@@ -183,3 +183,47 @@ h6 {
     left: 100%;
     top: -7px;
     }
+
+.content{
+        margin-right: 50px;
+        margin-left: 50px;
+}
+
+.container{
+    padding:30px;
+    margin-top: -30px;
+}
+.card{
+      height:100%;
+      width:100%;
+      
+}
+.card:hover{
+    background-color:lightskyblue;
+}
+
+
+.card-title{
+    text-align: center;
+}
+.img-content{
+    margin-left: 35px;
+    margin-right: 35px;
+    width: 10px;
+    height:10px;
+}
+.img{
+    width: 10px;
+    height:10px; 
+}
+.card-text{
+    margin-left: 35px;
+    margin-right: 35px;
+}
+.paginationcontainer{
+    align-items: center;
+}
+
+.title{
+    text-align: center;
+}
