@@ -20,9 +20,6 @@ public class UserServices
 
     public bool RemoveUser(int UserID);
 
-    public bool SetUserRoleAsReviewer(int UserID);
-
-    public bool RemoveUserRoleFromReviewer(int UserID);
-
+    public list<User> GetReviewers(bool IsReviewer);
     
 }

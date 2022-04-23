@@ -18,15 +18,15 @@ public class QueryServices
 
     public Query GetQuery(int QueryID);
 
-    public List<Query> GetQueries(int UserID);
+    public List<Query> GetQueriesByUserID(int UserID);
 
-    public List<Query> GetQueries(string Title);
+    public List<Query> GetQueriesByTitle(string Title);
 
     public List<Query> GetQueries(bool IsSolved);
 
 
 
-    public bool AddCommentToQuery(QueryComment comment);
+    public bool AddCommentToQuery(QueryComment comment));
 
     public List<QueryComment> GetComments(int QueryId);
 
@@ -34,17 +34,17 @@ public class QueryServices
 
 
     public bool RaiseSpam(SpamReport spam);
-        
-    public bool DeleteSpam(int SpamID);
 
-    public Spam GetSpam(int SpamID);
+    public List<query> GetQueriesByVerifyStatus(int VerifyStatusID);
 
-    public List<Spam> GetSpamsByVerifyStatus(int VerifyStatusID);
+    public int GetSpamCountForQueryID(int QueryID);
 
-    public  bool ApproveSpam(int SpamID);
+    public bool DeleteSpamsByQueryID(int QueryID);
     
-    public bool RemoveQuery(int QueryID);
+    public bool RemoveQueryByQueryID(int QueryID);
 
-    public bool RejectSpam(int SpamID);
+    public  bool ApproveSpam(int QueryID);
+
+    public bool RejectSpam(int QueryID);
 
 }

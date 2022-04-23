@@ -21,7 +21,7 @@ public class ArticleServices
 
     public bool UpdateArticle(Article article);
 
-    public   bool DeleteArticle(int ArticleId,int ArticleStatusID);  
+    public   bool DeleteArticleByArticleIdAndArticleStatusID(int ArticleId,int ArticleStatusID);  
 
     public Article GetArticleById(int ArticleId);
 
@@ -37,7 +37,7 @@ public class ArticleServices
 
     private List<Article> GetArticlesByUserId (int UserId);
 
-    public List<Article> GetArticlesByStatusId (int UserId,int ArticleStatusID);
+    public List<Article> GetArticlesByUserIdAndStatusId (int UserId,int ArticleStatusID);
 
 
     public bool AddCommentToArticle(ArticleComment comment);
@@ -48,7 +48,7 @@ public class ArticleServices
 
     public int GetLikesCount(int ArticleID);
 
-    public bool ChangeStatus(int ArticleID,int ArticleStatusID);
+    public bool UpdateArticleStatus(int ArticleID,int ArticleStatusID);
 }
 
 
