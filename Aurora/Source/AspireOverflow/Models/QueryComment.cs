@@ -27,7 +27,9 @@ namespace AspireOverflow.Models
 
 
         [ForeignKey("QueryId")]
-        public virtual Query Query { get; set; }
+        [NotMapped]
+        
+        public virtual Query? Query { get; set; }
 
 
 
