@@ -1,0 +1,155 @@
+@keyframes down-btn {
+    0% {
+        bottom: 20px
+    }
+
+    100% {
+        bottom: 0
+    }
+
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opaicty: 1
+    }
+}
+
+@-webkit-keyframes down-btn {
+    0% {
+        bottom: 20px
+    }
+
+    100% {
+        bottom: 0
+    }
+
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opaicty: 1
+    }
+}
+
+@-moz-keyframes down-btn {
+    0% {
+        bottom: 20px
+    }
+
+    100% {
+        bottom: 0
+    }
+
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opaicty: 1
+    }
+}
+
+@-o-keyframes down-btn {
+    0% {
+        bottom: 20px
+    }
+
+    100% {
+        bottom: 0
+    }
+
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opaicty: 1
+    }
+}
+
+body {
+    margin: 0
+}
+
+.basic-card {
+    width: 300px;
+    height:250px;
+    position: relative;
+    -webkit-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .3);
+    -moz-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .3);
+    -o-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .3);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .3);
+    margin-bottom:20px;
+    border-radius:10px;
+}
+.basic-card:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+      -5px -5px 30px 15px rgba(0,0,0,0.22);
+  }
+
+.basic-card .card-content {
+    padding: 30px
+}
+
+.basic-card .card-title {
+    color: black;
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif
+}
+
+.basic-card .card-text {
+    line-height: 1.6;
+    color: black;
+}
+
+.basic-card .card-link {
+    padding: 25px;
+    width: -webkit-fill-available;
+    position:fixed;
+}
+
+.basic-card .card-link a {
+    text-decoration: none;
+    position: relative;
+    padding: 10px 0
+}
+
+.basic-card .card-link a:after {
+    top: 30px;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    width: 0;
+    -webkit-transition: width .3s ease 0s, left .3s ease 0s;
+    -moz-transition: width .3s ease 0s, left .3s ease 0s;
+    -o-transition: width .3s ease 0s, left .3s ease 0s;
+    transition: width .3s ease 0s, left .3s ease 0s
+}
+
+.basic-card .card-link a:hover:after {
+    width: 100%;
+    left: 0
+}
+
+.basic-card-aqua {
+    background-color:wheat;
+}
+
+.basic-card .card-link a,
+.basic-card-aqua .card-content {
+    color: #fff
+}
+
+.basic-card-aqua .card-link {
+    border-top: 1px solid #82c1bb
+}
+
+.basic-card-aqua .card-link a:after {
+    background: #fff
+}
