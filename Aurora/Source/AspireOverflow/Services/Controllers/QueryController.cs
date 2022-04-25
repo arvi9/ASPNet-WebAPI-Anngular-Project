@@ -1,6 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Models;
+using System;
 
 namespace AspireOverflow.Controllers;
 
@@ -24,11 +25,11 @@ public class QueryController : ControllerBase
     [HttpGet]
     public IEnumerable<Query> GetAll()
     {
-
+        _logger.LogInformation("logging in GetAll method");
         return QueryService.GetQueries();
     }
 
-    
+
 
     [HttpGet]
     public IEnumerable<Query> GetQueriesByUserId(int UserID)
@@ -36,16 +37,17 @@ public class QueryController : ControllerBase
 
         return QueryService.GetQueriesByUserID(UserID);
     }
-    
+
 
     [HttpGet]
     public IEnumerable<Query> GetQueriesByTitle(String Title)
     {
-
-        return QueryService.GetQueriesByTitle(Title);
+       
+            return QueryService.GetQueriesByTitle(Title);
+       
     }
 
-     [HttpGet]
+    [HttpGet]
     public IEnumerable<Query> GetQueries(bool IsSolved)
     {
 
@@ -59,18 +61,19 @@ public class QueryController : ControllerBase
         return QueryService.GetComments(QueryId);
     }
 
-[HttpPost]
+    [HttpPost]
     public HttpStatusCode AddQuery(Query query)
     {
+        return query != null ? QueryService.AddQuery(query) : HttpStatusCode.NotAcceptable;
 
-        return QueryService.AddQuery(query);
     }
 
     [HttpPost]
     public HttpStatusCode AddComment(QueryComment comment)
     {
 
-        return QueryService.AddCommentToQuery(comment);
+        return comment != null ? QueryService.AddCommentToQuery(comment) : HttpStatusCode.NotAcceptable;
+
     }
 
 

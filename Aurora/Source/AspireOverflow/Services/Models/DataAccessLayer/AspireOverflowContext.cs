@@ -8,16 +8,14 @@ namespace AspireOverflow.Models
 
         public AspireOverflowContext() { }
         public AspireOverflowContext(DbContextOptions<AspireOverflowContext> options) : base(options)
+        { }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer("Server=.;database=AspireOverflow;Trusted_Connection=true;");
         }
-
-        
-         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if(!optionsBuilder.IsConfigured)
-        optionsBuilder.UseSqlServer("Server=.;database=AspireOverflowDB;Trusted_Connection=true;");
-    }
         public DbSet<Query> Queries { get; set; }
         public DbSet<QueryComment> QueryComments { get; set; }
 

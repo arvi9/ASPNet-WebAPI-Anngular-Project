@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj": {}
+    "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\AspireOverflow.csproj": {}
   },
   "projects": {
-    "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj": {
+    "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\AspireOverflow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj",
+        "projectUniqueName": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\AspireOverflow.csproj",
         "projectName": "AspireOverflow",
-        "projectPath": "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj",
-        "packagesPath": "C:\\Users\\Manim\\.nuget\\packages\\",
-        "outputPath": "E:\\API Projects\\AspireOverflow\\obj\\",
+        "projectPath": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\AspireOverflow.csproj",
+        "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
+        "outputPath": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Manim\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,6 +61,18 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "serilog.aspnetcore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "serilog.expressions": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "serilog.sinks.seq": {
+              "target": "Package",
+              "version": "[5.1.1, )"
             }
           },
           "imports": [
@@ -83,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

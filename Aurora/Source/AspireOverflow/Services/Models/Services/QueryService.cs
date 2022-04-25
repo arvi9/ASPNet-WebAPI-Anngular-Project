@@ -7,9 +7,21 @@ using AspireOverflow.Controllers;
 namespace AspireOverflow.Models
 {
 
+    public interface IQueryService
+    {
+        public  HttpStatusCode AddQuery(Query query);
+        public  IEnumerable<Query> GetQueries();
+        public  IEnumerable<Query> GetQueriesByUserID(int UserID);
+        public  IEnumerable<Query> GetQueriesByTitle(String Title);
+        public  IEnumerable<Query> GetQueries(bool IsSolved);
+        public  HttpStatusCode AddCommentToQuery(QueryComment comment);
+        public  IEnumerable<QueryComment> GetComments(int QueryId);
+
+    }
+
     class QueryService
     {
-        private static QueryDatabase database = new QueryDatabase(new AspireOverflowContext());
+        private static IQueryDataAccessLayer database = QueryDataAccessLayerFactory.GetQueryDataAccessLayerObject();        //Dependency Injection
 
         public static HttpStatusCode AddQuery(Query query)
         {
@@ -43,7 +55,7 @@ namespace AspireOverflow.Models
 
         public static IEnumerable<Query> GetQueriesByTitle(String Title)
         {
-
+                
             var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
                                        where ListOfAllQueries.Title.Contains(Title)
                                        select ListOfAllQueries;
@@ -81,14 +93,14 @@ namespace AspireOverflow.Models
 
         public static IEnumerable<QueryComment> GetComments(int QueryId)
         {
-                 var ListOfCommentsByQueryId = from ListOfAllComments in database.GetCommentsFromDatabase()
-                                       where ListOfAllComments.QueryId == QueryId
-                                       select ListOfAllComments;
-            return ListOfCommentsByQueryId ;
+            var ListOfCommentsByQueryId = from ListOfAllComments in database.GetCommentsFromDatabase()
+                                          where ListOfAllComments.QueryId == QueryId
+                                          select ListOfAllComments;
+            return ListOfCommentsByQueryId;
 
         }
 
-        
+
 
 
 

@@ -6,7 +6,7 @@ namespace AspireOverflow.Models
         public static bool ValidateQuery(Query query)
         {
 
-            if (query == null || query.CreatedBy  <=  0)
+            if (query == null || query.CreatedBy  <=  0 || query.Title==null || query.Content == null)
             {
                 return false;
             }
