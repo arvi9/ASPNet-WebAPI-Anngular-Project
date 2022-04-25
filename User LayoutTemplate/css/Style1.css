@@ -27,10 +27,13 @@ h6 {
 }
 
 .btn-primary {
-    color: #fff;
-    float:right;
+    color: #fff
 }
 
+.btn-primary:hover {
+    background: var(--secondary);
+    border-color: var(--secondary)
+}
 
 .btn-square {
     width: 36px;
@@ -54,7 +57,6 @@ h6 {
     padding-right: 0;
     text-align: center
 }
-
 .footer {
     left: 0;
     bottom: 0;
@@ -262,8 +264,8 @@ h6 {
 .d-flex{
     margin-left:5px;
 }
-.inner{
-    margin-right: 30px;;
+button.custom-btn.btn-1.inner{
+    margin-right: 30px;
   
 }
 .raise{
