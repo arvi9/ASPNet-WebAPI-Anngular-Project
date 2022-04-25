@@ -20,7 +20,7 @@ h6 {
     font-weight: 500 !important
 }
 
-.btn-1 {
+.btn {
     font-family: Jost, sans-serif;
     font-weight: 600;
     transition: .5s
@@ -28,24 +28,24 @@ h6 {
 
 
 
-.btn-1-square {
+.btn-square {
     width: 36px;
     height: 36px
 }
 
-.btn-1-sm-square {
+.btn-sm-square {
     width: 28px;
     height: 28px
 }
 
-.btn-1-lg-square {
+.btn-lg-square {
     width: 46px;
     height: 46px
 }
 
 .btn-lg-square,
 .btn-sm-square,
-.btn-1-square {
+.btn-square {
     padding-left: 0;
     padding-right: 0;
     text-align: center
@@ -263,16 +263,7 @@ background: rgb(0,172,238);}
 .custom-btn.btn-1{
 border: none;
 width: 150px;
-    height: 40px;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-    box-shadow: inset 2px 2px 2px 0px rgb(255 255 255 / 50%), 7px 7px 20px 0px rgb(0 0 0 / 10%), 4px 4px 5px 0px rgb(0 0 0 / 10%);
-    outline: none;
+   
 }
 button.custom-btn.btn-1.inner{
     margin-right: 30px; 
