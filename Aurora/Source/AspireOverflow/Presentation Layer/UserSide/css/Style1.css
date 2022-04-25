@@ -26,14 +26,7 @@ h6 {
     transition: .5s
 }
 
-.btn-primary {
-    color: #fff
-}
 
-.btn-primary:hover {
-    background: var(--secondary);
-    border-color: var(--secondary)
-}
 
 .btn-square {
     width: 36px;
@@ -264,9 +257,17 @@ h6 {
 .d-flex{
     margin-left:5px;
 }
+.btn-1{
+float:right;
+background: rgb(0,172,238);}
+.custom-btn.btn-1{
+border: none;
+width: 150px;
+   
+}
 button.custom-btn.btn-1.inner{
-    margin-right: 30px;
-  
+    margin-right: 30px; 
+    float:right;
 }
 .raise{
     font-size: larger;
