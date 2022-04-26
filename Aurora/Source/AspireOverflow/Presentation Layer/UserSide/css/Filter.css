@@ -1,13 +1,13 @@
 .card{
     width:1050px;
-    height:60px;
+    height:auto;
     padding:5px;
     margin-bottom:40px;
     text-align: center;
     align-items: center;
-    margin-left:320px;
-    background-color: skyblue;
+    margin-top:auto;
     border-radius: 20px;
+    background-color: skyblue;
 }
 
 .labeltext{
