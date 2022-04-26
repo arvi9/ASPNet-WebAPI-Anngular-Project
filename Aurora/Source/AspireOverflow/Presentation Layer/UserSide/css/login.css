@@ -1,3 +1,0 @@
-.img-container {
-    text-align: center;
-  }
