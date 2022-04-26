@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Aspire Overflow</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style1.css" rel="stylesheet">
+    <link href="css/Filter.css" rel="stylesheet">
+</head>
+<header>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a class="navbar-brand p-0">
+            <a>
+                <img class="LogoImg" src="img/logo.png">
+            </a>
+            <h1 class="m-0 text-primary">Aspire Overflow</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="ViewArticles.html" class="nav-item nav-link">Articles</a>
+                <a href="ViewQueries.html" class="nav-item nav-link">Queries</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My Profile</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="MyArticles.html" class="dropdown-item">My Articles</a>
+                        <ul class="dropdown-menu dropdown-submenu">
+                            <li>
+                                <a class="dropdown-item" href="#">Create Articles</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="MyArticles.html">My Articles</a>
+                            </li>
+                        </ul>
+                        <a href="myqueries.html" class="dropdown-item">My Queries</a>
+                        <ul class="dropdown-menu dropdown-submenu">
+                            <li>
+                                <a class="dropdown-item" href="RaiseQuery.html">Raise Query</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="myqueries.html">My Queries</a>
+                            </li>
+                        </ul>
+                        <a href="testimonial.html" class="dropdown-item">View Profile</a>
+                        <a href="appointment.html" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+</header>
+<div class="content">
+
+    <body>
+        <!-- Breadcrums Start -->
+        <div style="margin:20px;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html">Home / </a>
+                        <a href="ViewQueries.html">Queries</a>
+                     
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Stack and Heap
+                    </li>
+
+                </ol>
+            </nav>
+        </div>
+        <!-- Breadcrums End-->
+        <div class="container top">
+            <button type="button" class="custom-btn btn-1">Report Spam</button>
+        </div>
+        <div class="container p-5 my-5 border">
+            <div class="text-center">
+                <h1>Stack and Heap</h1>
+
+            </div>
+            <div class="panel panel-default">
+                <style>
+                    #more {
+                        display: none;
+                    }
+                </style>
+
+                <p> What is Stack and Heap?
+                    Programming language books explain that value types are created on the stack, and reference types
+                    are created on the heap, without explaining what these two things are. I haven't read a clear
+                    explanation of this. I understand what a stack is. But,
+                    Where and what are they (physically in a real computer's memory)?
+                    To what extent are they controlled by the OS or language run-time?
+                    What is their scope?
+                    What determines the size of each of them?
+                    What makes one faster<span id="dots">?</span><span id="more"><br>The stack is the memory set aside
+                        as scratch space for a thread of execution. When a function is called, a block is reserved on
+                        the top of the stack for local variables and some bookkeeping data. When that function returns,
+                        the block becomes unused and can be used the next time a function is called. The stack is always
+                        reserved in a LIFO (last in first out) order; the most recently reserved block is always the
+                        next block to be freed. This makes it really simple to keep track of the stack; freeing a block
+                        from the stack is nothing more than adjusting one pointer.
+
+                        The heap is memory set aside for dynamic allocation. Unlike the stack, there's no enforced
+                        pattern to the allocation and deallocation of blocks from the heap; you can allocate a block at
+                        any time and free it at any time. This makes it much more complex to keep track of which parts
+                        of the heap are allocated or free at any given time; there are many custom heap allocators
+                        available to tune heap performance for different usage patterns.
+
+                        Each thread gets a stack, while there's typically only one heap for the application (although it
+                        isn't uncommon to have multiple heaps for different types of allocation).
+                    </span></p>
+
+
+                <button onclick="myFunction()" id="myBtn">View Query</button>
+
+            </div>
+            <br>
+            <br>
+            <h4>30 Answers</h4>
+            <p class="ans-body">Stack is a linear data structure whereas Heap is a hierarchical data structure.
+                Stack memory will never become fragmented whereas Heap memory can become fragmented as blocks of memory
+                are first allocated and then freed. Stack accesses local variables only while Heap allows you to access
+                variables globally.<br>
+                <span id="ansicon"></span><i class='fa fa-comment'></i><span id="moreanswers">
+                    <br>
+                    <br>
+                    Stack is a linear data structure whereas Heap is a hierarchical data structure.
+                    Stack memory will never become fragmented whereas Heap memory can become fragmented as blocks of
+                    memory
+                    are first allocated and then freed. Stack accesses local variables only while Heap allows you to
+                    access variables globally.<br><i class='fa fa-comment'></i>
+                </span>
+            </p>
+            <button class="btnpad" onclick="myFunction1()" id="ansBtn">View More Answers</button>
+            <br>
+            <br>
+            <br>
+            <h5>Comment Your Answer</h5>
+            <div>
+                <div class="bg-light p-2">
+                    <textarea class="form-control"></textarea>
+                </div>
+                <div class="mt-2 text-right"><button class="custom-btn btn-1" type="button">Post comment</button> </div>
+            </div>
+        </div>
+    </body>
+</div>
+
+
+<!-- Footer Start -->
+<div class="container-fluid text-light footer flex-end" style="background: #051225;">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-4 text-center text-md-start">
+                <p class="mb-md-0">&copy; <a class="text-white border-bottom">Aspire Overflow</a>. All Rights
+                    Reserved.</p>
+            </div>
+            <div class="col-md-4 text-center text-md-middle">
+                <p class="mb-0 "> <a class="text-white">Address: 1/D-1,SIPCOT IT
+                        PARK,Siruseri,Chennai-603103</a><br>
+                <p class="mb-0 "><i class=" fa fa-light fa-phone"></i><a class="text-white">
+                        Phone:+91-4467404000</a><br>
+                <p class="mb-0 "> <i class="fa fa-light fa-envelope"></i><a class="text-white">
+                        Email:info-india@aspiresys.com</a><br>
+            </div>
+            <div class="col-md-4 text-center text-md-end">
+                <p class="mb-0">Designed by <a class="text-white border-bottom">Team Aurora</a><br>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+<script src="js/SpecificQuery.js"></script>
+
+
+
+</html>
