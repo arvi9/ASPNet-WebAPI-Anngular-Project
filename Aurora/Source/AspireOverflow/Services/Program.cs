@@ -1,4 +1,4 @@
-using AspireOverflow.Models;
+using AspireOverflow.DataAccessLayer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -12,10 +12,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+try{
 builder.Services.AddDbContext<AspireOverflowContext>(options =>{
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-});
+});}
+catch(SystemException Exception){
+    Console.WriteLine(Exception.Message);
+
+}
 
 builder.Services.AddHttpLogging(httpLogging =>{
     httpLogging.LoggingFields=HttpLoggingFields.All;

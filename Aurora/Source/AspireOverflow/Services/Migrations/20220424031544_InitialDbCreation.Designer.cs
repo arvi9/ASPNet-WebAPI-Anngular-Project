@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using AspireOverflow.DataAccessLayer;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable

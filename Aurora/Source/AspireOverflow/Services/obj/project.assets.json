@@ -3948,11 +3948,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\AspireOverflow.csproj",
+      "projectUniqueName": "E:\\Backup-project\\Services\\AspireOverflow.csproj",
       "projectName": "AspireOverflow",
-      "projectPath": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\AspireOverflow.csproj",
+      "projectPath": "E:\\Backup-project\\Services\\AspireOverflow.csproj",
       "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
-      "outputPath": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\obj\\",
+      "outputPath": "E:\\Backup-project\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"

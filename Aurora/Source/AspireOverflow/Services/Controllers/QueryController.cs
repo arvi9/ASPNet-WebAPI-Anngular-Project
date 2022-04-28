@@ -1,7 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Models;
-using System;
+using AspireOverflow.Services;
 
 namespace AspireOverflow.Controllers;
 
@@ -21,58 +21,60 @@ public class QueryController : ControllerBase
     }
 
 
-
     [HttpGet]
-    public IEnumerable<Query> GetAll()
+    public IActionResult GetAll()
     {
         _logger.LogInformation("logging in GetAll method");
-        return QueryService.GetQueries();
+        return Ok(QueryService.GetQueries());
+
+        
     }
 
 
 
     [HttpGet]
-    public IEnumerable<Query> GetQueriesByUserId(int UserID)
+    public IActionResult GetQueriesByUserId(int UserID)
     {
-
-        return QueryService.GetQueriesByUserID(UserID);
+        if(UserID ==0)return NotFound();
+        return Ok(QueryService.GetQueriesByUserID(UserID));
     }
 
+     
 
     [HttpGet]
-    public IEnumerable<Query> GetQueriesByTitle(String Title)
+    public IActionResult GetQueriesByTitle(String Title)
     {
        
-            return QueryService.GetQueriesByTitle(Title);
+            return Ok(QueryService.GetQueriesByTitle(Title));
        
     }
 
     [HttpGet]
-    public IEnumerable<Query> GetQueries(bool IsSolved)
+    public IActionResult GetQueries(bool IsSolved)
     {
 
-        return QueryService.GetQueries(IsSolved);
+        return Ok(QueryService.GetQueries(IsSolved));
     }
 
     [HttpGet]
-    public IEnumerable<QueryComment> GetComments(int QueryId)
+    public IActionResult GetComments(int QueryId)
     {
 
-        return QueryService.GetComments(QueryId);
+        return QueryId > 0 ? Ok(QueryService.GetComments(QueryId)):NotFound();
     }
 
     [HttpPost]
-    public HttpStatusCode AddQuery(Query query)
+    public IActionResult AddQuery(Query query)
     {
-        return query != null ? QueryService.AddQuery(query) : HttpStatusCode.NotAcceptable;
+        return query != null ? Ok(QueryService.AddQuery(query)) : NoContent();
 
     }
 
     [HttpPost]
-    public HttpStatusCode AddComment(QueryComment comment)
+    public IActionResult AddComment(QueryComment comment)
     {
 
-        return comment != null ? QueryService.AddCommentToQuery(comment) : HttpStatusCode.NotAcceptable;
+        return comment != null ? Ok(QueryService.AddCommentToQuery(comment)) : NoContent();
 
     }
 

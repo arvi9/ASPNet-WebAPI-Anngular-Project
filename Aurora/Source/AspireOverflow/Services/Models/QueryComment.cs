@@ -26,7 +26,7 @@ namespace AspireOverflow.Models
         public DateTime? UpdatedOn { get; set; }
 
 
-        [ForeignKey("QueryId")]
+        [ForeignKey("QueryId")][NotMapped]
         public virtual Query? Query { get; set; }
 
 

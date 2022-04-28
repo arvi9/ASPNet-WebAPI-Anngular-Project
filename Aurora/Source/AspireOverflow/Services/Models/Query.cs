@@ -20,6 +20,6 @@ namespace AspireOverflow.Models
         public DateTime? UpdatedOn { get; set; }
 
 
-
+    //  public ICollection<QueryComment> QueryComments {get;set;}
     }
 }
