@@ -19,11 +19,11 @@ namespace AspireOverflow.Services
 
     }
 
-    class QueryService
+    public class QueryService : IQueryService
     {
         private static IQueryRepository database = QueryRepositoryFactory.GetQueryRepositoryObject();        //Dependency Injection
 
-        public static HttpStatusCode AddQuery(Query query)
+        public  HttpStatusCode AddQuery(Query query)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public static IEnumerable<Query> GetQueries()
+        public  IEnumerable<Query> GetQueries()
         {
 
 
@@ -50,7 +50,7 @@ namespace AspireOverflow.Services
 
         }
 
-        public static IEnumerable<Query> GetQueriesByUserID(int UserID)
+        public  IEnumerable<Query> GetQueriesByUserID(int UserID)
         {
 
             var ListofQueriesByUserId = from ListOfAllQueries in GetQueries()
@@ -61,7 +61,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public static IEnumerable<Query> GetQueriesByTitle(String Title)
+        public  IEnumerable<Query> GetQueriesByTitle(String Title)
         {
 
             var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
@@ -72,7 +72,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public static IEnumerable<Query> GetQueries(bool IsSolved)
+        public  IEnumerable<Query> GetQueries(bool IsSolved)
         {
 
             var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
@@ -83,7 +83,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public static HttpStatusCode AddCommentToQuery(QueryComment comment)
+        public  HttpStatusCode AddCommentToQuery(QueryComment comment)
         {
             if (comment == null) return HttpStatusCode.NoContent;
             try
@@ -99,7 +99,7 @@ namespace AspireOverflow.Services
 
         }
 
-        public static IEnumerable<QueryComment> GetComments(int QueryId)
+        public  IEnumerable<QueryComment> GetComments(int QueryId)
         {
             var ListOfCommentsByQueryId = from ListOfAllComments in database.GetCommentsFromDatabase()
                                           where ListOfAllComments.QueryId == QueryId

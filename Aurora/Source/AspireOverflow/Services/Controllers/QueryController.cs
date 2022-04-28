@@ -11,10 +11,12 @@ public class QueryController : ControllerBase
 {
 
     internal static ILogger<QueryController> _logger;
+    private static QueryService _queryService;
 
-    public QueryController(ILogger<QueryController> logger)
+    public QueryController(ILogger<QueryController> logger,QueryService queryService)
     {
         _logger = logger;
+        _queryService=queryService;
 
 
 
@@ -25,7 +27,7 @@ public class QueryController : ControllerBase
     public IActionResult GetAll()
     {
         _logger.LogInformation("logging in GetAll method");
-        return Ok(QueryService.GetQueries());
+        return Ok(_queryService.GetQueries());
 
         
     }
@@ -36,7 +38,7 @@ public class QueryController : ControllerBase
     public IActionResult GetQueriesByUserId(int UserID)
     {
         if(UserID ==0)return NotFound();
-        return Ok(QueryService.GetQueriesByUserID(UserID));
+        return Ok(_queryService.GetQueriesByUserID(UserID));
     }
 
      
@@ -45,7 +47,7 @@ public class QueryController : ControllerBase
     public IActionResult GetQueriesByTitle(String Title)
     {
        
-            return Ok(QueryService.GetQueriesByTitle(Title));
+            return Title != null ? Ok(_queryService.GetQueriesByTitle(Title)):NotFound();
        
     }
 
@@ -53,20 +55,20 @@ public class QueryController : ControllerBase
     public IActionResult GetQueries(bool IsSolved)
     {
 
-        return Ok(QueryService.GetQueries(IsSolved));
+        return Ok(_queryService.GetQueries(IsSolved));
     }
 
     [HttpGet]
     public IActionResult GetComments(int QueryId)
     {
 
-        return QueryId > 0 ? Ok(QueryService.GetComments(QueryId)):NotFound();
+        return QueryId > 0 ? Ok(_queryService.GetComments(QueryId)):NotFound();
     }
 
     [HttpPost]
     public IActionResult AddQuery(Query query)
     {
-        return query != null ? Ok(QueryService.AddQuery(query)) : NoContent();
+        return query != null ? Ok(_queryService.AddQuery(query)) : NoContent();
 
     }
 
@@ -74,7 +76,7 @@ public class QueryController : ControllerBase
     public IActionResult AddComment(QueryComment comment)
     {
 
-        return comment != null ? Ok(QueryService.AddCommentToQuery(comment)) : NoContent();
+        return comment != null ? Ok(_queryService.AddCommentToQuery(comment)) : NoContent();
 
     }
 
