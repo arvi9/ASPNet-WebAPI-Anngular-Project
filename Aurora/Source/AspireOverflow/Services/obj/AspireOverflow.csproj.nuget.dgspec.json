@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Backup-project\\Services\\AspireOverflow.csproj": {}
+    "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\Services\\AspireOverflow.csproj": {}
   },
   "projects": {
-    "E:\\Backup-project\\Services\\AspireOverflow.csproj": {
+    "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\Services\\AspireOverflow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Backup-project\\Services\\AspireOverflow.csproj",
+        "projectUniqueName": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\Services\\AspireOverflow.csproj",
         "projectName": "AspireOverflow",
-        "projectPath": "E:\\Backup-project\\Services\\AspireOverflow.csproj",
+        "projectPath": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\Services\\AspireOverflow.csproj",
         "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
-        "outputPath": "E:\\Backup-project\\Services\\obj\\",
+        "outputPath": "E:\\Git-Mani\\Project\\Aurora\\Source\\AspireOverflow\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
