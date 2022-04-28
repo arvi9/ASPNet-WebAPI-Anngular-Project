@@ -23,7 +23,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-
+                Console.WriteLine(exception.Message);
             }
         }
         public DbSet<Query> Queries { get; set; }
