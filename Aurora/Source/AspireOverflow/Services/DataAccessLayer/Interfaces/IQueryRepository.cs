@@ -1,5 +1,5 @@
 using AspireOverflow.Models; 
-using System.Net;
+
 
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
@@ -10,7 +10,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     public IEnumerable<Query> GetQueriesFromDatabase();
     public IEnumerable<QueryComment> GetCommentsFromDatabase();
     public bool AddQueryToDatabase(Query query);
-    public HttpStatusCode AddCommentToDatabase(QueryComment comment);
+    public bool AddCommentToDatabase(QueryComment comment);
 
 }
     }

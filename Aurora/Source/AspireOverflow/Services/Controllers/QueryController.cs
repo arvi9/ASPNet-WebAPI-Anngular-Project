@@ -26,12 +26,14 @@ public class QueryController : ControllerBase
     {
         try
         {
+            
             var Queries = _queryService.GetQueries() ?? throw new NullReferenceException();
             return Ok(Queries);
         }
+
         catch (Exception exception)
         {
-            _logger.LogError(exception.Message, exception.Source);
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
             return BadRequest("Error occured while processing your request");
         }
     }
@@ -41,8 +43,23 @@ public class QueryController : ControllerBase
     [HttpGet]
     public IActionResult GetQueriesByUserId(int UserID)
     {
-        if (UserID == 0) return NotFound();
-        return Ok(_queryService.GetQueriesByUserID(UserID));
+        if (UserID == 0) return BadRequest("UserId must be greater than 0");
+        try
+        {
+            var ListOfQueriesByUserId = _queryService.GetQueriesByUserID(UserID);
+            return Ok(ListOfQueriesByUserId);
+        }
+        catch (ArgumentOutOfRangeException exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("UserId must be greater than 0");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Error Occured while processing your request");
+        }
+
     }
 
 
@@ -50,8 +67,24 @@ public class QueryController : ControllerBase
     [HttpGet]
     public IActionResult GetQueriesByTitle(String Title)
     {
+        if (Title == null) return BadRequest("Title can't be null");
+        try
+        {
+            var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title);
+            return Ok(ListOfQueriesByTitle);
+        }
+        catch (ArgumentNullException exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Title can't be null");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Error Occured while processing your request");
 
-        return Title != null ? Ok(_queryService.GetQueriesByTitle(Title)) : NotFound();
+        }
+
 
     }
 
@@ -59,27 +92,65 @@ public class QueryController : ControllerBase
     public IActionResult GetQueries(bool IsSolved)
     {
 
-        return Ok(_queryService.GetQueries(IsSolved));
+        try
+        {
+            var ListOfQueriesByIsSolved = _queryService.GetQueries(IsSolved);
+            return Ok(ListOfQueriesByIsSolved);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Error Occured while processing your request");
+
+        }
+
     }
+
+
 
     [HttpGet]
     public IActionResult GetComments(int QueryId)
     {
+        if (QueryId <= 0) return BadRequest("QueryId must be greater than 0");
+        try
+        {
+            var ListOfComments = _queryService.GetComments(QueryId);
+            return Ok(ListOfComments);
+        }
+        catch (ArgumentOutOfRangeException exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("QueryId must be greater than 0");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Error Occured while processing your request");
 
-        return QueryId > 0 ? Ok(_queryService.GetComments(QueryId)) : NotFound();
+
+        }
+
     }
 
     [HttpPost]
     public IActionResult AddQuery(Query query)
     {
         if (query == null) return BadRequest("Null value is not supported");
+
         try
         {
-            return _queryService.AddQuery(query) ?  Ok("Successfully Created"):  BadRequest("Unable to Add - Given data is Invalid");
+
+            return _queryService.AddQuery(query) ? Ok("Successfully Created") : BadRequest("Unable to Add - Given data is Invalid");
+        }
+        catch (ArgumentNullException exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Null value is not supported");
         }
         catch (Exception exception)
         {
-           return BadRequest("Error Occured");    
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Error Occured");
         }
 
     }
@@ -87,8 +158,22 @@ public class QueryController : ControllerBase
     [HttpPost]
     public IActionResult AddComment(QueryComment comment)
     {
+
         if (comment == null) return BadRequest("Null value is not supported");
-        return comment != null ? Ok(_queryService.AddCommentToQuery(comment)) : NoContent();
+        try
+        {
+            return _queryService.AddCommentToQuery(comment) ? Ok("Successfully Created") : BadRequest("Unable to Add - Given data is Invalid");
+        }
+        catch (ArgumentNullException exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Null value is not supported");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"{exception.Message},{exception.StackTrace}");
+            return BadRequest("Error Occured");
+        }
 
     }
 
