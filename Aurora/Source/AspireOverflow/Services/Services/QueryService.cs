@@ -2,66 +2,86 @@ using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
 using System.Net;
 using AspireOverflow.Controllers;
+using AspireOverflow.DataAccessLayer.Interfaces;
+
+
 
 
 namespace AspireOverflow.Services
 {
 
-    public interface IQueryService
-    {
-        public HttpStatusCode AddQuery(Query query);
-        public IEnumerable<Query> GetQueries();
-        public IEnumerable<Query> GetQueriesByUserID(int UserID);
-        public IEnumerable<Query> GetQueriesByTitle(String Title);
-        public IEnumerable<Query> GetQueries(bool IsSolved);
-        public HttpStatusCode AddCommentToQuery(QueryComment comment);
-        public IEnumerable<QueryComment> GetComments(int QueryId);
 
-    }
-
-    public class QueryService : IQueryService
+    public class QueryService
     {
         private static IQueryRepository database = QueryRepositoryFactory.GetQueryRepositoryObject();        //Dependency Injection
 
-        public  HttpStatusCode AddQuery(Query query)
+        private static ILogger<QueryService> _logger;
+
+        public QueryService(ILogger<QueryService> logger)
         {
+            _logger = logger;
+
+        }
+        public bool AddQuery(Query query)
+        {
+            if (!Validation.ValidateQuery(query)) return false;
             try
             {
-                if (Validation.ValidateQuery(query))
-                {
 
-                    return database.AddQueryToDatabase(query);
+              return database.AddQueryToDatabase(query);
 
-                }
-                return HttpStatusCode.NoContent;
             }
             catch (Exception exception)
             {
-                return HttpStatusCode.BadRequest;
+                return false;
             }
         }
 
 
-        public  IEnumerable<Query> GetQueries()
+        public IEnumerable<Query> GetQueries()
         {
+            if (database == null) throw new NullReferenceException();
 
+            try
+            {
+                var ListOfQueries = database.GetQueriesFromDatabase();
+                return ListOfQueries;
+            }
+            catch (NullReferenceException exception)
+            {
+                QueryController._logger.LogError(exception.Message);
+                throw exception;
+            }
+            catch (Exception exception)
+            {
+                QueryController._logger.LogError(exception.Message);
+                throw exception;
+            }
 
-            return database.GetQueriesFromDatabase();
 
         }
 
-        public  IEnumerable<Query> GetQueriesByUserID(int UserID)
+
+        public IEnumerable<Query> GetQueriesByUserID(int UserID)
         {
+            if (UserID <= 0) throw new ArgumentOutOfRangeException();
+            try
+            {
+                _logger.LogInformation("entered query service");
+                var ListofQueriesByUserId = from ListOfAllQueries in GetQueries()
+                                            where ListOfAllQueries.CreatedBy == UserID
+                                            select ListOfAllQueries;
+                return ListofQueriesByUserId.ToList();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
 
-            var ListofQueriesByUserId = from ListOfAllQueries in GetQueries()
-                                        where ListOfAllQueries.CreatedBy == UserID
-                                        select ListOfAllQueries;
-
-            return ListofQueriesByUserId.ToList();
         }
 
 
-        public  IEnumerable<Query> GetQueriesByTitle(String Title)
+        public IEnumerable<Query> GetQueriesByTitle(String Title)
         {
 
             var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
@@ -72,7 +92,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public  IEnumerable<Query> GetQueries(bool IsSolved)
+        public IEnumerable<Query> GetQueries(bool IsSolved)
         {
 
             var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
@@ -83,7 +103,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public  HttpStatusCode AddCommentToQuery(QueryComment comment)
+        public HttpStatusCode AddCommentToQuery(QueryComment comment)
         {
             if (comment == null) return HttpStatusCode.NoContent;
             try
@@ -99,7 +119,7 @@ namespace AspireOverflow.Services
 
         }
 
-        public  IEnumerable<QueryComment> GetComments(int QueryId)
+        public IEnumerable<QueryComment> GetComments(int QueryId)
         {
             var ListOfCommentsByQueryId = from ListOfAllComments in database.GetCommentsFromDatabase()
                                           where ListOfAllComments.QueryId == QueryId

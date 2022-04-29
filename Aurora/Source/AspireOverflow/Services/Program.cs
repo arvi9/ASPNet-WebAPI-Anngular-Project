@@ -30,12 +30,14 @@ builder.Services.AddHttpLogging(httpLogging =>{
 
 builder.Services.AddTransient<QueryService>();
 
-// var logger = new LoggerConfiguration()
-//   .ReadFrom.Configuration(builder.Configuration)
-//   .Enrich.FromLogContext()
-//   .CreateLogger();
-// builder.Logging.ClearProviders();
-// builder.Logging.AddSerilog(logger);
+
+
+var logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .Enrich.FromLogContext()
+  .CreateLogger();
+
+builder.Logging.AddSerilog(logger);
 
 
 

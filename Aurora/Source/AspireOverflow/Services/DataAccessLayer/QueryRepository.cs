@@ -2,35 +2,41 @@ using System.Net;
 using Microsoft.EntityFrameworkCore;
 using AspireOverflow.Models;
 using AspireOverflow.Controllers;
+using AspireOverflow.DataAccessLayer.Interfaces;
 
 namespace AspireOverflow.DataAccessLayer
 {
-    public interface IQueryRepository
-    {
+  
 
-        public IEnumerable<Query> GetQueriesFromDatabase();
-        public IEnumerable<QueryComment> GetCommentsFromDatabase();
-        public HttpStatusCode AddQueryToDatabase(Query query);
-        public HttpStatusCode AddCommentToDatabase(QueryComment comment);
-
-    }
-
-
-    public class QueryRepository : IQueryRepository
+    public class QueryRepository :IQueryRepository
     {
         private AspireOverflowContext _context;
 
-
-        public QueryRepository(AspireOverflowContext context)
+        // private ILogger<QueryRepository> _logger;
+        public QueryRepository(AspireOverflowContext context )
         {
             _context = context;
+        
 
         }
 
         public IEnumerable<Query> GetQueriesFromDatabase()
         {
+            if (_context == null) throw new NullReferenceException();
 
-            return _context.Queries;
+            try
+            {
+                var ListOfQueries = _context.Queries;
+                return ListOfQueries;
+
+            }
+            catch (Exception exception)
+            {
+
+                throw exception;
+            }
+
+
         }
 
 
@@ -42,33 +48,33 @@ namespace AspireOverflow.DataAccessLayer
 
 
 
-        public HttpStatusCode AddQueryToDatabase(Query query)
+        public bool AddQueryToDatabase(Query query)
         {
-            if (query == null) return HttpStatusCode.NoContent;
+            if (query == null) return false;
             try
             {
 
                 _context.Queries.Add(query);
                 _context.SaveChanges();
 
-                return HttpStatusCode.Created;
+                return false;
             }
             catch (OperationCanceledException exception)
             {
                 // Exception logged in logger 
                 QueryController._logger.LogError($"Exception Occured in AddQueryToDatabase method in QueryDatabase class.\nException : {exception.Message}");
-                return HttpStatusCode.BadRequest;
+                return false;
 
             }
             catch (DbUpdateException exception)
             {
                 QueryController._logger.LogError($"Exception Occured in AddQueryToDatabase method in QueryDatabase class.\nException : {exception.Message}");
-                return HttpStatusCode.Conflict;
+                return false;
 
             }
             catch (Exception exception)
             {
-                return HttpStatusCode.BadRequest;
+                return false;
 
             }
 

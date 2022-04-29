@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace AspireOverflow.DataAccessLayer
 {
     public class DbContextFactory
@@ -5,10 +7,20 @@ namespace AspireOverflow.DataAccessLayer
         public static AspireOverflowContext GetAspireOverflowContextObject()
         {
 
-            var _AspireOverflowContext = new AspireOverflowContext();
+            var optionsBuilder = new DbContextOptionsBuilder<AspireOverflowContext>();
+            var connectionString = "Server=.;database=AspireOverflow;Trusted_Connection=true;";
+            optionsBuilder.UseSqlServer(connectionString
+                                     ?? throw new NullReferenceException(
+                                         $"Connection string is not got from environment {nameof(connectionString)}"));
 
-            return _AspireOverflowContext;
+            
+            
+            return new AspireOverflowContext(optionsBuilder.Options);
+
+
 
         }
+
     }
+
 }
