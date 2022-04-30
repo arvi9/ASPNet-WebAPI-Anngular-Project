@@ -4,6 +4,7 @@ using AspireOverflow.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    partial class AspireOverflowContextModelSnapshot : ModelSnapshot
+    [Migration("20220430022814_samplemigration")]
+    partial class samplemigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,11 +106,13 @@ namespace AspireOverflow.Migrations
 
             modelBuilder.Entity("AspireOverflow.Models.QueryComment", b =>
                 {
-                    b.HasOne("AspireOverflow.Models.Query", null)
+                    b.HasOne("AspireOverflow.Models.Query", "Query")
                         .WithMany("QueryComments")
                         .HasForeignKey("QueryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Query");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Query", b =>

@@ -74,19 +74,19 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError($"{exception.Message},{exception.StackTrace}");
 
-                return false;
+                throw exception;
 
             }
             catch (DbUpdateException exception)
             {
                 _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                return false;
+                throw exception;
 
             }
             catch (Exception exception)
             {
                 _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                return false;
+                throw exception;
 
             }
 
@@ -110,21 +110,21 @@ namespace AspireOverflow.DataAccessLayer
             {
 
                 _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                return false;
+                throw exception;
 
             }
             catch (DbUpdateException exception)
             {
 
                 _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                return false;
+                throw exception;
 
             }
             catch (Exception exception)
             {
 
                 _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                return false;
+                throw exception;
 
             }
 

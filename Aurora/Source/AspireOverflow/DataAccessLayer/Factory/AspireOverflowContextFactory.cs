@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore;
 namespace AspireOverflow.DataAccessLayer
 {
     public class AspireOverflowContextFactory
+    
     {
+        private static AspireOverflowContext _aspireOverflowContext;
         public static AspireOverflowContext GetAspireOverflowContextObject()
         {
+            if(_aspireOverflowContext != null) return _aspireOverflowContext;  //SingleTon concept applied here 
 
             var optionsBuilder = new DbContextOptionsBuilder<AspireOverflowContext>();
             try
@@ -25,10 +28,9 @@ namespace AspireOverflow.DataAccessLayer
             {
                 Console.WriteLine(exception.Message);
             }
-            var aspireOverflowContext =  new AspireOverflowContext(optionsBuilder.Options);
+             _aspireOverflowContext =  new AspireOverflowContext(optionsBuilder.Options);
 
-            return aspireOverflowContext != null ? aspireOverflowContext : throw new Exception("Context is Null");
-
+            return _aspireOverflowContext;
 
         }
 

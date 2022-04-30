@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using System.ComponentModel.DataAnnotations;
 
-
+using AspireOverflow.Models.Interfaces;
 namespace AspireOverflow.Models
 {
-   public class QueryComment
+   public class QueryComment :IAuditField
     {
         [Key]
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace AspireOverflow.Models
         public DateTime? UpdatedOn { get; set; }
 
 
-        [ForeignKey("QueryId")][NotMapped]
+        [ForeignKey("QueryId")]
         public virtual Query? Query { get; set; }
 
 

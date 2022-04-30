@@ -1,5 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
+using System;
 
 using AspireOverflow.DataAccessLayer.Interfaces;
 
@@ -19,39 +21,33 @@ namespace AspireOverflow.Services
         public QueryService(ILogger<QueryService> logger)
         {
             _logger = logger ?? throw new NullReferenceException("logger can't be null");
-            database = QueryRepositoryFactory.GetQueryRepositoryObject(logger) ?? throw new NullReferenceException("Instance of Query Repository can't be null");
+            database = QueryRepositoryFactory.GetQueryRepositoryObject(logger);
+
         }
 
 
-
-
-        public bool AddQuery(Query query)
+        public bool AddQuery(Query query,Enum DevelopmentTeam)
         {
-            if (!Validation.ValidateQuery(query)) return false;
+            if (Validation.ValidateQuery(query)) throw new ValidationException("Given data is InValid");
             try
             {
-
+             
                 return database.AddQueryToDatabase(query);
 
             }
-            catch (ArgumentNullException exception)
-            {
-                _logger.LogError($"Argument passed as Null in QueryRepository {exception.Message},{exception.StackTrace}");
-               
-                return false;
-            }
+           
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+          
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(AddQuery),exception,query));
                 return false;
             }
         }
 
 
-        public IEnumerable<Query> GetQueries()
+        public IEnumerable<Query> GetQueries(Enum DevelopmentTeam)
         {
           
-
             try
             {
                 var ListOfQueries = database.GetQueriesFromDatabase();
@@ -60,7 +56,7 @@ namespace AspireOverflow.Services
             
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+               _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(GetQueries),exception));
                 throw exception;
             }
 
@@ -68,31 +64,31 @@ namespace AspireOverflow.Services
         }
 
 
-        public IEnumerable<Query> GetQueriesByUserID(int UserID)
+        public IEnumerable<Query> GetQueriesByUserID(int UserID,Enum DevelopmentTeam)
         {
             if (UserID <= 0) throw new ArgumentOutOfRangeException("UserID must be greater than 0");
             try
             {
                
-                var ListofQueriesByUserId = from ListOfAllQueries in GetQueries()
+                var ListofQueriesByUserId = from ListOfAllQueries in GetQueries(DevelopmentTeam)
                                             where ListOfAllQueries.CreatedBy == UserID
                                             select ListOfAllQueries;
                 return ListofQueriesByUserId.ToList();
             }
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(GetQueriesByUserID),exception,UserID));
                 throw exception;
             }
 
         }
 
 
-        public IEnumerable<Query> GetQueriesByTitle(String Title)
-        { if(Title ==null) throw new ArgumentNullException("Title value can't be null");
+        public IEnumerable<Query> GetQueriesByTitle(String Title,Enum DevelopmentTeam)
+        { if(String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Title value can't be null");
             try
             {
-                var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
+                var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries(DevelopmentTeam)
                                            where ListOfAllQueries.Title.Contains(Title)
                                            select ListOfAllQueries;
 
@@ -100,17 +96,17 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(GetQueriesByTitle),exception,Title));
                 throw exception;
             }
         }
 
 
-        public IEnumerable<Query> GetQueries(bool IsSolved)
+        public IEnumerable<Query> GetQueries(bool IsSolved,Enum DevelopmentTeam)
         {
             try
             {
-                var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries()
+                var ListOfQueriesByTitle = from ListOfAllQueries in GetQueries(DevelopmentTeam)
                                            where ListOfAllQueries.IsSolved == IsSolved
                                            select ListOfAllQueries;
 
@@ -118,33 +114,29 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                  _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(GetQueries),exception,IsSolved));
                 throw exception;
             }
         }
 
 
-        public bool AddCommentToQuery(QueryComment comment)
+        public bool AddCommentToQuery(QueryComment comment,Enum DevelopmentTeam)
         {
             if (comment == null) throw new ArgumentNullException("comment object can't be null");
             try
             {
                 return database.AddCommentToDatabase(comment);
             }
-            catch (ArgumentNullException exception)
-            {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                return false;
-            }
+          
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(AddCommentToQuery),exception),comment);
                 return false;
             }
 
         }
 
-        public IEnumerable<QueryComment> GetComments(int QueryId)
+        public IEnumerable<QueryComment> GetComments(int QueryId,Enum DevelopmentTeam)
         {
             if (QueryId <= 0) throw new ArgumentOutOfRangeException("QueryId must be greater than 0");
             try
@@ -156,7 +148,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam,nameof(GetComments),exception,QueryId));
                 throw exception;
             }
 
