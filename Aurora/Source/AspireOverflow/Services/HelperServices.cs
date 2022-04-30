@@ -15,14 +15,20 @@ namespace AspireOverflow.Services
             return stringBuilder.ToString();
         }
 
-          public static string LoggerMessage(Enum TeamName,string MethodName,Exception exception,object Data){
+          public static string LoggerMessage(Enum TeamName,string MethodName,Exception exception,object Data = null){
 
-              return $"{TeamName}:{MethodName}\n Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)} ";
+              return Data != null? $"{TeamName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}":
+
+               $"{TeamName}:{MethodName}\nException :{PropertyList(exception)}";;
           }
 
-           public static string LoggerMessage(Enum TeamName,string MethodName,Exception exception){
+          
 
-              return $"{TeamName}:{MethodName}\nException :{PropertyList(exception)}";
+            public static string LoggerMessage(string RepositoryName,string MethodName,Exception exception,object Data=null){
+
+              return Data != null? $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}":
+              
+               $"{RepositoryName}:{MethodName}\nException :{PropertyList(exception)}";;
           }
     }
 }

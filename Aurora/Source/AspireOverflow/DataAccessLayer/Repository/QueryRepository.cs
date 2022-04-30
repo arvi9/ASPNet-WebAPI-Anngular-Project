@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
 using AspireOverflow.Models;
@@ -22,46 +23,12 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
-        public IEnumerable<Query> GetQueriesFromDatabase()
-        {
-
-            try
-            {
-                var ListOfQueries = _context.Queries;
-                return ListOfQueries;
-
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                throw exception;
-            }
-
-
-        }
-
-
-        public IEnumerable<QueryComment> GetCommentsFromDatabase()
-        {
-
-            try
-            {
-                var ListOfComments = _context.QueryComments;
-                return ListOfComments;
-
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                throw exception;
-            }
-        }
 
 
 
         public bool AddQueryToDatabase(Query query)
         {
-            if (query == null) throw new ArgumentNullException("Query object cant be null");
+            Validation.ValidateQuery(query);
             try
             {
 
@@ -70,22 +37,10 @@ namespace AspireOverflow.DataAccessLayer
 
                 return true;
             }
-            catch (OperationCanceledException exception)
-            {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
-
-                throw exception;
-
-            }
-            catch (DbUpdateException exception)
-            {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
-                throw exception;
-
-            }
             catch (Exception exception)
             {
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddQueryToDatabase), exception, query));
+
                 throw exception;
 
             }
@@ -106,29 +61,102 @@ namespace AspireOverflow.DataAccessLayer
                 return true;
 
             }
-            catch (OperationCanceledException exception)
+            catch (Exception exception)
             {
 
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddCommentToDatabase), exception, comment));
+
                 throw exception;
 
             }
-            catch (DbUpdateException exception)
-            {
 
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
+
+        }
+
+        //Updating query Either by marking as Solved 
+        //Same method using to disable or soft delete the query
+        public bool UpdateQuery(int QueryId, bool IsSolved, bool IsDelete)
+        {
+
+            Validation.ValidateId(QueryId);
+            if (IsSolved && IsDelete) throw new ArgumentException("Both parameter cannot be true at the same time");
+            try
+            {
+                var ExistingQuery = GetQuery(QueryId);
+                if (ExistingQuery != null)
+                {
+                    if (IsSolved) ExistingQuery.IsSolved = IsSolved;
+                    if (IsDelete) ExistingQuery.IsActive = false;
+                    _context.Queries.Update(ExistingQuery);
+                    _context.SaveChanges();
+                    return true;
+                }
+                else return false;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(UpdateQuery), exception, IsSolved ? IsSolved : IsDelete));
+
                 throw exception;
+            }
+        }
+
+
+        public Query GetQuery(int QueryId)
+        {
+            Validation.ValidateId(QueryId);
+            Query ExistingQuery;
+            try
+            {
+                ExistingQuery = _context.Queries.First(item => item.QueryId == QueryId);
+                return ExistingQuery != null ? ExistingQuery : throw new SqlNullValueException($"There is no matching data with QueryID :{QueryId}");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQuery), exception, QueryId));
+
+                throw exception;
+            }
+        }
+
+        public IEnumerable<Query> GetQueriesFromDatabase()
+        {
+
+            try
+            {
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive == true);
+                return ListOfQueries;
 
             }
             catch (Exception exception)
             {
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQueriesFromDatabase), exception));
 
-                _logger.LogError($"{exception.Message},{exception.StackTrace}");
                 throw exception;
-
             }
 
+
         }
+
+
+        public IEnumerable<QueryComment> GetCommentsFromDatabase()
+        {
+
+            try
+            {
+                var ListOfComments = _context.QueryComments;
+                return ListOfComments;
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetCommentsFromDatabase), exception));
+
+                throw exception;
+            }
+        }
+
+
     }
 
 }

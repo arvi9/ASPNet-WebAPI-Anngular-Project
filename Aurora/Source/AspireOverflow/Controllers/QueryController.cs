@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Net;
@@ -23,6 +24,124 @@ public class QueryController : ControllerBase
     }
 
 
+    [HttpPost]
+    public IActionResult CreateQuery(Query query)
+    {
+        if (query == null) return BadRequest("Null value is not supported");
+
+        try
+        {
+
+            return _queryService.CreateQuery(query, DevelopmentTeam.Web) ? Created("Successfully Created",query) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
+        }
+        catch (ValidationException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateQuery), exception, query));
+            return BadRequest($"{exception.Message}\n{HelperService.PropertyList(query)} ");
+
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateQuery), exception, query));
+            return BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
+        }
+
+    }
+
+    [HttpPost]
+    public IActionResult CreateComment(QueryComment comment)
+    {
+
+        if (comment == null) return BadRequest("Null value is not supported");
+        try
+        {
+            return _queryService.CreateComment(comment, DevelopmentTeam.Web) ? Created("Successfully Created",comment) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
+        }
+
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
+            return BadRequest($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
+        }
+
+    }
+
+    [HttpDelete]
+    public IActionResult RemoveQueryByQueryId(int QueryId)
+    {
+        Validation.ValidateId(QueryId);
+        try
+        {
+            return _queryService.RemoveQueryByQueryId(QueryId, DevelopmentTeam.Web) ? Ok($"Successfully deleted the record with QueryId :{QueryId}") : BadRequest($"Error  Occured with QueryId :{QueryId}");
+        }
+        catch (ArgumentOutOfRangeException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(RemoveQueryByQueryId), exception, QueryId));
+            return BadRequest($"{exception.Message} with QueryId :{QueryId}");
+        }
+        catch (SqlNullValueException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(RemoveQueryByQueryId), exception, QueryId));
+            return NotFound($"{exception.Message} with QueryId :{QueryId}");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(RemoveQueryByQueryId), exception, QueryId));
+            return BadRequest($"Error  Occured with QueryId :{QueryId}");
+        }
+    }
+
+
+    [HttpPatch]
+    public IActionResult MarkQueryAsSolved(int QueryId)
+    {
+        Validation.ValidateId(QueryId);
+        try
+        {
+            return _queryService.MarkQueryAsSolved(QueryId, DevelopmentTeam.Web) ? Ok($"Successfully marked as Solved Query in  the record with QueryId :{QueryId}") : BadRequest($"Error  Occured with QueryId :{QueryId}");
+        }
+        catch (ArgumentOutOfRangeException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(MarkQueryAsSolved), exception, QueryId));
+            return BadRequest($"{exception.Message} with QueryId :{QueryId}");
+        }
+        catch (SqlNullValueException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(MarkQueryAsSolved), exception, QueryId));
+            return NotFound($"{exception.Message} with QueryId :{QueryId}");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(MarkQueryAsSolved), exception, QueryId));
+            return BadRequest($"Error  Occured with QueryId :{QueryId}");
+        }
+    }
+    [HttpGet]
+    public IActionResult GetQuery(int QueryId)
+    {
+        Validation.ValidateId(QueryId);
+        try
+        {
+
+            return Ok(_queryService.GetQuery(QueryId, DevelopmentTeam.Web));
+        }
+        catch (ArgumentOutOfRangeException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQuery), exception, QueryId));
+            return BadRequest($"{exception.Message} with QueryId :{QueryId}");
+        }
+        catch (SqlNullValueException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQuery), exception, QueryId));
+            return BadRequest($"{exception.Message} with QueryId :{QueryId}");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQuery), exception, QueryId));
+            return BadRequest($"Error  Occured with QueryId :{QueryId}");
+        }
+    }
+
     [HttpGet]
     public IActionResult GetAll()
     {
@@ -43,19 +162,19 @@ public class QueryController : ControllerBase
 
 
     [HttpGet]
-    public IActionResult GetQueriesByUserId(int UserID)
+    public IActionResult GetQueriesByUserId(int UserId)
     {
-        if (UserID <= 0) return BadRequest("UserId must be greater than 0");
+        if (UserId <= 0) return BadRequest("UserId must be greater than 0");
         try
         {
-            var ListOfQueriesByUserId = _queryService.GetQueriesByUserID(UserID, DevelopmentTeam.Web);
+            var ListOfQueriesByUserId = _queryService.GetQueries(DevelopmentTeam.Web);
             return Ok(ListOfQueriesByUserId);
         }
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueriesByUserId), exception, UserID));
-            return BadRequest($"Error Occured while processing your request with UserId :{UserID}");
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueriesByUserId), exception, UserId));
+            return BadRequest($"Error Occured while processing your request with UserId :{UserId}");
         }
 
     }
@@ -121,48 +240,5 @@ public class QueryController : ControllerBase
         }
 
     }
-
-    [HttpPost]
-    public IActionResult AddQuery(Query query)
-    {
-        if (query == null) return BadRequest("Null value is not supported");
-
-        try
-        {
-
-            return _queryService.AddQuery(query, DevelopmentTeam.Web) ? Ok("Successfully Created") : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
-        }
-        catch (ValidationException exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(AddQuery), exception, query));
-            return BadRequest($"{exception.Message}\n{HelperService.PropertyList(query)} ");
-
-        }
-        catch (Exception exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(AddQuery), exception, query));
-            return BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
-        }
-
-    }
-
-    [HttpPost]
-    public IActionResult AddComment(QueryComment comment)
-    {
-
-        if (comment == null) return BadRequest("Null value is not supported");
-        try
-        {
-            return _queryService.AddCommentToQuery(comment, DevelopmentTeam.Web) ? Ok("Successfully Created") :BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
-        }
-
-        catch (Exception exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(AddComment), exception, comment));
-            return BadRequest($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
-        }
-
-    }
-
 
 }

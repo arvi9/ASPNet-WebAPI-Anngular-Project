@@ -6,15 +6,16 @@ using System.ComponentModel.DataAnnotations;
 using AspireOverflow.Models.Interfaces;
 namespace AspireOverflow.Models
 {
-   public class QueryComment :IAuditField
+   public partial class QueryComment :IAuditField
     {
         [Key]
-        public int Id { get; set; }
+        public int QueryCommentId { get; set; }
 
         public string Comment { get; set; }
 
         public DateTime Datetime { get; set; }
 
+       
         public int QueryId { get; set; }
         public int UserId { get; set; }
 
@@ -26,7 +27,9 @@ namespace AspireOverflow.Models
         public DateTime? UpdatedOn { get; set; }
 
 
-        [ForeignKey("QueryId")]
+        
+       [ForeignKey("QueryId")]
+        [InverseProperty("QueryComments")]
         public virtual Query? Query { get; set; }
 
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace AspireOverflow.DataAccessLayer
 {
     public class AspireOverflowContextFactory
@@ -20,6 +21,7 @@ namespace AspireOverflow.DataAccessLayer
                 .AddJsonFile("appsettings.json")
                 .Build();
                 var connectionString = configuration.GetConnectionString("Default");
+            
                 optionsBuilder.UseSqlServer(connectionString
                                          ?? throw new NullReferenceException(
                                              $"Connection string is passed as null {nameof(connectionString)}"));
@@ -29,6 +31,7 @@ namespace AspireOverflow.DataAccessLayer
                 Console.WriteLine(exception.Message);
             }
              _aspireOverflowContext =  new AspireOverflowContext(optionsBuilder.Options);
+             
 
             return _aspireOverflowContext;
 

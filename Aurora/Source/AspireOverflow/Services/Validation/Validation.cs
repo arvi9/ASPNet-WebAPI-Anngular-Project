@@ -19,7 +19,9 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-
+        public static bool ValidateId(int QueryId){
+             return QueryId <= 0? throw new ArgumentOutOfRangeException("QueryId must be greater than 0"):true;
+        }
 
 
     }

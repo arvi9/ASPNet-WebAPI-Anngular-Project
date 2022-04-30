@@ -13,13 +13,13 @@ namespace AspireOverflow.Migrations
                 name: "Queries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    QueryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsSolved = table.Column<bool>(type: "bit", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true),
@@ -27,14 +27,14 @@ namespace AspireOverflow.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Queries", x => x.Id);
+                    table.PrimaryKey("PK_Queries", x => x.QueryId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "QueryComments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    QueryCommentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Datetime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -47,13 +47,12 @@ namespace AspireOverflow.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QueryComments", x => x.Id);
+                    table.PrimaryKey("PK_QueryComments", x => x.QueryCommentId);
                     table.ForeignKey(
-                        name: "FK_QueryComments_Queries_QueryId",
+                        name: "FK_QueryComment_Query",
                         column: x => x.QueryId,
                         principalTable: "Queries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "QueryId");
                 });
 
             migrationBuilder.CreateIndex(

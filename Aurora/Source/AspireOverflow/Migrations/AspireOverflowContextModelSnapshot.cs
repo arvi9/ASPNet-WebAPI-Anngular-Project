@@ -24,11 +24,11 @@ namespace AspireOverflow.Migrations
 
             modelBuilder.Entity("AspireOverflow.Models.Query", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("QueryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QueryId"), 1L, 1);
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -39,6 +39,9 @@ namespace AspireOverflow.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsSolved")
                         .HasColumnType("bit");
@@ -57,18 +60,18 @@ namespace AspireOverflow.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("QueryId");
 
                     b.ToTable("Queries");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.QueryComment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("QueryCommentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QueryCommentId"), 1L, 1);
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -95,7 +98,7 @@ namespace AspireOverflow.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("QueryCommentId");
 
                     b.HasIndex("QueryId");
 
@@ -107,8 +110,8 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Query", "Query")
                         .WithMany("QueryComments")
                         .HasForeignKey("QueryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_QueryComment_Query");
 
                     b.Navigation("Query");
                 });

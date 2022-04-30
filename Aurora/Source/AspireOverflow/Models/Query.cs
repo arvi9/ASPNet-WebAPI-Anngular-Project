@@ -1,12 +1,15 @@
 using AspireOverflow.Models.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace AspireOverflow.Models
 {
-    public class Query :IAuditField
+    public partial class Query :IAuditField
     {
         public Query(){
             QueryComments = new HashSet<QueryComment>();
         }
-        public int Id { get; set; }
+        [Key]
+        public int QueryId { get; set; }
 
         public string Title { get; set; }
         public string Content { get; set; }
@@ -14,7 +17,7 @@ namespace AspireOverflow.Models
 
         public bool IsSolved { get; set; }
 
-      
+      public bool IsActive{get;set;} =true;
  
         public int CreatedBy { get; set; }
 
@@ -24,7 +27,7 @@ namespace AspireOverflow.Models
         public DateTime? UpdatedOn { get; set; }
         
 
-
-      public ICollection<QueryComment>? QueryComments {get;set;}
+        [InverseProperty("Query")]
+      public virtual ICollection<QueryComment> QueryComments {get;set;}
     }
 }
