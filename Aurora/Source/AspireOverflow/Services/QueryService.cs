@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
-using System;
+
 
 using AspireOverflow.DataAccessLayer.Interfaces;
 
@@ -44,7 +44,7 @@ namespace AspireOverflow.Services
 
         public bool CreateComment(QueryComment comment, Enum DevelopmentTeam)
         {
-            if (comment == null) throw new ArgumentNullException("comment object can't be null");
+           Validation.ValidateComment(comment);
             try
             {
                 return database.AddCommentToDatabase(comment);
@@ -80,6 +80,7 @@ namespace AspireOverflow.Services
            {
                return database.UpdateQuery(QueryId,IsSolved:true);
            }
+        
            catch (Exception exception)
            {
                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(MarkQueryAsSolved), exception), QueryId);

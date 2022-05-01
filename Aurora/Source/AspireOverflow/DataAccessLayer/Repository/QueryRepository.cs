@@ -1,14 +1,13 @@
-using System.Data.SqlTypes;
-using System.Net;
-using Microsoft.EntityFrameworkCore;
+
+
 using AspireOverflow.Models;
-using AspireOverflow.Controllers;
+
 using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
+using AspireOverflow.CustomExceptions;
 
 namespace AspireOverflow.DataAccessLayer
 {
-
 
     public class QueryRepository : IQueryRepository
     {
@@ -51,26 +50,19 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool AddCommentToDatabase(QueryComment comment)
         {
-            if (comment == null) throw new ArgumentNullException("comment object cant be null");
+            Validation.ValidateComment(comment);
             try
             {
-
                 _context.QueryComments.Add(comment);
                 _context.SaveChanges();
-
                 return true;
 
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddCommentToDatabase), exception, comment));
-
                 throw exception;
-
             }
-
-
         }
 
         //Updating query Either by marking as Solved 
@@ -96,7 +88,6 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(UpdateQuery), exception, IsSolved ? IsSolved : IsDelete));
-
                 throw exception;
             }
         }
@@ -109,19 +100,17 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 ExistingQuery = _context.Queries.First(item => item.QueryId == QueryId);
-                return ExistingQuery != null ? ExistingQuery : throw new SqlNullValueException($"There is no matching data with QueryID :{QueryId}");
+                return ExistingQuery;
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQuery), exception, QueryId));
-
-                throw exception;
+                throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
         }
 
         public IEnumerable<Query> GetQueriesFromDatabase()
         {
-
             try
             {
                 var ListOfQueries = _context.Queries.Where(item => item.IsActive == true);

@@ -4,10 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 using AspireOverflow.Models.Interfaces;
+
 namespace AspireOverflow.Models
 {
    public partial class QueryComment :IAuditField
     {
+        public QueryComment(){
+    
+        }
         [Key]
         public int QueryCommentId { get; set; }
 
@@ -17,8 +21,7 @@ namespace AspireOverflow.Models
 
        
         public int QueryId { get; set; }
-        public int UserId { get; set; }
-
+       
         public int CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }
@@ -30,9 +33,11 @@ namespace AspireOverflow.Models
         
        [ForeignKey("QueryId")]
         [InverseProperty("QueryComments")]
-        public virtual Query? Query { get; set; }
+        public virtual Query? Query { get; set; }=null!;
 
-
+         [ForeignKey("CreatedBy")]
+      [InverseProperty("QueryComments")]
+      public virtual User? User {get;set;}=null!;
 
     }
 }

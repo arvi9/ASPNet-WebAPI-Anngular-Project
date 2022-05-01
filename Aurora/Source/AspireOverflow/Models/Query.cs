@@ -28,6 +28,10 @@ namespace AspireOverflow.Models
         
 
         [InverseProperty("Query")]
-      public virtual ICollection<QueryComment> QueryComments {get;set;}
+      public virtual ICollection<QueryComment>? QueryComments {get;set;}
+
+      [ForeignKey("CreatedBy")]
+      [InverseProperty("Queries")]
+      public virtual User? User {get;set;}
     }
 }

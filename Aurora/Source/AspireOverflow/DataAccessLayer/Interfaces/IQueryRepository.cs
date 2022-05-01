@@ -8,10 +8,10 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     {
 
 
-        public bool AddQueryToDatabase(Query query);
-        public bool UpdateQuery(int QueryId, bool IsSolved = false, bool IsDelete = false);
-        public Query GetQuery(int QueryId);
-        public IEnumerable<Query> GetQueriesFromDatabase();
+         bool AddQueryToDatabase(Query query);
+         bool UpdateQuery(int QueryId, bool IsSolved = false, bool IsDelete = false);
+         Query GetQuery(int QueryId);
+         IEnumerable<Query> GetQueriesFromDatabase();
 
 
 
@@ -19,9 +19,9 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     public interface IQueryCommentRepository
     {
 
-        public IEnumerable<QueryComment> GetCommentsFromDatabase();
+         IEnumerable<QueryComment> GetCommentsFromDatabase();
 
-        public bool AddCommentToDatabase(QueryComment comment);
+         bool AddCommentToDatabase(QueryComment comment);
 
     }
 }
