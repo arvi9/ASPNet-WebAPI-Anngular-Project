@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspireOverflow.Migrations
 {
-    public partial class UpdateDB : Migration
+    public partial class TestDBupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,11 +41,24 @@ namespace AspireOverflow.Migrations
                 {
                     UserRoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleName = table.Column<int>(type: "int", nullable: false)
+                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserRoles", x => x.UserRoleId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VerifyStatus",
+                columns: table => new
+                {
+                    VerifyStatusID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VerifyStatus", x => x.VerifyStatusID);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,35 +93,38 @@ namespace AspireOverflow.Migrations
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsVerified = table.Column<bool>(type: "bit", nullable: false),
+                    VerifyStatusID = table.Column<int>(type: "int", nullable: false),
+                    IsReviewer = table.Column<bool>(type: "bit", nullable: false),
                     UserRoleId = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    DesignationId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Users_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_User_Department",
+                        column: x => x.DesignationId,
+                        principalTable: "Designations",
+                        principalColumn: "DesignationId");
                     table.ForeignKey(
-                        name: "FK_Users_Gender_GenderId",
+                        name: "FK_User_Gender",
                         column: x => x.GenderId,
                         principalTable: "Gender",
-                        principalColumn: "GenderId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "GenderId");
                     table.ForeignKey(
-                        name: "FK_Users_UserRoles_UserRoleId",
+                        name: "FK_User_UserRole",
                         column: x => x.UserRoleId,
                         principalTable: "UserRoles",
-                        principalColumn: "UserRoleId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserRoleId");
+                    table.ForeignKey(
+                        name: "FK_User_VerifyStatus",
+                        column: x => x.VerifyStatusID,
+                        principalTable: "VerifyStatus",
+                        principalColumn: "VerifyStatusID");
                 });
 
             migrationBuilder.CreateTable(
@@ -187,9 +203,9 @@ namespace AspireOverflow.Migrations
                 column: "QueryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_DepartmentId",
+                name: "IX_Users_DesignationId",
                 table: "Users",
-                column: "DepartmentId");
+                column: "DesignationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_GenderId",
@@ -200,13 +216,15 @@ namespace AspireOverflow.Migrations
                 name: "IX_Users_UserRoleId",
                 table: "Users",
                 column: "UserRoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_VerifyStatusID",
+                table: "Users",
+                column: "VerifyStatusID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Designations");
-
             migrationBuilder.DropTable(
                 name: "QueryComments");
 
@@ -217,13 +235,19 @@ namespace AspireOverflow.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Departments");
+                name: "Designations");
 
             migrationBuilder.DropTable(
                 name: "Gender");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "VerifyStatus");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
         }
     }
 }

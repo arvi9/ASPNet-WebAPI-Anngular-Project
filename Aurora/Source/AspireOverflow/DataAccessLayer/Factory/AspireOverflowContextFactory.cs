@@ -25,16 +25,19 @@ namespace AspireOverflow.DataAccessLayer
                 optionsBuilder.UseSqlServer(connectionString
                                          ?? throw new NullReferenceException(
                                              $"Connection string is passed as null {nameof(connectionString)}"));
+
+                  _aspireOverflowContext =  new AspireOverflowContext(optionsBuilder.Options);
+                  return _aspireOverflowContext;
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
+                throw exception;
             }
-             _aspireOverflowContext =  new AspireOverflowContext(optionsBuilder.Options);
+         
              
 
-            return _aspireOverflowContext;
-
+      
         }
 
     }

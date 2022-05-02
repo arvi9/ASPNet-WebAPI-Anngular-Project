@@ -20,4 +20,24 @@ namespace AspireOverflow.DataAccessLayer
 
 
     }
+
+     public class UserRepositoryFactory
+    {
+        public static UserRepository GetUserRepositoryObject(ILogger<UserService> logger)
+        {
+            try
+            {  
+                var aspireOverflowContext = AspireOverflowContextFactory.GetAspireOverflowContextObject();
+                 return new UserRepository(aspireOverflowContext,logger);
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"{exception.Message},{exception.StackTrace}");
+                throw exception;
+            }
+           
+        }
+
+
+    }
 }

@@ -33,11 +33,10 @@ namespace AspireOverflow.Models
         
        [ForeignKey("QueryId")]
         [InverseProperty("QueryComments")]
-        public virtual Query? Query { get; set; }=null!;
+        public virtual Query? Query { get; set; }
 
          [ForeignKey("CreatedBy")]
       [InverseProperty("QueryComments")]
-      public virtual User? User {get;set;}=null!;
+      public virtual User? User {get;set;}
 
-    }
-}
+}}

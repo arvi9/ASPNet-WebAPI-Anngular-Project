@@ -18,5 +18,8 @@ namespace AspireOverflow.Models
         [ForeignKey("DepartmentId")]
         [InverseProperty("Designations")]
         public virtual Department Department { get; set; } = null!;
+
+          [InverseProperty("Designation")]
+        public virtual ICollection<User> Users { get; set; }= null!;
     }
 }

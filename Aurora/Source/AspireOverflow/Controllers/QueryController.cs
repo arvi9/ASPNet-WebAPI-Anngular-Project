@@ -5,6 +5,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 
+
 namespace AspireOverflow.Controllers;
 
 [ApiController]
@@ -24,16 +25,17 @@ public class QueryController : ControllerBase
 
 
     [HttpPost]
-    public IActionResult CreateQuery(Query query)
+    public async Task<ActionResult<Query>> CreateQuery( Query query)                 
     {
         if (query == null) return BadRequest("Null value is not supported");
         try
-        {
-            return _queryService.CreateQuery(query, DevelopmentTeam.Web) ? Created("Successfully Created", query) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
+        {   //Development.Web is Enum constants which indicated the request approaching team.
+            return _queryService.CreateQuery(query, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully Created")): BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
         }
         catch (ValidationException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateQuery), exception, query));
+            //HelperService.LoggerMessage - returns string for logger with detailed info
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateQuery), exception, query)); 
             return BadRequest($"{exception.Message}\n{HelperService.PropertyList(query)}");
         }
         catch (Exception exception)
@@ -44,13 +46,13 @@ public class QueryController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateComment(QueryComment comment)
+    public async Task<ActionResult<QueryComment>> CreateComment(QueryComment comment)
     {
 
         if (comment == null) return BadRequest("Null value is not supported");
         try
         {
-            return _queryService.CreateComment(comment, DevelopmentTeam.Web) ? Ok("Successfully added comment to the Query") : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
+            return _queryService.CreateComment(comment, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
         }  catch (ValidationException exception)
         {
             _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
@@ -66,12 +68,12 @@ public class QueryController : ControllerBase
     }
 
     [HttpDelete]
-    public IActionResult RemoveQueryByQueryId(int QueryId)
+    public async Task<ActionResult> RemoveQueryByQueryId(int QueryId)
     {
         if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
         try
         {
-            return _queryService.RemoveQueryByQueryId(QueryId, DevelopmentTeam.Web) ? Ok($"Successfully deleted the record with QueryId :{QueryId}") : BadRequest($"Error Occurred while removing query with QueryId :{QueryId}");
+            return _queryService.RemoveQueryByQueryId(QueryId, DevelopmentTeam.Web) ?await Task.FromResult(Ok($"Successfully deleted the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while removing query with QueryId :{QueryId}");
         }
 
         catch (ItemNotFoundException exception)
@@ -88,12 +90,12 @@ public class QueryController : ControllerBase
 
 
     [HttpPatch]
-    public IActionResult MarkQueryAsSolved(int QueryId)
+    public async Task<ActionResult> MarkQueryAsSolved(int QueryId)
     {
         if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
         try
         {
-            return _queryService.MarkQueryAsSolved(QueryId, DevelopmentTeam.Web) ? Ok($"Successfully marked as Solved Query in the record with QueryId :{QueryId}") : BadRequest($"Error Occurred while marking query as solved with QueryId :{QueryId}");
+            return _queryService.MarkQueryAsSolved(QueryId, DevelopmentTeam.Web) ? await Task.FromResult(Ok($"Successfully marked as Solved Query in the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while marking query as solved with QueryId :{QueryId}");
         }
 
         catch (ItemNotFoundException exception)
@@ -108,12 +110,12 @@ public class QueryController : ControllerBase
         }
     }
     [HttpGet]
-    public IActionResult GetQuery(int QueryId)
+    public async Task<ActionResult<Query>> GetQuery(int QueryId)
     {
         if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
         try
         {
-            return Ok(_queryService.GetQuery(QueryId, DevelopmentTeam.Web));
+            return await Task.FromResult(_queryService.GetQuery(QueryId, DevelopmentTeam.Web));
         }
         catch (ItemNotFoundException exception)
         {
@@ -128,12 +130,13 @@ public class QueryController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<ActionResult<IEnumerator<Query>>> GetAll()
     {
         try
-        {
+        { 
+          
             var Queries = _queryService.GetQueries(DevelopmentTeam.Web);    // DevelopmentTeam.Web is a property of enum class
-            return Ok(Queries);
+            return await Task.FromResult(Ok(Queries));
         }
         catch (Exception exception)
         {
@@ -145,13 +148,13 @@ public class QueryController : ControllerBase
 
 
     [HttpGet]
-    public IActionResult GetQueriesByUserId(int UserId)
+    public async Task<ActionResult<IEnumerator<Query>>> GetQueriesByUserId(int UserId)
     {
         if (UserId <= 0) return BadRequest("UserId must be greater than 0");
         try
         {
             var ListOfQueriesByUserId = _queryService.GetQueries(DevelopmentTeam.Web);
-            return Ok(ListOfQueriesByUserId);
+            return await Task.FromResult(Ok(ListOfQueriesByUserId));
         }
 
         catch (Exception exception)
@@ -165,13 +168,13 @@ public class QueryController : ControllerBase
 
 
     [HttpGet]
-    public IActionResult GetQueriesByTitle(string Title)
+    public async Task<ActionResult<IEnumerator<Query>>> GetQueriesByTitle(string  Title)
     {
         if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
         try
         {
-            var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title, DevelopmentTeam.Web);
-            return Ok(ListOfQueriesByTitle);
+            var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(null, DevelopmentTeam.Web);
+            return await Task.FromResult(Ok(ListOfQueriesByTitle));
         }
 
         catch (Exception exception)
@@ -185,17 +188,17 @@ public class QueryController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetQueries(bool IsSolved)
+    public async Task<ActionResult<IEnumerator<Query>>> GetQueriesByIsSolved(bool IsSolved)
     {
 
         try
         {
             var ListOfQueriesByIsSolved = _queryService.GetQueries(IsSolved, DevelopmentTeam.Web);
-            return Ok(ListOfQueriesByIsSolved);
+            return await Task.FromResult(Ok(ListOfQueriesByIsSolved));
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueries), exception, IsSolved));
+            _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueriesByIsSolved), exception, IsSolved));
             return BadRequest($"Error Occured while processing your request with IsSolved :{IsSolved}");
 
         }
@@ -205,13 +208,13 @@ public class QueryController : ControllerBase
 
 
     [HttpGet]
-    public IActionResult GetComments(int QueryId)
+    public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int QueryId)
     {
         if (QueryId <= 0) return BadRequest("QueryId must be greater than 0");
         try
         {
             var ListOfComments = _queryService.GetComments(QueryId, DevelopmentTeam.Web);
-            return Ok(ListOfComments);
+            return  await Task.FromResult(Ok(ListOfComments));
         }
 
         catch (Exception exception)

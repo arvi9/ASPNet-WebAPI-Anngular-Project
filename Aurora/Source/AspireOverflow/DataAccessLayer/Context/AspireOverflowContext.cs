@@ -55,6 +55,35 @@ namespace AspireOverflow.DataAccessLayer
                     .HasConstraintName("FK_QueryComment_User");
             });
 
+              modelBuilder.Entity<User>(entity =>
+            {
+
+                entity.HasOne(d => d.Designation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.DesignationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_Department");
+
+                entity.HasOne(d => d.Gender)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.GenderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_Gender");
+
+                entity.HasOne(d => d.UserRole)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.UserRoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                
+                    .HasConstraintName("FK_User_UserRole");
+
+                     entity.HasOne(d => d.VerifyStatus)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.VerifyStatusID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_VerifyStatus");
+            });
+
         }
     }
 }

@@ -8,7 +8,7 @@ using AspireOverflow.Models.Interfaces;
 namespace AspireOverflow.Models
 {
    
-    public partial class User :IAuditField
+    public partial class User 
     {
         public User()
         {
@@ -39,31 +39,37 @@ namespace AspireOverflow.Models
 
         public DateTime DateOfBirth { get; set; }
 
-        public bool IsVerified { get; set; }
+        public int VerifyStatusID { get; set; }=3;
+
+        public bool IsReviewer{ get; set; }
+
+        public int UserRoleId { get; set; }=2;
 
 
-        public int UserRoleId { get; set; }
+        public int DesignationId { get; set; }
 
-
-        public int DepartmentId { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }=DateTime.Now;
+     
 
         public DateTime? UpdatedOn { get; set; }
         public int? UpdatedBy { get; set; }
 
-        [ForeignKey("DepartmentId")]
+        
+        [ForeignKey("DesignationId")]
         [InverseProperty("Users")]
 
-        public virtual Department Department { get; set; } = null!;
+        public virtual Designation? Designation { get; set; } = null!;
         [ForeignKey("GenderId")]
         [InverseProperty("Users")]
-        public virtual Gender Gender { get; set; } = null!;
+        public virtual Gender? Gender { get; set; } = null!;
 
         [ForeignKey("UserRoleId")]
         [InverseProperty("Users")]
-        public virtual UserRole UserRole { get; set; } = null!;
+        public virtual UserRole? UserRole { get; set; } = null!;
+
+          [ForeignKey("VerifyStatusID")]
+        [InverseProperty("Users")]
+        public virtual VerifyStatus? VerifyStatus { get; set; } = null!;
 
         [InverseProperty("User")]
         public virtual ICollection<Query> Queries { get; set; }

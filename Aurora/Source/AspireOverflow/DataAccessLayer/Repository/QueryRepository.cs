@@ -25,7 +25,7 @@ namespace AspireOverflow.DataAccessLayer
 
 
 
-        public bool AddQueryToDatabase(Query query)
+        public bool AddQuery(Query query)
         {
             Validation.ValidateQuery(query);
             try
@@ -38,7 +38,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddQueryToDatabase), exception, query));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddQuery), exception, query));
 
                 throw exception;
 
@@ -48,7 +48,7 @@ namespace AspireOverflow.DataAccessLayer
 
 
 
-        public bool AddCommentToDatabase(QueryComment comment)
+        public bool AddComment(QueryComment comment)
         {
             Validation.ValidateComment(comment);
             try
@@ -60,7 +60,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddCommentToDatabase), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddComment), exception, comment));
                 throw exception;
             }
         }
@@ -74,16 +74,14 @@ namespace AspireOverflow.DataAccessLayer
             if (IsSolved && IsDelete) throw new ArgumentException("Both parameter cannot be true at the same time");
             try
             {
-                var ExistingQuery = GetQuery(QueryId);
-                if (ExistingQuery != null)
-                {
-                    if (IsSolved) ExistingQuery.IsSolved = IsSolved;
-                    if (IsDelete) ExistingQuery.IsActive = false;
-                    _context.Queries.Update(ExistingQuery);
-                    _context.SaveChanges();
-                    return true;
-                }
-                else return false;
+                var ExistingQuery = GetQueryByID(QueryId);
+
+                if (IsSolved) ExistingQuery.IsSolved = IsSolved;
+                if (IsDelete) ExistingQuery.IsActive = false;
+
+                _context.Queries.Update(ExistingQuery);
+                _context.SaveChanges();
+                return true;
             }
             catch (Exception exception)
             {
@@ -93,23 +91,23 @@ namespace AspireOverflow.DataAccessLayer
         }
 
 
-        public Query GetQuery(int QueryId)
+        public Query GetQueryByID(int QueryId)
         {
             Validation.ValidateId(QueryId);
             Query ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.First(item => item.QueryId == QueryId);
-                return ExistingQuery;
+                ExistingQuery = _context.Queries.Find(QueryId);
+                return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQuery), exception, QueryId));
-                throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQueryByID), exception, QueryId));
+                throw exception;
             }
         }
 
-        public IEnumerable<Query> GetQueriesFromDatabase()
+        public IEnumerable<Query> GetQueries()
         {
             try
             {
@@ -119,7 +117,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQueriesFromDatabase), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQueries), exception));
 
                 throw exception;
             }
@@ -128,7 +126,7 @@ namespace AspireOverflow.DataAccessLayer
         }
 
 
-        public IEnumerable<QueryComment> GetCommentsFromDatabase()
+        public IEnumerable<QueryComment> GetComments()
         {
 
             try
@@ -139,7 +137,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetCommentsFromDatabase), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetComments), exception));
 
                 throw exception;
             }

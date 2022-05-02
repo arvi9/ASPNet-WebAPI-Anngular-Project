@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    [Migration("20220501022854_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20220502042150_DbUpdate")]
+    partial class DbUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,16 +180,13 @@ namespace AspireOverflow.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("DesignationId")
                         .HasColumnType("int");
 
                     b.Property<string>("EmailAddress")
@@ -204,7 +201,7 @@ namespace AspireOverflow.Migrations
                     b.Property<int>("GenderId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsVerified")
+                    b.Property<bool>("IsReviewer")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
@@ -215,19 +212,24 @@ namespace AspireOverflow.Migrations
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn")
+                    b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserRoleId")
                         .HasColumnType("int");
 
+                    b.Property<int>("VerifyStatusID")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DesignationId");
 
                     b.HasIndex("GenderId");
 
                     b.HasIndex("UserRoleId");
+
+                    b.HasIndex("VerifyStatusID");
 
                     b.ToTable("Users");
                 });
@@ -240,12 +242,30 @@ namespace AspireOverflow.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleId"), 1L, 1);
 
-                    b.Property<int>("RoleName")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserRoleId");
 
                     b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.VerifyStatus", b =>
+                {
+                    b.Property<int>("VerifyStatusID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerifyStatusID"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VerifyStatusID");
+
+                    b.ToTable("VerifyStatus");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Designation", b =>
@@ -291,35 +311,46 @@ namespace AspireOverflow.Migrations
 
             modelBuilder.Entity("AspireOverflow.Models.User", b =>
                 {
-                    b.HasOne("AspireOverflow.Models.Department", "Department")
+                    b.HasOne("AspireOverflow.Models.Designation", "Designation")
                         .WithMany("Users")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DesignationId")
+                        .IsRequired()
+                        .HasConstraintName("FK_User_Department");
 
                     b.HasOne("AspireOverflow.Models.Gender", "Gender")
                         .WithMany("Users")
                         .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_User_Gender");
 
                     b.HasOne("AspireOverflow.Models.UserRole", "UserRole")
                         .WithMany("Users")
                         .HasForeignKey("UserRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_User_UserRole");
 
-                    b.Navigation("Department");
+                    b.HasOne("AspireOverflow.Models.VerifyStatus", "VerifyStatus")
+                        .WithMany("Users")
+                        .HasForeignKey("VerifyStatusID")
+                        .IsRequired()
+                        .HasConstraintName("FK_User_VerifyStatus");
+
+                    b.Navigation("Designation");
 
                     b.Navigation("Gender");
 
                     b.Navigation("UserRole");
+
+                    b.Navigation("VerifyStatus");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Department", b =>
                 {
                     b.Navigation("Designations");
+                });
 
+            modelBuilder.Entity("AspireOverflow.Models.Designation", b =>
+                {
                     b.Navigation("Users");
                 });
 
@@ -341,6 +372,11 @@ namespace AspireOverflow.Migrations
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.UserRole", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.VerifyStatus", b =>
                 {
                     b.Navigation("Users");
                 });

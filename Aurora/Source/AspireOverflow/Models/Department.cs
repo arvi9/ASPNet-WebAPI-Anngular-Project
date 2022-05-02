@@ -10,7 +10,7 @@ namespace AspireOverflow.Models
         public Department()
         {
             Designations = new HashSet<Designation>();
-            Users = new HashSet<User>();
+           
         }
         public int DepartmentId { get; set; }
      
@@ -20,7 +20,6 @@ namespace AspireOverflow.Models
 
         [InverseProperty("Department")]
         public virtual ICollection<Designation> Designations { get; set; }
-        [InverseProperty("Department")]
-        public virtual ICollection<User> Users { get; set; }
+      
     }
 }
