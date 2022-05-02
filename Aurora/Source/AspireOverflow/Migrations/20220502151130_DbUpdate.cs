@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspireOverflow.Migrations
 {
-    public partial class TestDBupdate : Migration
+    public partial class DbUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,8 +26,7 @@ namespace AspireOverflow.Migrations
                 name: "Gender",
                 columns: table => new
                 {
-                    GenderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GenderId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
@@ -39,8 +38,7 @@ namespace AspireOverflow.Migrations
                 name: "UserRoles",
                 columns: table => new
                 {
-                    UserRoleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserRoleId = table.Column<int>(type: "int", nullable: false),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -52,8 +50,7 @@ namespace AspireOverflow.Migrations
                 name: "VerifyStatus",
                 columns: table => new
                 {
-                    VerifyStatusID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VerifyStatusID = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -91,14 +88,13 @@ namespace AspireOverflow.Migrations
                     GenderId = table.Column<int>(type: "int", nullable: false),
                     AceNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     VerifyStatusID = table.Column<int>(type: "int", nullable: false),
                     IsReviewer = table.Column<bool>(type: "bit", nullable: false),
                     UserRoleId = table.Column<int>(type: "int", nullable: false),
                     DesignationId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true)
                 },
@@ -180,6 +176,34 @@ namespace AspireOverflow.Migrations
                         column: x => x.CreatedBy,
                         principalTable: "Users",
                         principalColumn: "UserId");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Gender",
+                columns: new[] { "GenderId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Male" },
+                    { 2, "Female" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "UserRoleId", "RoleName" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "VerifyStatus",
+                columns: new[] { "VerifyStatusID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Approved" },
+                    { 2, "Rejected" },
+                    { 3, "NotVerified" }
                 });
 
             migrationBuilder.CreateIndex(

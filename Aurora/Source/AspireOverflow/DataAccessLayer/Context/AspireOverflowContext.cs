@@ -1,5 +1,4 @@
 
-
 using AspireOverflow.Models;
 using Microsoft.EntityFrameworkCore;
 namespace AspireOverflow.DataAccessLayer
@@ -55,35 +54,54 @@ namespace AspireOverflow.DataAccessLayer
                     .HasConstraintName("FK_QueryComment_User");
             });
 
-              modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<User>(entity =>
+          {
+
+              entity.HasOne(d => d.Designation)
+                  .WithMany(p => p.Users)
+                  .HasForeignKey(d => d.DesignationId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_User_Department");
+
+              entity.HasOne(d => d.Gender)
+                  .WithMany(p => p.Users)
+                  .HasForeignKey(d => d.GenderId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_User_Gender");
+
+              entity.HasOne(d => d.UserRole)
+                  .WithMany(p => p.Users)
+                  .HasForeignKey(d => d.UserRoleId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+
+                  .HasConstraintName("FK_User_UserRole");
+
+              entity.HasOne(d => d.VerifyStatus)
+               .WithMany(p => p.Users)
+               .HasForeignKey(d => d.VerifyStatusID)
+               .OnDelete(DeleteBehavior.ClientSetNull)
+               .HasConstraintName("FK_User_VerifyStatus");
+          });
+
+            modelBuilder.Entity<Gender>(entity =>
+                      {
+                          entity.HasData(new Gender { GenderId = 1, Name = "Male" });
+                          entity.HasData(new Gender { GenderId = 2, Name = "Female" });
+                      });
+
+            modelBuilder.Entity<VerifyStatus>(entity =>
             {
-
-                entity.HasOne(d => d.Designation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.DesignationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_Department");
-
-                entity.HasOne(d => d.Gender)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.GenderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_Gender");
-
-                entity.HasOne(d => d.UserRole)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.UserRoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                
-                    .HasConstraintName("FK_User_UserRole");
-
-                     entity.HasOne(d => d.VerifyStatus)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.VerifyStatusID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_VerifyStatus");
+                entity.HasData(new VerifyStatus { VerifyStatusID = 1, Name = "Approved" });
+                entity.HasData(new VerifyStatus { VerifyStatusID = 2, Name = "Rejected" });
+                entity.HasData(new VerifyStatus { VerifyStatusID = 3, Name = "NotVerified" });
             });
 
+            modelBuilder.Entity<UserRole>(entity =>
+           {
+               entity.HasData(new UserRole { UserRoleId = 1, RoleName = "Admin" });
+               entity.HasData(new UserRole { UserRoleId = 2, RoleName = "User" });
+
+           });
         }
     }
 }

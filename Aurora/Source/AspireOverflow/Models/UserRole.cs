@@ -14,7 +14,7 @@ namespace AspireOverflow.Models
         }
 
 
-        [Key]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserRoleId { get; set; }
         public string RoleName { get; set; }
 

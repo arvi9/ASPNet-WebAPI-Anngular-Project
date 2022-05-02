@@ -14,7 +14,7 @@ namespace AspireOverflow.Models
         }
 
 
-        [Key]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int VerifyStatusID { get; set; }
         public string Name { get; set; }
 

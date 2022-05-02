@@ -1,13 +1,17 @@
 
+
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
+using Microsoft.AspNetCore.Authorization;
 
 
-namespace AspireOverflow.Controllers;
 
+namespace AspireOverflow.Controllers
+{
+[Authorize]
 [ApiController]
 [Route("[controller]/[action]")]
 public class QueryController : ControllerBase
@@ -227,4 +231,5 @@ public class QueryController : ControllerBase
 
     }
 
+}
 }

@@ -12,7 +12,7 @@ namespace AspireOverflow.Models
             Users = new HashSet<User>();
         }
 
-        [Key]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GenderId { get; set; }
       
         [StringLength(15)]

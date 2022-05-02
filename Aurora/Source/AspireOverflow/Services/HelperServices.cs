@@ -4,7 +4,7 @@ namespace AspireOverflow.Services
 {
     public static class HelperService
     {
-        public  static string PropertyList(this object obj)
+        public static string PropertyList(this object obj)
         {
             var properties = obj.GetType().GetProperties();
             var stringBuilder = new StringBuilder();
@@ -15,20 +15,42 @@ namespace AspireOverflow.Services
             return stringBuilder.ToString();
         }
 
-          public static string LoggerMessage(Enum TeamName,string MethodName,Exception exception,object Data = null){
+        public static string LoggerMessage(Enum TeamName, string MethodName, Exception exception, object Data = null)
+        {
 
-              return Data != null? $"{TeamName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}":
+            return Data != null ? $"{TeamName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}" :
 
-               $"{TeamName}:{MethodName}\nException :{PropertyList(exception)}";;
-          }
+             $"{TeamName}:{MethodName}\nException :{PropertyList(exception)}"; ;
+        }
 
-          
 
-            public static string LoggerMessage(string RepositoryName,string MethodName,Exception exception,object Data=null){
 
-              return Data != null? $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}":
-              
-               $"{RepositoryName}:{MethodName}\nException :{PropertyList(exception)}";;
-          }
+        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, object Data = null)
+        {
+
+            return Data != null ? $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}" :
+
+             $"{RepositoryName}:{MethodName}\nException :{PropertyList(exception)}"; ;
+        }
+
+        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, int FirstId, int? secondId)
+        {
+
+            return secondId != null ? $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {FirstId}, {secondId} }}\nException :{PropertyList(exception)}" :
+
+             $"{RepositoryName}:{MethodName}\n Object passed :{{ \n {FirstId} }}\nException :{PropertyList(exception)}"; ;
+        }
+
+        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, string data)
+        {
+
+            return $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {data} }}\nException :{PropertyList(exception)}";
+        }
+
+
+
+
+
+
     }
 }

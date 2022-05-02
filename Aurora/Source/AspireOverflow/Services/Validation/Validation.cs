@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.Models;
+using AspireOverflow.Security;
 
 namespace AspireOverflow.Services
 {
@@ -36,11 +37,11 @@ namespace AspireOverflow.Services
             return Id <= 0 ? throw new ArgumentOutOfRangeException("Id must be greater than 0") : true;
         }
 
-          public static bool ValidateId(int FirstId,int SecondId)
+        public static bool ValidateId(int FirstId, int SecondId)
         {
-            if(FirstId <= 0)  throw new ArgumentOutOfRangeException("Id must be greater than 0");
-                if(SecondId <= 0)  throw new ArgumentOutOfRangeException("Id must be greater than 0");
-            else return true;  
+            if (FirstId <= 0) throw new ArgumentOutOfRangeException("Id must be greater than 0");
+            if (SecondId <= 0) throw new ArgumentOutOfRangeException("Id must be greater than 0");
+            else return true;
         }
 
 
@@ -51,13 +52,20 @@ namespace AspireOverflow.Services
         }
 
 
-        public static User SetUserDefaultPropertyValues(User user){
-            user.VerifyStatusID=3;
-            user.CreatedOn=DateTime.Now;
-            user.IsReviewer=false;
-            user.UserRoleId=2;
-            
+        public static User SetUserDefaultPropertyValues(User user)
+        {
+            user.VerifyStatusID = 3;
+            user.CreatedOn = DateTime.Now;
+            user.IsReviewer = false;
+            user.UserRoleId = 2;
+            user.Password=PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user,user.Password);  //stores password with hashed password
             return user;
         }
+
+
+
     }
+
+
+
 }

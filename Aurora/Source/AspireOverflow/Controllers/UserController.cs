@@ -1,8 +1,10 @@
+using System.Security.AccessControl;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace AspireOverflow.Controllers;
@@ -25,9 +27,13 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreateUser(User User)
     {
+        
         if (User == null) return BadRequest("Null value is not supported");
+      
         try
-        {   //Development.Web is Enum constants which indicated the request approaching team.
+
+        {  if (User != null) throw new Exception("dummy");
+              //Development.Web is Enum constants which indicated the request approaching team.
             return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")): BadRequest($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
         }
         catch (ValidationException exception)
@@ -90,7 +96,7 @@ public class UserController : ControllerBase
     {
         if (UserId <= 0) return BadRequest("User ID must be greater than 0");
         try
-        {
+        {   
             return await Task.FromResult(_UserService.GetUsersByID(UserId));
         }
         catch (ItemNotFoundException exception)

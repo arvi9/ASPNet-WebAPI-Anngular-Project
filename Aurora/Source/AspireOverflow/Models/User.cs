@@ -1,8 +1,8 @@
 
-using System.Reflection;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using AspireOverflow.Models.Interfaces;
+
 
 
 namespace AspireOverflow.Models
@@ -12,9 +12,6 @@ namespace AspireOverflow.Models
     {
         public User()
         {
-
-            Queries = new HashSet<Query>();
-            QueryComments = new HashSet<QueryComment>();
 
         }
 
@@ -33,7 +30,7 @@ namespace AspireOverflow.Models
 
         public string EmailAddress { get; set; } = null!;
 
-        [StringLength(50)]
+       [Column(TypeName="nvarchar(max)")]
         public string Password { get; set; } = null!;
 
 
@@ -72,9 +69,9 @@ namespace AspireOverflow.Models
         public virtual VerifyStatus? VerifyStatus { get; set; } = null!;
 
         [InverseProperty("User")]
-        public virtual ICollection<Query> Queries { get; set; }
+        public virtual ICollection<Query>? Queries { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<QueryComment> QueryComments { get; set; }
+        public virtual ICollection<QueryComment>? QueryComments { get; set; }
        
 
     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    [Migration("20220502025255_TestDBupdate")]
-    partial class TestDBupdate
+    [Migration("20220502151130_DbUpdate")]
+    partial class DbUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,10 +68,7 @@ namespace AspireOverflow.Migrations
             modelBuilder.Entity("AspireOverflow.Models.Gender", b =>
                 {
                     b.Property<int>("GenderId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenderId"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -81,6 +78,18 @@ namespace AspireOverflow.Migrations
                     b.HasKey("GenderId");
 
                     b.ToTable("Gender");
+
+                    b.HasData(
+                        new
+                        {
+                            GenderId = 1,
+                            Name = "Male"
+                        },
+                        new
+                        {
+                            GenderId = 2,
+                            Name = "Female"
+                        });
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Query", b =>
@@ -180,9 +189,6 @@ namespace AspireOverflow.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -209,8 +215,7 @@ namespace AspireOverflow.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
@@ -240,10 +245,7 @@ namespace AspireOverflow.Migrations
             modelBuilder.Entity("AspireOverflow.Models.UserRole", b =>
                 {
                     b.Property<int>("UserRoleId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleId"), 1L, 1);
 
                     b.Property<string>("RoleName")
                         .IsRequired()
@@ -252,15 +254,24 @@ namespace AspireOverflow.Migrations
                     b.HasKey("UserRoleId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserRoleId = 1,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            UserRoleId = 2,
+                            RoleName = "User"
+                        });
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.VerifyStatus", b =>
                 {
                     b.Property<int>("VerifyStatusID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerifyStatusID"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -269,6 +280,23 @@ namespace AspireOverflow.Migrations
                     b.HasKey("VerifyStatusID");
 
                     b.ToTable("VerifyStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            VerifyStatusID = 1,
+                            Name = "Approved"
+                        },
+                        new
+                        {
+                            VerifyStatusID = 2,
+                            Name = "Rejected"
+                        },
+                        new
+                        {
+                            VerifyStatusID = 3,
+                            Name = "NotVerified"
+                        });
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Designation", b =>
