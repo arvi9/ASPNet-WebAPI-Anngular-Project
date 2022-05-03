@@ -8,7 +8,7 @@ namespace AspireOverflow.Services{
 
 public class UserService : IUserService
 {
-      private static UserRepository database;
+      private static IUserRepository database;
 
         private static ILogger<UserService> _logger;
 
@@ -28,7 +28,7 @@ public class UserService : IUserService
         catch (Exception exception)
         {
               _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(CreateUser), exception, user));
-            throw;
+            throw exception;
         }
     }
 

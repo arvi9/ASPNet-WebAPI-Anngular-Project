@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspireOverflow.Migrations
 {
-    public partial class DbUpdate : Migration
+    public partial class spamtable2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,6 +178,39 @@ namespace AspireOverflow.Migrations
                         principalColumn: "UserId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Spams",
+                columns: table => new
+                {
+                    SpamId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QueryId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    VerifyStatusID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Spams", x => x.SpamId);
+                    table.ForeignKey(
+                        name: "FK_Spams_Queries_QueryId",
+                        column: x => x.QueryId,
+                        principalTable: "Queries",
+                        principalColumn: "QueryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Spams_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Spams_VerifyStatus_VerifyStatusID",
+                        column: x => x.VerifyStatusID,
+                        principalTable: "VerifyStatus",
+                        principalColumn: "VerifyStatusID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Gender",
                 columns: new[] { "GenderId", "Name" },
@@ -227,6 +260,21 @@ namespace AspireOverflow.Migrations
                 column: "QueryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Spams_QueryId",
+                table: "Spams",
+                column: "QueryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Spams_UserId",
+                table: "Spams",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Spams_VerifyStatusID",
+                table: "Spams",
+                column: "VerifyStatusID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_DesignationId",
                 table: "Users",
                 column: "DesignationId");
@@ -251,6 +299,9 @@ namespace AspireOverflow.Migrations
         {
             migrationBuilder.DropTable(
                 name: "QueryComments");
+
+            migrationBuilder.DropTable(
+                name: "Spams");
 
             migrationBuilder.DropTable(
                 name: "Queries");

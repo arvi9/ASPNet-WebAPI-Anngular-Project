@@ -1,4 +1,4 @@
-using System.Security.AccessControl;
+
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Models;
@@ -32,7 +32,7 @@ public class UserController : ControllerBase
       
         try
 
-        {  if (User != null) throw new Exception("dummy");
+        { 
               //Development.Web is Enum constants which indicated the request approaching team.
             return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")): BadRequest($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
         }
@@ -107,7 +107,7 @@ public class UserController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUser), exception, UserId));
-            return BadRequest($"Error Occurred while removing User with UserId :{UserId}");
+            return BadRequest($"Error Occurred while Getting User with UserId :{UserId}");
         }
     }
 

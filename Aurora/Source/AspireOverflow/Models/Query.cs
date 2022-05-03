@@ -19,6 +19,7 @@ namespace AspireOverflow.Models
 
       public bool IsActive{get;set;} =true;
  
+      
         public int CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }

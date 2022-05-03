@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
+using Microsoft.EntityFrameworkCore;
 
 using AspireOverflow.DataAccessLayer.Interfaces;
 
@@ -33,11 +34,10 @@ namespace AspireOverflow.Services
                 return database.AddQuery(query);
 
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(CreateQuery), exception, query));
-                return false;
+                throw exception;
             }
         }
 
@@ -51,7 +51,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(CreateComment), exception), comment);
-                return false;
+                throw exception;
             }
         }
 

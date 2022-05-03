@@ -8,7 +8,7 @@ using AspireOverflow.CustomExceptions;
 namespace AspireOverflow.DataAccessLayer
 {
 
-    public class UserRepository 
+    public class UserRepository :IUserRepository
     {
         private AspireOverflowContext _context;
 

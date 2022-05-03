@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    [Migration("20220502151130_DbUpdate")]
-    partial class DbUpdate
+    [Migration("20220503120559_spamtable2")]
+    partial class spamtable2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,6 +174,34 @@ namespace AspireOverflow.Migrations
                     b.HasIndex("QueryId");
 
                     b.ToTable("QueryComments");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.Spam", b =>
+                {
+                    b.Property<int>("SpamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpamId"), 1L, 1);
+
+                    b.Property<int>("QueryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VerifyStatusID")
+                        .HasColumnType("int");
+
+                    b.HasKey("SpamId");
+
+                    b.HasIndex("QueryId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("VerifyStatusID");
+
+                    b.ToTable("Spams");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.User", b =>
@@ -338,6 +366,33 @@ namespace AspireOverflow.Migrations
                     b.Navigation("Query");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.Spam", b =>
+                {
+                    b.HasOne("AspireOverflow.Models.Query", "Query")
+                        .WithMany()
+                        .HasForeignKey("QueryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspireOverflow.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspireOverflow.Models.VerifyStatus", "VerifyStatus")
+                        .WithMany()
+                        .HasForeignKey("VerifyStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Query");
+
+                    b.Navigation("User");
+
+                    b.Navigation("VerifyStatus");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.User", b =>

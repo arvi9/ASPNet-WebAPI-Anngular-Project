@@ -43,7 +43,9 @@ namespace AspireOverflow.Controllers
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim("Email",Email)
+                        new Claim("Email",user.EmailAddress),
+                        new Claim("UserId",user.UserId.ToString()),
+                        new Claim("RoleId",user.UserRoleId.ToString())
 
 
                     };
@@ -53,7 +55,7 @@ namespace AspireOverflow.Controllers
                     var token = new JwtSecurityToken(
                         _configuration["Jwt:Issuer"],
                         _configuration["Jwt:Audience"],
-
+                            claims,
                         expires: DateTime.UtcNow.AddMinutes(10),
                         signingCredentials: signIn);
 

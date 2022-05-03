@@ -5,6 +5,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.CustomExceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspireOverflow.DataAccessLayer
 {
