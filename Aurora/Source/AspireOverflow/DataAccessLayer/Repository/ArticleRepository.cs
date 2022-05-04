@@ -13,7 +13,7 @@ namespace AspireOverflow.DataAccessLayer
         private ILogger<ArticleService> _logger;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleService> logger)
         {
-           _context = context ?? throw new NullReferenceException("Context can't be Null");
+            _context = context ?? throw new NullReferenceException("Context can't be Null");
             _logger = logger ?? throw new NullReferenceException("logger can't be Null"); ;
 
         }
@@ -38,14 +38,14 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-         public bool UpdateArticle(int ArticleId, int ArticleStatusID)
+        public bool UpdateArticle(int ArticleId, int ArticleStatusID)
         {
 
-            Validation.ValidateId(ArticleId,ArticleStatusID);
+            Validation.ValidateId(ArticleId, ArticleStatusID);
             try
             {
                 var ExistingArticle = GetArticleByID(ArticleId);
-                ExistingArticle.ArticleStatusID=ArticleStatusID;
+                ExistingArticle.ArticleStatusID = ArticleStatusID;
 
 
                 _context.Articles.Update(ExistingArticle);
@@ -75,8 +75,8 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-      
-         public IEnumerable<Article> GetArticles()
+
+        public IEnumerable<Article> GetArticles()
         {
             try
             {
@@ -94,7 +94,7 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
-         public bool AddComment(ArticleComment comment)
+        public bool AddComment(ArticleComment comment)
         {
             Validation.ValidateArticleComment(comment);
             try
@@ -132,5 +132,40 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+
+        public bool AddLike(ArticleLike like)
+        {
+            Validation.ValidateId(like.ArticleId, like.UserId);
+            try
+            {
+                _context.ArticleLikes.Add(like);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(AddLike), exception, like));
+
+                throw exception;
+            }
+        }
+
+        
+        public IEnumerable<ArticleLike> GetLikes()
+        {
+           
+            try
+            {
+                var ListOfArticleLikes = _context.ArticleLikes;
+                return ListOfArticleLikes;
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(GetLikes), exception));
+
+                throw exception;
+            }
+        }
     }
 }

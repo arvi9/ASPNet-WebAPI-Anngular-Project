@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    [Migration("20220504043756_ssampleDpUpdate1")]
-    partial class ssampleDpUpdate1
+    [Migration("20220504145823_dbupdate")]
+    partial class dbupdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,7 +136,7 @@ namespace AspireOverflow.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ArticleLike");
+                    b.ToTable("ArticleLikes");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.ArticleStatus", b =>
@@ -154,6 +154,28 @@ namespace AspireOverflow.Migrations
                     b.HasKey("ArticleStatusID");
 
                     b.ToTable("ArticleStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            ArticleStatusID = 1,
+                            Status = "InDraft"
+                        },
+                        new
+                        {
+                            ArticleStatusID = 2,
+                            Status = "ToBeReviewed"
+                        },
+                        new
+                        {
+                            ArticleStatusID = 3,
+                            Status = "UnderReview"
+                        },
+                        new
+                        {
+                            ArticleStatusID = 4,
+                            Status = "Published"
+                        });
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Department", b =>
@@ -464,13 +486,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.ArticleStatus", "ArticleStatus")
                         .WithMany("Articles")
                         .HasForeignKey("ArticleStatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("Articles")
                         .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ArticleStatus");
@@ -483,13 +505,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Article", "Article")
                         .WithMany("ArticleComments")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("ArticleComments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Article");
@@ -502,13 +524,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Article", "Article")
                         .WithMany("ArticleLikes")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "LikedUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Article");
@@ -521,7 +543,7 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Department", "Department")
                         .WithMany("Designations")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Department");
@@ -562,19 +584,19 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Query", "Query")
                         .WithMany()
                         .HasForeignKey("QueryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.VerifyStatus", "VerifyStatus")
                         .WithMany()
                         .HasForeignKey("VerifyStatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Query");

@@ -40,19 +40,6 @@ namespace AspireOverflow.Services
             }
         }
 
-        public bool CreateComment(QueryComment comment, Enum DevelopmentTeam)
-        {
-            Validation.ValidateComment(comment);
-            try
-            {
-                return database.AddComment(comment);
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(CreateComment), exception), comment);
-                throw exception;
-            }
-        }
 
         public bool RemoveQueryByQueryId(int QueryId, Enum DevelopmentTeam)
         {
@@ -209,6 +196,19 @@ namespace AspireOverflow.Services
 
 
 
+        public bool CreateComment(QueryComment comment, Enum DevelopmentTeam)
+        {
+            Validation.ValidateComment(comment);
+            try
+            {
+                return database.AddComment(comment);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(CreateComment), exception), comment);
+                throw exception;
+            }
+        }
 
         public IEnumerable<QueryComment> GetComments(int QueryId, Enum DevelopmentTeam)
         {

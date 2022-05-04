@@ -69,6 +69,41 @@ public class ArticleController : ControllerBase
 
     }
 
+  [HttpGet]
+        public async Task<ActionResult<IEnumerator<Query>>> GetLatestArticles()
+        {
+            try
+            {
+                var articles = _articleService.GetLatestArticles(DevelopmentTeam.Web);
+                var JsonResult = HelperService.GetJsonResult(articles);
+
+                return await Task.FromResult(Ok(JsonResult));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetLatestArticles), exception));
+                return BadRequest("Error occured while processing your request");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetTrendingArticles()
+        {
+            try
+            {
+                var Articles = _articleService.GetTrendingArticles(DevelopmentTeam.Web);
+                var JsonResult = HelperService.GetJsonResult(Articles);
+
+                return await Task.FromResult(Ok(JsonResult));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetTrendingArticles), exception));
+                return BadRequest("Error occured while processing your request");
+            }
+        }
+
+
     [HttpGet]
         public async Task<ActionResult<Article>> GetArticleById(int ArticleId)
         {

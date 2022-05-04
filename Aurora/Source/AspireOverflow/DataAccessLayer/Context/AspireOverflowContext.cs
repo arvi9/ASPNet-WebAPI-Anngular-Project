@@ -22,6 +22,8 @@ namespace AspireOverflow.DataAccessLayer
         public virtual DbSet<Designation> Designations { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
      public virtual DbSet<Spam> Spams { get; set; } = null!;
+        public virtual DbSet<ArticleLike> ArticleLikes { get; set; } = null!;
+          
 
    public DbSet<Article> Articles { get; set; } = null!;
         public DbSet<ArticleComment> ArticleComments { get; set; } = null!;

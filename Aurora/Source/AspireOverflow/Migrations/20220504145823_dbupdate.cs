@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspireOverflow.Migrations
 {
-    public partial class ssampleDpUpdate : Migration
+    public partial class dbupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -229,6 +229,32 @@ namespace AspireOverflow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArticleLikes",
+                columns: table => new
+                {
+                    LikeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleLikes", x => x.LikeId);
+                    table.ForeignKey(
+                        name: "FK_ArticleLikes_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "ArtileId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_ArticleLikes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QueryComments",
                 columns: table => new
                 {
@@ -291,6 +317,17 @@ namespace AspireOverflow.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ArticleStatus",
+                columns: new[] { "ArticleStatusID", "Status" },
+                values: new object[,]
+                {
+                    { 1, "InDraft" },
+                    { 2, "ToBeReviewed" },
+                    { 3, "UnderReview" },
+                    { 4, "Published" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Gender",
                 columns: new[] { "GenderId", "Name" },
                 values: new object[,]
@@ -326,6 +363,16 @@ namespace AspireOverflow.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ArticleComments_UserId",
                 table: "ArticleComments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleLikes_ArticleId",
+                table: "ArticleLikes",
+                column: "ArticleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleLikes_UserId",
+                table: "ArticleLikes",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -398,6 +445,9 @@ namespace AspireOverflow.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ArticleComments");
+
+            migrationBuilder.DropTable(
+                name: "ArticleLikes");
 
             migrationBuilder.DropTable(
                 name: "QueryComments");

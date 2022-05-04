@@ -134,7 +134,7 @@ namespace AspireOverflow.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ArticleLike");
+                    b.ToTable("ArticleLikes");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.ArticleStatus", b =>

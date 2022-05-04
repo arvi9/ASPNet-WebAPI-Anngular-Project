@@ -51,28 +51,6 @@ namespace AspireOverflow.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<QueryComment>> CreateComment(QueryComment comment)
-        {
-
-            if (comment == null) return BadRequest("Null value is not supported");
-            try
-            {
-                return _queryService.CreateComment(comment, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
-            }
-            catch (ValidationException exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
-                return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
-            }
-
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
-                return BadRequest($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
-            }
-
-        }
 
         [HttpDelete]
         public async Task<ActionResult> RemoveQueryByQueryId(int QueryId)
@@ -259,6 +237,28 @@ namespace AspireOverflow.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<ActionResult<QueryComment>> CreateComment(QueryComment comment)
+        {
+
+            if (comment == null) return BadRequest("Null value is not supported");
+            try
+            {
+                return _queryService.CreateComment(comment, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
+                return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
+            }
+
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
+                return BadRequest($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
+            }
+
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int QueryId)
