@@ -4,6 +4,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.CustomExceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspireOverflow.DataAccessLayer
 {
@@ -66,7 +67,7 @@ namespace AspireOverflow.DataAccessLayer
             User user;
             try
             {
-                user = _context.Users.Find(UserId);
+                user = GetUsers().Where(User =>User.UserId==UserId).First();
                 return user != null ? user : throw new ItemNotFoundException($"There is no matching User data with UserID :{UserId}");
             }
             catch (Exception exception)
@@ -82,7 +83,7 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
 
-                return _context.Users;
+                return _context.Users.Include("Designation").Include("UserRole").Include("Gender").Include("VerifyStatus");
             }
             catch (Exception exception)
             {

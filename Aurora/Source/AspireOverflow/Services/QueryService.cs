@@ -28,11 +28,10 @@ namespace AspireOverflow.Services
 
         public bool CreateQuery(Query query, Enum DevelopmentTeam)
         {
-            if (!Validation.ValidateQuery(query)) throw new ValidationException("Given data is InValid");
+            Validation.ValidateQuery(query);
             try
             {
                 return database.AddQuery(query);
-
             }
             catch (Exception exception)
             {
@@ -97,9 +96,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQuery), exception, QueryId));
-
                 throw exception;
             }
 
@@ -108,29 +105,70 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Query> GetQueries(Enum DevelopmentTeam)
         {
-
             try
             {
                 var ListOfQueries = database.GetQueries();
                 return ListOfQueries;
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQueries), exception));
                 throw exception;
             }
 
-
         }
+
+
+
+        public IEnumerable<Query> GetLatestQueries(Enum DevelopmentTeam)
+        {
+            try
+            {
+                var ListOfQueries = GetQueries(DevelopmentTeam).OrderByDescending(query => query.CreatedOn);
+                return ListOfQueries;
+            }
+
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetLatestQueries), exception));
+                throw exception;
+            }
+        }
+
+
+
+        public  IEnumerable<Query> GetTrendingQueries(Enum DevelopmentTeam)
+        {
+            try
+            {
+               
+                var data = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
+
+                 var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
+                var ListOfQueries = GetQueries(false,DevelopmentTeam).ToList();
+                var TrendingQueries = new List<Query>();
+                  foreach(var id in ListOfQueryId){
+                    TrendingQueries.Add(ListOfQueries.Find(item =>item.QueryId ==id));
+                  }
+              
+                return TrendingQueries;
+            }
+
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetTrendingQueries), exception));
+                throw exception;
+            }
+        }
+
 
 
         public IEnumerable<Query> GetQueriesByUserId(int UserId, Enum DevelopmentTeam)
         {
             Validation.ValidateId(UserId);
             try
-            { 
-              return GetQueries(DevelopmentTeam).Where(query => query.CreatedBy == UserId);
+            {
+                return GetQueries(DevelopmentTeam).Where(query => query.CreatedBy == UserId);
             }
             catch (Exception exception)
             {
@@ -143,10 +181,10 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Query> GetQueriesByTitle(String Title, Enum DevelopmentTeam)
         {
-             if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Title value can't be null");
+            if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Title value can't be null");
             try
             {
-               return GetQueries(DevelopmentTeam).Where(query => query.Title.Contains(Title));
+                return GetQueries(DevelopmentTeam).Where(query => query.Title.Contains(Title));
             }
             catch (Exception exception)
             {
@@ -160,7 +198,7 @@ namespace AspireOverflow.Services
         {
             try
             {
-              return GetQueries(DevelopmentTeam).Where(query => query.IsSolved == IsSolved);
+                return GetQueries(DevelopmentTeam).Where(query => query.IsSolved == IsSolved);
             }
             catch (Exception exception)
             {
@@ -177,7 +215,7 @@ namespace AspireOverflow.Services
             Validation.ValidateId(QueryId);
             try
             {
-                return database.GetComments().Where(comment => comment.QueryId==QueryId);
+                return database.GetComments().Where(comment => comment.QueryId == QueryId);
 
             }
             catch (Exception exception)

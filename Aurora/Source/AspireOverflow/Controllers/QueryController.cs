@@ -6,12 +6,11 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
-
-
-
+using System.Text.Json.Serialization;
+using System.Text.Json;
 namespace AspireOverflow.Controllers
 {
-    
+
     [ApiController]
     [Route("[controller]/[action]")]
     public class QueryController : ControllerBase
@@ -34,7 +33,7 @@ namespace AspireOverflow.Controllers
         {
             if (query == null) return BadRequest("Null value is not supported");
             try
-            { 
+            {
 
                 //Development.Web is Enum constants which indicated the request approaching team.
                 return _queryService.CreateQuery(query, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
@@ -122,8 +121,12 @@ namespace AspireOverflow.Controllers
         {
             if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
             try
+
             {
-                return await Task.FromResult(_queryService.GetQuery(QueryId, DevelopmentTeam.Web));
+                var JsonResult = HelperService.GetJsonResult(_queryService.GetQuery(QueryId, DevelopmentTeam.Web));
+
+                return await Task.FromResult(Ok(JsonResult));
+
             }
             catch (ItemNotFoundException exception)
             {
@@ -137,19 +140,54 @@ namespace AspireOverflow.Controllers
             }
         }
 
-        [HttpGet][Authorize]
+        [HttpGet]
         public async Task<ActionResult<IEnumerator<Query>>> GetAll()
         {
             try
             {
-               
 
                 var Queries = _queryService.GetQueries(DevelopmentTeam.Web);    // DevelopmentTeam.Web is a property of enum class
-                return await Task.FromResult(Ok(Queries));
+                var JsonResult = HelperService.GetJsonResult(Queries);
+
+                return await Task.FromResult(Ok(JsonResult));
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetAll), exception));
+                return BadRequest("Error occured while processing your request");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerator<Query>>> GetLatestQueries()
+        {
+            try
+            {
+                var Queries = _queryService.GetLatestQueries(DevelopmentTeam.Web);
+                var JsonResult = HelperService.GetJsonResult(Queries);
+
+                return await Task.FromResult(Ok(JsonResult));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetLatestQueries), exception));
+                return BadRequest("Error occured while processing your request");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetTrendingQueries()
+        {
+            try
+            {
+                var Queries = _queryService.GetTrendingQueries(DevelopmentTeam.Web);
+                var JsonResult = HelperService.GetJsonResult(Queries);
+
+                return await Task.FromResult(Ok(JsonResult));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetTrendingQueries), exception));
                 return BadRequest("Error occured while processing your request");
             }
         }
@@ -163,7 +201,9 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfQueriesByUserId = _queryService.GetQueries(DevelopmentTeam.Web);
-                return await Task.FromResult(Ok(ListOfQueriesByUserId));
+                var JsonResult = HelperService.GetJsonResult(ListOfQueriesByUserId);
+
+                return await Task.FromResult(Ok(JsonResult));
             }
 
             catch (Exception exception)
@@ -182,8 +222,10 @@ namespace AspireOverflow.Controllers
             if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
             try
             {
-                var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(null, DevelopmentTeam.Web);
-                return await Task.FromResult(Ok(ListOfQueriesByTitle));
+                var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title, DevelopmentTeam.Web);
+                var JsonResult = HelperService.GetJsonResult(ListOfQueriesByTitle);
+
+                return await Task.FromResult(Ok(JsonResult));
             }
 
             catch (Exception exception)
@@ -203,7 +245,9 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfQueriesByIsSolved = _queryService.GetQueries(IsSolved, DevelopmentTeam.Web);
-                return await Task.FromResult(Ok(ListOfQueriesByIsSolved));
+                var JsonResult = HelperService.GetJsonResult(ListOfQueriesByIsSolved);
+
+                return await Task.FromResult(Ok(JsonResult));
             }
             catch (Exception exception)
             {
@@ -223,7 +267,9 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfComments = _queryService.GetComments(QueryId, DevelopmentTeam.Web);
-                return await Task.FromResult(Ok(ListOfComments));
+                var JsonResult = HelperService.GetJsonResult(ListOfComments);
+
+                return await Task.FromResult(Ok(JsonResult));
             }
 
             catch (Exception exception)

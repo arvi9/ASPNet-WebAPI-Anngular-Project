@@ -98,7 +98,7 @@ namespace AspireOverflow.DataAccessLayer
             Query ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.Find(QueryId);
+                ExistingQuery = GetQueries().Where(query =>query.QueryId==QueryId).First();
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
@@ -112,7 +112,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive == true);
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive == true).Include("User");
                 return ListOfQueries;
 
             }
@@ -132,7 +132,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfComments = _context.QueryComments;
+                var ListOfComments = _context.QueryComments.Include("Query").Include("User");
                 return ListOfComments;
 
             }

@@ -1,9 +1,24 @@
 
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace AspireOverflow.Services
 {
     public static class HelperService
     {
+
+
+            public static String GetJsonResult(object obj){
+                if(obj ==null) throw new NullReferenceException();
+               var json = JsonSerializer.Serialize(obj, new JsonSerializerOptions()
+                {
+                    WriteIndented = true,
+                    ReferenceHandler = ReferenceHandler.IgnoreCycles
+                });
+                return json;
+            }
+
+
         public static string PropertyList(this object obj)
         {
             var properties = obj.GetType().GetProperties();
@@ -15,36 +30,46 @@ namespace AspireOverflow.Services
             return stringBuilder.ToString();
         }
 
-        public static string LoggerMessage(Enum TeamName, string MethodName, Exception exception, object Data = null)
+
+        public static string LoggerMessage(Enum TeamName, string MethodName, Exception exception, object Data =null)
         {
 
-            return Data != null ? $"{TeamName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}" :
+            return LoggerMessage(TeamName.ToString(), MethodName, exception, Data);
+        }
 
-             $"{TeamName}:{MethodName}\nException :{PropertyList(exception)}"; ;
+        public static string LoggerMessage(Enum TeamName, string MethodName, Exception exception, int FirstId, int? secondId)
+        {
+
+            return LoggerMessage(TeamName.ToString(), MethodName, exception, FirstId, secondId);
+        }
+        public static string LoggerMessage(Enum TeamName, string MethodName, Exception exception, string data)
+        {
+
+            return LoggerMessage(TeamName.ToString(), MethodName, exception, data);
         }
 
 
 
-        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, object Data = null)
+        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, object Data=null)
         {
 
-            return Data != null ? $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {PropertyList(Data)}}}\nException :{PropertyList(exception)}" :
+            return Data != null ? $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {PropertyList(Data)}}}\nException :{exception.ToString()}" :
 
-             $"{RepositoryName}:{MethodName}\nException :{PropertyList(exception)}"; ;
+             $"{RepositoryName}:{MethodName}\nException :{exception.ToString()}"; ;
         }
 
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, int FirstId, int? secondId)
         {
 
-            return secondId != null ? $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {FirstId}, {secondId} }}\nException :{PropertyList(exception)}" :
+            return secondId != null ? $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {FirstId}, {secondId} }}\nException :{exception.ToString()}" :
 
-             $"{RepositoryName}:{MethodName}\n Object passed :{{ \n {FirstId} }}\nException :{PropertyList(exception)}"; ;
+             $"{RepositoryName}:{MethodName}\n Data passed :{{ \n {FirstId} }}\nException :{exception.ToString()}"; ;
         }
 
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, string data)
         {
 
-            return $"{RepositoryName}:{MethodName}\n  Object passed :{{ \n {data} }}\nException :{PropertyList(exception)}";
+            return $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {data} }}\nException :{exception.ToString()}";
         }
 
 

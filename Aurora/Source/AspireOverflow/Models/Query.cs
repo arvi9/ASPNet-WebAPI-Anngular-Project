@@ -1,6 +1,7 @@
 using AspireOverflow.Models.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace AspireOverflow.Models
 {
     public partial class Query :IAuditField

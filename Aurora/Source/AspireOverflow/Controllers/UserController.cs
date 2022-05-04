@@ -97,7 +97,10 @@ public class UserController : ControllerBase
         if (UserId <= 0) return BadRequest("User ID must be greater than 0");
         try
         {   
-            return await Task.FromResult(_UserService.GetUsersByID(UserId));
+              var JsonResult = HelperService.GetJsonResult(_UserService.GetUsersByID(UserId));
+
+                return await Task.FromResult(Ok(JsonResult));
+           
         }
         catch (ItemNotFoundException exception)
         {
@@ -117,8 +120,9 @@ public class UserController : ControllerBase
         try
         {
             var ListOfUsers = _UserService.GetUsersByVerifyStatus(1);
-            return await Task.FromResult(Ok(ListOfUsers));
+          var JsonResult = HelperService.GetJsonResult(ListOfUsers);
 
+                return await Task.FromResult(Ok(JsonResult));
         }
         catch (Exception exception)
         {
@@ -133,8 +137,9 @@ public class UserController : ControllerBase
         try
         {
             var ListOfUsers = _UserService.GetUsersByVerifyStatus(3);
-            return await Task.FromResult(Ok(ListOfUsers));
-        }
+          var JsonResult = HelperService.GetJsonResult(ListOfUsers);
+
+                return await Task.FromResult(Ok(JsonResult));}
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUsersTobeVerified), exception));
@@ -148,7 +153,9 @@ public class UserController : ControllerBase
         try
         {
             var ListOfUsers = _UserService.GetUsersByVerifyStatus(2);
-            return await Task.FromResult(Ok(ListOfUsers));
+            var JsonResult = HelperService.GetJsonResult(ListOfUsers);
+
+                return await Task.FromResult(Ok(JsonResult));
         }
         catch (Exception exception)
         {
@@ -163,7 +170,9 @@ public class UserController : ControllerBase
         try
         {
             var ListOfUsers = _UserService.GetUsersByIsReviewer(true);
-            return await Task.FromResult(Ok(ListOfUsers));
+             var JsonResult = HelperService.GetJsonResult(ListOfUsers);
+
+                return await Task.FromResult(Ok(JsonResult));
         }
         catch (Exception exception)
         {

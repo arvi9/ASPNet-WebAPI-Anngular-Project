@@ -11,7 +11,7 @@ namespace AspireOverflow.DataAccessLayer
         private static AspireOverflowContext _aspireOverflowContext;
         public static AspireOverflowContext GetAspireOverflowContextObject()
         {
-            if(_aspireOverflowContext != null) return _aspireOverflowContext;  //SingleTon concept applied here 
+            // if(_aspireOverflowContext != null) return _aspireOverflowContext;  //SingleTon concept applied here 
 
             var optionsBuilder = new DbContextOptionsBuilder<AspireOverflowContext>();
             try
