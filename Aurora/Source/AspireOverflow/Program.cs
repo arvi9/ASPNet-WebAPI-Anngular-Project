@@ -38,6 +38,7 @@ builder.Services.AddHttpLogging(httpLogging =>
 
 builder.Services.AddTransient<QueryService>();
 builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<ArticleService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

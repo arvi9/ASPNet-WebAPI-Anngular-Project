@@ -112,7 +112,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive == true).Include("User");
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive == true).Include("User").ToList();
                 return ListOfQueries;
 
             }

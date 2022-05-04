@@ -105,7 +105,7 @@ public class UserController : ControllerBase
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUser), exception, UserId));
-            return BadRequest($"{exception.Message}");
+            return BadRequest($"{exception.Message} with UserId:{UserId}");
         }
         catch (Exception exception)
         {

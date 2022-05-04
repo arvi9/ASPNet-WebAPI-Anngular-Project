@@ -131,7 +131,7 @@ namespace AspireOverflow.Controllers
             catch (ItemNotFoundException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQuery), exception, QueryId));
-                return BadRequest($"{exception.Message}");
+                 return BadRequest($"{exception.Message} with QueryId:{QueryId}");
             }
             catch (Exception exception)
             {
