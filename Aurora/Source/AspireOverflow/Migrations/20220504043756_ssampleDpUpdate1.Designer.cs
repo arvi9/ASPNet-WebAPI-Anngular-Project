@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    [Migration("20220503120559_spamtable2")]
-    partial class spamtable2
+    [Migration("20220504043756_ssampleDpUpdate1")]
+    partial class ssampleDpUpdate1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,138 @@ namespace AspireOverflow.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("AspireOverflow.Models.Article", b =>
+                {
+                    b.Property<int>("ArtileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtileId"), 1L, 1);
+
+                    b.Property<int>("ArticleStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Datetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int?>("ReviewerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ArtileId");
+
+                    b.HasIndex("ArticleStatusID");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.ArticleComment", b =>
+                {
+                    b.Property<int>("ArticleCommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleCommentId"), 1L, 1);
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Datetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ArticleCommentId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ArticleComments");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.ArticleLike", b =>
+                {
+                    b.Property<int>("LikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LikeId"), 1L, 1);
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LikeId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ArticleLike");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.ArticleStatus", b =>
+                {
+                    b.Property<int>("ArticleStatusID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleStatusID"), 1L, 1);
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ArticleStatusID");
+
+                    b.ToTable("ArticleStatus");
+                });
 
             modelBuilder.Entity("AspireOverflow.Models.Department", b =>
                 {
@@ -327,6 +459,63 @@ namespace AspireOverflow.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AspireOverflow.Models.Article", b =>
+                {
+                    b.HasOne("AspireOverflow.Models.ArticleStatus", "ArticleStatus")
+                        .WithMany("Articles")
+                        .HasForeignKey("ArticleStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspireOverflow.Models.User", "User")
+                        .WithMany("Articles")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArticleStatus");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.ArticleComment", b =>
+                {
+                    b.HasOne("AspireOverflow.Models.Article", "Article")
+                        .WithMany("ArticleComments")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspireOverflow.Models.User", "User")
+                        .WithMany("ArticleComments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.ArticleLike", b =>
+                {
+                    b.HasOne("AspireOverflow.Models.Article", "Article")
+                        .WithMany("ArticleLikes")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspireOverflow.Models.User", "LikedUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("LikedUser");
+                });
+
             modelBuilder.Entity("AspireOverflow.Models.Designation", b =>
                 {
                     b.HasOne("AspireOverflow.Models.Department", "Department")
@@ -430,6 +619,18 @@ namespace AspireOverflow.Migrations
                     b.Navigation("VerifyStatus");
                 });
 
+            modelBuilder.Entity("AspireOverflow.Models.Article", b =>
+                {
+                    b.Navigation("ArticleComments");
+
+                    b.Navigation("ArticleLikes");
+                });
+
+            modelBuilder.Entity("AspireOverflow.Models.ArticleStatus", b =>
+                {
+                    b.Navigation("Articles");
+                });
+
             modelBuilder.Entity("AspireOverflow.Models.Department", b =>
                 {
                     b.Navigation("Designations");
@@ -452,6 +653,10 @@ namespace AspireOverflow.Migrations
 
             modelBuilder.Entity("AspireOverflow.Models.User", b =>
                 {
+                    b.Navigation("ArticleComments");
+
+                    b.Navigation("Articles");
+
                     b.Navigation("Queries");
 
                     b.Navigation("QueryComments");

@@ -4,6 +4,7 @@ using AspireOverflow.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    partial class AspireOverflowContextModelSnapshot : ModelSnapshot
+    [Migration("20220504041333_ssampleDpUpdate")]
+    partial class ssampleDpUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,29 +116,6 @@ namespace AspireOverflow.Migrations
                     b.ToTable("ArticleComments");
                 });
 
-            modelBuilder.Entity("AspireOverflow.Models.ArticleLike", b =>
-                {
-                    b.Property<int>("LikeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LikeId"), 1L, 1);
-
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LikeId");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ArticleLike");
-                });
-
             modelBuilder.Entity("AspireOverflow.Models.ArticleStatus", b =>
                 {
                     b.Property<int>("ArticleStatusID")
@@ -152,28 +131,6 @@ namespace AspireOverflow.Migrations
                     b.HasKey("ArticleStatusID");
 
                     b.ToTable("ArticleStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            ArticleStatusID = 1,
-                            Status = "InDraft"
-                        },
-                        new
-                        {
-                            ArticleStatusID = 2,
-                            Status = "ToBeReviewed"
-                        },
-                        new
-                        {
-                            ArticleStatusID = 3,
-                            Status = "UnderReview"
-                        },
-                        new
-                        {
-                            ArticleStatusID = 4,
-                            Status = "Published"
-                        });
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Department", b =>
@@ -488,7 +445,7 @@ namespace AspireOverflow.Migrations
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
-                        .WithMany("Articles")
+                        .WithMany("ArticleUsers")
                         .HasForeignKey("CreatedBy")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -515,25 +472,6 @@ namespace AspireOverflow.Migrations
                     b.Navigation("Article");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("AspireOverflow.Models.ArticleLike", b =>
-                {
-                    b.HasOne("AspireOverflow.Models.Article", "Article")
-                        .WithMany("ArticleLikes")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AspireOverflow.Models.User", "LikedUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-
-                    b.Navigation("LikedUser");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.Designation", b =>
@@ -642,8 +580,6 @@ namespace AspireOverflow.Migrations
             modelBuilder.Entity("AspireOverflow.Models.Article", b =>
                 {
                     b.Navigation("ArticleComments");
-
-                    b.Navigation("ArticleLikes");
                 });
 
             modelBuilder.Entity("AspireOverflow.Models.ArticleStatus", b =>
@@ -675,7 +611,7 @@ namespace AspireOverflow.Migrations
                 {
                     b.Navigation("ArticleComments");
 
-                    b.Navigation("Articles");
+                    b.Navigation("ArticleUsers");
 
                     b.Navigation("Queries");
 

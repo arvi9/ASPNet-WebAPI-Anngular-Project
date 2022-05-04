@@ -23,7 +23,8 @@ namespace AspireOverflow.DataAccessLayer
         public virtual DbSet<Gender> Genders { get; set; } = null!;
      public virtual DbSet<Spam> Spams { get; set; } = null!;
 
-
+   public DbSet<Article> Articles { get; set; } = null!;
+        public DbSet<ArticleComment> ArticleComments { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -103,6 +104,14 @@ namespace AspireOverflow.DataAccessLayer
                entity.HasData(new UserRole { UserRoleId = 2, RoleName = "User" });
 
            });
+             modelBuilder.Entity<ArticleStatus>(entity =>
+            {
+                entity.HasData(new ArticleStatus { ArticleStatusID = 1, Status = "InDraft" });
+                entity.HasData(new ArticleStatus { ArticleStatusID = 2, Status = "ToBeReviewed" });
+                entity.HasData(new ArticleStatus { ArticleStatusID = 3, Status = "UnderReview" });
+                 entity.HasData(new ArticleStatus { ArticleStatusID = 4, Status = "Published" });
+            });
+
         }
     }
 }

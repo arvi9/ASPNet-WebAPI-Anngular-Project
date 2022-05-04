@@ -72,6 +72,13 @@ namespace AspireOverflow.Models
         public virtual ICollection<Query>? Queries { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<QueryComment>? QueryComments { get; set; }
+             [InverseProperty("User")]
+        public virtual ICollection<ArticleComment>? ArticleComments { get; set; }
+             [InverseProperty("User")]
+        public virtual ICollection<Article>? Articles { get; set; }
+      
+     
+
        
 
     }

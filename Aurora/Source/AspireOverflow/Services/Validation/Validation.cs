@@ -7,6 +7,7 @@ namespace AspireOverflow.Services
     public class Validation
     {
 
+
         public static bool ValidateQuery(Query query)
         {
 
@@ -32,6 +33,31 @@ namespace AspireOverflow.Services
             else return true;
         }
 
+        public static bool ValidateArticle(Article article)
+        {
+
+
+            if (article == null) throw new NullReferenceException("Article should not be null");
+            else if (article.CreatedBy <= 0) throw new ValidationException("CreatedBy Id  must be greater than 0");
+            else if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
+            else if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
+            else if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
+
+            else return true;
+        }
+
+         public static bool ValidateArticleComment(ArticleComment Comment)
+        {
+
+
+            if (Comment == null) throw new NullReferenceException("Comment should not be null");
+            else if (Comment.CreatedBy <= 0) throw new ValidationException("CreatedBy  must be greater than 0");
+            //else if (Comment.ArticleId <= 0) throw new ValidationException("Article Id  must be greater than 0");
+            else if (String.IsNullOrEmpty(Comment.Comment)) throw new ValidationException("Comment cannot be null or empty");
+
+            else return true;
+        }
+
         public static bool ValidateId(int Id)
         {
             return Id <= 0 ? throw new ArgumentOutOfRangeException("Id must be greater than 0") : true;
@@ -51,7 +77,12 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-
+        public static bool ValidateTitle(string Title)
+        {
+            if (String.IsNullOrEmpty(Title)) throw new ValidationException("Title cannot be null or empty");
+            
+            else return true;
+        }
         public static User SetUserDefaultPropertyValues(User user)
         {
             user.VerifyStatusID = 3;
