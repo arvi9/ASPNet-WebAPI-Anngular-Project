@@ -24,12 +24,12 @@ public class ArticleController : ControllerBase
 
     [HttpPost]
 
-        public async Task<ActionResult<Article>> CreateArticle(Article article)
+        public async Task<ActionResult<Article>> CreateArticle(Article article,IFormFile ImageFile)
         {
             if (article == null) return BadRequest("Null value is not supported");
             try
             { 
-
+                    article.Image=ImageService.ImageToByteArray(ImageFile);
                 //Development.Web is Enum constants which indicated the request approaching team.
                 return _articleService.CreateArticle(article, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Article :{HelperService.PropertyList(article)}");
             }
@@ -124,13 +124,12 @@ public class ArticleController : ControllerBase
             }
         }
 
-        [HttpGet][Authorize]
+        [HttpGet]
         public async Task<ActionResult<IEnumerator<Article>>> GetAll()
         {
             try
             {
                
-
                 var Articles = _articleService.GetArticles(DevelopmentTeam.Web);    // DevelopmentTeam.Web is a property of enum class
                  var JsonResult = HelperService.GetJsonResult(Articles);
                 return await Task.FromResult(Ok(JsonResult));
