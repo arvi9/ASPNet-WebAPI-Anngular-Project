@@ -46,7 +46,7 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-         public static bool ValidateArticleComment(ArticleComment Comment)
+        public static bool ValidateArticleComment(ArticleComment Comment)
         {
 
 
@@ -80,7 +80,7 @@ namespace AspireOverflow.Services
         public static bool ValidateTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Title cannot be null or empty");
-            
+
             else return true;
         }
         public static User SetUserDefaultPropertyValues(User user)
@@ -89,11 +89,31 @@ namespace AspireOverflow.Services
             user.CreatedOn = DateTime.Now;
             user.IsReviewer = false;
             user.UserRoleId = 2;
-            user.Password=PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user,user.Password);  //stores password with hashed password
+            user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);  //stores password with hashed password
             return user;
         }
 
-            
+        public static Query SetUserDefaultPropertyValues(Query query)
+        {
+
+            query.CreatedOn = DateTime.Now;
+
+            query.Title = query.Title.ToLower();
+            query.IsActive = true;
+            query.IsSolved = false;
+            return query;
+        }
+public static Article SetUserDefaultPropertyValues(Article article)
+        {
+
+            article.CreatedOn = DateTime.Now;
+
+            article.Title = article.Title.ToLower();
+            article.ArticleStatusID = 1;
+            return article;
+        }
+
+
 
     }
 

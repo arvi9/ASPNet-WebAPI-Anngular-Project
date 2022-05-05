@@ -49,8 +49,10 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateId(UserId);
             try
             {   var User_NotVerified =GetUserByID(UserId);
-                if(User_NotVerified.VerifyStatusID==3)_context.Users.Remove(User_NotVerified);
+                if(User_NotVerified.VerifyStatusID==3){
+                _context.Users.Remove(User_NotVerified);
                 _context.SaveChanges();
+                }
                 return true;
             }
             catch (Exception exception)

@@ -20,7 +20,7 @@ namespace AspireOverflow.Services
 
         public QueryService(ILogger<QueryService> logger)
         {
-            _logger = logger ?? throw new NullReferenceException("logger can't be null");
+            _logger = logger ;
             database = QueryRepositoryFactory.GetQueryRepositoryObject(logger);
 
         }
@@ -31,6 +31,7 @@ namespace AspireOverflow.Services
             Validation.ValidateQuery(query);
             try
             {
+                Validation.SetUserDefaultPropertyValues(query);
                 return database.AddQuery(query);
             }
             catch (Exception exception)

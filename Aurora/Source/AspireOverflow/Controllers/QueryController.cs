@@ -21,8 +21,8 @@ namespace AspireOverflow.Controllers
 
         public QueryController(ILogger<QueryController> logger, QueryService queryService)
         {
-            _logger = logger ?? throw new NullReferenceException(nameof(logger));
-            _queryService = queryService ?? throw new NullReferenceException(nameof(queryService));
+            _logger = logger;
+            _queryService = queryService;
 
         }
 
@@ -178,7 +178,7 @@ namespace AspireOverflow.Controllers
             if (UserId <= 0) return BadRequest("UserId must be greater than 0");
             try
             {
-                var ListOfQueriesByUserId = _queryService.GetQueries(DevelopmentTeam.Web);
+                var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId,DevelopmentTeam.Web);
                 var JsonResult = HelperService.GetJsonResult(ListOfQueriesByUserId);
 
                 return await Task.FromResult(Ok(JsonResult));

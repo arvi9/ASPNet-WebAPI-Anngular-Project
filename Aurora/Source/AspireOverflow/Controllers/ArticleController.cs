@@ -17,8 +17,8 @@ public class ArticleController : ControllerBase
 
      public ArticleController(ILogger<ArticleController> logger, ArticleService articleService)
     {
-        _logger = logger ?? throw new NullReferenceException(nameof(logger));
-        _articleService = articleService ?? throw new NullReferenceException(nameof(articleService));
+        _logger = logger ;
+        _articleService = articleService;
 
     }
 
@@ -148,7 +148,7 @@ public class ArticleController : ControllerBase
             if (UserId <= 0) return BadRequest("UserId must be greater than 0");
             try
             {
-                var ListOfArticleByUserId = _articleService.GetArticles(DevelopmentTeam.Web);
+                var ListOfArticleByUserId = _articleService.GetArticleByUserId(UserId,DevelopmentTeam.Web);
                 var JsonResult = HelperService.GetJsonResult(ListOfArticleByUserId);
                 return await Task.FromResult(Ok(JsonResult));
             }

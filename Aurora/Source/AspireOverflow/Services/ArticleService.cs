@@ -18,7 +18,7 @@ namespace AspireOverflow.Services
 
         public ArticleService(ILogger<ArticleService> logger)
         {
-            _logger = logger ?? throw new NullReferenceException("logger can't be null");
+            _logger = logger;
             database = ArticleRepositoryFactory.GetArticleRepositoryObject(logger);
 
         }
@@ -27,9 +27,8 @@ namespace AspireOverflow.Services
         {
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
-            {
+            { Validation.SetUserDefaultPropertyValues(article);
                 return database.AddArticle(article);
-
             }
 
             catch (Exception exception)

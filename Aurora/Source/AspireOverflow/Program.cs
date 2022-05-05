@@ -36,6 +36,8 @@ builder.Services.AddHttpLogging(httpLogging =>
 
 });
 
+
+
 builder.Services.AddTransient<QueryService>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<ArticleService>();
@@ -91,7 +93,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 
 app.MapControllers();

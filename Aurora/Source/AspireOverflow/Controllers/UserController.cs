@@ -19,8 +19,8 @@ public class UserController : ControllerBase
 
     public UserController(ILogger<UserController> logger, UserService UserService)
     {
-        _logger = logger ?? throw new NullReferenceException(nameof(logger));
-        _UserService = UserService ?? throw new NullReferenceException(nameof(UserService));
+        _logger = logger;
+        _UserService = UserService;
 
     }
 
