@@ -5,19 +5,19 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
 
     public interface IQueryService
     {
-         bool CreateQuery(Query query, Enum DevelopmentTeam);
-         bool RemoveQueryByQueryID(int QueryID,Enum DevelopmentTeam);
-         bool CreateComment(QueryComment comment, Enum DevelopmentTeam);
+         bool CreateQuery(Query query);
+         bool RemoveQueryByQueryID(int QueryID);
+         bool CreateComment(QueryComment comment);
 
-         bool MarkQueryAsSolved(int QueryId,Enum DevelopmentTeam);
+         bool MarkQueryAsSolved(int QueryId);
 
-         Query GetQuery(int QueryID, Enum DevelopmentTeam);
-         IEnumerable<QueryComment> GetComments(int QueryId, Enum DevelopmentTeam);
+         Query GetQuery(int QueryID);
+         IEnumerable<QueryComment> GetComments(int QueryId);
 
-         IEnumerable<Query> GetQueries(Enum DevelopmentTeam);
-         IEnumerable<Query> GetQueriesByUserID(int UserID, Enum DevelopmentTeam);
-         IEnumerable<Query> GetQueriesByTitle(String Title, Enum DevelopmentTeam);
-         IEnumerable<Query> GetQueries(bool IsSolved, Enum DevelopmentTeam);
+         IEnumerable<Query> GetQueries();
+         IEnumerable<Query> GetQueriesByUserID(int UserID);
+         IEnumerable<Query> GetQueriesByTitle(String Title);
+         IEnumerable<Query> GetQueries(bool IsSolved);
 
 
 

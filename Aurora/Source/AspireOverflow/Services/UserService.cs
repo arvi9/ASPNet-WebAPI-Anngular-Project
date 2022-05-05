@@ -1,5 +1,6 @@
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.DataAccessLayer;
+using AspireOverflow.Security;
 
 using AspireOverflow.Models;
 
@@ -24,7 +25,8 @@ namespace AspireOverflow.Services
             Validation.ValidateUser(user);
             try
             {
-                user = Validation.SetUserDefaultPropertyValues(user);
+                 user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
+           
                 return database.CreateUser(user);
             }
             catch (Exception exception)

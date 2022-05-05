@@ -35,18 +35,18 @@ namespace AspireOverflow.Controllers
             try
             {
 
-                //Development.Web is Enum constants which indicated the request approaching team.
-                return _queryService.CreateQuery(query, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
+              
+                return _queryService.CreateQuery(query) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
             }
             catch (ValidationException exception)
             {
                 //HelperService.LoggerMessage - returns string for logger with detailed info
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateQuery), exception, query));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateQuery), exception, query));
                 return BadRequest($"{exception.Message}\n{HelperService.PropertyList(query)}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateQuery), exception, query));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateQuery), exception, query));
                 return BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
             }
         }
@@ -58,17 +58,17 @@ namespace AspireOverflow.Controllers
             if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
             try
             {
-                return _queryService.RemoveQueryByQueryId(QueryId, DevelopmentTeam.Web) ? await Task.FromResult(Ok($"Successfully deleted the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while removing query with QueryId :{QueryId}");
+                return _queryService.RemoveQueryByQueryId(QueryId) ? await Task.FromResult(Ok($"Successfully deleted the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while removing query with QueryId :{QueryId}");
             }
 
             catch (ItemNotFoundException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(RemoveQueryByQueryId), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(RemoveQueryByQueryId), exception, QueryId));
                 return NotFound($"{exception.Message}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(RemoveQueryByQueryId), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(RemoveQueryByQueryId), exception, QueryId));
                 return BadRequest($"Error Occurred while removing query with QueryId :{QueryId}");
             }
         }
@@ -80,17 +80,17 @@ namespace AspireOverflow.Controllers
             if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
             try
             {
-                return _queryService.MarkQueryAsSolved(QueryId, DevelopmentTeam.Web) ? await Task.FromResult(Ok($"Successfully marked as Solved Query in the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while marking query as solved with QueryId :{QueryId}");
+                return _queryService.MarkQueryAsSolved(QueryId) ? await Task.FromResult(Ok($"Successfully marked as Solved Query in the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while marking query as solved with QueryId :{QueryId}");
             }
 
             catch (ItemNotFoundException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(MarkQueryAsSolved), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(MarkQueryAsSolved), exception, QueryId));
                 return NotFound($"{exception.Message}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(MarkQueryAsSolved), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(MarkQueryAsSolved), exception, QueryId));
                 return BadRequest($"Error Occurred while marking query as solved with QueryId :{QueryId}");
             }
         }
@@ -101,19 +101,19 @@ namespace AspireOverflow.Controllers
             try
 
             {
-                var JsonResult = HelperService.GetJsonResult(_queryService.GetQuery(QueryId, DevelopmentTeam.Web));
+                var Query = _queryService.GetQuery(QueryId);
 
-                return await Task.FromResult(Ok(JsonResult));
+                return await Task.FromResult(Ok(Query));
 
             }
             catch (ItemNotFoundException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQuery), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQuery), exception, QueryId));
                  return BadRequest($"{exception.Message} with QueryId:{QueryId}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQuery), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQuery), exception, QueryId));
                 return BadRequest($"Error Occurred while getting query with QueryId :{QueryId}");
             }
         }
@@ -124,14 +124,12 @@ namespace AspireOverflow.Controllers
             try
             {
 
-                var Queries = _queryService.GetQueries(DevelopmentTeam.Web);    // DevelopmentTeam.Web is a property of enum class
-                var JsonResult = HelperService.GetJsonResult(Queries);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var Queries = _queryService.GetQueries();   
+                return await Task.FromResult(Ok(Queries));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetAll), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetAll), exception));
                 return BadRequest("Error occured while processing your request");
             }
         }
@@ -141,14 +139,13 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var Queries = _queryService.GetLatestQueries(DevelopmentTeam.Web);
-                var JsonResult = HelperService.GetJsonResult(Queries);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var Queries = _queryService.GetLatestQueries();
+              
+                return await Task.FromResult(Ok(Queries));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetLatestQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetLatestQueries), exception));
                 return BadRequest("Error occured while processing your request");
             }
         }
@@ -158,14 +155,12 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var Queries = _queryService.GetTrendingQueries(DevelopmentTeam.Web);
-                var JsonResult = HelperService.GetJsonResult(Queries);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var Queries = _queryService.GetTrendingQueries();
+                return await Task.FromResult(Ok(Queries));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetTrendingQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetTrendingQueries), exception));
                 return BadRequest("Error occured while processing your request");
             }
         }
@@ -178,15 +173,14 @@ namespace AspireOverflow.Controllers
             if (UserId <= 0) return BadRequest("UserId must be greater than 0");
             try
             {
-                var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId,DevelopmentTeam.Web);
-                var JsonResult = HelperService.GetJsonResult(ListOfQueriesByUserId);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId);
+              
+                return await Task.FromResult(Ok(ListOfQueriesByUserId));
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueriesByUserId), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQueriesByUserId), exception, UserId));
                 return BadRequest($"Error Occured while processing your request with UserId :{UserId}");
             }
 
@@ -200,15 +194,13 @@ namespace AspireOverflow.Controllers
             if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
             try
             {
-                var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title, DevelopmentTeam.Web);
-                var JsonResult = HelperService.GetJsonResult(ListOfQueriesByTitle);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title); 
+                return await Task.FromResult(Ok(ListOfQueriesByTitle));
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueriesByTitle), exception, Title));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQueriesByTitle), exception, Title));
                 return BadRequest($"Error Occured while processing your request with Title :{Title}");
 
             }
@@ -222,14 +214,12 @@ namespace AspireOverflow.Controllers
 
             try
             {
-                var ListOfQueriesByIsSolved = _queryService.GetQueries(IsSolved, DevelopmentTeam.Web);
-                var JsonResult = HelperService.GetJsonResult(ListOfQueriesByIsSolved);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var ListOfQueriesByIsSolved = _queryService.GetQueries(IsSolved);
+                return await Task.FromResult(Ok(ListOfQueriesByIsSolved));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetQueriesByIsSolved), exception, IsSolved));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQueriesByIsSolved), exception, IsSolved));
                 return BadRequest($"Error Occured while processing your request with IsSolved :{IsSolved}");
 
             }
@@ -244,17 +234,17 @@ namespace AspireOverflow.Controllers
             if (comment == null) return BadRequest("Null value is not supported");
             try
             {
-                return _queryService.CreateComment(comment, DevelopmentTeam.Web) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
+                return _queryService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
             }
             catch (ValidationException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateComment), exception, comment));
                 return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(CreateComment), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateComment), exception, comment));
                 return BadRequest($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
             }
 
@@ -266,15 +256,13 @@ namespace AspireOverflow.Controllers
             if (QueryId <= 0) return BadRequest("QueryId must be greater than 0");
             try
             {
-                var ListOfComments = _queryService.GetComments(QueryId, DevelopmentTeam.Web);
-                var JsonResult = HelperService.GetJsonResult(ListOfComments);
-
-                return await Task.FromResult(Ok(JsonResult));
+                var ListOfComments = _queryService.GetComments(QueryId);
+                return await Task.FromResult(Ok(ListOfComments));
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam.Web, nameof(GetComments), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetComments), exception, QueryId));
                 return BadRequest($"Error Occured while processing your request with QueryId :{QueryId}");
 
 

@@ -97,9 +97,9 @@ public class UserController : ControllerBase
         if (UserId <= 0) return BadRequest("User ID must be greater than 0");
         try
         {   
-              var JsonResult = HelperService.GetJsonResult(_UserService.GetUsersByID(UserId));
+              var User = _UserService.GetUsersByID(UserId);
 
-                return await Task.FromResult(Ok(JsonResult));
+                return await Task.FromResult(Ok(User));
            
         }
         catch (ItemNotFoundException exception)
@@ -115,70 +115,20 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetVerifiedUsers()
-    {
+    public async Task<ActionResult<IEnumerator<User>>> GetUsersVerifyStatusId(int VerifyStatusID){
+    if(VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}");
         try
         {
             var ListOfUsers = _UserService.GetUsersByVerifyStatus(1);
-          var JsonResult = HelperService.GetJsonResult(ListOfUsers);
-
-                return await Task.FromResult(Ok(JsonResult));
+                return await Task.FromResult(Ok(ListOfUsers));
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetVerifiedUsers), exception));
-            return BadRequest("Error occured while processing your request");
+            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUsersVerifyStatusId), exception));
+            return BadRequest($"Error occured while processing your request with VerifyStatusId:{VerifyStatusID}");
         }
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetUsersTobeVerified()
-    {
-        try
-        {
-            var ListOfUsers = _UserService.GetUsersByVerifyStatus(3);
-          var JsonResult = HelperService.GetJsonResult(ListOfUsers);
-
-                return await Task.FromResult(Ok(JsonResult));}
-        catch (Exception exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUsersTobeVerified), exception));
-            return BadRequest("Error occured while processing your request");
-        }
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetRejectedUsers()
-    {
-        try
-        {
-            var ListOfUsers = _UserService.GetUsersByVerifyStatus(2);
-            var JsonResult = HelperService.GetJsonResult(ListOfUsers);
-
-                return await Task.FromResult(Ok(JsonResult));
-        }
-        catch (Exception exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUsersTobeVerified), exception));
-            return BadRequest("Error occured while processing your request");
-        }
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetReviewers()
-    {
-        try
-        {
-            var ListOfUsers = _UserService.GetUsersByIsReviewer(true);
-             var JsonResult = HelperService.GetJsonResult(ListOfUsers);
-
-                return await Task.FromResult(Ok(JsonResult));
-        }
-        catch (Exception exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetReviewers), exception));
-            return BadRequest("Error occured while processing your request");
-        }
-    }
+  
 
 }

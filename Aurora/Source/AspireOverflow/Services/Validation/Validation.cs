@@ -17,6 +17,7 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(query.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(query.Content)) throw new ValidationException("content cannot be null or empty");
             else if (query.Title.Length > 60) throw new ValidationException("Title length must be less than 60 charcter");
+            else if(query.IsActive != true)throw new ValidationException("");
 
             else return true;
         }
@@ -74,6 +75,10 @@ namespace AspireOverflow.Services
         public static bool ValidateUser(User user)
         {
             if (user == null) throw new ValidationException("User should not be null");
+            else if(user.VerifyStatusID != 3)throw new ValidationException($"VerifyStatus must be 3  VerifyStatusId:{user.VerifyStatusID}");
+            else if( user.IsReviewer != false)throw new ValidationException($"IsReviewer must be false");
+            else if(  user.UserRoleId != 2)throw new ValidationException($"IsReviewer must be false");
+            else if(  user.UserRoleId != 2) throw new ValidationException($"UserRoleId must be equal to 2 UserRole:{user.UserRoleId}");
             else return true;
         }
 
@@ -83,33 +88,26 @@ namespace AspireOverflow.Services
 
             else return true;
         }
-        public static User SetUserDefaultPropertyValues(User user)
-        {
-            user.VerifyStatusID = 3;
-            user.CreatedOn = DateTime.Now;
-            user.IsReviewer = false;
-            user.UserRoleId = 2;
-            user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);  //stores password with hashed password
-            return user;
-        }
+       
 
         public static Query SetUserDefaultPropertyValues(Query query)
         {
 
             query.CreatedOn = DateTime.Now;
 
-            query.Title = query.Title.ToLower();
+           
             query.IsActive = true;
             query.IsSolved = false;
             return query;
         }
-public static Article SetUserDefaultPropertyValues(Article article)
+        public static Article SetUserDefaultPropertyValues(Article article)
         {
 
             article.CreatedOn = DateTime.Now;
 
             article.Title = article.Title.ToLower();
             article.ArticleStatusID = 1;
+         
             return article;
         }
 

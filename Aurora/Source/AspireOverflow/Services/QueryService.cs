@@ -26,7 +26,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public bool CreateQuery(Query query, Enum DevelopmentTeam)
+        public bool CreateQuery(Query query)
         {
             Validation.ValidateQuery(query);
             try
@@ -36,13 +36,13 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(CreateQuery), exception, query));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(CreateQuery), exception, query));
                 throw exception;
             }
         }
 
 
-        public bool RemoveQueryByQueryId(int QueryId, Enum DevelopmentTeam)
+        public bool RemoveQueryByQueryId(int QueryId)
         {
             Validation.ValidateId(QueryId);
             try
@@ -51,7 +51,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(RemoveQueryByQueryId), exception), QueryId);
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(RemoveQueryByQueryId), exception), QueryId);
 
                 throw exception;
             }
@@ -59,7 +59,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public bool MarkQueryAsSolved(int QueryId, Enum DevelopmentTeam)
+        public bool MarkQueryAsSolved(int QueryId)
         {
             Validation.ValidateId(QueryId);
             try
@@ -69,13 +69,13 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(MarkQueryAsSolved), exception), QueryId);
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(MarkQueryAsSolved), exception), QueryId);
 
                 throw exception;
             }
         }
 
-        public Query GetQuery(int QueryId, Enum DevelopmentTeam)
+        public Query GetQuery(int QueryId)
         {
             Validation.ValidateId(QueryId);
             try
@@ -84,14 +84,14 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQuery), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetQuery), exception, QueryId));
                 throw exception;
             }
 
         }
 
 
-        public IEnumerable<Query> GetQueries(Enum DevelopmentTeam)
+        public IEnumerable<Query> GetQueries()
         {
             try
             {
@@ -100,7 +100,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetQueries), exception));
                 throw exception;
             }
 
@@ -108,24 +108,24 @@ namespace AspireOverflow.Services
 
 
 
-        public IEnumerable<Query> GetLatestQueries(Enum DevelopmentTeam)
+        public IEnumerable<Query> GetLatestQueries()
         {
             try
             {
-                var ListOfQueries = GetQueries(DevelopmentTeam).OrderByDescending(query => query.CreatedOn);
+                var ListOfQueries = GetQueries().OrderByDescending(query => query.CreatedOn);
                 return ListOfQueries;
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetLatestQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetLatestQueries), exception));
                 throw exception;
             }
         }
 
 
 
-        public  IEnumerable<Query> GetTrendingQueries(Enum DevelopmentTeam)
+        public  IEnumerable<Query> GetTrendingQueries()
         {
             try
             {
@@ -133,7 +133,7 @@ namespace AspireOverflow.Services
                 var data = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
 
                  var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
-                var ListOfQueries = GetQueries(false,DevelopmentTeam).ToList();
+                var ListOfQueries = GetQueries(false).ToList();
                 var TrendingQueries = new List<Query>();
                   foreach(var id in ListOfQueryId){
                     TrendingQueries.Add(ListOfQueries.Find(item =>item.QueryId ==id));
@@ -144,60 +144,60 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetTrendingQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetTrendingQueries), exception));
                 throw exception;
             }
         }
 
 
 
-        public IEnumerable<Query> GetQueriesByUserId(int UserId, Enum DevelopmentTeam)
+        public IEnumerable<Query> GetQueriesByUserId(int UserId)
         {
             Validation.ValidateId(UserId);
             try
             {
-                return GetQueries(DevelopmentTeam).Where(query => query.CreatedBy == UserId);
+                return GetQueries().Where(query => query.CreatedBy == UserId);
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQueriesByUserId), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetQueriesByUserId), exception, UserId));
                 throw exception;
             }
 
         }
 
 
-        public IEnumerable<Query> GetQueriesByTitle(String Title, Enum DevelopmentTeam)
+        public IEnumerable<Query> GetQueriesByTitle(String Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Title value can't be null");
             try
             {
-                return GetQueries(DevelopmentTeam).Where(query => query.Title.Contains(Title));
+                return GetQueries().Where(query => query.Title.Contains(Title));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQueriesByTitle), exception, Title));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetQueriesByTitle), exception, Title));
                 throw exception;
             }
         }
 
 
-        public IEnumerable<Query> GetQueries(bool IsSolved, Enum DevelopmentTeam)
+        public IEnumerable<Query> GetQueries(bool IsSolved)
         {
             try
             {
-                return GetQueries(DevelopmentTeam).Where(query => query.IsSolved == IsSolved);
+                return GetQueries().Where(query => query.IsSolved == IsSolved);
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetQueries), exception, IsSolved));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetQueries), exception, IsSolved));
                 throw exception;
             }
         }
 
 
 
-        public bool CreateComment(QueryComment comment, Enum DevelopmentTeam)
+        public bool CreateComment(QueryComment comment)
         {
             Validation.ValidateComment(comment);
             try
@@ -206,12 +206,12 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(CreateComment), exception), comment);
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(CreateComment), exception), comment);
                 throw exception;
             }
         }
 
-        public IEnumerable<QueryComment> GetComments(int QueryId, Enum DevelopmentTeam)
+        public IEnumerable<QueryComment> GetComments(int QueryId)
         {
             Validation.ValidateId(QueryId);
             try
@@ -221,7 +221,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(DevelopmentTeam, nameof(GetComments), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage(nameof(QueryService), nameof(GetComments), exception, QueryId));
                 throw exception;
             }
 

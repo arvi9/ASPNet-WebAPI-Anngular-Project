@@ -8,7 +8,7 @@ namespace AspireOverflow.Services
     {
 
 
-            public static String GetJsonResult(object obj){
+            private static  String GetJsonResult(object obj){
                 if(obj ==null) throw new NullReferenceException();
                var json = JsonSerializer.Serialize(obj, new JsonSerializerOptions()
                 {

@@ -13,8 +13,8 @@ namespace AspireOverflow.DataAccessLayer
         private ILogger<ArticleService> _logger;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleService> logger)
         {
-            _context = context ?? throw new NullReferenceException("Context can't be Null");
-            _logger = logger ?? throw new NullReferenceException("logger can't be Null"); ;
+            _context = context ;
+            _logger = logger ;
 
         }
 
@@ -80,7 +80,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles;
+                var ListOfArticle = _context.Articles.ToList();
                 return ListOfArticle;
 
             }
@@ -120,7 +120,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfComments = _context.ArticleComments;
+                var ListOfComments = _context.ArticleComments.ToList();
                 return ListOfComments;
 
             }
@@ -156,7 +156,7 @@ namespace AspireOverflow.DataAccessLayer
            
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes;
+                var ListOfArticleLikes = _context.ArticleLikes.ToList();
                 return ListOfArticleLikes;
 
             }

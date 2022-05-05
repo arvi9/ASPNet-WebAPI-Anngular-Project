@@ -34,23 +34,25 @@ namespace AspireOverflow.Models
         public int? UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+
+
         
         [ForeignKey("ArticleStatusID")]
         [InverseProperty("Articles")]
-        public virtual ArticleStatus ArticleStatus { get; set; } 
+        public virtual ArticleStatus? ArticleStatus { get; set; } 
 
      
 
         [ForeignKey("CreatedBy")]
         [InverseProperty("Articles")]
-        public virtual User User { get; set; } = null!;
+        public virtual User? User { get; set; } = null!;
 
         [InverseProperty("Article")]
-        public virtual ICollection<ArticleComment> ArticleComments { get; set; }
+        public virtual ICollection<ArticleComment>? ArticleComments { get; set; }
 
         
         [InverseProperty("Article")]
-        public virtual ICollection<ArticleLike> ArticleLikes { get; set; }
+        public virtual ICollection<ArticleLike>? ArticleLikes { get; set; }
         
     }
 }

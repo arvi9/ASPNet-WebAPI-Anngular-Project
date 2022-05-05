@@ -5,21 +5,21 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
 
     public interface IArticleService
     {
-        bool CreateArticle(Article article, Enum DevelopmentTeam);
-        bool DeleteArticleByArticleIdAndArticleStatusID(int ArticleId,int ArticleStatusID, Enum DevelopmentTeam);
-        bool UpdateArticleStatus(int ArticleID,int ArticleStatusID,Enum DevelopmentTeam);
-        //bool AddLikeToArticle(int UserID, int ArticleID,Enum DevelopmentTeam);
+        bool CreateArticle(Article article);
+        bool DeleteArticleByArticleIdAndArticleStatusID(int ArticleId,int ArticleStatusID);
+        bool UpdateArticleStatus(int ArticleID,int ArticleStatusID);
+        bool AddLikeToArticle(int UserID, int ArticleID);
 
-        bool CreateComment(ArticleComment comment, Enum DevelopmentTeam);
-        bool AddCommentToArticle(ArticleComment comment, Enum DevelopmentTeam);
-        Article GetArticleById(int ArticleId,Enum DevelopmentTeam);
-        IEnumerable<Article> GetArticlesByTitle(string Title, Enum DevelopmentTeam);
-        IEnumerable<Article> GetArticlesByAuthor(string AuthorName, Enum DevelopmentTeam);
-        IEnumerable<Article>  GetArticlesByDateRange(DateTime Startdate ,DateTime EndDate, Enum DevelopmetTeam);
-       IEnumerable<Article> GetArticlesByUserId (int UserId, Enum DevelopmentTeam);
-       IEnumerable<Article> GetArticlesByUserIdAndArticleStatusId (int UserId,int ArticleStatusID,Enum DevelopmentTeam);
-       IEnumerable<ArticleComment> GetComments(int ArticleID, Enum DevelopmentTeam);
+        bool CreateComment(ArticleComment comment);
+        bool AddCommentToArticle(ArticleComment comment);
+        Article GetArticleById(int ArticleId);
+        IEnumerable<Article> GetArticlesByTitle(string Title);
+        IEnumerable<Article> GetArticlesByAuthor(string AuthorName);
+        IEnumerable<Article>  GetArticlesByDateRange(DateTime Startdate ,DateTime EndDate);
+       IEnumerable<Article> GetArticlesByUserId (int UserId);
+       IEnumerable<Article> GetArticlesByUserIdAndArticleStatusId (int UserId,int ArticleStatusID);
+       IEnumerable<ArticleComment> GetComments(int ArticleID);
 
-       //int GetLikesCount(int ArticleID,Enum DevelopmentTeam);
+       int GetLikesCount(int ArticleID);
     }
 }
