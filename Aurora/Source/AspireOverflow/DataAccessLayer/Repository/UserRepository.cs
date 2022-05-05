@@ -85,7 +85,7 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
 
-                return _context.Users.Include("Designation").Include("UserRole").Include("Gender").Include("VerifyStatus").ToList();
+                return _context.Users.Include("Designation").Include("UserRole").Include("Gender").Include("VerifyStatus");
             }
             catch (Exception exception)
             {

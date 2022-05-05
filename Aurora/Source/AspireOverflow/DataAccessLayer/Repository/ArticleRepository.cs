@@ -80,7 +80,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles.ToList();
+                var ListOfArticle = _context.Articles;
                 return ListOfArticle;
 
             }
@@ -120,7 +120,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfComments = _context.ArticleComments.ToList();
+                var ListOfComments = _context.ArticleComments;
                 return ListOfComments;
 
             }
@@ -156,7 +156,7 @@ namespace AspireOverflow.DataAccessLayer
            
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.ToList();
+                var ListOfArticleLikes = _context.ArticleLikes;
                 return ListOfArticleLikes;
 
             }

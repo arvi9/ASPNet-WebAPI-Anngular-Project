@@ -132,7 +132,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfComments = _context.QueryComments.Include("Query").Include("User").ToList();
+                var ListOfComments = _context.QueryComments.Include("Query").Include("User");
                 return ListOfComments;
 
             }
