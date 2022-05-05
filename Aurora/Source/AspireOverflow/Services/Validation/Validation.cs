@@ -59,17 +59,9 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-        public static bool ValidateId(int Id)
-        {
-            return Id <= 0 ? throw new ArgumentOutOfRangeException("Id must be greater than 0") : true;
-        }
+       
 
-        public static bool ValidateId(int FirstId, int SecondId)
-        {
-            if (FirstId <= 0) throw new ArgumentOutOfRangeException("Id must be greater than 0");
-            if (SecondId <= 0) throw new ArgumentOutOfRangeException("Id must be greater than 0");
-            else return true;
-        }
+  
 
 
         public static bool ValidateUser(User user)

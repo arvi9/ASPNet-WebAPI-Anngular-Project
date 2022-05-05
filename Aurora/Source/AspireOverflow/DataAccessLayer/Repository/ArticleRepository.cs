@@ -41,7 +41,8 @@ namespace AspireOverflow.DataAccessLayer
         public bool UpdateArticle(int ArticleId, int ArticleStatusID)
         {
 
-            Validation.ValidateId(ArticleId, ArticleStatusID);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentOutOfRangeException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
                 var ExistingArticle = GetArticleByID(ArticleId);
@@ -61,7 +62,7 @@ namespace AspireOverflow.DataAccessLayer
 
         public Article GetArticleByID(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             Article ExistingArticle;
             try
             {
@@ -135,7 +136,8 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool AddLike(ArticleLike like)
         {
-            Validation.ValidateId(like.ArticleId, like.UserId);
+            if (like.ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{like.ArticleId}");
+            if (like.UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{like.UserId}");
             try
             {
                 _context.ArticleLikes.Add(like);

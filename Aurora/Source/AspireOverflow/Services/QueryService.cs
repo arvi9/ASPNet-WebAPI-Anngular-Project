@@ -44,7 +44,7 @@ namespace AspireOverflow.Services
 
         public bool RemoveQueryByQueryId(int QueryId)
         {
-            Validation.ValidateId(QueryId);
+            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
                 return database.UpdateQuery(QueryId, IsDelete: true);
@@ -61,7 +61,7 @@ namespace AspireOverflow.Services
 
         public bool MarkQueryAsSolved(int QueryId)
         {
-            Validation.ValidateId(QueryId);
+            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
                 return database.UpdateQuery(QueryId, IsSolved: true);
@@ -77,7 +77,7 @@ namespace AspireOverflow.Services
 
         public Query GetQuery(int QueryId)
         {
-            Validation.ValidateId(QueryId);
+            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
                 return database.GetQueryByID(QueryId);
@@ -153,7 +153,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Query> GetQueriesByUserId(int UserId)
         {
-            Validation.ValidateId(UserId);
+            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 return GetQueries().Where(query => query.CreatedBy == UserId);
@@ -213,7 +213,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<QueryComment> GetComments(int QueryId)
         {
-            Validation.ValidateId(QueryId);
+            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
                 return database.GetComments().Where(comment => comment.QueryId == QueryId);

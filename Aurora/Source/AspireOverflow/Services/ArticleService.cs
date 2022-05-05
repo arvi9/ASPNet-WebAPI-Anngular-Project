@@ -56,7 +56,8 @@ namespace AspireOverflow.Services
         }
         public bool ChangeArticleStatus(int ArticleId, int ArticleStatusID)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentOutOfRangeException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
                 return database.UpdateArticle(ArticleId, ArticleStatusID);
@@ -72,7 +73,7 @@ namespace AspireOverflow.Services
 
         public Article GetArticleById(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 return database.GetArticleByID(ArticleId);
@@ -127,7 +128,7 @@ namespace AspireOverflow.Services
 
         public Article GetArticleByUserId(int UserId)
         {
-            Validation.ValidateId(UserId);
+            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 return database.GetArticleByID(UserId);
@@ -222,7 +223,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<ArticleComment> GetComments(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 return database.GetComments().Where(comment => comment.ArticleId == ArticleId);
@@ -238,7 +239,8 @@ namespace AspireOverflow.Services
 
         public bool AddLikeToArticle(int ArticleId, int UserId)
         {
-            Validation.ValidateId(ArticleId, UserId);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 if (database.GetLikes().Where(item => item.UserId == UserId && item.ArticleId == ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserID");
@@ -257,7 +259,7 @@ namespace AspireOverflow.Services
 
         public int GetLikesCount(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 var ArticleLikes = database.GetLikes().Count(item => item.ArticleId == ArticleId);

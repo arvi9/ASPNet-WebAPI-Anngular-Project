@@ -35,7 +35,7 @@ namespace AspireOverflow.Controllers
             try
             {
 
-              
+
                 return _queryService.CreateQuery(query) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
             }
             catch (ValidationException exception)
@@ -109,7 +109,7 @@ namespace AspireOverflow.Controllers
             catch (ItemNotFoundException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQuery), exception, QueryId));
-                 return BadRequest($"{exception.Message} with QueryId:{QueryId}");
+                return BadRequest($"{exception.Message} with QueryId:{QueryId}");
             }
             catch (Exception exception)
             {
@@ -124,7 +124,7 @@ namespace AspireOverflow.Controllers
             try
             {
 
-                var Queries = _queryService.GetQueries();   
+                var Queries = _queryService.GetQueries();
                 return await Task.FromResult(Ok(Queries));
             }
             catch (Exception exception)
@@ -135,13 +135,13 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetLatestQueries()
+        public async Task<ActionResult<IEnumerator<Query>>> GetLatestQueries(int Range)
         {
             try
             {
                 var Queries = _queryService.GetLatestQueries();
-              
-                return await Task.FromResult(Ok(Queries));
+                return Range > 0 ? await Task.FromResult(Ok(Queries.ToList().GetRange(1, Range))) : await Task.FromResult(Ok(Queries));
+             
             }
             catch (Exception exception)
             {
@@ -151,12 +151,12 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetTrendingQueries()
+        public async Task<ActionResult> GetTrendingQueries(int Range)
         {
             try
             {
                 var Queries = _queryService.GetTrendingQueries();
-                return await Task.FromResult(Ok(Queries));
+                   return Range > 0 ? await Task.FromResult(Ok(Queries.ToList().GetRange(1,Range))):await Task.FromResult(Ok(Queries));
             }
             catch (Exception exception)
             {
@@ -174,7 +174,7 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId);
-              
+
                 return await Task.FromResult(Ok(ListOfQueriesByUserId));
             }
 
@@ -194,7 +194,7 @@ namespace AspireOverflow.Controllers
             if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
             try
             {
-                var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title); 
+                var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title);
                 return await Task.FromResult(Ok(ListOfQueriesByTitle));
             }
 

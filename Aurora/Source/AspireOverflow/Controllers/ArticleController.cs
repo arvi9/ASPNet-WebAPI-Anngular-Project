@@ -73,14 +73,14 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Query>>> GetLatestArticles()
+    public async Task<ActionResult<IEnumerator<Query>>> GetLatestArticles(int Range)
     {
         try
         {
             var articles = _articleService.GetLatestArticles();
            
-
-            return await Task.FromResult(Ok(articles));
+               return Range > 0 ? await Task.FromResult(Ok(articles.ToList().GetRange(1,Range))):await Task.FromResult(Ok(articles));
+          
         }
         catch (Exception exception)
         {
@@ -90,14 +90,14 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetTrendingArticles()
+    public async Task<ActionResult> GetTrendingArticles(int Range)
     {
         try
         {
             var Articles = _articleService.GetTrendingArticles();
            
 
-            return await Task.FromResult(Ok(Articles));
+            return Range > 0 ? await Task.FromResult(Ok(Articles.ToList().GetRange(1,Range))):await Task.FromResult(Ok(Articles));
         }
         catch (Exception exception)
         {
