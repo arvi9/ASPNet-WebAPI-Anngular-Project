@@ -1,4 +1,4 @@
-using AspireOverflow.Models;
+ using AspireOverflow.Models;
 
 using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
@@ -31,7 +31,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle()", exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle(Article article)", exception, article));
 
                 throw exception;
 
@@ -49,7 +49,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle()", exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(Article article)", exception, article));
 
                 throw exception;
 
@@ -75,7 +75,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle()", exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception));
                 throw exception;
             }
         }
@@ -95,7 +95,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticle()", exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticle(int ArticleId)", exception, ArticleId));
                 throw exception;
             }
         }
@@ -110,7 +110,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticleByID()", exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticleByID(int ArticleId)", exception, ArticleId));
                 throw exception;
             }
         }
@@ -146,7 +146,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddComment()", exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddComment(ArticleComment comment)", exception, comment));
 
                 throw exception;
 
@@ -185,7 +185,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddLike()", exception, like));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddLike(ArticleLike like)", exception, like));
 
                 throw exception;
             }

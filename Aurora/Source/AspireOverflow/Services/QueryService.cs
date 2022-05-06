@@ -36,7 +36,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","CreateQuery", exception, query));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","CreateQuery(Query query)", exception, query));
             return false;
             }
         }
@@ -51,7 +51,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","RemoveQueryByQueryId", exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","RemoveQueryByQueryId(int QueryId)", exception, QueryId));
 
            return false;
             }
@@ -69,7 +69,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","MarkQueryAsSolved()", exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryService"," MarkQueryAsSolved(int QueryId)", exception, QueryId));
 
             return false;
             }
@@ -118,7 +118,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetLatestQueries", exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","GetLatestQueries()", exception));
              throw exception;
             }
         }
@@ -145,7 +145,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetTrendingQueries", exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","GetTrendingQueries()", exception));
              throw exception;
             }
         }
@@ -161,7 +161,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueriesByUserId", exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueriesByUserId(int UserId)", exception, UserId));
              throw exception;
             }
 
@@ -170,14 +170,14 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Query> GetQueriesByTitle(String Title)
         {
-            if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Title value can't be null");
+            if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Query Title value can't be null");
             try
             {
                 return GetQueries().Where(query => query.Title.Contains(Title));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueriesByTitle", exception, Title));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueriesByTitle(String Title)", exception, Title));
              throw exception;
             }
         }
@@ -191,7 +191,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueries", exception, IsSolved));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueries(bool IsSolved)", exception, IsSolved));
              throw exception;
             }
         }
@@ -207,7 +207,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","CreateComment", exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","CreateComment(QueryComment comment)", exception, comment));
              return false;
             }
         }
@@ -222,7 +222,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetComments", exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryService","GetComments(int QueryId)", exception, QueryId));
              throw exception;
             }
 

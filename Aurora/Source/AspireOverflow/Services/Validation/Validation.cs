@@ -75,12 +75,7 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-        public static bool ValidateTitle(string Title)
-        {
-            if (String.IsNullOrEmpty(Title)) throw new ValidationException("Title cannot be null or empty");
 
-            else return true;
-        }
        
 
 

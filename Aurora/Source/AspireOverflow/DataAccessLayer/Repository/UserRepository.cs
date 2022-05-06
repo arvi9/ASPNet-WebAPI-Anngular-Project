@@ -36,7 +36,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser()", exception, user));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser(User user)", exception, user));
                 throw;
 
             }
@@ -57,7 +57,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "RemoveUser()", exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "RemoveUser(int UserId)", exception, UserId));
                 throw;
 
             }
@@ -74,7 +74,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUserByID()", exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUserByID(int UserId)", exception, UserId));
                 throw exception;
             }
         }
@@ -108,7 +108,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "UpdateUserByVerifyStatus()", exception, $"UserId : {UserId},VerifyStatusID :{VerifyStatusID}"));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "UpdateUserByVerifyStatus(int UserId, int VerifyStatusID)", exception, $"UserId : {UserId},VerifyStatusID :{VerifyStatusID}"));
                 throw;
 
             }
@@ -128,7 +128,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "UpdateUserByReviewer()", exception, $"UserId : {UserId},IsReviewer :{IsReviewer}"));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "UpdateUserByReviewer(int UserId, bool IsReviewer)", exception, $"UserId : {UserId},IsReviewer :{IsReviewer}"));
                 throw;
 
             }

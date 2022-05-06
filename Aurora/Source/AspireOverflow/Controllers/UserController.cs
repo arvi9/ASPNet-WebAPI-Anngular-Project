@@ -39,12 +39,12 @@ public class UserController : ControllerBase
         catch (ValidationException exception)
         {
             //HelperService.LoggerMessage - returns string for logger with detailed info
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(CreateUser), exception, User));
+            _logger.LogError(HelperService.LoggerMessage("UserController"," CreateUser(User User)", exception, User));
             return BadRequest($"{exception.Message}\n{HelperService.PropertyList(User)}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(CreateUser), exception, User));
+            _logger.LogError(HelperService.LoggerMessage("UserController", " CreateUser(User User)", exception, User));
             return Problem($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
         }
     }
@@ -60,12 +60,12 @@ public class UserController : ControllerBase
         }
         catch (ItemNotFoundException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(ChangeUserVerifyStatus), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController", " ChangeUserVerifyStatus(int UserId, bool IsVerified)", exception, UserId));
             return NotFound($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(ChangeUserVerifyStatus), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController", " ChangeUserVerifyStatus(int UserId, bool IsVerified)", exception, UserId));
             return Problem($"Error Occurred while changing UserVerification Status with UserId :{UserId}");
         }
     }
@@ -82,12 +82,12 @@ public class UserController : ControllerBase
         }
         catch (ItemNotFoundException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(RemoveUser), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController", "RemoveUser(int UserId)", exception, UserId));
             return BadRequest($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(RemoveUser), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController", "RemoveUser(int UserId)", exception, UserId));
             return Problem($"Error Occurred while getting User with UserId :{UserId}");
         }
     }
@@ -105,12 +105,12 @@ public class UserController : ControllerBase
         }
         catch (ItemNotFoundException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(GetUser), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController", "GetUser()", exception, UserId));
             return BadRequest($"{exception.Message} with UserId:{UserId}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(GetUser), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController","GetUser()", exception, UserId));
             return Problem($"Error Occurred while Getting User with UserId :{UserId}");
         }
     }
@@ -125,7 +125,7 @@ public class UserController : ControllerBase
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController", nameof(GetUsersByVerifyStatusId), exception));
+            _logger.LogError(HelperService.LoggerMessage("UserController", "GetUsersByVerifyStatusId(int VerifyStatusID)", exception));
             return Problem($"Error occured while processing your request with VerifyStatusId:{VerifyStatusID}");
         }
     }

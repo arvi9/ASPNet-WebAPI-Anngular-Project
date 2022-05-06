@@ -36,7 +36,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle()", exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle(Article article)", exception, article));
                 return false;
             }
         }
@@ -60,7 +60,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle()", exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", " UpdateArticle(Article article, int CurrentUser)", exception, article));
                 return false;
             }
         }
@@ -76,7 +76,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "ChangeArticleStatus()", exception), ArticleId, ArticleStatusID);
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", " ChangeArticleStatus(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception), ArticleId, ArticleStatusID);
 
                 throw exception;
             }
@@ -93,7 +93,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "DeleteArticleByArticleId()", exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
 
                return false;
             }
@@ -108,7 +108,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById()", exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById(int ArticleId)", exception, ArticleId));
 
                 throw exception;
             }
@@ -163,7 +163,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById()", exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByUserId(int UserId)", exception, UserId));
 
                 throw exception;
             }
@@ -192,7 +192,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Article> GetArticlesByTitle(string Title)
         {
-            Validation.ValidateTitle(Title);
+            if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
                 return GetArticles().Where(article => article.Title.Contains(Title));
@@ -200,7 +200,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle()", exception, Title));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle(string Title)", exception, Title));
 
                 throw exception;
             }
@@ -219,7 +219,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle()", exception, AuthorName));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByAuthor(string AuthorName)", exception, AuthorName));
 
                 throw exception;
             }
@@ -236,7 +236,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "ChangeArticleStatus()", exception), ArticleStatusID);
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByArticleStatusId(int ArticleStatusID)", exception), ArticleStatusID);
 
                 throw exception;
             }
