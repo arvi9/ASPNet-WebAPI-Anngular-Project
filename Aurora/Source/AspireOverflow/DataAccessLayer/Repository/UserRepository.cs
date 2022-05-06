@@ -46,7 +46,7 @@ namespace AspireOverflow.DataAccessLayer
         //Admin rejected users only be deleted
         public bool RemoveUser(int UserId)
         {
-           if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             try
             {   var User_NotVerified =GetUserByID(UserId);
                 if(User_NotVerified.VerifyStatusID==3){
@@ -65,7 +65,7 @@ namespace AspireOverflow.DataAccessLayer
         }
         public User GetUserByID(int UserId)
         {
-            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             User user;
             try
             {
@@ -96,8 +96,7 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool UpdateUserByVerifyStatus(int UserId, int VerifyStatusID)
         {
-           if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
-           if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentOutOfRangeException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
+            Validation.ValidateId(UserId, VerifyStatusID);
             try
             {
                 var ExistingUser = GetUserByID(UserId);
@@ -117,7 +116,7 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool UpdateUserByReviewer(int UserId, bool IsReviewer)
         {
-           if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             try
             {
                 var ExistingUser = GetUserByID(UserId);

@@ -5,7 +5,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+
 
 namespace AspireOverflow.Controllers;
 
@@ -14,8 +14,8 @@ namespace AspireOverflow.Controllers;
 public class UserController : ControllerBase
 {
 
-    internal  ILogger<UserController> _logger;
-    private  UserService _UserService;
+    internal static ILogger<UserController> _logger;
+    private static UserService _UserService;
 
     public UserController(ILogger<UserController> logger, UserService UserService)
     {
@@ -45,7 +45,7 @@ public class UserController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(CreateUser), exception, User));
-            return Problem($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
+            return BadRequest($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
         }
     }
 
@@ -66,7 +66,7 @@ public class UserController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(ChangeUserVerifyStatus), exception, UserId));
-            return Problem($"Error Occurred while changing UserVerification Status with UserId :{UserId}");
+            return BadRequest($"Error Occurred while changing UserVerification Status with UserId :{UserId}");
         }
     }
 
@@ -74,7 +74,6 @@ public class UserController : ControllerBase
     [HttpDelete]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
-        if(User.HasClaim(item => item.Type==ClaimTypes.Role && item.Value=="2"))  return BadRequest("you dont have access to remove user"); 
         if (UserId <= 0) return BadRequest("User ID must be greater than 0");
         try
         {
@@ -88,17 +87,17 @@ public class UserController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(RemoveUser), exception, UserId));
-            return Problem($"Error Occurred while getting User with UserId :{UserId}");
+            return BadRequest($"Error Occurred while getting User with UserId :{UserId}");
         }
     }
 
-    [HttpGet][Authorize]
-    public async Task<ActionResult<User>> GetUser()
+    [HttpGet]
+    public async Task<ActionResult<User>> GetUser(int UserId)
     {
-        string UserId = User.FindFirst("UserId").Value;
+        if (UserId <= 0) return BadRequest("User ID must be greater than 0");
         try
         {   
-              var User = _UserService.GetUsersByID(Convert.ToInt32(UserId));
+              var User = _UserService.GetUsersByID(UserId);
 
                 return await Task.FromResult(Ok(User));
            
@@ -111,12 +110,12 @@ public class UserController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUser), exception, UserId));
-            return Problem($"Error Occurred while Getting User with UserId :{UserId}");
+            return BadRequest($"Error Occurred while Getting User with UserId :{UserId}");
         }
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetUsersByVerifyStatusId(int VerifyStatusID){
+    public async Task<ActionResult<IEnumerator<User>>> GetUsersVerifyStatusId(int VerifyStatusID){
     if(VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}");
         try
         {
@@ -125,8 +124,8 @@ public class UserController : ControllerBase
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUsersByVerifyStatusId), exception));
-            return Problem($"Error occured while processing your request with VerifyStatusId:{VerifyStatusID}");
+            _logger.LogError(HelperService.LoggerMessage(nameof(UserController), nameof(GetUsersVerifyStatusId), exception));
+            return BadRequest($"Error occured while processing your request with VerifyStatusId:{VerifyStatusID}");
         }
     }
 

@@ -43,9 +43,9 @@ namespace AspireOverflow.Controllers
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim(ClaimTypes.Email,user.EmailAddress),
+                        new Claim("Email",user.EmailAddress),
                         new Claim("UserId",user.UserId.ToString()),
-                        new Claim(ClaimTypes.Role,user.UserRoleId.ToString())
+                        new Claim("RoleId",user.UserRoleId.ToString())
 
 
                     };

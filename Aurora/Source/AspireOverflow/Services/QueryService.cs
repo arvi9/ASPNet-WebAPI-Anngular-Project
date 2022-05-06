@@ -20,7 +20,7 @@ namespace AspireOverflow.Services
 
         public QueryService(ILogger<QueryService> logger)
         {
-            _logger = logger;
+            _logger = logger ;
             database = QueryRepositoryFactory.GetQueryRepositoryObject(logger);
 
         }
@@ -31,7 +31,7 @@ namespace AspireOverflow.Services
             Validation.ValidateQuery(query);
             try
             {
-                query.CreatedOn = DateTime.Now;
+                Validation.SetUserDefaultPropertyValues(query);
                 return database.AddQuery(query);
             }
             catch (Exception exception)
@@ -44,7 +44,7 @@ namespace AspireOverflow.Services
 
         public bool RemoveQueryByQueryId(int QueryId)
         {
-            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            Validation.ValidateId(QueryId);
             try
             {
                 return database.UpdateQuery(QueryId, IsDelete: true);
@@ -61,7 +61,7 @@ namespace AspireOverflow.Services
 
         public bool MarkQueryAsSolved(int QueryId)
         {
-            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            Validation.ValidateId(QueryId);
             try
             {
                 return database.UpdateQuery(QueryId, IsSolved: true);
@@ -77,7 +77,7 @@ namespace AspireOverflow.Services
 
         public Query GetQuery(int QueryId)
         {
-            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            Validation.ValidateId(QueryId);
             try
             {
                 return database.GetQueryByID(QueryId);
@@ -125,21 +125,20 @@ namespace AspireOverflow.Services
 
 
 
-        public IEnumerable<Query> GetTrendingQueries()
+        public  IEnumerable<Query> GetTrendingQueries()
         {
             try
             {
-
+               
                 var data = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
 
-                var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
+                 var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
                 var ListOfQueries = GetQueries(false).ToList();
                 var TrendingQueries = new List<Query>();
-                foreach (var id in ListOfQueryId)
-                {
-                    TrendingQueries.Add(ListOfQueries.Find(item => item.QueryId == id));
-                }
-
+                  foreach(var id in ListOfQueryId){
+                    TrendingQueries.Add(ListOfQueries.Find(item =>item.QueryId ==id));
+                  }
+              
                 return TrendingQueries;
             }
 
@@ -154,7 +153,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Query> GetQueriesByUserId(int UserId)
         {
-            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             try
             {
                 return GetQueries().Where(query => query.CreatedBy == UserId);
@@ -214,7 +213,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<QueryComment> GetComments(int QueryId)
         {
-            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            Validation.ValidateId(QueryId);
             try
             {
                 return database.GetComments().Where(comment => comment.QueryId == QueryId);

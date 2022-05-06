@@ -71,8 +71,7 @@ namespace AspireOverflow.DataAccessLayer
         public bool UpdateQuery(int QueryId, bool IsSolved, bool IsDelete)
         {
 
-            if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
-        
+            Validation.ValidateId(QueryId);
             if (IsSolved && IsDelete) throw new ArgumentException("Both parameter cannot be true at the same time");
             try
             {
@@ -95,7 +94,7 @@ namespace AspireOverflow.DataAccessLayer
 
         public Query GetQueryByID(int QueryId)
         {
-             if (QueryId <= 0) throw new ArgumentOutOfRangeException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            Validation.ValidateId(QueryId);
             Query ExistingQuery;
             try
             {

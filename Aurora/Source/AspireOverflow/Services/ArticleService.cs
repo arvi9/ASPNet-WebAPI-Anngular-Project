@@ -29,7 +29,7 @@ namespace AspireOverflow.Services
             try
             {
                 
-                article.CreatedOn = DateTime.Now;
+                Validation.SetUserDefaultPropertyValues(article);
 
                 return database.AddArticle(article);
             }
@@ -56,8 +56,7 @@ namespace AspireOverflow.Services
         }
         public bool ChangeArticleStatus(int ArticleId, int ArticleStatusID)
         {
-            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentOutOfRangeException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+            Validation.ValidateId(ArticleId);
             try
             {
                 return database.UpdateArticle(ArticleId, ArticleStatusID);
@@ -73,7 +72,7 @@ namespace AspireOverflow.Services
 
         public Article GetArticleById(int ArticleId)
         {
-            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            Validation.ValidateId(ArticleId);
             try
             {
                 return database.GetArticleByID(ArticleId);
@@ -112,9 +111,9 @@ namespace AspireOverflow.Services
                 var ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
                 var ListOfArticles = GetArticles().ToList();
                 var TrendingArticles = new List<Article>();
-                foreach (var Id in ListOfArticleId)
+                foreach (var id in ListOfArticleId)
                 {
-                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id));
+                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == id));
                 }
                 return TrendingArticles;
             }
@@ -128,7 +127,7 @@ namespace AspireOverflow.Services
 
         public Article GetArticleByUserId(int UserId)
         {
-            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             try
             {
                 return database.GetArticleByID(UserId);
@@ -223,7 +222,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<ArticleComment> GetComments(int ArticleId)
         {
-            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            Validation.ValidateId(ArticleId);
             try
             {
                 return database.GetComments().Where(comment => comment.ArticleId == ArticleId);
@@ -239,8 +238,7 @@ namespace AspireOverflow.Services
 
         public bool AddLikeToArticle(int ArticleId, int UserId)
         {
-            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(ArticleId, UserId);
             try
             {
                 if (database.GetLikes().Where(item => item.UserId == UserId && item.ArticleId == ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserID");
@@ -259,7 +257,7 @@ namespace AspireOverflow.Services
 
         public int GetLikesCount(int ArticleId)
         {
-            if (ArticleId <= 0) throw new ArgumentOutOfRangeException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            Validation.ValidateId(ArticleId);
             try
             {
                 var ArticleLikes = database.GetLikes().Count(item => item.ArticleId == ArticleId);

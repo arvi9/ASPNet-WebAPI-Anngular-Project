@@ -38,7 +38,7 @@ namespace AspireOverflow.Services
 
         public bool RemoveUser(int UserId)
         {
-           if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             try
             {
                 return database.RemoveUser(UserId);
@@ -79,7 +79,7 @@ namespace AspireOverflow.Services
 
         public User GetUsersByID(int UserId)
         {
-            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0 where UserId:{UserId}");
+            Validation.ValidateId(UserId);
             try
             {
                 return database.GetUserByID(UserId);
@@ -93,7 +93,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<User> GetUsersByUserRoleID(int UserRoleID)
         {
-            if (UserRoleID <= 0) throw new ArgumentOutOfRangeException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
+            Validation.ValidateId(UserRoleID);
             try
             {
                 return GetUsersByVerifyStatus(1).Where(user => user.UserRoleId == UserRoleID);
@@ -109,8 +109,7 @@ namespace AspireOverflow.Services
 
         public bool ChangeUserVerificationStatus(int UserId, int VerifyStatusID)
         {
-            if (UserId <= 0) throw new ArgumentOutOfRangeException($"User Id must be greater than 0  where UserId:{UserId}");
-            if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentOutOfRangeException($"Verify Status Id must be between 0 and 3 where VerifyStatusID:{VerifyStatusID}");
+            Validation.ValidateId(UserId, VerifyStatusID);
             try
             {
                 return database.UpdateUserByVerifyStatus(UserId, VerifyStatusID);
