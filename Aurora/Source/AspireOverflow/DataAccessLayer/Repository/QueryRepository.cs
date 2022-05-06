@@ -39,7 +39,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddQuery), exception, query));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddQuery()", exception, query));
 
                 throw exception;
 
@@ -61,7 +61,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(AddComment), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddComment()", exception, comment));
                 throw exception;
             }
         }
@@ -87,7 +87,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(UpdateQuery), exception, IsSolved ? IsSolved : IsDelete));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "UpdateQuery()", exception, IsSolved ? IsSolved : IsDelete));
                 throw exception;
             }
         }
@@ -104,7 +104,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQueryByID), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetQueryByID()", exception, QueryId));
                 throw exception;
             }
         }
@@ -119,7 +119,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetQueries()", exception));
 
                 throw exception;
             }
@@ -139,7 +139,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryRepository), nameof(GetComments), exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetComments()", exception));
 
                 throw exception;
             }

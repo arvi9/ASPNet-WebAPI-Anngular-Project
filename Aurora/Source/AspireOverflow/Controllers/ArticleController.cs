@@ -36,12 +36,12 @@ public class ArticleController : ControllerBase
         catch (ValidationException exception)
         {
             //HelperService.LoggerMessage - returns string for logger with detailed info
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(CreateArticle), exception, article));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateArticle(Article article)", exception, article));
             return BadRequest($"{exception.Message}\n{HelperService.PropertyList(article)}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(CreateArticle), exception, article));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateArticle(Article article)", exception, article));
             return Problem($"Error Occured while Adding Article :{HelperService.PropertyList(article)}");
         }
     }
@@ -58,13 +58,13 @@ public class ArticleController : ControllerBase
         }
         catch (ValidationException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(CreateComment), exception, comment));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateComment(ArticleComment comment)", exception, comment));
             return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
         }
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(CreateComment), exception, comment));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateComment(ArticleComment comment)", exception, comment));
             return Problem($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
         }
 
@@ -83,12 +83,12 @@ public class ArticleController : ControllerBase
         }
         catch (ArgumentException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleById), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, ArticleId));
             return Problem($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleById), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, ArticleId));
             return BadRequest($"Error Occurred while Adding like to ArticleId :{ArticleId}");
         }
     }
@@ -106,13 +106,13 @@ public class ArticleController : ControllerBase
         }
         catch (ValidationException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(UpdateArticle), exception, article));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdateArticle(Article article)", exception, article));
             return BadRequest($"{exception.Message}\n{HelperService.PropertyList(article)}");
         }
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(UpdateArticle), exception, article));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdateArticle(Article article)", exception, article));
             return Problem($"Error Occured while Adding article :{HelperService.PropertyList(article)}");
         }
 
@@ -132,12 +132,12 @@ public class ArticleController : ControllerBase
         }
         catch (ItemNotFoundException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(ChangeArticleStatus), exception, ArticleId, ArticleStatusID));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "ChangeArticleStatus(int ArticleId, int ArticleStatusID)", exception, ArticleId, ArticleStatusID));
             return NotFound($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(ChangeArticleStatus), exception, ArticleId, ArticleStatusID));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "ChangeArticleStatus(int ArticleId, int ArticleStatusID)", exception, ArticleId, ArticleStatusID));
             return Problem($"Error Occurred while updating the status of the Article :{ArticleId}");
         }
     }
@@ -154,19 +154,19 @@ public class ArticleController : ControllerBase
         }
         catch (ArgumentException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleById), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
             return Problem($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(DeleteArticleByArticleId), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
             return BadRequest($"Error Occurred while Adding like to ArticleId :{ArticleId}");
         }
     }
 
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetLatestArticles(int Range)
+    public async Task<ActionResult<IEnumerator<Article>>> GetLatestArticles(int Range=0)
     {
         try
         {
@@ -182,13 +182,13 @@ public class ArticleController : ControllerBase
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetLatestArticles), exception));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", " GetLatestArticles(int Range)", exception));
             return Problem("Error occured while processing your request");
         }
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetTrendingArticles(int Range)
+    public async Task<ActionResult> GetTrendingArticles(int Range=0)
     {
         try
         {
@@ -203,7 +203,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetTrendingArticles), exception));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetTrendingArticles(int Range)", exception));
             return Problem("Error occured while processing your request");
         }
     }
@@ -219,12 +219,12 @@ public class ArticleController : ControllerBase
         }
         catch (ItemNotFoundException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleById), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticleById(int ArticleId)", exception, ArticleId));
             return Problem($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleById), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticleById(int ArticleId)", exception, ArticleId));
             return BadRequest($"Error Occurred while getting Article with ArticleId :{ArticleId}");
         }
     }
@@ -235,31 +235,31 @@ public class ArticleController : ControllerBase
         try
         {
 
-            var Articles = _articleService.GetArticles();    // nameof(ArticleController) is a property of enum class
+            var Articles = _articleService.GetArticles();    // "ArticleController" is a property of enum class
 
             return await Task.FromResult(Ok(Articles));
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetAll), exception));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", " GetAll()", exception));
             return Problem("Error occured while processing your request");
         }
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetArticleByUserId(int UserId)
+    public async Task<ActionResult<IEnumerator<Article>>> GetArticlesByUserId(int UserId)
     {
         if (UserId <= 0) return BadRequest("UserId must be greater than 0");
         try
         {
-            var ListOfArticleByUserId = _articleService.GetArticleByUserId(UserId);
+            var ListOfArticleByUserId = _articleService.GetArticlesByUserId(UserId);
 
             return await Task.FromResult(Ok(ListOfArticleByUserId));
         }
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleByUserId), exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController","GetArticlesByUserId(int UserId)", exception, UserId));
             return Problem($"Error Occured while processing your request with UserId in Articles :{UserId}");
         }
 
@@ -279,7 +279,7 @@ public class ArticleController : ControllerBase
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticlesByTitle), exception, Title));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByTitle(string Title)", exception, Title));
             return Problem($"Error Occured while processing your request with Title :{Title}");
 
         }
@@ -302,7 +302,7 @@ public class ArticleController : ControllerBase
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticlesByAuthor), exception, AuthorName));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByAuthor(string AuthorName)", exception, AuthorName));
             return Problem($"Error Occured while processing your request with Title :{AuthorName}");
 
         }
@@ -324,7 +324,7 @@ public class ArticleController : ControllerBase
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetComments), exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", nameof(GetComments), exception, ArticleId));
             return Problem($"Error Occured while processing your request with ArticleId :{ArticleId}");
 
 

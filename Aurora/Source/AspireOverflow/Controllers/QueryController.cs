@@ -40,12 +40,12 @@ namespace AspireOverflow.Controllers
             catch (ValidationException exception)
             {
                 //HelperService.LoggerMessage - returns string for logger with detailed info
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateQuery), exception, query));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(CreateQuery), exception, query));
                 return BadRequest($"{exception.Message}\n{HelperService.PropertyList(query)}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateQuery), exception, query));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(CreateQuery), exception, query));
                 return Problem($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
             }
         }
@@ -62,12 +62,12 @@ namespace AspireOverflow.Controllers
 
             catch (ItemNotFoundException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(RemoveQueryByQueryId), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(RemoveQueryByQueryId), exception, QueryId));
                 return NotFound($"{exception.Message}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(RemoveQueryByQueryId), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(RemoveQueryByQueryId), exception, QueryId));
                 return Problem($"Error Occurred while removing query with QueryId :{QueryId}");
             }
         }
@@ -84,12 +84,12 @@ namespace AspireOverflow.Controllers
 
             catch (ItemNotFoundException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(MarkQueryAsSolved), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(MarkQueryAsSolved), exception, QueryId));
                 return NotFound($"{exception.Message}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(MarkQueryAsSolved), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(MarkQueryAsSolved), exception, QueryId));
                 return Problem($"Error Occurred while marking query as solved with QueryId :{QueryId}");
             }
         }
@@ -107,12 +107,12 @@ namespace AspireOverflow.Controllers
             }
             catch (ItemNotFoundException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQuery), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetQuery), exception, QueryId));
                 return Problem($"{exception.Message} with QueryId:{QueryId}");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQuery), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetQuery), exception, QueryId));
                 return BadRequest($"Error Occurred while getting query with QueryId :{QueryId}");
             }
         }
@@ -128,13 +128,13 @@ namespace AspireOverflow.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetAll), exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetAll), exception));
                 return Problem("Error occured while processing your request");
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetLatestQueries(int Range)
+        public async Task<ActionResult<IEnumerator<Query>>> GetLatestQueries(int Range=0)
         {
             try
             {
@@ -149,13 +149,13 @@ namespace AspireOverflow.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetLatestQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetLatestQueries), exception));
                 return Problem("Error occured while processing your request");
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetTrendingQueries(int Range)
+        public async Task<ActionResult> GetTrendingQueries(int Range=0)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace AspireOverflow.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetTrendingQueries), exception));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetTrendingQueries), exception));
                 return Problem("Error occured while processing your request");
             }
         }
@@ -189,7 +189,7 @@ namespace AspireOverflow.Controllers
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQueriesByUserId), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetQueriesByUserId), exception, UserId));
                 return Problem($"Error Occured while processing your request with UserId :{UserId}");
             }
 
@@ -209,7 +209,7 @@ namespace AspireOverflow.Controllers
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQueriesByTitle), exception, Title));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetQueriesByTitle), exception, Title));
                 return Problem($"Error Occured while processing your request with Title :{Title}");
 
             }
@@ -228,7 +228,7 @@ namespace AspireOverflow.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetQueriesByIsSolved), exception, IsSolved));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetQueriesByIsSolved), exception, IsSolved));
                 return Problem($"Error Occured while processing your request with IsSolved :{IsSolved}");
 
             }
@@ -247,13 +247,13 @@ namespace AspireOverflow.Controllers
             }
             catch (ValidationException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateComment), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(CreateComment), exception, comment));
                 return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(CreateComment), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(CreateComment), exception, comment));
                 return Problem($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
             }
 
@@ -271,7 +271,7 @@ namespace AspireOverflow.Controllers
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(QueryController), nameof(GetComments), exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", nameof(GetComments), exception, QueryId));
                 return Problem($"Error Occured while processing your request with QueryId :{QueryId}");
 
 

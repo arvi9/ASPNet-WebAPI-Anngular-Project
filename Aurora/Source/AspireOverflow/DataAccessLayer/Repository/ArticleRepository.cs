@@ -31,7 +31,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(AddArticle), exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle()", exception, article));
 
                 throw exception;
 
@@ -49,7 +49,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(AddArticle), exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle()", exception, article));
 
                 throw exception;
 
@@ -75,7 +75,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(UpdateArticle), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle()", exception));
                 throw exception;
             }
         }
@@ -95,7 +95,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(DeleteArticle), exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticle()", exception, ArticleId));
                 throw exception;
             }
         }
@@ -110,7 +110,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(GetArticleByID), exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticleByID()", exception, ArticleId));
                 throw exception;
             }
         }
@@ -126,7 +126,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(GetArticles), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticles()", exception));
 
                 throw exception;
             }
@@ -146,7 +146,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(AddComment), exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddComment()", exception, comment));
 
                 throw exception;
 
@@ -166,7 +166,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(GetComments), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetComments()", exception));
 
                 throw exception;
             }
@@ -185,7 +185,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(AddLike), exception, like));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddLike()", exception, like));
 
                 throw exception;
             }
@@ -203,7 +203,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(GetLikes), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetLikes()", exception));
 
                 throw exception;
             }

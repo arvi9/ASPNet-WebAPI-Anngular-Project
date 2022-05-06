@@ -36,7 +36,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(CreateArticle), exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle()", exception, article));
                 return false;
             }
         }
@@ -60,7 +60,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(CreateArticle), exception, article));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle()", exception, article));
                 return false;
             }
         }
@@ -76,7 +76,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(ChangeArticleStatus), exception), ArticleId, ArticleStatusID);
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "ChangeArticleStatus()", exception), ArticleId, ArticleStatusID);
 
                 throw exception;
             }
@@ -93,9 +93,9 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(DeleteArticleByArticleId), exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "DeleteArticleByArticleId()", exception, ArticleId));
 
-                throw exception;
+               return false;
             }
         }
         public Article GetArticleById(int ArticleId)
@@ -108,7 +108,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetArticleById), exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById()", exception, ArticleId));
 
                 throw exception;
             }
@@ -125,7 +125,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetLatestArticles), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetLatestArticles()", exception));
                 throw exception;
             }
         }
@@ -147,23 +147,23 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetTrendingArticles), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetTrendingArticles()", exception));
                 throw exception;
             }
         }
 
 
-        public Article GetArticleByUserId(int UserId)
+        public IEnumerable<Article> GetArticlesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                return database.GetArticleByID(UserId);
+                return GetArticles().Where(item=>item.CreatedBy==UserId).ToList();
             }
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetArticleById), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById()", exception, UserId));
 
                 throw exception;
             }
@@ -182,7 +182,7 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetArticles), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
                 throw exception;
             }
 
@@ -200,7 +200,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetArticlesByTitle), exception, Title));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle()", exception, Title));
 
                 throw exception;
             }
@@ -219,7 +219,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
 
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetArticlesByTitle), exception, AuthorName));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle()", exception, AuthorName));
 
                 throw exception;
             }
@@ -236,7 +236,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(ChangeArticleStatus), exception), ArticleStatusID);
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "ChangeArticleStatus()", exception), ArticleStatusID);
 
                 throw exception;
             }
@@ -258,7 +258,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(CreateComment), exception), comment);
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateComment()", exception), comment);
                 return false;
             }
         }
@@ -274,7 +274,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetComments), exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetComments()", exception, ArticleId));
                 throw exception;
             }
         }
@@ -294,8 +294,8 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(AddLikeToArticle), exception, ArticleId, UserId));
-                throw;
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle()", exception, ArticleId, UserId));
+                return false;
             }
         }
 
@@ -310,7 +310,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(GetLikesCount), exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetLikesCount()", exception));
                 throw;
             }
         }

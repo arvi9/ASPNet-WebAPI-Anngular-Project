@@ -1,7 +1,7 @@
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Security;
-
+using Microsoft.AspNetCore.Identity;
 using AspireOverflow.Models;
 
 namespace AspireOverflow.Services
@@ -31,8 +31,8 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(CreateUser), exception, user));
-                throw exception;
+                _logger.LogError(HelperService.LoggerMessage("UserService", "CreateUser", exception, user));
+                return false;
             }
         }
 
@@ -45,12 +45,27 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(RemoveUser), exception, UserId));
-                throw;
+                _logger.LogError(HelperService.LoggerMessage("UserService", "RemoveUser", exception, UserId));
+                return false;
             }
 
         }
 
+        public  User GetUser(string Email, string Password)  //Method used in Token Controller
+        {
+            try
+            {
+                var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
+                var User = GetUsers().Where(user => user.EmailAddress == Email).First();
+                return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new InvalidDataException("Password doesn't match");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService()","GetUser",exception,Email));
+              
+                throw exception;
+            }
+        }
         public IEnumerable<User> GetUsers()
         {
             try
@@ -59,7 +74,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(GetUsers), exception));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsers", exception));
                 throw;
             }
         }
@@ -72,7 +87,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(GetUsersByVerifyStatus), exception, VerifyStatusID));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByVerifyStatus", exception, VerifyStatusID));
                 throw;
             }
         }
@@ -86,7 +101,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(GetUsersByID), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByID", exception, UserId));
                 throw;
             }
         }
@@ -100,7 +115,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(GetUsersByUserRoleID), exception, UserRoleID));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByUserRoleID", exception, UserRoleID));
 
                 throw;
             }
@@ -117,7 +132,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(ChangeUserVerificationStatus), exception, $"UserId:{UserId},VerifyStatusID:{VerifyStatusID}"));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "ChangeUserVerificationStatus", exception, $"UserId:{UserId},VerifyStatusID:{VerifyStatusID}"));
                 throw exception;
             }
         }
@@ -132,7 +147,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserService), nameof(GetUsersByIsReviewer), exception, IsReviewer));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByIsReviewer", exception, IsReviewer));
                 throw;
             }
         }

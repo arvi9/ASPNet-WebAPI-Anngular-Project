@@ -36,7 +36,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserRepository), nameof(CreateUser), exception, user));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser()", exception, user));
                 throw;
 
             }
@@ -57,7 +57,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserRepository), nameof(RemoveUser), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "RemoveUser()", exception, UserId));
                 throw;
 
             }
@@ -74,7 +74,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserRepository), nameof(GetUserByID), exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUserByID()", exception, UserId));
                 throw exception;
             }
         }
@@ -89,7 +89,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserRepository), nameof(GetUsers), exception));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsers()", exception));
                 throw exception;
             }
         }
@@ -108,7 +108,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserRepository), nameof(UpdateUserByVerifyStatus), exception, $"UserId : {UserId},VerifyStatusID :{VerifyStatusID}"));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "UpdateUserByVerifyStatus()", exception, $"UserId : {UserId},VerifyStatusID :{VerifyStatusID}"));
                 throw;
 
             }
@@ -128,7 +128,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(UserRepository), nameof(UpdateUserByReviewer), exception, $"UserId : {UserId},IsReviewer :{IsReviewer}"));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "UpdateUserByReviewer()", exception, $"UserId : {UserId},IsReviewer :{IsReviewer}"));
                 throw;
 
             }

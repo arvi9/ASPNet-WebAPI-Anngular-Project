@@ -1,13 +1,13 @@
-using Microsoft.EntityFrameworkCore;
+
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using AspireOverflow.Models;
+
 using AspireOverflow.DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
-using AspireOverflow.Security;
-using Microsoft.AspNetCore.Identity;
+
+
 using AspireOverflow.Services;
 
 namespace AspireOverflow.Controllers
@@ -20,21 +20,22 @@ namespace AspireOverflow.Controllers
         public IConfiguration _configuration;
         private readonly AspireOverflowContext _context;
         private ILogger<TokenController> _logger;
-        public TokenController(IConfiguration config, AspireOverflowContext context,ILogger<TokenController> logger)
+        private UserService _userService;
+        public TokenController(IConfiguration config, UserService service,ILogger<TokenController> logger)
         {
-            _configuration = config ?? throw new NullReferenceException();
-            _context = context?? throw new NullReferenceException();
-            _logger=logger?? throw new NullReferenceException();
+            _configuration = config;
+          
+            _logger=logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AuthToken(String Email, string Password)
+        public  IActionResult AuthToken(String Email, string Password)
         {
 
             if (Email == null && Password == null) return BadRequest();
             try
             {
-                var user = await GetUser(Email, Password);
+                var user =  _userService.GetUser(Email, Password);
 
                 if (user != null)
                 {
@@ -67,26 +68,12 @@ namespace AspireOverflow.Controllers
                 }
             }
             catch (Exception exception)
-            {   _logger.LogError(HelperService.LoggerMessage(nameof(TokenController),nameof(AuthToken),exception,Email));
-                return BadRequest("Invalid credentials");
+            {   _logger.LogError(HelperService.LoggerMessage("TokenController",nameof(AuthToken),exception,Email));
+                return BadRequest("Error Occured while Validating your  credentials");
             }
 
         }
 
-        private async Task<User> GetUser(string Email, string Password)
-        {
-            try
-            {
-                var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
-                var User = await _context.Users.FirstOrDefaultAsync(user => user.EmailAddress == Email);
-                return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new InvalidDataException("Password doesn't match");
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage(nameof(TokenController),nameof(GetUser),exception,Email));
-              
-                throw exception;
-            }
-        }
+
     }
 }
