@@ -6,7 +6,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     public interface IArticleService
     {
         bool CreateArticle(Article article);
-        bool DeleteArticleByArticleIdAndArticleStatusID(int ArticleId,int ArticleStatusID);
+        bool DeleteArticleByArticleId(int ArticleId);
         bool UpdateArticleStatus(int ArticleID,int ArticleStatusID);
         bool AddLikeToArticle(int UserID, int ArticleID);
 

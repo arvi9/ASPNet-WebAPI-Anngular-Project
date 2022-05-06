@@ -6,9 +6,10 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     public interface IArticleRepository : IArticleComment, IArticleLike
     {
         bool AddArticle(Article article);
-        bool UpdateArticle(int ArticleId, int ArticleStatusID);
+        bool UpdateArticle(int ArticleId, int ArticleStatusID,int UpdatedByUserId);
+        bool UpdateArticle(Article article);
         Article GetArticleByID(int ArticleId);
-
+   bool DeleteArticle(int ArticleId);
 
 
         IEnumerable<Article> GetArticles();

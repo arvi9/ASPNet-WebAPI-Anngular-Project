@@ -13,8 +13,8 @@ namespace AspireOverflow.DataAccessLayer
         private ILogger<ArticleService> _logger;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleService> logger)
         {
-            _context = context ;
-            _logger = logger ;
+            _context = context;
+            _logger = logger;
 
         }
 
@@ -38,14 +38,35 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        public bool UpdateArticle(int ArticleId, int ArticleStatusID)
+        public bool UpdateArticle(Article article)
+        {
+            Validation.ValidateArticle(article);
+            try
+            {
+                _context.Articles.Update(article);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(AddArticle), exception, article));
+
+                throw exception;
+
+            }
+        }
+
+        public bool UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)
         {
 
-            Validation.ValidateId(ArticleId, ArticleStatusID);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
                 var ExistingArticle = GetArticleByID(ArticleId);
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
+                ExistingArticle.UpdatedOn = DateTime.Now;
+                ExistingArticle.UpdatedBy = UpdatedByUserId;
 
 
                 _context.Articles.Update(ExistingArticle);
@@ -59,9 +80,28 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        public bool DeleteArticle(int ArticleId)
+        {
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            try
+            {
+                var ExistingDraftArticle = GetArticles().Where(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1).First();
+                if (ExistingDraftArticle == null) throw new ItemNotFoundException($"No Matching data found with ArticleId:{ArticleId}");
+
+                _context.Articles.Remove(ExistingDraftArticle);
+                _context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleRepository), nameof(DeleteArticle), exception, ArticleId));
+                throw exception;
+            }
+        }
         public Article GetArticleByID(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             Article ExistingArticle;
             try
             {
@@ -135,7 +175,8 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool AddLike(ArticleLike like)
         {
-            Validation.ValidateId(like.ArticleId, like.UserId);
+            if (like.ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{like.ArticleId}");
+            if (like.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{like.UserId}");
             try
             {
                 _context.ArticleLikes.Add(like);
@@ -150,10 +191,10 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        
+
         public IEnumerable<ArticleLike> GetLikes()
         {
-           
+
             try
             {
                 var ListOfArticleLikes = _context.ArticleLikes.ToList();

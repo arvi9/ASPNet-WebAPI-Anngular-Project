@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
-
+using AspireOverflow.CustomExceptions;
 using AspireOverflow.DataAccessLayer.Interfaces;
 
 
@@ -10,7 +10,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Services
 {
 
-    public class ArticleService
+    public class ArticleService 
     {
         private static IArticleRepository database;
 
@@ -28,8 +28,8 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                
-                Validation.SetUserDefaultPropertyValues(article);
+
+                article.CreatedOn = DateTime.Now;
 
                 return database.AddArticle(article);
             }
@@ -41,25 +41,38 @@ namespace AspireOverflow.Services
             }
         }
 
-        public bool AddCommentToArticle(ArticleComment comment)
+
+
+        public bool UpdateArticle(Article article, int CurrentUser)
         {
-            Validation.ValidateArticleComment(comment);
+
+            if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                return database.AddComment(comment);
+                var ExistingArticle = GetArticlesByArticleStatusId(1).Where(Item => Item.ArtileId == article.ArtileId).First();
+                if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
+                article.UpdatedOn = DateTime.Now;
+                article.UpdatedBy = CurrentUser;
+                ExistingArticle = article;
+
+                return database.UpdateArticle(ExistingArticle);
             }
+
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(AddCommentToArticle), exception), comment);
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(CreateArticle), exception, article));
                 return false;
             }
         }
-        public bool ChangeArticleStatus(int ArticleId, int ArticleStatusID)
+
+
+        public bool ChangeArticleStatus(int ArticleId, int ArticleStatusID, int UpdatedByUserId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
-                return database.UpdateArticle(ArticleId, ArticleStatusID);
+                return database.UpdateArticle(ArticleId, ArticleStatusID, UpdatedByUserId);
             }
             catch (Exception exception)
             {
@@ -70,9 +83,24 @@ namespace AspireOverflow.Services
 
         }
 
+        public bool DeleteArticleByArticleId(int ArticleId)
+        {
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            try
+            {  if(GetArticlesByArticleStatusId(1).Where(item =>item.ArtileId==ArticleId).First() ==null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
+                return database.DeleteArticle(ArticleId); //only Draft article will be deleted
+            }
+            catch (Exception exception)
+            {
+
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(DeleteArticleByArticleId), exception, ArticleId));
+
+                throw exception;
+            }
+        }
         public Article GetArticleById(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 return database.GetArticleByID(ArticleId);
@@ -111,9 +139,9 @@ namespace AspireOverflow.Services
                 var ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
                 var ListOfArticles = GetArticles().ToList();
                 var TrendingArticles = new List<Article>();
-                foreach (var id in ListOfArticleId)
+                foreach (var Id in ListOfArticleId)
                 {
-                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == id));
+                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id));
                 }
                 return TrendingArticles;
             }
@@ -127,7 +155,7 @@ namespace AspireOverflow.Services
 
         public Article GetArticleByUserId(int UserId)
         {
-            Validation.ValidateId(UserId);
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 return database.GetArticleByID(UserId);
@@ -198,6 +226,22 @@ namespace AspireOverflow.Services
 
         }
 
+        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID)
+        {
+
+            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+            try
+            {
+                return GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage(nameof(ArticleService), nameof(ChangeArticleStatus), exception), ArticleStatusID);
+
+                throw exception;
+            }
+
+        }
 
 
 
@@ -222,7 +266,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<ArticleComment> GetComments(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 return database.GetComments().Where(comment => comment.ArticleId == ArticleId);
@@ -238,7 +282,8 @@ namespace AspireOverflow.Services
 
         public bool AddLikeToArticle(int ArticleId, int UserId)
         {
-            Validation.ValidateId(ArticleId, UserId);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 if (database.GetLikes().Where(item => item.UserId == UserId && item.ArticleId == ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserID");
@@ -257,7 +302,7 @@ namespace AspireOverflow.Services
 
         public int GetLikesCount(int ArticleId)
         {
-            Validation.ValidateId(ArticleId);
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 var ArticleLikes = database.GetLikes().Count(item => item.ArticleId == ArticleId);

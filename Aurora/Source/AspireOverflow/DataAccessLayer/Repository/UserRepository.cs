@@ -46,7 +46,7 @@ namespace AspireOverflow.DataAccessLayer
         //Admin rejected users only be deleted
         public bool RemoveUser(int UserId)
         {
-            Validation.ValidateId(UserId);
+           if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {   var User_NotVerified =GetUserByID(UserId);
                 if(User_NotVerified.VerifyStatusID==3){
@@ -65,7 +65,7 @@ namespace AspireOverflow.DataAccessLayer
         }
         public User GetUserByID(int UserId)
         {
-            Validation.ValidateId(UserId);
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             User user;
             try
             {
@@ -96,7 +96,8 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool UpdateUserByVerifyStatus(int UserId, int VerifyStatusID)
         {
-            Validation.ValidateId(UserId, VerifyStatusID);
+           if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+           if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
             try
             {
                 var ExistingUser = GetUserByID(UserId);
@@ -116,7 +117,7 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool UpdateUserByReviewer(int UserId, bool IsReviewer)
         {
-            Validation.ValidateId(UserId);
+           if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 var ExistingUser = GetUserByID(UserId);
