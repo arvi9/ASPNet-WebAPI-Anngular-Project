@@ -12,8 +12,8 @@ namespace AspireOverflow.Controllers;
 [Route("[controller]/[action]")]
 public class ArticleController : ControllerBase
 {
-    internal static ILogger<ArticleController> _logger;
-    private static ArticleService _articleService;
+    private ILogger<ArticleController> _logger;
+    private ArticleService _articleService;
 
     public ArticleController(ILogger<ArticleController> logger, ArticleService articleService)
     {
@@ -31,7 +31,7 @@ public class ArticleController : ControllerBase
         if (article == null) return BadRequest("Null value is not supported");
         try
         {
-         
+
             //Development.Web is Enum constants which indicated the request approaching team.
             return _articleService.CreateArticle(article) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Article :{HelperService.PropertyList(article)}");
         }
@@ -44,7 +44,7 @@ public class ArticleController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(CreateArticle), exception, article));
-            return BadRequest($"Error Occured while Adding Article :{HelperService.PropertyList(article)}");
+            return Problem($"Error Occured while Adding Article :{HelperService.PropertyList(article)}");
         }
     }
 
@@ -67,7 +67,7 @@ public class ArticleController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(CreateComment), exception, comment));
-            return BadRequest($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
+            return Problem($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
         }
 
     }
@@ -77,15 +77,20 @@ public class ArticleController : ControllerBase
     {
         try
         {
-            var articles = _articleService.GetLatestArticles();
-           
-               return Range > 0 ? await Task.FromResult(Ok(articles.ToList().GetRange(1,Range))):await Task.FromResult(Ok(articles));
-          
+            var Articles = _articleService.GetTrendingArticles().ToList();
+
+            if (Range <= Articles.Count())
+            {
+                Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
+                return await Task.FromResult(Ok(Articles));
+            }
+            else return BadRequest("Range limit exceeded");
+
         }
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetLatestArticles), exception));
-            return BadRequest("Error occured while processing your request");
+            return Problem("Error occured while processing your request");
         }
     }
 
@@ -94,15 +99,19 @@ public class ArticleController : ControllerBase
     {
         try
         {
-            var Articles = _articleService.GetTrendingArticles();
-           
+            var Articles = _articleService.GetTrendingArticles().ToList();
 
-            return Range > 0 ? await Task.FromResult(Ok(Articles.ToList().GetRange(1,Range))):await Task.FromResult(Ok(Articles));
+            if (Range <= Articles.Count())
+            {
+                Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
+                return await Task.FromResult(Ok(Articles));
+            }
+            else return BadRequest("Range limit exceeded");
         }
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetTrendingArticles), exception));
-            return BadRequest("Error occured while processing your request");
+            return Problem("Error occured while processing your request");
         }
     }
 
@@ -118,7 +127,7 @@ public class ArticleController : ControllerBase
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleById), exception, ArticleId));
-            return BadRequest($"{exception.Message}");
+            return Problem($"{exception.Message}");
         }
         catch (Exception exception)
         {
@@ -134,13 +143,13 @@ public class ArticleController : ControllerBase
         {
 
             var Articles = _articleService.GetArticles();    // nameof(ArticleController) is a property of enum class
-           
+
             return await Task.FromResult(Ok(Articles));
         }
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetAll), exception));
-            return BadRequest("Error occured while processing your request");
+            return Problem("Error occured while processing your request");
         }
     }
 
@@ -151,14 +160,14 @@ public class ArticleController : ControllerBase
         try
         {
             var ListOfArticleByUserId = _articleService.GetArticleByUserId(UserId);
-           
+
             return await Task.FromResult(Ok(ListOfArticleByUserId));
         }
 
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticleByUserId), exception, UserId));
-            return BadRequest($"Error Occured while processing your request with UserId in Articles :{UserId}");
+            return Problem($"Error Occured while processing your request with UserId in Articles :{UserId}");
         }
 
     }
@@ -171,14 +180,14 @@ public class ArticleController : ControllerBase
         try
         {
             var ListOfArticlesByTitle = _articleService.GetArticlesByTitle(Title);
-          
+
             return await Task.FromResult(Ok(ListOfArticlesByTitle));
         }
 
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticlesByTitle), exception, Title));
-            return BadRequest($"Error Occured while processing your request with Title :{Title}");
+            return Problem($"Error Occured while processing your request with Title :{Title}");
 
         }
 
@@ -201,7 +210,7 @@ public class ArticleController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(ChangeArticleStatus), exception, ArticleId, ArticleStatusID));
-            return BadRequest($"Error Occurred while updating the status of the Article :{ArticleId}");
+            return Problem($"Error Occurred while updating the status of the Article :{ArticleId}");
         }
     }
 
@@ -213,14 +222,14 @@ public class ArticleController : ControllerBase
         try
         {
             var ListOfArticlesByAuthor = _articleService.GetArticlesByTitle(AuthorName);
-        
+
             return await Task.FromResult(Ok(ListOfArticlesByAuthor));
         }
 
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetArticlesByAuthor), exception, AuthorName));
-            return BadRequest($"Error Occured while processing your request with Title :{AuthorName}");
+            return Problem($"Error Occured while processing your request with Title :{AuthorName}");
 
         }
 
@@ -235,14 +244,14 @@ public class ArticleController : ControllerBase
         try
         {
             var ListOfComments = _articleService.GetComments(ArticleId);
-          
+
             return await Task.FromResult(Ok(ListOfComments));
         }
 
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage(nameof(ArticleController), nameof(GetComments), exception, ArticleId));
-            return BadRequest($"Error Occured while processing your request with ArticleId :{ArticleId}");
+            return Problem($"Error Occured while processing your request with ArticleId :{ArticleId}");
 
 
         }

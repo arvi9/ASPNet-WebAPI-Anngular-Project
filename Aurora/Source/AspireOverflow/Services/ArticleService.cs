@@ -29,7 +29,7 @@ namespace AspireOverflow.Services
             try
             {
                 
-                Validation.SetUserDefaultPropertyValues(article);
+                article.CreatedOn = DateTime.Now;
 
                 return database.AddArticle(article);
             }
@@ -112,9 +112,9 @@ namespace AspireOverflow.Services
                 var ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
                 var ListOfArticles = GetArticles().ToList();
                 var TrendingArticles = new List<Article>();
-                foreach (var id in ListOfArticleId)
+                foreach (var Id in ListOfArticleId)
                 {
-                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == id));
+                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id));
                 }
                 return TrendingArticles;
             }

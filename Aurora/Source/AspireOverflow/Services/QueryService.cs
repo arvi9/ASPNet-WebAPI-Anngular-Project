@@ -20,7 +20,7 @@ namespace AspireOverflow.Services
 
         public QueryService(ILogger<QueryService> logger)
         {
-            _logger = logger ;
+            _logger = logger;
             database = QueryRepositoryFactory.GetQueryRepositoryObject(logger);
 
         }
@@ -31,7 +31,7 @@ namespace AspireOverflow.Services
             Validation.ValidateQuery(query);
             try
             {
-                Validation.SetUserDefaultPropertyValues(query);
+                query.CreatedOn = DateTime.Now;
                 return database.AddQuery(query);
             }
             catch (Exception exception)
@@ -125,20 +125,21 @@ namespace AspireOverflow.Services
 
 
 
-        public  IEnumerable<Query> GetTrendingQueries()
+        public IEnumerable<Query> GetTrendingQueries()
         {
             try
             {
-               
+
                 var data = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
 
-                 var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
+                var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
                 var ListOfQueries = GetQueries(false).ToList();
                 var TrendingQueries = new List<Query>();
-                  foreach(var id in ListOfQueryId){
-                    TrendingQueries.Add(ListOfQueries.Find(item =>item.QueryId ==id));
-                  }
-              
+                foreach (var id in ListOfQueryId)
+                {
+                    TrendingQueries.Add(ListOfQueries.Find(item => item.QueryId == id));
+                }
+
                 return TrendingQueries;
             }
 
