@@ -26,7 +26,7 @@ public class ArticleController : ControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<Article>> CreateArticle(Article article)
+    public async Task<ActionResult> CreateArticle(Article article)
     {
         if (article == null) return BadRequest("Null value is not supported");
         try
@@ -72,7 +72,7 @@ public class ArticleController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult<Article>> AddLikeToArticle(int ArticleId)
+    public async Task<ActionResult> AddLikeToArticle(int ArticleId)
     {
         if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
         var CurrentUserId = User.FindFirst("userId").Value;
@@ -145,7 +145,7 @@ public class ArticleController : ControllerBase
 
     
     [HttpDelete]
-    public async Task<ActionResult<Article>> DeleteArticleByArticleId(int ArticleId)
+    public async Task<ActionResult> DeleteArticleByArticleId(int ArticleId)
     {
         if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
         try
@@ -166,7 +166,7 @@ public class ArticleController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetLatestArticles(int Range=0)
+    public async Task<ActionResult> GetLatestArticles(int Range=0)
     {
         try
         {
@@ -210,12 +210,12 @@ public class ArticleController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult<Article>> GetArticleById(int ArticleId)
+    public async Task<ActionResult> GetArticleById(int ArticleId)
     {
         if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
         try
         {
-            return await Task.FromResult(_articleService.GetArticleById(ArticleId));
+            return await Task.FromResult(Ok(_articleService.GetArticleById(ArticleId)));
         }
         catch (ItemNotFoundException exception)
         {
@@ -230,12 +230,12 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetAll()
+    public async Task<ActionResult> GetAll()
     {
         try
         {
 
-            var Articles = _articleService.GetArticles();    // "ArticleController" is a property of enum class
+            var Articles = _articleService.GetListOfArticles();    // "ArticleController" is a property of enum class
 
             return await Task.FromResult(Ok(Articles));
         }
@@ -247,7 +247,7 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetArticlesByUserId(int UserId)
+    public async Task<ActionResult> GetArticlesByUserId(int UserId)
     {
         if (UserId <= 0) return BadRequest("UserId must be greater than 0");
         try
@@ -267,7 +267,7 @@ public class ArticleController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetArticlesByTitle(string Title)
+    public async Task<ActionResult> GetArticlesByTitle(string Title)
     {
         if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
         try
@@ -290,7 +290,7 @@ public class ArticleController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<Article>>> GetArticlesByAuthor(string AuthorName)
+    public async Task<ActionResult> GetArticlesByAuthor(string AuthorName)
     {
         if (String.IsNullOrEmpty(AuthorName)) return BadRequest("Author Name can't be null");
         try

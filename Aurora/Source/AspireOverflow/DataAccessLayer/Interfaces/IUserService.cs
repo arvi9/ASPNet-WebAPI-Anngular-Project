@@ -5,17 +5,17 @@ namespace AspireOverflow.DataAccessLayer.Interfaces{
 {
     public bool CreateUser(User user);
 
-    public IEnumerable<User> GetUsers();
+    public IEnumerable<Object> GetUsers();
 
-    public IEnumerable<User> GetUsersByVerifyStatus(int VerifyStatusID);
+    public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID);
 
-    public User GetUsersByID(int UserID);
+    public object GetUserByID(int UserID);
 
-    public IEnumerable<User> GetUsersByUserRoleID(int UserRoleID);
+    public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID);
 
     public  bool ChangeUserVerificationStatus(int UserID,int VerifyStatusID);
 
-    public IEnumerable<User> GetUsersByIsReviewer(bool IsReviewer);
+    public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer);
     
 }
 }

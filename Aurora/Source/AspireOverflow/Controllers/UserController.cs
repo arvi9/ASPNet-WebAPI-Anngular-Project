@@ -92,13 +92,13 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpGet][Authorize]
-    public async Task<ActionResult<User>> GetUser()
+    [HttpGet]
+    public async Task<ActionResult> GetUser(int UserId)
     {
-        string UserId = User.FindFirst("UserId").Value;
+        //string UserId = User.FindFirst("UserId").Value;
         try
         {   
-              var User = _UserService.GetUsersByID(Convert.ToInt32(UserId));
+              var User = _UserService.GetUserByID(UserId);
 
                 return await Task.FromResult(Ok(User));
            

@@ -8,7 +8,7 @@ namespace AspireOverflow.Services
 {
 
 
-    public class UserService : IUserService
+    public class UserService
     {
         private static IUserRepository database;
 
@@ -66,7 +66,7 @@ namespace AspireOverflow.Services
                 throw exception;
             }
         }
-        public IEnumerable<User> GetUsers()
+        private IEnumerable<User> GetUsers()
         {
             try
             {
@@ -92,12 +92,24 @@ namespace AspireOverflow.Services
             }
         }
 
-        public User GetUsersByID(int UserId)
+        public object GetUserByID(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                return database.GetUserByID(UserId);
+                var User=database.GetUserByID(UserId);
+                return new {
+                    UserId=User.UserId,
+                    Name=User.FullName,
+                    EmployeeId=User.AceNumber,
+                    Email=User.EmailAddress,
+                    DateOfBirth=User.DateOfBirth,
+                    Designation=User.Designation,
+                    Department=User.Designation.Department.DepartmentName,
+                    Gender=User.Gender.Name,
+                    IsReviewer=User.IsReviewer
+
+                };
             }
             catch (Exception exception)
             {

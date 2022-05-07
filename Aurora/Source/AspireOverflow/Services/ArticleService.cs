@@ -49,7 +49,7 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                var ExistingArticle = GetArticlesByArticleStatusId(1).Where(Item => Item.ArtileId == article.ArtileId).First();
+                var ExistingArticle = GetArticles().Where(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID==1).First();
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
                 article.UpdatedOn = DateTime.Now;
                 article.UpdatedBy = CurrentUser;
@@ -87,7 +87,7 @@ namespace AspireOverflow.Services
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
-            {  if(GetArticlesByArticleStatusId(1).Where(item =>item.ArtileId==ArticleId).First() ==null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
+            {  if(GetArticles().Where(item =>item.ArtileId==ArticleId && item.ArticleStatusID==1).First() ==null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
                 return database.DeleteArticle(ArticleId); //only Draft article will be deleted
             }
             catch (Exception exception)
@@ -98,12 +98,20 @@ namespace AspireOverflow.Services
                return false;
             }
         }
-        public Article GetArticleById(int ArticleId)
+        public object GetArticleById(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                return database.GetArticleByID(ArticleId);
+                var article= database.GetArticleByID(ArticleId);
+                return new {
+                    articleId=article.ArtileId,
+                    PublishedDate =article.Datetime,
+                    title=article.Title,
+                    content=article.Content,
+                    Likes= GetLikesCount(article.ArtileId),
+                    comments=GetComments(article.ArtileId) 
+                };
             }
             catch (Exception exception)
             {
@@ -115,12 +123,17 @@ namespace AspireOverflow.Services
 
         }
 
-        public IEnumerable<Article> GetLatestArticles()
+        public IEnumerable<object> GetLatestArticles()
         {
             try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.CreatedOn);
-                return ListOfArticles;
+                return ListOfArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
             }
 
             catch (Exception exception)
@@ -158,12 +171,19 @@ namespace AspireOverflow.Services
         }
 
 
-        public IEnumerable<Article> GetArticlesByUserId(int UserId)
+        public IEnumerable<object> GetArticlesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                return GetArticles().Where(item=>item.CreatedBy==UserId).ToList();
+                var ListOfArticles= GetArticles().Where(item=>item.CreatedBy==UserId).ToList();
+                 return ListOfArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
+                
             }
             catch (Exception exception)
             {
@@ -176,7 +196,7 @@ namespace AspireOverflow.Services
         }
 
 
-        public IEnumerable<Article> GetArticles()
+        private IEnumerable<Article> GetArticles()
         {
 
             try
@@ -194,13 +214,43 @@ namespace AspireOverflow.Services
 
         }
 
+        
+        public IEnumerable<Object> GetListOfArticles()
+        {
 
-        public IEnumerable<Article> GetArticlesByTitle(string Title)
+            try
+            {
+                var ListOfArticles = database.GetArticles();
+               return ListOfArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
+            }
+
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
+                throw exception;
+            }
+
+
+        }
+
+
+        public IEnumerable<object> GetArticlesByTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
-                return GetArticles().Where(article => article.Title.Contains(Title));
+                var ListOfArticles= GetArticles().Where(article => article.Title.Contains(Title));
+                 return ListOfArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
             }
             catch (Exception exception)
             {
@@ -214,12 +264,18 @@ namespace AspireOverflow.Services
 
 
 
-        public IEnumerable<Article> GetArticlesByAuthor(string AuthorName)
+        public IEnumerable<object> GetArticlesByAuthor(string AuthorName)
         {
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentNullException("AuthorName value can't be null");
             try
             {
-                return GetArticles().Where(article => article.User.FullName.Contains(AuthorName));
+                var ListOfArticles= GetArticles().Where(article => article.User.FullName.Contains(AuthorName));
+                return ListOfArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
             }
             catch (Exception exception)
             {
@@ -231,13 +287,19 @@ namespace AspireOverflow.Services
 
         }
 
-        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID)
+        public IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID)
         {
 
             if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
-                return GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
+                var ListOfArticles= GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
+                return ListOfArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
             }
             catch (Exception exception)
             {
@@ -269,12 +331,19 @@ namespace AspireOverflow.Services
         }
 
 
-        public IEnumerable<ArticleComment> GetComments(int ArticleId)
+        public IEnumerable<Object> GetComments(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                return database.GetComments().Where(comment => comment.ArticleId == ArticleId);
+                var ListOfComments= database.GetComments().Where(comment => comment.ArticleId == ArticleId);
+                return ListOfComments.Select(Item => new {
+                       CommentId = Item.ArticleCommentId,
+                    Message = Item.Comment,
+                    Name = Item.User.FullName,
+                    ArticleId = Item.ArticleId
+
+                });
 
             }
             catch (Exception exception)
