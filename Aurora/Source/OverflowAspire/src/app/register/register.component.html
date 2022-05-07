@@ -37,13 +37,11 @@
                         </div>  
                     </div>
                     <div class="col-sm-12 col-xl-6">
-                        <label class="label">Department</label>
-                        <select class="form-select mb-4 " aria-label=".form-select-sm example" name="Department">
-                            <option disabled="disabled" selected="selected">Choose option</option>
-                            <option value="1">.Net</option>
-                            <option value="2">Java</option>
-                            <option value="3">Oracle</option>
-                            <option value="3">Lamp</option>
+                        <label class="form-label">Department </label>
+                        <select name="Department" id="DepartmentName" class="form-select " (change)="filterDropdown()" name="dept" [(ngModel)]="dept">
+                            <option value="">Select the Department</option>
+                            <option *ngFor="let item of department" value={{item}}>{{item}}</option>
+
                         </select>
                     </div>
                 </div>
@@ -56,12 +54,10 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6">
-                        <label class="label">Designation</label>
-                        <select class="form-select mb-4 " aria-label=".form-select-sm example" name="Designation">
-                            <option disabled="disabled" selected="selected">Choose option</option>
-                            <option value="1">Senior Engineer</option>
-                            <option value="2">Module Lead</option>
-                            <option value="3">Team Lead</option>
+                        <label class="form-label">Designation </label>
+                        <select name="Designation" id="DesignationName" class="form-select" (change)="filterDropdown()" name="_designation" [(ngModel)]="_Designation">
+                            <option value="" >Select the Designation</option>
+                            <option *ngFor="let item of designation" value={{item.designationName}}>{{item.designationName}}</option>
                         </select>
                     </div>
                 </div>

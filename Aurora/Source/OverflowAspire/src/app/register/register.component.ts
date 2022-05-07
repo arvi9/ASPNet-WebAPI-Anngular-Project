@@ -24,10 +24,57 @@ export class RegisterComponent implements OnInit {
   }
   
 
+  
+
+  dept = '';
+  _Designation = '';
+  designation: any[] = [];
+  
+
   ngOnInit(): void {
+
+  }
+
+
+  filterDropdown() {
+
+  
+    this.designation = [];
+    for (let item of this.designationDetails) {
+      if (item.departmentName == this.dept) {
+        this.designation.push(item);
+        console.log("true")
+      }
+    }
+
+  
+
   }
   onSubmit(){
-    console.log(this.user)
+
   }
-   
+
+
+
+
+
+  department: string[] = [ 'java', 'dotnet','BFS']
+
+  designationDetails: any[] = [{
+    departmentName: 'java',
+    designationName: 'TeamLead'
+  },
+  {
+    departmentName: 'java',
+     designationName: 'Trainer'
+  }, {
+    departmentName: 'dotnet',
+    designationName: 'ModuleLead'
+  },
+  {
+    departmentName: 'dotnet',
+    designationName: 'Trainer'
+  }]
+
+
 }
