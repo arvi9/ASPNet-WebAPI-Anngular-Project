@@ -1,0 +1,30 @@
+h1,
+h2 {
+    font-weight: 700 !important
+}
+
+h3,
+h4 {
+    font-weight: 600 !important
+}
+
+h5,
+h6 {
+    font-weight: 500 !important
+}
+.LogoImg {
+    height:60px;
+    width: 60px;  
+    
+}
+  .btn-lg{
+      width:100px;
+      height:50px;
+      background-color:skyblue ;
+      border-color: skyblue;
+  }
+  .text{
+      font-size: 40px;
+      padding-left:1%;
+      color: skyblue;
+  }

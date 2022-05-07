@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div style="margin:20px;">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/Home"  routerLinkActive="active">Home</a>
+          </li>
+          <li class="breadcrumb-item active">
+              MyProfile
+          </li>
+
+      </ol>
+  </nav>
+</div>
+<div class="container">
+    <div class=" profile-card border shadow-sm">
+        <div class="row">
+            <div class="col h1 fw-bold">My Profile</div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-2"><b>Name</b></div>
+            <div class="col-md-6">{{user.fullName}}</div>
+            <div class="col-md-2"><b>Role</b></div>
+            <div class="col-md-2">User</div>
+          </div>
+         
+          
+          <div class="row mt-5">
+            <div class="col-md-2"><b>Email Address</b></div>
+            <div class="col-md-6">{{user.emailAddress}}</div>
+            <div class="col-md-2"><b>Designation</b></div>
+            <div class="col-md-2">Senior Engineer</div>
+          </div>
+          
+          <div class="row mt-5">
+            <div class="col-md-2"><b>Department</b></div>
+            <div class="col-md-6">.Net</div>
+            <div class="col-md-2"><b>Date of Birth</b></div>
+            <div class="col-md-2">{{user.dateOfBirth}}</div>
+            
+          </div>
+    </div>
+</div>
+<app-footer></app-footer>

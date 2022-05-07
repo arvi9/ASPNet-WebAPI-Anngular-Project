@@ -1,0 +1,45 @@
+<app-admin-navbar></app-admin-navbar>
+<div style="margin:20px; margin-left:13%">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="Home.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Employees
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<div class="Content" style="min-height: 100vh;">
+<app-sidenav></app-sidenav>  
+<h1>Employee Details</h1>
+<div class="Container">
+    <div >
+    <table datatable class="table table-striped row-border hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ACE Number</th>
+                <th>Email Address</th>
+                <th>Reviewer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="" *ngFor="let item of data">
+                <td>{{item.name}}</td>
+                <td>{{item.aceno}}</td>
+                <td>{{item.email}}</td>
+                <td><input type="checkbox"></td>
+                <td><button>Disable</button></td>
+            </tr>
+            </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<app-footer></app-footer>

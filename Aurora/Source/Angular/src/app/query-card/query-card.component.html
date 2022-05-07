@@ -1,0 +1,21 @@
+<div class="container justify-content-center d-flex flex-wrap">
+    <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength }">
+        <div class="our-skills">
+            <div class="box-shadow">
+                <div class="icon">
+                    <img class="QueryImgIcon" src="https://cdn-icons-png.flaticon.com/512/745/745205.png">
+                </div>
+                <h4 class="card-text text-truncate">{{item.title}}</h4>
+                <p class="truncate-line-clamp">{{item.content}}</p>
+                <a class="btn btn-default readmore" href="#">Read More →</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="Container justify-content-center d-flex flex-wrap">
+    <div class="stickypagination">
+        <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+    </div>
+</div>

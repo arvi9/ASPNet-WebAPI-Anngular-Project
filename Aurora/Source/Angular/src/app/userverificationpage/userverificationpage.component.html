@@ -1,0 +1,48 @@
+<app-admin-navbar></app-admin-navbar>
+<div style="margin:20px; margin-left:13%">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="Home.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                UserVerification 
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<div class="Content" style="min-height: 100vh;">
+<app-sidenav></app-sidenav>  
+<h1>UserVerification</h1>
+<div class="Container">
+    <div >
+    <table datatable class="table table-striped row-border hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date of Birth </th>
+                <th>Employee Id</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="" *ngFor="let item of data">
+                <td>{{item.Name}}</td>
+                <td>{{item.DateOfBirth}}</td>
+                <td>{{item.ACENumber}}</td>
+                <td>{{item.Role}}</td>
+                <td>{{item.Email}}</td>
+              
+                <td><button>Accept</button><button>Reject</button></td>
+            </tr>
+            </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<app-footer></app-footer>

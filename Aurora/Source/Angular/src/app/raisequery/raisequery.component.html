@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+
+<div style="margin:20px;">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/Home"  routerLinkActive="active">Home</a>
+          </li>
+          <li class="breadcrumb-item active">
+              RaiseQuery
+          </li>
+
+      </ol>
+  </nav>
+</div>
+<div>
+<div class="container p-5 my-5 border">
+    <div class="text-center">
+        <h2>Raise Query</h2>
+    </div>
+    <br>
+    <br>
+    <form class="form-horizontal">
+        <div class="form-group">
+
+        <label class="control-label col-sm-2" for="fname"><b>Title</b></label>
+        <div class="col-sm-10">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+   <div>
+        <form #form="ngForm" (ngSubmit)="RaiseQuery()" autocomplete="off">
+            <div class="form-group"> 
+         
+                <label class="raise" for="fname"><b>Query</b></label>
+                <div class="col-sm-10"> 
+                <textarea type="text" name="raisequery" class="form-control" rows="5" cols="4"
+                    placeholder="maximum 200words" id="raisequery-name" placeholder="Raise Query here"
+                    [(ngModel)]="raisequery.query"></textarea>
+                </div>
+            </div>
+            <div class="form-group">        
+                <div class="col-sm-offset-2 col-sm-10">
+                <div class="mt-2 text-right"><button class="custom-btn btn-1 btn-2" type="submit">Raise
+                        Query</button>
+
+                </div>
+
+            </div>
+            </div>
+        </form>
+    
+    </div>
+
+

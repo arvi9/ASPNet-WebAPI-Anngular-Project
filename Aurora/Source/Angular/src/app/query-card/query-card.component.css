@@ -1,0 +1,80 @@
+.our-skills {
+    padding: 70px 0px 20px;
+    width: 300px;
+    height: 200px;
+    margin-left:30px;
+    margin-right:30px;
+    align-items:center;
+}
+.icon {
+    padding: 10px 0px;
+    background-color: #fff;
+    margin: -45px auto 20px auto;
+    border-radius: 10px;
+    width: 90px;
+}
+
+.box-shadow {
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px #a5a5a5;
+    padding: 15px;
+    border-radius: 10px;
+    float: right;
+    width:300px;
+    height:300px;
+}
+.box-shadow:hover {
+    box-shadow: 0px 0px 10px 0px #a5a5a5;
+}
+p {
+    font-size: 15px;
+    line-height: 23px;
+    color:#a09f9f;
+    text-align: center;
+}
+a {
+    color: #6b6b6b;
+    font-size: 16px;
+    float: right;
+    text-decoration: none;
+    transition: 0.5s;
+}
+h4 {
+    text-transform: uppercase;
+    text-align: center;
+    color: #6b6b6b;
+    font-weight: 500;
+}
+
+.QueryImgIcon {
+    height: 60px;
+    width: 60px;
+    margin-left: 12px;
+   
+ 
+  
+  
+}
+.readmore{
+      position: sticky;
+      top:100%
+}
+
+a:hover{
+    color: blue;
+}
+
+.truncate-line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical; 
+    width: 250px;
+    overflow: hidden;
+  }
+
+  .stickypagination{
+      position:sticky;
+      top:110%;
+
+  }

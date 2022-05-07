@@ -1,0 +1,73 @@
+:root {
+    --primary: #009cff;
+    --light: #f3f6f9;
+    --dark: #191c24;
+    --gray: #ddd;
+    --red: #ff0000;
+    --green: #7FFF00
+}
+
+body {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+:root {
+    --primary: #009cff;
+    --light: #f3f6f9;
+    --dark: #191c24
+}
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+ 
+}
+
+:root {
+    --primary: #009cff;
+    --light: #f3f6f9;
+    --dark: #191c24
+}
+
+body {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.cardRight {
+    border-style: solid
+}
+
+.cardLeft {
+    border-style: solid
+}
+
+.cardBottom {
+    border-style: solid
+}
+
+.cardLeft1 {
+    border-style: solid
+}
+
+.cardBottom1 {
+    border-style: solid
+}
+
+.Card {
+    margin-left: 600px
+}
+
+.heading{
+    text-align: center;
+}

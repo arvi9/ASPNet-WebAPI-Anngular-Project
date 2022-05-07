@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div style="margin:20px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLink="/Home" routerLinkActive="active">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Latest Articles
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<div class="Content" style="min-height: 100vh;">
+    <app-article-filter></app-article-filter>
+    <h1>Latest Articles</h1>
+    <app-article-card artsrc="https://localhost:7197/Article/GetLatestArticles"></app-article-card>
+</div>
+
+<app-footer></app-footer>

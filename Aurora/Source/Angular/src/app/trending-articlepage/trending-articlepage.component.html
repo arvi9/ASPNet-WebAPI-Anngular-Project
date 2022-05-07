@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="Content" style="min-height: 100vh;">
+    <div style="margin:20px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a routerLink="/Home"  routerLinkActive="active">Home</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    TrendingArticles
+                </li>
+      
+            </ol>
+        </nav>
+      </div>
+    <app-article-filter></app-article-filter>
+    <h1>Trending Articles</h1>
+    <app-article-card artsrc="https://localhost:7197/Article/GetTrendingArticles"></app-article-card>
+</div>
+
+<app-footer></app-footer>

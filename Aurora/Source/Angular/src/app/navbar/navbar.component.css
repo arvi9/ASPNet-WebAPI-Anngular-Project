@@ -1,0 +1,413 @@
+:root {
+    --primary: #06A3DA;
+    --secondary: #F57E57;
+    --light: #EEF9FF;
+    --dark: #091E3E
+}
+
+h1,
+h2 {
+    font-weight: 700 !important
+}
+
+h3,
+h4 {
+    font-weight: 600 !important
+}
+
+h5,
+h6 {
+    font-weight: 500 !important
+}
+
+.btn {
+    font-weight: 600;
+    transition: .5s
+}
+
+.btn-square {
+    width: 36px;
+    height: 36px
+}
+
+.btn-sm-square {
+    width: 28px;
+    height: 28px
+}
+
+.btn-lg-square {
+    width: 46px;
+    height: 46px
+}
+
+.btn-lg-square,
+.btn-sm-square,
+.btn-square {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center
+}
+
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%
+}
+
+.back-to-top {
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: Jost, sans-serif;
+    padding: 35px 15px;
+    font-size: 18px;
+    color: var(--dark);
+    outline: 0;
+    transition: .5s
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--primary)
+}
+
+@media (max-width:991.98px) {
+    .navbar-light .navbar-nav .nav-link {
+        padding: 10px 0
+    }
+}
+
+.service-item .bg-light,
+.service-item .bg-light h5,
+.service-item img,
+.team-item .team-text {
+    transition: .5s
+}
+
+.service-item:hover img {
+    transform: scale(1.15)
+}
+
+.service-item .bg-light::after,
+.team-item .team-text::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    border-radius: 100px/15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .7);
+    opacity: 0;
+    transition: .5s;
+    z-index: -1
+}
+
+.service-item:hover .bg-light::after,
+.team-item:hover .team-text::after {
+    opacity: 1
+}
+
+.price-carousel .owl-nav {
+    position: absolute;
+    width: calc(100% + 45px);
+    height: 45px;
+    top: calc(50% - 22.5px);
+    left: -22.5px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: .5s
+}
+
+.price-carousel:hover .owl-nav {
+    opacity: 1
+}
+
+.testimonial-carousel {
+    background: rgba(6, 163, 218, .85)
+}
+
+.testimonial-carousel .owl-nav {
+    position: absolute;
+    width: calc(100% + 46px);
+    height: 46px;
+    top: calc(50% - 23px);
+    left: -23px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1
+}
+
+.testimonial-carousel .owl-item img {
+    width: 120px;
+    height: 120px
+}
+
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px
+}
+
+.content {
+    margin-right: 50px;
+    margin-left: 50px
+}
+
+.container {
+    padding: 30px;
+    margin-top: -30px
+}
+
+.top {
+    padding: 5px
+}
+
+.card {
+    height: 100%;
+    width: 100%
+}
+
+.card:hover {
+    background-color: #87cefa
+}
+
+.card-title {
+    text-align: center
+}
+
+.img-content {
+    margin-left: 35px;
+    margin-right: 35px;
+    width: 10px;
+    height: 10px
+}
+
+.img {
+    width: 10px;
+    height: 10px
+}
+
+.card-text {
+    margin-left: 35px;
+    margin-right: 35px
+}
+
+.paginationcontainer {
+    align-items: center
+}
+
+.title {
+    text-align: center
+}
+
+.ans-body {
+    margin-left: 50px
+}
+
+#more {
+    display: none
+}
+
+#moreanswers {
+    display: none
+}
+
+.fa.fa-comment {
+    font-size: 36px
+}
+
+.btnpad {
+    margin-left: 100px
+}
+
+.btnpad1 {
+    margin-left: 6px
+}
+
+.form-control {
+    resize: none
+}
+
+.form-control1 {
+    resize: none;
+    width: 350px;
+    height: 150px;
+    margin-left: 180px
+}
+
+.iconArrowUpLg {
+    font-size: small;
+    height: 15px;
+    width: 15px
+}
+
+.iconArrowDownLg {
+    font-size: small;
+    height: 15px;
+    width: 15px
+}
+
+.d-flex {
+    margin-left: 5px
+}
+
+.btn-2 {
+    float: right;
+    margin-right: .5rem;
+    background: #00acee
+}
+
+.custom-btn.btn-1 {
+    border: none;
+    width: 100px
+}
+
+.btn-3 {
+    float: right;
+    margin-right: -2.3rem;
+    background: #00acee
+}
+
+.custom-btn.btn-1 {
+    border: none;
+    width: 130px
+}
+
+button.custom-btn.btn-1.inner {
+    margin-right: 30px;
+    float: right
+}
+
+.raise {
+    font-size: larger;
+    font-weight: bolder;
+    margin-left: 50px
+}
+
+.textwidth {
+    margin-left: 200px
+}
+
+.aligntitle * {
+    vertical-align: middle
+}
+
+#left-content {
+    display: inline-block;
+    width: 20px;
+    padding-top: 0
+}
+
+#right-content {
+    display: inline-block;
+    width: 95%;
+    padding-top: 20px
+}
+
+.collapsible {
+    color: #000;
+    cursor: pointer;
+    padding: 5px;
+    width: 115px;
+    border: none;
+    text-align: center;
+    outline: 0;
+    font-size: 15px;
+    margin-bottom: 20px
+}
+
+.colcontent {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #fff
+}
+
+.colcolor {
+    background-color: #f5f5f5;
+    width: 40rem
+}
+
+.user-container {
+    float: right
+}
+
+.name {
+    display: inline-block
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify
+}
+
+#footer {
+    position: fixed;
+    padding: 10px 10px 0 10px;
+    bottom: 0;
+    width: 100%;
+    height: 130px
+}
+
+.LogoImg {
+    height:60px;
+    width:60px;
+    
+    
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    left: 0;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2)
+}
+
+.dropdown-Subcontent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    top: 0;
+    left: 100%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2)
+}
+
+.dropdown-content a {
+    float: none;
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd
+}
+
+.dropdown-content .dropdown-Subcontent-left {
+    right: 100%;
+    left: auto
+}
+
+.dropdown-content>li:hover>.dropdown-Subcontent {
+    display: block
+}
+
+.dropdown:hover>.dropdown-content {
+    display: block
+}
+.Title{
+    color:#00acee;
+}

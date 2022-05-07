@@ -1,0 +1,27 @@
+<div class="container  p-5 my-5 border">
+ <div class="panel panel-default">
+    <div>           
+    <p> 
+        {{querypara}}
+         {{querycode}}
+        </p>
+</div>
+</div>
+
+<div class="text-center my-4">
+    <h3>{{Reporthead}}</h3>
+    <div>
+        <form  #form="ngForm" (ngSubmit)="spamreport()" autocomplete="off">
+        <div class="bg-light p-2">
+           
+            <textarea type="text" name="reportspam" class="form-control" rows="5" cols="4" placeholder="maximum 200words" id="reportspam-name"
+            placeholder="Reason for Report" [(ngModel)]="reportspam.query"></textarea>
+        </div>
+        <div class="mt-2 text-right"><button type="submit" class="custom-btn btn-1 btn-2">Report
+                Spam</button>
+    </div>
+        </form>
+</div>
+</div>
+</div>
+<app-footer></app-footer>

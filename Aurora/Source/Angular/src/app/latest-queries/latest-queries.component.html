@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div style="margin:20px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/Home"  routerLinkActive="active">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Latest Queries
+            </li>
+  
+        </ol>
+    </nav>
+  </div>
+<div class="Content" style="min-height: 100vh;">
+    <app-query-filter></app-query-filter>
+    <h1>Latest Queries</h1>
+    <app-query-card Querysrc="https://localhost:7197/Query/GetLatestQueries"></app-query-card>
+</div>
+<app-footer></app-footer>

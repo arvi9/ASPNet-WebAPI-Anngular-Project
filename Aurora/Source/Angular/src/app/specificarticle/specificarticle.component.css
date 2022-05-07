@@ -1,0 +1,153 @@
+.bcontent {
+  margin-left: 10px;
+}
+
+.cursor:hover {
+  color: blue
+}
+
+.cursor {
+  cursor: pointer;
+
+}
+
+.bg-white {
+  margin-right: 200px;
+}
+
+.btn-counter {
+  margin-right: 39px;
+}
+
+.btn-counter:after,
+.btn-counter:hover:after {
+  text-shadow: none;
+}
+
+.btn-counter:after {
+  border-radius: 3px;
+  border: 1px solid #d3d3d3;
+  background-color: #eee;
+  padding: 0 8px;
+  color: #777;
+  content: attr(data-count);
+  left: 100%;
+  margin-left: 8px;
+  margin-right: -13px;
+  position: absolute;
+  top: -1px;
+}
+
+.btn-counter:before {
+  transform: rotate(45deg);
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476, sizingMethod='auto expand');
+
+  background-color: #eee;
+  border: 1px solid #d3d3d3;
+  border-right: 0;
+  border-top: 0;
+  content: '';
+  position: absolute;
+  right: -13px;
+  top: 5px;
+  height: 6px;
+  width: 6px;
+  z-index: 1;
+  zoom: 1;
+}
+
+/*
+ * Custom styles
+ */
+body {
+  background: #eee
+}
+
+.date {
+  font-size: 11px
+}
+
+.comment-text {
+  font-size: 12px
+}
+
+.fs-12 {
+  font-size: 12px
+}
+
+.shadow-none {
+  box-shadow: none
+}
+.article-img{
+  max-height: 350px;
+  justify-content: center;
+  justify-items: center;
+  border-radius: 12px;
+  
+}
+.name {
+  color: #007bff
+}
+
+.cursor:hover {
+  color: blue
+}
+
+.cursor {
+  cursor: pointer
+}
+
+.textarea {
+  resize: none
+}
+.buttonp{
+ margin-left: 91%;
+ 
+}
+.buttonu{
+  margin-left:2%;
+}
+.limitTextHeight {
+  height:75px;
+  overflow: hidden;
+}
+.commentleft{
+  margin-left:4%;
+}
+.usernamestyle{
+  font-weight:500;
+}
+
+
+.like-button {
+  font-size: 1rem;
+  padding: 5px 10px;
+  color: #585858;
+}
+
+.liked {
+  font-weight: bold;
+  color: #1565c0;
+}
+.iconstyle{
+  font-size:120%;
+}
+.limitcommentHeight {
+  height:150px;
+  overflow: hidden;
+}
+
+.example-viewport {
+  height: 300px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.example-dt {
+  height: 30px;
+  font-weight: bold;
+}
+
+.example-dd {
+  height: 30px;
+}

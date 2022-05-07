@@ -1,0 +1,115 @@
+<app-navbar></app-navbar>
+  <!-- Breadcrums Start -->
+  <div style="margin:20px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home / </a>
+                <a href="ViewQueries.html">Queries</a>
+
+            </li>
+            <li class="breadcrumb-item active">
+                Stack and Heap
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<!-- Breadcrums End-->
+<div>
+  <div class="container">
+    <a [routerLink]="['../report-spam']"><button type="button" class="custom-btn btn-1 btn-3" id="button-code" >Report Spam</button></a>
+  </div>
+
+  <div class="container p-5 my-1 border">
+    <div class="text-center">
+
+      <h1>{{data.title}}</h1>
+
+    </div>   
+    <div class="panel panel-default"><br>
+      {{data.content}}
+<br>
+<br>
+      <pre class="border shadow-sm w-500">
+{{data.code}}
+                    </pre>
+
+                  
+      
+         <h4>{{data.queryComments.length}} Answers</h4> 
+        <div >
+      
+  
+  
+ 
+      <br>
+    </div>
+  </div>
+
+        
+        <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+          <dl class="example-dl p-2">
+            <ng-container *cdkVirtualFor="let comment of data.queryComments">
+              <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">Answer : {{comment.comment}}</i></dt>
+              <dd class="example-dd mx-5">{{comment.code}}</dd>
+              <dd class="example-dd mx-5">Answered by : Girish Kumar</dd>
+              <hr>
+            </ng-container>
+          </dl>
+        </cdk-virtual-scroll-viewport>
+     <br>
+     <br>
+        <h5>Comment Your Answer</h5>
+
+        <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
+          <div class="container">
+            <div class="bg-light p-2">
+              <textarea type="text" name="queryComment" class="form-control form-control5" id="queryComment-name"
+                placeholder="Enter comments" [(ngModel)]="data1.comment">
+                    <textarea class="form-control" name="queryComment" [(ngModel)]="data1.comment"></textarea>
+            </div>
+          </div>
+       
+        <div class="mt-2 text-right">
+          <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">Post comment</button>
+        </div>
+      </form>
+        <div class="mt-2 ">
+          <button type="button " class="btnpad1 btn-1" (click)="openpopup()">
+            Add code
+          </button>
+              </div>
+            </div>
+
+            <!-- The Modal -->
+  <div class="modal" id="myModal" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title ">Add code</h4>
+
+        </div>
+        <form #form="ngForm" (ngSubmit)="PostCode()" autocomplete="off">
+          <div class="bg-light p-2">
+            <textarea class="form-control" contenteditable="true" name="querycomment" 
+              id="querycomment-name" placeholder="Enter code" [(ngModel)]="data1.code"></textarea>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="custom-btn btn-1 btn-2" (click)="closePopup()">Cancel</button>
+                    <button type="submit" class="custom-btn btn-1 btn-2">Post</button>
+                  </div>
+                </form>
+                  <!-- Modal footer -->
+                 
+               
+              </div>
+            </div>
+          </div>
+  </div>
+          <app-footer></app-footer>
+      
+

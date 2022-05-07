@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="Content" style="min-height: 100vh;">
+    <div style="margin:20px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="Home.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="MyArticles.html">My Articles</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    Create Article
+                </li>
+
+            </ol>
+        </nav>
+    </div>
+    <div class="container editor">
+        <form>
+            <div class="w-25">
+                <label class="form-label">Name:</label>
+                <input class="form-control" placeholder="Enter Name">
+            </div>
+            <div class="w-25">
+                <label class="form-label">Title:</label>
+                <input class="form-control" placeholder="Enter Title">
+            </div>
+            <div class="editor-btn">
+                <button class="custom-btn btn-1" type="button" data-toggle="modal"
+                    data-target="#invitegroupModalCenter">Create Group</button>
+                <button class="custom-btn btn-1" type="button" data-toggle="modal"
+                    data-target="#invitegroupModalCenter">Edit Article</button>
+            </div>
+        </form>
+        <app-editor></app-editor>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,24 @@
+.login{
+    margin-top:10%;
+    margin-bottom:5%;
+    }
+.img-container{
+        align-items:30px;
+        padding: 30px;
+        margin-left: 430px;
+        margin-top:70px;
+      }
+.LogoImg {
+        height:15%;
+        width: 15%;
+        margin-top: 7px; 
+        margin-bottom:4%; 
+        margin-left:12%;
+        margin-right:2%;
+    }
+    .Title{
+        color:#00acee;
+    }
+    .link{
+          margin-left: 33%;
+    }

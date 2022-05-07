@@ -1,0 +1,19 @@
+.btn-text-left {
+    text-align: left;
+}
+
+.btn-text-right {
+    text-align: right;
+}
+
+body {
+    padding: 20px;
+}
+
+.right-btn {
+    margin-left: 290px;
+}
+
+#more {
+    display: none;
+}

@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="container p-5 my-5 border">
+    <div class="text-center">
+        <h1>{{data.title}}</h1>
+    </div>
+    <div class="panel panel-default p-3">
+        <div class="panel-heading bold">Author Name:&nbsp;{{data.createdBy}}</div>
+        <div class="panel-body bold">Date:&nbsp;{{createdOn}}</div>
+    <div class="text-center pb-4">
+            <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
+        </div>
+        <div  [ngClass]="{'limitTextHeight': isReadMore}">
+            <p> {{data.content}}
+            </p>
+        </div>
+        <button type="button" (click)="showText()">
+            {{ isReadMore ? 'Read More': 'Read Less' }}
+        </button>
+    </div>
+    <h4>{{data.articleComments.length}} comments</h4>
+    <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+        <dl class="example-dl p-2">
+          <ng-container *cdkVirtualFor="let comment of data.articleComments">
+            <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">{{comment.createdBy}}</i></dt>
+            <dd class="example-dd mx-5">{{comment.comment}}</dd>
+            <hr>
+          </ng-container>
+        </dl>
+      </cdk-virtual-scroll-viewport>
+
+    <br>
+    <hr>
+    <br>
+
+    <div class=" iconstyle d-flex flex-row fs-12">
+        <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
+            <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{35}}</span>
+        </div>
+        <div class="like p-2 cursor"><i class="fa fa-share mx-2"></i><span class="ml-1">Share</span></div>
+    </div>
+    <div class="container">
+
+        <div class="d-flex flex-row align-items-start"><textarea
+                class="form-control ml-1 shadow-none textarea"></textarea></div>
+        <div class="mt-2 text-right">
+            <button class=" buttonp btn btn-primary btn-sm shadow-none ml-1" type="button">Post comment</button>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
