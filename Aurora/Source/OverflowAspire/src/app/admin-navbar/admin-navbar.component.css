@@ -18,13 +18,15 @@ h6 {
     
 }
   .btn-lg{
-      width:100px;
-      height:50px;
-      background-color:skyblue ;
-      border-color: skyblue;
+    display: table-cell;
+    width: 100px;
   }
   .text{
       font-size: 40px;
       padding-left:1%;
       color: skyblue;
+  }
+  .example-button-row {
+    display: table-cell;
+    width: 490px;
   }
