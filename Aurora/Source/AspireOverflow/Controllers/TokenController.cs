@@ -24,7 +24,7 @@ namespace AspireOverflow.Controllers
         public TokenController(IConfiguration config, UserService service,ILogger<TokenController> logger)
         {
             _configuration = config;
-          
+          _userService=service;
             _logger=logger;
         }
 

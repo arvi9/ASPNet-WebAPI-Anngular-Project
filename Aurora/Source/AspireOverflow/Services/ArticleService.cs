@@ -130,7 +130,7 @@ namespace AspireOverflow.Services
             }
         }
 
-        public IEnumerable<Article> GetTrendingArticles()
+        public IEnumerable<Object> GetTrendingArticles()
         {
             try
             {
@@ -143,7 +143,12 @@ namespace AspireOverflow.Services
                 {
                     TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id));
                 }
-                return TrendingArticles;
+                return TrendingArticles.Select(e => new{
+                    ArticleId =e.ArtileId,
+                    title=e.Title,
+                    content=e.Content,
+                    image=e.Image,
+                });
             }
             catch (Exception exception)
             {

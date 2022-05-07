@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using AspireOverflow.Models;
 
 
@@ -17,8 +18,8 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(query.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(query.Content)) throw new ValidationException("content cannot be null or empty");
             else if (query.Title.Length > 60) throw new ValidationException("Title length must be less than 60 charcter");
-            else if(query.IsActive != true)throw new ValidationException("IsActive must be true");
-            else if ( query.IsSolved = false) throw new ValidationException("IsSolved must be false");
+            else if (query.IsActive != true) throw new ValidationException("IsActive must be true");
+            else if (query.IsSolved = false) throw new ValidationException("IsSolved must be false");
 
             else return true;
         }
@@ -44,7 +45,7 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
             else if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
-            else if( article.ArticleStatusID == 1)throw new ValidationException("ArticlestatusID mst be 1");
+            else if (article.ArticleStatusID == 1) throw new ValidationException("ArticlestatusID mst be 1");
             else return true;
         }
 
@@ -60,23 +61,26 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-       
 
-  
+
 
 
         public static bool ValidateUser(User user)
         {
+            var mail = new Regex("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+
+
             if (user == null) throw new ValidationException("User should not be null");
-            else if(user.VerifyStatusID != 3)throw new ValidationException($"VerifyStatus must be 3  VerifyStatusId:{user.VerifyStatusID}");
-            else if( user.IsReviewer != false)throw new ValidationException($"IsReviewer must be false");
-            else if(  user.UserRoleId != 2)throw new ValidationException($"IsReviewer must be false");
-            else if(  user.UserRoleId != 2) throw new ValidationException($"UserRoleId must be equal to 2 UserRole:{user.UserRoleId}");
+            else if (user.VerifyStatusID != 3) throw new ValidationException($"VerifyStatus must be 3  VerifyStatusId:{user.VerifyStatusID}");
+            else if (user.IsReviewer != false) throw new ValidationException($"IsReviewer must be false");
+
+            else if (user.UserRoleId != 2) throw new ValidationException($"UserRoleId must be equal to 2 UserRole:{user.UserRoleId}");
+            else if (!mail.IsMatch(user.EmailAddress)) throw new ValidationException($"Email format is incorrect  EmailEntered:{ user.EmailAddress }");
             else return true;
         }
 
 
-       
+
 
 
 

@@ -36,8 +36,8 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","CreateQuery(Query query)", exception, query));
-            return false;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "CreateQuery(Query query)", exception, query));
+                return false;
             }
         }
 
@@ -51,9 +51,9 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","RemoveQueryByQueryId(int QueryId)", exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "RemoveQueryByQueryId(int QueryId)", exception, QueryId));
 
-           return false;
+                return false;
             }
 
         }
@@ -69,29 +69,40 @@ namespace AspireOverflow.Services
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService"," MarkQueryAsSolved(int QueryId)", exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryService", " MarkQueryAsSolved(int QueryId)", exception, QueryId));
 
-            return false;
+                return false;
             }
         }
 
-        public Query GetQuery(int QueryId)
+        public Object GetQuery(int QueryId)
         {
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
-                return database.GetQueryByID(QueryId);
+                var Query = database.GetQueryByID(QueryId);
+                return new
+                {
+                    QueryId = Query.QueryId,
+                    Title = Query.Title,
+                    Content = Query.Content,
+                    code = Query.code,
+                    Date = Query.CreatedOn,
+                    RaiserName = Query.User.FullName,
+                    Comments = GetComments(QueryId)
+
+                };
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQuery(int QueryId)", exception, QueryId));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQuery(int QueryId)", exception, QueryId));
+                throw exception;
             }
 
         }
 
 
-        public IEnumerable<Query> GetQueries()
+        private IEnumerable<Query> GetQueries()
         {
             try
             {
@@ -100,32 +111,58 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueries()", exception));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
+                throw exception;
+            }
+
+        }
+
+        public IEnumerable<Object> GetListOfQueries()
+        {
+            try
+            {
+                var ListOfQueries = database.GetQueries();
+                return ListOfQueries.Select(item => new
+                {
+                    QueryId = item.QueryId,
+                    Title = item.Title,
+                    content = item.Content
+                });
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
+                throw exception;
             }
 
         }
 
 
 
-        public IEnumerable<Query> GetLatestQueries()
+        public IEnumerable<Object> GetLatestQueries()
         {
             try
             {
                 var ListOfQueries = GetQueries().OrderByDescending(query => query.CreatedOn);
-                return ListOfQueries;
+
+                return ListOfQueries.Select(item => new
+                {
+                    QueryId = item.QueryId,
+                    Title = item.Title,
+                    content = item.Content
+                });
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetLatestQueries()", exception));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetLatestQueries()", exception));
+                throw exception;
             }
         }
 
 
 
-        public IEnumerable<Query> GetTrendingQueries()
+        public IEnumerable<Object> GetTrendingQueries()
         {
             try
             {
@@ -133,66 +170,91 @@ namespace AspireOverflow.Services
                 var data = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
 
                 var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
-                var ListOfQueries = GetQueries(false).ToList();
+                var ListOfQueries = GetQueries().Where(item => item.IsSolved == false).ToList();
                 var TrendingQueries = new List<Query>();
                 foreach (var id in ListOfQueryId)
                 {
                     TrendingQueries.Add(ListOfQueries.Find(item => item.QueryId == id));
                 }
 
-                return TrendingQueries;
+                return TrendingQueries.Select(item => new
+                {
+                    QueryId = item.QueryId,
+                    Title = item.Title,
+                    content = item.Content
+                });
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetTrendingQueries()", exception));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetTrendingQueries()", exception));
+                throw exception;
             }
         }
 
 
 
-        public IEnumerable<Query> GetQueriesByUserId(int UserId)
+        public IEnumerable<Object> GetQueriesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                return GetQueries().Where(query => query.CreatedBy == UserId);
+                var ListOfQueries = GetQueries().Where(query => query.CreatedBy == UserId);
+
+                return ListOfQueries.Select(item => new
+                {
+                    QueryId = item.QueryId,
+                    Title = item.Title,
+                    content = item.Content
+                });
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueriesByUserId(int UserId)", exception, UserId));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByUserId(int UserId)", exception, UserId));
+                throw exception;
             }
 
         }
 
 
-        public IEnumerable<Query> GetQueriesByTitle(String Title)
+        public IEnumerable<Object> GetQueriesByTitle(String Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Query Title value can't be null");
             try
             {
-                return GetQueries().Where(query => query.Title.Contains(Title));
+                var ListOfQueries = GetQueries().Where(query => query.Title.Contains(Title));
+                return ListOfQueries.Select(item => new
+                {
+                    QueryId = item.QueryId,
+                    Title = item.Title,
+                    content = item.Content
+                });
+
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueriesByTitle(String Title)", exception, Title));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByTitle(String Title)", exception, Title));
+                throw exception;
             }
         }
 
 
-        public IEnumerable<Query> GetQueries(bool IsSolved)
+        public IEnumerable<Object> GetQueries(bool IsSolved)
         {
             try
             {
-                return GetQueries().Where(query => query.IsSolved == IsSolved);
+                var ListOfQueries = GetQueries().Where(query => query.IsSolved == IsSolved);
+                return ListOfQueries.Select(item => new
+                {
+                    QueryId = item.QueryId,
+                    Title = item.Title,
+                    content = item.Content
+                });
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetQueries(bool IsSolved)", exception, IsSolved));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries(bool IsSolved)", exception, IsSolved));
+                throw exception;
             }
         }
 
@@ -207,23 +269,30 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","CreateComment(QueryComment comment)", exception, comment));
-             return false;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "CreateComment(QueryComment comment)", exception, comment));
+                return false;
             }
         }
 
-        public IEnumerable<QueryComment> GetComments(int QueryId)
+        public IEnumerable<Object> GetComments(int QueryId)
         {
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
-                return database.GetComments().Where(comment => comment.QueryId == QueryId);
+                var ListOfComments = database.GetComments().Where(comment => comment.QueryId == QueryId);
+                return ListOfComments.Select(item => new
+                {
+                    CommentId = item.QueryCommentId,
+                    Message = item.Comment,
+                    Name = item.User.FullName,
+                    QueryId = item.QueryId
+                });
 
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService","GetComments(int QueryId)", exception, QueryId));
-             throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetComments(int QueryId)", exception, QueryId));
+                throw exception;
             }
 
         }

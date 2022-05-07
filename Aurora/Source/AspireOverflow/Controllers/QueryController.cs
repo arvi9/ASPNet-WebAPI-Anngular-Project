@@ -15,8 +15,8 @@ namespace AspireOverflow.Controllers
     public class QueryController : ControllerBase
     {
 
-        internal  ILogger<QueryController> _logger;
-        private  QueryService _queryService;
+        internal ILogger<QueryController> _logger;
+        private QueryService _queryService;
 
         public QueryController(ILogger<QueryController> logger, QueryService queryService)
         {
@@ -28,12 +28,11 @@ namespace AspireOverflow.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Query>> CreateQuery(Query query)
+        public async Task<ActionResult> CreateQuery(Query query)
         {
             if (query == null) return BadRequest("Null value is not supported");
             try
             {
-
 
                 return _queryService.CreateQuery(query) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
             }
@@ -67,7 +66,7 @@ namespace AspireOverflow.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryController","RemoveQueryByQueryId(int QueryId)", exception, QueryId));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", "RemoveQueryByQueryId(int QueryId)", exception, QueryId));
                 return Problem($"Error Occurred while removing query with QueryId :{QueryId}");
             }
         }
@@ -94,11 +93,10 @@ namespace AspireOverflow.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult<Query>> GetQuery(int QueryId)
+        public async Task<ActionResult> GetQuery(int QueryId)
         {
             if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
             try
-
             {
                 var Query = _queryService.GetQuery(QueryId);
 
@@ -118,12 +116,11 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetAll()
+        public async Task<ActionResult> GetAll()
         {
             try
             {
-
-                var Queries = _queryService.GetQueries();
+                var Queries = _queryService.GetListOfQueries();
                 return await Task.FromResult(Ok(Queries));
             }
             catch (Exception exception)
@@ -134,18 +131,19 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetLatestQueries(int Range=0)
+        public async Task<ActionResult> GetLatestQueries(int Range = 0)
         {
             try
             {
                 var Queries = _queryService.GetLatestQueries().ToList();
 
-            if (Range <= Queries.Count())
-            {
-               Queries  = Range > 0 ? Queries.GetRange(1, Range) : Queries;
-               return await Task.FromResult(Ok(Queries));
-            }else return BadRequest("Range limit exceeded");
-             
+                if (Range <= Queries.Count())
+                {
+                    Queries = Range > 0 ? Queries.GetRange(1, Range) : Queries;
+                    return await Task.FromResult(Ok(Queries));
+                }
+                else return BadRequest("Range limit exceeded");
+
             }
             catch (Exception exception)
             {
@@ -155,17 +153,18 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetTrendingQueries(int Range=0)
+        public async Task<ActionResult> GetTrendingQueries(int Range = 0)
         {
             try
             {
                 var Queries = _queryService.GetTrendingQueries().ToList();
 
-            if (Range <= Queries.Count())
-            {
-               Queries  = Range > 0 ? Queries.GetRange(1, Range) : Queries;
-               return await Task.FromResult(Ok(Queries));
-            }else return BadRequest("Range limit exceeded");
+                if (Range <= Queries.Count())
+                {
+                    Queries = Range > 0 ? Queries.GetRange(1, Range) : Queries;
+                    return await Task.FromResult(Ok(Queries));
+                }
+                else return BadRequest("Range limit exceeded");
             }
             catch (Exception exception)
             {
@@ -177,7 +176,7 @@ namespace AspireOverflow.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetQueriesByUserId(int UserId)
+        public async Task<ActionResult> GetQueriesByUserId(int UserId)
         {
             if (UserId <= 0) return BadRequest("UserId must be greater than 0");
             try
@@ -198,7 +197,7 @@ namespace AspireOverflow.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetQueriesByTitle(string Title)
+        public async Task<ActionResult> GetQueriesByTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
             try
@@ -218,7 +217,7 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<Query>>> GetQueriesByIsSolved(bool IsSolved)
+        public async Task<ActionResult> GetQueriesByIsSolved(bool IsSolved)
         {
 
             try
@@ -253,7 +252,7 @@ namespace AspireOverflow.Controllers
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryController"," CreateComment(QueryComment comment)", exception, comment));
+                _logger.LogError(HelperService.LoggerMessage("QueryController", " CreateComment(QueryComment comment)", exception, comment));
                 return Problem($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
             }
 
