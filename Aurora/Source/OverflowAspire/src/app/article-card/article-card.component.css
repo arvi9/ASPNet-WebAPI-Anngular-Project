@@ -229,8 +229,8 @@ a:hover {
 }
 
 .stickypagination{
-    position:absolute;
-    top:110%
+    position:sticky;
+    top:90%
 
 }
 .para{

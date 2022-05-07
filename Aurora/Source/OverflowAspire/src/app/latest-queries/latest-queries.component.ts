@@ -9,20 +9,9 @@ import { Query } from 'Models/Query';
 })
 export class LatestQueriesComponent implements OnInit {
 
-  @Input() Querysrc: string ="https://localhost:7197/Query/GetLatestQueries";
-   totalLength: any;
-   page: number = 1;
-   
- 
-   constructor(private http: HttpClient) { }
+  
    ngOnInit(): void {
-     this.http
-       .get<any>(this.Querysrc)
-       .subscribe((data) => {
-         this.data = data;
-         this.totalLength = data.length;
-        
-       });
+     
    }
  
  

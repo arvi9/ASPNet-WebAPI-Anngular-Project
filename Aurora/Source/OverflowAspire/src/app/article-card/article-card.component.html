@@ -3,7 +3,7 @@
         <div class="img-card iCard-style2 onhover">
             <div class="card-content">
                 <div class="card-image">
-                    <img src="https://www.dlf.pt/dfpng/maxpng/174-1749995_java-png-icon.png" />
+                    <img [src]="'data:image/jpg;base64,'+ item.image" />
                 </div>
 
                 <h1 class="card-title text-truncate">{{item.title}}</h1>
