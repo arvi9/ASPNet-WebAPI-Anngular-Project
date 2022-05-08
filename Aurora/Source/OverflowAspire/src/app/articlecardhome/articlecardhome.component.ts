@@ -11,13 +11,25 @@ import { HttpClient} from '@angular/common/http';
 export class ArticlecardhomeComponent implements OnInit {
 
 
+  @Input() artsrc: string ="";
+  totalLength: any;
+  page: number = 1;
+ 
+
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
-   
+    this.http
+      .get<any>(this.artsrc)
+      .subscribe((data) => {
+        this.data = data;
+        this.totalLength = data.length;
+        console.log(data)
+       
+      });
 }
-public data:any[]=[{title:"hi",content:"hello"},{title:"hi",content:"hello"},{title:"hi",content:"hello"}];
+public data: Article[] = [
 
-
-;
+ 
+];
 
 }

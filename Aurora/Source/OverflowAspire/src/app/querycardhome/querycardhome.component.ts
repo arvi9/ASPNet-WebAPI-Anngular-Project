@@ -16,8 +16,19 @@ export class QuerycardhomeComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
+    this.http
+      .get<any>(this.Querysrc)
+      .subscribe((data) => {
+        this.data = data;
+        this.totalLength = data.length;
+       
+      });
   }
-public data: any[] = [{Title:"hi",Content:"gk"},{Title:"hi",Content:"gk"},{Title:"hi",Content:"gk"}
+
+
+
+  
+   public data: Query[] = [
     
 
   ];
@@ -26,6 +37,9 @@ public data: any[] = [{Title:"hi",Content:"gk"},{Title:"hi",Content:"gk"},{Title
 
 
 }
+
+
+
 
 
  
