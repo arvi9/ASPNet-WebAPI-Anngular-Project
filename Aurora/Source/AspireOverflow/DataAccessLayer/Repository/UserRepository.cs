@@ -135,6 +135,33 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+         public IEnumerable<Designation> GetDesignations()
+        {
+            try
+            {
+
+                return _context.Designations.Include("Department").ToList();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDesignations()", exception));
+                throw exception;
+            }
+        }
+
+         public IEnumerable<Department> GetDepartments()
+        {
+            try
+            {
+                return _context.Departments.ToList();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
+                throw exception;
+            }
+        }
+
 
     }
 }

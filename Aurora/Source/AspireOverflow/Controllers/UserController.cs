@@ -14,8 +14,8 @@ namespace AspireOverflow.Controllers;
 public class UserController : ControllerBase
 {
 
-    internal  ILogger<UserController> _logger;
-    private  UserService _UserService;
+    internal ILogger<UserController> _logger;
+    private UserService _UserService;
 
     public UserController(ILogger<UserController> logger, UserService UserService)
     {
@@ -27,19 +27,19 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreateUser(User User)
     {
-        
+
         if (User == null) return BadRequest("Null value is not supported");
-      
+
         try
 
-        { 
-              //Development.Web is Enum constants which indicated the request approaching team.
-            return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")): BadRequest($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
+        {
+            //Development.Web is Enum constants which indicated the request approaching team.
+            return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
         }
         catch (ValidationException exception)
         {
             //HelperService.LoggerMessage - returns string for logger with detailed info
-            _logger.LogError(HelperService.LoggerMessage("UserController"," CreateUser(User User)", exception, User));
+            _logger.LogError(HelperService.LoggerMessage("UserController", " CreateUser(User User)", exception, User));
             return BadRequest($"{exception.Message}\n{HelperService.PropertyList(User)}");
         }
         catch (Exception exception)
@@ -74,11 +74,11 @@ public class UserController : ControllerBase
     [HttpDelete]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
-        if(User.HasClaim(item => item.Type==ClaimTypes.Role && item.Value=="2"))  return BadRequest("you dont have access to remove user"); 
+        if (User.HasClaim(item => item.Type == ClaimTypes.Role && item.Value == "2")) return BadRequest("you dont have access to remove user");
         if (UserId <= 0) return BadRequest("User ID must be greater than 0");
         try
         {
-            return _UserService.RemoveUser(UserId) ? await Task.FromResult(Ok("Not Verified User has been rejected succfully")) : BadRequest($"Unable to remove User with UserId:{UserId}");
+            return _UserService.RemoveUser(UserId) ? await Task.FromResult(Ok("Not Verified User has been rejected succfully")) : BadRequest($"Not Allowed to remove User with UserId:{UserId}");
         }
         catch (ItemNotFoundException exception)
         {
@@ -88,7 +88,7 @@ public class UserController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", "RemoveUser(int UserId)", exception, UserId));
-            return Problem($"Error Occurred while getting User with UserId :{UserId}");
+            return Problem($"Error Occurred while removing User with UserId :{UserId}");
         }
     }
 
@@ -97,11 +97,11 @@ public class UserController : ControllerBase
     {
         //string UserId = User.FindFirst("UserId").Value;
         try
-        {   
-              var User = _UserService.GetUserByID(UserId);
+        {
+            var User = _UserService.GetUserByID(UserId);
 
-                return await Task.FromResult(Ok(User));
-           
+            return await Task.FromResult(Ok(User));
+
         }
         catch (ItemNotFoundException exception)
         {
@@ -110,18 +110,19 @@ public class UserController : ControllerBase
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserController","GetUser()", exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("UserController", "GetUser()", exception, UserId));
             return Problem($"Error Occurred while Getting User with UserId :{UserId}");
         }
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetUsersByVerifyStatusId(int VerifyStatusID){
-    if(VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}");
+    public async Task<ActionResult<IEnumerator<User>>> GetUsersByVerifyStatusId(int VerifyStatusID)
+    {
+        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}");
         try
         {
-            var ListOfUsers = _UserService.GetUsersByVerifyStatus(1);
-                return await Task.FromResult(Ok(ListOfUsers));
+            var ListOfUsers = _UserService.GetUsersByVerifyStatus(VerifyStatusID);
+            return await Task.FromResult(Ok(ListOfUsers));
         }
         catch (Exception exception)
         {
@@ -130,6 +131,65 @@ public class UserController : ControllerBase
         }
     }
 
-  
+    [HttpGet]
+    public async Task<ActionResult<IEnumerator<User>>> GetUsersByUserRoleId(int RoleId)
+    {
+        if (RoleId <= 0 && RoleId > 2) return BadRequest($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}");
+        try
+        {
+            var ListOfUsers = _UserService.GetUsersByUserRoleID(RoleId);
+            return await Task.FromResult(Ok(ListOfUsers));
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserController", "GetUsersByUserRoleId(int RoleId)", exception));
+            return Problem($"Error occured while processing your request with RoleId:{RoleId}");
+        }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerator<User>>> GetUsersByIsReviewer(bool IsReviewer)
+    {
+
+        try
+        {
+            var ListOfUsers = _UserService.GetUsersByIsReviewer(IsReviewer);
+            return await Task.FromResult(Ok(ListOfUsers));
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserController", " GetUsersByIsReviewer(bool IsReviewer)", exception));
+            return Problem($"Error occured while processing your request with IsReviewer:{IsReviewer}");
+        }
+    }
+    [HttpGet]
+    public async Task<IActionResult> GetDesignations()
+    {
+        try
+        {
+            return await Task.FromResult(Ok(_UserService.GetDesignations()));
+
+
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserController", " GetDesignations()", exception));
+            throw exception;
+        }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetDepartments()
+    {
+        try
+        {
+            return await Task.FromResult(Ok(_UserService.GetDepartments()));
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
+            throw exception;
+        }
+    }
 
 }

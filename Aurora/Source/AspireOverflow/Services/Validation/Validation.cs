@@ -73,6 +73,8 @@ namespace AspireOverflow.Services
             if (user == null) throw new ValidationException("User should not be null");
             else if (user.VerifyStatusID != 3) throw new ValidationException($"VerifyStatus must be 3  VerifyStatusId:{user.VerifyStatusID}");
             else if (user.IsReviewer != false) throw new ValidationException($"IsReviewer must be false");
+              else if (user.GenderId <= 0 && user.GenderId > 2) throw new ValidationException($"Gender ID must be 1 or 2");
+
 
             else if (user.UserRoleId != 2) throw new ValidationException($"UserRoleId must be equal to 2 UserRole:{user.UserRoleId}");
             else if (!mail.IsMatch(user.EmailAddress)) throw new ValidationException($"Email format is incorrect  EmailEntered:{ user.EmailAddress }");

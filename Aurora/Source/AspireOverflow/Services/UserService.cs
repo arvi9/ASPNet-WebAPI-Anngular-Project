@@ -25,8 +25,8 @@ namespace AspireOverflow.Services
             Validation.ValidateUser(user);
             try
             {
-                 user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
-           
+                user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
+
                 return database.CreateUser(user);
             }
             catch (Exception exception)
@@ -38,7 +38,7 @@ namespace AspireOverflow.Services
 
         public bool RemoveUser(int UserId)
         {
-           if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
                 return database.RemoveUser(UserId);
@@ -51,7 +51,7 @@ namespace AspireOverflow.Services
 
         }
 
-        public  User GetUser(string Email, string Password)  //Method used in Token Controller
+        public User GetUser(string Email, string Password)  //Method used in Token Controller
         {
             try
             {
@@ -61,8 +61,8 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService()","GetUser(string Email, string Password)",exception,Email));
-              
+                _logger.LogError(HelperService.LoggerMessage("ArticleService()", "GetUser(string Email, string Password)", exception, Email));
+
                 throw exception;
             }
         }
@@ -79,11 +79,23 @@ namespace AspireOverflow.Services
             }
         }
 
-        public IEnumerable<User> GetUsersByVerifyStatus(int VerifyStatusID)
+        public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
             try
             {
-                return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID);
+                return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID).Select(User => new
+                {
+                    UserId = User.UserId,
+                    Name = User.FullName,
+                    EmployeeId = User.AceNumber,
+                    Email = User.EmailAddress,
+                    DateOfBirth = User.DateOfBirth,
+                    Designation = User.Designation.DesignationName,
+                    Department = GetDepartmentByID(User.DesignationId),
+                    Gender = User.Gender.Name,
+                    IsReviewer = User.IsReviewer
+
+                });
             }
             catch (Exception exception)
             {
@@ -97,17 +109,18 @@ namespace AspireOverflow.Services
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var User=database.GetUserByID(UserId);
-                return new {
-                    UserId=User.UserId,
-                    Name=User.FullName,
-                    EmployeeId=User.AceNumber,
-                    Email=User.EmailAddress,
-                    DateOfBirth=User.DateOfBirth,
-                    Designation=User.Designation,
-                    Department=User.Designation.Department.DepartmentName,
-                    Gender=User.Gender.Name,
-                    IsReviewer=User.IsReviewer
+                var User = database.GetUserByID(UserId);
+                return new
+                {
+                    UserId = User.UserId,
+                    Name = User.FullName,
+                    EmployeeId = User.AceNumber,
+                    Email = User.EmailAddress,
+                    DateOfBirth = User.DateOfBirth,
+                    Designation = User.Designation.DesignationName,
+                    Department = GetDepartmentByID(User.DesignationId),
+                    Gender = User.Gender.Name,
+                    IsReviewer = User.IsReviewer
 
                 };
             }
@@ -118,12 +131,24 @@ namespace AspireOverflow.Services
             }
         }
 
-        public IEnumerable<User> GetUsersByUserRoleID(int UserRoleID)
+        public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID)
         {
             if (UserRoleID <= 0) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
-                return GetUsersByVerifyStatus(1).Where(user => user.UserRoleId == UserRoleID);
+                return GetUsers().Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Select(User => new
+                {
+                    UserId = User.UserId,
+                    Name = User.FullName,
+                    EmployeeId = User.AceNumber,
+                    Email = User.EmailAddress,
+                    DateOfBirth = User.DateOfBirth,
+                    Designation = User.Designation.DesignationName,
+                    Department = GetDepartmentByID(User.DesignationId),
+                    Gender = User.Gender.Name,
+                    IsReviewer = User.IsReviewer
+
+                });
             }
             catch (Exception exception)
             {
@@ -151,16 +176,80 @@ namespace AspireOverflow.Services
 
 
 
-        public IEnumerable<User> GetUsersByIsReviewer(bool IsReviewer)
+        public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer)
         {
             try
             {
-                return GetUsersByVerifyStatus(1).Where(user => user.IsReviewer == IsReviewer);
+                return GetUsers().Where(user => user.IsReviewer == IsReviewer && user.VerifyStatusID == 1).Select(User => new
+                {
+                    UserId = User.UserId,
+                    Name = User.FullName,
+                    EmployeeId = User.AceNumber,
+                    Email = User.EmailAddress,
+                    DateOfBirth = User.DateOfBirth,
+                    Designation = User.Designation.DesignationName,
+                    Department = GetDepartmentByID(User.DesignationId),
+                    Gender = User.Gender.Name,
+                    IsReviewer = User.IsReviewer
+
+                });
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByIsReviewer(bool IsReviewer)", exception, IsReviewer));
                 throw;
+            }
+        }
+
+
+        private string GetDepartmentByID(int DepartmentId)
+        {
+            if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
+            try
+            {
+                var department = database.GetDepartments().Where(item => item.DepartmentId == DepartmentId).First();
+                return department.DepartmentName;
+               
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetDepartmentByID(int DepartmentId)", exception, DepartmentId));
+                throw;
+            }
+        }
+        public IEnumerable<Object> GetDesignations()
+        {
+            try
+            {
+                var designations = database.GetDesignations().Select(item => new
+                {
+                    DesignationId = item.DesignationId,
+                    Name = item.DesignationName
+                });
+                return designations;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", " GetDesignations()", exception));
+                throw exception;
+            }
+        }
+
+        public IEnumerable<object> GetDepartments()
+        {
+            try
+            {
+                var Departments = database.GetDepartments().Select(item => new
+                {
+                    DepartmentId = item.DepartmentId,
+                    Name = item.DepartmentName
+                });
+                return Departments;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
+                throw exception;
             }
         }
 
