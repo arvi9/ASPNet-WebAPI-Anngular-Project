@@ -33,7 +33,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle(Article article)", exception, article));
 
-                throw exception;
+               return false;
+
 
             }
         }
@@ -51,7 +52,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(Article article)", exception, article));
 
-                throw exception;
+                return false;
+
 
             }
         }
@@ -76,7 +78,8 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception));
-                throw exception;
+                return false;
+
             }
         }
 
@@ -96,7 +99,8 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticle(int ArticleId)", exception, ArticleId));
-                throw exception;
+                 return false;
+
             }
         }
         public Article GetArticleByID(int ArticleId)
@@ -148,7 +152,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddComment(ArticleComment comment)", exception, comment));
 
-                throw exception;
+               return false;
+
 
             }
         }
@@ -187,7 +192,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddLike(ArticleLike like)", exception, like));
 
-                throw exception;
+               return false;
+
             }
         }
 

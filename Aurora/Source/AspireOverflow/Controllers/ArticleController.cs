@@ -123,12 +123,12 @@ public class ArticleController : ControllerBase
     public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID)
     {
         if (ArticleId <= 0 && ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4");
-         var CurrentUserId = User.FindFirst("userId").Value;
+        var CurrentUserId = User.FindFirst("userId").Value;
         int UserId = CurrentUserId != null ? Convert.ToInt32(CurrentUserId) : 0;
         try
         {
 
-            return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID,UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest($"Error Occurred while updating the status of the Article:{ArticleId}");
+            return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID, UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest($"Error Occurred while updating the status of the Article:{ArticleId}");
         }
         catch (ItemNotFoundException exception)
         {
@@ -143,7 +143,7 @@ public class ArticleController : ControllerBase
     }
 
 
-    
+
     [HttpDelete]
     public async Task<ActionResult> DeleteArticleByArticleId(int ArticleId)
     {
@@ -166,7 +166,7 @@ public class ArticleController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult> GetLatestArticles(int Range=0)
+    public async Task<ActionResult> GetLatestArticles(int Range = 0)
     {
         try
         {
@@ -188,7 +188,7 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetTrendingArticles(int Range=0)
+    public async Task<ActionResult> GetTrendingArticles(int Range = 0)
     {
         try
         {
@@ -259,7 +259,7 @@ public class ArticleController : ControllerBase
 
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("ArticleController","GetArticlesByUserId(int UserId)", exception, UserId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByUserId(int UserId)", exception, UserId));
             return Problem($"Error Occured while processing your request with UserId in Articles :{UserId}");
         }
 
@@ -329,6 +329,8 @@ public class ArticleController : ControllerBase
 
 
         }
+
+
 
     }
 

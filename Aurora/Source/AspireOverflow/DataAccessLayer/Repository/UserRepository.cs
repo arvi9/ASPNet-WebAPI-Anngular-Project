@@ -37,7 +37,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser(User user)", exception, user));
-                throw;
+                return false;
 
             }
 
@@ -58,7 +58,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "RemoveUser(int UserId)", exception, UserId));
-                throw;
+                return false;
 
             }
 

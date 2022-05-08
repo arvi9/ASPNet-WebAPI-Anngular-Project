@@ -17,8 +17,8 @@ namespace AspireOverflow.DataAccessLayer
         private ILogger<QueryService> _logger;
         public QueryRepository(AspireOverflowContext context, ILogger<QueryService> logger)
         {
-            _context = context ?? throw new NullReferenceException("Context can't be Null");
-            _logger = logger ?? throw new NullReferenceException("logger can't be Null"); ;
+            _context = context;
+            _logger = logger ;
 
 
         }
@@ -41,7 +41,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddQuery(Query query)", exception, query));
 
-                throw exception;
+               return false;
+
 
             }
 
@@ -62,7 +63,8 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddComment(QueryComment comment)", exception, comment));
-                throw exception;
+                return false;
+
             }
         }
 
@@ -88,7 +90,8 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "UpdateQuery(int QueryId, bool IsSolved, bool IsDelete)", exception, IsSolved ? IsSolved : IsDelete));
-                throw exception;
+                return false;
+
             }
         }
 
