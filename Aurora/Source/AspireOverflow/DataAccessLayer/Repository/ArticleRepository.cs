@@ -3,6 +3,7 @@
 using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.CustomExceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspireOverflow.DataAccessLayer
 {
@@ -124,7 +125,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles.ToList();
+                var ListOfArticle = _context.Articles.Include("ArticleStatus").ToList();
                 return ListOfArticle;
 
             }

@@ -122,8 +122,8 @@ public class ArticleController : ControllerBase
     [HttpPatch]
     public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID)
     {
-        if (ArticleId <= 0 && ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4");
-        var CurrentUserId = User.FindFirst("userId").Value;
+        if (ArticleId <= 0 || ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4");
+        var CurrentUserId = User.FindFirst("UserId").Value;
         int UserId = CurrentUserId != null ? Convert.ToInt32(CurrentUserId) : 0;
         try
         {
@@ -307,9 +307,29 @@ public class ArticleController : ControllerBase
 
         }
 
-
     }
 
+[HttpGet]
+   public async Task<IActionResult> GetArticlesByArticleStatusId(int ArticleStatusID)
+        {
+
+            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+            try
+            {
+              
+                var ListOfArticles= _articleService.GetArticlesByArticleStatusId(ArticleStatusID);
+                return await Task.FromResult(Ok(ListOfArticles));
+               
+                
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByArticleStatusId(int ArticleStatusID)", exception), ArticleStatusID);
+
+                throw exception;
+            }
+
+        }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int ArticleId)

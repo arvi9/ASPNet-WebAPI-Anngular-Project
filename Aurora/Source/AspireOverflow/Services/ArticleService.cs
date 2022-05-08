@@ -293,12 +293,15 @@ namespace AspireOverflow.Services
             if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
+              
                 var ListOfArticles= GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
+                  if(ArticleStatusID==2) ListOfArticles.Where(Item =>Item.ArticleStatusID==3);
                 return ListOfArticles.Select(e => new{
                     ArticleId =e.ArtileId,
                     title=e.Title,
                     content=e.Content,
                     image=e.Image,
+                    Status=e.ArticleStatus.Status
                 });
             }
             catch (Exception exception)

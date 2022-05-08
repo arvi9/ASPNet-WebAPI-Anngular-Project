@@ -19,7 +19,7 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(query.Content)) throw new ValidationException("content cannot be null or empty");
             else if (query.Title.Length > 60) throw new ValidationException("Title length must be less than 60 charcter");
             else if (query.IsActive != true) throw new ValidationException("IsActive must be true");
-            else if (query.IsSolved = false) throw new ValidationException("IsSolved must be false");
+            else if (query.IsSolved != false) throw new ValidationException("IsSolved must be false");
 
             else return true;
         }
@@ -45,7 +45,7 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
             else if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
-            else if (article.ArticleStatusID == 1) throw new ValidationException("ArticlestatusID mst be 1");
+            else if (article.ArticleStatusID != 1) throw new ValidationException("ArticlestatusID must be 1");
             else return true;
         }
 

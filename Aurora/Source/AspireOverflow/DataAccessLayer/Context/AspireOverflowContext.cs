@@ -53,8 +53,8 @@ namespace AspireOverflow.DataAccessLayer
              modelBuilder.Entity<ArticleStatus>(entity =>
             {
                 entity.HasData(new ArticleStatus { ArticleStatusID = 1, Status = "InDraft" });
-                entity.HasData(new ArticleStatus { ArticleStatusID = 2, Status = "ToBeReviewed" });
-                entity.HasData(new ArticleStatus { ArticleStatusID = 3, Status = "UnderReview" });
+                entity.HasData(new ArticleStatus { ArticleStatusID = 2, Status = "To Be Reviewed" });
+                entity.HasData(new ArticleStatus { ArticleStatusID = 3, Status = "Under Review" });
                  entity.HasData(new ArticleStatus { ArticleStatusID = 4, Status = "Published" });
             });
 
