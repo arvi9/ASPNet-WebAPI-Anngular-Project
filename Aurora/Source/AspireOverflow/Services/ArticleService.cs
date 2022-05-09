@@ -108,6 +108,7 @@ namespace AspireOverflow.Services
                     articleId=article.ArtileId,
                     PublishedDate =article.Datetime,
                     title=article.Title,
+                    AuthorName=article.User.FullName,
                     content=article.Content,
                     Likes= GetLikesCount(article.ArtileId),
                     comments=GetComments(article.ArtileId) 
@@ -128,11 +129,12 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.CreatedOn);
-                return ListOfArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
+                return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
             }
 
@@ -156,11 +158,12 @@ namespace AspireOverflow.Services
                 {
                     TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id));
                 }
-                return TrendingArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
+                return TrendingArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
             }
             catch (Exception exception)
@@ -177,11 +180,12 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles= GetArticles().Where(item=>item.CreatedBy==UserId).ToList();
-                 return ListOfArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
+                  return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
                 
             }
@@ -221,11 +225,12 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = database.GetArticles();
-               return ListOfArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
+                return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
             }
 
@@ -245,11 +250,12 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles= GetArticles().Where(article => article.Title.Contains(Title));
-                 return ListOfArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
+                return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
             }
             catch (Exception exception)
@@ -270,17 +276,43 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles= GetArticles().Where(article => article.User.FullName.Contains(AuthorName));
-                return ListOfArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
+                return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
             }
             catch (Exception exception)
             {
 
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByAuthor(string AuthorName)", exception, AuthorName));
+
+                throw exception;
+            }
+
+        }
+
+        
+        public IEnumerable<object> GetArticlesByReviewerId(int ReviewerId)
+        {
+            if (ReviewerId <=0 ) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
+            try
+            {
+                var ListOfArticles= GetArticles().Where(article => article.ReviewerId==ReviewerId);
+                return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
+                });
+            }
+            catch (Exception exception)
+            {
+
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", " GetArticlesByReviewerId(int ReviewerId)", exception, ReviewerId));
 
                 throw exception;
             }
@@ -296,12 +328,12 @@ namespace AspireOverflow.Services
               
                 var ListOfArticles= GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
                   if(ArticleStatusID==2) ListOfArticles.Where(Item =>Item.ArticleStatusID==3);
-                return ListOfArticles.Select(e => new{
-                    ArticleId =e.ArtileId,
-                    title=e.Title,
-                    content=e.Content,
-                    image=e.Image,
-                    Status=e.ArticleStatus.Status
+                return ListOfArticles.Select(Article => new{
+                    ArticleId =Article.ArtileId,
+                    title=Article.Title,
+                      AuthorName=Article.User.FullName,
+                    content=Article.Content,
+                    image=Article.Image,
                 });
             }
             catch (Exception exception)
@@ -363,7 +395,7 @@ namespace AspireOverflow.Services
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                if (database.GetLikes().Where(item => item.UserId == UserId && item.ArticleId == ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserID");
+                if (database.GetLikes().ToList().Find(item => item.UserId == UserId && item.ArticleId == ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserID");
                 var ArticleLike = new ArticleLike();
                 ArticleLike.ArticleId = ArticleId;
                 ArticleLike.UserId = UserId;
@@ -392,5 +424,6 @@ namespace AspireOverflow.Services
             }
         }
 
+       
     }
 }

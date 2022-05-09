@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspireOverflow.Models
 {
-   
-    public partial class User 
+
+    public partial class User
     {
         public User()
         {
@@ -30,28 +30,28 @@ namespace AspireOverflow.Models
 
         public string EmailAddress { get; set; } = null!;
 
-       [Column(TypeName="nvarchar(max)")]
+        [Column(TypeName = "nvarchar(max)")]
         public string Password { get; set; } = null!;
 
 
         public DateTime DateOfBirth { get; set; }
 
-        public int VerifyStatusID { get; set; }=3;
+        public int VerifyStatusID { get; set; } = 3;
 
-        public bool IsReviewer{ get; set; }
+        public bool IsReviewer { get; set; }
 
-        public int UserRoleId { get; set; }=2;
+        public int UserRoleId { get; set; } = 2;
 
 
         public int DesignationId { get; set; }
 
-        public DateTime CreatedOn { get; set; }=DateTime.Now;
-     
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
 
         public DateTime? UpdatedOn { get; set; }
         public int? UpdatedBy { get; set; }
 
-        
+
         [ForeignKey("DesignationId")]
         [InverseProperty("Users")]
 
@@ -64,7 +64,7 @@ namespace AspireOverflow.Models
         [InverseProperty("Users")]
         public virtual UserRole? UserRole { get; set; } = null!;
 
-          [ForeignKey("VerifyStatusID")]
+        [ForeignKey("VerifyStatusID")]
         [InverseProperty("Users")]
         public virtual VerifyStatus? VerifyStatus { get; set; } = null!;
 
@@ -72,14 +72,16 @@ namespace AspireOverflow.Models
         public virtual ICollection<Query>? Queries { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<QueryComment>? QueryComments { get; set; }
-             [InverseProperty("User")]
+        [InverseProperty("User")]
         public virtual ICollection<ArticleComment>? ArticleComments { get; set; }
-             [InverseProperty("User")]
+        [InverseProperty("User")]
         public virtual ICollection<Article>? Articles { get; set; }
-      
-     
+        [InverseProperty("LikedUser")]
+        public virtual ICollection<ArticleLike> Likes { get; set; }
 
-       
+
+
+
 
     }
 }

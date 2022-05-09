@@ -66,7 +66,34 @@ namespace AspireOverflow.Services
                 throw exception;
             }
         }
-        private IEnumerable<User> GetUsers()
+
+                public object GetUserByID(int UserId)
+        {
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+            try
+            {
+                var User = database.GetUserByID(UserId);
+                return new
+                {
+                    UserId = User.UserId,
+                    Name = User.FullName,
+                    EmployeeId = User.AceNumber,
+                    Email = User.EmailAddress,
+                    DateOfBirth = User.DateOfBirth,
+                    Designation = User.Designation.DesignationName,
+                    Department = GetDepartmentByID(User.DesignationId),
+                    Gender = User.Gender.Name,
+                    IsReviewer = User.IsReviewer
+
+                };
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByID(int UserId)", exception, UserId));
+                throw;
+            }
+        }
+        public IEnumerable<User> GetUsers()
         {
             try
             {
@@ -104,32 +131,7 @@ namespace AspireOverflow.Services
             }
         }
 
-        public object GetUserByID(int UserId)
-        {
-            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
-            try
-            {
-                var User = database.GetUserByID(UserId);
-                return new
-                {
-                    UserId = User.UserId,
-                    Name = User.FullName,
-                    EmployeeId = User.AceNumber,
-                    Email = User.EmailAddress,
-                    DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation.DesignationName,
-                    Department = GetDepartmentByID(User.DesignationId),
-                    Gender = User.Gender.Name,
-                    IsReviewer = User.IsReviewer
 
-                };
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByID(int UserId)", exception, UserId));
-                throw;
-            }
-        }
 
         public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID)
         {
@@ -252,6 +254,8 @@ namespace AspireOverflow.Services
                 throw exception;
             }
         }
+
+ 
 
     }
 

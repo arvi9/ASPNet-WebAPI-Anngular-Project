@@ -115,8 +115,10 @@ public class UserController : ControllerBase
         }
     }
 
+    
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetUsersByVerifyStatusId(int VerifyStatusID)
+    public async Task<ActionResult> GetUsersByVerifyStatusId(int VerifyStatusID)
     {
         if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}");
         try
@@ -132,7 +134,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetUsersByUserRoleId(int RoleId)
+    public async Task<ActionResult> GetUsersByUserRoleId(int RoleId)
     {
         if (RoleId <= 0 && RoleId > 2) return BadRequest($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}");
         try
@@ -148,7 +150,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerator<User>>> GetUsersByIsReviewer(bool IsReviewer)
+    public async Task<ActionResult> GetUsersByIsReviewer(bool IsReviewer)
     {
 
         try

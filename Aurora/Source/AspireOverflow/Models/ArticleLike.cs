@@ -17,9 +17,10 @@ namespace AspireOverflow.Models
 
         [ForeignKey("ArticleId")]
         [InverseProperty("ArticleLikes")]
-        public virtual Article Article { get; set; }
+        public virtual Article? Article { get; set; }=null!;
     
     [ForeignKey("UserId")]
-    public virtual User? LikedUser { get; set; }
+     [InverseProperty("Likes")]
+    public virtual User? LikedUser { get; set; }=null!;
 }
 }

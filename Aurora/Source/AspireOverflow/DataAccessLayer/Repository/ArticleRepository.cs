@@ -125,7 +125,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles.Include("ArticleStatus").ToList();
+                var ListOfArticle = _context.Articles.Include("ArticleStatus").Include("User").ToList();
                 return ListOfArticle;
 
             }
