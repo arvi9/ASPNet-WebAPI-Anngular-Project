@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { User } from 'Models/User';
 @Component({
@@ -8,32 +8,21 @@ import { User } from 'Models/User';
 })
 export class EmployeePageComponent implements OnInit {
 
-
+  @Input() Usersrc : string="https://localhost:7197/User/GetUsersByUserRoleId?RoleId=2";
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    // this.http
-    // .get<any>(this.)
-    // .subscribe((data) => {
-    // this.data = data;
-
+    this.http
+    .get<any>(this.Usersrc)
+    .subscribe((data)=>{
+      this.data =data;
+      console.log(data);
+    });
   }
-  public data: any[] = [{name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'yuui5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'gowtham',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'yuui5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'mani',email:'mani@gmail.com',aceno:'ace5656'},
-  {name:'gowtham',email:'mani@gmail.com',aceno:'ace5656'}
 
+  public data: User[] = []
  
-  ];
+ 
     
   
 

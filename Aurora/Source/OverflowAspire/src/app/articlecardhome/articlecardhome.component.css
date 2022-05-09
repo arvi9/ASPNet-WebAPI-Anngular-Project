@@ -191,7 +191,7 @@ body {
 }
 
 .img-card.iCard-style2 .card-link a:hover {
-    background: #000
+    /* background: #000 */
 }
 
 .img-card.iCard-style2 .card-link a:hover span {

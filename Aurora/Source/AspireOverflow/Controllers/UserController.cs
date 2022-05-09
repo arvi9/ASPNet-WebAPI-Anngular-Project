@@ -98,9 +98,9 @@ public class UserController : ControllerBase
         //string UserId = User.FindFirst("UserId").Value;
         try
         {
-            var User = _UserService.GetUserByID(UserId);
+           // var User = _UserService.GetUserByID(UserId);
 
-            return await Task.FromResult(Ok(User));
+            return await Task.FromResult(Ok( _UserService.GetUserByID(UserId)));
 
         }
         catch (ItemNotFoundException exception)

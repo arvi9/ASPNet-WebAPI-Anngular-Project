@@ -8,7 +8,7 @@ import { data } from 'jquery';
   styleUrls: ['./specificarticle.component.css']
 })
 export class SpecificarticleComponent implements OnInit {
-  @Input() Articlesrc : string="https://localhost:7197/Article/GetArticleById?ArticleId=1009";
+  @Input() Articlesrc : string="https://localhost:7197/Article/GetArticleById?ArticleId=4";
   
   totalLength :any;
   page : number= 1;

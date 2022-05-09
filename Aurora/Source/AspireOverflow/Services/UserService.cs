@@ -76,9 +76,9 @@ namespace AspireOverflow.Services
                 return new
                 {
                     UserId = User.UserId,
-                    Name = User.FullName,
+                    fullName = User.FullName,
                     EmployeeId = User.AceNumber,
-                    Email = User.EmailAddress,
+                    email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation.DesignationName,
                     Department = GetDepartmentByID(User.DesignationId),
@@ -113,7 +113,7 @@ namespace AspireOverflow.Services
                 return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID).Select(User => new
                 {
                     UserId = User.UserId,
-                    Name = User.FullName,
+                    fullName = User.FullName,
                     EmployeeId = User.AceNumber,
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
@@ -141,7 +141,7 @@ namespace AspireOverflow.Services
                 return GetUsers().Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Select(User => new
                 {
                     UserId = User.UserId,
-                    Name = User.FullName,
+                    fullName = User.FullName,
                     EmployeeId = User.AceNumber,
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,

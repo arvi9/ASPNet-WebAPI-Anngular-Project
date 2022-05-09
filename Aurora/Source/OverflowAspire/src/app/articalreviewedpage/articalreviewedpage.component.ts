@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { Article } from 'Models/Article';
 
 @Component({
   selector: 'app-articalreviewedpage',
@@ -6,16 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./articalreviewedpage.component.css']
 })
 export class ArticalreviewedpageComponent implements OnInit {
-
-  constructor() { }
-
+  @Input() Usersrc : string="https://localhost:7197/Article/GetArticlesByArticleStatusId?ArticleStatusID=4";
+  
+  totalLength :any;
+  page : number= 1;
+ 
+  constructor(private http: HttpClient){}
+ 
   ngOnInit(): void {
+    this.http
+    .get<any>(this.Usersrc)
+    .subscribe((data)=>{
+      this.data =data;
+      this.totalLength=data.length;
+      console.log(data);
+    });
   }
-  public data: any[] = [{ArticleID:'A1',AuthorName:'Sandy',ArticleName:'Nature',PublishedDate:'02-09-2008'},
-  {ArticleID:'A1',AuthorName:'irfan',ArticleName:'Nature',PublishedDate:'02-09-2008'},
-  {ArticleID:'A1',AuthorName:'Sandy',ArticleName:'Nature',PublishedDate:'02-09-2008'},
-  {ArticleID:'A1',AuthorName:'ranjith',ArticleName:'Nature',PublishedDate:'02-09-2008'},
-  {ArticleID:'A1',AuthorName:'Sandy',ArticleName:'Nature',PublishedDate:'02-09-2008'},
+  public data: Article[] = [
  
 
  

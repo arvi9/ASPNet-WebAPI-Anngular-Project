@@ -3,8 +3,11 @@ export interface User {
     fullName: string;
     genderId: number;
     aceNumber: string;
-    emailAddress: string;
+    email: string;
+    department: string;
+    designation :string;
     password: string;
+    employeeId :string;
     dateOfBirth: string;
     verifyStatusID: number;
     isReviewer: boolean;

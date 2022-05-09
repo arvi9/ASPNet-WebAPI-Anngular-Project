@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:'',component:RegisterComponent},
   {path:'Home',component:HomepageComponent},
   {path:'MyProfile',component:ProfileComponent}, 
-  {path:'Articles',component:ArticlesComponent},
+  {path:'Articles/:articleId',component:ArticlesComponent},
   {path:'LatestArticles',component:LatestArticlepageComponent},
   {path:'TrendingArticles',component:TrendingArticlepageComponent},
   {path:'specificarticle',component:SpecificarticleComponent},

@@ -77,7 +77,7 @@ namespace AspireOverflow.Models
         [InverseProperty("User")]
         public virtual ICollection<Article>? Articles { get; set; }
         [InverseProperty("LikedUser")]
-        public virtual ICollection<ArticleLike> Likes { get; set; }
+        public virtual ICollection<ArticleLike>? Likes { get; set; }
 
 
 

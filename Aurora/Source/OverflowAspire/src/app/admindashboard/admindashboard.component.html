@@ -12,12 +12,12 @@
     <app-sidenav></app-sidenav>
     <h2 class="heading">Overview of Dashboard</h2>
     <br><br>
-<div class="d-flex">
-    <div class="Card d-md-inline">
+<div class="Container">
+
         <div class="cardRight" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">4250</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfUsers}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Users</p>
 
             </div>
@@ -26,7 +26,7 @@
         <div class="cardLeft" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">64</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfReviwers}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Reviewers</p>
 
             </div>
@@ -35,7 +35,7 @@
         <div class="cardBottom" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">2500</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfArticles}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Articles</p>
 
             </div>
@@ -45,7 +45,7 @@
         <div class="cardLeft1" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">150</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.totaNumberofSolvedQueries}}</h5>
                 <p class="card-text" style="text-align: center;">Solved Query</p>
 
             </div>
@@ -55,7 +55,7 @@
         <div class="cardBottom1" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">35</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfUnSolvedQueries}}</h5>
                 <p class="card-text" style="text-align: center;">UnSolved Query</p>
 
             </div>
@@ -65,5 +65,5 @@
 </div>
 
 
-</div>
+
 <app-footer></app-footer>

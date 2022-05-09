@@ -9,7 +9,7 @@ export class Article {
     articleStatusID: number=0;
     reviewerId: number=0;
     createdBy:number=0;
-   
+    authorName:string='';
     articleComments:ArticleComments[]=[];
     createdOn:Date=new Date();
     getlike:articleLikes[]=[];

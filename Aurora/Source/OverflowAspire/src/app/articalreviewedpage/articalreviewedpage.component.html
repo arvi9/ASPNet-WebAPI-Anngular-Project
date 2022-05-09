@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div style="margin:20px; margin-left:13%">
+<div style="margin:20px;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -13,7 +13,7 @@
     </nav>
 </div>
 <div class="Content" style="min-height: 100vh;">
-<app-reviewersidenav></app-reviewersidenav>
+<!-- <app-reviewersidenav></app-reviewersidenav> -->
 <h1>Artical Reviewed</h1>
 <div class="Container">
     <div >
@@ -28,10 +28,10 @@
         </thead>
         <tbody>
             <tr class="" *ngFor="let item of data">
-                <td>{{item.ArticleID}}</td>
-                <td>{{item.AuthorName}}</td>
-                <td>{{item.ArticleName}}</td>
-                <td>{{item.PublishedDate}}</td>
+                <td>{{item.articleId}}</td>
+                <td>{{item.authorName}}</td>
+                <td>{{item.title}}</td>
+                <td>03.02.2020</td>
               
                 
             </tr>

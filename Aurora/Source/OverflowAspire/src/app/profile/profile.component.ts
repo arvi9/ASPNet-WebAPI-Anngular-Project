@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { User } from 'Models/User';
 @Component({
   selector: 'app-profile',
@@ -6,14 +7,31 @@ import { User } from 'Models/User';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  constructor() { }
-  user:User={
+  @Input() Usersrc : string="https://localhost:7197/User/GetUser?UserId=1";
+  
+  totalLength :any;
+  page : number= 1;
+ 
+  constructor(private http: HttpClient){}
+ 
+  ngOnInit(): void {
+    this.http
+    .get<any>(this.Usersrc)
+    .subscribe((data)=>{
+      this.user =data;
+      this.totalLength=data.length;
+      console.log(data);
+    });
+  }
+  public user:User={
     userId: 0,
     fullName: 'Pooja',
     genderId: 1,
     aceNumber: 'ACE0564',
-    emailAddress: 'pooja@gmail.com',
+    employeeId:'',
+    email: 'pooja@gmail.com',
+    department:'dotnet',
+    designation:'',
     password: '',
     dateOfBirth: '05/05/2001',
     verifyStatusID: 0,
@@ -22,7 +40,5 @@ export class ProfileComponent implements OnInit {
     designationId: 0
   }
 
-  ngOnInit(): void {
-  }
-
+  
 }

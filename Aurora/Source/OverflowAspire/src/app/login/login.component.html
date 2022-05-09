@@ -12,7 +12,7 @@
 				<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Email </label>
-						<input type="text" class="form-control" name="emailAddress" [(ngModel)]="user.emailAddress">
+						<input type="text" class="form-control" name="emailAddress" [(ngModel)]="user.email">
 					</div>
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Password</label>
@@ -23,7 +23,7 @@
 						<button  class="custom-btn btn-1"
 						routerLink="/Home" type="Submit" routerLinkActive="active">Login</button>
 					</div>
-					<div class="link d-md-flex text-center">
+					<div class="container">
 							<span> <a class="d-block  mt-2 small text-center" routerLink="/" >New User? Sign Up</a>
 							</span>
 					</div>

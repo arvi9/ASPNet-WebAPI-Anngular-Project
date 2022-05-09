@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit,Input } from '@angular/core';
+import { User } from 'Models/User';
 
 @Component({
   selector: 'app-userverificationpage',
@@ -7,15 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserverificationpageComponent implements OnInit {
 
-  constructor() { }
+  @Input() Usersrc : string="https://localhost:7197/User/GetUsersByVerifyStatusId?VerifyStatusID=3";
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http
+    .get<any>(this.Usersrc)
+    .subscribe((data)=>{
+      this.data =data;
+      console.log(data);
+    });
   }
-  public data: any[] = [{Name:'Mani',DateOfBirth:'02-12-2009',ACENumber:'ace5656',Role:'SSE',Email:'mani@gmail.com'},
-  {Name:'Mani',DateOfBirth:'02-12-2009',ACENumber:'ace5656',Role:'SSE',Email:'mani@gmail.com'},
-  {Name:'Mani',DateOfBirth:'02-12-2009',ACENumber:'ace5656',Role:'SSE',Email:'mani@gmail.com'},
-  {Name:'Mani',DateOfBirth:'02-12-2009',ACENumber:'ace5656',Role:'SSE',Email:'mani@gmail.com'},
-  
+  public data: User[] = [
   
   
   ];

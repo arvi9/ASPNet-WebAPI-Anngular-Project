@@ -15,7 +15,7 @@
 <div class="Content" style="min-height: 100vh;">
 <app-sidenav></app-sidenav>  
 <h1>Employee Details</h1>
-<div class="Container">
+<div class="Container justify-content-center">
     <div >
     <table datatable class="table table-striped row-border hover">
         <thead>
@@ -29,8 +29,8 @@
         </thead>
         <tbody>
             <tr class="" *ngFor="let item of data">
-                <td>{{item.name}}</td>
-                <td>{{item.aceno}}</td>
+                <td>{{item.fullName}}</td>
+                <td>{{item.employeeId}}</td>
                 <td>{{item.email}}</td>
                 <td><input type="checkbox"></td>
                 <td><button>Disable</button></td>

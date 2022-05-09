@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div style="margin:20px; margin-left:13%">
+<div style="margin:20px">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -9,16 +9,16 @@
     </nav>
 </div>
 <div class="Content" style="min-height: 100vh;">
-    <app-reviewersidenav></app-reviewersidenav>
+    <!-- <app-reviewersidenav></app-reviewersidenav> -->
     <h2 class="heading">Overview of Dashboard</h2><br>
     <br><br>
-
-    <br><br><div class="d-flex">
+   
+    <br><br><div class="Container" >
         <div class="Card d-md-inline">
             <div class="cardRight" style="width: 18rem;">
              
               <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">50</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.articlesTobeReviewed}}</h5>
                 <p class="card-text" style="text-align: center;">  Article To Review</p>
              
               </div>
@@ -27,7 +27,7 @@
             <div class="cardLeft" style="width: 18rem;">
              
               <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">605</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.articlesReviewed}}</h5>
                 <p class="card-text" style="text-align: center;"> Article Reviewed</p>
              
               </div>
@@ -36,7 +36,7 @@
             <div class="cardBottom" style="width: 18rem;">
              
               <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">1500</h5>
+                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfArticles}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Article</p>
              
               </div>
@@ -45,5 +45,6 @@
           </div>
          
 </div>
+
 
 <app-footer></app-footer>
