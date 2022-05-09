@@ -16,9 +16,9 @@
     </nav>
 </div>
 <!-- Breadcrums End-->
-<div>
-  <div class="container">
-    <a [routerLink]="['../report-spam']"><button type="button" class="custom-btn btn-1 btn-3" id="button-code" >Report Spam</button></a>
+
+  <div class="container mb-4">
+    <a [routerLink]="['../report-spam']"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code" >Report Spam</button></a>
   </div>
 
   <div class="container p-5 my-1 border">
@@ -72,11 +72,11 @@
           </div>
        
         <div class="mt-2 text-right">
-          <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">Post comment</button>
+          <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">Post</button>
         </div>
       </form>
         <div class="mt-2 ">
-          <button type="button " class="btnpad1 btn-1" (click)="openpopup()">
+          <button type="button " class="custom-btn btn-1" (click)="openpopup()">
             Add code
           </button>
               </div>
@@ -100,7 +100,7 @@
 
                   <div class="modal-footer">
                     <button type="button" class="custom-btn btn-1 btn-2" (click)="closePopup()">Cancel</button>
-                    <button type="submit" class="custom-btn btn-1 btn-2">Post</button>
+                    <button class=" custom-btn btn-1" type="button">Post </button>
                   </div>
                 </form>
                   <!-- Modal footer -->
@@ -109,7 +109,7 @@
               </div>
             </div>
           </div>
-  </div>
+
           <app-footer></app-footer>
       
 

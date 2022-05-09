@@ -15,19 +15,19 @@ import { SpecificarticleComponent } from './specificarticle/specificarticle.comp
 import { SpecificqueryComponent } from './specificquery/specificquery.component';
 import { TrendingArticlepageComponent } from './trending-articlepage/trending-articlepage.component';
 import { TrendingQueriespageComponent } from './trending-queriespage/trending-queriespage.component';
+import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
 
 const routes: Routes = [
   {path:'Login',component:LoginComponent},
   {path:'',component:RegisterComponent},
   {path:'Home',component:HomepageComponent},
-  {path:'MyProfile',component:ProfileComponent},
-  
+  {path:'MyProfile',component:ProfileComponent}, 
   {path:'Articles',component:ArticlesComponent},
   {path:'LatestArticles',component:LatestArticlepageComponent},
   {path:'TrendingArticles',component:TrendingArticlepageComponent},
-  {path:'SpecificArticle',component:SpecificarticleComponent},
+  {path:'specificarticle',component:SpecificarticleComponent},
   {path:'MyArticles',component:MyArticlesComponent},
-
+  {path:'CreateArticle',component:CreateArticlePageComponent},
   {path:'Queries',component:QueriesComponent},
   {path:'LatestQueries',component:LatestQueriesComponent},
   {path:'TrendingQueries',component:TrendingQueriespageComponent},
@@ -35,7 +35,6 @@ const routes: Routes = [
   {path:'RaiseQuery',component:RaisequeryComponent},
   {path:'MyQueries',component:MyQueriesComponent},
   {path:'RaiseQuery',component:RaisequeryComponent}
-  
 ];
 
 @NgModule({
