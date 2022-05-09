@@ -18,11 +18,11 @@ import { TrendingQueriespageComponent } from './trending-queriespage/trending-qu
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
 
 const routes: Routes = [
-  {path:'Login',component:LoginComponent},
-  {path:'',component:RegisterComponent},
+  {path:'',component:LoginComponent},
+  // {path:'',component:RegisterComponent},
   {path:'Home',component:HomepageComponent},
   {path:'MyProfile',component:ProfileComponent}, 
-  {path:'Articles/:articleId',component:ArticlesComponent},
+  {path:'Articles',component:ArticlesComponent},
   {path:'LatestArticles',component:LatestArticlepageComponent},
   {path:'TrendingArticles',component:TrendingArticlepageComponent},
   {path:'specificarticle',component:SpecificarticleComponent},

@@ -18,15 +18,18 @@ export class RegisterComponent implements OnInit {
     fullName: '',
     genderId: 0,
     aceNumber: '',
-    emailAddress: '',
+    email: '',
+    department:'',
+    employeeId:'',
+    designation:'',
     password: '',
-    dateOfBirth:'',
+    dateOfBirth: '',
     verifyStatusID: 0,
     isReviewer: false,
     userRoleId: 0,
-    designationId: 0,
-
+    designationId: 0
   }
+   
 dobmessage:string=''
 message:string=''
   dept = '';

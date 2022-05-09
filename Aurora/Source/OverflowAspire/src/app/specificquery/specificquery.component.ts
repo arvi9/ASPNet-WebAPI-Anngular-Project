@@ -11,7 +11,7 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
   styleUrls: ['./specificquery.component.css']
 })
 export class SpecificqueryComponent implements OnInit {
- @Input() Querysrc : string="https://localhost:7197/Query/GetQuery?QueryId=1021";
+ @Input() Querysrc : string="https://localhost:7197/Query/GetQuery?QueryId=2";
  totalLength :any;
  page : number= 1;
 

@@ -76,7 +76,7 @@
                             <input type="text" #emailAddress="ngModel"
                                 pattern="([a-zA-Z0-9-_\.]+)@(aspiresys.com|aspiresystems.biz)" class="form-control"
                                 required [class.is-invalid]="emailAddress.invalid && emailAddress.touched"
-                                name="emailAddress" [(ngModel)]="user.emailAddress">
+                                name="emailAddress" [(ngModel)]="user.email">
                             <div *ngIf="emailAddress.errors && (emailAddress.invalid || emailAddress.touched)">
                                 <small class="text-danger" *ngIf="emailAddress.errors['pattern']">Mail Address
                                     is
@@ -135,5 +135,5 @@
                 <div class="text-center mb-2 p-2">
                     <button [disabled]="register.form.invalid"
                         class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="Submit"
-                        (click)="userdata()">Register</button>
+                        (click)="userdata()" routerLink="\Login">Register</button>
                 </div>

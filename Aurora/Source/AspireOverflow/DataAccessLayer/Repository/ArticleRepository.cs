@@ -110,7 +110,7 @@ namespace AspireOverflow.DataAccessLayer
             Article ExistingArticle;
             try
             {
-                ExistingArticle = _context.Articles.Find(ArticleId);
+                ExistingArticle = GetArticles().Where(item=>item.ArtileId==ArticleId).First();
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)
@@ -119,7 +119,6 @@ namespace AspireOverflow.DataAccessLayer
                 throw exception;
             }
         }
-
 
         public IEnumerable<Article> GetArticles()
         {
