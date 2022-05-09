@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'Models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,28 +8,27 @@ import { User } from 'Models/User';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  register: any;
 
-  constructor() { }
+ 
+  
+  constructor(private router:Router) { }
   user:User={
     userId: 0,
     fullName: '',
     genderId: 0,
     aceNumber: '',
-    email: '',
-    department:'',
-    designation:'',
+    emailAddress: '',
     password: '',
-    dateOfBirth: '',
+    dateOfBirth:'',
     verifyStatusID: 0,
-    employeeId:'',
     isReviewer: false,
     userRoleId: 0,
-    designationId: 0
+    designationId: 0,
+
   }
-  
-
-  
-
+dobmessage:string=''
+message:string=''
   dept = '';
   _Designation = '';
   designation: any[] = [];
@@ -38,7 +38,8 @@ export class RegisterComponent implements OnInit {
 
   }
 
-
+	
+  
   filterDropdown() {
 
   
@@ -49,15 +50,30 @@ export class RegisterComponent implements OnInit {
         console.log("true")
       }
     }
+  }
+    validateDateOfBirth(){
+     if(Date.now.toString()>this.user.dateOfBirth){
+  
+       this.dobmessage="Date of birth should be valid";
+       console.log(this.dobmessage);
+// return this.dobmessage;
+    }
+      }
 
+  // validateconfirmpassword(){
+  //   if(this.user.password==this.confirmpassword){
+  //     return null;}
+  //     else{
+  //       this.message="Password do not match";
+  //       return this.message;
+  //     }
+
+  //   }
   
 
-  }
-  onSubmit(){
 
-  }
-
-
+gender=''
+  Gender:string[]=['Male','Female','Others']
 
 
 
@@ -79,5 +95,12 @@ export class RegisterComponent implements OnInit {
     designationName: 'Trainer'
   }]
 
-
+  userdata()
+  {
+    this.router.navigate(['/Login']);
+    this.register.setMessage(this.user);
+    localStorage.setItem(this.user.fullName, JSON.stringify(this.user));
+    // this.login.userName(this.userModel);
+    // this.login.display(this.userModel);
+  }
 }
