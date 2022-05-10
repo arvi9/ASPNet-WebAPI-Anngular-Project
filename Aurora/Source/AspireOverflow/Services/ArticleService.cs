@@ -110,6 +110,7 @@ namespace AspireOverflow.Services
                     title=article.Title,
                     AuthorName=article.User.FullName,
                     content=article.Content,
+                    image=article.Image,
                     Likes= GetLikesCount(article.ArtileId),
                     comments=GetComments(article.ArtileId) 
                 };

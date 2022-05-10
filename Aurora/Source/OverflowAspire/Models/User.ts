@@ -13,4 +13,5 @@ export interface User {
     isReviewer: boolean;
     userRoleId: number;
     designationId: number;
+    
 }

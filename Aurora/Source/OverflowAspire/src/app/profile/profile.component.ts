@@ -22,8 +22,11 @@ export class ProfileComponent implements OnInit {
       this.totalLength=data.length;
       console.log(data);
     });
+    
   }
   public user:User={
+    
+    
     userId: 0,
     fullName: 'Pooja',
     genderId: 1,
@@ -38,7 +41,8 @@ export class ProfileComponent implements OnInit {
     isReviewer: false,
     userRoleId: 0,
     designationId: 0
-  }
+  } 
+ 
 
   
 }
