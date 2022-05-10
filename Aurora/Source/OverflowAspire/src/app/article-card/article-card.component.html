@@ -8,13 +8,13 @@
 
                 <h1 class="card-title text-truncate">{{item.title}}</h1>
 
-                <p class="truncate-line-clamp para">{{item.content}}</p>
-
+                <div class="truncate-line-clamp para" [innerHTML]=item.content></div>
+                    
 
             </div>
 
             <div class="card-link readmore">
-                <a routerLink="/specificarticle/{{item.articleId}}" title="Read Full">Read Full Article</a>
+                <a title="Read Full">Read Full Article</a>
             </div>
         </div>
     </div>

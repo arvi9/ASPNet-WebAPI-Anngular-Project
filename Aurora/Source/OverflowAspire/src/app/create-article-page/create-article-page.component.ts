@@ -24,19 +24,20 @@ export class CreateArticlePageComponent implements OnInit {
     articleId:0,
     title:'',
     content:'',
-    image: [],
+    image: "",
     articleStatusID:1,
     reviewerId: 0,
-    datetime:'',
+    datetime:Date.now,
     createdBy:1,
-    createdOn:'',
+    createdOn:Date.now,
     updatedBy:0,
     ImageString:this.cardImageBase64,
     updatedOn:'',
     articleStatus:null,
     user:null,
+    
     articleComments:[],
-    articleLikes: null,
+    articleLikes: null
   }
 
 
@@ -55,7 +56,7 @@ export class CreateArticlePageComponent implements OnInit {
 
   onSubmit() {
     const headers = { 'content-type': 'application/json' }
-
+this.article.ImageString=this.cardImageBase64.replace("data:image/png;base64,",'')
     console.log(this.article)
     this.http.post<any>('https://localhost:7197/Article/CreateArticle', this.article, { headers: headers })
       .subscribe((data) => {
@@ -100,7 +101,8 @@ export class CreateArticlePageComponent implements OnInit {
           const imgBase64Path = e.target.result;
           this.cardImageBase64 = imgBase64Path;
           this.isImageSaved = true;
-          console.log(this.cardImageBase64)
+          console.log(imgBase64Path)
+          console.log(image.src)
 
         }
 

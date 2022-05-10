@@ -28,7 +28,7 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-
+                article.Image=System.Convert.FromBase64String(article.ImageString);
                 article.CreatedOn = DateTime.Now;
 
                 return database.AddArticle(article);

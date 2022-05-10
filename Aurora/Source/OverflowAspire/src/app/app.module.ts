@@ -57,7 +57,9 @@ import { ReviewersidenavComponent } from './reviewersidenav/reviewersidenav.comp
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { EditorComponent } from './editor/editor.component';
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
-import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component'; 
+import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
+import { ArticleContentComponent } from './article-content/article-content.component';
+
 
 
 @NgModule({
@@ -104,7 +106,9 @@ import { UpdateArticlePageComponent } from './update-article-page/update-article
     ReviewerdashboardComponent,
     AdmindashboardComponent,
     ToreviewspecificpageComponent,
-    ArticlereviewedspecificpageComponent
+    ArticlereviewedspecificpageComponent,
+    ArticleContentComponent,
+   
 
   ],
   imports: [
