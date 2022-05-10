@@ -17,23 +17,29 @@
         </nav>
     </div>
     <div class="container editor">
-        <form>
-            <div class="w-25">
-                <label class="form-label">Name:</label>
-                <input class="form-control" placeholder="Enter Name">
-            </div>
+        <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">
                 <label class="form-label">Title:</label>
-                <input class="form-control" placeholder="Enter Title">
+                <input class="form-control" placeholder="Enter Title" name="title" [(ngModel)]="article.title">
+            </div>
+            <div class="w-25">
+                <label class="form-label">Image:</label><br>
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" [(ngModel)]="article.image">
+                <label class="text-danger"> {{imageError}}</label>
             </div>
             <div class="editor-btn">
                 <button class="custom-btn btn-1" type="button" data-toggle="modal"
                     data-target="#invitegroupModalCenter">Create Group</button>
-                <button class="custom-btn btn-1" type="button" data-toggle="modal"
-                    data-target="#invitegroupModalCenter">Edit Article</button>
+                
+            </div>
+            <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
+            </ckeditor>
+            <div class="editor-btn">
+                <input class="custom-btn btn-1" type="button" value="Save To Draft" />
+                <input class="custom-btn btn-1" type="submit" value="Submit"/>
             </div>
         </form>
-        <app-editor></app-editor>
+        
     </div>
 </div>
 <app-footer></app-footer>

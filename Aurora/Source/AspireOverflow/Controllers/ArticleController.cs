@@ -75,8 +75,7 @@ public class ArticleController : ControllerBase
     public async Task<ActionResult> AddLikeToArticle(int ArticleId,int UserId)
     {
         if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
-        // var CurrentUserId = User.FindFirst("userId").Value;
-        // int UserId = CurrentUserId != null ? Convert.ToInt32(CurrentUserId) : 0;
+        
         try
         {
             return _articleService.AddLikeToArticle(ArticleId, UserId) ? await Task.FromResult(Ok("Successfully added like to article")) : BadRequest("Error Occured while adding like to article ");
@@ -123,8 +122,7 @@ public class ArticleController : ControllerBase
     public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID,int UserId)
     {
         if (ArticleId <= 0 || ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4");
-        // var CurrentUserId = User.FindFirst("UserId")?.Value;
-        // int UserId = CurrentUserId != null ? Convert.ToInt32(CurrentUserId) : 0;
+        
         try
         {
 

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { Article } from 'Models/Article';
 
 @Component({
   selector: 'app-toreviewpage',
@@ -6,19 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toreviewpage.component.css']
 })
 export class ToreviewpageComponent implements OnInit {
-
-  constructor() { }
-
+  @Input() Usersrc : string="https://localhost:7197/Article/GetArticlesByArticleStatusId?ArticleStatusID=2";
+  
+  totalLength :any;
+  page : number= 1;
+ 
+  constructor(private http: HttpClient){}
+ 
   ngOnInit(): void {
+    this.http
+    .get<any>(this.Usersrc)
+    .subscribe((data)=>{
+      this.data =data;
+      this.totalLength=data.length;
+      console.log(data);
+    });
   }
-  public data: any[] = [{ArticleID:'1',AuthorName:'jin',ArticleTitle:'Rising Sun',Status:'Click Here To Review',ReviewerName:'-'},
-  {ArticleID:'2',AuthorName:'Ranjith',ArticleTitle:'Happiness',Status:'Click Here To Review',ReviewerName:'-'},
-  {ArticleID:'3',AuthorName:'Irfan',ArticleTitle:'Master of the Universe',Status:'Under Review',ReviewerName:'Ranjith'},
-  {ArticleID:'4',AuthorName:'Mohammed',ArticleTitle:'The art of the Steal',Status:'Click Here To Review',ReviewerName:'-'},
-  {ArticleID:'5',AuthorName:'Kumar',ArticleTitle:'Music is an art',Status:'Under Review',ReviewerName:'Irfan'},
-  
-  
+  public data: Article[] = [
+ 
 
  
   ];
+ 
+  
 }
