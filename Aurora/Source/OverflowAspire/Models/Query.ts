@@ -4,16 +4,16 @@ export class Query {
     content!: string;
     code: string="";
     isSolved: boolean=false;
-    queryComments:QueryComment[]=[];
+    comments:QueryComment[]=[];
     constructor(){}
     
 }
 
 export class QueryComment{
-        queryCommentId: number=0;
-        comment: string="";
-        createdOn: string="";
-        queryId: number=0;
-        code: string="";
+        CommentId: number=0;
+        message: string="";
+        name:string="";
+        code:string=""
+        
     
 }

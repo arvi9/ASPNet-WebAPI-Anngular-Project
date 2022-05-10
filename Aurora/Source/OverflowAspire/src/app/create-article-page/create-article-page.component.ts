@@ -56,7 +56,10 @@ export class CreateArticlePageComponent implements OnInit {
 
   onSubmit() {
     const headers = { 'content-type': 'application/json' }
-this.article.ImageString=this.cardImageBase64.replace("data:image/png;base64,",'')
+this.article.ImageString=this.cardImageBase64.replace("data:image/png;base64,","")
+this.article.ImageString=this.cardImageBase64.replace("data:image/jpg;base64,","")
+this.article.ImageString=this.cardImageBase64.replace("data:image/jpeg;base64,","")
+
     console.log(this.article)
     this.http.post<any>('https://localhost:7197/Article/CreateArticle', this.article, { headers: headers })
       .subscribe((data) => {

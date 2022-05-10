@@ -11,7 +11,7 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
   styleUrls: ['./specificquery.component.css']
 })
 export class SpecificqueryComponent implements OnInit {
- @Input() Querysrc : string="https://localhost:7197/Query/GetQuery?QueryId=2";
+ @Input() Querysrc : string="https://localhost:7197/Query/GetQuery?QueryId=1004";
  totalLength :any;
  page : number= 1;
 
@@ -44,10 +44,9 @@ public data1:QueryComment=new QueryComment();
    this.displayStyle = "none";
  }
  PostComment(){  
-      
-  console.log(this.data1.comment)
-    }
+ }
+ 
     PostCode(){    
-      console.log(this.data1.code)
+     console.log();
         }
 }

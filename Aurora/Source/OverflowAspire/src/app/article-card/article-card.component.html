@@ -8,7 +8,7 @@
 
                 <h1 class="card-title text-truncate">{{item.title}}</h1>
 
-                <div class="truncate-line-clamp para" [innerHTML]=item.content></div>
+                <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                     
 
             </div>

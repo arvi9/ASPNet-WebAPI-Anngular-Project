@@ -37,7 +37,7 @@
 
                   
       
-         <h4>{{data.queryComments.length}} Answers</h4> 
+         <h4>{{data.comments.length}} Answers</h4> 
         <div >
       
   
@@ -50,10 +50,10 @@
         
         <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
           <dl class="example-dl p-2">
-            <ng-container *cdkVirtualFor="let comment of data.queryComments">
-              <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">Answer : {{comment.comment}}</i></dt>
+            <ng-container *cdkVirtualFor="let comment of data.comments">
+              <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">Answer : {{comment.message}}</i></dt>
               <dd class="example-dd mx-5">{{comment.code}}</dd>
-              <dd class="example-dd mx-5">Answered by : Girish Kumar</dd>
+              <dd class="example-dd mx-5">Answered by : {{comment.name}}</dd>
               <hr>
             </ng-container>
           </dl>
@@ -66,8 +66,8 @@
           <div class="container">
             <div class="bg-light p-2">
               <textarea type="text" name="queryComment" class="form-control form-control5" id="queryComment-name"
-                placeholder="Enter comments" [(ngModel)]="data1.comment">
-                    <textarea class="form-control" name="queryComment" [(ngModel)]="data1.comment"></textarea>
+                placeholder="Enter comments">
+                    </textarea>
             </div>
           </div>
        

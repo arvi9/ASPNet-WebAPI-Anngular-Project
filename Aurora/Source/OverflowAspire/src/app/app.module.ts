@@ -59,6 +59,7 @@ import { EditorComponent } from './editor/editor.component';
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
 import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
 import { ArticleContentComponent } from './article-content/article-content.component';
+import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
 
 
 
@@ -108,6 +109,7 @@ import { ArticleContentComponent } from './article-content/article-content.compo
     ToreviewspecificpageComponent,
     ArticlereviewedspecificpageComponent,
     ArticleContentComponent,
+    HtmlToPlaintextPipe,
    
 
   ],
