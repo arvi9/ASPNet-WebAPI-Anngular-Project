@@ -4,24 +4,24 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  templateUrl:'./register.component.html',
+  templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   register: any;
 
- 
-  
-  constructor(private router:Router) { }
-  user:User={
+
+
+  constructor(private router: Router) { }
+  user: User = {
     userId: 0,
     fullName: '',
     genderId: 0,
     aceNumber: '',
     email: '',
-    department:'',
-    employeeId:'',
-    designation:'',
+    department: '',
+    employeeId: '',
+    designation: '',
     password: '',
     dateOfBirth: '',
     verifyStatusID: 0,
@@ -29,39 +29,39 @@ export class RegisterComponent implements OnInit {
     userRoleId: 0,
     designationId: 0
   }
-   
-dobmessage:string=''
-message:string=''
-  dept = '';
+
+  dobmessage: string = ''
+  message: string = ''
+dept=''
   _Designation = '';
-  designation: any[] = [];
-  
+
+designation:any[]=[]
 
   ngOnInit(): void {
 
   }
 
-	
-  
+
+
   filterDropdown() {
 
-  
-    this.designation = [];
+
+    this.designation=[];
     for (let item of this.designationDetails) {
-      if (item.departmentName == this.dept) {
+      if (item.departmentID == this.dept) {
         this.designation.push(item);
-        console.log("true")
+     
       }
     }
   }
-    validateDateOfBirth(){
-     if(Date.now.toString()>this.user.dateOfBirth){
-  
-       this.dobmessage="Date of birth should be valid";
-       console.log(this.dobmessage);
-// return this.dobmessage;
+  validateDateOfBirth() {
+    if (Date.now.toString() > this.user.dateOfBirth)
+    {
+      this.dobmessage = "Date of birth should be valid";
+      console.log(this.dobmessage);
+    
     }
-      }
+  }
 
   // validateconfirmpassword(){
   //   if(this.user.password==this.confirmpassword){
@@ -72,37 +72,71 @@ message:string=''
   //     }
 
   //   }
-  
-
-
-gender=''
-  Gender:string[]=['Male','Female','Others']
 
 
 
-  department: string[] = [ 'java', 'dotnet','BFS']
+  gender = ''
+  Gender: any = [
+    {
+      id: 1,
+      gender: 'Male'
+    },
+    {
+      id: 2,
+      gender: 'Female'
+    }
+  ]
 
-  designationDetails: any[] = [{
-    departmentName: 'java',
-    designationName: 'TeamLead'
+
+
+  department: any = [{
+    id: 1,
+    department: 'Java'
   },
   {
-    departmentName: 'java',
-     designationName: 'Trainer'
-  }, {
-    departmentName: 'dotnet',
-    designationName: 'ModuleLead'
+    id: 2,
+    department: 'Dotnet'
   },
   {
-    departmentName: 'dotnet',
-    designationName: 'Trainer'
-  }]
+    id: 3,
+    department: 'BFS'
+  }
+  ]
+  designationDetails: any = [
+    {
+      designationid: 1,
+      designationName: 'Team Lead',
+       departmentID:1
+    },
+    {
+      designationid: 2,
+      designationName: 'Team Lead',
+       departmentID:2
+    },
+    {
+      designationid: 3,
+      designationName: 'Trainer',
+      departmentID:1
+    },
+    {
+      designationid: 4,
+      designationName: 'ModuleLead',
+      departmentID:3
+    },
+    {
+      designationid: 5,
+      designationName: 'Senior Engineer',
+      departmentID:2
+    },
+  ]
 
-  userdata()
-  {
-    this.router.navigate(['/Login']);
-    this.register.setMessage(this.user);
-    localStorage.setItem(this.user.fullName, JSON.stringify(this.user));
+
+
+  userdata() {
+    console.log(this.user.genderId)
+    // this.router.navigate(['/Login']);
+    // this.register.setMessage(this.user);
+    // localStorage.setItem(this.user.fullName, JSON.stringify(this.user));
     // this.login.userName(this.userModel);
     // this.login.display(this.userModel);
   }

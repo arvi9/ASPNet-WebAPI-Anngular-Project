@@ -32,9 +32,9 @@
                     <div class="col-sm-12 col-xl-6">
 
                         <label class="form-label">Gender</label>
-                        <select class="form-select " name="gender" [(ngModel)]="gender" required>
+                        <select class="form-select " name="gender" [(ngModel)]="user.genderId" required>
                             <option value="" hidden>Choose option</option>
-                            <option *ngFor="let item of Gender" value={{item}}>{{item}}</option>
+                            <option *ngFor="let item of Gender" value={{item.id}}>{{item.gender}}</option>
                         </select>
 
                     </div>
@@ -59,10 +59,10 @@
                     <div class="col-sm-12 col-xl-6">
 
                         <label class="form-label">Department </label>
-                        <select name="Department" id="DepartmentName" class="form-select " (change)="filterDropdown()"
+                        <select name="Department" id="DepartmentName" class="form-select" (change)="filterDropdown()"
                             name="dept" [(ngModel)]="dept" required>
                             <option value="" hidden>Select the Department</option>
-                            <option *ngFor="let item of department" value={{item}}>{{item}}</option>
+                            <option *ngFor="let item of department" value={{item.id}} >{{item.department}}</option>
                         </select>
 
                     </div>
@@ -92,10 +92,10 @@
 
                             <label class="form-label">Designation </label>
                             <select name="Designation" id="DesignationName" class="form-select"
-                                (change)="filterDropdown()" name="_designation" [(ngModel)]="_Designation" required>
-                                <option value="">Select the Designation</option>
-                                <option *ngFor="let item of designation" value={{item.designationName}}>
-                                    {{item.designationName}}</option>
+                                (change)="filterDropdown()" name="_Designation" [(ngModel)]="_Designation" required>
+                                <option value="" hidden>Select the Designation</option>
+                                <option *ngFor="let item of designation" value={{item.designationid}}>
+                                    {{item.designationName}}  </option>
                             </select>
                     </div>
                 </div>
