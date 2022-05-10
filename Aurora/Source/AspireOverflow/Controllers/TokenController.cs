@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AspireOverflow.Models;
 
 using AspireOverflow.DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ using AspireOverflow.Services;
 namespace AspireOverflow.Controllers
 {
     [ApiController]
-    [Route("api/token")]
+    [Route("[controller]/[action]")]
 
     public class TokenController : ControllerBase
     {
@@ -21,21 +22,21 @@ namespace AspireOverflow.Controllers
         private readonly AspireOverflowContext _context;
         private ILogger<TokenController> _logger;
         private UserService _userService;
-        public TokenController(IConfiguration config, UserService service,ILogger<TokenController> logger)
+        public TokenController(IConfiguration config, UserService service, ILogger<TokenController> logger)
         {
             _configuration = config;
-          _userService=service;
-            _logger=logger;
+            _userService = service;
+            _logger = logger;
         }
 
         [HttpPost]
-        public  IActionResult AuthToken(String Email, string Password)
+        public IActionResult AuthToken(Login Crendentials)
         {
 
-            if (Email == null && Password == null) return BadRequest();
+            if (Crendentials.Email == null && Crendentials.Password== null) return BadRequest();
             try
             {
-                var user =  _userService.GetUser(Email, Password);
+                var user = _userService.GetUser(Crendentials.Email, Crendentials.Password);
 
                 if (user != null)
                 {
@@ -59,16 +60,19 @@ namespace AspireOverflow.Controllers
                             claims,
                         expires: DateTime.UtcNow.AddMinutes(10),
                         signingCredentials: signIn);
-
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                        var Result = new {
+                            token=new JwtSecurityTokenHandler().WriteToken(token),
+                        };
+                    return Ok(Result);
                 }
                 else
-                {   
+                {
                     return BadRequest("Invalid credentials");
                 }
             }
             catch (Exception exception)
-            {   _logger.LogError(HelperService.LoggerMessage("TokenController","AuthToken(String Email, string Password)",exception,Email));
+            {
+                _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email));
                 return BadRequest("Error Occured while Validating your  credentials");
             }
 

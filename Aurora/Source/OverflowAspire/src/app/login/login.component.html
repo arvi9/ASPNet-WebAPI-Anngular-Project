@@ -12,18 +12,18 @@
 				<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Email </label>
-						<input type="text" class="form-control" name="emailAddress" [(ngModel)]="user.email">
+						<input type="text" class="form-control" name="email" [(ngModel)]="user.Email">
 					</div>
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Password</label>
-						<input type="password" class="form-control" name="password" [(ngModel)]="user.password">
+						<input type="password" class="form-control" name="password" [(ngModel)]="user.Password">
 					</div>
 
 					<div class="text-center mb-2 p-2">
 						<button  class="custom-btn btn-1"
-						routerLink="/Home" type="Submit" routerLinkActive="active">Login</button>
+						 type="Submit" routerLinkActive="active">Login</button>
 					</div>
-					<div class="container">
+					<div class="link d-md-flex text-center">
 							<span> <a class="d-block  mt-2 small text-center" routerLink="/" >New User? Sign Up</a>
 							</span>
 					</div>

@@ -98,7 +98,7 @@ public class ArticleController : ControllerBase
     public async Task<ActionResult> UpdateArticle(Article article)
     {
         if (article == null) return BadRequest("Article can't be null");
-        var CurrentUserId = User.FindFirst("userId").Value;
+        var CurrentUserId = User.FindFirst("userId")?.Value;
         if (article.CreatedBy.ToString() != CurrentUserId) BadRequest("Article must be updated only by Article Creater");
         try
         {
@@ -120,11 +120,11 @@ public class ArticleController : ControllerBase
 
 
     [HttpPatch]
-    public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID)
+    public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID,int UserId)
     {
         if (ArticleId <= 0 || ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4");
-        var CurrentUserId = User.FindFirst("UserId").Value;
-        int UserId = CurrentUserId != null ? Convert.ToInt32(CurrentUserId) : 0;
+        // var CurrentUserId = User.FindFirst("UserId")?.Value;
+        // int UserId = CurrentUserId != null ? Convert.ToInt32(CurrentUserId) : 0;
         try
         {
 
