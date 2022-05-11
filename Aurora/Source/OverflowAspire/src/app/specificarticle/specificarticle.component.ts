@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Article } from 'Models/Article';
 import { data } from 'jquery';
+import { application } from 'Models/Application';
 @Component({
   selector: 'app-specificarticle',
   templateUrl: './specificarticle.component.html',
   styleUrls: ['./specificarticle.component.css']
 })
 export class SpecificarticleComponent implements OnInit {
-  @Input() Articlesrc : string="https://localhost:7197/Article/GetArticleById?ArticleId=1006";
+  @Input() Articlesrc : string=`${application.URL}/Article/GetArticleById?ArticleId=1006`;
   
   totalLength :any;
   page : number= 1;

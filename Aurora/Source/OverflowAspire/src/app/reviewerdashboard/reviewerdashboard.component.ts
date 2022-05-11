@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Input } from '@angular/core';
+import { application } from 'Models/Application';
 import { Dashboard } from 'Models/Dashboard';
 
 @Component({
@@ -8,7 +9,7 @@ import { Dashboard } from 'Models/Dashboard';
   styleUrls: ['./reviewerdashboard.component.css']
 })
 export class ReviewerdashboardComponent implements OnInit {
-  @Input() Usersrc : string="https://localhost:7197/Dashboard/GetReviewerDashboard?ReviewerId=1";
+  @Input() Usersrc : string=`${application.URL}/Dashboard/GetReviewerDashboard?ReviewerId=1`;
   
   
  

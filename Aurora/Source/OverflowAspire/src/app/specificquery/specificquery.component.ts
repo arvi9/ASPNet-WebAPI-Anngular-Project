@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Query } from 'Models/Query';
 import{QueryComment} from 'Models/Query';
+import { application } from 'Models/Application';
 
 declare type myarray = Array<{ content: string, coding: string, name: string }>
 @Component({
@@ -11,7 +12,7 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
   styleUrls: ['./specificquery.component.css']
 })
 export class SpecificqueryComponent implements OnInit {
- @Input() Querysrc : string="https://localhost:7197/Query/GetQuery?QueryId=1004";
+ @Input() Querysrc : string=`${application.URL}/Query/GetQuery?QueryId=1004`;
  totalLength :any;
  page : number= 1;
 

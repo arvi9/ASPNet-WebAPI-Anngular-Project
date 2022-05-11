@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { application } from 'Models/Application';
 
 @Component({
   selector: 'app-homepage',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
+  public UrlString:string=application.URL
   constructor() { }
 
   ngOnInit(): void {

@@ -1,13 +1,14 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'Models/User';
+import { application } from 'Models/Application';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  @Input() Usersrc : string="https://localhost:7197/User/GetUser?UserId=1";
+  @Input() Usersrc : string=`${application.URL}/User/GetUser?UserId=1`;
   
   totalLength :any;
   page : number= 1;

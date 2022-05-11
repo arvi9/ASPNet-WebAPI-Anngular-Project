@@ -13,7 +13,7 @@ import { MatButtonModule} from '@angular/material/button';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { AppComponent } from './app.component';
 import { QueryCardComponent } from './query-card/query-card.component';
-import { ButtonComponent } from './button/button.component';
+
 import { ArticleCardComponent } from './article-card/article-card.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -41,7 +41,7 @@ import { RaisequeryComponent } from './raisequery/raisequery.component';
 import { ReportSpamComponent} from './report-spam/report-spam.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { MyQueriesComponent } from './my-queries/my-queries.component';
-import { TableComponent } from './table/table.component';
+
 
 import { HomepageComponent } from './homepage/homepage.component';
 import { ArticlecardhomeComponent } from './articlecardhome/articlecardhome.component';
@@ -58,7 +58,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { EditorComponent } from './editor/editor.component';
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
 import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
-import { ArticleContentComponent } from './article-content/article-content.component';
+
 import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
 
 
@@ -67,7 +67,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
   declarations: [
     AppComponent,
     QueryCardComponent,
-    ButtonComponent,
+  
     ArticleCardComponent,
     QueryFilterComponent,
     QueriesComponent,
@@ -88,7 +88,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     SpecificqueryComponent,
     RaisequeryComponent,
     ReportSpamComponent,
-    TableComponent,
+   
     EmployeePageComponent,
     SidenavComponent,
     HomepageComponent,
@@ -108,7 +108,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     AdmindashboardComponent,
     ToreviewspecificpageComponent,
     ArticlereviewedspecificpageComponent,
-    ArticleContentComponent,
+
     HtmlToPlaintextPipe,
    
 

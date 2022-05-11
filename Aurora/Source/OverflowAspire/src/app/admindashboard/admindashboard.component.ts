@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Input } from '@angular/core';
 import { Dashboard } from 'Models/Dashboard';
+import { application } from 'Models/Application'
 
 @Component({
   selector: 'app-admindashboard',
@@ -9,7 +10,7 @@ import { Dashboard } from 'Models/Dashboard';
 })
 export class AdmindashboardComponent implements OnInit {
 
-  @Input() Usersrc : string="https://localhost:7197/Dashboard/GetAdminDashboard";
+  @Input() Usersrc : string=`${application.URL}/Dashboard/GetAdminDashboard`;
   
   
  

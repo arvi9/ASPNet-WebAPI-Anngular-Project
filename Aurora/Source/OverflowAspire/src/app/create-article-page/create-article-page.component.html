@@ -35,7 +35,7 @@
             <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
             </ckeditor>
             <div class="editor-btn">
-                <input class="custom-btn btn-1" type="button" value="Save To Draft" />
+                <input class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()"/>
                 <input class="custom-btn btn-1" type="submit" value="Submit"/>
             </div>
         </form>

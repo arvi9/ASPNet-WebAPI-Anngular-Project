@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Input } from '@angular/core';
+import { application } from 'Models/Application';
 import { User } from 'Models/User';
 
 @Component({
@@ -9,7 +10,7 @@ import { User } from 'Models/User';
 })
 export class UserverificationpageComponent implements OnInit {
 
-  @Input() Usersrc : string="https://localhost:7197/User/GetUsersByVerifyStatusId?VerifyStatusID=3";
+  @Input() Usersrc : string=`${application.URL}/User/GetUsersByVerifyStatusId?VerifyStatusID=3`;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

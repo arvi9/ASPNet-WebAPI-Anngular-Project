@@ -1,6 +1,7 @@
 import { Component, Input,OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Article } from 'Models/Article';
+import { application } from 'Models/Application';
 
 @Component({
   selector: 'app-articles',
@@ -9,9 +10,13 @@ import { Article } from 'Models/Article';
 })
 export class ArticlesComponent implements OnInit {
 
-  @Input() artsrc: string ="https://localhost:7197/Article/GetAll";
+  @Input() artsrc: string =`${application.URL}/Article/GetAll`;
   totalLength: any;
   page: number = 1;
+  public data: Article[] = [
+
+ 
+  ]
  
 
   constructor(private http: HttpClient) { }
@@ -24,9 +29,7 @@ export class ArticlesComponent implements OnInit {
         console.log(data)
        
       });
-}public data: Article[] = [
-
- 
-];
+      
+}
 
 }

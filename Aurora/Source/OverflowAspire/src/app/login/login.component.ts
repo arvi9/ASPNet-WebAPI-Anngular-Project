@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { User } from 'Models/User';
+import { application } from 'Models/Application';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     const headers = { 'content-type': 'application/json'}  
    
     console.log(this.user)
-    this.http.post<any>('https://localhost:7197/Token/AuthToken',this.user,{headers:headers})
+    this.http.post<any>(`${application.URL}/Token/AuthToken`,this.user,{headers:headers})
       .subscribe((data) => {
        
         console.log(data)

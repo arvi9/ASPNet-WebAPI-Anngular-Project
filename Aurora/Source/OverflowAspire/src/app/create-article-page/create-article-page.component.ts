@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Byte } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
+import { ApplicationInitStatus, Component, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
+import { application } from 'Models/Application'
+
+
 declare var CKEDITOR: any;
 
 @Component({
@@ -17,26 +20,26 @@ export class CreateArticlePageComponent implements OnInit {
   cardImageBase64: string = "";
   test: any;
   public ckeditorContent: string = "";
- 
+
 
   constructor(private http: HttpClient) { }
   article: any = {
-    articleId:0,
-    title:'',
-    content:'',
+    articleId: 0,
+    title: '',
+    content: '',
     image: "",
-    articleStatusID:1,
+    articleStatusID: 1,
     reviewerId: 0,
-    datetime:Date.now,
-    createdBy:1,
-    createdOn:Date.now,
-    updatedBy:0,
-    ImageString:this.cardImageBase64,
-    updatedOn:'',
-    articleStatus:null,
-    user:null,
-    
-    articleComments:[],
+    datetime: Date.now,
+    createdBy: 1,
+    createdOn: Date.now,
+    updatedBy: 0,
+    ImageString: this.cardImageBase64,
+    updatedOn: '',
+    articleStatus: null,
+    user: null,
+
+    articleComments: [],
     articleLikes: null
   }
 
@@ -54,14 +57,13 @@ export class CreateArticlePageComponent implements OnInit {
   }
 
 
+
   onSubmit() {
     const headers = { 'content-type': 'application/json' }
-this.article.ImageString=this.cardImageBase64.replace("data:image/png;base64,","")
-this.article.ImageString=this.cardImageBase64.replace("data:image/jpg;base64,","")
-this.article.ImageString=this.cardImageBase64.replace("data:image/jpeg;base64,","")
-
-    console.log(this.article)
-    this.http.post<any>('https://localhost:7197/Article/CreateArticle', this.article, { headers: headers })
+    this.imgconvert()
+    this.article.articleStatusID = 2;
+   
+    this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .subscribe((data) => {
 
         console.log(data)
@@ -70,7 +72,25 @@ this.article.ImageString=this.cardImageBase64.replace("data:image/jpeg;base64,",
   }
 
 
+  saveToDraft() {
+    const headers = { 'content-type': 'application/json' }
+    this.imgconvert()
 
+    
+    this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
+      .subscribe((data) => {
+
+        console.log(data)
+
+      });
+  }
+
+
+  imgconvert() {
+    this.article.ImageString = this.cardImageBase64.replace("data:image/png;base64,", "")
+    this.article.ImageString = this.cardImageBase64.replace("data:image/jpg;base64,", "")
+    this.article.ImageString = this.cardImageBase64.replace("data:image/jpeg;base64,", "")
+  }
 
 
 
@@ -102,10 +122,10 @@ this.article.ImageString=this.cardImageBase64.replace("data:image/jpeg;base64,",
         image.onload = rs => {
 
           const imgBase64Path = e.target.result;
+          
           this.cardImageBase64 = imgBase64Path;
           this.isImageSaved = true;
-          console.log(imgBase64Path)
-          console.log(image.src)
+          
 
         }
 

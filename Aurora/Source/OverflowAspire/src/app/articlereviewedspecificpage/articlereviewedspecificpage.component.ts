@@ -1,6 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Article } from 'Models/Article';
+import { application } from 'Models/Application'
 
 @Component({
   selector: 'app-articlereviewedspecificpage',
@@ -9,7 +10,7 @@ import { Article } from 'Models/Article';
 })
 export class ArticlereviewedspecificpageComponent implements OnInit {
 
-  @Input() Articlesrc : string="https://localhost:7197/Article/GetArticleById?ArticleId=11";
+  @Input() Articlesrc : string=`${application.URL}/Article/GetArticleById?ArticleId=11`;
   
   totalLength :any;
   page : number= 1;
