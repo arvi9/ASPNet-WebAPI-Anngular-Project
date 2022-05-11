@@ -3,7 +3,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Query } from 'Models/Query';
 import{QueryComment} from 'Models/Query';
-import { application } from 'Models/Application';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 declare type myarray = Array<{ content: string, coding: string, name: string }>
 @Component({
@@ -12,25 +14,40 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
   styleUrls: ['./specificquery.component.css']
 })
 export class SpecificqueryComponent implements OnInit {
- @Input() Querysrc : string=`${application.URL}/Query/GetQuery?QueryId=1004`;
- totalLength :any;
- page : number= 1;
-
- constructor(private http: HttpClient){}
-
- ngOnInit(): void {
-   this.http
-   .get<any>(this.Querysrc)
-   .subscribe((data)=>{
-     this.data =data;
-     this.totalLength=data.length;
-     console.log(data);
-   });
- }
+  queryId: number = 0
+  @Input() Querysrc: string = "https://localhost:7197/Query/GetQuery/:queryId";
+  Query: any = {
+   CommentId:0,
+   comment: '',
+   datetime:Date.now,
+   userId: 9,
+   queryId:1,
+   createdBy:1,
+   createdOn:Date.now,
+   
+    
+  }
+  
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+   
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.queryId = params['queryId'];
+    console.log(this.queryId)
+    this.http
+      .get<any>(`https://localhost:7197/Query/GetQuery?QueryId=${this.queryId}`)
+      .subscribe((data) => {
+        this.data = data;
+        console.log(data);
+      });
+    });
+  }
+  
+   
 
 
  public data:Query =new Query();
-public data1:QueryComment=new QueryComment();
+
 
 
  
@@ -38,16 +55,20 @@ public data1:QueryComment=new QueryComment();
  openpopup() {
    this.displayStyle = "block";
  }
- dismisspopup() {
-   this.displayStyle = "none";
- }
+ 
  closePopup() {
    this.displayStyle = "none";
  }
  PostComment(){  
+  const headers = { 'content-type': 'application/json' }
+  console.log(this.Query)
+    this.http.post<any>('https://localhost:7197/Query/CreateComment', this.Query, { headers: headers })
+      .subscribe((data) => {
+
+        console.log(data)
+
+      });
  }
  
-    PostCode(){    
-     console.log();
-        }
+    
 }

@@ -17,12 +17,12 @@
             {{ isReadMore ? 'Read More': 'Read Less' }}
         </button>
     </div>
-    <h4>{{data.articleComments.length}} comments</h4>
+    <h4>{{data.comments.length}} comments</h4>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
         <dl class="example-dl p-2">
-          <ng-container *cdkVirtualFor="let comment of data.articleComments">
-            <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">{{comment.createdBy}}</i></dt>
-            <dd class="example-dd mx-5">{{comment.comment}}</dd>
+          <ng-container *cdkVirtualFor="let comment of data.comments">
+            <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">{{comment.name}}</i></dt>
+            <dd class="example-dd mx-5">{{comment.message}}</dd>
             <hr>
           </ng-container>
         </dl>
@@ -34,18 +34,20 @@
 
     <div class=" iconstyle d-flex flex-row fs-12">
         <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
-            <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{1}}</span>
+            <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{data.likes}}</span>
         </div>
         <div class="like p-2 cursor"><i class="fa fa-share mx-2"></i><span class="ml-1">Share</span></div>
     </div>
+    <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
     <div class="container">
 
         <div class="d-flex flex-row align-items-start"><textarea
-                class="form-control ml-1 shadow-none textarea"></textarea></div>
+                class="form-control ml-1 shadow-none textarea" name="QueryComment" [(ngModel)]="article.comment"></textarea></div>
         <div class="mt-2">
-            <button class=" custom-btn btn-1" type="button">Post comment</button>
+            <input class="custom-btn btn-1" type="submit" value="Post Comment"/>
         </div>
     </div>
+</form>
 </div>
 
 <app-footer></app-footer>

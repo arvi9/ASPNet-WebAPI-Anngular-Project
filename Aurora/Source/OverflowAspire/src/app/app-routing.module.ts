@@ -16,10 +16,13 @@ import { SpecificqueryComponent } from './specificquery/specificquery.component'
 import { TrendingArticlepageComponent } from './trending-articlepage/trending-articlepage.component';
 import { TrendingQueriespageComponent } from './trending-queriespage/trending-queriespage.component';
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
+import { ReviewerdashboardComponent } from './reviewerdashboard/reviewerdashboard.component';
+import { ToreviewpageComponent } from './toreviewpage/toreviewpage.component';
+import { ArticalreviewedpageComponent } from './articalreviewedpage/articalreviewedpage.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
-  // {path:'',component:RegisterComponent},
+  {path:'Register',component:RegisterComponent},
   {path:'Home',component:HomepageComponent},
   {path:'MyProfile',component:ProfileComponent}, 
   {path:'Articles',component:ArticlesComponent},
@@ -31,10 +34,14 @@ const routes: Routes = [
   {path:'Queries',component:QueriesComponent},
   {path:'LatestQueries',component:LatestQueriesComponent},
   {path:'TrendingQueries',component:TrendingQueriespageComponent},
-  {path:'SpecificQuery',component:SpecificqueryComponent},
+  {path:'SpecificQuery/:queryId',component:SpecificqueryComponent},
   {path:'RaiseQuery',component:RaisequeryComponent},
   {path:'MyQueries',component:MyQueriesComponent},
-  {path:'RaiseQuery',component:RaisequeryComponent}
+  {path:'RaiseQuery',component:RaisequeryComponent},
+  {path:'ReviewerDashboard',component:ReviewerdashboardComponent},
+  {path:'ToReview',component:ToreviewpageComponent},
+  {path:'ArticleReviewed',component:ArticalreviewedpageComponent}
+  
 ];
 
 @NgModule({

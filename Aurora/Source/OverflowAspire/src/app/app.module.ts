@@ -21,7 +21,7 @@ import { ReviewerdashboardComponent } from './reviewerdashboard/reviewerdashboar
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { ToreviewspecificpageComponent } from './toreviewspecificpage/toreviewspecificpage.component';
 import { ArticlereviewedspecificpageComponent } from './articlereviewedspecificpage/articlereviewedspecificpage.component';
-
+import { SpamViewComponent } from './spam-view/spam-view.component';
 import { QueryFilterComponent } from './query-filter/query-filter.component';
 import { QueriesComponent } from './queries/queries.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
@@ -67,7 +67,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
   declarations: [
     AppComponent,
     QueryCardComponent,
-  
+    SpamViewComponent,
     ArticleCardComponent,
     QueryFilterComponent,
     QueriesComponent,

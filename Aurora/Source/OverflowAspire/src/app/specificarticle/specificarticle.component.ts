@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Article } from 'Models/Article';
+import { User } from 'Models/User';
 import { data } from 'jquery';
 import { application } from 'Models/Application';
 @Component({
@@ -9,34 +10,57 @@ import { application } from 'Models/Application';
   styleUrls: ['./specificarticle.component.css']
 })
 export class SpecificarticleComponent implements OnInit {
-  @Input() Articlesrc : string=`${application.URL}/Article/GetArticleById?ArticleId=1006`;
+  @Input() Articlesrc: string = `${application.URL}/Article/GetArticleById?ArticleId=1`;
+
+
+
+  constructor(private http: HttpClient) { }
+  article: any = {
+    articleCommentId: 0,
+    comment: '',
+    datetime: Date.now,
+    userId: 1,
+    createdBy: 1,
+    articleId: 1009,
+    createdOn: Date.now,
+    updatedBy: 0,
+    updatedOn: '',
+
+
+  }
+  like: any = {
+    likeId:0,
+    articleId:1,
+    userId:2,
+   
+}
+
   
-  totalLength :any;
-  page : number= 1;
- 
-  constructor(private http: HttpClient){}
- 
   ngOnInit(): void {
     this.http
-    .get<any>(this.Articlesrc)
-    .subscribe((data)=>{
-      this.data =data;
-      this.totalLength=data.length;
-      console.log(data);
-    });
+      .get<any>(this.Articlesrc)
+      .subscribe((data) => {
+        this.data = data;
+        console.log(data);
+      });
   }
-  public data:Article=new Article();
- createdOn:string = this.data.createdOn.toDateString()
+  public data: Article = new Article();
+  createdOn: string = this.data.createdOn.toDateString()
   likeCount = 0;
   isLiked = false;
 
-  likeTheButton = () => {
-    if (this.isLiked)
-      this.likeCount--;
-    else
-      this.likeCount++;
 
-    this.isLiked = !this.isLiked
+  likeTheButton = () => {
+    const headers = { 'content-type': 'application/json' }
+    console.log(this.like)
+    this.http.post<any>(`${application.URL}/Article/AddLikeToArticle`, this.like, { headers: headers })
+      .subscribe((data) => {
+          this.data.likes=data.likesCount
+        console.log(data)
+
+      });
+     
+
   }
   isReadMore = true
 
@@ -47,5 +71,16 @@ export class SpecificarticleComponent implements OnInit {
 
   Text() {
     this.iReadMore = !this.iReadMore
+  }
+
+  PostComment() {
+    const headers = { 'content-type': 'application/json' }
+    console.log(this.article)
+    this.http.post<any>(`${application.URL}/Article/CreateComment`, this.article, { headers: headers })
+      .subscribe((data) => {
+
+        console.log(data)
+
+      });
   }
 }

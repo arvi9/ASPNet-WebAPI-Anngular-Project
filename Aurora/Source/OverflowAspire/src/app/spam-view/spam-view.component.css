@@ -1,0 +1,14 @@
+.example-viewport {
+    height: 300px;
+    width: 100%;
+    border: 1px solid black;
+  }
+  
+  .example-dt {
+    height: 30px;
+    font-weight: bold;
+  }
+  
+  .example-dd {
+    height: 30px;
+  }

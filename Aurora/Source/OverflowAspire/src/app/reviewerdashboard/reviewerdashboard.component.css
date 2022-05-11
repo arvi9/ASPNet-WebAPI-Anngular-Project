@@ -57,3 +57,12 @@ body {
 .heading{
     text-align: center;
 }
+
+.cardRight:hover{
+    color:coral
+}
+
+.cardLeft:hover {
+    color:coral
+}
+
