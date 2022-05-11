@@ -45,7 +45,7 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
             else if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
-            else if (article.ArticleStatusID != 1) throw new ValidationException("ArticlestatusID must be 1");
+            else if (article.ArticleStatusID <=0 && article.ArticleStatusID > 2) throw new ValidationException("ArticlestatusID must be less than 2");
             else return true;
         }
 
