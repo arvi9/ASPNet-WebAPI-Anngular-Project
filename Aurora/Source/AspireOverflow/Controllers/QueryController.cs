@@ -286,7 +286,7 @@ namespace AspireOverflow.Controllers
             {
                 return _queryService.AddSpam( spam) ? await Task.FromResult(Ok("Successfully added spam for the query")) : BadRequest("Error Occured while adding spam to the query ");
             }
-            catch (ArgumentException exception)
+            catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "AddSpam(int QueryId)", exception, spam));
                 return Problem($"{exception.Message}");

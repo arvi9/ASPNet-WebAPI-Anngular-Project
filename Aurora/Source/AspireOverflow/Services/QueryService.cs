@@ -317,8 +317,7 @@ namespace AspireOverflow.Services
 
         public bool AddSpam(Spam spam)
         {
-            if (spam.QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{spam.QueryId}");
-            if (spam.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{spam.UserId}");
+         Validation.ValidateSpam(spam);
             try
             {
                 if (database.GetSpams().ToList().Find(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId) != null) throw new ArgumentException("Unable to Add spam to same Query with same UserID");

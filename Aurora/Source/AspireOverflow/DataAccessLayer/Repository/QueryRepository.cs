@@ -150,8 +150,7 @@ namespace AspireOverflow.DataAccessLayer
 
         public bool AddSpam(Spam spam)
         {
-            if (spam.QueryId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where SpamId:{spam.QueryId}");
-            if (spam.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{spam.UserId}");
+           Validation.ValidateSpam(spam);
             try
             {
                 _context.Spams.Add(spam);
