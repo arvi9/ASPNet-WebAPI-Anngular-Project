@@ -10,7 +10,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Services
 {
 
-    public class ArticleService 
+    public class ArticleService
     {
         private static IArticleRepository database;
 
@@ -28,7 +28,7 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                article.Image=System.Convert.FromBase64String(article.ImageString);
+                article.Image = System.Convert.FromBase64String(article.ImageString);
                 article.CreatedOn = DateTime.Now;
 
                 return database.AddArticle(article);
@@ -49,7 +49,7 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                var ExistingArticle = GetArticles().Where(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID==1).First();
+                var ExistingArticle = GetArticles().Where(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1).First();
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
                 article.UpdatedOn = DateTime.Now;
                 article.UpdatedBy = CurrentUser;
@@ -87,7 +87,8 @@ namespace AspireOverflow.Services
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
-            {  if(GetArticles().Where(item =>item.ArtileId==ArticleId && item.ArticleStatusID==1).First() ==null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
+            {
+                if (GetArticles().Where(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1).First() == null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
                 return database.DeleteArticle(ArticleId); //only Draft article will be deleted
             }
             catch (Exception exception)
@@ -95,7 +96,7 @@ namespace AspireOverflow.Services
 
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
 
-               return false;
+                return false;
             }
         }
         public object GetArticleById(int ArticleId)
@@ -103,16 +104,17 @@ namespace AspireOverflow.Services
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                var article= database.GetArticleByID(ArticleId);
-                return new {
-                    articleId=article.ArtileId,
-                    PublishedDate =article.Datetime,
-                    title=article.Title,
-                    AuthorName=article.User.FullName,
-                    content=article.Content,
-                    image=article.Image,
-                    Likes= GetLikesCount(article.ArtileId),
-                    comments=GetComments(article.ArtileId) 
+                var article = database.GetArticleByID(ArticleId);
+                return new
+                {
+                    articleId = article.ArtileId,
+                    PublishedDate = article.UpdatedBy,
+                    title = article.Title,
+                    AuthorName = article.User?.FullName,
+                    content = article.Content,
+                    image = article.Image,
+                    Likes = GetLikesCount(article.ArtileId),
+                    comments = GetComments(article.ArtileId)
                 };
             }
             catch (Exception exception)
@@ -130,12 +132,14 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.CreatedOn);
-                return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
             }
 
@@ -159,12 +163,14 @@ namespace AspireOverflow.Services
                 {
                     TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id));
                 }
-                return TrendingArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                return TrendingArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -180,15 +186,17 @@ namespace AspireOverflow.Services
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var ListOfArticles= GetArticles().Where(item=>item.CreatedBy==UserId).ToList();
-                  return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                var ListOfArticles = GetArticles().Where(item => item.CreatedBy == UserId).ToList();
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
-                
+
             }
             catch (Exception exception)
             {
@@ -219,19 +227,21 @@ namespace AspireOverflow.Services
 
         }
 
-        
+
         public IEnumerable<Object> GetListOfArticles()
         {
 
             try
             {
                 var ListOfArticles = database.GetArticles();
-                return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
             }
 
@@ -250,13 +260,15 @@ namespace AspireOverflow.Services
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
-                var ListOfArticles= GetArticles().Where(article => article.Title.Contains(Title));
-                return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                var ListOfArticles = GetArticles().Where(article => article.Title.Contains(Title));
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -276,13 +288,15 @@ namespace AspireOverflow.Services
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentNullException("AuthorName value can't be null");
             try
             {
-                var ListOfArticles= GetArticles().Where(article => article.User.FullName.Contains(AuthorName));
-                return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                var ListOfArticles = GetArticles().Where(article => article.User.FullName.Contains(AuthorName));
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -295,19 +309,21 @@ namespace AspireOverflow.Services
 
         }
 
-        
+
         public IEnumerable<object> GetArticlesByReviewerId(int ReviewerId)
         {
-            if (ReviewerId <=0 ) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
+            if (ReviewerId <= 0) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
             try
             {
-                var ListOfArticles= GetArticles().Where(article => article.ReviewerId==ReviewerId);
-                return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+                var ListOfArticles = GetArticles().Where(article => article.ReviewerId == ReviewerId);
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                     date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -326,15 +342,18 @@ namespace AspireOverflow.Services
             if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
-              
-                var ListOfArticles= GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
-                  if(ArticleStatusID==2) ListOfArticles.Where(Item =>Item.ArticleStatusID==3);
-                return ListOfArticles.Select(Article => new{
-                    ArticleId =Article.ArtileId,
-                    title=Article.Title,
-                      AuthorName=Article.User.FullName,
-                    content=Article.Content,
-                    image=Article.Image,
+
+                var ListOfArticles = GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
+                if (ArticleStatusID == 2) ListOfArticles.Where(Item => Item.ArticleStatusID == 3);
+                return ListOfArticles.Select(Article => new
+                {
+                    ArticleId = Article.ArtileId,
+                    title = Article.Title,
+                    AuthorName = Article.User?.FullName,
+                    content = Article.Content,
+                    image = Article.Image,
+                    date = Article.UpdatedBy,
+
                 });
             }
             catch (Exception exception)
@@ -372,11 +391,12 @@ namespace AspireOverflow.Services
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                var ListOfComments= database.GetComments().Where(comment => comment.ArticleId == ArticleId);
-                return ListOfComments.Select(Item => new {
-                       CommentId = Item.ArticleCommentId,
+                var ListOfComments = database.GetComments().Where(comment => comment.ArticleId == ArticleId);
+                return ListOfComments.Select(Item => new
+                {
+                    CommentId = Item.ArticleCommentId,
                     Message = Item.Comment,
-                    Name = Item.User.FullName,
+                    Name = Item.User?.FullName,
                     ArticleId = Item.ArticleId
 
                 });
@@ -390,21 +410,20 @@ namespace AspireOverflow.Services
         }
 
 
-        public bool AddLikeToArticle(int ArticleId, int UserId)
+        
+     public bool AddLikeToArticle(ArticleLike Like)
         {
-            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+            if (Like.ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{Like.ArticleId}");
+            if (Like.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{Like.UserId}");
             try
             {
-                if (database.GetLikes().ToList().Find(item => item.UserId == UserId && item.ArticleId == ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserID");
-                var ArticleLike = new ArticleLike();
-                ArticleLike.ArticleId = ArticleId;
-                ArticleLike.UserId = UserId;
-                return database.AddLike(ArticleLike);
+                if (database.GetLikes().ToList().Find(item => item.UserId == Like.UserId && item.ArticleId == Like.ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserId");
+             
+                return database.AddLike(Like);
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle()", exception, ArticleId, UserId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle()", exception,  Like));
                 return false;
             }
         }
@@ -425,6 +444,6 @@ namespace AspireOverflow.Services
             }
         }
 
-       
+
     }
 }

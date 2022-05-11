@@ -71,24 +71,25 @@ public class ArticleController : ControllerBase
     }
 
 
-    [HttpPost]
-    public async Task<ActionResult> AddLikeToArticle(int ArticleId,int UserId)
+    public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
     {
-        if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
+        if (Like.ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
         
         try
         {
-            return _articleService.AddLikeToArticle(ArticleId, UserId) ? await Task.FromResult(Ok("Successfully added like to article")) : BadRequest("Error Occured while adding like to article ");
+            if(!_articleService.AddLikeToArticle(Like)) BadRequest("Error Occured while adding Like to article ");
+            var Result=new{message="Successfully added Like to article",LikesCount=_articleService.GetLikesCount(Like.ArticleId)};
+            return await Task.FromResult(Ok(Result)); 
         }
         catch (ArgumentException exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, ArticleId));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, Like));
             return Problem($"{exception.Message}");
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, ArticleId));
-            return BadRequest($"Error Occurred while Adding like to ArticleId :{ArticleId}");
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, Like));
+            return BadRequest($"Error Occurred while Adding Like  :{Like}");
         }
     }
 
@@ -194,7 +195,7 @@ public class ArticleController : ControllerBase
 
             if (Range <= Articles.Count())
             {
-                Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
+                Articles = Range > 0 ? Articles.GetRange(0, Range) : Articles;
                 return await Task.FromResult(Ok(Articles));
             }
             else return BadRequest("Range limit exceeded");

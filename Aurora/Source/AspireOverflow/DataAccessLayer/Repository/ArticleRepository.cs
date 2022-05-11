@@ -203,7 +203,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include("Article").ToList();
                 return ListOfArticleLikes;
 
             }

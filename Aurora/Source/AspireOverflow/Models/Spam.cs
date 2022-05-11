@@ -7,6 +7,8 @@ namespace AspireOverflow.Models
     {
         [Key]
         public int SpamId { get; set; }
+
+        public string Reason { get; set; }
         public int QueryId { get; set; }
         public int UserId { get; set; }
 

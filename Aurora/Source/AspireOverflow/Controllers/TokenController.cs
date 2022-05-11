@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 
 using AspireOverflow.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace AspireOverflow.Controllers
 {
@@ -33,9 +34,10 @@ namespace AspireOverflow.Controllers
         public IActionResult AuthToken(Login Crendentials)
         {
 
-            if (Crendentials.Email == null && Crendentials.Password== null) return BadRequest();
+         
             try
             {
+                if(!Validation.ValidateUserCredentials(Crendentials.Email,Crendentials.Password)) return BadRequest();
                 var user = _userService.GetUser(Crendentials.Email, Crendentials.Password);
 
                 if (user != null)
@@ -69,6 +71,11 @@ namespace AspireOverflow.Controllers
                 {
                     return BadRequest("Invalid credentials");
                 }
+            }
+            catch (ValidationException exception){
+                  _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email));
+                return BadRequest(exception.Message);
+
             }
             catch (Exception exception)
             {

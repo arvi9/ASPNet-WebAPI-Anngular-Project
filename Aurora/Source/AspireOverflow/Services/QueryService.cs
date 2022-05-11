@@ -299,6 +299,54 @@ namespace AspireOverflow.Services
 
 
 
+ public bool ChangeSpamStatus(int SpamId, int VerifyStatusID)
+        {
+            if (SpamId <= 0) throw new ArgumentException($"Spam Id must be greater than 0  where SpamId:{SpamId}");
+            if(VerifyStatusID <= 0 && VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
+            try
+            {
+                return database.UpdateSpam(SpamId,  VerifyStatusID);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int SpamId, int VerifyStatusID)", exception, SpamId,VerifyStatusID));
+                throw exception;
+            }
+        }
+
+
+        public bool AddSpam(Spam spam)
+        {
+            if (spam.QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{spam.QueryId}");
+            if (spam.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{spam.UserId}");
+            try
+            {
+                if (database.GetSpams().ToList().Find(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId) != null) throw new ArgumentException("Unable to Add spam to same Query with same UserID");
+             
+                return database.AddSpam(spam);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "AddSpam(int QueryId, int UserId)", exception, spam));
+                return false;
+            }
+        }
+
+
+        public IEnumerable<object> GetSpams()
+        {
+           
+            try
+            {
+                var Spams = database.GetSpams().Where(item =>item.VerifyStatusID==3).GroupBy(item => item.QueryId).OrderByDescending(item=>item.Count());
+                return Spams;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetSpams()", exception));
+                throw;
+            }
+        }
 
 
 

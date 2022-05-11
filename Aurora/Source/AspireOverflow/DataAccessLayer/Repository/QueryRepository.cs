@@ -148,7 +148,70 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        public bool AddSpam(Spam spam)
+        {
+            if (spam.QueryId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where SpamId:{spam.QueryId}");
+            if (spam.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{spam.UserId}");
+            try
+            {
+                _context.Spams.Add(spam);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddSpam(Spam spam)", exception, spam));
+
+               return false;
+
+            }
+        }
+
+
+        public IEnumerable<Spam> GetSpams()
+        {
+
+            try
+            {
+                var ListOfSpams = _context.Spams.ToList();
+                return ListOfSpams;
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetSpams()", exception));
+                throw exception;
+            }
+        }
+
+
+
+        public bool UpdateSpam(int SpamId, int VerifyStatusID)
+        {
+
+            if (SpamId <= 0) throw new ArgumentException($"Spam Id must be greater than 0 where SpamId:{SpamId}");
+            if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
             
+            try
+            {
+              var ExistingSpam = GetSpams().ToList().Find(item=>item.SpamId==SpamId);
+               if(ExistingSpam == null) throw new ItemNotFoundException($"There is no matching Spam data with SpamID :{SpamId}");
+                 ExistingSpam.VerifyStatusID = VerifyStatusID;
+                _context.Spams.Update(ExistingSpam);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "UpdateSpam(int SpamId, int VerifyStatusID)", exception, VerifyStatusID));
+                return false;
+
+            }
+        }
+
+
+
+    
     }
 
 }

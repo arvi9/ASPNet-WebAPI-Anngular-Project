@@ -80,9 +80,9 @@ namespace AspireOverflow.Services
                     EmployeeId = User.AceNumber,
                     email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation.DesignationName,
+                    Designation = User.Designation?.DesignationName,
                     Department = GetDepartmentByID(User.DesignationId),
-                    Gender = User.Gender.Name,
+                    Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
                 };
@@ -117,9 +117,9 @@ namespace AspireOverflow.Services
                     EmployeeId = User.AceNumber,
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation.DesignationName,
+                    Designation = User.Designation?.DesignationName,
                     Department = GetDepartmentByID(User.DesignationId),
-                    Gender = User.Gender.Name,
+                    Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
                 });
@@ -145,9 +145,9 @@ namespace AspireOverflow.Services
                     EmployeeId = User.AceNumber,
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation.DesignationName,
+                    Designation = User.Designation?.DesignationName,
                     Department = GetDepartmentByID(User.DesignationId),
-                    Gender = User.Gender.Name,
+                    Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
                 });
@@ -189,9 +189,9 @@ namespace AspireOverflow.Services
                     EmployeeId = User.AceNumber,
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation.DesignationName,
+                    Designation = User.Designation?.DesignationName,
                     Department = GetDepartmentByID(User.DesignationId),
-                    Gender = User.Gender.Name,
+                    Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
                 });

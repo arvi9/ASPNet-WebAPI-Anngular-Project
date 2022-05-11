@@ -45,7 +45,7 @@ namespace AspireOverflow.Services
             else if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
             else if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
-            else if (article.ArticleStatusID <=0 && article.ArticleStatusID > 2) throw new ValidationException("ArticlestatusID must be less than 2");
+            else if (article.ArticleStatusID <= 0 && article.ArticleStatusID > 2) throw new ValidationException("ArticlestatusID must be less than 2");
             else return true;
         }
 
@@ -73,18 +73,32 @@ namespace AspireOverflow.Services
             if (user == null) throw new ValidationException("User should not be null");
             else if (user.VerifyStatusID != 3) throw new ValidationException($"VerifyStatus must be 3  VerifyStatusId:{user.VerifyStatusID}");
             else if (user.IsReviewer != false) throw new ValidationException($"IsReviewer must be false");
-              else if (user.GenderId <= 0 && user.GenderId > 2) throw new ValidationException($"Gender ID must be 1 or 2");
-
-
+            else if (user.GenderId <= 0 && user.GenderId > 2) throw new ValidationException($"Gender ID must be 1 or 2");
             else if (user.UserRoleId != 2) throw new ValidationException($"UserRoleId must be equal to 2 UserRole:{user.UserRoleId}");
-            else if (!mail.IsMatch(user.EmailAddress)) throw new ValidationException($"Email format is incorrect  EmailEntered:{ user.EmailAddress }");
+            else if(!ValidateUserCredentials(user.EmailAddress,user.Password)) return false;
             else return true;
         }
 
 
 
-
-
+        public static bool ValidateSpam(Spam spam)
+        {
+            if (spam == null) throw new ValidationException("Spam should not be null");
+            else if (spam.QueryId <= 0) throw new ValidationException("Query Id must be greater than 0");
+            else if (spam.UserId <= 0) throw new ValidationException("UserId must be greater than 0");
+            else if (spam.VerifyStatusID <= 0 && spam.VerifyStatusID > 3)
+            throw new ValidationException("Verify Status Id must be between 0 and 3");
+            else if (String.IsNullOrEmpty(spam.Reason)) throw new ValidationException("Spam Reason cannot be null or empty");
+            else return true;
+        }
+ public static bool ValidateUserCredentials(String Email,String Password )
+        {
+            var mail = new Regex("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+            var password = new Regex("^(?=.*/d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$");
+            if (!mail.IsMatch(Email)) throw new ValidationException($"Email format is incorrect EmailEntered:{ Email }");
+            else if(!password.IsMatch(Password))throw new ValidationException($"Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit. Password Entered:{Password}");
+            else return true;
+        }
 
 
 

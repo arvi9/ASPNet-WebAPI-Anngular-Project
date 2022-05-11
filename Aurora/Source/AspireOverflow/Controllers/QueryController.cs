@@ -161,7 +161,7 @@ namespace AspireOverflow.Controllers
 
                 if (Range <= Queries.Count())
                 {
-                    Queries = Range > 0 ? Queries.GetRange(1, Range) : Queries;
+                    Queries = Range > 0 ? Queries.GetRange(0, Range) : Queries;
                     return await Task.FromResult(Ok(Queries));
                 }
                 else return BadRequest("Range limit exceeded");
@@ -277,6 +277,58 @@ namespace AspireOverflow.Controllers
             }
 
         }
+ [HttpPost]
+        public async Task<ActionResult> AddSpam(Spam spam)
+        {
+            if (spam == null ) return BadRequest("spam object cannot be null");
 
+            try
+            {
+                return _queryService.AddSpam( spam) ? await Task.FromResult(Ok("Successfully added spam for the query")) : BadRequest("Error Occured while adding spam to the query ");
+            }
+            catch (ArgumentException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryController", "AddSpam(int QueryId)", exception, spam));
+                return Problem($"{exception.Message}");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryController", "AddSpam(int Query)", exception, spam));
+                return BadRequest($"Error Occurred while Adding Spam with Spam data :{HelperService.PropertyList(spam)}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetListOfSpams()
+        {
+            try
+            {
+                var ListOfSpams = _queryService.GetSpams();
+                return await Task.FromResult(Ok(ListOfSpams));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryController", "GetListOfSpams()", exception));
+                return Problem("Error occured while processing your request");
+            }
+        }
+
+    
+
+[HttpPatch]
+    public ActionResult UpdateSpamStatus(int SpamId, int VerifyStatusID)
+    {
+        if (SpamId <= 0) return BadRequest($"Spam Id must be greater than 0  where SpamId:{SpamId}");
+        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
+        try
+        {
+            return _queryService.ChangeSpamStatus(SpamId, VerifyStatusID)? Ok("successfully Updated"): BadRequest($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int SpamId, int VerifyStatusID)", exception, SpamId, VerifyStatusID));
+            return Problem($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}");
+        }
+    }
     }
 }

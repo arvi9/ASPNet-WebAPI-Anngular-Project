@@ -4,7 +4,7 @@ using AspireOverflow.Models;
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
 
-    public interface IQueryRepository : IQueryCommentRepository
+    public interface IQueryRepository : IQueryCommentRepository,ISpamReportRepository
     {
 
 
@@ -22,6 +22,16 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
          IEnumerable<QueryComment> GetComments();
 
          bool AddComment(QueryComment comment);
+
+    }
+     public interface ISpamReportRepository
+    {
+
+         IEnumerable<Spam> GetSpams();
+
+         bool AddSpam(Spam spam);
+
+         bool UpdateSpam(int SpamId, int VerifyStatusID);
 
     }
 }
