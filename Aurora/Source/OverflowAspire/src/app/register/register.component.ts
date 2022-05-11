@@ -63,19 +63,6 @@ designation:any[]=[]
     }
   }
 
-  // validateconfirmpassword(){
-  //   if(this.user.password==this.confirmpassword){
-  //     return null;}
-  //     else{
-  //       this.message="Password do not match";
-  //       return this.message;
-  //     }
-
-  //   }
-
-
-
-  gender = ''
   Gender: any = [
     {
       id: 1,

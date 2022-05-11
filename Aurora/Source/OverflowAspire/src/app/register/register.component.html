@@ -29,14 +29,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xl-6">
-
+                    <div class="col-sm-12 col-xl-6 col-md-6">
                         <label class="form-label">Gender</label>
                         <select class="form-select " name="gender" [(ngModel)]="user.genderId" required>
-                            <option value="" hidden>Choose option</option>
+                            <option value="" hidden>Choose Gender</option>
                             <option *ngFor="let item of Gender" value={{item.id}}>{{item.gender}}</option>
                         </select>
-
                     </div>
                 </div>
 
@@ -56,10 +54,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xl-6">
+                    <div class="col-sm-12 col-xl-6 col-md-6">
 
                         <label class="form-label">Department </label>
-                        <select name="Department" id="DepartmentName" class="form-select" (change)="filterDropdown()"
+                        <select  id="DepartmentName" class="form-select" (change)="filterDropdown()"
                             name="dept" [(ngModel)]="dept" required>
                             <option value="" hidden>Select the Department</option>
                             <option *ngFor="let item of department" value={{item.id}} >{{item.department}}</option>
@@ -88,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                        <div class="col-sm-12 col-xl-6">
+                        <div class="col-sm-12 col-xl-6 col-md-6">
 
                             <label class="form-label">Designation </label>
                             <select name="Designation" id="DesignationName" class="form-select"
@@ -100,7 +98,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-xl-6 ">
+                    <div class="col-sm-12 col-xl-6 col-md-6 ">
 
                         <label class="form-label">Date Of Birth</label>
                         <div class="input-group rounded mb-4 ">
