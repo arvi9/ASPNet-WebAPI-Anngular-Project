@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'Articles',component:ArticlesComponent},
   {path:'LatestArticles',component:LatestArticlepageComponent},
   {path:'TrendingArticles',component:TrendingArticlepageComponent},
-  {path:'specificarticle',component:SpecificarticleComponent},
+  {path:'specificarticle/:articleId',component:SpecificarticleComponent},
   {path:'MyArticles',component:MyArticlesComponent},
   {path:'CreateArticle',component:CreateArticlePageComponent},
   {path:'Queries',component:QueriesComponent},

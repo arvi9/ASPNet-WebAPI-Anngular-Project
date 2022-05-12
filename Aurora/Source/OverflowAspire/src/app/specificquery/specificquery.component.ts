@@ -15,7 +15,7 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
 })
 export class SpecificqueryComponent implements OnInit {
   queryId: number = 0
-  @Input() Querysrc: string = "https://localhost:7197/Query/GetQuery/:queryId";
+ 
   Query: any = {
    CommentId:0,
    comment: '',

@@ -4,17 +4,19 @@ import { Article } from 'Models/Article';
 import { User } from 'Models/User';
 import { data } from 'jquery';
 import { application } from 'Models/Application';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-specificarticle',
   templateUrl: './specificarticle.component.html',
   styleUrls: ['./specificarticle.component.css']
 })
 export class SpecificarticleComponent implements OnInit {
-  @Input() Articlesrc: string = `${application.URL}/Article/GetArticleById?ArticleId=1`;
+  articleId: number = 0
+  //@Input() Articlesrc: string = `${application.URL}/Article/GetArticleById/:articleId`;
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
   article: any = {
     articleCommentId: 0,
     comment: '',
@@ -36,14 +38,18 @@ export class SpecificarticleComponent implements OnInit {
 }
 
   
-  ngOnInit(): void {
-    this.http
-      .get<any>(this.Articlesrc)
-      .subscribe((data) => {
-        this.data = data;
-        console.log(data);
-      });
-  }
+ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.articleId = params['articleId'];
+  console.log(this.articleId)
+  this.http
+    .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`)
+    .subscribe((data) => {
+      this.data = data;
+      console.log(data);
+    });
+  });
+}
   public data: Article = new Article();
   createdOn: string = this.data.createdOn.toDateString()
   likeCount = 0;

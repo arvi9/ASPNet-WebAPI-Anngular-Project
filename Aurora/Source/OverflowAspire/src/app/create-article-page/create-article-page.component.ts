@@ -3,6 +3,7 @@ import { Byte } from '@angular/compiler/src/util';
 import { ApplicationInitStatus, Component, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application'
+import { catchError } from 'rxjs';
 
 
 declare var CKEDITOR: any;
@@ -60,21 +61,34 @@ export class CreateArticlePageComponent implements OnInit {
 
   onSubmit() {
     const headers = { 'content-type': 'application/json' }
-    this.imgconvert()
+   
     this.article.articleStatusID = 2;
    
     this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
-      .subscribe((data) => {
+      .pipe(catchError(this.handleError)).subscribe((data) => {
 
         console.log(data)
 
       });
   }
-
+  handleError(error:any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
+    }
+    console.log(errorMessage);
+   
+        return "";
+    
+  }
 
   saveToDraft() {
     const headers = { 'content-type': 'application/json' }
-    this.imgconvert()
+    
 
     
     this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
@@ -86,11 +100,6 @@ export class CreateArticlePageComponent implements OnInit {
   }
 
 
-  imgconvert() {
-    this.article.ImageString = this.cardImageBase64.replace("data:image/png;base64,", "")
-    this.article.ImageString = this.cardImageBase64.replace("data:image/jpg;base64,", "")
-    this.article.ImageString = this.cardImageBase64.replace("data:image/jpeg;base64,", "")
-  }
 
 
 
@@ -124,6 +133,10 @@ export class CreateArticlePageComponent implements OnInit {
           const imgBase64Path = e.target.result;
           
           this.cardImageBase64 = imgBase64Path;
+          this.cardImageBase64= this.cardImageBase64.replace("data:image/png;base64,", "");
+          this.cardImageBase64= this.cardImageBase64.replace("data:image/jpg;base64,", "");
+          this.cardImageBase64= this.cardImageBase64.replace("data:image/jpeg;base64,", "");
+          this.article.ImageString=this.cardImageBase64;
           this.isImageSaved = true;
           
 

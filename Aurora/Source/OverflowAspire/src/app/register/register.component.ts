@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'Models/User';
 import { Router } from '@angular/router';
+import { application } from 'Models/Application';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -8,11 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  register: any;
+  @Input() Registersrc: string = `${application.URL}/User/GetUser?UserId=1`;
+  totalLength: any;
+  data: any;
 
 
 
-  constructor(private router: Router) { }
+
+  constructor(private http: HttpClient,private router:Router) { }
   user: User = {
     userId: 0,
     fullName: '',
@@ -32,34 +37,38 @@ export class RegisterComponent implements OnInit {
 
   dobmessage: string = ''
   message: string = ''
-dept=''
+  dept = ''
   _Designation = '';
 
-designation:any[]=[]
+  designation: any[] = []
 
   ngOnInit(): void {
-
+    this.http
+      .get<any>(this.Registersrc)
+      .subscribe((data) => {
+        this.data = data;
+        this.totalLength = data.length;
+        console.log(data);
+      });
   }
-
 
 
   filterDropdown() {
 
 
-    this.designation=[];
+    this.designation = [];
     for (let item of this.designationDetails) {
       if (item.departmentID == this.dept) {
         this.designation.push(item);
-     
+
       }
     }
   }
   validateDateOfBirth() {
-    if (Date.now.toString() > this.user.dateOfBirth)
-    {
+    if (Date.now.toString() > this.user.dateOfBirth) {
       this.dobmessage = "Date of birth should be valid";
       console.log(this.dobmessage);
-    
+
     }
   }
 
@@ -93,38 +102,36 @@ designation:any[]=[]
     {
       designationid: 1,
       designationName: 'Team Lead',
-       departmentID:1
+      departmentID: 1
     },
     {
       designationid: 2,
       designationName: 'Team Lead',
-       departmentID:2
+      departmentID: 2
     },
     {
       designationid: 3,
       designationName: 'Trainer',
-      departmentID:1
+      departmentID: 1
     },
     {
       designationid: 4,
       designationName: 'ModuleLead',
-      departmentID:3
+      departmentID: 3
     },
     {
       designationid: 5,
       designationName: 'Senior Engineer',
-      departmentID:2
+      departmentID: 2
     },
   ]
 
 
 
-  userdata() {
-    console.log(this.user.genderId)
-    // this.router.navigate(['/Login']);
-    // this.register.setMessage(this.user);
-    // localStorage.setItem(this.user.fullName, JSON.stringify(this.user));
-    // this.login.userName(this.userModel);
-    // this.login.display(this.userModel);
-  }
+   userdata() {
+     console.log(this.user.genderId)
+     this.router.navigate(['/Login']);
+   }
+
+
 }

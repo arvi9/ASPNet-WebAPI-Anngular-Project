@@ -13,7 +13,7 @@ import { MatButtonModule} from '@angular/material/button';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { AppComponent } from './app.component';
 import { QueryCardComponent } from './query-card/query-card.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ArticleCardComponent } from './article-card/article-card.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -22,14 +22,14 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
 import { ToreviewspecificpageComponent } from './toreviewspecificpage/toreviewspecificpage.component';
 import { ArticlereviewedspecificpageComponent } from './articlereviewedspecificpage/articlereviewedspecificpage.component';
 import { SpamViewComponent } from './spam-view/spam-view.component';
-import { QueryFilterComponent } from './query-filter/query-filter.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { QueriesComponent } from './queries/queries.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SpecificarticleComponent } from './specificarticle/specificarticle.component';
 import { ArticlesComponent } from './articles/articles.component';
-import { ArticleFilterComponent } from './article-filter/article-filter.component';
+
 import { LatestQueriesComponent } from './latest-queries/latest-queries.component';
 import { TrendingQueriespageComponent } from './trending-queriespage/trending-queriespage.component';
 import { LatestArticlepageComponent } from './latest-articlepage/latest-articlepage.component';
@@ -69,7 +69,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     QueryCardComponent,
     SpamViewComponent,
     ArticleCardComponent,
-    QueryFilterComponent,
+    
     QueriesComponent,
     NavbarComponent,
     FooterComponent,
@@ -78,7 +78,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     RegisterComponent,
     SpecificarticleComponent,
     ArticlesComponent,
-    ArticleFilterComponent,
+   
     LatestQueriesComponent,
     TrendingQueriespageComponent,
     LatestArticlepageComponent,
@@ -125,7 +125,10 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     NgChartsModule,
     MatButtonModule,
     ScrollingModule,
-    CKEditorModule
+    CKEditorModule,
+    Ng2SearchPipeModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

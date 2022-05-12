@@ -15,7 +15,7 @@ export class QueryCardComponent implements OnInit {
  @Input() Querysrc: string ="";
   totalLength: any;
   page: number = 1;
-  
+  searchTitle=""
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
