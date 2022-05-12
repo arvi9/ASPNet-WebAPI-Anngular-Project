@@ -303,7 +303,7 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var ListOfSpams = _queryService.GetSpams();
+                var ListOfSpams = _queryService.GetSpams(3);
                 return await Task.FromResult(Ok(ListOfSpams));
             }
             catch (Exception exception)

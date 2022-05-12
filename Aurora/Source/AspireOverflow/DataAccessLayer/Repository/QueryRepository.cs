@@ -172,7 +172,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfSpams = _context.Spams.ToList();
+                var ListOfSpams = _context.Spams.Include("Query").Include("User").ToList();
                 return ListOfSpams;
 
             }
