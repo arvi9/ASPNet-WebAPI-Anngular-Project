@@ -330,5 +330,16 @@ namespace AspireOverflow.Controllers
             return Problem($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}");
         }
     }
+
+
+     private object Message(string message,object? obj=null){
+
+     
+           if(Message !=null && obj ==null ) return new {Message=message};
+           else if(Message !=null && obj !=null) return new{Message=message,DataPassed =obj};
+           else return new {};
+        
+    }
+
     }
 }

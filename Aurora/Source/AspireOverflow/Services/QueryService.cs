@@ -126,7 +126,8 @@ namespace AspireOverflow.Services
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
-                    content = item.Content
+                    content = item.Content,
+                    IsSolved=item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -149,7 +150,8 @@ namespace AspireOverflow.Services
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
-                    content = item.Content
+                    content = item.Content,
+                      IsSolved=item.IsSolved
                 });
             }
 
@@ -181,7 +183,8 @@ namespace AspireOverflow.Services
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
-                    content = item.Content
+                    content = item.Content,
+                      IsSolved=item.IsSolved
                 });
             }
 
@@ -205,7 +208,8 @@ namespace AspireOverflow.Services
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
-                    content = item.Content
+                    content = item.Content,
+                      IsSolved=item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -227,7 +231,8 @@ namespace AspireOverflow.Services
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
-                    content = item.Content
+                    content = item.Content,
+                      IsSolved=item.IsSolved
                 });
 
             }
@@ -248,7 +253,8 @@ namespace AspireOverflow.Services
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
-                    content = item.Content
+                    content = item.Content,
+                      IsSolved=item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -284,7 +290,7 @@ namespace AspireOverflow.Services
                 {
                     CommentId = item.QueryCommentId,
                     Message = item.Comment,
-                    Name = item.User.FullName,
+                    Name = item.User?.FullName,
                     QueryId = item.QueryId
                 });
 

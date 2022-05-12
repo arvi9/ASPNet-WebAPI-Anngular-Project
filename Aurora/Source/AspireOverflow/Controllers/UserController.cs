@@ -193,5 +193,14 @@ public class UserController : ControllerBase
             throw exception;
         }
     }
+     private object Message(string message,object? obj=null){
+
+     
+           if(Message !=null && obj ==null ) return new {Message=message};
+           else if(Message !=null && obj !=null) return new{Message=message,DataPassed =obj};
+           else return new {};
+        
+    }
+
 
 }

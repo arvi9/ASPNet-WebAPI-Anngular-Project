@@ -94,9 +94,9 @@ namespace AspireOverflow.Services
  public static bool ValidateUserCredentials(String Email,String Password )
         {
             var mail = new Regex("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-            var password = new Regex("^(?=.*/d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$");
+            var password = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
             if (!mail.IsMatch(Email)) throw new ValidationException($"Email format is incorrect EmailEntered:{ Email }");
-            else if(!password.IsMatch(Password))throw new ValidationException($"Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit. Password Entered:{Password}");
+            else if(!password.IsMatch(Password))throw new ValidationException($"Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter,  one numeric digit and one special character. Password Entered:{Password}");
             else return true;
         }
 
