@@ -11,7 +11,7 @@ namespace AspireOverflow.Controllers;
 
 [ApiController]
 [Route("[controller]/[action]")]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
 
     internal ILogger<UserController> _logger;
@@ -28,19 +28,19 @@ public class UserController : ControllerBase
     public async Task<ActionResult> CreateUser(User User)
     {
 
-        if (User == null) return BadRequest("Null value is not supported");
+        if (User == null) return BadRequest(Message("Null value is not supported"));
 
         try
 
         {
             //Development.Web is Enum constants which indicated the request approaching team.
-            return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
+            return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest(Message($"Error Occured while Adding User :{HelperService.PropertyList(User)}"));
         }
         catch (ValidationException exception)
         {
             //HelperService.LoggerMessage - returns string for logger with detailed info
             _logger.LogError(HelperService.LoggerMessage("UserController", " CreateUser(User User)", exception, User));
-            return BadRequest($"{exception.Message}\n{HelperService.PropertyList(User)}");
+            return BadRequest(Message($"{exception.Message}",User));
         }
         catch (Exception exception)
         {
@@ -52,11 +52,11 @@ public class UserController : ControllerBase
     [HttpPatch]
     public async Task<ActionResult> ChangeUserVerifyStatus(int UserId, bool IsVerified)
     {
-        if (UserId <= 0) return BadRequest("User ID must be greater than 0");
+        if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
-            if (IsVerified) return _UserService.ChangeUserVerificationStatus(UserId, 1) ? await Task.FromResult(Ok($"Successfully marked as Verified User in the record with UserId :{UserId}")) : BadRequest($"Error Occurred while marking User as Verified with UserId :{UserId}");
-            else return _UserService.ChangeUserVerificationStatus(UserId, 2) ? await Task.FromResult(Ok($"Successfully marked as UnVerified User in the record with UserId :{UserId}")) : BadRequest($"Error Occurred while marking User as UnVerified with UserId :{UserId}");
+            if (IsVerified) return _UserService.ChangeUserVerificationStatus(UserId, 1) ? await Task.FromResult(Ok($"Successfully marked as Verified User in the record with UserId :{UserId}")) : BadRequest(Message($"Error Occurred while marking User as Verified with UserId :{UserId}"));
+            else return _UserService.ChangeUserVerificationStatus(UserId, 2) ? await Task.FromResult(Ok($"Successfully marked as UnVerified User in the record with UserId :{UserId}")) : BadRequest(Message($"Error Occurred while marking User as UnVerified with UserId :{UserId}"));
         }
         catch (ItemNotFoundException exception)
         {
@@ -74,16 +74,16 @@ public class UserController : ControllerBase
     [HttpDelete]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
-        if (User.HasClaim(item => item.Type == ClaimTypes.Role && item.Value == "2")) return BadRequest("you dont have access to remove user");
-        if (UserId <= 0) return BadRequest("User ID must be greater than 0");
+        if (User.HasClaim(item => item.Type == ClaimTypes.Role && item.Value == "2")) return BadRequest(Message("you dont have access to remove user"));
+        if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
-            return _UserService.RemoveUser(UserId) ? await Task.FromResult(Ok("Not Verified User has been rejected succfully")) : BadRequest($"Not Allowed to remove User with UserId:{UserId}");
+            return _UserService.RemoveUser(UserId) ? await Task.FromResult(Ok("Not Verified User has been rejected succfully")) : BadRequest(Message($"Not Allowed to remove User with UserId:{UserId}"));
         }
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", "RemoveUser(int UserId)", exception, UserId));
-            return BadRequest($"{exception.Message}");
+            return BadRequest(Message($"{exception.Message}"));
         }
         catch (Exception exception)
         {
@@ -106,7 +106,7 @@ public class UserController : ControllerBase
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", "GetUser()", exception, UserId));
-            return BadRequest($"{exception.Message} with UserId:{UserId}");
+            return BadRequest(Message($"{exception.Message} with UserId:{UserId}"));
         }
         catch (Exception exception)
         {
@@ -120,7 +120,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetUsersByVerifyStatusId(int VerifyStatusID)
     {
-        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}");
+        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}"));
         try
         {
             var ListOfUsers = _UserService.GetUsersByVerifyStatus(VerifyStatusID);
@@ -136,7 +136,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetUsersByUserRoleId(int RoleId)
     {
-        if (RoleId <= 0 && RoleId > 2) return BadRequest($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}");
+        if (RoleId <= 0 && RoleId > 2) return BadRequest(Message($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}"));
         try
         {
             var ListOfUsers = _UserService.GetUsersByUserRoleID(RoleId);
@@ -193,14 +193,7 @@ public class UserController : ControllerBase
             throw exception;
         }
     }
-     private object Message(string message,object? obj=null){
-
-     
-           if(Message !=null && obj ==null ) return new {Message=message};
-           else if(Message !=null && obj !=null) return new{Message=message,DataPassed =obj};
-           else return new {};
-        
-    }
+   
 
 
 }

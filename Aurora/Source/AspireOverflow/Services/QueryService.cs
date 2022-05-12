@@ -350,7 +350,8 @@ namespace AspireOverflow.Services
                 }),
                 Query=new {
                     QueryId=item.First().QueryId,
-                    Content=item.First().Query?.Content
+                    Content=item.First().Query?.Content,
+                    Title=item.First().Query?.Title
                 }});
                 return Spams;
             }
@@ -360,7 +361,6 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
 
 
 

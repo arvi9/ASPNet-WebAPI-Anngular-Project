@@ -17,7 +17,7 @@ namespace AspireOverflow.Controllers
     [ApiController]
     [Route("[controller]/[action]")]
 
-    public class TokenController : ControllerBase
+    public class TokenController : BaseController
     {
         public IConfiguration _configuration;
         private readonly AspireOverflowContext _context;
@@ -69,7 +69,7 @@ namespace AspireOverflow.Controllers
                 }
                 else
                 {
-                    return BadRequest("Invalid credentials");
+                    return BadRequest(Message("Invalid credentials"));
                 }
             }
             catch (ValidationException exception){
@@ -80,19 +80,13 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email));
-                return BadRequest("Error Occured while Validating your  credentials");
+                return BadRequest(Message("Error Occured while Validating your  credentials"));
             }
 
         }
- private object Message(string message,object? obj=null){
-
-     
-           if(Message !=null && obj ==null ) return new {Message=message};
-           else if(Message !=null && obj !=null) return new{Message=message,DataPassed =obj};
-           else return new {};
+       
         
     }
 
 
     }
-}

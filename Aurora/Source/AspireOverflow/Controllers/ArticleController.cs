@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AspireOverflow.Controllers;
 [ApiController]
 [Route("[controller]/[action]")]
-public class ArticleController : ControllerBase
+public class ArticleController : BaseController
 {
     private ILogger<ArticleController> _logger;
     private ArticleService _articleService;
@@ -51,15 +51,15 @@ public class ArticleController : ControllerBase
     public async Task<ActionResult<ArticleComment>> CreateComment(ArticleComment comment)
     {
 
-        if (comment == null) return BadRequest("Null value is not supported");
+        if (comment == null) return BadRequest(Message("Null value is not supported"));
         try
         {
-            return _articleService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Article")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
+            return _articleService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Article")) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
         }
         catch (ValidationException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateComment(ArticleComment comment)", exception, comment));
-            return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
+            return BadRequest(Message(exception.Message,comment));
         }
 
         catch (Exception exception)
@@ -73,11 +73,11 @@ public class ArticleController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
     {
-        if (Like.ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
+        if (Like.ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
 
         try
         {
-            if (!_articleService.AddLikeToArticle(Like)) BadRequest("Error Occured while adding Like to article ");
+            if (!_articleService.AddLikeToArticle(Like)) BadRequest(Message("Error Occured while adding Like to article "));
             var Result = new { message = "Successfully added Like to article", LikesCount = _articleService.GetLikesCount(Like.ArticleId) };
             return await Task.FromResult(Ok(Result));
         }
@@ -89,7 +89,7 @@ public class ArticleController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, Like));
-            return BadRequest($"Error Occurred while Adding Like  :{Like}");
+            return BadRequest(Message($"Error Occurred while Adding Like  :{Like}"));
         }
     }
 
@@ -97,17 +97,17 @@ public class ArticleController : ControllerBase
 
     public async Task<ActionResult> UpdateArticle(Article article)
     {
-        if (article == null) return BadRequest("Article can't be null");
+        if (article == null) return BadRequest(Message("Article can't be null"));
         var CurrentUserId = User.FindFirst("userId")?.Value;
-        if (article.CreatedBy.ToString() != CurrentUserId) BadRequest("Article must be updated only by Article Creater");
+        if (article.CreatedBy.ToString() != CurrentUserId) BadRequest(Message("Article must be updated only by Article Creater"));
         try
         {
-            return _articleService.UpdateArticle(article, Convert.ToInt32(CurrentUserId)) ? await Task.FromResult(Ok("Successfully updated the article")) : BadRequest("Error Occured while Updating the article");
+            return _articleService.UpdateArticle(article, Convert.ToInt32(CurrentUserId)) ? await Task.FromResult(Ok("Successfully updated the article")) : BadRequest(Message("Error Occured while Updating the article"));
         }
         catch (ValidationException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdateArticle(Article article)", exception, article));
-            return BadRequest($"{exception.Message}\n{HelperService.PropertyList(article)}");
+            return BadRequest(Message($"{exception.Message}",article));
         }
 
         catch (Exception exception)
@@ -122,12 +122,12 @@ public class ArticleController : ControllerBase
     [HttpPatch]
     public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID, int UserId)
     {
-        if (ArticleId <= 0 || ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4");
+        if (ArticleId <= 0 || ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest(Message("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4"));
 
         try
         {
 
-            return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID, UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest($"Error Occurred while updating the status of the Article:{ArticleId}");
+            return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID, UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest(Message($"Error Occurred while updating the status of the Article:{ArticleId}"));
         }
         catch (ItemNotFoundException exception)
         {
@@ -146,10 +146,10 @@ public class ArticleController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult> DeleteArticleByArticleId(int ArticleId)
     {
-        if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
+        if (ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
         try
         {
-            return _articleService.DeleteArticleByArticleId(ArticleId) ? await Task.FromResult(Ok("Successfully Deleted the draft article")) : BadRequest($"Error Occured while deleting article with ArticleID:{ArticleId} ");
+            return _articleService.DeleteArticleByArticleId(ArticleId) ? await Task.FromResult(Ok("Successfully Deleted the draft article")) : BadRequest(Message($"Error Occured while deleting article with ArticleID:{ArticleId} "));
         }
         catch (ArgumentException exception)
         {
@@ -159,7 +159,7 @@ public class ArticleController : ControllerBase
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
-            return BadRequest($"Error Occurred while Adding like to ArticleId :{ArticleId}");
+            return BadRequest(Message($"Error Occurred while Adding like to ArticleId :{ArticleId}"));
         }
     }
 
@@ -176,7 +176,7 @@ public class ArticleController : ControllerBase
                 Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
                 return await Task.FromResult(Ok(Articles));
             }
-            else return BadRequest("Range limit exceeded");
+            else return BadRequest(Message("Range limit exceeded"));
 
         }
         catch (Exception exception)
@@ -198,7 +198,7 @@ public class ArticleController : ControllerBase
                 Articles = Range > 0 ? Articles.GetRange(0, Range) : Articles;
                 return await Task.FromResult(Ok(Articles));
             }
-            else return BadRequest("Range limit exceeded");
+            else return BadRequest(Message("Range limit exceeded"));
         }
         catch (Exception exception)
         {
@@ -211,7 +211,7 @@ public class ArticleController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetArticleById(int ArticleId)
     {
-        if (ArticleId <= 0) return BadRequest("Article ID must be greater than 0");
+        if (ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
         try
         {
             return await Task.FromResult(Ok(_articleService.GetArticleById(ArticleId)));
@@ -219,7 +219,7 @@ public class ArticleController : ControllerBase
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticleById(int ArticleId)", exception, ArticleId));
-            return BadRequest($"{exception.Message}");
+            return BadRequest(Message($"{exception.Message}"));
         }
         catch (Exception exception)
         {
@@ -249,7 +249,7 @@ public class ArticleController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetArticlesByUserId(int UserId)
     {
-        if (UserId <= 0) return BadRequest("UserId must be greater than 0");
+        if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
         try
         {
             var ListOfArticleByUserId = _articleService.GetArticlesByUserId(UserId);
@@ -269,7 +269,7 @@ public class ArticleController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetArticlesByTitle(string Title)
     {
-        if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
+        if (String.IsNullOrEmpty(Title)) return BadRequest(Message("Title can't be null"));
         try
         {
             var ListOfArticlesByTitle = _articleService.GetArticlesByTitle(Title);
@@ -292,7 +292,7 @@ public class ArticleController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetArticlesByAuthor(string AuthorName)
     {
-        if (String.IsNullOrEmpty(AuthorName)) return BadRequest("Author Name can't be null");
+        if (String.IsNullOrEmpty(AuthorName)) return BadRequest(Message("Author Name can't be null"));
         try
         {
             var ListOfArticlesByAuthor = _articleService.GetArticlesByTitle(AuthorName);
@@ -313,7 +313,7 @@ public class ArticleController : ControllerBase
     public async Task<IActionResult> GetArticlesByArticleStatusId(int ArticleStatusID)
     {
 
-        if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+        if (ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest(Message($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}"));
         try
         {
 
@@ -334,7 +334,7 @@ public class ArticleController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int ArticleId)
     {
-        if (ArticleId <= 0) return BadRequest("ArticleId must be greater than 0");
+        if (ArticleId <= 0) return BadRequest(Message("ArticleId must be greater than 0"));
         try
         {
             var ListOfComments = _articleService.GetComments(ArticleId);
@@ -355,14 +355,6 @@ public class ArticleController : ControllerBase
     }
 
 
-    private object Message(string message, object? obj = null)
-    {
 
-
-        if (Message != null && obj == null) return new { Message = message };
-        else if (Message != null && obj != null) return new { Message = message, DataPassed = obj };
-        else return new { };
-
-    }
 
 }

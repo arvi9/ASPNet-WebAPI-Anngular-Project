@@ -67,7 +67,7 @@ namespace AspireOverflow.Services
 
         public static bool ValidateUser(User user)
         {
-            var mail = new Regex("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+            
 
 
             if (user == null) throw new ValidationException("User should not be null");

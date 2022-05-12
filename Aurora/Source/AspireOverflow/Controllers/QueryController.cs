@@ -12,7 +12,7 @@ namespace AspireOverflow.Controllers
 
     [ApiController]
     [Route("[controller]/[action]")]
-    public class QueryController : ControllerBase
+    public class QueryController : BaseController
     {
 
         internal ILogger<QueryController> _logger;
@@ -30,7 +30,7 @@ namespace AspireOverflow.Controllers
 
         public async Task<ActionResult> CreateQuery(Query query)
         {
-            if (query == null) return BadRequest("Null value is not supported");
+            if (query == null) return BadRequest(Message("Null value is not supported"));
             try
             {
 
@@ -40,7 +40,7 @@ namespace AspireOverflow.Controllers
             {
                 //HelperService.LoggerMessage - returns string for logger with detailed info
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "CreateQuery(Query query)", exception, query));
-                return BadRequest($"{exception.Message}\n{HelperService.PropertyList(query)}");
+                return BadRequest(Message($"{exception.Message}",query));
             }
             catch (Exception exception)
             {
@@ -53,10 +53,10 @@ namespace AspireOverflow.Controllers
         [HttpDelete]
         public async Task<ActionResult> RemoveQueryByQueryId(int QueryId)
         {
-            if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
+            if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
             try
             {
-                return _queryService.RemoveQueryByQueryId(QueryId) ? await Task.FromResult(Ok($"Successfully deleted the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while removing query with QueryId :{QueryId}");
+                return _queryService.RemoveQueryByQueryId(QueryId) ? await Task.FromResult(Ok($"Successfully deleted the record with QueryId :{QueryId}")) : BadRequest(Message($"Error Occurred while removing query with QueryId :{QueryId}"));
             }
 
             catch (ItemNotFoundException exception)
@@ -75,10 +75,10 @@ namespace AspireOverflow.Controllers
         [HttpPatch]
         public async Task<ActionResult> MarkQueryAsSolved(int QueryId)
         {
-            if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
+            if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
             try
             {
-                return _queryService.MarkQueryAsSolved(QueryId) ? await Task.FromResult(Ok($"Successfully marked as Solved Query in the record with QueryId :{QueryId}")) : BadRequest($"Error Occurred while marking query as solved with QueryId :{QueryId}");
+                return _queryService.MarkQueryAsSolved(QueryId) ? await Task.FromResult(Ok($"Successfully marked as Solved Query in the record with QueryId :{QueryId}")) : BadRequest(Message($"Error Occurred while marking query as solved with QueryId :{QueryId}"));
             }
 
             catch (ItemNotFoundException exception)
@@ -95,7 +95,7 @@ namespace AspireOverflow.Controllers
         [HttpGet]
         public async Task<ActionResult> GetQuery(int QueryId)
         {
-            if (QueryId <= 0) return BadRequest("Query ID must be greater than 0");
+            if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
             try
             {
                 var Query = _queryService.GetQuery(QueryId);
@@ -111,7 +111,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "GetQuery(int QueryId)", exception, QueryId));
-                return BadRequest($"Error Occurred while getting query with QueryId :{QueryId}");
+                return BadRequest(Message($"Error Occurred while getting query with QueryId :{QueryId}"));
             }
         }
 
@@ -142,7 +142,7 @@ namespace AspireOverflow.Controllers
                     Queries = Range > 0 ? Queries.GetRange(1, Range) : Queries;
                     return await Task.FromResult(Ok(Queries));
                 }
-                else return BadRequest("Range limit exceeded");
+                else return BadRequest(Message("Range limit exceeded"));
 
             }
             catch (Exception exception)
@@ -164,7 +164,7 @@ namespace AspireOverflow.Controllers
                     Queries = Range > 0 ? Queries.GetRange(0, Range) : Queries;
                     return await Task.FromResult(Ok(Queries));
                 }
-                else return BadRequest("Range limit exceeded");
+                else return BadRequest(Message("Range limit exceeded"));
             }
             catch (Exception exception)
             {
@@ -178,7 +178,7 @@ namespace AspireOverflow.Controllers
         [HttpGet]
         public async Task<ActionResult> GetQueriesByUserId(int UserId)
         {
-            if (UserId <= 0) return BadRequest("UserId must be greater than 0");
+            if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
             try
             {
                 var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId);
@@ -199,7 +199,7 @@ namespace AspireOverflow.Controllers
         [HttpGet]
         public async Task<ActionResult> GetQueriesByTitle(string Title)
         {
-            if (String.IsNullOrEmpty(Title)) return BadRequest("Title can't be null");
+            if (String.IsNullOrEmpty(Title)) return BadRequest(Message("Title can't be null"));
             try
             {
                 var ListOfQueriesByTitle = _queryService.GetQueriesByTitle(Title);
@@ -239,15 +239,15 @@ namespace AspireOverflow.Controllers
         public async Task<ActionResult<QueryComment>> CreateComment(QueryComment comment)
         {
 
-            if (comment == null) return BadRequest("Null value is not supported");
+            if (comment == null) return BadRequest(Message("Null value is not supported"));
             try
             {
-                return _queryService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}");
+                return _queryService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
             }
             catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", " CreateComment(QueryComment comment)", exception, comment));
-                return BadRequest($"{exception.Message}\n{HelperService.PropertyList(comment)}");
+                return BadRequest(Message($"{exception.Message}",comment));
             }
 
             catch (Exception exception)
@@ -261,7 +261,7 @@ namespace AspireOverflow.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int QueryId)
         {
-            if (QueryId <= 0) return BadRequest("QueryId must be greater than 0");
+            if (QueryId <= 0) return BadRequest(Message("QueryId must be greater than 0"));
             try
             {
                 var ListOfComments = _queryService.GetComments(QueryId);
@@ -280,11 +280,11 @@ namespace AspireOverflow.Controllers
  [HttpPost]
         public async Task<ActionResult> AddSpam(Spam spam)
         {
-            if (spam == null ) return BadRequest("spam object cannot be null");
+            if (spam == null ) return BadRequest(Message("spam object cannot be null"));
 
             try
             {
-                return _queryService.AddSpam( spam) ? await Task.FromResult(Ok("Successfully added spam for the query")) : BadRequest("Error Occured while adding spam to the query ");
+                return _queryService.AddSpam( spam) ? await Task.FromResult(Ok("Successfully added spam for the query")) : BadRequest(Message("Error Occured while adding spam to the query "));
             }
             catch (ValidationException exception)
             {
@@ -294,7 +294,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "AddSpam(int Query)", exception, spam));
-                return BadRequest($"Error Occurred while Adding Spam with Spam data :{HelperService.PropertyList(spam)}");
+                return BadRequest(Message("Error Occurred while Adding Spam with Spam data",spam));
             }
         }
 
@@ -318,11 +318,11 @@ namespace AspireOverflow.Controllers
 [HttpPatch]
     public ActionResult UpdateSpamStatus(int SpamId, int VerifyStatusID)
     {
-        if (SpamId <= 0) return BadRequest($"Spam Id must be greater than 0  where SpamId:{SpamId}");
-        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
+        if (SpamId <= 0) return BadRequest(Message($"Spam Id must be greater than 0  where SpamId:{SpamId}"));
+        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
         try
         {
-            return _queryService.ChangeSpamStatus(SpamId, VerifyStatusID)? Ok("successfully Updated"): BadRequest($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}");
+            return _queryService.ChangeSpamStatus(SpamId, VerifyStatusID)? Ok("successfully Updated"): BadRequest(Message($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}"));
         }
         catch (Exception exception)
         {
@@ -332,14 +332,6 @@ namespace AspireOverflow.Controllers
     }
 
 
-     private object Message(string message,object? obj=null){
-
-     
-           if(Message !=null && obj ==null ) return new {Message=message};
-           else if(Message !=null && obj !=null) return new{Message=message,DataPassed =obj};
-           else return new {};
-        
-    }
 
     }
 }
