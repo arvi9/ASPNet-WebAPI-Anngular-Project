@@ -19,7 +19,7 @@ namespace AspireOverflow.Models
 
         public DateTime Datetime { get; set; }
 
-       
+       public string Code { get; set; }
         public int QueryId { get; set; }
        
         public int CreatedBy { get; set; }
