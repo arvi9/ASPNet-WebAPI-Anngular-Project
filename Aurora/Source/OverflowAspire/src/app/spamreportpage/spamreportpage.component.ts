@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input,OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { application } from 'Models/Application';
 
 @Component({
   selector: 'app-spamreportpage',
@@ -7,20 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpamreportpageComponent implements OnInit {
 
-  constructor() { }
+  @Input() QuerySrc : string=`${application.URL}/Query/GetListOfSpams`;
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http
+    .get<any>(this.QuerySrc)
+    .subscribe((data)=>{
+      this.data =data;
+      console.log(data);
+    });
   }
-  public data: any[] = [{QueryID:'Q1',QueryTitle:'Web API',Reports:'8'},
-  {QueryID:'Q2',QueryTitle:'Web API',Reports:'8'},
-  {QueryID:'Q3',QueryTitle:'Web API',Reports:'8'},
-  {QueryID:'Q1',QueryTitle:'Web API',Reports:'8'},
-  {QueryID:'Q4',QueryTitle:'Web API',Reports:'8'},
-  {QueryID:'Q5',QueryTitle:'Web API',Reports:'8'},
-  {QueryID:'Q9',QueryTitle:'Web API',Reports:'8'},
-  
 
+  public data: any[] = []
  
-  ];
+ 
+    
+  
 
 }

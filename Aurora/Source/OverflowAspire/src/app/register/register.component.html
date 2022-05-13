@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="form-label">
-                            <label class="form-label" for="fullName">First Name </label>
+                            <label class="form-label" for="fullName">Full Name </label>
                             <input type="text" #fullName="ngModel" class="form-control" pattern="^[A-Za-z ]+$"
                                 [class.is-invalid]="fullName.invalid && fullName.touched" name="fullName"
                                 [(ngModel)]="user.fullName" required>
@@ -31,9 +31,10 @@
                     </div>
                     <div class="col-sm-12 col-xl-6 col-md-6">
                         <label class="form-label">Gender</label>
-                        <select class="form-select " name="gender" [(ngModel)]="user.genderId" required>
-                            <option value="" hidden>Choose Gender</option>
-                            <option *ngFor="let item of Gender" value={{item.id}}>{{item.gender}}</option>
+                        <select class="form-select " name="genderId" [(ngModel)]="user.genderId" required>
+                            
+                            <option hidden>Choose Gender</option>
+                            <option *ngFor="let item of GenderDetails" value={{item.genderId}}>{{item.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -57,10 +58,10 @@
                     <div class="col-sm-12 col-xl-6 col-md-6">
 
                         <label class="form-label">Department </label>
-                        <select  id="DepartmentName" class="form-select" (change)="filterDropdown()"
-                            name="dept" [(ngModel)]="dept" required>
+                        <select  id="DepartmentName" class="form-select" (change)="FilterDesignation()"
+                            name="department" [(ngModel)]="department" required>
                             <option value="" hidden>Select the Department</option>
-                            <option *ngFor="let item of department" value={{item.id}} >{{item.department}}</option>
+                            <option *ngFor="let item of departmentDetails" value={{item.departmentId}} >{{item.name}}</option>
                         </select>
 
                     </div>
@@ -74,7 +75,7 @@
                             <input type="text" #emailAddress="ngModel"
                                 pattern="([a-zA-Z0-9-_\.]+)@(aspiresys.com|aspiresystems.biz)" class="form-control"
                                 required [class.is-invalid]="emailAddress.invalid && emailAddress.touched"
-                                name="emailAddress" [(ngModel)]="user.email">
+                                name="emailAddress" [(ngModel)]="user.emailAddress">
                             <div *ngIf="emailAddress.errors && (emailAddress.invalid || emailAddress.touched)">
                                 <small class="text-danger" *ngIf="emailAddress.errors['pattern']">Mail Address
                                     is
@@ -90,10 +91,10 @@
 
                             <label class="form-label">Designation </label>
                             <select name="Designation" id="DesignationName" class="form-select"
-                                (change)="filterDropdown()" name="_Designation" [(ngModel)]="_Designation" required>
-                                <option value="" hidden>Select the Designation</option>
-                                <option *ngFor="let item of designation" value={{item.designationid}}>
-                                    {{item.designationName}}  </option>
+                                 name="designationId" [(ngModel)]="user.designationId" required>
+                                <option  hidden>Select the Designation</option>
+                                <option *ngFor="let item of designationDetails |filter:department" value={{item.designationId}}>
+                                    {{item.name}}  </option>
                             </select>
                     </div>
                 </div>
@@ -106,8 +107,7 @@
                                 aria-describedby="search-addon" name="dateOfBirth" #dateOfBirth="ngModel"
                                 [(ngModel)]="user.dateOfBirth" (keyup)="validateDateOfBirth()" required>
 
-                            <!-- <small class="text-danger" [class.d-none]="fullName.valid || fullName.untouched" *ngIf="dateOfBirth.errors['required']">Date of birth is
-                                            required</small> -->
+                            
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,8 @@
                     </div>
                 </div>
                 <div class="text-center mb-2 p-2">
-                    <button [disabled]="register.form.invalid"
+                    <!-- <button [disabled]="register.form.invalid" -->
+                        <button
                         class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="Submit"
-                        (click)="userdata()" routerLink="\Login">Register</button>
+                        (click)="userdata()">Register</button>
                 </div>

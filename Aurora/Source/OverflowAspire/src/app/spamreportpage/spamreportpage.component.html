@@ -28,9 +28,9 @@
         </thead>
         <tbody>
             <tr class="" *ngFor="let item of data">
-                <td>{{item.QueryID}}</td>
-                <td>{{item.QueryTitle}}</td>
-                <td>{{item.Reports}}</td>
+                <td>{{item.query.queryId}}</td>
+                <td>{{item.query.title}}</td>
+                <td>{{item.listOfSpams.length}}</td>
               
                 <td><button>View</button></td>
             </tr>

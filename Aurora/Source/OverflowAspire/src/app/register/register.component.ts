@@ -10,59 +10,82 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @Input() Registersrc: string = `${application.URL}/User/GetUser?UserId=1`;
-  totalLength: any;
-  data: any;
+  Registersrc: string = `${application.URL}/User/CreateUser`;
+
+  designationDetails: any;
+  departmentDetails: any;
+  GenderDetails: any;
 
 
 
-
-  constructor(private http: HttpClient,private router:Router) { }
-  user: User = {
+  constructor(private http: HttpClient, private router: Router) { }
+  user: any = {
     userId: 0,
     fullName: '',
     genderId: 0,
     aceNumber: '',
-    email: '',
-    department: '',
-    employeeId: '',
-    designation: '',
+    emailAddress: '',
     password: '',
-    dateOfBirth: '',
-    verifyStatusID: 0,
+    dateOfBirth: new Date(),
+    verifyStatusID: 3,
     isReviewer: false,
-    userRoleId: 0,
-    designationId: 0
+    userRoleId: 2,
+    designationId: 0,
+    createdOn: Date.now,
+    updatedBy: 0,
+    updatedOn: null,
+    designation: null,
+    gender: null,
+    userRole: null,
+    verifyStatus: null,
+    queries: null,
+    queryComments: null,
+    articleComments: null,
+    articles: null,
+    likes: null
+
+
+
   }
 
   dobmessage: string = ''
   message: string = ''
-  dept = ''
-  _Designation = '';
+  department = ''
 
-  designation: any[] = []
+
+
+
+  DesignationUrl: string = `https://localhost:7197/User/GetDesignations`
+  DepartmentUrl: string = `https://localhost:7197/User/GetDepartments`
+  GenderUrl: string = `https://localhost:7197/User/GetGenders`
+
 
   ngOnInit(): void {
     this.http
-      .get<any>(this.Registersrc)
+      .get<any>(this.DesignationUrl)
       .subscribe((data) => {
-        this.data = data;
-        this.totalLength = data.length;
-        console.log(data);
+        this.designationDetails = data;
+        console.log(this.designationDetails)
+
       });
+    this.http
+      .get<any>(this.DepartmentUrl)
+      .subscribe((data) => {
+        this.departmentDetails = data;
+        console.log(this.departmentDetails)
+
+      });
+    this.http
+      .get<any>(this.GenderUrl)
+      .subscribe((data) => {
+        this.GenderDetails = data;
+        console.log(this.GenderDetails)
+
+      });
+
   }
-
-
-  filterDropdown() {
-
-
-    this.designation = [];
-    for (let item of this.designationDetails) {
-      if (item.departmentID == this.dept) {
-        this.designation.push(item);
-
-      }
-    }
+  FilterDesignation() {
+         
   }
   validateDateOfBirth() {
     if (Date.now.toString() > this.user.dateOfBirth) {
@@ -72,66 +95,21 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  Gender: any = [
-    {
-      id: 1,
-      gender: 'Male'
-    },
-    {
-      id: 2,
-      gender: 'Female'
-    }
-  ]
 
+  userdata() {
+    const headers = { 'content-type': 'application/json' }
+    console.log(this.user)
+    this.http.post<any>(`${application.URL}/User/CreateUser`, this.user, { headers: headers })
+      .subscribe((data) => {
 
+        console.log(data)
 
-  department: any = [{
-    id: 1,
-    department: 'Java'
-  },
-  {
-    id: 2,
-    department: 'Dotnet'
-  },
-  {
-    id: 3,
-    department: 'BFS'
+      });
+
   }
-  ]
-  designationDetails: any = [
-    {
-      designationid: 1,
-      designationName: 'Team Lead',
-      departmentID: 1
-    },
-    {
-      designationid: 2,
-      designationName: 'Team Lead',
-      departmentID: 2
-    },
-    {
-      designationid: 3,
-      designationName: 'Trainer',
-      departmentID: 1
-    },
-    {
-      designationid: 4,
-      designationName: 'ModuleLead',
-      departmentID: 3
-    },
-    {
-      designationid: 5,
-      designationName: 'Senior Engineer',
-      departmentID: 2
-    },
-  ]
 
-
-
-   userdata() {
-     console.log(this.user.genderId)
-     this.router.navigate(['/Login']);
-   }
+ 
+   
 
 
 }
