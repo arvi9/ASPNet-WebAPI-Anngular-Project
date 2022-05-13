@@ -245,7 +245,8 @@ namespace AspireOverflow.Services
                 var designations = database.GetDesignations().Select(item => new
                 {
                     DesignationId = item.DesignationId,
-                    Name = item.DesignationName
+                    Name = item.DesignationName,
+                    DepartmentId = item.DepartmentId
                 });
                 return designations;
             }

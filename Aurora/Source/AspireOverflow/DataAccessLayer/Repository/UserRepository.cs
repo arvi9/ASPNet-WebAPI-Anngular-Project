@@ -140,7 +140,7 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
 
-                return _context.Genders.Include("Gender").ToList();
+                return _context.Genders.ToList();
             }
             catch (Exception exception)
             {
