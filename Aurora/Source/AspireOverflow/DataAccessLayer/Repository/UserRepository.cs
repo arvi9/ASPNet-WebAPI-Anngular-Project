@@ -135,6 +135,20 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+         public IEnumerable<Gender> GetGenders()
+        {
+            try
+            {
+
+                return _context.Genders.Include("Gender").ToList();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetGenders()", exception));
+                throw exception;
+            }
+        }
+
          public IEnumerable<Designation> GetDesignations()
         {
             try

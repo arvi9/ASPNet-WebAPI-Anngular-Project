@@ -16,7 +16,8 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public bool UpdateUserByReviewer(int UserId, bool IsReviewer);
         public bool RemoveUser(int UserId);
 
-  public IEnumerable<Department> GetDepartments();
+        public IEnumerable<Department> GetDepartments();
+        public IEnumerable<Gender> GetGenders();
          public IEnumerable<Designation> GetDesignations();
     }
 }

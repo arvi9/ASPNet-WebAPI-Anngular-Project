@@ -3,16 +3,16 @@ using AspireOverflow.Models;
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
 
-    public interface IQueryService
+    public interface IQueryService : IQueryCommentService , IQuerySpamService
     {
          bool CreateQuery(Query query);
          bool RemoveQueryByQueryID(int QueryID);
-         bool CreateComment(QueryComment comment);
+        
 
          bool MarkQueryAsSolved(int QueryId);
 
          Query GetQuery(int QueryID);
-         IEnumerable<QueryComment> GetComments(int QueryId);
+         
 
          IEnumerable<Query> GetQueries();
          IEnumerable<Query> GetQueriesByUserID(int UserID);
@@ -20,6 +20,19 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
          IEnumerable<Query> GetQueries(bool IsSolved);
 
 
+
+    }
+
+    public interface IQueryCommentService{
+        bool CreateComment(QueryComment comment);
+        IEnumerable<QueryComment> GetComments(int QueryId);
+
+    }
+
+    public interface IQuerySpamService{
+        bool AddSpam(Spam spam);
+        IEnumerable<object> GetSpams(int VerifyStatusID);
+        bool ChangeSpamStatus(int SpamId, int VerifyStatusID);
 
     }
 

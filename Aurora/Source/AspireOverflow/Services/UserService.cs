@@ -219,6 +219,25 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
+        public IEnumerable<Object> GetGenders()
+        {
+            try
+            {
+                var Genders = database.GetGenders().Select(item => new
+                {
+                    GenderId = item.GenderId,
+                    Name = item.Name
+                });
+                return Genders;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
+                throw exception;
+            }
+        }
+
         public IEnumerable<Object> GetDesignations()
         {
             try

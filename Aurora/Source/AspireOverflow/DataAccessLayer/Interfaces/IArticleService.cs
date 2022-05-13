@@ -3,23 +3,33 @@ using AspireOverflow.Models;
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
 
-    public interface IArticleService
+    public interface IArticleService:IArticleCommentService , IArticleLikeService
     {
         bool CreateArticle(Article article);
         bool DeleteArticleByArticleId(int ArticleId);
         bool UpdateArticleStatus(int ArticleID,int ArticleStatusID);
-        bool AddLikeToArticle(int UserID, int ArticleID);
+      
 
-        bool CreateComment(ArticleComment comment);
-        bool AddCommentToArticle(ArticleComment comment);
         Article GetArticleById(int ArticleId);
         IEnumerable<Article> GetArticlesByTitle(string Title);
         IEnumerable<Article> GetArticlesByAuthor(string AuthorName);
         IEnumerable<Article>  GetArticlesByDateRange(DateTime Startdate ,DateTime EndDate);
        IEnumerable<Article> GetArticlesByUserId (int UserId);
        IEnumerable<Article> GetArticlesByUserIdAndArticleStatusId (int UserId,int ArticleStatusID);
-       IEnumerable<ArticleComment> GetComments(int ArticleID);
+      
+   
+    }
 
-       int GetLikesCount(int ArticleID);
+    public interface IArticleCommentService{
+        bool CreateComment(ArticleComment comment);
+        bool AddCommentToArticle(ArticleComment comment);
+        IEnumerable<ArticleComment> GetComments(int ArticleID);
+
+    }
+
+    public interface IArticleLikeService{
+        bool AddLikeToArticle(int UserID, int ArticleID);
+        int GetLikesCount(int ArticleID);
+
     }
 }

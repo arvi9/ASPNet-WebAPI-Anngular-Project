@@ -164,6 +164,23 @@ public class UserController : BaseController
             return Problem($"Error occured while processing your request with IsReviewer:{IsReviewer}");
         }
     }
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetGenders()
+    {
+        try
+        {
+            return await Task.FromResult(Ok(_UserService.GetGenders()));
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetGenders()", exception));
+            throw exception;
+        }
+    }
+
+
     [HttpGet]
     public async Task<IActionResult> GetDesignations()
     {
