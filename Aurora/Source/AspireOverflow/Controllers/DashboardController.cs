@@ -22,7 +22,7 @@ namespace AspireOverflow.Controllers
             _logger = logger;
             _articleService = articleService;
             _userService = userService;
-            _queryService=queryService;
+            _queryService = queryService;
 
 
         }
@@ -55,7 +55,7 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var DashboardInformation = new 
+                var DashboardInformation = new
                 {
                     TotalNumberOfArticles = _articleService.GetListOfArticles().Count(),
                     TotalNumberOfUsers = _userService.GetUsers().Count(),
@@ -69,7 +69,29 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("DashboardController", "GetAdminDashboard()", exception));
-                 return BadRequest("Error Occured while processing your request");
+                return BadRequest("Error Occured while processing your request");
+            }
+        }
+        [HttpGet]
+
+        public async Task<ActionResult> GetHomePage()
+        {
+            try
+            {
+                var Data = new
+                {
+                    TrendingArticles = _articleService.GetTrendingArticles(),
+                    LatestArticles = _articleService.GetLatestArticles(),
+                    TrendingQueries = _queryService.GetTrendingQueries(),
+                    LatestQueries = _queryService.GetLatestQueries(),
+
+
+                }; return await Task.FromResult(Ok(Data));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("DashboardController", "GetHomePage()", exception));
+                return BadRequest("Error Occured while processing your request");
             }
         }
 
