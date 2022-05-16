@@ -1,6 +1,6 @@
 import { Template } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit,Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Query } from 'Models/Query';
 
 @Component({
@@ -19,24 +19,29 @@ export class QueryCardComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+    })
+    console.log(localStorage.getItem("token"))
     this.http
-      .get<any>(this.Querysrc)
+      .get<any>(this.Querysrc, {headers: headers} )
       .subscribe((data) => {
         this.data = data;
         this.totalLength = data.length;
-       
+
       });
   }
 
 
 
-  
+
    public data: Query[] = [
-    
+
 
   ];
 
- 
+
 
 
 }
