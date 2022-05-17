@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="Home.html">Home</a>
+                <a>Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 To Review
@@ -32,7 +32,7 @@
                 <td>{{item.articleId}}</td>
                 <td>{{item.authorName}}</td>
                 <td>{{item.title}}</td>
-                <td><a>Under Review</a></td>
+                <td><a routerLinkActive="active" [routerLink]="['/ToReviewSpecific',item.articleId]">To Review</a></td>
                 <td>Manimaran</td>
               
                

@@ -3,10 +3,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="Home.html">Home</a>
+                <a>Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-                Artical Reviewed
+                Article Reviewed
             </li>
 
         </ol>
@@ -30,8 +30,8 @@
             <tr class="" *ngFor="let item of data">
                 <td>{{item.articleId}}</td>
                 <td>{{item.authorName}}</td>
-                <td>{{item.title}}</td>
-                <td>03.02.2020</td>
+                <td><a routerLinkActive="active" [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a></td>
+                <td>{{item.createdOn}}</td>
               
                 
             </tr>

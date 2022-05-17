@@ -20,7 +20,7 @@ export class SpecificqueryComponent implements OnInit {
    CommentId:0,
    comment: '',
    datetime:Date.now,
-   userId: 9,
+   userId: 1,
    queryId:1,
    createdBy:1,
    createdOn:Date.now,

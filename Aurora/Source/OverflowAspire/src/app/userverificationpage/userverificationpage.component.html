@@ -1,20 +1,8 @@
 <app-admin-navbar></app-admin-navbar>
-<div style="margin:20px; margin-left:13%">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="Home.html">Home</a>
-            </li>
-            <li class="breadcrumb-item active">
-                UserVerification 
-            </li>
-
-        </ol>
-    </nav>
-</div>
-<div class="Content" style="min-height: 100vh;">
 <app-sidenav></app-sidenav>  
-<h1>UserVerification</h1>
+<div class="Content" style="min-height: 100vh;">
+
+<h1>User Verification</h1>
 <div class="Container">
     <div >
     <table datatable class="table table-striped row-border hover">
@@ -36,7 +24,7 @@
                 <td>{{item.designation}}</td>
                 <td>{{item.email}}</td>
               
-                <td><button>Accept</button><button>Reject</button></td>
+                <td><button>Accept</button>&nbsp;<button>Reject</button></td>
             </tr>
             </tbody>
     </table>

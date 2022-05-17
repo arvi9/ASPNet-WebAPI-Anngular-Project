@@ -1,19 +1,7 @@
 <app-admin-navbar></app-admin-navbar>
-<div style="margin:20px; margin-left:13%">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="Home.html">Home</a>
-            </li>
-            <li class="breadcrumb-item active">
-                Spam Reports
-            </li>
-
-        </ol>
-    </nav>
-</div>
-<div class="Content" style="min-height: 100vh;">
 <app-sidenav></app-sidenav>  
+<div class="Content" style="min-height: 100vh;">
+
 <h1>Spam Reports</h1>
 <div class="Container">
     <div >
@@ -32,7 +20,7 @@
                 <td>{{item.query.title}}</td>
                 <td>{{item.listOfSpams.length}}</td>
               
-                <td><button>View</button></td>
+                <td><a routerLinkActive="active" [routerLink]="['/SpamView',item.query.queryId]"> <button>View</button></a></td>
             </tr>
             </tbody>
     </table>

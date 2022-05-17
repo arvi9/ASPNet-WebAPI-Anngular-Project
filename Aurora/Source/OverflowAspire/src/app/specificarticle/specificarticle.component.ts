@@ -23,7 +23,7 @@ export class SpecificarticleComponent implements OnInit {
     datetime: Date.now,
     userId: 1,
     createdBy: 1,
-    articleId: 1009,
+    articleId: 2,
     createdOn: Date.now,
     updatedBy: 0,
     updatedOn: '',

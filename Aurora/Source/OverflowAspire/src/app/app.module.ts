@@ -34,15 +34,15 @@ import { LatestQueriesComponent } from './latest-queries/latest-queries.componen
 import { TrendingQueriespageComponent } from './trending-queriespage/trending-queriespage.component';
 import { LatestArticlepageComponent } from './latest-articlepage/latest-articlepage.component';
 import { TrendingArticlepageComponent } from './trending-articlepage/trending-articlepage.component';
-import { PiechartComponent } from './piechart/piechart.component';
+
 import { ProfileComponent } from './profile/profile.component';
 import { SpecificqueryComponent } from './specificquery/specificquery.component';
 import { RaisequeryComponent } from './raisequery/raisequery.component';
 import { ReportSpamComponent} from './report-spam/report-spam.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { MyQueriesComponent } from './my-queries/my-queries.component';
-
-
+import { AdminPiechartComponent } from './admin-piechart/admin-piechart.component';
+import { ReviewerPiechartComponent } from './reviewer-piechart/reviewer-piechart.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ArticlecardhomeComponent } from './articlecardhome/articlecardhome.component';
 import { QuerycardhomeComponent } from './querycardhome/querycardhome.component';
@@ -53,7 +53,7 @@ import { SpamreportpageComponent } from './spamreportpage/spamreportpage.compone
 import { UserverificationpageComponent } from './userverificationpage/userverificationpage.component';
 import { ToreviewpageComponent } from './toreviewpage/toreviewpage.component';
 import { ArticalreviewedpageComponent } from './articalreviewedpage/articalreviewedpage.component';
-import { ReviewersidenavComponent } from './reviewersidenav/reviewersidenav.component';
+
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { EditorComponent } from './editor/editor.component';
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
@@ -69,7 +69,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     QueryCardComponent,
     SpamViewComponent,
     ArticleCardComponent,
-    
+    ReviewerPiechartComponent,
     QueriesComponent,
     NavbarComponent,
     FooterComponent,
@@ -78,12 +78,12 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     RegisterComponent,
     SpecificarticleComponent,
     ArticlesComponent,
-   
+    AdminPiechartComponent,
     LatestQueriesComponent,
     TrendingQueriespageComponent,
     LatestArticlepageComponent,
     TrendingArticlepageComponent,
-    PiechartComponent,
+ 
     ProfileComponent,
     SpecificqueryComponent,
     RaisequeryComponent,
@@ -98,7 +98,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     UserverificationpageComponent,
     ToreviewpageComponent,
     ArticalreviewedpageComponent,
-    ReviewersidenavComponent,
+  
     MyArticlesComponent,
     MyQueriesComponent,
     EditorComponent,

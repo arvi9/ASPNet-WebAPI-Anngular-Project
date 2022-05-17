@@ -2,6 +2,7 @@ import { Component,Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-toreviewspecificpage',
@@ -9,21 +10,24 @@ import { application } from 'Models/Application';
   styleUrls: ['./toreviewspecificpage.component.css']
 })
 export class ToreviewspecificpageComponent implements OnInit {
+  articleId: number = 0
 
-  @Input() Articlesrc : string=`${application.URL}/Article/GetArticleById?ArticleId=11`;
   
   totalLength :any;
   page : number= 1;
  
-  constructor(private http: HttpClient){}
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
  
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.articleId = params['articleId'];
+    console.log(this.articleId)
     this.http
-    .get<any>(this.Articlesrc)
-    .subscribe((data)=>{
-      this.data =data;
-      this.totalLength=data.length;
-      console.log(data);
+      .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`)
+      .subscribe((data) => {
+        this.data = data;
+        console.log(data);
+      });
     });
   }
   public data:Article=new Article();

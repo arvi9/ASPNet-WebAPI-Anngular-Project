@@ -19,6 +19,14 @@ import { CreateArticlePageComponent } from './create-article-page/create-article
 import { ReviewerdashboardComponent } from './reviewerdashboard/reviewerdashboard.component';
 import { ToreviewpageComponent } from './toreviewpage/toreviewpage.component';
 import { ArticalreviewedpageComponent } from './articalreviewedpage/articalreviewedpage.component';
+import { ToreviewspecificpageComponent } from './toreviewspecificpage/toreviewspecificpage.component';
+import { ArticlereviewedspecificpageComponent } from './articlereviewedspecificpage/articlereviewedspecificpage.component';
+import { SpamViewComponent } from './spam-view/spam-view.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { EmployeePageComponent } from './employee-page/employee-page.component';
+import { SpamreportpageComponent } from './spamreportpage/spamreportpage.component';
+import { UserverificationpageComponent } from './userverificationpage/userverificationpage.component';
+import { ReportSpamComponent } from './report-spam/report-spam.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -40,7 +48,17 @@ const routes: Routes = [
   {path:'RaiseQuery',component:RaisequeryComponent},
   {path:'ReviewerDashboard',component:ReviewerdashboardComponent},
   {path:'ToReview',component:ToreviewpageComponent},
-  {path:'ArticleReviewed',component:ArticalreviewedpageComponent}
+  {path:'ArticleReviewed',component:ArticalreviewedpageComponent},
+  {path:'ToReviewSpecific/:articleId',component:ToreviewspecificpageComponent},
+  {path:'ArticleReviewedSpecific/:articleId',component:ArticlereviewedspecificpageComponent},
+  {path:'SpamView/:queryId',component:SpamViewComponent},
+  {path:'AdminDashboard',component:AdmindashboardComponent},
+  {path:'Employee',component:EmployeePageComponent},
+  {path:'SpamReport',component:SpamreportpageComponent},
+  {path:'ReportSpam/:queryId',component:ReportSpamComponent},
+  {path:'UserVerification',component:UserverificationpageComponent},
+
+
   
 ];
 

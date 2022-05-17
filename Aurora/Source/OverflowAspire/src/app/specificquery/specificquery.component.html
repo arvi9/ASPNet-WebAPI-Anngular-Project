@@ -4,21 +4,18 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">Home / </a>
-        <a href="ViewQueries.html">Queries</a>
+        <a>Home / </a>
+        <a>Queries</a>
 
       </li>
-      <li class="breadcrumb-item active">
-        Stack and Heap
-      </li>
-
+     
     </ol>
   </nav>
 </div>
 <!-- Breadcrums End-->
 
 <div class="container mb-4">
-  <a [routerLink]="['../report-spam']"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code">Report
+  <a routerLinkActive="active" [routerLink]="['/ReportSpam',data.queryId]"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code">Report
       Spam</button></a>
 </div>
 
