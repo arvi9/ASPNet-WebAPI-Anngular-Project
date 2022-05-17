@@ -1,3 +1,6 @@
+using System.Data;
+using System.Reflection.PortableExecutable;
+using System.Net.Mail;
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
@@ -12,13 +15,16 @@ namespace AspireOverflow.Services
 
     public class ArticleService
     {
-        private static IArticleRepository database;
+        private IArticleRepository database;
 
-        private static ILogger<ArticleService> _logger;
+        private ILogger<ArticleService> _logger;
 
-        public ArticleService(ILogger<ArticleService> logger)
+        private MailService _mailService;
+
+        public ArticleService(ILogger<ArticleService> logger, MailService mailService)
         {
             _logger = logger;
+            _mailService = mailService;
             database = ArticleRepositoryFactory.GetArticleRepositoryObject(logger);
 
         }
@@ -30,8 +36,10 @@ namespace AspireOverflow.Services
             {
                 article.Image = System.Convert.FromBase64String(article.ImageString);
                 article.CreatedOn = DateTime.Now;
+                var IsAddedSuccfully = database.AddArticle(article);
+                if (IsAddedSuccfully) _mailService?.SendEmailAsync(HelperService.ArticleMail("Manimaran.0610@gmail.com", article.Title, "Article Created Successfully"));
+                return IsAddedSuccfully;
 
-                return database.AddArticle(article);
             }
 
             catch (Exception exception)
@@ -129,6 +137,9 @@ namespace AspireOverflow.Services
 
         public IEnumerable<object> GetLatestArticles()
         {
+
+
+
             try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.CreatedOn);
@@ -139,7 +150,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
             }
 
@@ -170,7 +181,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -194,7 +205,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
 
             }
@@ -241,7 +252,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
             }
 
@@ -268,7 +279,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -296,7 +307,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -323,7 +334,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                     date = Article.UpdatedBy,
+                    date = Article.UpdatedBy,
                 });
             }
             catch (Exception exception)
@@ -410,20 +421,20 @@ namespace AspireOverflow.Services
         }
 
 
-        
-     public bool AddLikeToArticle(ArticleLike Like)
+
+        public bool AddLikeToArticle(ArticleLike Like)
         {
             if (Like.ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{Like.ArticleId}");
             if (Like.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{Like.UserId}");
             try
             {
                 if (database.GetLikes().ToList().Find(item => item.UserId == Like.UserId && item.ArticleId == Like.ArticleId) != null) throw new Exception("Unable to Add like to same article with same UserId");
-             
+
                 return database.AddLike(Like);
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle()", exception,  Like));
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle()", exception, Like));
                 return false;
             }
         }

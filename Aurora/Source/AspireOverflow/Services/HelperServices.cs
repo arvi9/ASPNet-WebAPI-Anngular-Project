@@ -1,5 +1,6 @@
 
 using System.Text;
+using AspireOverflow.Models;
 
 namespace AspireOverflow.Services
 {
@@ -54,7 +55,16 @@ namespace AspireOverflow.Services
 
 
 
+        public static MailRequest ArticleMail(string RecieverEmail,string ArticleTitle,string Subject){
 
+            var mail=new MailRequest();
+            mail.ToEmail=RecieverEmail;
+            mail.Subject=Subject;
+             mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Article - \"{ArticleTitle}\" have been published successfully.\n\n Thanks and Regards,\nAspireOverflow.\n";
+     
+
+            return mail;
+        }
 
 
     }

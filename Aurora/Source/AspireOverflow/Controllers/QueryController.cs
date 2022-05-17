@@ -115,7 +115,7 @@ namespace AspireOverflow.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet][Authorize]
         public async Task<ActionResult> GetAll()
         {
             try

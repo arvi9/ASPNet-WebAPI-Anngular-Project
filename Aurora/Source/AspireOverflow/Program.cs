@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using AspireOverflow.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AspireOverflow.Models;
+
 using System.Text;
 using Serilog;
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +64,8 @@ builder.Services.AddControllersWithViews()
 Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddSingleton<MailService>();
 try
 {
     var logger = new LoggerConfiguration()
