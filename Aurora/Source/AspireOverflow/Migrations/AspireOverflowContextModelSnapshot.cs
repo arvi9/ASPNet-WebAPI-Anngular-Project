@@ -102,7 +102,7 @@ namespace AspireOverflow.Migrations
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ArticleCommentId");
@@ -516,9 +516,7 @@ namespace AspireOverflow.Migrations
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("ArticleComments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Article");
 

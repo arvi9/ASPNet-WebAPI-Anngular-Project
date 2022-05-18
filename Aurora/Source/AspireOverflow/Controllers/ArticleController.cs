@@ -14,11 +14,14 @@ public class ArticleController : BaseController
 {
     private ILogger<ArticleController> _logger;
     private ArticleService _articleService;
+  //  private CurrentUser _currentUser;
 
     public ArticleController(ILogger<ArticleController> logger, ArticleService articleService)
     {
         _logger = logger;
         _articleService = articleService;
+       // _currentUser=GetCurrentUser();
+
 
     }
 
@@ -27,10 +30,11 @@ public class ArticleController : BaseController
     [HttpPost]
 
     public async Task<ActionResult> CreateArticle(Article article)
-    {
+    {  
         if (article == null) return BadRequest(Message("Null value is not supported"));
         try
         {
+            //article.CreatedBy=_currentUser.UserId;
             return _articleService.CreateArticle(article) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding Article ", article));
         }
         catch (ValidationException exception)
@@ -54,6 +58,7 @@ public class ArticleController : BaseController
         if (comment == null) return BadRequest(Message("Null value is not supported"));
         try
         {
+        //    comment.UserId= _currentUser.UserId; 
             return _articleService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Article")) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
         }
         catch (ValidationException exception)
@@ -74,7 +79,7 @@ public class ArticleController : BaseController
     public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
     {
         if (Like.ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
-
+       // Like.UserId=_currentUser.UserId;
         try
         {
             if (!_articleService.AddLikeToArticle(Like)) BadRequest(Message("Error Occured while adding Like to article "));
@@ -98,11 +103,11 @@ public class ArticleController : BaseController
     public async Task<ActionResult> UpdateArticle(Article article)
     {
         if (article == null) return BadRequest(Message("Article can't be null"));
-        var CurrentUserId = User.FindFirst("userId")?.Value;
-        if (article.CreatedBy.ToString() != CurrentUserId) BadRequest(Message("Article must be updated only by Article Creater"));
+      
+       // if (article.CreatedBy != _currentUser.UserId) BadRequest(Message("Article must be updated only by Article Creater"));
         try
-        {
-            return _articleService.UpdateArticle(article, Convert.ToInt32(CurrentUserId)) ? await Task.FromResult(Ok("Successfully updated the article")) : BadRequest(Message("Error Occured while Updating the article"));
+        {   //article.createdBy in UpdateArticle() replaced to _currentUser.UserID once Authorization enabled
+            return _articleService.UpdateArticle(article, article.CreatedBy) ? await Task.FromResult(Ok("Successfully updated the article")) : BadRequest(Message("Error Occured while Updating the article"));
         }
         catch (ValidationException exception)
         {
@@ -126,7 +131,7 @@ public class ArticleController : BaseController
 
         try
         {
-
+                        
             return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID, UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest(Message($"Error Occurred while updating the status of the Article:{ArticleId}"));
         }
         catch (ItemNotFoundException exception)

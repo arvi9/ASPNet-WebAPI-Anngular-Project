@@ -53,6 +53,7 @@ namespace AspireOverflow.Services
 
         public User GetUser(string Email, string Password)  //Method used in Token Controller
         {
+            if(Email == null || Password ==null) throw new ArgumentNullException("Email or Password cannot be null");
             try
             {
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();

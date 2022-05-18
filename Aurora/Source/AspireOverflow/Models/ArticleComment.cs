@@ -7,24 +7,33 @@ using AspireOverflow.Models.Interfaces;
 
 namespace AspireOverflow.Models
 {
-   public partial class ArticleComment :IAuditField
-   {
-       public ArticleComment(){
+    public partial class ArticleComment : IAuditField
+    {
+        public ArticleComment()
+        {
 
-       }
+        }
 
-       [Key]
-       public int ArticleCommentId { get; set; }
+        [Key]
+        public int ArticleCommentId { get; set; }
 
-       public string Comment { get; set; }
+        public string Comment { get; set; }
 
-       public DateTime Datetime {get; set; }
-      public int UserId { get; set; }
-       public int CreatedBy { get; set; }
+        public DateTime Datetime { get; set; }
 
-       public int ArticleId { get; set; }
 
-       public DateTime CreatedOn { get; set; }
+        public int UserId { get;  set;}
+        public int CreatedBy{get
+        {
+         return CreatedBy;
+        }set{
+           value=UserId;
+        }}
+      
+
+        public int ArticleId { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public int? UpdatedBy { get; set; }
 
@@ -37,5 +46,5 @@ namespace AspireOverflow.Models
         [ForeignKey("UserId")]
         [InverseProperty("ArticleComments")]
         public virtual User? User { get; set; } = null!;
-   }
+    }
 }
