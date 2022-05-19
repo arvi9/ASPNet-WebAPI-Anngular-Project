@@ -39,6 +39,7 @@ namespace AspireOverflow.Services
              $"{RepositoryName}:{MethodName}\nException :{exception.ToString()}"; ;
         }
 
+
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, int FirstId, int? secondId)
         {
 
@@ -46,6 +47,7 @@ namespace AspireOverflow.Services
 
              $"{RepositoryName}:{MethodName}\n Data passed :{{ \n {FirstId} }}\nException :{exception.ToString()}"; ;
         }
+
 
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, string data)
         {
@@ -55,17 +57,76 @@ namespace AspireOverflow.Services
 
 
 
-        public static MailRequest ArticleMail(string RecieverEmail,string ArticleTitle,string Subject){
-
+    public static MailRequest ArticleMail(string RecieverEmail,string ArticleTitle,string Subject,int ArticleStatusID)
+    {
             var mail=new MailRequest();
             mail.ToEmail=RecieverEmail;
             mail.Subject=Subject;
-             mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Article - \"{ArticleTitle}\" have been published successfully.\n\n Thanks and Regards,\nAspireOverflow.\n";
-     
+            switch(ArticleStatusID){
 
+                case 2: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Article - \"{ArticleTitle}\" has been submitted successfully.\n\n Thanks and Regards,\nAspireOverflow.\n";
+                        return mail;
+                        break;
+
+                case 4: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Article - \"{ArticleTitle}\" have been published successfully.\n\n Thanks and Regards,\nAspireOverflow.\n";
+                        return mail;
+                        break;
+                
+                defaut: return null;
+                        break;
+
+            }
+             
             return mail;
         }
 
 
+
+    public static MailRequest SpamMail(string RecieverEmail,string QueryTitle,string Subject,int VerifyStatusID)
+        {
+            var mail=new MailRequest();
+            mail.ToEmail=RecieverEmail;
+            mail.Subject=Subject;
+            switch(VerifyStatusID){
+
+                case 1: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Report on - \"{QueryTitle}\" has been accpect as spam.\n\n Thanks and Regards,\nAspireOverflow.\n";
+                        return mail;
+                        break;
+
+                case 2: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Report on - \"{QueryTitle}\" have been rejected from accepting as spam.\n\n Thanks and Regards,\nAspireOverflow.\n";
+                        return mail;
+                        break;
+
+               case 3: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Report on - \"{QueryTitle}\" have been submitted for review.\n\n Thanks and Regards,\nAspireOverflow.\n";
+                       return mail;
+                       break;  
+                
+                defaut: return null;
+                        break;
+
+            }
+           return mail;     
+        }
+
+
+        public static MailRequest QueryMail(string RecieverEmail,string QueryTitle,string Subject)
+        {
+            var mail=new MailRequest();
+            mail.ToEmail=RecieverEmail;
+            mail.Subject=Subject;
+            mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Query- \"{QueryTitle}\" have been Created.\n\n Thanks and Regards,\nAspireOverflow.\n";
+            return mail;
+
+        }
+
+        public static MailRequest CommentMail(string RecieverEmail,string Title,string Subject)
+        {
+            var mail=new MailRequest();
+            mail.ToEmail=RecieverEmail;
+            mail.Subject=Subject;
+            mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Someone has Commented in your- \"{Title}\" \n\n Thanks and Regards,\nAspireOverflow.\n";
+            return mail;
+
+        }
     }
 }
