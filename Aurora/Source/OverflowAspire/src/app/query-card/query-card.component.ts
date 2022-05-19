@@ -3,6 +3,8 @@ import { Component, OnInit,Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Query } from 'Models/Query';
 
+import { AuthService } from '../auth.service';
+
 @Component({
   selector: 'app-query-card',
   templateUrl: './query-card.component.html',
@@ -21,9 +23,9 @@ export class QueryCardComponent implements OnInit {
   ngOnInit(): void {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem("token")}`
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
     })
-    console.log(localStorage.getItem("token"))
+    console.log(AuthService.GetData("token"))
     this.http
       .get<any>(this.Querysrc, {headers: headers} )
       .subscribe((data) => {

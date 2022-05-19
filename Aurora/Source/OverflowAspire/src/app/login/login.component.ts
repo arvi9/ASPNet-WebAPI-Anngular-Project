@@ -1,7 +1,8 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { User } from 'Models/User';
 import { application } from 'Models/Application';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,9 @@ import { application } from 'Models/Application';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  IsAdmin:boolean=false;
+  IsReviewer:boolean=false;
+  constructor(private http: HttpClient,private route:Router) { }
   user:any={
 
    Email: '',
@@ -28,8 +31,22 @@ export class LoginComponent implements OnInit {
     console.log(this.user)
     this.http.post<any>(`${application.URL}/Token/AuthToken`,this.user,{headers:headers})
       .subscribe((data) => {
-        localStorage.setItem("token",data.token)
 
+        this.IsAdmin=data.isAdmin,
+        this.IsReviewer=data.isReviewer
+        AuthService.SetDateWithExpiry("token",data.token,data.expiryInMinutes)
+        AuthService.SetDateWithExpiry("Admin",data.isAdmin,data.expiryInMinutes)
+        AuthService.SetDateWithExpiry("Reviewer",data.isReviewer,data.expiryInMinutes)
+
+        console.log(AuthService.GetData("token"))
+        console.log(AuthService.GetData("Admin"))
+        console.log(AuthService.GetData("Reviewer"))
+
+        if(this.IsAdmin){
+          this.route.navigateByUrl("/AdminDashboard");  //navigation
+        }else{
+          this.route.navigateByUrl("/Home");
+        }
         console.log(data)
 
       });
