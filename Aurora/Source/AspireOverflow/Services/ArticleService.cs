@@ -8,8 +8,6 @@ using AspireOverflow.CustomExceptions;
 using AspireOverflow.DataAccessLayer.Interfaces;
 
 
-
-
 namespace AspireOverflow.Services
 {
 
@@ -36,10 +34,7 @@ namespace AspireOverflow.Services
             {
                 article.Image = System.Convert.FromBase64String(article.ImageString);
                 article.CreatedOn = DateTime.Now;
-                var IsAddedSuccfully = database.AddArticle(article);
-                if (IsAddedSuccfully) _mailService?.SendEmailAsync(HelperService.ArticleMail("Manimaran.0610@gmail.com", article.Title, "Article Created Successfully"));
-                return IsAddedSuccfully;
-
+               return database.AddArticle(article);
             }
 
             catch (Exception exception)
@@ -48,7 +43,6 @@ namespace AspireOverflow.Services
                 return false;
             }
         }
-
 
 
         public bool UpdateArticle(Article article, int CurrentUser)
@@ -80,7 +74,9 @@ namespace AspireOverflow.Services
             if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
-                return database.UpdateArticle(ArticleId, ArticleStatusID, UpdatedByUserId);
+                var IsAddedSuccfully = database.UpdateArticle(ArticleId, ArticleStatusID, UpdatedByUserId);
+                if (IsAddedSuccfully) _mailService.SendEmailAsync(HelperService.ArticleMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" , 2));
+                return IsAddedSuccfully;
             }
             catch (Exception exception)
             {
@@ -88,7 +84,6 @@ namespace AspireOverflow.Services
 
                 throw exception;
             }
-
         }
 
         public bool DeleteArticleByArticleId(int ArticleId)
@@ -137,9 +132,6 @@ namespace AspireOverflow.Services
 
         public IEnumerable<object> GetLatestArticles()
         {
-
-
-
             try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.CreatedOn);
@@ -160,6 +152,7 @@ namespace AspireOverflow.Services
                 throw exception;
             }
         }
+
 
         public IEnumerable<Object> GetTrendingArticles()
         {
@@ -266,6 +259,7 @@ namespace AspireOverflow.Services
         }
 
 
+
         public IEnumerable<object> GetArticlesByTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
@@ -347,6 +341,7 @@ namespace AspireOverflow.Services
 
         }
 
+
         public IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID)
         {
 
@@ -377,17 +372,15 @@ namespace AspireOverflow.Services
         }
 
 
-
-
-
-
         //Article Comment
         public bool CreateComment(ArticleComment comment)
         {
             Validation.ValidateArticleComment(comment);
             try
             {
-                return database.AddComment(comment);
+                var IsCommentSuccessfully = database.AddComment(comment);;
+                if (IsCommentSuccessfully) _mailService.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" ));
+                return IsCommentSuccessfully;
             }
             catch (Exception exception)
             {

@@ -1,6 +1,10 @@
+using System.Data;
+using System.Reflection.PortableExecutable;
+using System.Net.Mail;
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
+using AspireOverflow.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
 
 using AspireOverflow.DataAccessLayer.Interfaces;
@@ -18,9 +22,12 @@ namespace AspireOverflow.Services
 
         private static ILogger<QueryService> _logger;
 
-        public QueryService(ILogger<QueryService> logger)
+        private MailService _mailService;
+
+        public QueryService(ILogger<QueryService> logger, MailService mailService)
         {
             _logger = logger;
+            _mailService = mailService;
             database = QueryRepositoryFactory.GetQueryRepositoryObject(logger);
 
         }
@@ -32,7 +39,9 @@ namespace AspireOverflow.Services
             try
             {
                 query.CreatedOn = DateTime.Now;
-                return database.AddQuery(query);
+                var IsAddedSuccessfully = database.AddQuery(query);
+                if (IsAddedSuccessfully) _mailService?.SendEmailAsync(HelperService.QueryMail("Manimaran.0610@gmail.com", query.Title, "Query Created Successfully"));
+                return IsAddedSuccessfully;
             }
             catch (Exception exception)
             {
@@ -265,7 +274,6 @@ namespace AspireOverflow.Services
         }
 
 
-
         public bool CreateComment(QueryComment comment)
         {
             Validation.ValidateComment(comment);
@@ -311,7 +319,9 @@ namespace AspireOverflow.Services
             if(VerifyStatusID <= 0 && VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
-                return database.UpdateSpam(SpamId,  VerifyStatusID);
+                var IsChangeSuccessfully = database.UpdateSpam(SpamId,  VerifyStatusID);
+                if (IsChangeSuccessfully) _mailService?.SendEmailAsync(HelperService.SpamMail("Manimaran.0610@gmail.com","Title", "Hello" , 2));
+                return IsChangeSuccessfully;
             }
             catch (Exception exception)
             {
@@ -361,11 +371,5 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
-
-
-
-
-
     }
 }
