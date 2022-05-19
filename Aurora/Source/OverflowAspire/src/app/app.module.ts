@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule} from '@angular/material/table';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule} from '@angular/material/card';
@@ -44,8 +44,6 @@ import { MyQueriesComponent } from './my-queries/my-queries.component';
 import { AdminPiechartComponent } from './admin-piechart/admin-piechart.component';
 import { ReviewerPiechartComponent } from './reviewer-piechart/reviewer-piechart.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { ArticlecardhomeComponent } from './articlecardhome/articlecardhome.component';
-import { QuerycardhomeComponent } from './querycardhome/querycardhome.component';
 
 import { EmployeePageComponent } from './employee-page/employee-page.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -92,8 +90,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     EmployeePageComponent,
     SidenavComponent,
     HomepageComponent,
-    ArticlecardhomeComponent,
-    QuerycardhomeComponent,
+    
     SpamreportpageComponent,
     UserverificationpageComponent,
     ToreviewpageComponent,
@@ -118,7 +115,7 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     AppRoutingModule,
     DataTablesModule,
     HttpClientModule,
-    MatTableModule,
+   
     NgxPaginationModule,
     MatCardModule,NgbCollapseModule,
     FormsModule,

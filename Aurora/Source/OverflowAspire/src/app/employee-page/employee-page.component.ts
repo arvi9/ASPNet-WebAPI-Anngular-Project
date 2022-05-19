@@ -20,7 +20,14 @@ export class EmployeePageComponent implements OnInit {
       console.log(data);
     });
   }
-
+  DisableUser(userId:number){
+    console.log("ge")
+    this.http
+    .patch(`https://localhost:7197/User/ChangeUserVerifyStatus?UserId=${userId}&IsVerified=false`,Object)  
+    .subscribe((data)=>{
+      console.log(data);
+    });
+  }
   public data: User[] = []
  
  

@@ -21,7 +21,7 @@
                 <td>{{item.employeeId}}</td>
                 <td>{{item.email}}</td>
                 <td><input type="checkbox"></td>
-                <td><button>Disable</button></td>
+                <td><a (click)="DisableUser(item.userId)"><button>Disable</button></a></td>
             </tr>
             </tbody>
     </table>

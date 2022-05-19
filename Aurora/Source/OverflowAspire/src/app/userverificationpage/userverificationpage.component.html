@@ -24,7 +24,8 @@
                 <td>{{item.designation}}</td>
                 <td>{{item.email}}</td>
               
-                <td><button>Accept</button>&nbsp;<button>Reject</button></td>
+                <td><a (click)="AcceptUser(item.userId)"><button>Accept</button></a>&nbsp;
+                    <a (click)="RejectUser(item.userId)"><button>Reject</button></a></td>
             </tr>
             </tbody>
     </table>

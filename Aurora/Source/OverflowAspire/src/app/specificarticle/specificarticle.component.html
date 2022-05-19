@@ -8,7 +8,7 @@
         <div class="panel-heading bold">Author Name:&nbsp;{{data.authorName}}</div>
         <div class="panel-body bold">Date:&nbsp;{{createdOn}}</div>
     <div class="text-center pb-4">
-            <img class="article-img " [src]="'data:image/png;base64,'+ data.image" />
+            <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
         <div  [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
           

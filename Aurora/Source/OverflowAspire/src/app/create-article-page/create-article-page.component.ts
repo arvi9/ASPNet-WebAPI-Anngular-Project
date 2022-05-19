@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Byte } from '@angular/compiler/src/util';
+
 import { ApplicationInitStatus, Component, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application'

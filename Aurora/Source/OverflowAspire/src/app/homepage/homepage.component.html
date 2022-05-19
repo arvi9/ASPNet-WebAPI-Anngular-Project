@@ -14,28 +14,108 @@
     </div>
 </div>
 <div class="Content" style="min-height: 100vh;">
-    <h3>Trending Articles<a routerLink="/TrendingArticles" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
+    <h3>Trending Articles<a routerLink="/TrendingArticles" class="Homepage" routerLinkActive="active">(Show all)</a>
+    </h3>
+
+    <div class="container justify-content-center d-flex flex-wrap">
+        <div class="" *ngFor="let item of data.trendingArticles">
+            <div class="img-card iCard-style2 onhover">
+                <div class="card-content">
+                    <div class="card-image">
+                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                    </div>
+
+                    <h1 class="card-title text-truncate">{{item.title}}</h1>
+
+                    <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+
+
+                </div>
+
+                <div class="card-link readfull" routerLinkActive="active"
+                    [routerLink]="['/specificarticle',item.articleId]">
+                    <a title="Read Full">Read Full Article</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
     <br>
+    <h3>Latest Articles<a routerLink="/LatestArticles" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
+
+    <div class="container justify-content-center d-flex flex-wrap">
+        <div class="" *ngFor="let item of data.latestArticles">
+            <div class="img-card iCard-style2 onhover">
+                <div class="card-content">
+                    <div class="card-image">
+                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                    </div>
+
+                    <h1 class="card-title text-truncate">{{item.title}}</h1>
+
+                    <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+
+
+                </div>
+
+                <div class="card-link readfull" routerLinkActive="active"
+                    [routerLink]="['/specificarticle',item.articleId]">
+                    <a title="Read Full">Read Full Article</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
     <br>
-<app-articlecardhome artsrc="https://localhost:7197/Article/GetTrendingArticles?Range=0"></app-articlecardhome>
-<br>
-<br>
-<h3>Latest Articles<a routerLink="/LatestArticles" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
-<br>
-<br>
-<app-articlecardhome artsrc="https://localhost:7197/Article/GetLatestArticles?Range=3"></app-articlecardhome>
-<br>
-<br>
-<h3>Trending Queries<a routerLink="/TrendingQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
-<br>
-<br>
-<app-querycardhome Querysrc="https://localhost:7197/Query/GetTrendingQueries?Range=0"></app-querycardhome>
-<br>
-<br>
-<h3>Latest Queries<a routerLink="/LatestQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
-<br>
-<br>
-<app-querycardhome Querysrc="https://localhost:7197/Query/GetLatestQueries?Range=3"></app-querycardhome>
+    <h3>Trending Queries<a routerLink="/TrendingQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
+
+    <div class="container justify-content-center d-flex flex-wrap">
+        <div class="" *ngFor="let item of data.trendingQueries">
+            <div class="our-skills">
+                <div class="box-shadow">
+                    <div class="icon">
+                        <img class="QueryImgIcon" src="https://cdn-icons-png.flaticon.com/512/745/745205.png">
+                    </div>
+                    <h4 class="card-text text-truncate">{{item.title}}</h4>
+                    <p class="truncate-line-clamp">{{item.content}}</p>
+                    <a class="btn btn-default readmore" routerLinkActive="active"
+                        [routerLink]="['/SpecificQuery',item.queryId]">Read More →</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <h3>Latest Queries<a routerLink="/LatestQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
+
+    <div class="container justify-content-center d-flex flex-wrap">
+        <div class="" *ngFor="let item of data.latestQueries">
+            <div class="our-skills">
+                <div class="box-shadow">
+                    <div class="icon">
+                        <img class="QueryImgIcon" src="https://cdn-icons-png.flaticon.com/512/745/745205.png">
+                    </div>
+                    <h4 class="card-text text-truncate">{{item.title}}</h4>
+                    <p class="truncate-line-clamp">{{item.content}}</p>
+                    <a class="btn btn-default readmore" routerLinkActive="active"
+                        [routerLink]="['/SpecificQuery',item.queryId]">Read More →</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <app-footer></app-footer>
