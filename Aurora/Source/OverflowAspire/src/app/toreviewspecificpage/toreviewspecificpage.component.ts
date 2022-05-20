@@ -21,13 +21,15 @@ export class ToreviewspecificpageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
-    console.log(this.articleId)
+   
+    console.warn(this.articleId)
+    if(confirm("Are you sure?")==true){
     this.http
       .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`)
       .subscribe((data) => {
         this.data = data;
         console.log(data);
-      });
+      });}
     });
   }
   public data:Article=new Article();

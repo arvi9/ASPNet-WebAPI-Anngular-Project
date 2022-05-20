@@ -1,37 +1,39 @@
 <app-admin-navbar></app-admin-navbar>
-<app-sidenav></app-sidenav>  
+<app-sidenav></app-sidenav>
 <div class="Content" style="min-height: 100vh;">
 
-<h1>User Verification</h1>
-<div class="Container">
-    <div >
-    <table datatable class="table table-striped row-border hover">
+  <h1>User Verification</h1>
+  <div class="Container">
+    <div>
+      <table datatable class="table table-striped row-border hover">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Date of Birth </th>
-                <th>Employee Id</th>
-                <th>Role</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Date of Birth </th>
+            <th>Employee Id</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
-            <tr class="" *ngFor="let item of data">
-                <td>{{item.fullName}}</td>
-                <td>{{item.dateOfBirth}}</td>
-                <td>{{item.employeeId}}</td>
-                <td>{{item.designation}}</td>
-                <td>{{item.email}}</td>
-              
-                <td><a (click)="AcceptUser(item.userId)"><button>Accept</button></a>&nbsp;
-                    <a (click)="RejectUser(item.userId)"><button>Reject</button></a></td>
-            </tr>
-            </tbody>
+          <tr class="" *ngFor="let item of data">
+            <td>{{item.fullName}}</td>
+            <td>{{item.dateOfBirth}}</td>
+            <td>{{item.employeeId}}</td>
+            <td>{{item.designation}}</td>
+            <td>{{item.email}}</td>
+           
+            <td><button (click)="AcceptUser(this.item.userId)">Accept</button>          
+              &nbsp;
+              <button (click)="RejectUser(this. item.userId)">Reject</button>
+          
+            </td>   
+
+    </tr>
+    </tbody>
     </table>
   </div>
-</div>
-
 </div>
 
 <app-footer></app-footer>

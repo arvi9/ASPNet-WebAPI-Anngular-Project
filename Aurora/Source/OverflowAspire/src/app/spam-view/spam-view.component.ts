@@ -15,13 +15,15 @@ queryId: number = 0
 constructor(private http: HttpClient) { }
 
 ngOnInit(): void {
+  console.warn(this.queryId)
+  if(confirm("Are you sure?")==true){
   this.http
   .get<any>(this.Querysrc)
   .subscribe((data)=>{
     this.data =data;
     this.data=this.data.filter(item=> item.query.queryId==this.queryId)
     console.log(data);
-  });
+  });}
 }
 
 public data: any[] = []
