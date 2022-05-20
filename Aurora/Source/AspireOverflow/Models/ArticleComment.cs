@@ -23,12 +23,8 @@ namespace AspireOverflow.Models
 
 
         public int UserId { get;  set;}
-        public int CreatedBy{get
-        {
-         return CreatedBy;
-        }set{
-           value=UserId;
-        }}
+        public int CreatedBy{get;set;}
+        
       
 
         public int ArticleId { get; set; }
