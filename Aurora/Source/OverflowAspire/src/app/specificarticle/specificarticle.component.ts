@@ -51,7 +51,7 @@ ngOnInit(): void {
   });
 }
   public data: Article = new Article();
-  createdOn: string = this.data.createdOn.toDateString()
+  createdOn: string = this.data.date.toDateString()
   likeCount = 0;
   isLiked = false;
 

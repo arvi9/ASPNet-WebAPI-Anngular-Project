@@ -13,6 +13,7 @@ h6 {
     font-weight: 500 !important
 }
 .LogoImg {
+   margin-left: 75px;
     height:60px;
     width: 60px;  
     
@@ -30,3 +31,68 @@ h6 {
     display: table-cell;
     width: 490px;
   }
+
+  .navbar-toggler-icon{
+    height:25px;
+    width:25px;
+  }
+
+  .sidenav-toggler {
+    position:absolute;
+    height: 40px !important;
+    width: 40px !important;
+    margin-top: 1px;
+    margin-left: 5px;
+    border-color: white;
+}
+
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: Jost, sans-serif;
+    padding: 35px 15px;
+    color: var(--dark);
+    outline: 0;
+    transition: .5s
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link:hover {
+    
+    color: var(--primary)
+}
+
+@media (max-width:991.98px) {
+    .navbar-light .navbar-nav .nav-link {
+        padding: 10px 0
+    }
+}
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 15%; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    left: 0;
+    background-color: whitesmoke; /* Black*/
+    overflow-x: hidden; 
+    overflow-y: hidden;/* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+     /* 0.5 second transition effect to slide in the sidebar */
+  }
+  
+  /* The sidebar links */
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: large;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidebar a:hover {
+    color: black;
+  }
+  
+
+

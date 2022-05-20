@@ -13,7 +13,7 @@ export class ArticalreviewedpageComponent implements OnInit {
   
   totalLength :any;
   page : number= 1;
- 
+  
   constructor(private http: HttpClient){}
  
   ngOnInit(): void {
