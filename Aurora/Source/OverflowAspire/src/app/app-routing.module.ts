@@ -27,7 +27,8 @@ import { EmployeePageComponent } from './employee-page/employee-page.component';
 import { SpamreportpageComponent } from './spamreportpage/spamreportpage.component';
 import { UserverificationpageComponent } from './userverificationpage/userverificationpage.component';
 import { ReportSpamComponent } from './report-spam/report-spam.component';
-
+import { DialogComponent } from './dialog/dialog.component';
+import{EditarticleComponent} from './editarticle/editarticle.component';
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'Register',component:RegisterComponent},
@@ -57,8 +58,8 @@ const routes: Routes = [
   {path:'SpamReport',component:SpamreportpageComponent},
   {path:'ReportSpam/:queryId',component:ReportSpamComponent},
   {path:'UserVerification',component:UserverificationpageComponent},
-
-
+{path:'dialog',component:DialogComponent},
+{path:'Editarticle/:articleId',component:EditarticleComponent}
   
 ];
 
