@@ -60,7 +60,7 @@ import { UpdateArticlePageComponent } from './update-article-page/update-article
 
 import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
 import{MatDialogModule} from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
+
 
 import { EditarticleComponent } from './editarticle/editarticle.component';
 
@@ -111,12 +111,11 @@ import { EditarticleComponent } from './editarticle/editarticle.component';
     ArticlereviewedspecificpageComponent,
 
     HtmlToPlaintextPipe,
-      DialogComponent,
-      EditarticleComponent,
+    EditarticleComponent,
    
 
   ],
-  entryComponents:[DialogComponent],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,

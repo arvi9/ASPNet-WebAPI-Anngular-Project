@@ -10,6 +10,7 @@ export class Article {
     reviewerId: number=0;
     createdBy:number=0;
     authorName:string='';
+    status:string="";
     comments:ArticleComments[]=[];
     date:Date=new Date();
     getlike:articleLikes[]=[];
@@ -20,12 +21,12 @@ export class ArticleComments{
     CommentId: number=0;
     message: string="";
     name:string="";
-   
+
 
 }
 
 export class articleLikes{
-    
+
           likeId:number=0;
           articleId:Article[]=[];
           user: User[]=[];
