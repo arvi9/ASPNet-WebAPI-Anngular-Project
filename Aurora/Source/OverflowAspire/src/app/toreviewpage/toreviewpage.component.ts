@@ -23,6 +23,7 @@ export class ToreviewpageComponent implements OnInit {
       this.totalLength=data.length;
       console.log(data);
     });
+   
   }
   public data: Article[] = [
  

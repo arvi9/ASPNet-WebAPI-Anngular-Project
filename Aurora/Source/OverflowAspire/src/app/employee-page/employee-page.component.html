@@ -1,5 +1,5 @@
 <app-admin-navbar></app-admin-navbar>
-<app-sidenav></app-sidenav>  
+
 <div class="Content" style="min-height: 100vh;">
 <h1>Employee Details</h1>
 
@@ -20,7 +20,7 @@
                 <td>{{item.fullName}}</td>
                 <td>{{item.employeeId}}</td>
                 <td>{{item.email}}</td>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" (change)="checkEmployee(item.userId)"></td>
                 <td><a (click)="DisableUser(item.userId)"><button>Disable</button></a></td>
             </tr>
             </tbody>

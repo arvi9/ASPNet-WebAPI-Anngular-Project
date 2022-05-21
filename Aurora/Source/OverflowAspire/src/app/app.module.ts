@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -58,7 +59,10 @@ import { CreateArticlePageComponent } from './create-article-page/create-article
 import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
 
 import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
+import{MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
+import { EditarticleComponent } from './editarticle/editarticle.component';
 
 
 @NgModule({
@@ -107,15 +111,21 @@ import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
     ArticlereviewedspecificpageComponent,
 
     HtmlToPlaintextPipe,
+      DialogComponent,
+      EditarticleComponent,
    
 
   ],
+  entryComponents:[DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,
     HttpClientModule,
-   
+   BrowserAnimationsModule,
+   MatButtonModule,
+   MatDialogModule,
+
     NgxPaginationModule,
     MatCardModule,NgbCollapseModule,
     FormsModule,

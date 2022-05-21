@@ -1,14 +1,38 @@
-<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-20">
 
 
 
+<nav class="navbar sidenav bg-light navbar-light  px-2 py-20">
+  <button mat-button class="sidenav-toggler  " type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-    <img class="LogoImg" src="./assets/Logo.png" alt="Good Morning Friends">
+    <img class="LogoImg " src="./assets/Logo.png" alt="Good Morning Friends">
     <h1 class="text">Aspire Overflow</h1>
 
     <div class="navbar-nav align-items-center ms-auto">
       <div class="nav-item dropdown">
         <a routerLink="" routerLinkActive="active">
-        <button mat-button color="warn" (click)="LogOut()">Logout</button>
+        <button mat-button color="warn">Logout</button>
         </a>
+      </div>
+    </div>
+</nav>
+<nav class="sidenav  bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+    
+    
+  <div class="collapse navbar-collapse  px-5 py-3 sidebar" id="navbarCollapse">
+      <div class="navbar-nav ms-auto py-0">
 
+          
+           <a class="nav-item nav-link active" routerLink="/AdminDashboard"><i class="fa fa-desktop me-2" aria-hidden="true"></i>Dashboard</a>
+           <a class="nav-item nav-link" routerLink="/Employee"><i class="fa fa-child me-2" aria-hidden="true"></i> Employees</a>
+
+           <a class="nav-item nav-link" routerLink="/SpamReport"><i class="fa fa-flag me-2" aria-hidden="true"></i> Spam Reports</a>
+           <a class="nav-item nav-link" routerLink="/UserVerification"><i class="fa fa-check me-2" aria-hidden="true"></i>User Verfication</a>
+
+      </div>
+  </div>
+</nav>
+
+
+        

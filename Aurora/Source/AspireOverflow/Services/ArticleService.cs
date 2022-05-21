@@ -142,7 +142,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
             }
 
@@ -174,7 +174,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
             }
             catch (Exception exception)
@@ -198,7 +198,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
 
             }
@@ -245,7 +245,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
             }
 
@@ -273,7 +273,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
             }
             catch (Exception exception)
@@ -301,7 +301,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
             }
             catch (Exception exception)
@@ -328,7 +328,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
                 });
             }
             catch (Exception exception)
@@ -358,7 +358,7 @@ namespace AspireOverflow.Services
                     AuthorName = Article.User?.FullName,
                     content = Article.Content,
                     image = Article.Image,
-                    date = Article.UpdatedBy,
+                    date = Article.UpdatedOn,
 
                 });
             }
@@ -378,7 +378,8 @@ namespace AspireOverflow.Services
             Validation.ValidateArticleComment(comment);
             try
             {
-                var IsCommentSuccessfully = database.AddComment(comment);;
+                comment.CreatedBy=comment.UserId;
+                var IsCommentSuccessfully = database.AddComment(comment);
                 if (IsCommentSuccessfully) _mailService.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" ));
                 return IsCommentSuccessfully;
             }

@@ -5,12 +5,14 @@ import { User } from 'Models/User';
 import { data } from 'jquery';
 import { application } from 'Models/Application';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
-  selector: 'app-specificarticle',
-  templateUrl: './specificarticle.component.html',
-  styleUrls: ['./specificarticle.component.css']
+  selector: 'app-editarticle',
+  templateUrl: './editarticle.component.html',
+  styleUrls: ['./editarticle.component.css']
 })
-export class SpecificarticleComponent implements OnInit {
+export class EditarticleComponent implements OnInit {
+
   articleId: number = 0
   //@Input() Articlesrc: string = `${application.URL}/Article/GetArticleById/:articleId`;
 
@@ -89,4 +91,5 @@ ngOnInit(): void {
 
       });
   }
+
 }

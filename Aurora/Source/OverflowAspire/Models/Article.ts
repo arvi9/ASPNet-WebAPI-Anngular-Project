@@ -11,7 +11,7 @@ export class Article {
     createdBy:number=0;
     authorName:string='';
     comments:ArticleComments[]=[];
-    createdOn:Date=new Date();
+    date:Date=new Date();
     getlike:articleLikes[]=[];
     likes:number=0
 }

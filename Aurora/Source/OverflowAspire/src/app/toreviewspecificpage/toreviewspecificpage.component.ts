@@ -16,7 +16,7 @@ export class ToreviewspecificpageComponent implements OnInit {
   totalLength :any;
   page : number= 1;
  
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient,private routing:Router) { }
  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -31,4 +31,25 @@ export class ToreviewspecificpageComponent implements OnInit {
     });
   }
   public data:Article=new Article();
+
+  PublishArticle(articleId:number){
+    console.log("ge")
+    this.http
+    .patch(`${application.URL}/Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=4`,Object)  
+    .subscribe((data)=>{
+      console.log(data);
+    });
+    this.routing.navigateByUrl("/ToReview");
+   
+  }
+
+  RejectArticle(articleId:number){
+    console.log("go")
+    this.http
+    .patch(`${application.URL}/Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=1`,Object)
+    .subscribe((data)=>{
+      console.log(data);
+    });
+    this.routing.navigateByUrl("/ToReview");
+  }
 }

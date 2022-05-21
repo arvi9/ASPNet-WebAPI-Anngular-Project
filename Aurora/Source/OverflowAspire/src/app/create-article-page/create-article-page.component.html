@@ -27,11 +27,7 @@
                 <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" >
                 <label class="text-danger"> {{imageError}}</label>
             </div>
-            <div class="editor-btn">
-                <button class="custom-btn btn-1" type="button" data-toggle="modal"
-                    data-target="#invitegroupModalCenter">Create Group</button>
-                
-            </div>
+           <br>
             <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
             </ckeditor>
             <div class="editor-btn">

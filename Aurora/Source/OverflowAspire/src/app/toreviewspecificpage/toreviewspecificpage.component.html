@@ -13,67 +13,21 @@
     </nav>
 </div>
 <div class="Content" style="min-height: 100vh;">
-
- 
     <div class="container">
         <div class="text-center">
             <h1>{{data.title}}</h1>
         </div>
         <div class="text-center pb-4">
-            <img class= "article-img"  [src]="'data:image/jpg;base64,'+ data.image" />
+            <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
-            <p> {{data.content}}
-            </p>
-        <br>
-        <br><br>
-        <p class="Article1"></p>
-<div class="container d-flex justify-content-between">
-
-    <button type="button" class="custom-btn btn-1" data-toggle="modal"
-             data-target="#exampleModal">Publish</button>
- 
- 
-        <button  type="button" class="custom-btn btn-1" data-toggle="modal"
-             data-target="#exampleModal2">Reject</button>
-</div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-
-
-                    </div>
-                    <div class="modal-body">
-                        <h6>Do You Want To proceed?</h6>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                        <a href="ThankYou.html"><button type="button" class="btn btn-primary">Yes</button></a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel2">Confirmation</h5>
-                    </div>
-                    <div class="modal-body">
-                        <h6>Do You Want To proceed?</h6>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                        <a href="Rejection1.html"><button type="button" class="btn btn-primary">Yes</button></a>
-
-                    </div>
-                </div>
-            </div>
+        <p> {{data.content}}</p>
+       
+        <div class="container d-flex justify-content-between">
+            <a (click)="PublishArticle(data.articleId)"><button type="button" class="custom-btn btn-1">Publish</button></a>
+            <a (click)="RejectArticle(data.articleId)"><button type="button" class="custom-btn btn-1">Reject</button></a>
         </div>
     </div>
+   
+</div>
+<br>
 <app-footer></app-footer>
