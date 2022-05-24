@@ -117,7 +117,9 @@ namespace AspireOverflow.Services
                     content = article.Content,
                     image = article.Image,
                     Likes = GetLikesCount(article.ArtileId),
-                    comments = GetComments(article.ArtileId)
+                    comments = GetComments(article.ArtileId),
+                      status=article.ArticleStatus?.Status,
+
                 };
             }
             catch (Exception exception)
@@ -143,6 +145,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
             }
 
@@ -175,6 +179,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
             }
             catch (Exception exception)
@@ -199,6 +205,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
 
             }
@@ -246,6 +254,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
             }
 
@@ -274,6 +284,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
             }
             catch (Exception exception)
@@ -302,6 +314,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
             }
             catch (Exception exception)
@@ -329,6 +343,8 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                      status=Article.ArticleStatus?.Status,
+
                 });
             }
             catch (Exception exception)
@@ -359,6 +375,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
+                    status=Article.ArticleStatus?.Status,
 
                 });
             }
