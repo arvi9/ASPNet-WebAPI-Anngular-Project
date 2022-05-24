@@ -20,20 +20,14 @@ export class EmployeePageComponent implements OnInit {
       console.log(data);
     });
   }
-  checkEmployee(userId:any){
-    console.warn("user id :"+userId)
-    if(confirm("Are you sure?")==true){
-    }
-  }
   DisableUser(userId:number){
-    console.warn("user id :"+userId)
-    if(confirm("Are you sure?")==true){
+    console.log("ge")
     this.http
     .patch(`https://localhost:7197/User/ChangeUserVerifyStatus?UserId=${userId}&IsVerified=false`,Object)  
     .subscribe((data)=>{
       console.log(data);
     });
-  }}
+  }
   public data: User[] = []
  
  

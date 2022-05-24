@@ -29,6 +29,7 @@ userId:any=0;
       .get<any>(this.artsrc)
       .subscribe((data) => {
         this.data = data;
+        console.log(data)
         this.filteredData = data;
         this.totalLength = data.length;
       });

@@ -13,6 +13,7 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
 })
 export class ArticleCardComponent implements OnInit {
   @Input() artsrc: string = "";
+  @Input() ShowStatus:boolean =true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";

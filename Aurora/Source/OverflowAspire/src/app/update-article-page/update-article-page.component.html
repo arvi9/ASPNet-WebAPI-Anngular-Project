@@ -17,8 +17,20 @@
         </nav>
     </div>
     <div class="container editor">
-       <h1>Web API</h1>
-        <app-editor></app-editor>
+        <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="w-25">
+                <label class="form-label">Title:</label>
+                <input class="form-control" placeholder="Enter Title" name="title" value={{article.title}} [(ngModel)]="article.title">
+            </div>
+           <br>
+            <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
+            </ckeditor>
+            <div class="editor-btn">
+                <input class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()"/>
+                <input class="custom-btn btn-1" type="submit" value="Submit"/>
+            </div>
+        </form>
+       
     </div>
 </div>
 <app-footer></app-footer>

@@ -47,14 +47,14 @@ import { ReviewerPiechartComponent } from './reviewer-piechart/reviewer-piechart
 import { HomepageComponent } from './homepage/homepage.component';
 
 import { EmployeePageComponent } from './employee-page/employee-page.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+
 import { SpamreportpageComponent } from './spamreportpage/spamreportpage.component';
 import { UserverificationpageComponent } from './userverificationpage/userverificationpage.component';
 import { ToreviewpageComponent } from './toreviewpage/toreviewpage.component';
 import { ArticalreviewedpageComponent } from './articalreviewedpage/articalreviewedpage.component';
 
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { EditorComponent } from './editor/editor.component';
+
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
 import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
 
@@ -92,7 +92,7 @@ import { EditarticleComponent } from './editarticle/editarticle.component';
     ReportSpamComponent,
    
     EmployeePageComponent,
-    SidenavComponent,
+ 
     HomepageComponent,
     
     SpamreportpageComponent,
@@ -102,7 +102,7 @@ import { EditarticleComponent } from './editarticle/editarticle.component';
   
     MyArticlesComponent,
     MyQueriesComponent,
-    EditorComponent,
+
     CreateArticlePageComponent,
     UpdateArticlePageComponent, 
     ReviewerdashboardComponent,

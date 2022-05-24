@@ -28,6 +28,7 @@ import { SpamreportpageComponent } from './spamreportpage/spamreportpage.compone
 import { UserverificationpageComponent } from './userverificationpage/userverificationpage.component';
 import { ReportSpamComponent } from './report-spam/report-spam.component';
 import{EditarticleComponent} from './editarticle/editarticle.component';
+import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'Register',component:RegisterComponent},
@@ -57,8 +58,9 @@ const routes: Routes = [
   {path:'SpamReport',component:SpamreportpageComponent},
   {path:'ReportSpam/:queryId',component:ReportSpamComponent},
   {path:'UserVerification',component:UserverificationpageComponent},
-
-{path:'Editarticle/:articleId',component:EditarticleComponent}
+  {path:'UpdateArticle/:articleId',component:UpdateArticlePageComponent},
+  {path:'EditArticle/:articleId',component:EditarticleComponent},
+  
   
 ];
 

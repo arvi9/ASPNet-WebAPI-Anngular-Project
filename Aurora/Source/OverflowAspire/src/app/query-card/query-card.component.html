@@ -2,13 +2,16 @@
     <form>
         <label class="labeltext">Search Query</label>
         <input class="Searchbar" type="text"  name="search" [(ngModel)]="searchTitle" autocomplete="off">
-        <input  type="radio" value="Solved Queries" name="Queries">
+        <input  type="radio" value="Solved Queries" name="Queries" [(ngModel)]="searchSolvedQueries" autocomplete="off">
         <label class="labeltext">Solved Queries</label>
-        <input  type="radio" value="Unsolved Queries" name="Queries">
+        <input  type="radio" value="Unsolved Queries" name="Queries" [(ngModel)]="searchUnSolvedQueries" autocomplete="off">
         <label class="labeltext">Unsolved Queries</label>
-        <button class="custom-btn btn-1"> Apply</button>
+        <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)"> Apply</button>
     </form>
-</div>
+</div>   
+
+
+
 <div class="container justify-content-center d-flex flex-wrap">
     <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength }">
         <div class="our-skills">

@@ -1,5 +1,6 @@
 <app-admin-navbar></app-admin-navbar>
-
+<div id="page-content-wrapper">
+    
 <div class="Content" style="min-height: 100vh;">
 <h1>Employee Details</h1>
 
@@ -20,7 +21,7 @@
                 <td>{{item.fullName}}</td>
                 <td>{{item.employeeId}}</td>
                 <td>{{item.email}}</td>
-                <td><input type="checkbox" (change)="checkEmployee(item.userId)"></td>
+                <td><input type="checkbox"></td>
                 <td><a (click)="DisableUser(item.userId)"><button>Disable</button></a></td>
             </tr>
             </tbody>
@@ -29,5 +30,5 @@
 </div>
 
 </div>
-
+</div>
 <app-footer></app-footer>

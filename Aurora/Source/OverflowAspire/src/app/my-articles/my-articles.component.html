@@ -27,40 +27,32 @@
         </form>
     </div>
     <div class="container justify-content-center d-flex flex-wrap">
-        <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
-            <div class="img-card iCard-style2 onhover">
-                <div class="card-content">
-                    <div class="card-image">
-                        <img [src]="'data:image/jpg;base64,'+ item.image" />
-                    </div>
-
-                    <h1 class="card-title text-truncate">{{item.title}}</h1>
-
-                    <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
-                    <h1>{{item.status}}</h1>
-
-                    <div *ngIf="ShowStatus">
-                        <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
-                        <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
-                            class="tag tag-brown">Under Review</span>
-                        <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
-                    </div>
+        <div class="m-4" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
+            <div class="onhover">
+              <div class="card1">
+                <div class="card__header">
+                  <img [src]="'data:image/png;base64,'+ item.image" alt="card__image" class="card__image" width="600" height="200">
                 </div>
-
-                <div class="card-link readmore">
-                    <a title="Read Full" routerLinkActive="active" [routerLink]="['/Editarticle',item.articleId]">Read
-                        Full Article</a>
+                <div class="card__body">
+                  <div *ngIf="ShowStatus">
+                  <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
+                  <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'" class="tag tag-brown">Under Review</span>
+                  <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
                 </div>
+                  <h4 class="card-text text-truncate">{{item.title}}</h4>
+                  <p class="truncate-line-clamp">{{item.content|htmlToPlaintext}}</p>
+                </div>
+                <div class=" btntag tag-blue" routerLinkActive="active" [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+              </div>
+    
             </div>
         </div>
-
-
+    
+    
     </div>
     <div class="Container justify-content-center d-flex">
         <div class="stickypagination">
             <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
-</div>
-
 <app-footer></app-footer>
