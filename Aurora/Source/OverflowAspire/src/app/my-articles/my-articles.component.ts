@@ -10,8 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MyArticlesComponent implements OnInit {
 
   @Input()  ShowStatus:boolean=true;
- 
-  @Input() artsrc: string = "https://localhost:7197/Article/GetArticlesByUserId?UserId=1";
+
+  @Input() artsrc: string = "https://localhost:7197/Article/GetArticlesByUserId?UserId=1002";
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -60,7 +60,7 @@ userId:any=0;
       console.log("ToDate")
       this.data = this.filteredData.filter(item => new Date(item.date) <= new Date(ToDate));
     }
-   
+
     //6.search by title and fromdate
     else if (searchTitle.length != 0 &&  FromDate != new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) {
       console.log("title&FromDate")
@@ -71,7 +71,7 @@ userId:any=0;
       console.log("title&ToDate")
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) <= new Date(ToDate) });
     }
-   
+
     //10.search by fromdate and todate
     else if (searchTitle == '' &&  FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       console.log("fromdate&TsearchTitle == ''oDate")
@@ -91,7 +91,7 @@ userId:any=0;
   }
 
 
- 
+
 
 
 }

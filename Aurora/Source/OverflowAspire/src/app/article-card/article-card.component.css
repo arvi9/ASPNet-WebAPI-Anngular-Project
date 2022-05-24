@@ -118,7 +118,13 @@ body {
 }
 
 .img-card .card-text {
-  line-height: 1.5
+  line-height: 1.5;
+
+}
+h4{
+  font-size: 1.5rem;
+
+  font-weight: 600;
 }
 
 .img-card .card-link {
@@ -210,7 +216,7 @@ body {
 
 .truncate-line-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   width: 250px;
   overflow: hidden;
@@ -291,11 +297,14 @@ a:hover {
 .btntag {
   align-self: flex-end;
   cursor: pointer;
-margin-right: 25px;
-margin-bottom: 10px;
+margin-left: 195px;
+margin-top: 15px;
+margin-bottom: 0px;
+
   padding: .25em .75em;
   border-radius: 1em;
   font-size: .75rem;
+  width: fit-content;
 }
 
 .tag-blue {

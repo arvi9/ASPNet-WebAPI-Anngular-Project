@@ -19,17 +19,15 @@
                     <img [src]="'data:image/jpg;base64,'+ item.image" />
                 </div>
 
-                <h1 class="card-title text-truncate">{{item.title}}</h1>
+                <h4 class="card-title text-truncate">{{item.title}}</h4>
 
                 <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
 
 
             </div>
 
-            <div class="card-link readmore">
-                <a title="Read Full" routerLinkActive="active" [routerLink]="['/specificarticle',item.articleId]">Read
-                    Full Article</a>
-            </div>
+            <div class=" btntag tag-blue " routerLinkActive="active" [routerLink]="['/specificarticle',item.articleId]">Read More</div>
+
         </div>
     </div>
 
