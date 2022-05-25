@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
         console.log(data)
 
       });
-
+      this.router.navigateByUrl("");
   }
 
  

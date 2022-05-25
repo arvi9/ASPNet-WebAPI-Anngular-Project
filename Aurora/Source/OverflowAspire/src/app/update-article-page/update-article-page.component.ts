@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { application } from 'Models/Application';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -12,24 +12,23 @@ import { catchError } from 'rxjs';
   styleUrls: ['./update-article-page.component.css']
 })
 export class UpdateArticlePageComponent implements OnInit {
-  @Input() articleId: number = 0
   imageError: string = "";
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
 
 
-
-
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  articleId: number = 0
+  
+  constructor(private route: ActivatedRoute, private http: HttpClient,private routing:Router) { }
   article: any = {
-    artileId: 0,
+    articleId: 0,
     title: '',
     content: '',
     image: "",
     articleStatusID: 1,
     reviewerId: 0,
     datetime: Date.now,
-    createdBy: 1002,
+    createdBy: 1,
     createdOn: Date.now,
     updatedBy: 0,
     ImageString: this.cardImageBase64,
@@ -47,10 +46,7 @@ export class UpdateArticlePageComponent implements OnInit {
     this.http
       .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`)
       .subscribe((data) => {
-        this.article.artileId = data.articleId;
-        this.article.title=data.title;
-        this.article.content=data.content;
-        this.article.ImageString=data.image
+        this.article = data;
         console.log(data);
       });
     });
@@ -59,13 +55,14 @@ export class UpdateArticlePageComponent implements OnInit {
 
   onSubmit() {
     const headers = { 'content-type': 'application/json' }
-
+   
     this.article.articleStatusID = 2;
-    console.log(this.article)
+   
     this.http.put<any>(`${application.URL}/Article/UpdateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe((data) => {
-        console.log(data.message)
+        console.log(data)
       });
+      this.routing.navigateByUrl("/MyArticles");
   }
   handleError(error:any) {
     let errorMessage = '';
@@ -74,12 +71,12 @@ export class UpdateArticlePageComponent implements OnInit {
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
     }
     console.log(errorMessage);
-
+   
         return "";
-
+    
   }
 
 
@@ -117,14 +114,14 @@ export class UpdateArticlePageComponent implements OnInit {
         image.onload = rs => {
 
           const imgBase64Path = e.target.result;
-
+          
           this.cardImageBase64 = imgBase64Path;
           this.cardImageBase64= this.cardImageBase64.replace("data:image/png;base64,", "");
           this.cardImageBase64= this.cardImageBase64.replace("data:image/jpg;base64,", "");
           this.cardImageBase64= this.cardImageBase64.replace("data:image/jpeg;base64,", "");
           this.article.ImageString=this.cardImageBase64;
           this.isImageSaved = true;
-
+          
 
         }
 

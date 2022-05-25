@@ -4,10 +4,12 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a>Home / </a>
-        <a>Queries</a>
-
-      </li>
+      
+          <a routerLinkActive="active" routerLink="/Home">Home</a>
+      </li>   
+      <li class="breadcrumb-item">
+        <a >Specificquery</a>
+    </li>
      
     </ol>
   </nav>
@@ -70,7 +72,7 @@
     </div>
 
     <div class="mt-2 text-right">
-      <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">Post</button>
+      <button class="custom-btn btn-1 btn-2" routerLinkActive="active" routerLink="/Home" id="button-code" type="submit">Post</button>
     </div>
 
     <div class="mt-2 ">

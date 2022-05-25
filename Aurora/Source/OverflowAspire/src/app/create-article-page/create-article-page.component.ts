@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApplicationInitStatus, Component, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application'
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 
 
@@ -23,7 +24,7 @@ export class CreateArticlePageComponent implements OnInit {
   public ckeditorContent: string = "";
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private routing:Router) { }
   article: any = {
     articleId: 0,
     title: '',
@@ -70,6 +71,7 @@ export class CreateArticlePageComponent implements OnInit {
         console.log(data)
 
       });
+      this.routing.navigateByUrl("/MyArticles");
   }
   handleError(error:any) {
     let errorMessage = '';
@@ -97,6 +99,7 @@ export class CreateArticlePageComponent implements OnInit {
         console.log(data)
 
       });
+      this.routing.navigateByUrl("/MyArticles");
   }
 
 

@@ -1,6 +1,21 @@
 <app-admin-navbar></app-admin-navbar>
-
 <div class="Content" style="min-height: 100vh;">
+  <div style="margin:70px;">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a routerLinkActive="active" routerLink="/AdminDashboard">AdminDashboard</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a routerLinkActive="active" routerLink="/SpamReport">Spam Reports</a>
+            </li>
+              <li class="breadcrumb-item active">
+                 SpamView
+              </li>
+            
+          </ol>
+      </nav>
+  </div>
     <div class="container">
         <h1 style="text-align: center;">{{data[0].query.title}}</h1>
         <br>
@@ -8,9 +23,9 @@
             <p>{{data[0].query.content}}<br>
             </p>
         </div>
-        <button class="btn btn-danger ">Reject</button>
+        <button class="btn btn-danger " routerLinkActive="active" routerLink="/SpamReport" (onclick)="onReject()">Reject</button>
 
-        <button class="btn btn-success float-end">Accept</button>
+        <button class="btn btn-success float-end " routerLinkActive="active" routerLink="/SpamReport" (onclick)="onAccept()">Accept</button>
 
         <br>
         <br>
@@ -26,4 +41,5 @@
       </cdk-virtual-scroll-viewport>
     </div>
 </div>
+
 <app-footer></app-footer>

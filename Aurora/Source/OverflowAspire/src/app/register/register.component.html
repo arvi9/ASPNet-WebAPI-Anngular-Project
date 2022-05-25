@@ -93,7 +93,7 @@
                             <select name="Designation" id="DesignationName" class="form-select"
                                  name="designationId" [(ngModel)]="user.designationId" required>
                                 <option  hidden>Select the Designation</option>
-                                <option *ngFor="let item of designationDetails |filter:department" value={{item.designationId}}>
+                                <option *ngFor="let item of designationDetails | filter:department" value={{item.designationId}}>
                                     {{item.name}}  </option>
                             </select>
                     </div>

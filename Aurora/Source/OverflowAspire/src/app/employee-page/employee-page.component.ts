@@ -27,11 +27,7 @@ export class EmployeePageComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data);
     });
+    
   }
   public data: User[] = []
- 
- 
-    
-  
-
 }

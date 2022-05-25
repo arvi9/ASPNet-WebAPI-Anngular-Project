@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Query } from '../query'
 import { application } from 'Models/Application';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-raisequery',
   templateUrl: './raisequery.component.html',
@@ -10,7 +10,7 @@ import { application } from 'Models/Application';
 })
 export class RaisequeryComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private routing : Router) { }
   query: any = {
     queryId:0,
     title:'',
@@ -36,6 +36,7 @@ export class RaisequeryComponent implements OnInit {
         console.log(data)
 
       });
+      this.routing.navigateByUrl("/Home");
   }
 
   ngOnInit(): void {

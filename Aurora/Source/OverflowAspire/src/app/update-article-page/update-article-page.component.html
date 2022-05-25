@@ -4,15 +4,15 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="Home.html">Home</a>
+                    <a routerLinkActive="active" routerLink="/Home">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="MyArticles.html">My Articles</a>
+                    <a routerLinkActive="active" [routerLink]="['/EditArticle',article.articleId]">EditArticle</a>
                 </li>
                 <li class="breadcrumb-item active">
                     Update Article
                 </li>
-
+              
             </ol>
         </nav>
     </div>
@@ -21,11 +21,7 @@
             <div class="w-25">
                 <label class="form-label">Title:</label>
                 <input class="form-control" placeholder="Enter Title" name="title" value={{article.title}} [(ngModel)]="article.title">
-            </div>  <div class="w-25">
-              <label class="form-label">Image:</label><br>
-              <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" >
-             
-          </div>
+            </div>
            <br>
             <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
             </ckeditor>
@@ -34,7 +30,7 @@
                 <input class="custom-btn btn-1" type="submit" value="Submit"/>
             </div>
         </form>
-
+       
     </div>
 </div>
 <app-footer></app-footer>

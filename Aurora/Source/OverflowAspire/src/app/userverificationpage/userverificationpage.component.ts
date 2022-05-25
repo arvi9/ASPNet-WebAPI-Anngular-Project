@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { application } from 'Models/Application';
 import { User } from 'Models/User';
@@ -12,7 +13,7 @@ import { User } from 'Models/User';
 export class UserverificationpageComponent implements OnInit {
 
   @Input() Usersrc : string=`${application.URL}/User/GetUsersByVerifyStatusId?VerifyStatusID=3`;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private routing:Router) { }
 
   ngOnInit(): void {
     this.http
@@ -34,6 +35,7 @@ export class UserverificationpageComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data);
     });
+    this.routing.navigateByUrl("/Employee");
   }
 
 
@@ -44,6 +46,6 @@ export class UserverificationpageComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data);
     });
-   
+    this.routing.navigateByUrl("/Employee");
   }
 }

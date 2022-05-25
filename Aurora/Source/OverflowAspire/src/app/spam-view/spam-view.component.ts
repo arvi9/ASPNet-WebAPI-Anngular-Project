@@ -1,6 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { application } from 'Models/Application';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-spam-view',
@@ -12,7 +13,7 @@ queryId: number = 0
 
 
 @Input() Querysrc : string = `${application.URL}/Query/GetListOfSpams`;
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient,private routing:Router) { }
 
 ngOnInit(): void {
   this.http
@@ -27,5 +28,10 @@ ngOnInit(): void {
 public data: any[] = []
 
  
-
+onAccept(){
+  this.routing.navigateByUrl("/SpamReport");
+}
+onReject(){
+  this.routing.navigateByUrl("/SpamReport");
+}
 }
