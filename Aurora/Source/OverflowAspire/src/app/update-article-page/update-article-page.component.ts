@@ -86,6 +86,7 @@ export class UpdateArticlePageComponent implements OnInit {
       .subscribe((data) => {
         console.log(data)
       });
+      this.routing.navigateByUrl("/MyArticles");
   }
 
   fileChangeEvent(fileInput: any) {

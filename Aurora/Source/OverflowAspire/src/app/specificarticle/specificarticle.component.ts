@@ -16,7 +16,7 @@ export class SpecificarticleComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
   article: any = {
     articleCommentId: 0,
     comment: '',
@@ -88,5 +88,6 @@ ngOnInit(): void {
         console.log(data)
 
       });
+      this.routing.navigateByUrl("/Home");
   }
 }

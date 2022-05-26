@@ -90,10 +90,10 @@
                         <div class="col-sm-12 col-xl-6 col-md-6">
 
                             <label class="form-label">Designation </label>
-                            <select name="Designation" id="DesignationName" class="form-select"
-                                 name="designationId" [(ngModel)]="user.designationId" required>
+                            <select name="Designation" id="Designation" class="form-select"
+                                (change)="FilterDesignation()" name="departmentId" [(ngModel)]="user.designationId" required>
                                 <option  hidden>Select the Designation</option>
-                                <option *ngFor="let item of designationDetails | filter:department" value={{item.designationId}}>
+                                <option *ngFor="let item of Designationlist" value={{item.designationId}}>
                                     {{item.name}}  </option>
                             </select>
                     </div>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="text-center mb-2 p-2">
                     <!-- <button [disabled]="register.form.invalid" -->
-                        <button
+                        <button [disabled]="register.form.invalid"
                         class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="Submit"
                         (click)="userdata()">Register</button>
                 </div>

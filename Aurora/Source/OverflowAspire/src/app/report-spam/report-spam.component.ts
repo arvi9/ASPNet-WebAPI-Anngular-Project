@@ -17,7 +17,7 @@ export class ReportSpamComponent implements OnInit {
   queryId: number = 0
 
  
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
   reportspam: any = {
     spamId: 0,
     reason: '',
@@ -49,6 +49,7 @@ export class ReportSpamComponent implements OnInit {
         console.log(data)
 
       });
+      this.routing.navigateByUrl("/Home");
   }
   
 }

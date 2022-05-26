@@ -28,7 +28,7 @@ export class SpecificqueryComponent implements OnInit {
     
   }
   
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
    
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -68,6 +68,7 @@ export class SpecificqueryComponent implements OnInit {
         console.log(data)
 
       });
+      this.routing.navigateByUrl("/Home");
  }
  
     

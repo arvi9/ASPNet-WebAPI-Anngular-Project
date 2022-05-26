@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   departmentDetails: any;
   GenderDetails: any;
 
-
+Designationlist:any[]=[]
 
   constructor(private http: HttpClient, private router: Router) { }
   user: any = {
@@ -85,7 +85,14 @@ export class RegisterComponent implements OnInit {
 
   }
   FilterDesignation() {
-         
+         this.Designationlist=[];
+for(let item of this.designationDetails){
+  if(item.departmentId==this.department){
+console.log(item.departmentId)
+this.Designationlist.push(item)
+console.log(item)
+  }
+}
   }
   validateDateOfBirth() {
     if (Date.now.toString() > this.user.dateOfBirth) {
