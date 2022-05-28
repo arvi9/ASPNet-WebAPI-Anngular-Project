@@ -24,7 +24,7 @@ export class AuthService {
 
   static SetDateWithExpiry(key:string,value:string, expiryInMinutes:number) {
    const now = new Date()
-   expiryInMinutes =expiryInMinutes*60;
+   expiryInMinutes =expiryInMinutes*60000;
 
    const item = {
      value: value,
