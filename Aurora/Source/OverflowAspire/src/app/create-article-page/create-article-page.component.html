@@ -4,18 +4,18 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a routerLinkActive="active" routerLink="/Home">Home</a>
+                    <a href="Home.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="MyArticles.html">My Articles</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    Create Article
                 </li>
 
-                <li class="breadcrumb-item active">
-                    <a>Create Article</a>
-                </li>
-      
             </ol>
         </nav>
-      </div>
-
-  
+    </div>
     <div class="container editor">
         <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">

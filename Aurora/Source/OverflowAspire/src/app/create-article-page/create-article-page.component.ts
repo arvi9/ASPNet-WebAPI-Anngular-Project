@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { ApplicationInitStatus, Component, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application'
-import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 
 
@@ -24,7 +23,7 @@ export class CreateArticlePageComponent implements OnInit {
   public ckeditorContent: string = "";
 
 
-  constructor(private http: HttpClient,private routing:Router) { }
+  constructor(private http: HttpClient) { }
   article: any = {
     articleId: 0,
     title: '',
@@ -33,17 +32,22 @@ export class CreateArticlePageComponent implements OnInit {
     articleStatusID: 1,
     reviewerId: 0,
     datetime: Date.now,
-    createdBy: 1,
+    createdBy: 0,
     createdOn: Date.now,
     updatedBy: 0,
     ImageString: this.cardImageBase64,
     updatedOn: '',
     articleStatus: null,
     user: null,
-
+    IsPrivate:true,
     articleComments: [],
-    articleLikes: null
+    articleLikes: null,
+
   }
+  // privatearticle:any={
+  //   article:this.article,
+  //   sharedUsersId:[4,2002]
+  // }
 
 
   ngOnInit(): void {
@@ -62,16 +66,22 @@ export class CreateArticlePageComponent implements OnInit {
 
   onSubmit() {
     const headers = { 'content-type': 'application/json' }
-   
+
     this.article.articleStatusID = 2;
-   
-    this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
+
+
+    // this.http.post<any>(`${application.URL}/Article/CreatePrivateArticle`, this.privatearticle, { headers: headers })
+    //   .pipe(catchError(this.handleError)).subscribe((data) => {
+
+    //     console.log(data)
+
+    //   });
+      this.http.post<any>(`${application.URL}/Article/CreatePrivateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe((data) => {
 
         console.log(data)
 
       });
-      this.routing.navigateByUrl("/MyArticles");
   }
   handleError(error:any) {
     let errorMessage = '';
@@ -83,23 +93,22 @@ export class CreateArticlePageComponent implements OnInit {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
     }
     console.log(errorMessage);
-   
+
         return "";
-    
+
   }
 
   saveToDraft() {
     const headers = { 'content-type': 'application/json' }
-    
 
-    
+
+
     this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .subscribe((data) => {
 
         console.log(data)
 
       });
-      this.routing.navigateByUrl("/MyArticles");
   }
 
 
@@ -134,14 +143,14 @@ export class CreateArticlePageComponent implements OnInit {
         image.onload = rs => {
 
           const imgBase64Path = e.target.result;
-          
+
           this.cardImageBase64 = imgBase64Path;
           this.cardImageBase64= this.cardImageBase64.replace("data:image/png;base64,", "");
           this.cardImageBase64= this.cardImageBase64.replace("data:image/jpg;base64,", "");
           this.cardImageBase64= this.cardImageBase64.replace("data:image/jpeg;base64,", "");
           this.article.ImageString=this.cardImageBase64;
           this.isImageSaved = true;
-          
+
 
         }
 
