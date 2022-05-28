@@ -66,18 +66,18 @@ namespace AspireOverflow.Services
 
                 case 2: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Article - \"{ArticleTitle}\" has been submitted successfully.\n\n Thanks and Regards,\nAspireOverflow.\n";
                         return mail;
-                        break;
+                       
 
                 case 4: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Article - \"{ArticleTitle}\" have been published successfully.\n\n Thanks and Regards,\nAspireOverflow.\n";
                         return mail;
-                        break;
+                      
                 
-                defaut: return null;
-                        break;
+                default: return mail;
+                      
 
             }
              
-            return mail;
+          
         }
 
 
@@ -91,21 +91,21 @@ namespace AspireOverflow.Services
 
                 case 1: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Report on - \"{QueryTitle}\" has been accpect as spam.\n\n Thanks and Regards,\nAspireOverflow.\n";
                         return mail;
-                        break;
+                     
 
                 case 2: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Report on - \"{QueryTitle}\" have been rejected from accepting as spam.\n\n Thanks and Regards,\nAspireOverflow.\n";
                         return mail;
-                        break;
+                        
 
                case 3: mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Report on - \"{QueryTitle}\" have been submitted for review.\n\n Thanks and Regards,\nAspireOverflow.\n";
                        return mail;
-                       break;  
+                     
                 
-                defaut: return null;
-                        break;
+                default: return mail;
+                        
 
             }
-           return mail;     
+          
         }
 
 

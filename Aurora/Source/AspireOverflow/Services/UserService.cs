@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Security;
 using Microsoft.AspNetCore.Identity;
 using AspireOverflow.Models;
+
 
 namespace AspireOverflow.Services
 {
@@ -58,6 +60,7 @@ namespace AspireOverflow.Services
             {
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
                 var User = GetUsers().Where(user => user.EmailAddress == Email).First();
+                if(User ==null) throw new ValidationException("Invalid Email");
                 return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new InvalidDataException("Password doesn't match");
             }
             catch (Exception exception)

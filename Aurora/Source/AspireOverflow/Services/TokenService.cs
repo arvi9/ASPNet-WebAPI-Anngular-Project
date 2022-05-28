@@ -43,7 +43,7 @@ namespace AspireOverflow.Services
                     _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
                         claims,
-                    expires: DateTime.UtcNow.AddHours(6),
+                    expires: DateTime.UtcNow.AddMinutes(360),
                     signingCredentials: signIn);
 
                 var Result = new

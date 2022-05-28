@@ -39,11 +39,12 @@ builder.Services.AddHttpLogging(httpLogging =>
 });
 
 
-
 builder.Services.AddTransient<QueryService>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<TokenService>();
 builder.Services.AddTransient<ArticleService>();
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddSingleton<MailService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -65,8 +66,7 @@ builder.Services.AddControllersWithViews()
 Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
-builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
-builder.Services.AddSingleton<MailService>();
+
 try
 {
     var logger = new LoggerConfiguration()

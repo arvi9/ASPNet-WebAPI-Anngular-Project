@@ -4,6 +4,7 @@ using AspireOverflow.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspireOverflow.Migrations
 {
     [DbContext(typeof(AspireOverflowContext))]
-    partial class AspireOverflowContextModelSnapshot : ModelSnapshot
+    [Migration("20220528043920_CreatedPrivateArticleTable")]
+    partial class CreatedPrivateArticleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -518,13 +520,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.ArticleStatus", "ArticleStatus")
                         .WithMany("Articles")
                         .HasForeignKey("ArticleStatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("Articles")
                         .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ArticleStatus");
@@ -537,13 +539,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Article", "Article")
                         .WithMany("ArticleComments")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("ArticleComments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Article");
@@ -556,13 +558,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Article", "Article")
                         .WithMany("ArticleLikes")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "LikedUser")
                         .WithMany("Likes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Article");
@@ -575,7 +577,7 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Department", "Department")
                         .WithMany("Designations")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Department");
@@ -586,13 +588,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Article", "article")
                         .WithMany("PrivateArticles")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "user")
                         .WithMany("PrivateArticles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("article");
@@ -605,7 +607,7 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("Queries")
                         .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -616,13 +618,13 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany("QueryComments")
                         .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.Query", "Query")
                         .WithMany("QueryComments")
                         .HasForeignKey("QueryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Query");
@@ -635,19 +637,19 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Query", "Query")
                         .WithMany()
                         .HasForeignKey("QueryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.VerifyStatus", "VerifyStatus")
                         .WithMany()
                         .HasForeignKey("VerifyStatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Query");
@@ -662,25 +664,25 @@ namespace AspireOverflow.Migrations
                     b.HasOne("AspireOverflow.Models.Designation", "Designation")
                         .WithMany("Users")
                         .HasForeignKey("DesignationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.Gender", "Gender")
                         .WithMany("Users")
                         .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.UserRole", "UserRole")
                         .WithMany("Users")
                         .HasForeignKey("UserRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AspireOverflow.Models.VerifyStatus", "VerifyStatus")
                         .WithMany("Users")
                         .HasForeignKey("VerifyStatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Designation");

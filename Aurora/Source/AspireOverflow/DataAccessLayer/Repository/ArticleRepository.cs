@@ -1,4 +1,4 @@
- using AspireOverflow.Models;
+using AspireOverflow.Models;
 
 using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
@@ -34,8 +34,32 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle(Article article)", exception, article));
 
-               return false;
+                return false;
 
+
+            }
+        }
+
+        public bool AddPrivateArticle(Article article, List<int> SharedUsersId)
+        {
+            Validation.ValidateArticle(article);
+            try
+            {
+                var entry = _context.Articles.Add(article);
+                _context.SaveChanges();
+                if (article.IsPrivate && SharedUsersId != null && SharedUsersId.Count() > 0)
+                {
+                    SharedUsersId.ForEach(item => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArtileId, item)));
+                    _context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddPrivateArticle(Article article, List<int> SharedUsersId)", exception, article));
+
+                return false;
 
             }
         }
@@ -45,7 +69,8 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticle(article);
             try
             {
-                _context.Articles.Update(article);
+                _context.Entry<Article>(article).State = EntityState.Modified;
+                // _context.Articles.AddOrUpdate(article);
                 _context.SaveChanges();
                 return true;
             }
@@ -70,6 +95,7 @@ namespace AspireOverflow.DataAccessLayer
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
+
 
 
                 _context.Articles.Update(ExistingArticle);
@@ -100,7 +126,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticle(int ArticleId)", exception, ArticleId));
-                 return false;
+                return false;
 
             }
         }
@@ -110,7 +136,7 @@ namespace AspireOverflow.DataAccessLayer
             Article ExistingArticle;
             try
             {
-                ExistingArticle = GetArticles().Where(item=>item.ArtileId==ArticleId).First();
+                ExistingArticle = GetArticles().Where(item => item.ArtileId == ArticleId).First();
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)
@@ -138,6 +164,24 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+        public IEnumerable<PrivateArticle> GetPrivateArticles()
+        {
+            try
+            {
+                var ListofPrivateArticles = _context.PrivateArticles.ToList();
+                return ListofPrivateArticles;
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticles()", exception));
+
+                throw exception;
+            }
+
+
+        }
+
         public bool AddComment(ArticleComment comment)
         {
             Validation.ValidateArticleComment(comment);
@@ -152,7 +196,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddComment(ArticleComment comment)", exception, comment));
 
-               return false;
+                return false;
 
 
             }
@@ -192,7 +236,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddLike(ArticleLike like)", exception, like));
 
-               return false;
+                return false;
 
             }
         }

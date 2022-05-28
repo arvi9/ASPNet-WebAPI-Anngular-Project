@@ -22,6 +22,8 @@ namespace AspireOverflow.Models
 
         public DateTime Datetime { get; set; }
 
+        public bool IsPrivate { get; set; } = false;
+
         public int CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }
@@ -49,6 +51,41 @@ namespace AspireOverflow.Models
         [InverseProperty("Article")]
         public virtual ICollection<ArticleLike>? ArticleLikes { get; set; }
 
+        [InverseProperty("article")]
+        public virtual ICollection<PrivateArticle>? PrivateArticles { get; set; }
+
     }
+    public partial class PrivateArticle
+    {
+        public PrivateArticle(int articleId, int userId)
+        {
+            ArticleId = articleId;
+            UserId = userId;
+        }
+
+        [Key]
+        public int Id { get; set; }
+
+        public int ArticleId { get; set; }
+
+        public int UserId { get; set; }
+
+        [ForeignKey("ArticleId")]
+        [InverseProperty("PrivateArticles")]
+        public virtual Article? article { get; set; }
+        [ForeignKey("UserId")]
+        [InverseProperty("PrivateArticles")]
+        public virtual User? user { get; set; }
+
+
+    }
+
+    public partial class PrivateArticleDto {
+
+        public Article article { get; set; }
+        public List<int> SharedUsersId { get; set; }
+    }
+
+
 
 }

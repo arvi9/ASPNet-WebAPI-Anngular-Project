@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Data;
 using System.Reflection.PortableExecutable;
 using System.Net.Mail;
@@ -27,13 +29,15 @@ namespace AspireOverflow.Services
 
         }
 
-        public bool CreateArticle(Article article)
+        public bool CreateArticle(Article article,List<int> SharedUsersId=null)
         {
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
                 article.Image = System.Convert.FromBase64String(article.ImageString);
                 article.CreatedOn = DateTime.Now;
+                //for adding articles visible only for shared users.
+                if(SharedUsersId != null && article.IsPrivate && SharedUsersId.Count() > 0) return database.AddPrivateArticle(article,SharedUsersId);
                return database.AddArticle(article);
             }
 
@@ -43,6 +47,8 @@ namespace AspireOverflow.Services
                 return false;
             }
         }
+       
+
 
 
         public bool UpdateArticle(Article article, int CurrentUser)
@@ -51,11 +57,15 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                var ExistingArticle = GetArticles().Where(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1).First();
+                var ExistingArticle = GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
-                article.UpdatedOn = DateTime.Now;
-                article.UpdatedBy = CurrentUser;
-                ExistingArticle = article;
+                ExistingArticle.Title=article.Title;
+                ExistingArticle.Content=article.Content;
+                ExistingArticle.UpdatedOn = DateTime.Now;
+                ExistingArticle.UpdatedBy = CurrentUser;
+                ExistingArticle.ArticleStatusID=article.ArticleStatusID;
+                ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString);
+             
 
                 return database.UpdateArticle(ExistingArticle);
             }
@@ -245,7 +255,7 @@ namespace AspireOverflow.Services
 
             try
             {
-                var ListOfArticles = database.GetArticles();
+                var ListOfArticles = GetArticles().Where(Item =>Item.IsPrivate==false);
                 return ListOfArticles.Select(Article => new
                 {
                     ArticleId = Article.ArtileId,
@@ -262,6 +272,24 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
+                throw exception;
+            }
+
+
+        }
+
+        public IEnumerable<Object> GetPrivateArticles(int UserId)
+        {
+
+            try
+            {
+                var ListOfPrivateArticles = database.GetPrivateArticles().Where(Item=>Item.UserId==UserId);
+                return ListOfPrivateArticles.Select(PrivateArticle => GetArticleById(PrivateArticle.ArticleId));
+            }
+
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetPrivateArticles(int UserId)", exception));
                 throw exception;
             }
 
