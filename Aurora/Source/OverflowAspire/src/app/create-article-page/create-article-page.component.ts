@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApplicationInitStatus, Component, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application'
 import { catchError } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 
 declare var CKEDITOR: any;
@@ -65,8 +66,11 @@ export class CreateArticlePageComponent implements OnInit {
 
 
   onSubmit() {
-    const headers = { 'content-type': 'application/json' }
-
+   
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
     this.article.articleStatusID = 2;
 
 
@@ -99,7 +103,12 @@ export class CreateArticlePageComponent implements OnInit {
   }
 
   saveToDraft() {
-    const headers = { 'content-type': 'application/json' }
+  
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${AuthService.GetData("token")}`
+      })
+      console.log(AuthService.GetData("token"))
 
 
 

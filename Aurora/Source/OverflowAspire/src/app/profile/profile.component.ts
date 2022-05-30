@@ -1,7 +1,8 @@
 import { Component,Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'Models/User';
 import { application } from 'Models/Application';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -16,8 +17,13 @@ export class ProfileComponent implements OnInit {
   constructor(private http: HttpClient){}
  
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.http
-    .get<any>(this.Usersrc)
+    .get<any>(this.Usersrc,{headers:headers})
     .subscribe((data)=>{
       this.user =data;
       this.totalLength=data.length;

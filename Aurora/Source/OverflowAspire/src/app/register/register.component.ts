@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'Models/User';
 import { Router } from '@angular/router';
 import { application } from 'Models/Application';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -61,22 +62,27 @@ Designationlist:any[]=[]
 
 
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.http
-      .get<any>(this.DesignationUrl)
+      .get<any>(this.DesignationUrl,{headers:headers})
       .subscribe((data) => {
         this.designationDetails = data;
         console.log(this.designationDetails)
 
       });
     this.http
-      .get<any>(this.DepartmentUrl)
+      .get<any>(this.DepartmentUrl,{headers:headers})
       .subscribe((data) => {
         this.departmentDetails = data;
         console.log(this.departmentDetails)
 
       });
     this.http
-      .get<any>(this.GenderUrl)
+      .get<any>(this.GenderUrl,{headers:headers})
       .subscribe((data) => {
         this.GenderDetails = data;
         console.log(this.GenderDetails)
@@ -104,7 +110,11 @@ console.log(item)
 
 
   userdata() {
-    const headers = { 'content-type': 'application/json' }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     console.log(this.user)
     this.http.post<any>(`${application.URL}/User/CreateUser`, this.user, { headers: headers })
       .subscribe((data) => {

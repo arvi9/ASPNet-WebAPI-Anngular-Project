@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Article } from 'Models/Article';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-latest-articlepage',
   templateUrl: './latest-articlepage.component.html',
@@ -16,8 +17,13 @@ export class LatestArticlepageComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.http
-      .get<any>(this.artsrc)
+      .get<any>(this.artsrc,{headers:headers})
       .subscribe((data) => {
         this.data = data;
         this.totalLength = data.length;

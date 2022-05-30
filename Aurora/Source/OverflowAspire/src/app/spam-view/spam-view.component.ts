@@ -1,7 +1,8 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { application } from 'Models/Application';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-spam-view',
@@ -16,8 +17,13 @@ queryId: number = 0
 constructor(private http: HttpClient,private routing:Router) { }
 
 ngOnInit(): void {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${AuthService.GetData("token")}`
+  })
+  console.log(AuthService.GetData("token"))
   this.http
-  .get<any>(this.Querysrc)
+  .get<any>(this.Querysrc,{headers:headers})
   .subscribe((data)=>{
     this.data =data;
     this.data=this.data.filter(item=> item.query.queryId==this.queryId)

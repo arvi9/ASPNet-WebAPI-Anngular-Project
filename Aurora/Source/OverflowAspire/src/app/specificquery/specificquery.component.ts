@@ -1,10 +1,11 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Query } from 'Models/Query';
 import{QueryComment} from 'Models/Query';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 
 declare type myarray = Array<{ content: string, coding: string, name: string }>
@@ -31,11 +32,16 @@ export class SpecificqueryComponent implements OnInit {
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
    
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
     console.log(this.queryId)
     this.http
-      .get<any>(`https://localhost:7197/Query/GetQuery?QueryId=${this.queryId}`)
+      .get<any>(`https://localhost:7197/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
       .subscribe((data) => {
         this.data = data;
         console.log(data);
@@ -60,7 +66,11 @@ export class SpecificqueryComponent implements OnInit {
    this.displayStyle = "none";
  }
  PostComment(){  
-  const headers = { 'content-type': 'application/json' }
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${AuthService.GetData("token")}`
+  })
+  console.log(AuthService.GetData("token"))
   console.log(this.Query)
     this.http.post<any>('https://localhost:7197/Query/CreateComment', this.Query, { headers: headers })
       .subscribe((data) => {

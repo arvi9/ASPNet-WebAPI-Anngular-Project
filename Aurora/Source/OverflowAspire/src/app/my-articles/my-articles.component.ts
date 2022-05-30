@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Article } from 'Models/Article';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-my-articles',
   templateUrl: './my-articles.component.html',
@@ -22,11 +23,16 @@ userId:any=0;
 
   constructor(private route: ActivatedRoute,private http: HttpClient) { }
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.route.params.subscribe(params => {
       this.userId = params['UserId'];
     console.log(this.userId)
     this.http
-      .get<any>(this.artsrc)
+      .get<any>(this.artsrc,{headers:headers})
       .subscribe((data) => {
         this.data = data;
         console.log(data)

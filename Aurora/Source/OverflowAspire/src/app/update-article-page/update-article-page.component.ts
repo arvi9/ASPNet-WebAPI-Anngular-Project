@@ -43,12 +43,17 @@ export class UpdateArticlePageComponent implements OnInit {
     articleLikes: null
   }
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
 
     console.log(this.articleId)
     this.http
-      .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`)
+      .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
       .subscribe((data) => {
         this.article.artileId = data.articleId;
         this.article.title=data.title;
@@ -65,6 +70,7 @@ export class UpdateArticlePageComponent implements OnInit {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
     })
+    console.log(AuthService.GetData("token"))
 
     this.article.articleStatusID = 2;
     console.log(this.article)
@@ -94,6 +100,7 @@ export class UpdateArticlePageComponent implements OnInit {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
     })
+    console.log(AuthService.GetData("token"))
     this.article.articleStatusID=1;
     this.http.put<any>(`${application.URL}/Article/UpdateArticle`, this.article, { headers: headers })
       .subscribe((data) => {

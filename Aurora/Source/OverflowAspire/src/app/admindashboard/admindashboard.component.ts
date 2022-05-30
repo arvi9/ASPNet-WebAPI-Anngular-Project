@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit,Input } from '@angular/core';
 import { Dashboard } from 'Models/Dashboard';
 import { application } from 'Models/Application'
@@ -23,10 +23,14 @@ export class AdmindashboardComponent implements OnInit {
 
 
     if(!AuthService.IsAdmin()) this.route.navigateByUrl("")  //if u want u can navigate to 404 page
-
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
 
    this.http
-    .get<any>(this.Usersrc)
+    .get<any>(this.Usersrc,{headers:headers})
     .subscribe((data)=>{
       this.data =data;
 

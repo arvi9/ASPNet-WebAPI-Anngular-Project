@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'chart.js';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Dashboard } from 'Models/Dashboard';
 import { application } from 'Models/Application';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-admin-piechart',
   templateUrl: './admin-piechart.component.html',
@@ -12,8 +13,13 @@ export class AdminPiechartComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 ngOnInit(): void {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${AuthService.GetData("token")}`
+  })
+  console.log(AuthService.GetData("token"))
   this.http
-    .get<any>(`${application.URL}/Dashboard/GetAdminDashboard`)
+    .get<any>(`${application.URL}/Dashboard/GetAdminDashboard`,{headers:headers})
     .subscribe((data) => {
       this.piedata = data;
       console.log(data);

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { application } from 'Models/Application';
 import { Article } from 'Models/Article';
 import { Query } from 'Models/Query';
+import { AuthService } from '../auth.service';
 
 export class HomePage{
   trendingArticles:Article[]=[];
@@ -26,8 +27,13 @@ export class HomepageComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
     this.http
-      .get<any>(this.UrlString)
+      .get<any>(this.UrlString,{headers:headers})
       .subscribe((data) => {
         this.data.latestArticles=data.latestArticles.slice(0,3)
         this.data.trendingArticles=data.trendingArticles.slice(0,3)
