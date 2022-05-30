@@ -3,6 +3,8 @@ import { HttpClient} from '@angular/common/http';
 import { application } from 'Models/Application';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { data } from 'jquery';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +12,10 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+showErrorMessage=false;
   IsAdmin:boolean=false;
   IsReviewer:boolean=false;
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private spinnerService: NgxSpinnerService,private http: HttpClient,private route:Router) { }
   user:any={
 
    Email: '',
@@ -26,11 +28,18 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.spinnerService.show();
+      
+        setTimeout(() => {
+          this.spinnerService.hide();
+        }, 2000); 
+   this.showErrorMessage=false;
     const headers = { 'content-type': 'application/json'}
 
     console.log(this.user)
     this.http.post<any>(`${application.URL}/Token/AuthToken`,this.user,{headers:headers})
-      .subscribe((data) => {
+      .subscribe((data) => 
+      {
 
         this.IsAdmin=data.isAdmin,
         this.IsReviewer=data.isReviewer
@@ -43,12 +52,20 @@ export class LoginComponent implements OnInit {
         console.log(AuthService.GetData("Reviewer"))
 
         if(this.IsAdmin){
+         
           this.route.navigateByUrl("/AdminDashboard");  //navigation
         }else{
           this.route.navigateByUrl("/Home");
         }
         console.log(data)
-
-      });
+        
+      },
+      (error)=>{
+        this.showErrorMessage=true;
+      }
+      );
+      
+      
   }
+  
 }
