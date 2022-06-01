@@ -7,11 +7,13 @@
     
     
 <div class="Container">
-   <app-admin-piechart></app-admin-piechart>
+    <div class="wrapper">
+        <canvas id="piechart" width="76" height="76"></canvas>
+      </div>
         <div class="cardRight" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfUsers}}</h5>
+                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfUsers}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Users</p>
 
             </div>
@@ -20,7 +22,7 @@
         <div class="cardLeft" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfReviwers}}</h5>
+                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfReviwers}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Reviewers</p>
 
             </div>
@@ -29,7 +31,7 @@
         <div class="cardBottom" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfArticles}}</h5>
+                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfArticles}}</h5>
                 <p class="card-text" style="text-align: center;">Total Number of Articles</p>
 
             </div>
@@ -39,7 +41,7 @@
         <div class="cardLeft1" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{data.totaNumberofSolvedQueries}}</h5>
+                <h5 class="card-title" style="text-align: center;">{{piedata.totaNumberofSolvedQueries}}</h5>
                 <p class="card-text" style="text-align: center;">Solved Query</p>
 
             </div>
@@ -49,7 +51,7 @@
         <div class="cardBottom1" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfUnSolvedQueries}}</h5>
+                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfUnSolvedQueries}}</h5>
                 <p class="card-text" style="text-align: center;">UnSolved Query</p>
 
             </div>
