@@ -18,12 +18,14 @@
   <div class="Container">
     
     <div class="Card d-md-inline">
-      <app-reviewer-piechart></app-reviewer-piechart>
+      <div class="wrapper">
+        <canvas id="piechart" width="76" height="76"></canvas>
+      </div>
          <div class="cardRight" style="width: 18rem;" routerLink="/ToReview" routerLinkActive="active" >
 
           <div class="card-body">
 
-            <h5 class="card-title" style="text-align: center;">{{data.articlesTobeReviewed}}</h5>
+            <h5 class="card-title" style="text-align: center;">{{piedata.articlesTobeReviewed}}</h5>
             <p class="card-text" style="text-align: center;"> Article To Review</p>
 
           </div>
@@ -36,7 +38,7 @@
 
           <div class="card-body">
 
-            <h5 class="card-title" style="text-align: center;">{{data.articlesReviewed}}</h5>
+            <h5 class="card-title" style="text-align: center;">{{piedata.articlesReviewed}}</h5>
             <p class="card-text" style="text-align: center;"> Article Reviewed</p>
 
           </div>
@@ -46,7 +48,7 @@
       <div class="cardBottom" style="width: 18rem;">
 
         <div class="card-body">
-          <h5 class="card-title" style="text-align: center;">{{data.totalNumberOfArticles}}</h5>
+          <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfArticles}}</h5>
           <p class="card-text" style="text-align: center;">Total Number of Article</p>
 
         </div>

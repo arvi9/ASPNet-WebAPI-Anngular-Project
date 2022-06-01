@@ -42,8 +42,7 @@ import { RaisequeryComponent } from './raisequery/raisequery.component';
 import { ReportSpamComponent} from './report-spam/report-spam.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { MyQueriesComponent } from './my-queries/my-queries.component';
-import { AdminPiechartComponent } from './admin-piechart/admin-piechart.component';
-import { ReviewerPiechartComponent } from './reviewer-piechart/reviewer-piechart.component';
+
 import { HomepageComponent } from './homepage/homepage.component';
 
 import { EmployeePageComponent } from './employee-page/employee-page.component';
@@ -71,7 +70,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     QueryCardComponent,
     SpamViewComponent,
     ArticleCardComponent,
-    ReviewerPiechartComponent,
+ 
     QueriesComponent,
     NavbarComponent,
     FooterComponent,
@@ -80,7 +79,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     SpecificarticleComponent,
     ArticlesComponent,
-    AdminPiechartComponent,
+  
     LatestQueriesComponent,
     TrendingQueriespageComponent,
     LatestArticlepageComponent,
