@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -63,8 +63,8 @@ import{MatDialogModule} from '@angular/material/dialog';
 
 
 import { EditarticleComponent } from './editarticle/editarticle.component';
-
-
+import { NgxSpinnerModule } from "ngx-spinner";
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -133,9 +133,11 @@ import { EditarticleComponent } from './editarticle/editarticle.component';
     ScrollingModule,
     CKEditorModule,
     Ng2SearchPipeModule,
-    
+    NgxSpinnerModule,
+ReactiveFormsModule
     
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
