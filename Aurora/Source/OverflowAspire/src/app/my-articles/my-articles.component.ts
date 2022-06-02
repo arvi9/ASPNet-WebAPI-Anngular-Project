@@ -3,6 +3,7 @@ import { Article } from 'Models/Article';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { application } from 'Models/Application';
 @Component({
   selector: 'app-my-articles',
   templateUrl: './my-articles.component.html',
@@ -12,7 +13,7 @@ export class MyArticlesComponent implements OnInit {
 
   @Input()  ShowStatus:boolean=true;
 
-  @Input() artsrc: string = "https://localhost:7197/Article/GetArticlesByUserId?UserId=1002";
+  @Input() artsrc: string = `${application.URL}/Article/GetArticlesByUserId?UserId=1`;
   totalLength: any;
   page: number = 1;
   searchTitle = "";

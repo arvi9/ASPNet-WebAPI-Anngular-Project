@@ -1,6 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Query } from 'Models/Query';
+import { application } from 'Models/Application';
 
 @Component({
   selector: 'app-my-queries',
@@ -10,7 +11,7 @@ import { Query } from 'Models/Query';
 export class MyQueriesComponent implements OnInit {
 
  
- 
+  url: string = `${application.URL}/Query/GetQueriesByUserId?UserId=2`;
 
  
   ngOnInit(): void {

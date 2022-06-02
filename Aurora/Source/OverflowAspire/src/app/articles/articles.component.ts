@@ -10,13 +10,11 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
-
+url:string=`${application.URL}/Article/GetArticlesByArticleStatusId?ArticleStatusID=4`;
   @Input() artsrc: string =`${application.URL}/Article/GetAll`;
   totalLength: any;
   page: number = 1;
   public data: Article[] = [
-
- 
   ]
  
 

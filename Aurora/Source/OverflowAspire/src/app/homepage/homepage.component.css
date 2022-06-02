@@ -304,3 +304,21 @@ a:hover {
 .btn-1:hover {
     background: #0495ce
 }
+.btntag {
+    align-self: flex-end;
+    cursor: pointer;
+  margin-left: 195px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+    width: fit-content;
+  }
+  
+  .tag-blue {
+    background: #56CCF2;
+  background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+    color: #fafafa;
+  }

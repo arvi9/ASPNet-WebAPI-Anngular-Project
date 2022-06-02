@@ -18,45 +18,45 @@ export class RegisterComponent implements OnInit {
   designationDetails: any;
   departmentDetails: any;
   GenderDetails: any;
-Designationlist:any[]=[]
-Designationlist1:any[]=[]
-user=new FormGroup({
-  fullName: new FormControl('',[Validators.required,Validators.maxLength(20),Validators.pattern("^[A-Za-z ]+$")]),
-   gender: new FormControl('',[Validators.required]),
-   aceNumber: new FormControl('',[Validators.required,Validators.pattern("ACE+[0-9]{4}")]),
-departmentValidate:new FormControl('',[Validators.required]),
-emailAddress: new FormControl('',[Validators.required,Validators.pattern("([a-zA-Z0-9-_\.]+)@(aspiresys.com|aspiresystems.biz)")]),
-DesignationValidate:new FormControl('',[Validators.required]),
- dateOfBirth: new FormControl('',[Validators.required]),
-password: new FormControl('',[Validators.required,Validators.maxLength(10)]),
+  Designationlist: any[] = []
+  Designationlist1: any[] = []
+  user = new FormGroup({
+    fullName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern("^[A-Za-z ]+$")]),
+    gender: new FormControl('', [Validators.required]),
+    aceNumber: new FormControl('', [Validators.required, Validators.pattern("ACE+[0-9]{4}")]),
+    departmentValidate: new FormControl('', [Validators.required]),
+    emailAddress: new FormControl('', [Validators.required, Validators.pattern("([a-zA-Z0-9-_\.]+)@(aspiresys.com|aspiresystems.biz)")]),
+    DesignationValidate: new FormControl('', [Validators.required]),
+    dateOfBirth: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.maxLength(10)]),
 
-})
+  })
 
-get fullName() {
-  return this.user.get('fullName');
-} 
-get gender() {
-   return this.user.get('gender');
-} 
-get aceNumber(){
-  return this.user.get('aceNumber')
-}
-get departmentValidate(){
-  return this.user.get('departmentValidate')
+  get fullName() {
+    return this.user.get('fullName');
+  }
+  get gender() {
+    return this.user.get('gender');
+  }
+  get aceNumber() {
+    return this.user.get('aceNumber')
+  }
+  get departmentValidate() {
+    return this.user.get('departmentValidate')
 
-}
-get emailAddress(){
-  return this.user.get('emailAddress')
-}
-get DesignationValidate(){
-  return this.user.get('DesignationValidate')
-}
-get dateOfBirth(){
-  return this.user.get('dateOfBirth')
-}
-get password(){
-  return this.user.get('password')
-}
+  }
+  get emailAddress() {
+    return this.user.get('emailAddress')
+  }
+  get DesignationValidate() {
+    return this.user.get('DesignationValidate')
+  }
+  get dateOfBirth() {
+    return this.user.get('dateOfBirth')
+  }
+  get password() {
+    return this.user.get('password')
+  }
   constructor(private http: HttpClient, private router: Router) { }
   // user: any = {
   //   userId: 0,
@@ -85,15 +85,15 @@ get password(){
   // }
 
   dobmessage: string = ''
-  message: string = '' 
+  message: string = ''
 
-  validateGendererror=true;
-  validateGender(value:any){
-    if(value==='default'){
-      this.validateGendererror=true;
+  validateGendererror = true;
+  validateGender(value: any) {
+    if (value === 'default') {
+      this.validateGendererror = true;
     }
-    else{
-      this.validateGendererror=false;
+    else {
+      this.validateGendererror = false;
     }
   }
 
@@ -103,7 +103,7 @@ get password(){
 
 
   ngOnInit(): void {
-   
+
     this.http
       .get<any>(this.DesignationUrl)
       .subscribe((data) => {
@@ -127,30 +127,30 @@ get password(){
       });
 
   }
-  
-   FilterDesignation() {
-    this.Designationlist=[];
-    for(let item of this.designationDetails){
+
+  FilterDesignation() {
+    this.Designationlist = [];
+    for (let item of this.designationDetails) {
       console.log(item.departmentId)
-      if(item.departmentId==this.departmentValidate?.value){
+      if (item.departmentId == this.departmentValidate?.value) {
         console.log(item.departmentId)
         this.Designationlist.push(item)
         console.log(item)
       }
     }
   }
- 
+
   validateDateOfBirth() {
     if (Date.now.toString() > this.dateOfBirth?.value) {
       this.dobmessage = "Date of birth should be valid";
       console.log(Date.now)
       console.log(this.dateOfBirth?.value);
       console.log(this.dobmessage);
-  // return true;
+      // return true;
     }
-  //  else{
-  //    return false; 
-  //  }
+    //  else{
+    //    return false; 
+    //  }
   }
 
 
@@ -167,11 +167,11 @@ get password(){
         console.log(data)
 
       });
-      this.router.navigateByUrl("");
+    this.router.navigateByUrl("");
   }
 
- 
-   
+
+
 
 
 }

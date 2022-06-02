@@ -6,6 +6,7 @@ import{QueryComment} from 'Models/Query';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { application } from 'Models/Application';
 
 
 declare type myarray = Array<{ content: string, coding: string, name: string }>
@@ -41,7 +42,7 @@ export class SpecificqueryComponent implements OnInit {
       this.queryId = params['queryId'];
     console.log(this.queryId)
     this.http
-      .get<any>(`https://localhost:7197/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
+      .get<any>(`${application.URL}/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
       .subscribe((data) => {
         this.data = data;
         console.log(data);

@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./spam-view.component.css']
 })
 export class SpamViewComponent implements OnInit {
-queryId: number = 0
+queryId: number = 4
 
 
 @Input() Querysrc : string = `${application.URL}/Query/GetListOfSpams`;

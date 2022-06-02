@@ -13,7 +13,7 @@ import { AuthService } from '../auth.service';
 })
 export class SpecificarticleComponent implements OnInit {
   articleId: number = 0
-  //@Input() Articlesrc: string = `${application.URL}/Article/GetArticleById/:articleId`;
+  
 
 
 

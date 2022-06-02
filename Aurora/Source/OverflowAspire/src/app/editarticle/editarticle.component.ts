@@ -64,22 +64,7 @@ ngOnInit(): void {
   isLiked = false;
 
 
-  likeTheButton = () => {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${AuthService.GetData("token")}`
-    })
-    console.log(AuthService.GetData("token"))
-    console.log(this.like)
-    this.http.post<any>(`${application.URL}/Article/AddLikeToArticle`, this.like, { headers: headers })
-      .subscribe((data) => {
-          this.data.likes=data.likesCount
-        console.log(data)
-
-      });
-     
-
-  }
+ 
   isReadMore = true
 
   showText() {
@@ -91,19 +76,5 @@ ngOnInit(): void {
     this.iReadMore = !this.iReadMore
   }
 
-  PostComment() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${AuthService.GetData("token")}`
-    })
-    console.log(AuthService.GetData("token"))
-    console.log(this.article)
-    this.http.post<any>(`${application.URL}/Article/CreateComment`, this.article, { headers: headers })
-      .subscribe((data) => {
-
-        console.log(data)
-
-      });
-  }
-
+  
 }

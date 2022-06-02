@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { application } from 'Models/Application';
 import { Article } from 'Models/Article';
 import { AuthService } from '../auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./toreviewpage.component.css']
 })
 export class ToreviewpageComponent implements OnInit {
-  @Input() Usersrc : string="https://localhost:7197/Article/GetArticlesByArticleStatusId?ArticleStatusID=2";
+  @Input() Usersrc : string=`${application.URL}/Article/GetArticlesByArticleStatusId?ArticleStatusID=2`;
   
   totalLength :any;
   page : number= 1;
