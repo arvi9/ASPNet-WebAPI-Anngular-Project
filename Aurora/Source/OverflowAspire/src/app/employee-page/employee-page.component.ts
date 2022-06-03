@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./employee-page.component.css']
 })
 export class EmployeePageComponent implements OnInit {
-
+  text :string='change to reviewer'
   @Input() Usersrc : string=`${application.URL}/User/GetUsersByUserRoleId?RoleId=2`;
   constructor(private http: HttpClient) { }
 
@@ -39,6 +39,14 @@ export class EmployeePageComponent implements OnInit {
       console.log(data);
     });
     
+  }
+  
+  changeText(){
+    if(this.text==='change to reviewer'){
+      this.text='change to user'
+    }else{
+      this.text='change to reviewer'
+    }
   }
   public data: User[] = []
 }

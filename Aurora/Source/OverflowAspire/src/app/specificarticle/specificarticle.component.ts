@@ -12,19 +12,23 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./specificarticle.component.css']
 })
 export class SpecificarticleComponent implements OnInit {
-  articleId: number = 0
+  articleDetails:any= this.route.params.subscribe(params => {
+    this.articleId = params['articleId'];
+    console.log(this.articleId)
+  });
+  articleId:number=this.articleDetails;
+
   
 
-
-
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
+  
   article: any = {
     articleCommentId: 0,
     comment: '',
     datetime: Date.now,
-    userId: 1,
+    userId:1,
     createdBy: 1,
-    articleId: 2,
+    articleId: 0,
     createdOn: Date.now,
     updatedBy: 0,
     updatedOn: '',
@@ -33,8 +37,8 @@ export class SpecificarticleComponent implements OnInit {
   }
   like: any = {
     likeId:0,
-    articleId:1,
-    userId:2,
+    articleId:0,
+    userId:10,
    
 }
 
@@ -69,6 +73,8 @@ ngOnInit(): void {
     })
     console.log(AuthService.GetData("token"))
     console.log(this.like)
+    console.log(this.articleId)
+    this.like.articleId=this.articleId;
     this.http.post<any>(`${application.URL}/Article/AddLikeToArticle`, this.like, { headers: headers })
       .subscribe((data) => {
           this.data.likes=data.likesCount
@@ -95,13 +101,15 @@ ngOnInit(): void {
       'Authorization': `Bearer ${AuthService.GetData("token")}`
     })
     console.log(AuthService.GetData("token"))
+    console.log(this.articleId)
     console.log(this.article)
+    this.article.articleId=this.articleId;
     this.http.post<any>(`${application.URL}/Article/CreateComment`, this.article, { headers: headers })
       .subscribe((data) => {
 
         console.log(data)
-
       });
+      
       this.routing.navigateByUrl("/Home");
   }
 }

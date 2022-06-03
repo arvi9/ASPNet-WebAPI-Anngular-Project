@@ -16,15 +16,19 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
   styleUrls: ['./specificquery.component.css']
 })
 export class SpecificqueryComponent implements OnInit {
-  queryId: number = 0
+  queryDetails:any= this.route.params.subscribe(params => {
+    this.queryId = params['queryIdId'];
+    console.log(this.queryId)
+  });
+  queryId:number=this.queryDetails;
  
   Query: any = {
    CommentId:0,
    comment: '',
    datetime:Date.now,
    userId: 1,
-   queryId:1,
-   createdBy:1,
+   queryId:0,
+   createdBy:10,
    createdOn:Date.now,
    
     
@@ -41,6 +45,7 @@ export class SpecificqueryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
     console.log(this.queryId)
+
     this.http
       .get<any>(`${application.URL}/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
       .subscribe((data) => {
@@ -73,6 +78,8 @@ export class SpecificqueryComponent implements OnInit {
   })
   console.log(AuthService.GetData("token"))
   console.log(this.Query)
+  console.log(this.queryId)
+    this.Query.queryId=this.queryId;
     this.http.post<any>('https://localhost:7197/Query/CreateComment', this.Query, { headers: headers })
       .subscribe((data) => {
 
