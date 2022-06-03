@@ -42,7 +42,7 @@ export class EmployeePageComponent implements OnInit {
   }
   
   changeText(){
-    if(this.text==='change to reviewer'){
+    if(this.text=='change to reviewer'){
       this.text='change to user'
     }else{
       this.text='change to reviewer'
