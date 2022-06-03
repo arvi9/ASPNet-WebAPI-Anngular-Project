@@ -24,18 +24,22 @@
             </div>
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
-                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" >
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image">
                 <label class="text-danger"> {{imageError}}</label>
             </div>
-           <br>
+            <div class="w-25">
+                <label class="form-label">Invite People:</label>
+                <input class="form-control" placeholder="Add Users" name="addusers" [(ngModel)]="article.title">
+            </div>
+            <br>
             <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
             </ckeditor>
             <div class="editor-btn">
-                <input class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()"/>
-                <input class="custom-btn btn-1" type="submit" value="Submit"/>
+                <input class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()" />
+                <input class="custom-btn btn-1" type="submit" value="Submit" />
             </div>
         </form>
-        
+
     </div>
 </div>
 <app-footer></app-footer>

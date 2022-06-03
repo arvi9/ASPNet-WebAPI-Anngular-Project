@@ -1,8 +1,9 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { application } from 'Models/Application';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-spam-view',
@@ -10,34 +11,37 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./spam-view.component.css']
 })
 export class SpamViewComponent implements OnInit {
-queryId: number = 4
+  queryId: number = 0;
 
 
-@Input() Querysrc : string = `${application.URL}/Query/GetListOfSpams`;
-constructor(private http: HttpClient,private routing:Router) { }
+  @Input() Querysrc: string = `${application.URL}/Query/GetListOfSpams`;
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
 
-ngOnInit(): void {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${AuthService.GetData("token")}`
-  })
-  console.log(AuthService.GetData("token"))
-  this.http
-  .get<any>(this.Querysrc,{headers:headers})
-  .subscribe((data)=>{
-    this.data =data;
-    this.data=this.data.filter(item=> item.query.queryId==this.queryId)
-    console.log(data);
-  });
-}
+  ngOnInit(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
+    this.route.params.subscribe(params => {
+      this.queryId = params['queryId'];
+      this.http
+        .get<any>(this.Querysrc, { headers: headers })
+        .subscribe((data) => {
+          this.data = data;
+          this.data = this.data.filter(item => item.query.queryId == this.queryId)
+          console.log(data);
+        });
+    });
+  }
 
-public data: any[] = []
+  public data: any[] = []
 
- 
-onAccept(){
-  this.routing.navigateByUrl("/SpamReport");
-}
-onReject(){
-  this.routing.navigateByUrl("/SpamReport");
-}
+
+  onAccept() {
+    this.routing.navigateByUrl("/SpamReport");
+  }
+  onReject() {
+    this.routing.navigateByUrl("/SpamReport");
+  }
 }
