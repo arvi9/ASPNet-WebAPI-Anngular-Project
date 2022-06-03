@@ -33,7 +33,7 @@
                 <td>{{item.articleId}}</td>
                 <td>{{item.authorName}}</td>
                 <td>{{item.title}}</td>
-                <td><a routerLinkActive="active" [routerLink]="['/ToReviewSpecific',item.articleId]">To Review</a></td>
+                <td><a routerLinkActive="active" btn.disabled="clicked" clicked=true (click)="actionMethod()" [routerLink]="['/ToReviewSpecific',item.articleId]">{{button}}</a></td>
                 <td>Manimaran</td>
               
                

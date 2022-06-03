@@ -32,6 +32,18 @@ export class ToreviewpageComponent implements OnInit {
     });
    
   }
+  button :string='To review'
+  clicked=false;
+  actionMethod(){
+if(this.clicked){
+  this.button='To Review'
+
+}
+  else{
+    this.button='Under Review'
+console.log("clicked")
+  }
+  }
   public data: Article[] = [
  
 
