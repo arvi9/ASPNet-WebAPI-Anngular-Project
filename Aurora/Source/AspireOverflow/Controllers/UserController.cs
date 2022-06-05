@@ -6,6 +6,7 @@ using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using AspireOverflow.DataAccessLayer.Interfaces;
 
 namespace AspireOverflow.Controllers;
 
@@ -15,7 +16,7 @@ public class UserController : BaseController
 {
 
     internal ILogger<UserController> _logger;
-    private UserService _UserService;
+    private IUserService _UserService;
 
     public UserController(ILogger<UserController> logger, UserService UserService)
     {

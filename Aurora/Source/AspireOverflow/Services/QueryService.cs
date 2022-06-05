@@ -16,7 +16,7 @@ namespace AspireOverflow.Services
 {
 
 
-    public class QueryService
+    public class QueryService :IQueryService
     {
         private static IQueryRepository database;
 
@@ -24,11 +24,11 @@ namespace AspireOverflow.Services
 
         private MailService _mailService;
 
-        public QueryService(ILogger<QueryService> logger, MailService mailService)
+        public QueryService(ILogger<QueryService> logger, MailService mailService,QueryRepository _queryRepository)
         {
             _logger = logger;
             _mailService = mailService;
-            database = QueryRepositoryFactory.GetQueryRepositoryObject(logger);
+            database =_queryRepository;
 
         }
 

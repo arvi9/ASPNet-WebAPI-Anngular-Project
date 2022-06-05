@@ -10,16 +10,16 @@ namespace AspireOverflow.Services
 {
 
 
-    public class UserService
+    public class UserService :IUserService
     {
         private static IUserRepository database;
 
         private static ILogger<UserService> _logger;
 
-        public UserService(ILogger<UserService> logger)
+        public UserService(ILogger<UserService> logger,UserRepository _userRepository)
         {
             _logger = logger;
-            database = UserRepositoryFactory.GetUserRepositoryObject(logger);
+            database =_userRepository;
 
         }
         public bool CreateUser(User user)

@@ -14,8 +14,8 @@ namespace AspireOverflow.DataAccessLayer
     {
         private AspireOverflowContext _context;
 
-        private ILogger<QueryService> _logger;
-        public QueryRepository(AspireOverflowContext context, ILogger<QueryService> logger)
+        private ILogger<QueryRepository> _logger;
+        public QueryRepository(AspireOverflowContext context, ILogger<QueryRepository> logger)
         {
             _context = context;
             _logger = logger ;

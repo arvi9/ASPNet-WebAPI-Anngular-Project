@@ -1,22 +1,28 @@
 using AspireOverflow.Models;
-namespace AspireOverflow.DataAccessLayer.Interfaces{
-
-    public interface IUserService
+namespace AspireOverflow.DataAccessLayer.Interfaces
 {
-    public bool CreateUser(User user);
 
-    public IEnumerable<Object> GetUsers();
+    public interface IUserService :IDesignations,IGenders
+    {
+        public bool CreateUser(User user);
+        public bool RemoveUser(int UserId);
 
-    public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID);
+        public IEnumerable<User> GetUsers();
+        public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID);
+        public object GetUserByID(int UserID);
+        public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID);
+        public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID);
+        public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer);
+    }
+        public interface IDesignations
+        {
+            public IEnumerable<Object> GetDesignations();
+            public IEnumerable<Object> GetDepartments();
+        }
 
-    public object GetUserByID(int UserID);
+        public interface IGenders
+        {
+            public IEnumerable<Object> GetGenders();
+        }
 
-    public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID);
-
-    public  bool ChangeUserVerificationStatus(int UserID,int VerifyStatusID);
-
-    public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer);
-  
-    
-}
-}
+    }

@@ -4,8 +4,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
-
-
+using AspireOverflow.DataAccessLayer.Interfaces;
 
 namespace AspireOverflow.Controllers;
 [ApiController]
@@ -13,13 +12,16 @@ namespace AspireOverflow.Controllers;
 public class ArticleController : BaseController
 {
     private ILogger<ArticleController> _logger;
-    private ArticleService _articleService;
+    private IArticleService _articleService;
+
+    private CurrentUser _currentUser;
   
 
     public ArticleController(ILogger<ArticleController> logger, ArticleService articleService)
     {
         _logger = logger;
         _articleService = articleService;
+        _currentUser=GetCurrentUser();
    
 
 
@@ -34,7 +36,7 @@ public class ArticleController : BaseController
         if (article == null) return BadRequest(Message("Null value is not supported"));
         try
         {
-            //article.CreatedBy=_currentUser.UserId;
+            article.CreatedBy=_currentUser.UserId;
             return _articleService.CreateArticle(article) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding Article ", article));
         }
         catch (ValidationException exception)
@@ -52,24 +54,24 @@ public class ArticleController : BaseController
 
       [HttpPost]
 
-    public async Task<ActionResult> CreatePrivateArticle(PrivateArticleDto article)
+    public async Task<ActionResult> CreatePrivateArticle(PrivateArticleDto privateArticleDto)
     {  
-        if (article == null) return BadRequest(Message("Null value is not supported"));
+        if (privateArticleDto == null) return BadRequest(Message("Null value is not supported"));
         try
         {
-            //article.CreatedBy=_currentUser.UserId;
-            return _articleService.CreateArticle(article.article,article.SharedUsersId) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding private Article ", article));
+            privateArticleDto.article.CreatedBy=_currentUser.UserId;
+            return _articleService.CreateArticle(privateArticleDto.article,privateArticleDto.SharedUsersId) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding private Article ", privateArticleDto));
         }
         catch (ValidationException exception)
         {
             //HelperService.LoggerMessage - returns string for logger with detailed info
-            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreatePrivateArticle(PrivateArticleDto article)", exception, article));
-            return BadRequest(Message(exception.Message, article));
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreatePrivateArticle(PrivateArticleDto article)", exception, privateArticleDto));
+            return BadRequest(Message(exception.Message, privateArticleDto));
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreatePrivateArticle(PrivateArticleDto article)", exception, article));
-            return Problem($"Error Occured while Adding private Article :{HelperService.PropertyList(article)}");
+            _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreatePrivateArticle(PrivateArticleDto article)", exception, privateArticleDto));
+            return Problem($"Error Occured while Adding private Article");
         }
     }
 
@@ -81,7 +83,7 @@ public class ArticleController : BaseController
         if (comment == null) return BadRequest(Message("Null value is not supported"));
         try
         {
-        //    comment.UserId= _currentUser.UserId; 
+           comment.UserId= _currentUser.UserId; 
             return _articleService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Article")) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
         }
         catch (ValidationException exception)

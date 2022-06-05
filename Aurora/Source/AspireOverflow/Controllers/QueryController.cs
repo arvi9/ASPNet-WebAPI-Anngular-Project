@@ -6,6 +6,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
+using AspireOverflow.DataAccessLayer.Interfaces;
 
 namespace AspireOverflow.Controllers
 {
@@ -16,7 +17,7 @@ namespace AspireOverflow.Controllers
     {
 
         internal ILogger<QueryController> _logger;
-        private QueryService _queryService;
+        private IQueryService _queryService;
 
         public QueryController(ILogger<QueryController> logger, QueryService queryService)
         {

@@ -13,7 +13,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Services
 {
 
-    public class ArticleService
+    public class ArticleService :IArticleService
     {
         private IArticleRepository database;
 
@@ -21,11 +21,11 @@ namespace AspireOverflow.Services
 
         private MailService _mailService;
 
-        public ArticleService(ILogger<ArticleService> logger, MailService mailService)
+        public ArticleService(ILogger<ArticleService> logger, MailService mailService,ArticleRepository _articleRepository)
         {
             _logger = logger;
             _mailService = mailService;
-            database = ArticleRepositoryFactory.GetArticleRepositoryObject(logger);
+            database =_articleRepository;
 
         }
 
