@@ -19,7 +19,7 @@ namespace AspireOverflow.Controllers
         internal ILogger<QueryController> _logger;
         private IQueryService _queryService;
 
-        public QueryController(ILogger<QueryController> logger, QueryService queryService)
+        public QueryController(ILogger<QueryController> logger, IQueryService queryService)
         {
             _logger = logger;
             _queryService = queryService;

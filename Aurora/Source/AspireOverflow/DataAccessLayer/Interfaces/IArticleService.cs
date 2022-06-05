@@ -3,42 +3,32 @@ using AspireOverflow.Models;
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
 
-    public interface IArticleService : IArticleCommentService, IArticleLikeService
+    public interface IArticleService:IArticleCommentService , IArticleLikeService
     {
-     
-        bool CreateArticle(Article article, List<int> SharedUsersId= default!);
+        bool CreateArticle(Article article);
         bool DeleteArticleByArticleId(int ArticleId);
-        bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId);
+        bool UpdateArticleStatus(int ArticleID,int ArticleStatusID);
+      
 
-        bool UpdateArticle(Article article, int _currentUserId);
-
-
-        Object GetArticleById(int ArticleId);
-
-        IEnumerable<Object> GetTrendingArticles();
-        IEnumerable<Object> GetLatestArticles();
-        IEnumerable<Object> GetListOfArticles();
-        IEnumerable<Object> GetPrivateArticles(int UserId);
-        IEnumerable<Object> GetArticlesByTitle(string Title);
-        IEnumerable<Object> GetArticlesByAuthor(string AuthorName);
-
-        IEnumerable<Object> GetArticlesByUserId(int UserId);
-     
-
-        IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID);
-
+        Article GetArticleById(int ArticleId);
+        IEnumerable<Article> GetArticlesByTitle(string Title);
+        IEnumerable<Article> GetArticlesByAuthor(string AuthorName);
+        IEnumerable<Article>  GetArticlesByDateRange(DateTime Startdate ,DateTime EndDate);
+       IEnumerable<Article> GetArticlesByUserId (int UserId);
+       IEnumerable<Article> GetArticlesByUserIdAndArticleStatusId (int UserId,int ArticleStatusID);
+      
+   
     }
 
-    public interface IArticleCommentService
-    {
+    public interface IArticleCommentService{
         bool CreateComment(ArticleComment comment);
-        IEnumerable<object> GetComments(int ArticleID);
+        bool AddCommentToArticle(ArticleComment comment);
+        IEnumerable<ArticleComment> GetComments(int ArticleID);
 
     }
 
-    public interface IArticleLikeService
-    {
-        bool AddLikeToArticle(ArticleLike Like);
+    public interface IArticleLikeService{
+        bool AddLikeToArticle(int UserID, int ArticleID);
         int GetLikesCount(int ArticleID);
 
     }

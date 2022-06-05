@@ -1,0 +1,292 @@
+[2022-05-17 11:56:18.820 +05:30 INF] User profile is available. Using 'C:\Users\Manim\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2022-05-17 11:56:19.279 +05:30 INF] Now listening on: https://localhost:7197
+[2022-05-17 11:56:19.279 +05:30 INF] Now listening on: http://localhost:5241
+[2022-05-17 11:56:19.286 +05:30 INF] Application started. Press Ctrl+C to shut down.
+[2022-05-17 11:56:19.286 +05:30 INF] Hosting environment: Development
+[2022-05-17 11:56:19.286 +05:30 INF] Content root path: E:\API Projects\AspireOverflow\
+[2022-05-17 11:56:23.036 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/ - -
+[2022-05-17 11:56:23.240 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Upgrade-Insecure-Requests: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 11:56:23.761 +05:30 INF] Response:
+StatusCode: 404
+[2022-05-17 11:56:23.768 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/ - - - 404 0 - 737.1756ms
+[2022-05-17 11:56:50.414 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - -
+[2022-05-17 11:56:50.499 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - - - 200 - text/html;charset=utf-8 84.6828ms
+[2022-05-17 11:56:50.709 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - -
+[2022-05-17 11:56:50.945 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 236.6886ms
+[2022-05-17 11:56:57.354 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - -
+[2022-05-17 11:56:57.356 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /Article/GetLatestArticles
+Accept: */*
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Referer: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 11:56:57.362 +05:30 INF] Executing endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 11:56:57.462 +05:30 INF] Route matched with {action = "GetLatestArticles", controller = "Article"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestArticles(Int32) on controller AspireOverflow.Controllers.ArticleController (AspireOverflow).
+[2022-05-17 11:57:03.642 +05:30 INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+[2022-05-17 11:57:03.905 +05:30 INF] Response:
+StatusCode: 200
+Content-Type: application/json; charset=utf-8
+Content-Length: 185
+[2022-05-17 11:57:03.928 +05:30 INF] Executed action AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow) in 6447.9328ms
+[2022-05-17 11:57:03.930 +05:30 INF] Executed endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 11:57:03.933 +05:30 INF] ResponseBody: [{"articleId":4,"title":"string","authorName":"Mani","content":"string","image":"","date":4},{"articleId":3,"title":"string","authorName":"Mani","content":"string","image":"","date":4}]
+[2022-05-17 11:57:03.933 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - - - 200 185 application/json;+charset=utf-8 6579.8293ms
+[2022-05-17 11:58:47.679 +05:30 INF] Application is shutting down...
+[2022-05-17 11:59:06.720 +05:30 INF] User profile is available. Using 'C:\Users\Manim\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2022-05-17 11:59:06.986 +05:30 INF] Now listening on: https://localhost:7197
+[2022-05-17 11:59:06.988 +05:30 INF] Now listening on: http://localhost:5241
+[2022-05-17 11:59:06.995 +05:30 INF] Application started. Press Ctrl+C to shut down.
+[2022-05-17 11:59:06.997 +05:30 INF] Hosting environment: Development
+[2022-05-17 11:59:06.999 +05:30 INF] Content root path: E:\API Projects\AspireOverflow\
+[2022-05-17 11:59:07.551 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/ - -
+[2022-05-17 11:59:07.627 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Upgrade-Insecure-Requests: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 11:59:07.841 +05:30 INF] Response:
+StatusCode: 404
+[2022-05-17 11:59:07.851 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/ - - - 404 0 - 307.5990ms
+[2022-05-17 11:59:10.447 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - -
+[2022-05-17 11:59:10.487 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /Article/GetLatestArticles
+Accept: */*
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Referer: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 11:59:10.496 +05:30 INF] Executing endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 11:59:10.536 +05:30 INF] Route matched with {action = "GetLatestArticles", controller = "Article"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestArticles(Int32) on controller AspireOverflow.Controllers.ArticleController (AspireOverflow).
+[2022-05-17 12:01:31.880 +05:30 INF] User profile is available. Using 'C:\Users\Manim\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2022-05-17 12:01:32.122 +05:30 INF] Now listening on: https://localhost:7197
+[2022-05-17 12:01:32.124 +05:30 INF] Now listening on: http://localhost:5241
+[2022-05-17 12:01:32.131 +05:30 INF] Application started. Press Ctrl+C to shut down.
+[2022-05-17 12:01:32.133 +05:30 INF] Hosting environment: Development
+[2022-05-17 12:01:32.135 +05:30 INF] Content root path: E:\API Projects\AspireOverflow\
+[2022-05-17 12:01:32.414 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/ - -
+[2022-05-17 12:01:32.488 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Upgrade-Insecure-Requests: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 12:01:32.567 +05:30 INF] Response:
+StatusCode: 404
+[2022-05-17 12:01:32.576 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/ - - - 404 0 - 166.1212ms
+[2022-05-17 12:01:35.149 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - -
+[2022-05-17 12:01:35.155 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /Article/GetLatestArticles
+Accept: */*
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Referer: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 12:01:35.165 +05:30 INF] Executing endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 12:01:35.205 +05:30 INF] Route matched with {action = "GetLatestArticles", controller = "Article"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestArticles(Int32) on controller AspireOverflow.Controllers.ArticleController (AspireOverflow).
+[2022-05-17 12:02:45.936 +05:30 INF] User profile is available. Using 'C:\Users\Manim\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2022-05-17 12:02:46.182 +05:30 INF] Now listening on: https://localhost:7197
+[2022-05-17 12:02:46.185 +05:30 INF] Now listening on: http://localhost:5241
+[2022-05-17 12:02:46.192 +05:30 INF] Application started. Press Ctrl+C to shut down.
+[2022-05-17 12:02:46.194 +05:30 INF] Hosting environment: Development
+[2022-05-17 12:02:46.196 +05:30 INF] Content root path: E:\API Projects\AspireOverflow\
+[2022-05-17 12:02:46.408 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/ - -
+[2022-05-17 12:02:46.477 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Upgrade-Insecure-Requests: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 12:02:46.547 +05:30 INF] Response:
+StatusCode: 404
+[2022-05-17 12:02:46.555 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/ - - - 404 0 - 150.4991ms
+[2022-05-17 12:02:52.663 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - -
+[2022-05-17 12:02:52.668 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /Article/GetLatestArticles
+Accept: */*
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Referer: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 12:02:52.682 +05:30 INF] Executing endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 12:02:52.721 +05:30 INF] Route matched with {action = "GetLatestArticles", controller = "Article"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestArticles(Int32) on controller AspireOverflow.Controllers.ArticleController (AspireOverflow).
+[2022-05-17 12:03:07.102 +05:30 INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+[2022-05-17 12:03:07.240 +05:30 INF] Response:
+StatusCode: 200
+Content-Type: application/json; charset=utf-8
+Content-Length: 185
+[2022-05-17 12:03:07.257 +05:30 INF] Executed action AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow) in 14522.9674ms
+[2022-05-17 12:03:07.261 +05:30 INF] Executed endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 12:03:07.266 +05:30 INF] ResponseBody: [{"articleId":4,"title":"string","authorName":"Mani","content":"string","image":"","date":4},{"articleId":3,"title":"string","authorName":"Mani","content":"string","image":"","date":4}]
+[2022-05-17 12:03:07.270 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - - - 200 185 application/json;+charset=utf-8 14606.1474ms
+[2022-05-17 12:06:02.332 +05:30 INF] User profile is available. Using 'C:\Users\Manim\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2022-05-17 12:06:02.568 +05:30 INF] Now listening on: https://localhost:7197
+[2022-05-17 12:06:02.571 +05:30 INF] Now listening on: http://localhost:5241
+[2022-05-17 12:06:02.580 +05:30 INF] Application started. Press Ctrl+C to shut down.
+[2022-05-17 12:06:02.583 +05:30 INF] Hosting environment: Development
+[2022-05-17 12:06:02.585 +05:30 INF] Content root path: E:\API Projects\AspireOverflow\
+[2022-05-17 12:06:02.851 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/ - -
+[2022-05-17 12:06:02.931 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Upgrade-Insecure-Requests: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 12:06:03.081 +05:30 INF] Response:
+StatusCode: 404
+[2022-05-17 12:06:03.092 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/ - - - 404 0 - 243.0387ms
+[2022-05-17 12:06:15.283 +05:30 INF] Request starting HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - -
+[2022-05-17 12:06:15.296 +05:30 INF] Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /Article/GetLatestArticles
+Accept: */*
+Host: localhost:7197
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Referer: [Redacted]
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted]
+[2022-05-17 12:06:15.303 +05:30 INF] Executing endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 12:06:15.341 +05:30 INF] Route matched with {action = "GetLatestArticles", controller = "Article"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestArticles(Int32) on controller AspireOverflow.Controllers.ArticleController (AspireOverflow).
+[2022-05-17 12:06:30.439 +05:30 INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+[2022-05-17 12:06:30.576 +05:30 INF] Response:
+StatusCode: 200
+Content-Type: application/json; charset=utf-8
+Content-Length: 185
+[2022-05-17 12:06:30.595 +05:30 INF] Executed action AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow) in 15236.6463ms
+[2022-05-17 12:06:30.598 +05:30 INF] Executed endpoint 'AspireOverflow.Controllers.ArticleController.GetLatestArticles (AspireOverflow)'
+[2022-05-17 12:06:30.602 +05:30 INF] ResponseBody: [{"articleId":4,"title":"string","authorName":"Mani","content":"string","image":"","date":4},{"articleId":3,"title":"string","authorName":"Mani","content":"string","image":"","date":4}]
+[2022-05-17 12:06:30.605 +05:30 INF] Request finished HTTP/2 GET https://localhost:7197/Article/GetLatestArticles?Range=0 - - - 200 185 application/json;+charset=utf-8 15320.5240ms
