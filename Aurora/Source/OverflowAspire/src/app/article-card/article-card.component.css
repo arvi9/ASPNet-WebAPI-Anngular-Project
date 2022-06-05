@@ -99,7 +99,9 @@ body {
   overflow: hidden;
   border-radius: 25px 25px 0 0;
   height: 200px
+
 }
+
 
 .img-card .card-image img {
   width: 100%;
@@ -167,6 +169,12 @@ h4{
   text-align: center;
   padding-left: 20px;
 
+}
+img {
+  max-width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .img-card.iCard-style2 .card-image {

@@ -62,9 +62,10 @@ h6 {
 }
 
 .navbar-light .navbar-nav .nav-link {
-    font-family: Jost, sans-serif;
+    font-family: Roboto, sans-serif;
     padding: 35px 15px;
     font-size: 18px;
+    font-weight: 550;
     color: var(--dark);
     outline: 0;
     transition: .5s
@@ -360,8 +361,8 @@ pre {
 .LogoImg {
     height:60px;
     width:60px;
-    
-    
+
+
 }
 
 

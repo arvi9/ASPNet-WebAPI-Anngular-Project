@@ -13,7 +13,7 @@ export class MyArticlesComponent implements OnInit {
 
   @Input()  ShowStatus:boolean=true;
 
-  @Input() artsrc: string = `${application.URL}/Article/GetArticlesByUserId?UserId=1`;
+  @Input() artsrc: string = `${application.URL}/Article/GetArticlesByUserId`;
   totalLength: any;
   page: number = 1;
   searchTitle = "";

@@ -255,12 +255,12 @@ p {
 
 
 
-h4 {
-    text-transform: uppercase;
-    text-align: center;
-    color: #6b6b6b;
-    font-weight: 500
+h4{
+  font-size: 1.5rem;
+
+  font-weight: 600;
 }
+
 
 .QueryImgIcon {
     height: 60px;
@@ -279,10 +279,53 @@ a:hover {
 
 .truncate-line-clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
+
     -webkit-box-orient: vertical;
     width: 250px;
     overflow: hidden
+}
+
+.qbtntag {
+  align-self: flex-end;
+  cursor: pointer;
+margin-left: 100px;
+margin-top: 15px;
+
+
+position:sticky ;
+
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+  width: fit-content;
+}
+
+.Queryp {
+  font-size: 15px;
+  line-height: 23px;
+
+  text-align: center;
+}
+.queryh4{
+
+    text-align: center;
+
+    font-weight: 600;
+}
+.Query-truncate-line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  width: 250px;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: 95%;
+  display: block;
+  object-fit: cover;
 }
 
 .card {
@@ -310,13 +353,13 @@ a:hover {
   margin-left: 195px;
   margin-top: 15px;
   margin-bottom: 0px;
-  
+
     padding: .25em .75em;
     border-radius: 1em;
     font-size: .75rem;
     width: fit-content;
   }
-  
+
   .tag-blue {
     background: #56CCF2;
   background: linear-gradient(to bottom, #2F80ED, #56CCF2);

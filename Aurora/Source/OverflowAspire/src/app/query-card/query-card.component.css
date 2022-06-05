@@ -33,7 +33,7 @@
 p {
     font-size: 15px;
     line-height: 23px;
-    color: #a09f9f;
+
     text-align: center;
 }
 
@@ -46,10 +46,10 @@ a {
 }
 
 h4 {
-    text-transform: uppercase;
+
     text-align: center;
-    color: #6b6b6b;
-    font-weight: 500;
+
+    font-weight: 600;
 }
 
 .QueryImgIcon {
@@ -73,7 +73,7 @@ a:hover {
 
 .truncate-line-clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     width: 250px;
     overflow: hidden;
@@ -84,6 +84,55 @@ a:hover {
     top: 110%;
 
 }
+.tag {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+}
+.btntag {
+  align-self: flex-end;
+  cursor: pointer;
+margin-left: 125px;
+margin-top: 15px;
+margin-bottom: 15px;
+position:fixed ;
+
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+  width: fit-content;
+}
+
+.tag-blue {
+  background: #56CCF2;
+background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  color: #fafafa;
+}
+
+.tag + .tag {
+  margin-left: .5em;
+}
+
+
+
+.tag-brown {
+  background: #D1913C;
+background: linear-gradient(to bottom, #ff9800, #ed6c02);
+  color: #fafafa;
+}
+
+.tag-red {
+
+background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+  color: #fafafa;
+}
+
+.tag-Material {
+
+  background: linear-gradient(to bottom,  blue, #9c27b0,#9c27b0);
+    color: #fafafa;
+  }
 
 .card {
     margin-top: 2%;

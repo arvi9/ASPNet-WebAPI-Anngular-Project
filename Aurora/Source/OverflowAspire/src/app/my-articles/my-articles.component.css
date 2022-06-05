@@ -210,7 +210,7 @@ body {
 
 .truncate-line-clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     width: 250px;
     overflow: hidden;
@@ -297,44 +297,44 @@ h1{
     border-radius: 1em;
     font-size: .75rem;
   }
-  
+
   .tag + .tag {
     margin-left: .5em;
   }
-  
+
   .tag-blue {
     background: #56CCF2;
   background: linear-gradient(to bottom, #2F80ED, #56CCF2);
     color: #fafafa;
   }
-  
+
   .tag-brown {
     background: #D1913C;
   background: linear-gradient(to bottom, #FFD194, #D1913C);
     color: #fafafa;
   }
-  
+
   .tag-red {
     background: #cb2d3e;
   background: linear-gradient(to bottom, #ef473a, #cb2d3e);
     color: #fafafa;
   }
-  
-  
+
+
   /* 1 */
   .btn-1 {
       background: rgb(0, 172, 238);
       border: none;
   }
-  
+
   .btn-1:hover {
       background: rgb(4, 149, 206);
-  
+
   }
-  
-  
-  
-  
+
+
+
+
   body {
     font-family: "Quicksand", sans-serif;
     display: grid;
@@ -343,23 +343,24 @@ h1{
     background: #7f7fd5;
     background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
   }
-  
+
   .containerArticle {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 1200px;
     margin-block: 2rem;
-  
+
     gap: 2rem;
   }
-  
+
   img {
     max-width: 100%;
+    height: 95%;
     display: block;
     object-fit: cover;
   }
-  
+
   .card1 {
     display: flex;
     flex-direction: column;
@@ -368,20 +369,21 @@ h1{
     box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
     border-radius: 1em;
     background: white;
-   
-  
+
+
   }
-  
-  
-  
+h4{
+  font-weight: 600;
+
+}
+
+
   .card__body {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
+    padding-left: 1rem;
+
   }
-  
-  
+
+
   .tag {
     align-self: flex-start;
     padding: .25em .75em;
@@ -393,40 +395,40 @@ h1{
     cursor: pointer;
   margin-left: 195px;
   margin-top: 15px;
-  margin-bottom: 0px;
-  
+  margin-bottom: 15px;
+
     padding: .25em .75em;
     border-radius: 1em;
     font-size: .75rem;
     width: fit-content;
   }
-  
+
   .tag-blue {
     background: #56CCF2;
   background: linear-gradient(to bottom, #2F80ED, #56CCF2);
     color: #fafafa;
   }
-  
+
   .tag + .tag {
     margin-left: .5em;
   }
-  
-  
-  
+
+
+
   .tag-brown {
     background: #D1913C;
   background: linear-gradient(to bottom, #ff9800, #ed6c02);
     color: #fafafa;
   }
-  
+
   .tag-red {
-  
+
   background: linear-gradient(to bottom, #ef473a, #cb2d3e);
     color: #fafafa;
   }
-  
+
   .tag-Material {
-  
+
     background: linear-gradient(to bottom,  blue, #9c27b0,#9c27b0);
       color: #fafafa;
     }
@@ -434,24 +436,29 @@ h1{
     font-size: 1.5rem;
     text-transform: capitalize;
   }
-  
+  img {
+    max-width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
   .card__footer {
     display: flex;
     padding: 1rem;
     margin-top: auto;
   }
-  
+
   .user {
     display: flex;
     gap: .5rem;
   }
-  
+
   .user__image {
     border-radius: 50%;
   }
-  
+
   .user__info > small {
     color: #666;
   }
-  
-  
+

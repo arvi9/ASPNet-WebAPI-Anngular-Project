@@ -18,10 +18,10 @@ export class SpecificarticleComponent implements OnInit {
   });
   articleId:number=this.articleDetails;
 
-  
+
 
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
-  
+
   article: any = {
     articleCommentId: 0,
     comment: '',
@@ -39,10 +39,10 @@ export class SpecificarticleComponent implements OnInit {
     likeId:0,
     articleId:0,
     userId:10,
-   
+
 }
 
-  
+
 ngOnInit(): void {
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -81,10 +81,10 @@ ngOnInit(): void {
         console.log(data)
 
       });
-     
+
 
   }
-  isReadMore = true
+  isReadMore = false
 
   showText() {
     this.isReadMore = !this.isReadMore
@@ -109,7 +109,7 @@ ngOnInit(): void {
 
         console.log(data)
       });
-      
+
       this.routing.navigateByUrl("/Home");
   }
 }

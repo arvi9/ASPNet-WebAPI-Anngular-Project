@@ -25,7 +25,7 @@
                         <img [src]="'data:image/jpg;base64,'+ item.image" />
                     </div>
 
-                    <h1 class="card-title text-truncate">{{item.title}}</h1>
+                    <h4 class="card-title text-truncate">{{item.title }}</h4>
 
                     <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
 
@@ -54,7 +54,7 @@
                         <img [src]="'data:image/jpg;base64,'+ item.image" />
                     </div>
 
-                    <h1 class="card-title text-truncate">{{item.title}}</h1>
+                    <h4 class="card-title text-truncate">{{item.title}}</h4>
 
                     <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
 
@@ -80,11 +80,11 @@
             <div class="our-skills">
                 <div class="box-shadow">
                     <div class="icon">
-                        <img class="QueryImgIcon" src="https://cdn-icons-png.flaticon.com/512/745/745205.png">
+                        <img class="QueryImgIcon" src="http://primedepartamentos.com/images/icons/chat-icon.png">
                     </div>
-                    <h4 class="card-text text-truncate">{{item.title}}</h4>
-                    <p class="truncate-line-clamp">{{item.content}}</p>
-                    <a class="btn btn-default readmore" routerLinkActive="active"
+                    <h4 class="card-text queryh4">{{item.title}}</h4>
+                    <p class="Query-truncate-line-clamp Queryp">{{item.content}}</p>
+                    <a class="btn btn-default qbtntag tag-blue" routerLinkActive="active"
                         [routerLink]="['/SpecificQuery',item.queryId]">Read More →</a>
 
                 </div>
@@ -100,11 +100,11 @@
             <div class="our-skills">
                 <div class="box-shadow">
                     <div class="icon">
-                        <img class="QueryImgIcon" src="https://cdn-icons-png.flaticon.com/512/745/745205.png">
+                        <img class="QueryImgIcon" src="http://primedepartamentos.com/images/icons/chat-icon.png">
                     </div>
-                    <h4 class="card-text text-truncate">{{item.title}}</h4>
-                    <p class="truncate-line-clamp">{{item.content}}</p>
-                    <a class="btn btn-default readmore" routerLinkActive="active"
+                    <h4 class="card-text queryh4">{{item.title}}</h4>
+                    <p class="Query-truncate-line-clamp Queryp">{{item.content}}</p>
+                    <a class="btn btn-default qbtntag tag-blue" routerLinkActive="active"
                         [routerLink]="['/SpecificQuery',item.queryId]">Read More →</a>
 
                 </div>

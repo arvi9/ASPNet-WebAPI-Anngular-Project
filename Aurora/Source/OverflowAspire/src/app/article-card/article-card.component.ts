@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { data } from 'jquery';
 import { isNull } from '@angular/compiler/src/output/output_ast';
 import { AuthService } from '../auth.service';
+import { application } from 'Models/Application';
 
 
 
@@ -13,7 +14,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./article-card.component.css']
 })
 export class ArticleCardComponent implements OnInit {
-  @Input() artsrc: string = "";
+  @Input() artsrc: string = `${application.URL}/Article/GetArticlesByArticleStatusId(4)`;
   @Input() ShowStatus:boolean =true;
   totalLength: any;
   page: number = 1;

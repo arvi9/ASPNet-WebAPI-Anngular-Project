@@ -66,7 +66,7 @@ export class CreateArticlePageComponent implements OnInit {
 
 
   onSubmit() {
-   
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -80,7 +80,7 @@ export class CreateArticlePageComponent implements OnInit {
     //     console.log(data)
 
     //   });
-      this.http.post<any>(`${application.URL}/Article/CreatePrivateArticle`, this.article, { headers: headers })
+      this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe((data) => {
 
         console.log(data)
@@ -103,7 +103,7 @@ export class CreateArticlePageComponent implements OnInit {
   }
 
   saveToDraft() {
-  
+
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${AuthService.GetData("token")}`

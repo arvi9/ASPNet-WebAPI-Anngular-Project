@@ -6,7 +6,7 @@
                 <li class="breadcrumb-item">
                     <a routerLinkActive="active" routerLink="/Home">Home</a>
                 </li>
-              
+
                 <li class="breadcrumb-item">
                     <a>specificarticle</a>
                 </li>
@@ -19,15 +19,15 @@
         <h1>{{data.title}}</h1>
     </div>
     <div class="panel panel-default p-3">
-        <div class="panel-heading bold">Author Name:&nbsp;{{data.authorName}}</div>
+        <div class="panel-heading bold"  [ngStyle]="{'font-weight':'600'}">Author Name:&nbsp;{{data.authorName}}</div>
         <div class="panel-body bold">Date:&nbsp;{{createdOn}}</div>
-    <div class="text-center pb-4">
+    <div class="text-center pb-4 ">
             <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
         <div  [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
-          
+
         </div>
-        <button type="button" (click)="showText()">
+        <button type="custom-btn btn-1" (click)="showText()">
             {{ isReadMore ? 'Read More': 'Read Less' }}
         </button>
     </div>

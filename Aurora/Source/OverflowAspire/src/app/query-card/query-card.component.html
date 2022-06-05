@@ -8,7 +8,7 @@
         <label class="labeltext">Unsolved Queries</label>
         <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)"> Apply</button>
     </form>
-</div>   
+</div>
 
 
 
@@ -17,12 +17,12 @@
         <div class="our-skills">
             <div class="box-shadow">
                 <div class="icon">
-                    <img class="QueryImgIcon" src="https://cdn-icons-png.flaticon.com/512/745/745205.png">
+                    <img class="QueryImgIcon" src="http://primedepartamentos.com/images/icons/chat-icon.png">
                 </div>
-                <h4 class="card-text text-truncate">{{item.title}}</h4>
+                <h4 class="card-text">{{item.title}}</h4>
                 <p class="truncate-line-clamp">{{item.content}}</p>
-                <a class="btn btn-default readmore" routerLinkActive="active"
-                [routerLink]="['/SpecificQuery',item.queryId]">Read More →</a>
+                <a class="btntag  tag-blue" routerLinkActive="active"
+                [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
 
             </div>
         </div>

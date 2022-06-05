@@ -41,12 +41,12 @@ export class RaisequeryComponent implements OnInit {
         console.log(data)
 
       });
-      this.routing.navigateByUrl("/Home");
+      // this.routing.navigateByUrl("/Home");
   }
 
   ngOnInit(): void {
-   
 
-    
+
+
   }}
 
