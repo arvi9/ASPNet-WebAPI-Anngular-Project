@@ -37,10 +37,10 @@ export class EditarticleComponent implements OnInit {
     likeId:0,
     articleId:1,
     userId:2,
-   
+
 }
 
-  
+
 ngOnInit(): void {
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -64,8 +64,8 @@ ngOnInit(): void {
   isLiked = false;
 
 
- 
-  isReadMore = true
+
+  isReadMore = false
 
   showText() {
     this.isReadMore = !this.isReadMore
@@ -76,5 +76,5 @@ ngOnInit(): void {
     this.iReadMore = !this.iReadMore
   }
 
-  
+
 }

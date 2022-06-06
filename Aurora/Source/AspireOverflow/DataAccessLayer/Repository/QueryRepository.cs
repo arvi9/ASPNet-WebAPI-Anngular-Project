@@ -14,8 +14,8 @@ namespace AspireOverflow.DataAccessLayer
     {
         private AspireOverflowContext _context;
 
-        private ILogger<QueryService> _logger;
-        public QueryRepository(AspireOverflowContext context, ILogger<QueryService> logger)
+        private ILogger<QueryRepository> _logger;
+        public QueryRepository(AspireOverflowContext context, ILogger<QueryRepository> logger)
         {
             _context = context;
             _logger = logger ;
@@ -70,7 +70,7 @@ namespace AspireOverflow.DataAccessLayer
 
         //Updating query Either by marking as Solved 
         //Same method using to disable or soft delete the query
-        public bool UpdateQuery(int QueryId, bool IsSolved=false, bool IsDelete=false)
+        public bool UpdateQuery(int QueryId, bool IsSolved, bool IsDelete)
         {
 
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");

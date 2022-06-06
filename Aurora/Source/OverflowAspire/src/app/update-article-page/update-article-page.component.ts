@@ -22,7 +22,7 @@ export class UpdateArticlePageComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient,private router:Router) { }
   article: any = {
     artileId: 0,
     title: '',
@@ -77,7 +77,9 @@ export class UpdateArticlePageComponent implements OnInit {
     this.http.put<any>(`${application.URL}/Article/UpdateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe((data) => {
         console.log(data.message)
+        this.router.navigateByUrl("MyArticles")
       });
+
   }
   handleError(error:any) {
     let errorMessage = '';
@@ -106,6 +108,7 @@ export class UpdateArticlePageComponent implements OnInit {
       .subscribe((data) => {
         console.log(data)
       });
+      this.router.navigateByUrl("MyArticles")
   }
 
   fileChangeEvent(fileInput: any) {

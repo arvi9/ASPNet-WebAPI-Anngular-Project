@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  IsLoading:boolean=false;
   Registersrc: string = `${application.URL}/User/CreateUser`;
 
   designationDetails: any;
@@ -97,9 +98,9 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  DesignationUrl: string = `https://localhost:7197/User/GetDesignations`
-  DepartmentUrl: string = `https://localhost:7197/User/GetDepartments`
-  GenderUrl: string = `https://localhost:7197/User/GetGenders`
+  DesignationUrl: string = `${application.URL}/User/GetDesignations`
+  DepartmentUrl: string = `${application.URL}/User/GetDepartments`
+  GenderUrl: string = `${application.URL}/User/GetGenders`
 
 
   ngOnInit(): void {
@@ -149,15 +150,16 @@ export class RegisterComponent implements OnInit {
       // return true;
     }
     //  else{
-    //    return false; 
+    //    return false;
     //  }
   }
 
 
   userdata() {
+    this.IsLoading=true
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${AuthService.GetData("token")}`
+
     })
     console.log(AuthService.GetData("token"))
     console.log(this.user)
@@ -165,9 +167,10 @@ export class RegisterComponent implements OnInit {
       .subscribe((data) => {
 
         console.log(data)
+        this.router.navigateByUrl("");
 
       });
-    this.router.navigateByUrl("");
+
   }
 
 

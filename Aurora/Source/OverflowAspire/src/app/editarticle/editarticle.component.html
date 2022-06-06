@@ -12,7 +12,7 @@
               <li class="breadcrumb-item active">
                   <a>Edit Article</a>
               </li>
-    
+
           </ol>
       </nav>
     </div>
@@ -21,7 +21,7 @@
 <br>
 
 <div class="container p-1">
-    <a routerLinkActive="active" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>
+    <a *ngIf="data.status=='InDraft'" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>
   </div>
 <div class="container p-5 my-5 border">
     <div class="text-center">
@@ -34,7 +34,7 @@
             <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
         <div  [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
-          
+
         </div>
         <button type="button" (click)="showText()">
             {{ isReadMore ? 'Read More': 'Read Less' }}
@@ -54,7 +54,7 @@
     <br>
     <hr>
     <br>
-    
+
 </div>
 
 <app-footer></app-footer>

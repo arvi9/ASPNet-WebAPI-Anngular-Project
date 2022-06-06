@@ -9,13 +9,13 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  @Input() Usersrc : string=`${application.URL}/User/GetUser?UserId=1`;
-  
+  @Input() Usersrc : string=`${application.URL}/User/GetUser`;
+
   totalLength :any;
   page : number= 1;
- 
+
   constructor(private http: HttpClient){}
- 
+
   ngOnInit(): void {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -29,11 +29,11 @@ export class ProfileComponent implements OnInit {
       this.totalLength=data.length;
       console.log(data);
     });
-    
+
   }
   public user:User={
-    
-    
+
+
     userId: 0,
     fullName: 'Pooja',
     genderId: 1,
@@ -48,8 +48,8 @@ export class ProfileComponent implements OnInit {
     isReviewer: false,
     userRoleId: 0,
     designationId: 0
-  } 
- 
+  }
 
-  
+
+
 }

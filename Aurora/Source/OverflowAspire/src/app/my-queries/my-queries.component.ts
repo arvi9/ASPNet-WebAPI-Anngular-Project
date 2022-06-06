@@ -10,12 +10,12 @@ import { application } from 'Models/Application';
 })
 export class MyQueriesComponent implements OnInit {
 
- 
-  url: string = `${application.URL}/Query/GetQueriesByUserId?UserId=2`;
 
- 
+  url: string = `${application.URL}/Query/GetQueriesByUserId`;
+
+
   ngOnInit(): void {
-    
+
       };
 }
 

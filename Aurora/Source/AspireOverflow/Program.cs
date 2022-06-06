@@ -8,6 +8,8 @@ using AspireOverflow.Models;
 
 using System.Text;
 using Serilog;
+using AspireOverflow.DataAccessLayer.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -40,6 +42,9 @@ builder.Services.AddHttpLogging(httpLogging =>
 
 
 builder.Services.AddTransient<QueryService>();
+builder.Services.AddTransient<QueryRepository>();
+builder.Services.AddTransient<ArticleRepository>();
+builder.Services.AddTransient<UserRepository>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<TokenService>();
 builder.Services.AddTransient<ArticleService>();

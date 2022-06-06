@@ -18,8 +18,8 @@
         <div class="text-center mb-4">
             <h2>Raise Query</h2>
         </div>
-        
-        
+
+
             <div class="form-group">
                 <form #form="ngForm" (ngSubmit)="RaiseQuery()" autocomplete="off">
                     <label class="control-label col-sm-2 mb-2" for="fname"><b>Title</b></label>
@@ -43,11 +43,12 @@
                                     [(ngModel)]="query.code"></textarea>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <div class="mt-2 text-right"><button class="custom-btn btn-1 btn-2" type="submit">Raise
-                                        Query</button>
+                                <div class="mt-2 text-right">
+                                  <button class="btn btn-1 btn-2 text-white font-weight-normal " type="submit"><span *ngIf="IsLoading"  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                   Raise Query </button>
                                 </div>
                             </div>
                         </div>

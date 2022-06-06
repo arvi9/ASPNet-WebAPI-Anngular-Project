@@ -21,21 +21,22 @@ export class SpecificqueryComponent implements OnInit {
     console.log(this.queryId)
   });
   queryId:number=this.queryDetails;
- 
+
   Query: any = {
    CommentId:0,
    comment: '',
    datetime:Date.now,
+   code:"",
    userId: 1,
    queryId:0,
    createdBy:10,
    createdOn:Date.now,
-   
-    
+
+
   }
-  
+
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
-   
+
   ngOnInit(): void {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -45,33 +46,40 @@ export class SpecificqueryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
     console.log(this.queryId)
+this.GetQuery()
 
-    this.http
-      .get<any>(`${application.URL}/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
-      .subscribe((data) => {
-        this.data = data;
-        console.log(data);
-      });
     });
   }
-  
-   
+
+
+  GetQuery():void{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    this.http
+    .get<any>(`${application.URL}/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
+    .subscribe((data) => {
+      this.data = data;
+      console.log(data);
+    });
+  }
 
 
  public data:Query =new Query();
 
 
 
- 
+
  displayStyle = "none";
  openpopup() {
    this.displayStyle = "block";
  }
- 
+
  closePopup() {
    this.displayStyle = "none";
  }
- PostComment(){  
+ PostComment(){
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -80,14 +88,14 @@ export class SpecificqueryComponent implements OnInit {
   console.log(this.Query)
   console.log(this.queryId)
     this.Query.queryId=this.queryId;
-    this.http.post<any>('https://localhost:7197/Query/CreateComment', this.Query, { headers: headers })
+    this.http.post<any>(`${application.URL}/Query/CreateComment`, this.Query, { headers: headers })
       .subscribe((data) => {
 
         console.log(data)
 
-      });
-      this.routing.navigateByUrl("/Home");
+      }); this.GetQuery()
+
  }
- 
-    
+
+
 }

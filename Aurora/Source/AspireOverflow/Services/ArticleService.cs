@@ -13,7 +13,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Services
 {
 
-    public class ArticleService
+    public class ArticleService :IArticleService
     {
         private IArticleRepository database;
 
@@ -21,11 +21,11 @@ namespace AspireOverflow.Services
 
         private MailService _mailService;
 
-        public ArticleService(ILogger<ArticleService> logger, MailService mailService)
+        public ArticleService(ILogger<ArticleService> logger, MailService mailService,ArticleRepository _articleRepository)
         {
             _logger = logger;
             _mailService = mailService;
-            database = ArticleRepositoryFactory.GetArticleRepositoryObject(logger);
+            database =_articleRepository;
 
         }
 
@@ -57,7 +57,7 @@ namespace AspireOverflow.Services
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
-                var ExistingArticle = GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
+                var ExistingArticle = database.GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
                 ExistingArticle.Title=article.Title;
                 ExistingArticle.Content=article.Content;
@@ -206,7 +206,7 @@ namespace AspireOverflow.Services
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var ListOfArticles = GetArticles().Where(item => item.CreatedBy == UserId).ToList();
+                var ListOfArticles = database.GetArticles().Where(item => item.CreatedBy == UserId).ToList();
                 return ListOfArticles.Select(Article => new
                 {
                     ArticleId = Article.ArtileId,
@@ -236,13 +236,30 @@ namespace AspireOverflow.Services
 
             try
             {
-                var ListOfArticles = database.GetArticles();
+                var ListOfArticles = database.GetArticles().Where(item =>item.ArticleStatusID==4);
                 return ListOfArticles;
             }
 
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
+                throw exception;
+            }
+
+
+        }
+          public IEnumerable<Article> GetAll()
+        {
+
+            try
+            {
+                var ListOfArticles = database.GetArticles();
+                return ListOfArticles;
+            }
+
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetAll()", exception));
                 throw exception;
             }
 

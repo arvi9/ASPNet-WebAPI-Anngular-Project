@@ -5,6 +5,7 @@ import { Article } from 'Models/Article';
 import { application } from 'Models/Application'
 import { catchError } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 
 declare var CKEDITOR: any;
@@ -16,6 +17,9 @@ declare var CKEDITOR: any;
 })
 export class CreateArticlePageComponent implements OnInit {
 
+  IsLoadingSubmit:boolean=false;
+
+  IsLoadingSaveDraft:boolean=false;
 
   imageError: string = "";
   isImageSaved: boolean = false;
@@ -24,7 +28,7 @@ export class CreateArticlePageComponent implements OnInit {
   public ckeditorContent: string = "";
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private route:Router) { }
   article: any = {
     articleId: 0,
     title: '',
@@ -66,7 +70,7 @@ export class CreateArticlePageComponent implements OnInit {
 
 
   onSubmit() {
-
+this.IsLoadingSubmit=true;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -83,6 +87,7 @@ export class CreateArticlePageComponent implements OnInit {
       this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe((data) => {
 
+        this.route.navigateByUrl("/MyArticles")
         console.log(data)
 
       });
@@ -103,7 +108,7 @@ export class CreateArticlePageComponent implements OnInit {
   }
 
   saveToDraft() {
-
+    this.IsLoadingSaveDraft=true;
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -114,7 +119,7 @@ export class CreateArticlePageComponent implements OnInit {
 
     this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .subscribe((data) => {
-
+        this.route.navigateByUrl("/MyArticles")
         console.log(data)
 
       });

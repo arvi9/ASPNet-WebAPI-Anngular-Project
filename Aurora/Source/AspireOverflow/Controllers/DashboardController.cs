@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AspireOverflow.Controllers
 {
 
-    [ApiController]
+    [ApiController][Authorize]
     [Route("[controller]/[action]")]
     public class DashboardController : BaseController
     {
@@ -57,7 +57,7 @@ namespace AspireOverflow.Controllers
             {
                 var DashboardInformation = new
                 {
-                    TotalNumberOfArticles = _articleService.GetListOfArticles().Count(),
+                    TotalNumberOfArticles = _articleService.GetAll().Count(),
                     TotalNumberOfUsers = _userService.GetUsers().Count(),
                     TotalNumberOfReviwers = _userService.GetUsersByIsReviewer(true).Count(),
                     TotalNumberofQueries = _queryService.GetListOfQueries().Count(),

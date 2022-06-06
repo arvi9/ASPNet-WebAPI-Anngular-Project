@@ -11,7 +11,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Controllers
 {
 
-    [ApiController]
+    [ApiController][Authorize]
     [Route("[controller]/[action]")]
     public class QueryController : BaseController
     {
@@ -19,7 +19,7 @@ namespace AspireOverflow.Controllers
         internal ILogger<QueryController> _logger;
         private IQueryService _queryService;
 
-        public QueryController(ILogger<QueryController> logger, IQueryService queryService)
+        public QueryController(ILogger<QueryController> logger, QueryService queryService)
         {
             _logger = logger;
             _queryService = queryService;
@@ -34,8 +34,8 @@ namespace AspireOverflow.Controllers
             if (query == null) return BadRequest(Message("Null value is not supported"));
             try
             {
-
-                return _queryService.CreateQuery(query) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
+                query.CreatedBy=GetCurrentUser().UserId;
+                return _queryService.CreateQuery(query) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding Query :{HelperService.PropertyList(query)}"));
             }
             catch (ValidationException exception)
             {
@@ -116,7 +116,7 @@ namespace AspireOverflow.Controllers
             }
         }
 
-        [HttpGet][Authorize]
+        [HttpGet]
         public async Task<ActionResult> GetAll()
         {
             try
@@ -177,9 +177,9 @@ namespace AspireOverflow.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> GetQueriesByUserId(int UserId)
+        public async Task<ActionResult> GetQueriesByUserId()
         {
-            if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
+            int UserId=GetCurrentUser().UserId;
             try
             {
                 var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId);
@@ -243,6 +243,7 @@ namespace AspireOverflow.Controllers
             if (comment == null) return BadRequest(Message("Null value is not supported"));
             try
             {
+                comment.CreatedBy=GetCurrentUser().UserId;
                 return _queryService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
             }
             catch (ValidationException exception)

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 showErrorMessage=false;
   IsAdmin:boolean=false;
   IsReviewer:boolean=false;
+  IsLoading:boolean=false;
   constructor(private spinnerService: NgxSpinnerService,private http: HttpClient,private route:Router) { }
   user:any={
 
@@ -28,17 +29,15 @@ showErrorMessage=false;
   }
 
   onSubmit(){
-    this.spinnerService.show();
-      
-        setTimeout(() => {
-          this.spinnerService.hide();
-        }, 2000); 
+
+    this.IsLoading=true;
+
    this.showErrorMessage=false;
     const headers = { 'content-type': 'application/json'}
 
     console.log(this.user)
     this.http.post<any>(`${application.URL}/Token/AuthToken`,this.user,{headers:headers})
-      .subscribe((data) => 
+      .subscribe((data) =>
       {
 
         this.IsAdmin=data.isAdmin,
@@ -52,20 +51,23 @@ showErrorMessage=false;
         console.log(AuthService.GetData("Reviewer"))
 
         if(this.IsAdmin){
-         
+
           this.route.navigateByUrl("/AdminDashboard");  //navigation
         }else{
           this.route.navigateByUrl("/Home");
         }
         console.log(data)
-        
+
       },
       (error)=>{
         this.showErrorMessage=true;
       }
       );
-      
-      
+
+
+
+
+       
   }
-  
+
 }

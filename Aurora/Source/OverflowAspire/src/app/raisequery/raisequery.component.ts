@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 export class RaisequeryComponent implements OnInit {
 
   constructor(private http: HttpClient,private routing : Router) { }
+  IsLoading:boolean=false;
   query: any = {
     queryId:0,
     title:'',
@@ -29,6 +30,7 @@ export class RaisequeryComponent implements OnInit {
 
   }
   RaiseQuery() {
+    this.IsLoading=true;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -37,12 +39,10 @@ export class RaisequeryComponent implements OnInit {
     console.log(this.query)
     this.http.post<any>(`${application.URL}/Query/CreateQuery`, this.query, { headers: headers })
       .subscribe((data) => {
-
-        console.log(data)
-
+        console.log(data);
       });
-      // this.routing.navigateByUrl("/Home");
-  }
+       this.routing.navigateByUrl("MyQueries");
+    }
 
   ngOnInit(): void {
 

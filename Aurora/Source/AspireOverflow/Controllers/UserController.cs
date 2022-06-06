@@ -6,16 +6,17 @@ using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using AspireOverflow.DataAccessLayer.Interfaces;
 
 namespace AspireOverflow.Controllers;
 
-[ApiController]
+[ApiController][Authorize]
 [Route("[controller]/[action]")]
 public class UserController : BaseController
 {
 
     internal ILogger<UserController> _logger;
-    private UserService _UserService;
+    private IUserService _UserService;
 
     public UserController(ILogger<UserController> logger, UserService UserService)
     {
@@ -52,6 +53,7 @@ public class UserController : BaseController
     [HttpPatch]
     public async Task<ActionResult> ChangeUserVerifyStatus(int UserId, bool IsVerified)
     {
+        
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
@@ -70,11 +72,34 @@ public class UserController : BaseController
         }
     }
 
+      [HttpPatch]
+    public async Task<ActionResult> UpdateUserByIsReviewer(int UserId, bool IsReviewer)
+    {
+        if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
+        try
+        {
+           return _UserService.UpdateUserByIsReviewer(UserId, IsReviewer) ? await Task.FromResult( Ok($"Successfully Updated the Reviewer status with UserId :{UserId}")) : BadRequest(Message($"Error Occurred while updating the reviewer status with UserId :{UserId}"));
+          
+        }
+        catch (ItemNotFoundException exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserController", "  UpdateUserByIsReviewer(int UserId, bool IsReviewer)", exception, UserId));
+            return NotFound($"{exception.Message}");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(HelperService.LoggerMessage("UserController", "UpdateUserByIsReviewer(int UserId, bool IsReviewer)", exception, UserId));
+            return Problem($"Error Occurred while updating user reviewer Status with UserId :{UserId}");
+        }
+    }
+
+
+
 
     [HttpDelete]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
-        if (User.HasClaim(item => item.Type == ClaimTypes.Role && item.Value == "2")) return BadRequest(Message("you dont have access to remove user"));
+      
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
@@ -93,12 +118,13 @@ public class UserController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetUser(int UserId)
+    public async Task<ActionResult> GetUser()
     {
-        //string UserId = User.FindFirst("UserId").Value;
+        int UserId=GetCurrentUser().UserId;
+   
         try
         {
-           // var User = _UserService.GetUserByID(UserId);
+         
 
             return await Task.FromResult(Ok( _UserService.GetUserByID(UserId)));
 
@@ -166,7 +192,7 @@ public class UserController : BaseController
     }
 
 
-    [HttpGet]
+    [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetGenders()
     {
         try
@@ -181,7 +207,7 @@ public class UserController : BaseController
     }
 
 
-    [HttpGet]
+    [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDesignations()
     {
         try
@@ -197,7 +223,7 @@ public class UserController : BaseController
         }
     }
 
-    [HttpGet]
+    [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDepartments()
     {
         try

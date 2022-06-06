@@ -37,27 +37,33 @@ export class SpecificarticleComponent implements OnInit {
   }
   like: any = {
     likeId:0,
-    articleId:0,
+    articleId:this.article.articleId,
     userId:10,
 
 }
 
 
 ngOnInit(): void {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${AuthService.GetData("token")}`
-  })
+
   console.log(AuthService.GetData("token"))
   this.route.params.subscribe(params => {
     this.articleId = params['articleId'];
   console.log(this.articleId)
+  this.GetArticlesByArticleId()
+
+  });
+}
+
+public GetArticlesByArticleId():void{
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${AuthService.GetData("token")}`
+  })
   this.http
-    .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
-    .subscribe((data) => {
-      this.data = data;
-      console.log(data);
-    });
+  .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
+  .subscribe((data) => {
+    this.data = data;
+    console.log(data);
   });
 }
   public data: Article = new Article();
@@ -109,7 +115,7 @@ ngOnInit(): void {
 
         console.log(data)
       });
+      this.GetArticlesByArticleId()
 
-      this.routing.navigateByUrl("/Home");
   }
 }
