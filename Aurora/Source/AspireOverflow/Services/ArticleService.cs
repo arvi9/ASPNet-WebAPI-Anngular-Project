@@ -21,7 +21,7 @@ namespace AspireOverflow.Services
 
         private MailService _mailService;
 
-        public ArticleService(ILogger<ArticleService> logger, MailService mailService,ArticleRepository _articleRepository)
+        public ArticleService(ILogger<ArticleService> logger, MailService mailService,IArticleRepository _articleRepository)
         {
             _logger = logger;
             _mailService = mailService;
@@ -31,6 +31,7 @@ namespace AspireOverflow.Services
 
         public bool CreateArticle(Article article,List<int> SharedUsersId=null)
         {
+           
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
@@ -85,7 +86,7 @@ namespace AspireOverflow.Services
             try
             {
                 var IsAddedSuccfully = database.UpdateArticle(ArticleId, ArticleStatusID, UpdatedByUserId);
-                if (IsAddedSuccfully) _mailService.SendEmailAsync(HelperService.ArticleMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" , 2));
+                if (IsAddedSuccfully) _mailService?.SendEmailAsync(HelperService.ArticleMail("manimaran.0610@gmail.com", "Title", "Article Created Successfully" , 2));
                 return IsAddedSuccfully;
             }
             catch (Exception exception)
@@ -442,7 +443,7 @@ namespace AspireOverflow.Services
             {
                 comment.CreatedBy=comment.UserId;
                 var IsCommentSuccessfully = database.AddComment(comment);
-                if (IsCommentSuccessfully) _mailService.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" ));
+                if (IsCommentSuccessfully) _mailService?.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" ));
                 return IsCommentSuccessfully;
             }
             catch (Exception exception)

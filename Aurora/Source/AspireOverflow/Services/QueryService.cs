@@ -24,7 +24,7 @@ namespace AspireOverflow.Services
 
         private MailService _mailService;
 
-        public QueryService(ILogger<QueryService> logger, MailService mailService,QueryRepository _queryRepository)
+        public QueryService(ILogger<QueryService> logger, MailService mailService,IQueryRepository _queryRepository)
         {
             _logger = logger;
             _mailService = mailService;

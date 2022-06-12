@@ -15,6 +15,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         IEnumerable<Object> GetLatestQueries();
      
         IEnumerable<Object> GetQueriesByUserId(int UserId);
+ 
         IEnumerable<Object> GetQueriesByTitle(String Title);
         IEnumerable<Object> GetQueries(bool IsSolved);
 

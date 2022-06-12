@@ -15,7 +15,7 @@ namespace AspireOverflowTest
     {
         private AspireOverflowContext _context;
 
-        private Mock<ILogger<QueryService>> _logger = new Mock<ILogger<QueryService>>();
+        private Mock<ILogger<QueryRepository>> _logger = new Mock<ILogger<QueryRepository>>();
         private QueryRepository _queryRepository;
 
         public QuertRepositoryTest()
@@ -40,6 +40,7 @@ namespace AspireOverflowTest
         [InlineData(null)]
         public void AddQuery_ShouldThrowValidationException_WhenQueryObjectIsNull(Query query)
         {
+            
             Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
         }
 
@@ -50,7 +51,14 @@ namespace AspireOverflowTest
             Query query = QueryMock.GetInValidQuery();
             Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
         }
+  [Fact]
+        public void AddQuery_ShouldThrowDBUpdateException()
 
+        {
+            Query query = QueryMock.GetInValidQuery();
+        
+            Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
+        }
 
         
 

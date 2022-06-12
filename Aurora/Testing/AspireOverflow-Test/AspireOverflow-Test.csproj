@@ -23,7 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <ProjectReference Include="..\AspireOverflow\AspireOverflow.csproj" />
+    <ProjectReference Include="..\..\AspireOverflow\AspireOverflow.csproj" />
   </ItemGroup>
 
 

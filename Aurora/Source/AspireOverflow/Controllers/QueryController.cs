@@ -11,7 +11,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Controllers
 {
 
-    [ApiController][Authorize]
+    [ApiController]
     [Route("[controller]/[action]")]
     public class QueryController : BaseController
     {
@@ -19,7 +19,7 @@ namespace AspireOverflow.Controllers
         internal ILogger<QueryController> _logger;
         private IQueryService _queryService;
 
-        public QueryController(ILogger<QueryController> logger, QueryService queryService)
+        public QueryController(ILogger<QueryController> logger, IQueryService queryService)
         {
             _logger = logger;
             _queryService = queryService;
@@ -34,7 +34,7 @@ namespace AspireOverflow.Controllers
             if (query == null) return BadRequest(Message("Null value is not supported"));
             try
             {
-                query.CreatedBy=GetCurrentUser().UserId;
+               query.CreatedBy=GetCurrentUser().UserId;
                 return _queryService.CreateQuery(query) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding Query :{HelperService.PropertyList(query)}"));
             }
             catch (ValidationException exception)
@@ -237,7 +237,7 @@ namespace AspireOverflow.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<QueryComment>> CreateComment(QueryComment comment)
+        public async Task<ActionResult> CreateComment(QueryComment comment)
         {
 
             if (comment == null) return BadRequest(Message("Null value is not supported"));
@@ -261,7 +261,7 @@ namespace AspireOverflow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int QueryId)
+        public async Task<ActionResult> GetComments(int QueryId)
         {
             if (QueryId <= 0) return BadRequest(Message("QueryId must be greater than 0"));
             try

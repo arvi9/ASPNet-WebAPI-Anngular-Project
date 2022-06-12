@@ -24,8 +24,6 @@ namespace AspireOverflow.DataAccessLayer
         }
 
 
-
-
         public bool AddQuery(Query query)
         {
             Validation.ValidateQuery(query);

@@ -17,12 +17,10 @@ public class ArticleController : BaseController
     
   
 
-    public ArticleController(ILogger<ArticleController> logger, ArticleService articleService)
+    public ArticleController(ILogger<ArticleController> logger, IArticleService articleService)
     {
         _logger = logger;
         _articleService = articleService;
-      
-   
 
 
     }

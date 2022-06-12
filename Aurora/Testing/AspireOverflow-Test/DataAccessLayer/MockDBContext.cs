@@ -13,6 +13,10 @@ public static class MockDBContext
         return new AspireOverflowContext(Options);
     
 
-    }    
+    }       public static void SeedMockDataInMemoryDb(AspireOverflowContext dbContext)
+        {
+           dbContext.Queries.AddRange(QueryMock.GetListOfQueries());
+            dbContext.SaveChanges();
+        }
 }
 }

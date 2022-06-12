@@ -20,15 +20,19 @@ namespace AspireOverflow.Controllers
 
         protected CurrentUser GetCurrentUser()
         {
-
-            var CurrentUser= new CurrentUser();
+            var CurrentUser = new CurrentUser();
+            if (User != null)
+            {
                 CurrentUser.UserId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
-                 CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
-                 CurrentUser.RoleId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
-                 CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
+                CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
+                CurrentUser.RoleId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+                CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
 
-                 return CurrentUser;
-            
+                return CurrentUser;
+            }
+            return CurrentUser;
+
+
 
         }
     }
