@@ -4,6 +4,8 @@ using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
 using AspireOverflow.Services;
 using AspireOverflowTest.DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
@@ -15,6 +17,7 @@ namespace AspireOverflowTest
     {
         private AspireOverflowContext _context;
 
+
         private Mock<ILogger<QueryRepository>> _logger = new Mock<ILogger<QueryRepository>>();
         private QueryRepository _queryRepository;
 
@@ -23,11 +26,11 @@ namespace AspireOverflowTest
             _context = MockDBContext.GetInMemoryDbContext();
             _queryRepository = new QueryRepository(_context, _logger.Object);
 
+
         }
 
         [Fact]
         public void AddQuery_ShouldReturnTrue_WhenQueryObjectIsValid()
-
         {
             Query query = QueryMock.GetValidQuery();
 
@@ -40,7 +43,7 @@ namespace AspireOverflowTest
         [InlineData(null)]
         public void AddQuery_ShouldThrowValidationException_WhenQueryObjectIsNull(Query query)
         {
-            
+
             Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
         }
 
@@ -51,16 +54,21 @@ namespace AspireOverflowTest
             Query query = QueryMock.GetInValidQuery();
             Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
         }
-  [Fact]
-        public void AddQuery_ShouldThrowDBUpdateException()
+        // [Fact]
+        // public void AddQuery_ShouldThrowDBUpdateException()
+        // {
+        //     Query query = QueryMock.GetValidQuery();
 
-        {
-            Query query = QueryMock.GetInValidQuery();
-        
-            Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
-        }
 
-        
+
+        //     // _Mockcontext.Setup(item => item.Queries.Add(query)).Throws(new DbUpdateException());
+
+        //     Assert.Throws<DbUpdateException>(() => _queryRepository.AddQuery(query));
+
+        //     // _queryRepository=new QueryRepository(_context,_logger.Object);
+        // }
+
+
 
     }
 }

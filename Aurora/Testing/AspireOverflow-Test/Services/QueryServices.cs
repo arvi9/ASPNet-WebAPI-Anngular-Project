@@ -73,7 +73,7 @@ namespace AspireOverflowTest
             Assert.False(_queryService.CreateQuery(query));
         }
 
-         [Theory]
+        [Theory]
         [InlineData(null)]
         public void CreateComment_ShouldThrowValidationException_WhenQueryObjectIsNull(QueryComment Comment)
         {
@@ -84,7 +84,7 @@ namespace AspireOverflowTest
         public void CreateComment_ShouldThrowValidationException_WhenQueryObjectIsInvalid()
 
         {
-           QueryComment Comment=new QueryComment();
+            QueryComment Comment = new QueryComment();
             Assert.Throws<ValidationException>(() => _queryService.CreateComment(Comment));
         }
 
@@ -93,7 +93,7 @@ namespace AspireOverflowTest
         public void CreateComment_ShouldReturnTrue_WhenQueryObjectIsValid()
 
         {
-           QueryComment Comment=QueryMock.GetValidQueryComment();
+            QueryComment Comment = QueryMock.GetValidQueryComment();
             _queryRepository.Setup(obj => obj.AddComment(Comment)).Returns(true);
             var Result = _queryService.CreateComment(Comment);
 
@@ -104,7 +104,7 @@ namespace AspireOverflowTest
         public void CreateComment_ShouldReturnFalse_WhenExceptionThrownInQueryRepository()
 
         {
-           QueryComment Comment=QueryMock.GetValidQueryComment();
+            QueryComment Comment = QueryMock.GetValidQueryComment();
             _queryRepository.Setup(obj => obj.AddComment(Comment)).Throws(new DbUpdateException());
             var Result = _queryService.CreateComment(Comment);
             Assert.False(Result);
@@ -117,20 +117,20 @@ namespace AspireOverflowTest
         }
 
 
-  [Theory]
+        [Theory]
         [InlineData(0)]
         public void RemoveQueryByQueryId_ShouldReturnArgumentException_WhenQueryIdIsInValid(int queryId)
         {
-            Assert.Throws<ArgumentException>(() =>_queryService.RemoveQueryByQueryId(queryId));
+            Assert.Throws<ArgumentException>(() => _queryService.RemoveQueryByQueryId(queryId));
         }
 
         [Theory]
         [InlineData(1)]
         public void RemoveQueryByQueryId_ShouldReturnTrue_WhenQueryIdIsValid(int queryId)
         {
-            _queryRepository.Setup(obj => obj.UpdateQuery(queryId,false,true)).Returns(true);
+            _queryRepository.Setup(obj => obj.UpdateQuery(queryId, false, true)).Returns(true);
 
-            Assert.Equal(true,_queryService.RemoveQueryByQueryId(queryId));
+            Assert.Equal(true, _queryService.RemoveQueryByQueryId(queryId));
 
         }
 
@@ -138,34 +138,38 @@ namespace AspireOverflowTest
         public void RemoveQueryByQueryId_ShouldReturnFalse_WhenExceptionIsThrown()
         {
             int queryId = 2;
-            _queryRepository.Setup(obj => obj.UpdateQuery(queryId,false,true)).Throws(new DbUpdateException());
- 
+            _queryRepository.Setup(obj => obj.UpdateQuery(queryId, false, true)).Throws(new DbUpdateException());
+
             var Result = _queryService.RemoveQueryByQueryId(queryId);
             Assert.False(Result);
-            _queryRepository.Setup(obj => obj.UpdateQuery(queryId,false,true)).Throws(new Exception());
+            _queryRepository.Setup(obj => obj.UpdateQuery(queryId, false, true)).Throws(new Exception());
 
             Assert.False(_queryService.RemoveQueryByQueryId(queryId));
-            _queryRepository.Setup(obj =>obj.UpdateQuery(queryId,false,true)).Throws(new OperationCanceledException());
+            _queryRepository.Setup(obj => obj.UpdateQuery(queryId, false, true)).Throws(new OperationCanceledException());
 
             Assert.False(_queryService.RemoveQueryByQueryId(queryId));
         }
 
-//        [Theory]
-//   [InlineData(true)]
-//   [InlineData(false)]
-//         public void GetQueries_ShouldReturnListOfQueries_WhenMethodIsCalled(bool IsSolved)
-//         {
-//             var Queries=QueryMock.GetListOfQueries();
-//             _queryRepository.Setup(obj => obj.GetQueries()).Returns(Queries);
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void GetQueries_ShouldReturnListOfQueries_WhenMethodIsCalled(bool IsSolved)
+        {
+            var Queries = QueryMock.GetListOfQueries();
+            _queryRepository.Setup(obj => obj.GetQueries()).Returns(Queries);
 
-//             Assert.Equal(Queries.FindAll(item =>item.IsSolved==IsSolved).Select(item =>new {
-//                 Title=item.Title,
-//                 content=item.Content,
-//                 code=item.code,
-//                 IsSolved=item.IsSolved
+            var ExpectedQueries = Queries.Where(item => item.IsSolved == IsSolved).Count();
+            Assert.Equal(ExpectedQueries, _queryService.GetQueries(IsSolved).Count());
+        }
 
-//             }), _queryService.GetQueries(IsSolved));
-//         }
+        [Fact]
+
+        public void GetQueries_ShoultThrowException_WhenAnyExceptionIsRaised()
+        {
+            _queryRepository.Setup(obj => obj.GetQueries()).Throws(new Exception());
+
+            Assert.Throws<Exception>(() => _queryService.GetQueries(false));
+        }
 
     }
-} 
+}
