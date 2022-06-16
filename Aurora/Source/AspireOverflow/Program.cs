@@ -44,9 +44,10 @@ builder.Services.AddHttpLogging(httpLogging =>
 builder.Services.AddTransient<IQueryService,QueryService>();
 builder.Services.AddTransient<IQueryRepository,QueryRepository>();
 builder.Services.AddTransient<IArticleRepository,ArticleRepository>();
-builder.Services.AddTransient<UserRepository>();
-builder.Services.AddTransient<UserService>();
-builder.Services.AddTransient<TokenService>();
+builder.Services.AddTransient<IUserRepository,UserRepository>();
+builder.Services.AddTransient<IUserService,UserService>();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<UserService>();
 builder.Services.AddTransient<IArticleService,ArticleService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddSingleton<MailService>();

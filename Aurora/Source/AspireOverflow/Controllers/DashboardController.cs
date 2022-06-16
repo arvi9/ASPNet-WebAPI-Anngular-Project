@@ -4,6 +4,7 @@ using AspireOverflow.Models;
 using AspireOverflow.Services;
 
 using Microsoft.AspNetCore.Authorization;
+using AspireOverflow.DataAccessLayer.Interfaces;
 
 namespace AspireOverflow.Controllers
 {
@@ -14,10 +15,10 @@ namespace AspireOverflow.Controllers
     {
 
         internal ILogger<DashboardController> _logger;
-        private ArticleService _articleService;
-        private QueryService _queryService;
-        private UserService _userService;
-        public DashboardController(ILogger<DashboardController> logger, ArticleService articleService, QueryService queryService, UserService userService)
+        private IArticleService _articleService;
+        private IQueryService _queryService;
+        private IUserService _userService;
+        public DashboardController(ILogger<DashboardController> logger, IArticleService articleService, IQueryService queryService, IUserService userService)
         {
             _logger = logger;
             _articleService = articleService;
@@ -72,7 +73,7 @@ namespace AspireOverflow.Controllers
                 return BadRequest("Error Occured while processing your request");
             }
         }
-        [HttpGet]
+        [HttpGet][AllowAnonymous]
 
         public async Task<ActionResult> GetHomePage()
         {

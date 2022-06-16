@@ -18,14 +18,14 @@ public class UserController : BaseController
     internal ILogger<UserController> _logger;
     private IUserService _UserService;
 
-    public UserController(ILogger<UserController> logger, UserService UserService)
+    public UserController(ILogger<UserController> logger, IUserService UserService)
     {
         _logger = logger;
         _UserService = UserService;
 
     }
 
-    [HttpPost]
+    [HttpPost][AllowAnonymous]
     public async Task<ActionResult> CreateUser(User User)
     {
 

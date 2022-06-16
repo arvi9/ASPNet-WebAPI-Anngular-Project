@@ -16,7 +16,7 @@ namespace AspireOverflow.Services
 
         private static ILogger<UserService> _logger;
 
-        public UserService(ILogger<UserService> logger,UserRepository _userRepository)
+        public UserService(ILogger<UserService> logger,IUserRepository _userRepository)
         {
             _logger = logger;
             database =_userRepository;
