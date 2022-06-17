@@ -34,7 +34,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     {
         bool AddSpam(Spam spam);
         IEnumerable<object> GetSpams(int VerifyStatusID);
-        bool ChangeSpamStatus(int SpamId, int VerifyStatusID);
+        bool ChangeSpamStatus(int QueryId, int VerifyStatusID);
 
     }
 

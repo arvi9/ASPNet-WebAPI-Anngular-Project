@@ -13,8 +13,8 @@ namespace AspireOverflow.DataAccessLayer
     {
         private AspireOverflowContext _context;
 
-        private ILogger<UserService> _logger;
-        public UserRepository(AspireOverflowContext context, ILogger<UserService> logger)
+        private ILogger<UserRepository> _logger;
+        public UserRepository(AspireOverflowContext context, ILogger<UserRepository> logger)
         {
             _context = context ?? throw new NullReferenceException("Context can't be Null");
             _logger = logger ?? throw new NullReferenceException("logger can't be Null"); ;

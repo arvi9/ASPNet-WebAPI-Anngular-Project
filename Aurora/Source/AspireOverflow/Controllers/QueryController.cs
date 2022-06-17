@@ -288,7 +288,8 @@ namespace AspireOverflow.Controllers
 
             try
             {
-                return _queryService.AddSpam( spam) ? await Task.FromResult(Ok("Successfully added spam for the query")) : BadRequest(Message("Error Occured while adding spam to the query "));
+                spam.UserId=GetCurrentUser().UserId;
+                return _queryService.AddSpam( spam) ? await Task.FromResult(Ok(Message("Successfully added spam for the query"))) : BadRequest(Message("Error Occured while adding spam to the query "));
             }
             catch (ValidationException exception)
             {
@@ -320,18 +321,18 @@ namespace AspireOverflow.Controllers
     
 
 [HttpPatch]
-    public ActionResult UpdateSpamStatus(int SpamId, int VerifyStatusID)
+    public ActionResult UpdateSpamStatus(int QueryId, int VerifyStatusID)
     {
-        if (SpamId <= 0) return BadRequest(Message($"Spam Id must be greater than 0  where SpamId:{SpamId}"));
+        if (QueryId <= 0) return BadRequest(Message($"QueryId Id must be greater than 0  where QueryId:{QueryId}"));
         if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
         try
         {
-            return _queryService.ChangeSpamStatus(SpamId, VerifyStatusID)? Ok("successfully Updated"): BadRequest(Message($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}"));
+            return _queryService.ChangeSpamStatus(QueryId, VerifyStatusID)? Ok(Message("successfully Updated")): BadRequest(Message($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}"));
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int SpamId, int VerifyStatusID)", exception, SpamId, VerifyStatusID));
-            return Problem($"Error occured while processing your request with SpamID:{SpamId} and VerifyStatusId:{VerifyStatusID}");
+            _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId, VerifyStatusID));
+            return Problem($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}");
         }
     }
 

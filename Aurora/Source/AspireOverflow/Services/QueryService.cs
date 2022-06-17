@@ -313,19 +313,19 @@ namespace AspireOverflow.Services
 
 
 
- public bool ChangeSpamStatus(int SpamId, int VerifyStatusID)
+ public bool ChangeSpamStatus(int QueryId, int VerifyStatusID)
         {
-            if (SpamId <= 0) throw new ArgumentException($"Spam Id must be greater than 0  where SpamId:{SpamId}");
+            if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0  where QueryId:{QueryId}");
             if(VerifyStatusID <= 0 && VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
-                var IsChangeSuccessfully = database.UpdateSpam(SpamId,  VerifyStatusID);
+                var IsChangeSuccessfully = database.UpdateSpam(QueryId,  VerifyStatusID);
                 if (IsChangeSuccessfully) _mailService?.SendEmailAsync(HelperService.SpamMail("Manimaran.0610@gmail.com","Title", "Hello" , 2));
                 return IsChangeSuccessfully;
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int SpamId, int VerifyStatusID)", exception, SpamId,VerifyStatusID));
+                _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId,VerifyStatusID));
                 throw exception;
             }
         }
@@ -336,8 +336,6 @@ namespace AspireOverflow.Services
          Validation.ValidateSpam(spam);
             try
             {
-                if (database.GetSpams().ToList().Find(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId) != null) throw new ArgumentException("Unable to Add spam to same Query with same UserID");
-             
                 return database.AddSpam(spam);
             }
             catch (Exception exception)

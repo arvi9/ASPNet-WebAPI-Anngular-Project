@@ -151,7 +151,9 @@ namespace AspireOverflow.DataAccessLayer
            Validation.ValidateSpam(spam);
             try
             {
-                _context.Spams.Add(spam);
+               if (GetSpams().ToList().Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("Unable to Create spam to same Query with same UserID");
+               
+                _context.Spams.AddRange(spam);
                 _context.SaveChanges();
                 return true;
             }
@@ -167,7 +169,6 @@ namespace AspireOverflow.DataAccessLayer
 
         public IEnumerable<Spam> GetSpams()
         {
-
             try
             {
                 var ListOfSpams = _context.Spams.Include("Query").Include("User").ToList();
@@ -183,24 +184,24 @@ namespace AspireOverflow.DataAccessLayer
 
 
 
-        public bool UpdateSpam(int SpamId, int VerifyStatusID)
+        public bool UpdateSpam(int QueryId, int VerifyStatusID)
         {
 
-            if (SpamId <= 0) throw new ArgumentException($"Spam Id must be greater than 0 where SpamId:{SpamId}");
+            if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0 where QueryId:{QueryId}");
             if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
             
             try
             {
-              var ExistingSpam = GetSpams().ToList().Find(item=>item.SpamId==SpamId);
-               if(ExistingSpam == null) throw new ItemNotFoundException($"There is no matching Spam data with SpamID :{SpamId}");
-                 ExistingSpam.VerifyStatusID = VerifyStatusID;
-                _context.Spams.Update(ExistingSpam);
+              var ExistingSpam = GetSpams().Where(item=>item.QueryId==QueryId).ToList();
+               if(ExistingSpam == null) throw new ItemNotFoundException($"There is no matching Spam data with QueryId :{QueryId}");
+                 ExistingSpam.ForEach(Item =>Item.VerifyStatusID=VerifyStatusID);
+                _context.Spams.UpdateRange(ExistingSpam);
                 _context.SaveChanges();
                 return true;
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "UpdateSpam(int SpamId, int VerifyStatusID)", exception, VerifyStatusID));
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "UpdateSpam(int QueryId, int VerifyStatusID)", exception, VerifyStatusID));
                 return false;
 
             }

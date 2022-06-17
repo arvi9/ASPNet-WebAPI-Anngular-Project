@@ -24,13 +24,9 @@ namespace AspireOverflow.Controllers
         [HttpPost]
         public IActionResult AuthToken(Login Crendentials)
         {
-
-
-            try
+          try
             {
                 if (!Validation.ValidateUserCredentials(Crendentials.Email, Crendentials.Password)) return BadRequest();
-
-
                 var Result = _tokenService.GenerateToken(Crendentials);
                 return Ok(Result);
 

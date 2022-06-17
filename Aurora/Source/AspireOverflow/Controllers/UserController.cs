@@ -30,9 +30,7 @@ public class UserController : BaseController
     {
 
         if (User == null) return BadRequest(Message("Null value is not supported"));
-
         try
-
         {
             //Development.Web is Enum constants which indicated the request approaching team.
             return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest(Message($"Error Occured while Adding User :{HelperService.PropertyList(User)}"));
@@ -53,7 +51,6 @@ public class UserController : BaseController
     [HttpPatch]
     public async Task<ActionResult> ChangeUserVerifyStatus(int UserId, bool IsVerified)
     {
-        
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
@@ -99,7 +96,6 @@ public class UserController : BaseController
     [HttpDelete]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
-      
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
@@ -121,11 +117,8 @@ public class UserController : BaseController
     public async Task<ActionResult> GetUser()
     {
         int UserId=GetCurrentUser().UserId;
-   
         try
         {
-         
-
             return await Task.FromResult(Ok( _UserService.GetUserByID(UserId)));
 
         }

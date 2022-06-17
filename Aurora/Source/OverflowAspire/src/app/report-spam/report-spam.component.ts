@@ -8,16 +8,16 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-report-spam',
-  templateUrl: './report-spam.component.html', 
+  templateUrl: './report-spam.component.html',
   styleUrls: ['../specificquery/specificquery.component.css'],
   providers:[QueryService]
 })
-export class ReportSpamComponent implements OnInit { 
+export class ReportSpamComponent implements OnInit {
  @Input() Querysrc: string = "https://localhost:7197/Query/GetQuery?QueryId=1";
   data: any;
   queryId: number = 0
 
- 
+
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
   reportspam: any = {
     spamId: 0,
@@ -25,8 +25,8 @@ export class ReportSpamComponent implements OnInit {
     queryId:3,
     userId: 0,
     verifyStatusID: 3,
-    
-  
+
+
   }
 
   ngOnInit(): void {
@@ -56,13 +56,14 @@ export class ReportSpamComponent implements OnInit {
     })
     console.log(AuthService.GetData("token"))
     console.log(this.reportspam)
+    this.reportspam.queryId=this.queryId;
     this.http.post<any>(`${application.URL}/Query/AddSpam`, this.reportspam, { headers: headers })
       .subscribe((data) => {
 
         console.log(data)
 
       });
-     
+
   }
-  
+
 }

@@ -47,7 +47,7 @@ export class SpamViewComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     console.log("ge")
     this.http
-    .patch(`https://localhost:7197/Query/UpdateSpamStatus?SpamId=6&VerifyStatusID=1`,Object,{headers:headers})  
+    .patch(`https://localhost:7197/Query/UpdateSpamStatus?QueryId=${this.queryId}&VerifyStatusID=1`,Object,{headers:headers})
     .subscribe((data)=>{
       console.log(data);
     });
@@ -55,7 +55,7 @@ export class SpamViewComponent implements OnInit {
   }
 
 
-  
+
   onReject() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export class SpamViewComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     console.log("ge")
     this.http
-    .patch(`https://localhost:7197/Query/UpdateSpamStatus?SpamId=6&VerifyStatusID=2`,Object,{headers:headers})  
+    .patch(`https://localhost:7197/Query/UpdateSpamStatus?QueryId=${this.queryId}&VerifyStatusID=2`,Object,{headers:headers})
     .subscribe((data)=>{
       console.log(data);
     });
