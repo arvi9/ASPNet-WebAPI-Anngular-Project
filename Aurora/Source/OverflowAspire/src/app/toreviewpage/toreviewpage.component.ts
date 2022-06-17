@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { application } from 'Models/Application';
 import { Article } from 'Models/Article';
 import { AuthService } from '../auth.service';
@@ -15,9 +16,10 @@ export class ToreviewpageComponent implements OnInit {
   totalLength :any;
   page : number= 1;
  
-  constructor(private http: HttpClient){}
- 
+
+  constructor(private http: HttpClient,private route:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

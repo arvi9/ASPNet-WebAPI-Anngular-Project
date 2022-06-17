@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { application } from 'Models/Application';
 import { Article } from 'Models/Article';
 import { Query } from 'Models/Query';
@@ -20,13 +21,10 @@ export class HomePage{
 export class HomepageComponent implements OnInit {
 
   public UrlString:string=`${application.URL}/Dashboard/GetHomePage`
- 
   
-  
-  
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private route:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

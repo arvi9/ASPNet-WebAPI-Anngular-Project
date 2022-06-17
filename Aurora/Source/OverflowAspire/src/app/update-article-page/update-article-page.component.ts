@@ -43,6 +43,7 @@ export class UpdateArticlePageComponent implements OnInit {
     articleLikes: null
   }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.router.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

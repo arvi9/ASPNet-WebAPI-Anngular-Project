@@ -17,6 +17,7 @@ export class UserverificationpageComponent implements OnInit {
   constructor(private http: HttpClient,private routing:Router) { }
 
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

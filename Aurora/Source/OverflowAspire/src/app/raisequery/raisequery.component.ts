@@ -44,9 +44,8 @@ export class RaisequeryComponent implements OnInit {
        this.routing.navigateByUrl("MyQueries");
     }
 
-  ngOnInit(): void {
 
-
-
+    ngOnInit(): void {
+      if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
   }}
 

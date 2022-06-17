@@ -23,13 +23,14 @@ export class ReportSpamComponent implements OnInit {
     spamId: 0,
     reason: '',
     queryId:3,
-    userId: 1,
+    userId: 0,
     verifyStatusID: 3,
     
   
   }
 
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -39,13 +40,15 @@ export class ReportSpamComponent implements OnInit {
       this.queryId = params['queryId'];
     console.log(this.queryId)
     this.http
-      .get<any>(`https://localhost:7197/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
+      .get<any>(`${application.URL}/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
       .subscribe((data) => {
         this.data = data;
         console.log(data);
       });
     });
   }
+
+
   spamreport(){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -59,7 +62,7 @@ export class ReportSpamComponent implements OnInit {
         console.log(data)
 
       });
-      this.routing.navigateByUrl("/Home");
+     
   }
   
 }

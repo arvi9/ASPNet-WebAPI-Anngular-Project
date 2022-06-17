@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { User } from 'Models/User';
 import { application } from 'Models/Application';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-employee-page',
   templateUrl: './employee-page.component.html',
@@ -11,9 +12,9 @@ import { AuthService } from '../auth.service';
 export class EmployeePageComponent implements OnInit {
   text :string='change to reviewer'
   @Input() Usersrc : string=`${application.URL}/User/GetUsersByUserRoleId?RoleId=2`;
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient,private route:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

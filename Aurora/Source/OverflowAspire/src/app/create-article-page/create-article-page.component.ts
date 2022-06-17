@@ -56,6 +56,7 @@ export class CreateArticlePageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     // Set The Name of ckEditor
     CKEDITOR.on("instanceCreated", function (event: { editor: any; }, data: any) {
       var editor = event.editor,
@@ -76,14 +77,6 @@ this.IsLoadingSubmit=true;
       'Authorization': `Bearer ${AuthService.GetData("token")}`
     })
     this.article.articleStatusID = 2;
-
-
-    // this.http.post<any>(`${application.URL}/Article/CreatePrivateArticle`, this.privatearticle, { headers: headers })
-    //   .pipe(catchError(this.handleError)).subscribe((data) => {
-
-    //     console.log(data)
-
-    //   });
       this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe((data) => {
 

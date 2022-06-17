@@ -11,8 +11,9 @@ import {Chart} from 'chart.js';
   styleUrls: ['./admindashboard.component.css']
 })
 export class AdmindashboardComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private route:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

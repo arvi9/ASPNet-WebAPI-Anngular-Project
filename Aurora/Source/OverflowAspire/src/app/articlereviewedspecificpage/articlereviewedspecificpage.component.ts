@@ -15,8 +15,9 @@ export class ArticlereviewedspecificpageComponent implements OnInit {
   
 
  
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient,private routes:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.routes.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { application } from 'Models/Application'
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-articalreviewedpage',
   templateUrl: './articalreviewedpage.component.html',
@@ -14,9 +15,9 @@ export class ArticalreviewedpageComponent implements OnInit {
   totalLength :any;
   page : number= 1;
   
-  constructor(private http: HttpClient){}
- 
+  constructor(private http: HttpClient,private route:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

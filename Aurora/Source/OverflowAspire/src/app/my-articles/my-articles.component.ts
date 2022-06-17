@@ -20,10 +20,12 @@ export class MyArticlesComponent implements OnInit {
   searchAuthor = "";
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
-userId:any=0;
+  userId:any=0;
 
-  constructor(private route: ActivatedRoute,private http: HttpClient) { }
-  ngOnInit(): void {
+ 
+constructor(private route: ActivatedRoute, private http: HttpClient,private routes:Router) { }
+ngOnInit(): void {
+  if(AuthService.GetData("token")==null) this.routes.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -31,8 +33,8 @@ userId:any=0;
     console.log(AuthService.GetData("token"))
     this.route.params.subscribe(params => {
       this.userId = params['UserId'];
-    console.log(this.userId)
-    this.http
+      
+      this.http
       .get<any>(this.artsrc,{headers:headers})
       .subscribe((data) => {
         this.data = data;

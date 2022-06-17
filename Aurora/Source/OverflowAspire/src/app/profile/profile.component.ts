@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'Models/User';
 import { application } from 'Models/Application';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,13 +11,10 @@ import { AuthService } from '../auth.service';
 })
 export class ProfileComponent implements OnInit {
   @Input() Usersrc : string=`${application.URL}/User/GetUser`;
-
-  totalLength :any;
-  page : number= 1;
-
-  constructor(private http: HttpClient){}
-
+  
+  constructor(private http: HttpClient,private route:Router) { }
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -26,7 +24,6 @@ export class ProfileComponent implements OnInit {
     .get<any>(this.Usersrc,{headers:headers})
     .subscribe((data)=>{
       this.user =data;
-      this.totalLength=data.length;
       console.log(data);
     });
 

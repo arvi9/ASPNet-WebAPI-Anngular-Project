@@ -19,7 +19,7 @@ export class EditarticleComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient,private routes:Router) { }
   article: any = {
     articleCommentId: 0,
     comment: '',
@@ -42,6 +42,7 @@ export class EditarticleComponent implements OnInit {
 
 
 ngOnInit(): void {
+  if(AuthService.GetData("token")==null) this.routes.navigateByUrl("")
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${AuthService.GetData("token")}`

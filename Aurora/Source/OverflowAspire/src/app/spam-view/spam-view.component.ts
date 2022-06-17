@@ -18,6 +18,7 @@ export class SpamViewComponent implements OnInit {
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
@@ -39,9 +40,34 @@ export class SpamViewComponent implements OnInit {
 
 
   onAccept() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
+    console.log("ge")
+    this.http
+    .patch(`https://localhost:7197/Query/UpdateSpamStatus?SpamId=6&VerifyStatusID=1`,Object,{headers:headers})  
+    .subscribe((data)=>{
+      console.log(data);
+    });
     this.routing.navigateByUrl("/SpamReport");
   }
+
+
+  
   onReject() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${AuthService.GetData("token")}`
+    })
+    console.log(AuthService.GetData("token"))
+    console.log("ge")
+    this.http
+    .patch(`https://localhost:7197/Query/UpdateSpamStatus?SpamId=6&VerifyStatusID=2`,Object,{headers:headers})  
+    .subscribe((data)=>{
+      console.log(data);
+    });
     this.routing.navigateByUrl("/SpamReport");
   }
 }

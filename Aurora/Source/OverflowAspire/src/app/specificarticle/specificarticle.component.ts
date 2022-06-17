@@ -43,7 +43,10 @@ export class SpecificarticleComponent implements OnInit {
 }
 
 
+
+
 ngOnInit(): void {
+  if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
 
   console.log(AuthService.GetData("token"))
   this.route.params.subscribe(params => {

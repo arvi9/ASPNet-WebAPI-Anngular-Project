@@ -38,6 +38,7 @@ export class SpecificqueryComponent implements OnInit {
   constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
+    if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`

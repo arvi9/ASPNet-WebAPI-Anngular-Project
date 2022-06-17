@@ -12,7 +12,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
+            <div *ngIf =" role === true" >
             <a routerLink="/ReviewerDashboard" class="nav-item nav-link" routerLinkActive="active">Dashboard</a>
+            </div>
             <li class="nav-item">
                 <a routerLink="/Home" class="nav-item nav-link" routerLinkActive="active">Home</a>
             </li>
