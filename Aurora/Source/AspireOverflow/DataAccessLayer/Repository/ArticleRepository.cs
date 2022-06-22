@@ -133,10 +133,10 @@ namespace AspireOverflow.DataAccessLayer
         public Article GetArticleByID(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            Article ExistingArticle;
+            Article? ExistingArticle;
             try
             {
-                ExistingArticle = GetArticles().Where(item => item.ArtileId == ArticleId).First();
+                ExistingArticle = GetArticles().ToList().Find(item => item.ArtileId == ArticleId);
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)

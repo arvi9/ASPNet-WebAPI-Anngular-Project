@@ -66,10 +66,10 @@ namespace AspireOverflow.DataAccessLayer
         public User GetUserByID(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
-            User user;
+            User? user;
             try
             {
-                user = GetUsers().Where(User =>User.UserId==UserId).First();
+                user = GetUsers().ToList().Find(User =>User.UserId==UserId);
                 return user != null ? user : throw new ItemNotFoundException($"There is no matching User data with UserID :{UserId}");
             }
             catch (Exception exception)

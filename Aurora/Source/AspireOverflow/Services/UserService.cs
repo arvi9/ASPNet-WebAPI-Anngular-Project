@@ -153,7 +153,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID)
         {
-            if (UserRoleID <= 0) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
+            if (UserRoleID <= 0 && UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
                 return GetUsers().Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Select(User => new

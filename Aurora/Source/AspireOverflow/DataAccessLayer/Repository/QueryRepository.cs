@@ -97,10 +97,10 @@ namespace AspireOverflow.DataAccessLayer
         public Query GetQueryByID(int QueryId)
         {
              if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
-            Query ExistingQuery;
+            Query? ExistingQuery;
             try
             {
-                ExistingQuery = GetQueries().Where(query =>query.QueryId==QueryId).First();
+                ExistingQuery = GetQueries().ToList().Find(query =>query.QueryId==QueryId);
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
