@@ -27,7 +27,6 @@ namespace AspireOverflow.Controllers
             _queryService = queryService;
 
         }
-
         /// <summary>
         /// Create a query.
         /// </summary>
@@ -54,7 +53,8 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="query"></param>
 
-        [HttpPost("Query")]
+        [HttpPost]
+
         public async Task<ActionResult> CreateQuery(Query query)
         {
             if (query == null) return BadRequest(Message("Null value is not supported"));
@@ -75,6 +75,7 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occured while Adding Query :{HelperService.PropertyList(query)}");
             }
         }
+
         /// <summary>
         /// To remove query by its id.
         /// </summary>
@@ -98,8 +99,7 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="QueryId"></param>
 
-        [HttpDelete("Queries/{QueryId:int}")]
-
+        [HttpDelete]
         public async Task<ActionResult> RemoveQueryByQueryId(int QueryId)
         {
             if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
@@ -140,7 +140,8 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="QueryId"></param>
 
-        [HttpPatch("Queries/{QueryId:int}")]
+
+        [HttpPatch]
         public async Task<ActionResult> MarkQueryAsSolved(int QueryId)
         {
             if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
@@ -174,7 +175,7 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="QueryId"></param>
 
-        [HttpGet("QueryId:int")]
+        [HttpGet]
         public async Task<ActionResult> GetQuery(int QueryId)
         {
             if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
@@ -196,6 +197,7 @@ namespace AspireOverflow.Controllers
                 return BadRequest(Message($"Error Occurred while getting query with QueryId :{QueryId}"));
             }
         }
+
         /// <summary>
         /// Gets all queries.
         /// </summary>
@@ -207,7 +209,8 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a list of queries. </response>
         /// <response code="500">If there is problem in server. </response>
-        [HttpGet("Queries")]
+        
+        [HttpGet]
         public async Task<ActionResult> GetAll()
         {
             try
@@ -223,7 +226,7 @@ namespace AspireOverflow.Controllers
         }
 
         /// <summary>
-        /// Get latest queries
+        /// Get Latest Queries
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -241,7 +244,8 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Range"></param>
-        [HttpGet("Range")]
+        /// 
+        [HttpGet]
         public async Task<ActionResult> GetLatestQueries(int Range = 0)
         {
             try
@@ -262,9 +266,8 @@ namespace AspireOverflow.Controllers
                 return Problem("Error occured while processing your request");
             }
         }
-
         /// <summary>
-        /// Get trending queries
+        /// Get Trending Queries.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -281,8 +284,7 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a trending queries in a queries. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
-        /// <param name="Range"></param>
-        [HttpGet("Range")]
+        [HttpGet]
         public async Task<ActionResult> GetTrendingQueries(int Range = 0)
         {
             try
@@ -356,7 +358,7 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Title"></param>
 
-        [HttpGet("Queries/{Title:string}")]
+        [HttpGet]
         public async Task<ActionResult> GetQueriesByTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) return BadRequest(Message("Title can't be null"));
@@ -375,6 +377,7 @@ namespace AspireOverflow.Controllers
 
 
         }
+
         /// <summary>
         /// Gets a list of solved queries in query.
         /// </summary>
@@ -392,11 +395,10 @@ namespace AspireOverflow.Controllers
         /// 
         /// </remarks>
         /// <response code="200">Returns a list of solved queries.</response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="IsSolved"></param>
 
-        [HttpGet("Queries/{IsSolved:bool}")]
+        [HttpGet]
         public async Task<ActionResult> GetQueriesByIsSolved(bool IsSolved)
         {
 
@@ -413,6 +415,7 @@ namespace AspireOverflow.Controllers
             }
 
         }
+
         /// <summary>
         /// Create a comment
         /// </summary>
@@ -433,12 +436,13 @@ namespace AspireOverflow.Controllers
         ///     }
         /// 
         /// </remarks>
-        /// <response code="200">If the comment was created. </response>
+        /// <response code="200">If the comment was created successfully. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="comment"></param>
 
-        [HttpPost("comment")]
+
+        [HttpPost]
         public async Task<ActionResult> CreateComment(QueryComment comment)
         {
 
@@ -461,6 +465,7 @@ namespace AspireOverflow.Controllers
             }
 
         }
+
         /// <summary>
         /// Gets a list of comments by query id.
         /// </summary>
@@ -481,8 +486,8 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="QueryId"></param>
-        
-        [HttpGet("Queries/{QueryId:int}")]
+
+        [HttpGet]
         public async Task<ActionResult> GetComments(int QueryId)
         {
             if (QueryId <= 0) return BadRequest(Message("QueryId must be greater than 0"));
@@ -501,6 +506,7 @@ namespace AspireOverflow.Controllers
             }
 
         }
+
         /// <summary>
         /// Add a spam 
         /// </summary>
@@ -517,7 +523,6 @@ namespace AspireOverflow.Controllers
         ///            reason*: string,
         ///            queryId*: int,
         ///            userId*: int,
-        ///            verifyStatusID*: int
         ///     }
         /// 
         /// </remarks>
@@ -525,7 +530,8 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="spam"></param>
-        [HttpPost("Spam")]
+
+        [HttpPost]
         public async Task<ActionResult> AddSpam(Spam spam)
         {
             if (spam == null ) return BadRequest(Message("spam object cannot be null"));
@@ -546,6 +552,7 @@ namespace AspireOverflow.Controllers
                 return BadRequest(Message("Error Occurred while Adding Spam with Spam data",spam));
             }
         }
+
         /// <summary>
         /// Gets a list of spam.
         /// </summary>
@@ -557,6 +564,7 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a list of spams. </response>
         /// <response code="500">If there is problem in server. </response>
+
         [HttpGet]
         public async Task<ActionResult> GetListOfSpams()
         {
@@ -571,8 +579,6 @@ namespace AspireOverflow.Controllers
                 return Problem("Error occured while processing your request");
             }
         }
-
-    
 
         /// <summary>
         /// To update the spam status
@@ -597,12 +603,11 @@ namespace AspireOverflow.Controllers
         /// <param name="SpamId"></param>
         /// <param name="VerifyStatusID"></param>
 
-
-   [HttpPatch ("{SpamId:int}/{VerifyStatusID:int}")]
+    [HttpPatch]
     public ActionResult UpdateSpamStatus(int QueryId, int VerifyStatusID)
     {
         if (QueryId <= 0) return BadRequest(Message($"QueryId Id must be greater than 0  where QueryId:{QueryId}"));
-        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
+        if (VerifyStatusID <= 0 || VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
         try
         {
             return _queryService.ChangeSpamStatus(QueryId, VerifyStatusID)? Ok(Message("successfully Updated")): BadRequest(Message($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}"));
@@ -613,5 +618,8 @@ namespace AspireOverflow.Controllers
             return Problem($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}");
         }
     }
+
+
+
     }
 }

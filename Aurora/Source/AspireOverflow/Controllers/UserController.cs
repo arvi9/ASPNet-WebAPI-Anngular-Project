@@ -42,10 +42,6 @@ public class UserController : BaseController
         ///        emailAddress*: string,
         ///        password*: string,
         ///        dateOfBirth*: 2022-06-19T16:02:44.207Z,
-        ///        verifyStatusID*: int,
-        ///        isReviewer*: string,
-        ///        userRoleId*: int,
-        ///        designationId*": int,
         ///     }
         ///
         /// </remarks>
@@ -54,7 +50,7 @@ public class UserController : BaseController
         /// <response code="500">If there is problem in server.</response>
         /// <param name="User"></param>
 
-    [HttpPost("User")][AllowAnonymous]
+    [HttpPost][AllowAnonymous]
     public async Task<ActionResult> CreateUser(User User)
     {
 
@@ -76,7 +72,6 @@ public class UserController : BaseController
             return Problem($"Error Occured while Adding User :{HelperService.PropertyList(User)}");
         }
     }
-
         /// <summary>
         /// Change user verify status.
         /// </summary>
@@ -88,7 +83,7 @@ public class UserController : BaseController
         ///     body
         ///             {
         ///                 UserId* : int,
-        ///                 IsVerified* : boolean
+        ///                 IsVerified* : bool,
         ///                
         ///             }
         /// 
@@ -99,8 +94,7 @@ public class UserController : BaseController
         /// <param name="UserId"></param>
         /// <param name="IsVerified"></param>
 
-
-    [HttpPatch("{UserId:int}/{IsVerified:bool}")]
+    [HttpPatch]
     public async Task<ActionResult> ChangeUserVerifyStatus(int UserId, bool IsVerified)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -120,7 +114,6 @@ public class UserController : BaseController
             return Problem($"Error Occurred while changing UserVerification Status with UserId :{UserId}");
         }
     }
-
         /// <summary>
         /// Here the user is updated as reviewer.
         /// </summary>
@@ -132,7 +125,7 @@ public class UserController : BaseController
         ///     body
         ///             {
         ///                 UserId* : int,
-        ///                 IsReviewer* : boolean
+        ///                 IsReviewer* : bool,
         ///                
         ///             }
         /// 
@@ -143,7 +136,7 @@ public class UserController : BaseController
         /// <param name="UserId"></param>
         /// <param name="IsReviewer"></param>
 
-      [HttpPatch("{UserId:int}/{IsReviewer:bool}")]
+      [HttpPatch]
     public async Task<ActionResult> UpdateUserByIsReviewer(int UserId, bool IsReviewer)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -164,6 +157,7 @@ public class UserController : BaseController
         }
     }
 
+        
         /// <summary>
         /// To remove user by User id.
         /// </summary>
@@ -186,7 +180,9 @@ public class UserController : BaseController
         /// <response code="500">If there is problem in server. </response>
         /// <param name="UserId"></param>
 
-    [HttpDelete("UserId:int")]   //Admin rejected users only be deleted
+
+
+    [HttpDelete]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -205,6 +201,7 @@ public class UserController : BaseController
             return Problem($"Error Occurred while removing User with UserId :{UserId}");
         }
     }
+
         /// <summary>
         /// Gets all users
         /// </summary>
@@ -217,6 +214,7 @@ public class UserController : BaseController
         /// <response code="200">Returns a list of user. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
+
     [HttpGet]
     public async Task<ActionResult> GetUser()
     {
@@ -259,8 +257,8 @@ public class UserController : BaseController
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="VerifyStatusID"></param>
-        
-        [HttpGet("VerifyStatusId:int")]
+
+    [HttpGet]
     public async Task<ActionResult> GetUsersByVerifyStatusId(int VerifyStatusID)
     {
         if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}"));
@@ -277,7 +275,7 @@ public class UserController : BaseController
     }
 
         /// <summary>
-        /// Gets a list of users assigned to the role by role id.
+        /// Gets a list of users role by its id.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -297,8 +295,7 @@ public class UserController : BaseController
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="RoleId"></param>
-
-    [HttpGet("RoleId:int")]
+    [HttpGet]
     public async Task<ActionResult> GetUsersByUserRoleId(int RoleId)
     {
         if (RoleId <= 0 && RoleId > 2) return BadRequest(Message($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}"));
@@ -313,7 +310,7 @@ public class UserController : BaseController
             return Problem($"Error occured while processing your request with RoleId:{RoleId}");
         }
     }
-
+  
         /// <summary>
         /// Gets a list of user assigned as reviewer.
         /// </summary>
@@ -327,7 +324,7 @@ public class UserController : BaseController
         /// 
         ///     body
         ///             {
-        ///                 IsReviewer* : boolean,
+        ///                 IsReviewer* : bool,
         ///                
         ///             }
         /// </remarks>
@@ -335,9 +332,7 @@ public class UserController : BaseController
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="IsReviewer"></param>
-
-
-    [HttpGet("IsReviewer:bool")]
+    [HttpGet]
     public async Task<ActionResult> GetUsersByIsReviewer(bool IsReviewer)
     {
 
@@ -374,7 +369,7 @@ public class UserController : BaseController
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetGenders()", exception));
-            throw exception;
+            return  Problem("Some Internal Server Error Occured");
         }
     }
 
@@ -390,6 +385,7 @@ public class UserController : BaseController
         /// <response code="200">Returns a list of designations. </response>
         /// <response code="500">If there is problem in server. </response>
 
+
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDesignations()
     {
@@ -402,10 +398,10 @@ public class UserController : BaseController
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", " GetDesignations()", exception));
-            throw exception;
+           return Problem("Some Internal Server Error Occured");
         }
     }
-        /// <summary>
+         /// <summary>
         /// Gets all departments.
         /// </summary>
         /// <remarks>
@@ -414,8 +410,10 @@ public class UserController : BaseController
         ///     url : https://localhost:7197/User/GetDepartments
         ///
         /// </remarks>
-        /// <response code="200">Returns a list of departments. </response>
+        /// <response code="200">Returns a list of departments.
+        /// </response>
         /// <response code="500">If there is problem in server. </response>
+
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDepartments()
     {
@@ -425,8 +423,8 @@ public class UserController : BaseController
         }
         catch (Exception exception)
         {
-            _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
-            throw exception;
+          _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
+          return  Problem("Some Internal Server Error Occured");
         }
     }
    

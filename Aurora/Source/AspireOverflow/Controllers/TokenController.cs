@@ -38,9 +38,9 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a jwt token. </response>
         /// <response code="401">Invalid credentials. </response>
         /// <response code="500">If there is problem in server. </response>
-        /// <param name="Crendentials"></param>
-        
-        [HttpPost("login")]
+        /// <param name="Crendentials"></
+
+        [HttpPost]
         public IActionResult AuthToken(Login Crendentials)
         {
           try
