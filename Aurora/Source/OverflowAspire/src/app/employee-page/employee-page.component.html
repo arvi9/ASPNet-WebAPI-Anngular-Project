@@ -36,7 +36,7 @@
                 <td>{{item.fullName}}</td>
                 <td>{{item.employeeId}}</td>
                 <td>{{item.email}}</td>
-                <td><button (click)="changeText()" ion-button>{{text}}</button></td>
+                <td><input  [(ngModel)]="item.isReviewer" type="checkbox" (change)="onCheckboxChange(item.userId)"></td>
                 <td><a (click)="DisableUser(item.userId)"><button>Disable</button></a></td>
             </tr>
             </tbody>

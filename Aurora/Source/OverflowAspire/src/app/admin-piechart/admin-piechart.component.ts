@@ -14,7 +14,7 @@ export class AdminPiechartComponent implements OnInit {
 ngOnInit(): void {
   this.http
     .get<any>(`${application.URL}/Dashboard/GetAdminDashboard`)
-    .subscribe((data) => {
+    .subscribe({next:(data) => {
       this.piedata = data;
       console.log(data);
       var names=['Number of Articles', 'Number of Queries'];
@@ -46,7 +46,7 @@ ngOnInit(): void {
       
     }
   });
-});
+}});
 
  
 }

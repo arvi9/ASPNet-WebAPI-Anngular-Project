@@ -55,13 +55,13 @@ export class UpdateArticlePageComponent implements OnInit {
     console.log(this.articleId)
     this.http
       .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.article.artileId = data.articleId;
         this.article.title=data.title;
         this.article.content=data.content;
         this.article.ImageString=data.image
         console.log(data);
-      });
+    }});
     });
   }
   public data: Article = new Article();
@@ -76,10 +76,10 @@ export class UpdateArticlePageComponent implements OnInit {
     this.article.articleStatusID = 2;
     console.log(this.article)
     this.http.put<any>(`${application.URL}/Article/UpdateArticle`, this.article, { headers: headers })
-      .pipe(catchError(this.handleError)).subscribe((data) => {
+      .pipe(catchError(this.handleError)).subscribe({next:(data) => {
         console.log(data.message)
         this.router.navigateByUrl("MyArticles")
-      });
+      }});
 
   }
   handleError(error:any) {
@@ -106,9 +106,9 @@ export class UpdateArticlePageComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.article.articleStatusID=1;
     this.http.put<any>(`${application.URL}/Article/UpdateArticle`, this.article, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         console.log(data)
-      });
+      }});
       this.router.navigateByUrl("MyArticles")
   }
 

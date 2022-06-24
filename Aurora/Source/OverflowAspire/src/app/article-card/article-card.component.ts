@@ -33,11 +33,11 @@ export class ArticleCardComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(this.artsrc,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         this.filteredData = data;
         this.totalLength = data.length;
-      });
+      }});
   }
   public data: Article[] = [
 

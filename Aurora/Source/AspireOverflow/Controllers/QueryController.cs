@@ -119,26 +119,6 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occurred while removing query with QueryId :{QueryId}");
             }
         }
-        /// <summary>
-        /// Mark that query as solved by its solved.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Query/MarkQueryAsSolved
-        ///
-        ///     body
-        ///             {
-        ///                 QueryId* : int,
-        ///                
-        ///             }
-        /// 
-        /// </remarks>
-        /// <response code="200">Returns that query as marked as solved.</response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="404">If QueryId was not found. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="QueryId"></param>
 
 
         [HttpPatch]
@@ -305,17 +285,6 @@ namespace AspireOverflow.Controllers
             }
         }
 
-        /// <summary>
-        /// Gets list of queries by user id
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Query/GetQueriesByUserId
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of queries by user. </response>
-        /// <response code="500">If there is problem in server. </response>
 
 
         [HttpGet]
@@ -337,26 +306,6 @@ namespace AspireOverflow.Controllers
 
         }
 
-        /// <summary>
-        /// Gets a list of queries by title.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Query/GetQueriesByTitle
-        /// 
-        ///  * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         Title*: string,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of queries by title.. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="Title"></param>
 
         [HttpGet]
         public async Task<ActionResult> GetQueriesByTitle(string Title)

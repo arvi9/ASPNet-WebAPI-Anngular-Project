@@ -347,17 +347,7 @@ public class UserController : BaseController
             return Problem($"Error occured while processing your request with IsReviewer:{IsReviewer}");
         }
     }
-        /// <summary>
-        /// Gets all genders
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/User/GetGenders
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of genders. </response>
-        /// <response code="500">If there is problem in server. </response>
+
 
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetGenders()
@@ -373,17 +363,6 @@ public class UserController : BaseController
         }
     }
 
-        /// <summary>
-        /// Gets all designations.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/User/GetDesignations
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of designations. </response>
-        /// <response code="500">If there is problem in server. </response>
 
 
     [HttpGet][AllowAnonymous]

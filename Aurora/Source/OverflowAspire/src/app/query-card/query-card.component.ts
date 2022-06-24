@@ -31,12 +31,12 @@ export class QueryCardComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(this.Querysrc, {headers: headers} )
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         this.filteredData = data;
         this.totalLength = data.length;
 
-      });
+  }});
   }
   public data: Query[] = [];
   public filteredData: Query[] = [];

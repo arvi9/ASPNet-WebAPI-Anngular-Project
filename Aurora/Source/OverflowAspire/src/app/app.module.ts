@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -23,14 +22,12 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
 import { ToreviewspecificpageComponent } from './toreviewspecificpage/toreviewspecificpage.component';
 import { ArticlereviewedspecificpageComponent } from './articlereviewedspecificpage/articlereviewedspecificpage.component';
 import { SpamViewComponent } from './spam-view/spam-view.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { QueriesComponent } from './queries/queries.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SpecificarticleComponent } from './specificarticle/specificarticle.component';
 import { ArticlesComponent } from './articles/articles.component';
-
 import { LatestQueriesComponent } from './latest-queries/latest-queries.component';
 import { TrendingQueriespageComponent } from './trending-queriespage/trending-queriespage.component';
 import { LatestArticlepageComponent } from './latest-articlepage/latest-articlepage.component';
@@ -59,11 +56,11 @@ import { UpdateArticlePageComponent } from './update-article-page/update-article
 
 import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
 import { EditarticleComponent } from './editarticle/editarticle.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,6 +108,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
     HtmlToPlaintextPipe,
     EditarticleComponent,
+    
+    
 
 
   ],
@@ -132,7 +131,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CKEditorModule,
     Ng2SearchPipeModule,
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+  
+   
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

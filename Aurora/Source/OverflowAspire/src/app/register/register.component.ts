@@ -64,25 +64,34 @@ export class RegisterComponent implements OnInit {
 
     this.http
       .get<any>(this.DesignationUrl)
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.designationDetails = data;
         console.log(this.designationDetails)
 
-      });
+  }});
     this.http
       .get<any>(this.DepartmentUrl)
-      .subscribe((data) => {
+      .subscribe({
+        next:(data) => {
         this.departmentDetails = data;
         console.log(this.departmentDetails)
-
-      });
-    this.http
+        this.http
       .get<any>(this.GenderUrl)
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.GenderDetails = data;
         console.log(this.GenderDetails)
 
-      });
+        }});
+
+
+      }});
+    this.http
+      .get<any>(this.GenderUrl)
+      .subscribe({next:(data) => {
+        this.GenderDetails = data;
+        console.log(this.GenderDetails)
+
+   } });
 
   }
 
@@ -150,12 +159,12 @@ export class RegisterComponent implements OnInit {
     console.log(registeruser);
     console.log(application.URL);
     this.http.post<any>(`${application.URL}/User/CreateUser`, registeruser, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
 
         console.log(data)
 
 
-      });
+  }});
     this.router.navigateByUrl("");
   }
 

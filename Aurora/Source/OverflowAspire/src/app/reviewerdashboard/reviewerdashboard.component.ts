@@ -21,7 +21,7 @@ export class ReviewerdashboardComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(`${application.URL}/Dashboard/GetReviewerDashboard?ReviewerId=1`,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.piedata = data;
         console.log(data);
         var names=['Articles to be Reviewed', 'Articles Reviewed'];
@@ -53,7 +53,7 @@ export class ReviewerdashboardComponent implements OnInit {
         
       }
     });
-  });
+  }});
   
    
   }

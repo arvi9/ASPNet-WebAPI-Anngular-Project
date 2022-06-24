@@ -4,15 +4,19 @@ import { User } from 'Models/User';
 import { application } from 'Models/Application';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+
+
+
 @Component({
   selector: 'app-employee-page',
   templateUrl: './employee-page.component.html',
   styleUrls: ['./employee-page.component.css']
 })
 export class EmployeePageComponent implements OnInit {
-  text :string='change to reviewer'
   @Input() Usersrc : string=`${application.URL}/User/GetUsersByUserRoleId?RoleId=2`;
   constructor(private http: HttpClient,private route:Router) { }
+
+
   ngOnInit(): void {
     if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
     const headers = new HttpHeaders({
@@ -27,6 +31,8 @@ export class EmployeePageComponent implements OnInit {
       console.log(data);
     });
   }
+
+
   DisableUser(userId:number){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -41,13 +47,35 @@ export class EmployeePageComponent implements OnInit {
     });
     
   }
-  
-  changeText(){
-    if(this.text=='change to reviewer'){
-      this.text='change to user'
-    }else{
-      this.text='change to reviewer'
-    }
+  onCheckboxChange(userId:any){
+      var res=this.data.find(item => item.userId==userId)?.isReviewer 
+      console.log(res)   
+      if(res==true){
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${AuthService.GetData("token")}`
+        })
+        this.http
+        .patch(`https://localhost:7197/User/UpdateUserByIsReviewer?UserId=${userId}&IsReviewer=true`,Object,{headers:headers})
+        .subscribe((data)=>{
+          console.log(data);
+        });
+       
+       
+      } 
+
+      else{
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${AuthService.GetData("token")}`
+        })
+        this.http
+        .patch(`https://localhost:7197/User/UpdateUserByIsReviewer?UserId=${userId}&IsReviewer=false`,Object,{headers:headers})
+        .subscribe((data)=>{
+          console.log(data);
+        });
+      }
   }
+  
   public data: User[] = []
 }

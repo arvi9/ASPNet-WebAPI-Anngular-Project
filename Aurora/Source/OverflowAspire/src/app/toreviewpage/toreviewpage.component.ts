@@ -27,11 +27,11 @@ export class ToreviewpageComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
     .get<any>(this.Usersrc,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       this.data =data;
       this.totalLength=data.length;
       console.log(data);
-    });
+    }});
    
   }
   button :string='To review'

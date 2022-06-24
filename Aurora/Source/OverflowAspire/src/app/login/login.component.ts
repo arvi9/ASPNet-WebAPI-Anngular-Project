@@ -37,7 +37,8 @@ showErrorMessage=false;
 
     console.log(this.user)
     this.http.post<any>(`${application.URL}/Token/AuthToken`,this.user,{headers:headers})
-      .subscribe((data) =>
+      .subscribe({
+        next:(data) =>
       {
 
         this.IsAdmin=data.isAdmin,
@@ -59,10 +60,11 @@ showErrorMessage=false;
         console.log(data)
 
       },
-      (error)=>{
+      error:(error)=>{
+      
         this.showErrorMessage=true;
       }
-      );
+    });
 
 
 

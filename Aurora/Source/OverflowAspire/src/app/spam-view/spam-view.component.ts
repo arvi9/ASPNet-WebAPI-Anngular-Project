@@ -35,7 +35,7 @@ export class SpamViewComponent implements OnInit {
         });
     });
   }
-
+  
   public data: any[] = []
 
 
@@ -43,15 +43,21 @@ export class SpamViewComponent implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthService.GetData("token")}`
-    })
+    })    
     console.log(AuthService.GetData("token"))
     console.log("ge")
     this.http
     .patch(`https://localhost:7197/Query/UpdateSpamStatus?QueryId=${this.queryId}&VerifyStatusID=1`,Object,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
+    this.http
+    .delete(`https://localhost:7197/Query/RemoveQueryByQueryId?QueryId=${this.queryId}`,{headers:headers})
+    .subscribe({next:(data)=>{
+      console.log("hello");
+    }});
     this.routing.navigateByUrl("/SpamReport");
+    window.alert("Done Successfully")
   }
 
 
@@ -65,9 +71,9 @@ export class SpamViewComponent implements OnInit {
     console.log("ge")
     this.http
     .patch(`https://localhost:7197/Query/UpdateSpamStatus?QueryId=${this.queryId}&VerifyStatusID=2`,Object,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
     this.routing.navigateByUrl("/SpamReport");
   }
 }

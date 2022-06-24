@@ -60,10 +60,10 @@ this.GetQuery()
     })
     this.http
     .get<any>(`${application.URL}/Query/GetQuery?QueryId=${this.queryId}`,{headers:headers})
-    .subscribe((data) => {
+    .subscribe({next:(data) => {
       this.data = data;
       console.log(data);
-    });
+    }});
   }
 
 
@@ -90,11 +90,11 @@ this.GetQuery()
   console.log(this.queryId)
     this.Query.queryId=this.queryId;
     this.http.post<any>(`${application.URL}/Query/CreateComment`, this.Query, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
 
         console.log(data)
 
-      }); this.GetQuery()
+      }}); this.GetQuery()
 
  }
 

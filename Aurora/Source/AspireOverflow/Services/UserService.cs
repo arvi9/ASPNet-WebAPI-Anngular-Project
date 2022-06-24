@@ -126,6 +126,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
+            if(VerifyStatusID <=0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
                 return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID).Select(User => new
@@ -153,7 +154,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID)
         {
-            if (UserRoleID <= 0 && UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
+            if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
                 return GetUsers().Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Select(User => new
@@ -182,7 +183,7 @@ namespace AspireOverflow.Services
         public bool ChangeUserVerificationStatus(int UserId, int VerifyStatusID)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0  where UserId:{UserId}");
-            if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be between 0 and 3 where VerifyStatusID:{VerifyStatusID}");
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be between 0 and 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
                 return database.UpdateUserByVerifyStatus(UserId, VerifyStatusID);

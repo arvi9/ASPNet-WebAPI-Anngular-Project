@@ -21,7 +21,7 @@ export class AdmindashboardComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(`${application.URL}/Dashboard/GetAdminDashboard`,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.piedata = data;
         console.log(data);
         var names=['Number of Articles', 'Number of Queries'];
@@ -53,7 +53,7 @@ export class AdmindashboardComponent implements OnInit {
         
       }
     });
-  });
+  }});
   
    
   }

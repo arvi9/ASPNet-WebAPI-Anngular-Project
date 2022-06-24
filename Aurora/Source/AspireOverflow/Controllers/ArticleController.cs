@@ -24,32 +24,6 @@ public class ArticleController : BaseController
 
 
     }
-        ///<summary>
-        /// Create Article
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/CreateArticle
-        /// 
-        ///     * fields are required
-        /// 
-        /// body{
-        ///     articleId*: int,
-        ///     title*: string,
-        ///     content*: string,
-        ///     image*: string,
-        ///     datetime*: 2022-06-17T05:49:09.096Z,
-        ///     isPrivate*: bool,
-        ///     articleStatusID*: int,
-        ///     reviewerId*: int,
-        ///      }
-        /// 
-        /// </remarks>
-        /// <response code="200">If the article was created. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="article"></param>
 
 
     [HttpPost]
@@ -311,27 +285,6 @@ public class ArticleController : BaseController
             return Problem($"Error Occurred while updating the status of the Article :{ArticleId}");
         }
     }
-
-        /// <summary>
-        /// Delete Article by Article Id.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/DeleteArticleByArticleId
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         artileId*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">If the article was deleted. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ArticleId"></param>
 
 
 
