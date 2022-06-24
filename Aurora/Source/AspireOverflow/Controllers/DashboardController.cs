@@ -28,28 +28,9 @@ namespace AspireOverflow.Controllers
 
         }
 
-        /// <summary>
-        /// Gets a reviewer dashboard by reviewer id.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Dashboard/GetReviewerDashboard
-        /// 
-        ///  * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         ReviewerId*: int,
-        ///     }
-        /// </remarks>
-        /// <response code="200">Returns a reviewer dashboard by reviewer id. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ReviewerId"></param>
 
+        [HttpGet]
 
-        [HttpGet("ReviewerId:int")]
         public async Task<ActionResult> GetReviewerDashboard(int ReviewerId) //reviewerID temporarily getting as input ,later it is retrived from claims.
         {
             try
@@ -68,19 +49,9 @@ namespace AspireOverflow.Controllers
                 return BadRequest("Error Occured while processing your request");
             }
         }
-        /// <summary>
-        /// Gets admin dashboard.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Dashboard/GetAdminDashboard
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a admin dashboard. </response>
-        /// <response code="500">If there is problem in server. </response>
 
         [HttpGet]
+
         public async Task<ActionResult> GetAdminDashboard()
         {
             try
@@ -102,17 +73,6 @@ namespace AspireOverflow.Controllers
                 return BadRequest("Error Occured while processing your request");
             }
         }
-        /// <summary>
-        /// Gets home page.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Dashboard/GetHomePage
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a homepage. </response>
-        /// <response code="500">If there is problem in server. </response>
         [HttpGet][AllowAnonymous]
 
         public async Task<ActionResult> GetHomePage()

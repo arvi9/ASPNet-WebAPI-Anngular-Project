@@ -13,7 +13,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Services
 {
 
-    public class ArticleService :IArticleService
+    public class ArticleService : IArticleService
     {
         private IArticleRepository database;
 
@@ -21,25 +21,25 @@ namespace AspireOverflow.Services
 
         private MailService _mailService;
 
-        public ArticleService(ILogger<ArticleService> logger, MailService mailService,IArticleRepository _articleRepository)
+        public ArticleService(ILogger<ArticleService> logger, MailService mailService, IArticleRepository _articleRepository)
         {
             _logger = logger;
             _mailService = mailService;
-            database =_articleRepository;
+            database = _articleRepository;
 
         }
 
-        public bool CreateArticle(Article article,List<int> SharedUsersId=null)
+        public bool CreateArticle(Article article, List<int> SharedUsersId = null)
         {
-           
+
             if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
             try
             {
                 article.Image = System.Convert.FromBase64String(article.ImageString);
                 article.CreatedOn = DateTime.Now;
                 //for adding articles visible only for shared users.
-                if(SharedUsersId != null && article.IsPrivate && SharedUsersId.Count() > 0) return database.AddPrivateArticle(article,SharedUsersId);
-               return database.AddArticle(article);
+                if (SharedUsersId != null && article.IsPrivate && SharedUsersId.Count() > 0) return database.AddPrivateArticle(article, SharedUsersId);
+                return database.AddArticle(article);
             }
 
             catch (Exception exception)
@@ -48,7 +48,7 @@ namespace AspireOverflow.Services
                 return false;
             }
         }
-       
+
 
 
 
@@ -60,13 +60,13 @@ namespace AspireOverflow.Services
             {
                 var ExistingArticle = database.GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
-                ExistingArticle.Title=article.Title;
-                ExistingArticle.Content=article.Content;
+                ExistingArticle.Title = article.Title;
+                ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = CurrentUser;
-                ExistingArticle.ArticleStatusID=article.ArticleStatusID;
+                ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString);
-             
+
 
                 return database.UpdateArticle(ExistingArticle);
             }
@@ -82,11 +82,11 @@ namespace AspireOverflow.Services
         public bool ChangeArticleStatus(int ArticleId, int ArticleStatusID, int UpdatedByUserId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+            if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
                 var IsAddedSuccfully = database.UpdateArticle(ArticleId, ArticleStatusID, UpdatedByUserId);
-                if (IsAddedSuccfully) _mailService?.SendEmailAsync(HelperService.ArticleMail("manimaran.0610@gmail.com", "Title", "Article Created Successfully" , 2));
+                if (IsAddedSuccfully) _mailService?.SendEmailAsync(HelperService.ArticleMail("manimaran.0610@gmail.com", "Title", "Article Created Successfully", 2));
                 return IsAddedSuccfully;
             }
             catch (Exception exception)
@@ -97,22 +97,21 @@ namespace AspireOverflow.Services
             }
         }
 
+
         public bool DeleteArticleByArticleId(int ArticleId)
         {
-            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            try
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}"); try
             {
-                if (GetArticles().Where(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1).First() == null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
+                if (database.GetArticles().ToList().Find(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1) == null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
                 return database.DeleteArticle(ArticleId); //only Draft article will be deleted
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
-
                 return false;
             }
         }
+
         public object GetArticleById(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
@@ -129,7 +128,7 @@ namespace AspireOverflow.Services
                     image = article.Image,
                     Likes = GetLikesCount(article.ArtileId),
                     comments = GetComments(article.ArtileId),
-                      status=article.ArticleStatus?.Status,
+                    status = article.ArticleStatus?.Status,
 
                 };
             }
@@ -156,7 +155,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -190,7 +189,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -216,7 +215,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
 
@@ -237,7 +236,7 @@ namespace AspireOverflow.Services
 
             try
             {
-                var ListOfArticles = database.GetArticles().Where(item =>item.ArticleStatusID==4);
+                var ListOfArticles = database.GetArticles().Where(item => item.ArticleStatusID == 4);
                 return ListOfArticles;
             }
 
@@ -249,7 +248,7 @@ namespace AspireOverflow.Services
 
 
         }
-          public IEnumerable<Article> GetAll()
+        public IEnumerable<Article> GetAll()
         {
 
             try
@@ -273,7 +272,7 @@ namespace AspireOverflow.Services
 
             try
             {
-                var ListOfArticles = GetArticles().Where(Item =>Item.IsPrivate==false);
+                var ListOfArticles = GetArticles().Where(Item => Item.IsPrivate == false);
                 return ListOfArticles.Select(Article => new
                 {
                     ArticleId = Article.ArtileId,
@@ -282,7 +281,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -301,7 +300,7 @@ namespace AspireOverflow.Services
 
             try
             {
-                var ListOfPrivateArticles = database.GetPrivateArticles().Where(Item=>Item.UserId==UserId);
+                var ListOfPrivateArticles = database.GetPrivateArticles().Where(Item => Item.UserId == UserId);
                 return ListOfPrivateArticles.Select(PrivateArticle => GetArticleById(PrivateArticle.ArticleId));
             }
 
@@ -330,7 +329,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -360,7 +359,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -389,7 +388,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                      status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -407,7 +406,7 @@ namespace AspireOverflow.Services
         public IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID)
         {
 
-            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+            if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
 
@@ -421,7 +420,7 @@ namespace AspireOverflow.Services
                     content = Article.Content,
                     image = Article.Image,
                     date = Article.UpdatedOn,
-                    status=Article.ArticleStatus?.Status,
+                    status = Article.ArticleStatus?.Status,
 
                 });
             }
@@ -441,9 +440,9 @@ namespace AspireOverflow.Services
             Validation.ValidateArticleComment(comment);
             try
             {
-                comment.CreatedBy=comment.UserId;
+                comment.CreatedBy = comment.UserId;
                 var IsCommentSuccessfully = database.AddComment(comment);
-                if (IsCommentSuccessfully) _mailService?.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully" ));
+                if (IsCommentSuccessfully) _mailService?.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully"));
                 return IsCommentSuccessfully;
             }
             catch (Exception exception)

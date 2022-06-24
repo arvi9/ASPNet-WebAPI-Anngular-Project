@@ -316,7 +316,7 @@ namespace AspireOverflow.Services
  public bool ChangeSpamStatus(int QueryId, int VerifyStatusID)
         {
             if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0  where QueryId:{QueryId}");
-            if(VerifyStatusID <= 0 && VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
+            if(VerifyStatusID <= 0 || VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
                 var IsChangeSuccessfully = database.UpdateSpam(QueryId,  VerifyStatusID);

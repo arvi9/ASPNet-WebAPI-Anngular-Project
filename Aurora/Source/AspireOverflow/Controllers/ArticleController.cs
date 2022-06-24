@@ -24,36 +24,11 @@ public class ArticleController : BaseController
 
 
     }
-        ///<summary>
-        /// Create Article
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/CreateArticle
-        /// 
-        ///     * fields are required
-        /// 
-        /// body{
-        ///     articleId*: int,
-        ///     title*: string,
-        ///     content*: string,
-        ///     image*: string,
-        ///     datetime*: 2022-06-17T05:49:09.096Z,
-        ///     isPrivate*: bool,
-        ///     articleStatusID*: int,
-        ///     reviewerId*: int,
-        ///      }
-        /// 
-        /// </remarks>
-        /// <response code="200">If the article was created. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="article"></param>
 
-     [HttpPost("article")]
-    
-    public async Task<ActionResult> CreateArticle(Article article)
+
+
+    [HttpPost]
+        public async Task<ActionResult> CreateArticle(Article article)
     {  
         if (article == null) return BadRequest(Message("Null value is not supported"));
         try
@@ -74,32 +49,7 @@ public class ArticleController : BaseController
         }
     }
 
-        /// <summary>
-        /// Create Private Article
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/CreatePrivateArticle
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         artileId*: int,
-        ///         title*: string,
-        ///         content*: string,
-        ///         image*: string,
-        ///         datetime*: 2022-06-17T05:49:09.096Z,
-        ///         Private*: true,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">If the privateArticleDto was Created. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="privateArticleDto"></param>
-      [HttpPost("privatearticle")]
+      [HttpPost]
 
     public async Task<ActionResult> CreatePrivateArticle(PrivateArticleDto privateArticleDto)
     {  
@@ -121,34 +71,9 @@ public class ArticleController : BaseController
             return Problem($"Error Occured while Adding private Article");
         }
     }
-        /// <summary>
-        /// Create a comment
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/CreateComment
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         comment*: string,
-        ///         userId*: int,
-        ///         articleId*: int,
-        ///         articleCommentId*: int,
-        ///         datetime*: 2022-06-17T06:04:24.371Z,
-        ///         
-        ///     }
-        /// 
-        /// </remarks>
-        /// <response code="200">If the comment was created. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="comment"></param>
 
-    [HttpPost("comment")]
 
+    [HttpPost]
     public async Task<ActionResult<ArticleComment>> CreateComment(ArticleComment comment)
     {
 
@@ -171,30 +96,8 @@ public class ArticleController : BaseController
         }
 
     }
-        /// <summary>
-        /// Add Like to Article
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/AddLikeToArticle
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         likeId*: int,
-        ///         articleId*: int,
-        ///         userId*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">If the Like was added. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="Like"></param>
-        
-    [HttpPost("AddLike")]
+
+    [HttpPost]
     public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
     {
         if (Like.ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
@@ -217,36 +120,8 @@ public class ArticleController : BaseController
         }
     }
 
-        /// <summary>
-        /// Update a article
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/UpdateArticle
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         artileId*: int,
-        ///         title*: string,
-        ///         content*: string,
-        ///         image*: string
-        ///         articleStatusID*: int,
-        ///         reviewerId*: int,
-        ///         datetime*: "2022-06-22T04:00:01.462Z",
-        ///         isPrivate*: bool,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">If the article was updated. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="404">If article was not found. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="article"></param>
-       
-    [HttpPut("article")]
+    [HttpPut]
+
     public async Task<ActionResult> UpdateArticle(Article article)
     {
         if (article == null) return BadRequest(Message("Article can't be null"));
@@ -270,34 +145,11 @@ public class ArticleController : BaseController
 
     }
 
-        /// <summary>
-        /// Change Article Status
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/ChangeArticleStatus
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         artileId*: int,
-        ///         ArticleStatusID*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">If the articlestatus was changed. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="404">If article was not found. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ArticleId"></param>
-        /// <param name="ArticleStatusID"></param>
 
-    [HttpPatch ("{ArticleId:int}/{ArticlestatusId:int}")]
+    [HttpPatch]
     public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID)
     {
-        if (ArticleId <= 0 || ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest(Message("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4"));
+        if (ArticleId <= 0 || ArticleStatusID <= 0 || ArticleStatusID > 4) return BadRequest(Message("Article ID  and Article Status ID must be greater than 0 and ArticleStatusID must be less than or equal to 4"));
         if(ArticleStatusID >= 3 && !GetCurrentUser().IsReviewer) return BadRequest(Message("Only Reviewer can able to change the status"));
         try
         {
@@ -316,29 +168,9 @@ public class ArticleController : BaseController
         }
     }
 
-        /// <summary>
-        /// Delete Article by Article Id.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/DeleteArticleByArticleId
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         artileId*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">If the article was deleted. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ArticleId"></param>
 
-    [HttpDelete("DraftArticles/{ArticleId:int}")]
 
+    [HttpDelete]
     public async Task<ActionResult> DeleteArticleByArticleId(int ArticleId)
     {
         if (ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
@@ -358,27 +190,8 @@ public class ArticleController : BaseController
         }
     }
 
-        /// <summary>
-        /// Get latest articles
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetLatestArticles
-        ///
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         Range*: int,
-        ///     }
-        /// </remarks>
-        /// <response code="200">Returns a latest articles in a articles. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="Range"></param>
-        
-    [HttpGet("Range")]
+
+    [HttpGet]
     public async Task<ActionResult> GetLatestArticles(int Range = 0)
     {
         try
@@ -399,27 +212,8 @@ public class ArticleController : BaseController
             return Problem("Error occured while processing your request");
         }
     }
-        /// <summary>
-        /// Get trending articles
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetTrendingArticles
-        ///
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         Range*: int,
-        ///     }
-        /// </remarks>
-        /// <response code="200">Returns a trending articles in a articles. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="Range"></param>
-        
-    [HttpGet("Range")]
+
+    [HttpGet]
     public async Task<ActionResult> GetTrendingArticles(int Range = 0)
     {
         try
@@ -439,28 +233,9 @@ public class ArticleController : BaseController
             return Problem("Error occured while processing your request");
         }
     }
-        /// <summary>
-        /// Get a Article by its Id
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetArticleById
-        ///
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         ArticleId*: int,
-        ///     }
-        /// </remarks>
-        /// <response code="200">Returns a article by its Id . </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="404">If Aricle was not found </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ArticleId"></param>
 
-    [HttpGet("ArticleId:int")]
+
+    [HttpGet]
     public async Task<ActionResult> GetArticleById(int ArticleId)
     {
         if (ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
@@ -479,19 +254,7 @@ public class ArticleController : BaseController
             return Problem($"Error Occurred while getting Article with ArticleId :{ArticleId}");
         }
     }
-        /// <summary>
-        /// Gets list of articles
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetAll
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of articles. </response>
-        /// <response code="500">If there is problem in server. </response>
 
-    
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
@@ -509,19 +272,8 @@ public class ArticleController : BaseController
             return Problem("Error occured while processing your request");
         }
     }
-        /// <summary>
-        /// Gets list of articles by user id
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetArticlesByUserId
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of articles by user. </response>
-        /// <response code="500">If there is problem in server. </response>
 
-    [HttpGet("UserId:int")]
+    [HttpGet]
     public async Task<ActionResult> GetArticlesByUserId()
     {
         //if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
@@ -540,29 +292,8 @@ public class ArticleController : BaseController
 
     }
 
-        /// <summary>
-        /// Gets a list of private articles in article by user id.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetPrivateArticles
-        /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         UserId*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of private articles in that user id</response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="UserId"></param>
 
-    [HttpGet("UserId:int")]
-
+    [HttpGet]
     public async Task<ActionResult> GetPrivateArticles(int UserId)
     {
         if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
@@ -581,30 +312,8 @@ public class ArticleController : BaseController
 
     }
 
-        /// <summary>
-        /// Gets a list of articles by title.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     url : https://localhost:7197/Article/GetArticlesByTitle
-        /// 
-        ///  * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         Title*: string,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of article by title.. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
 
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="Title"></param>
-
-    [HttpGet("Articles/{title:string}")]
-
+    [HttpGet]
     public async Task<ActionResult> GetArticlesByTitle(string Title)
     {
         if (String.IsNullOrEmpty(Title)) return BadRequest(Message("Title can't be null"));
@@ -625,29 +334,9 @@ public class ArticleController : BaseController
 
     }
 
-        /// <summary>
-        /// Gets a list of articles by author name.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///    url:  https://localhost:7197/Article/GetArticlesByAuthor
-        /// 
-        ///  * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         AuthorName*: string,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of articles by author name.. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="404">If AuthorName was not found. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="AuthorName"></param>
 
-    [HttpGet("Articles/{author:string}")]
+
+    [HttpGet]
     public async Task<ActionResult> GetArticlesByAuthor(string AuthorName)
     {
         if (String.IsNullOrEmpty(AuthorName)) return BadRequest(Message("Author Name can't be null"));
@@ -666,32 +355,12 @@ public class ArticleController : BaseController
         }
 
     }
-        /// <summary>
-        /// Gets a list of article by article status id.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///    url: https://localhost:7197/Article/GetArticlesByArticleStatusId 
-        /// 
-        ///  * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         ArticleStatusID*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of article by article status id.. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ArticleStatusID"></param>
-        
-    [HttpGet("ArticleStatusId:int")]
+
+    [HttpGet]
     public async Task<IActionResult> GetArticlesByArticleStatusId(int ArticleStatusID)
     {
 
-        if (ArticleStatusID <= 0 && ArticleStatusID > 4) return BadRequest(Message($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}"));
+        if (ArticleStatusID <= 0 || ArticleStatusID > 4) return BadRequest(Message($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}"));
         try
         {
 
@@ -709,29 +378,7 @@ public class ArticleController : BaseController
 
     }
 
-        /// <summary>
-        /// Gets a list of comments by article id.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///    url: https://localhost:7197/Article/GetComments
-        /// 
-        ///  * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         ArticleId*: int,
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns a list of comment by article id.. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
-        /// <param name="ArticleId"></param>
-
-     [HttpGet("{ArticleId:int}/comments")]
-
+    [HttpGet]
     public async Task<ActionResult<IEnumerator<QueryComment>>> GetComments(int ArticleId)
     {
         if (ArticleId <= 0) return BadRequest(Message("ArticleId must be greater than 0"));
@@ -750,6 +397,11 @@ public class ArticleController : BaseController
 
         }
 
+
+
     }
+
+
+
 
 }
