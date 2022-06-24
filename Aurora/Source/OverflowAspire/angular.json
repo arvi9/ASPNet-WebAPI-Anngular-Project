@@ -114,7 +114,8 @@
               "src/assets/css/style.css",
               "src/assets/css/modal.css",
               "src/assets/Reviewercss/bootstrap.min.css",
-              "src/assets/Reviewercss/style.css"
+              "src/assets/Reviewercss/style.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
