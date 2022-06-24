@@ -52,7 +52,8 @@ namespace AspireOverflow.Services
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     ExpiryInMinutes = 360,
                     IsAdmin = user.UserRoleId == 1 ? true : false,
-                    IsReviewer = user.IsReviewer
+                    IsReviewer = user.IsReviewer,
+                    IsVerified=user.VerifyStatus?.Name
                 };
 
                 return Result;
