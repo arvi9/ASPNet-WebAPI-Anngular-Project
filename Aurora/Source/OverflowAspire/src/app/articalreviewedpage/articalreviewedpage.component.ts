@@ -25,11 +25,11 @@ export class ArticalreviewedpageComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
     .get<any>(this.Usersrc,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       this.data =data;
       this.totalLength=data.length;
       console.log(data);
-    });
+    }});
   }
   public data: Article[] = [
  

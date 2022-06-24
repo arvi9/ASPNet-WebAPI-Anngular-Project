@@ -22,25 +22,25 @@ export class ProfileComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
     .get<any>(this.Usersrc,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       this.user =data;
       console.log(data);
-    });
+    }});
 
   }
   public user:User={
 
 
     userId: 0,
-    fullName: 'Pooja',
+    fullName: '',
     genderId: 1,
-    aceNumber: 'ACE0564',
+    aceNumber: '',
     employeeId:'',
-    email: 'pooja@gmail.com',
-    department:'dotnet',
+    email: '',
+    department:'',
     designation:'',
     password: '',
-    dateOfBirth: '05/05/2001',
+    dateOfBirth: '',
     verifyStatusID: 0,
     isReviewer: false,
     userRoleId: 0,

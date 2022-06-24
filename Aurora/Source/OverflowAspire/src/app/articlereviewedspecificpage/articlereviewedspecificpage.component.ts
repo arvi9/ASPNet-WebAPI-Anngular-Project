@@ -28,10 +28,10 @@ export class ArticlereviewedspecificpageComponent implements OnInit {
     console.log(this.articleId)
     this.http
       .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         console.log(data);
-      });
+      }});
     });
   }
   public data:Article=new Article();

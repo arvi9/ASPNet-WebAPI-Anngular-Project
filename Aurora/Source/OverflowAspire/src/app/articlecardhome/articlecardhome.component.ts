@@ -27,12 +27,12 @@ export class ArticlecardhomeComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(this.artsrc,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         
         console.log(data)
        
-      });
+      }});
 }
 public data: Article[] = [
 

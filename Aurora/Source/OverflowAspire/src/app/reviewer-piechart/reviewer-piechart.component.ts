@@ -14,7 +14,7 @@ export class ReviewerPiechartComponent implements OnInit {
 ngOnInit(): void {
   this.http
     .get<any>(`${application.URL}/Dashboard/GetReviewerDashboard?ReviewerId=1`)
-    .subscribe((data) => {
+    .subscribe({next:(data) => {
       this.piedata = data;
       console.log(data);
       var names=['Articles to be Reviewed', 'Articles Reviewed'];
@@ -46,7 +46,7 @@ ngOnInit(): void {
       
     }
   });
-});
+}});
 
  
 }

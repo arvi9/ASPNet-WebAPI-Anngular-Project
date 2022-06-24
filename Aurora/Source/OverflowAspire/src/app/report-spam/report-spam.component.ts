@@ -58,11 +58,11 @@ export class ReportSpamComponent implements OnInit {
     console.log(this.reportspam)
     this.reportspam.queryId=this.queryId;
     this.http.post<any>(`${application.URL}/Query/AddSpam`, this.reportspam, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
 
         console.log(data)
 
-      });
+  }});
 
   }
 

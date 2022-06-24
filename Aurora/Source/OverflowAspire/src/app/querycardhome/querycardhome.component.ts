@@ -24,11 +24,11 @@ export class QuerycardhomeComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(this.Querysrc,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         this.totalLength = data.length;
        
-      });
+      }});
   }
 
 

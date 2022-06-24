@@ -30,10 +30,10 @@ export class ToreviewspecificpageComponent implements OnInit {
     console.log(this.articleId)
     this.http
       .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         console.log(data);
-      });
+      }});
     });
   }
   public data:Article=new Article();
@@ -47,9 +47,9 @@ export class ToreviewspecificpageComponent implements OnInit {
     console.log("ge")
     this.http
     .patch(`${application.URL}/Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=4`,Object,{headers:headers})  
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
     this.routing.navigateByUrl("/ToReview");
    
   }
@@ -63,9 +63,9 @@ export class ToreviewspecificpageComponent implements OnInit {
     console.log("go")
     this.http
     .patch(`${application.URL}/Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=1`,Object,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
     this.routing.navigateByUrl("/ToReview");
   }
 }

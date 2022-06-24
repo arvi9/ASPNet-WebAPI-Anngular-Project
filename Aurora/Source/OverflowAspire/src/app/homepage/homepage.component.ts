@@ -32,7 +32,7 @@ export class HomepageComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
       .get<any>(this.UrlString,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data.latestArticles=data.latestArticles.slice(0,3)
         this.data.trendingArticles=data.trendingArticles.slice(0,3)
         this.data.trendingQueries=data.trendingQueries.slice(0,3)
@@ -40,7 +40,7 @@ export class HomepageComponent implements OnInit {
       
       console.log(data)
        
-      });
+      }});
     
     }
       public data: HomePage = new HomePage();

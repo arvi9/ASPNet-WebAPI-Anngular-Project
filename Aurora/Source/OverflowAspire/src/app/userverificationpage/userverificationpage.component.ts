@@ -25,10 +25,10 @@ export class UserverificationpageComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
     .get<any>(this.Usersrc,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       this.data =data;
       console.log(data);
-    });
+   } });
   }
   public data: User[] = [
   
@@ -44,9 +44,9 @@ export class UserverificationpageComponent implements OnInit {
     console.log("ge")
     this.http
     .patch(`https://localhost:7197/User/ChangeUserVerifyStatus?UserId=${userId}&IsVerified=true`,Object,{headers:headers})  
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
     this.routing.navigateByUrl("/Employee");
   }
 
@@ -60,9 +60,9 @@ export class UserverificationpageComponent implements OnInit {
     console.log("go")
     this.http
     .delete(`https://localhost:7197/User/RemoveUser?UserId=${userId}`,{headers:headers})  
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
     this.routing.navigateByUrl("/Employee");
   }
 }

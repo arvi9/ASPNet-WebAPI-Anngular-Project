@@ -36,12 +36,12 @@ ngOnInit(): void {
       
       this.http
       .get<any>(this.artsrc,{headers:headers})
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.data = data;
         console.log(data)
         this.filteredData = data;
         this.totalLength = data.length;
-      });
+      }});
     });
   }
   public data: Article[] = [

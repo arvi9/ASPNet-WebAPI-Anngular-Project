@@ -23,10 +23,10 @@ export class SpamreportpageComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     this.http
     .get<any>(this.QuerySrc,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       this.data =data;
       console.log(data);
-    });
+    }});
   }
 
   public data: any[] = []

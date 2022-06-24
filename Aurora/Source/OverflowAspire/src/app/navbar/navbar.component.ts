@@ -22,10 +22,10 @@ export class NavbarComponent implements OnInit {
     })
     this.http
     .get<any>(this.Usersrc,{headers:headers})
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       this.user =data;
       this.role=data.isReviewer;
-    });
+    }});
 
    }
   LogOut(){

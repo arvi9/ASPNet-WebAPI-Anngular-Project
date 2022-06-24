@@ -38,9 +38,9 @@ export class RaisequeryComponent implements OnInit {
     console.log(AuthService.GetData("token"))
     console.log(this.query)
     this.http.post<any>(`${application.URL}/Query/CreateQuery`, this.query, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         console.log(data);
-      });
+      }});
        this.routing.navigateByUrl("MyQueries");
     }
 

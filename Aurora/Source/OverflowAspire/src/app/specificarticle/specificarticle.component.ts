@@ -64,10 +64,10 @@ public GetArticlesByArticleId():void{
   })
   this.http
   .get<any>(`${application.URL}/Article/GetArticleById?ArticleId=${this.articleId}`,{headers:headers})
-  .subscribe((data) => {
+  .subscribe({next:(data) => {
     this.data = data;
     console.log(data);
-  });
+  }});
 }
   public data: Article = new Article();
   createdOn: string = this.data.date.toDateString()
@@ -85,11 +85,11 @@ public GetArticlesByArticleId():void{
     console.log(this.articleId)
     this.like.articleId=this.articleId;
     this.http.post<any>(`${application.URL}/Article/AddLikeToArticle`, this.like, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
           this.data.likes=data.likesCount
         console.log(data)
 
-      });
+      }});
 
 
   }
@@ -114,10 +114,10 @@ public GetArticlesByArticleId():void{
     console.log(this.article)
     this.article.articleId=this.articleId;
     this.http.post<any>(`${application.URL}/Article/CreateComment`, this.article, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
 
         console.log(data)
-      });
+      }});
       this.GetArticlesByArticleId()
 
   }

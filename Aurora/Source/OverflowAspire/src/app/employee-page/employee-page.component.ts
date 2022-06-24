@@ -36,17 +36,38 @@ export class EmployeePageComponent implements OnInit {
     console.log("ge")
     this.http
     .patch(`https://localhost:7197/User/ChangeUserVerifyStatus?UserId=${userId}&IsVerified=false`,Object,{headers:headers})  
-    .subscribe((data)=>{
+    .subscribe({next:(data)=>{
       console.log(data);
-    });
+    }});
     
   }
   
   changeText(){
     if(this.text=='change to reviewer'){
+      // const headers = new HttpHeaders({
+      //   'Content-Type': 'application/json',
+      //   'Authorization': `Bearer ${AuthService.GetData("token")}`
+      // })
+      // console.log(AuthService.GetData("token"))
+      // this.http
+      // .patch(`https://localhost:7197/User/UpdateUserByIsReviewer?UserId=${userId}&IsReviewer=true`,Object,{headers:headers})  
+      // .subscribe((data)=>{
+      //   console.log(data);
+      // });
       this.text='change to user'
     }else{
+      // const headers = new HttpHeaders({
+      //   'Content-Type': 'application/json',
+      //   'Authorization': `Bearer ${AuthService.GetData("token")}`
+      // })
+      // console.log(AuthService.GetData("token"))
+      // this.http
+      // .patch(`https://localhost:7197/User/UpdateUserByIsReviewer?UserId=${userId}&IsReviewer=false`,Object,{headers:headers})  
+      // .subscribe((data)=>{
+      //   console.log(data);
+      // });
       this.text='change to reviewer'
+
     }
   }
   public data: User[] = []

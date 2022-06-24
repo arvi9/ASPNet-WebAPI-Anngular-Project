@@ -78,12 +78,12 @@ this.IsLoadingSubmit=true;
     })
     this.article.articleStatusID = 2;
       this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
-      .pipe(catchError(this.handleError)).subscribe((data) => {
+      .pipe(catchError(this.handleError)).subscribe({next:(data) => {
 
         this.route.navigateByUrl("/MyArticles")
         console.log(data)
 
-      });
+      }});
   }
   handleError(error:any) {
     let errorMessage = '';
@@ -111,11 +111,11 @@ this.IsLoadingSubmit=true;
 
 
     this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
-      .subscribe((data) => {
+      .subscribe({next:(data) => {
         this.route.navigateByUrl("/MyArticles")
         console.log(data)
 
-      });
+      }});
   }
 
 
