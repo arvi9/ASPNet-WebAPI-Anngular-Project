@@ -24,8 +24,37 @@ public class UserController : BaseController
         _UserService = UserService;
 
     }
+        /// <summary>
+        /// Create User
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     url : https://localhost:7197/User/CreateUser
+        ///
+        ///     * fields are required
+        ///      body
+        ///     {
+        ///        userId*: int,
+        ///        fullName*: string,
+        ///        genderId*: int,
+        ///        aceNumber*: string,
+        ///        emailAddress*: string,
+        ///        password*: string,
+        ///        dateOfBirth*: 2022-06-19T16:02:44.207Z,
+        ///        verifyStatusID*: int,
+        ///        isReviewer*: string,
+        ///        userRoleId*: int,
+        ///        designationId*": int,
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">If the User was created.</response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error.</response>
+        /// <response code="500">If there is problem in server.</response>
+        /// <param name="User"></param>
 
-    [HttpPost][AllowAnonymous]
+    [HttpPost("User")][AllowAnonymous]
     public async Task<ActionResult> CreateUser(User User)
     {
 
@@ -48,7 +77,30 @@ public class UserController : BaseController
         }
     }
 
-    [HttpPatch]
+        /// <summary>
+        /// Change user verify status.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/ChangeUserVerifyStatus
+        ///
+        ///     body
+        ///             {
+        ///                 UserId* : int,
+        ///                 IsVerified* : boolean
+        ///                
+        ///             }
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns that user status is verified.</response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="UserId"></param>
+        /// <param name="IsVerified"></param>
+
+
+    [HttpPatch("{UserId:int}/{IsVerified:bool}")]
     public async Task<ActionResult> ChangeUserVerifyStatus(int UserId, bool IsVerified)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -69,7 +121,29 @@ public class UserController : BaseController
         }
     }
 
-      [HttpPatch]
+        /// <summary>
+        /// Here the user is updated as reviewer.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/UpdateUserByIsReviewer
+        ///
+        ///     body
+        ///             {
+        ///                 UserId* : int,
+        ///                 IsReviewer* : boolean
+        ///                
+        ///             }
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns that the User is marked as reviewer..</response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="UserId"></param>
+        /// <param name="IsReviewer"></param>
+
+      [HttpPatch("{UserId:int}/{IsReviewer:bool}")]
     public async Task<ActionResult> UpdateUserByIsReviewer(int UserId, bool IsReviewer)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -90,10 +164,29 @@ public class UserController : BaseController
         }
     }
 
+        /// <summary>
+        /// To remove user by User id.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/RemoveUser
+        ///     
+        ///     * fields are required
+        /// 
+        ///     body
+        ///             {
+        ///                 UserId* : int,
+        ///                
+        ///             }
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns as removed user successfully. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="UserId"></param>
 
-
-
-    [HttpDelete]   //Admin rejected users only be deleted
+    [HttpDelete("UserId:int")]   //Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -112,7 +205,18 @@ public class UserController : BaseController
             return Problem($"Error Occurred while removing User with UserId :{UserId}");
         }
     }
-
+        /// <summary>
+        /// Gets all users
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetUser
+        ///
+        /// </remarks>
+        /// <response code="200">Returns a list of user. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
     [HttpGet]
     public async Task<ActionResult> GetUser()
     {
@@ -134,9 +238,29 @@ public class UserController : BaseController
         }
     }
 
-    
-
-    [HttpGet]
+        /// <summary>
+        /// Gets a list of verified users by verify status id..
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetUsersByVerifyStatusId
+        ///
+        /// 
+        ///     * fields are required
+        /// 
+        ///     body
+        ///             {
+        ///                 VerifyStatusID* : int,
+        ///                
+        ///             }
+        /// </remarks>
+        /// <response code="200">Returns a list of verified user. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="VerifyStatusID"></param>
+        
+        [HttpGet("VerifyStatusId:int")]
     public async Task<ActionResult> GetUsersByVerifyStatusId(int VerifyStatusID)
     {
         if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}"));
@@ -152,7 +276,29 @@ public class UserController : BaseController
         }
     }
 
-    [HttpGet]
+        /// <summary>
+        /// Gets a list of users assigned to the role by role id.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetUsersByUserRoleId
+        ///
+        /// 
+        ///     * fields are required
+        /// 
+        ///     body
+        ///             {
+        ///                 RoleId* : int,
+        ///                
+        ///             }
+        /// </remarks>
+        /// <response code="200">Returns a list of users assigned to the user role. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="RoleId"></param>
+
+    [HttpGet("RoleId:int")]
     public async Task<ActionResult> GetUsersByUserRoleId(int RoleId)
     {
         if (RoleId <= 0 && RoleId > 2) return BadRequest(Message($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}"));
@@ -168,7 +314,30 @@ public class UserController : BaseController
         }
     }
 
-    [HttpGet]
+        /// <summary>
+        /// Gets a list of user assigned as reviewer.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetUsersByIsReviewer
+        ///
+        /// 
+        ///     * fields are required
+        /// 
+        ///     body
+        ///             {
+        ///                 IsReviewer* : boolean,
+        ///                
+        ///             }
+        /// </remarks>
+        /// <response code="200">Returns a list of user  assigned as reviewer. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="IsReviewer"></param>
+
+
+    [HttpGet("IsReviewer:bool")]
     public async Task<ActionResult> GetUsersByIsReviewer(bool IsReviewer)
     {
 
@@ -183,7 +352,17 @@ public class UserController : BaseController
             return Problem($"Error occured while processing your request with IsReviewer:{IsReviewer}");
         }
     }
-
+        /// <summary>
+        /// Gets all genders
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetGenders
+        ///
+        /// </remarks>
+        /// <response code="200">Returns a list of genders. </response>
+        /// <response code="500">If there is problem in server. </response>
 
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetGenders()
@@ -199,6 +378,17 @@ public class UserController : BaseController
         }
     }
 
+        /// <summary>
+        /// Gets all designations.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetDesignations
+        ///
+        /// </remarks>
+        /// <response code="200">Returns a list of designations. </response>
+        /// <response code="500">If there is problem in server. </response>
 
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDesignations()
@@ -215,7 +405,17 @@ public class UserController : BaseController
             throw exception;
         }
     }
-
+        /// <summary>
+        /// Gets all departments.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetDepartments
+        ///
+        /// </remarks>
+        /// <response code="200">Returns a list of departments. </response>
+        /// <response code="500">If there is problem in server. </response>
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDepartments()
     {
