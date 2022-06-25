@@ -9026,8 +9026,8 @@
     },
     "AspireOverflow/1.0.0": {
       "type": "project",
-      "path": "../../AspireOverflow/AspireOverflow.csproj",
-      "msbuildProject": "../../AspireOverflow/AspireOverflow.csproj"
+      "path": "../AspireOverflow/AspireOverflow.csproj",
+      "msbuildProject": "../AspireOverflow/AspireOverflow.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9043,34 +9043,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Manim\\.nuget\\packages\\": {}
+    "C:\\Users\\manimaran.venkat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\API Projects\\Testing\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
+      "projectUniqueName": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
       "projectName": "AspireOverflow-Test",
-      "projectPath": "E:\\API Projects\\Testing\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
-      "packagesPath": "C:\\Users\\Manim\\.nuget\\packages\\",
-      "outputPath": "E:\\API Projects\\Testing\\AspireOverflow-Test\\obj\\",
+      "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
+      "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Manim\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj": {
-              "projectPath": "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj"
+            "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj": {
+              "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj"
             }
           }
         }
@@ -9133,7 +9131,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

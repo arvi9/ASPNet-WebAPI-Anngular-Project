@@ -38,21 +38,46 @@ namespace AspireOverflowTest
             };
         }
 
-         public static QueryComment GetValidQueryComment()
+        public static List<Query> GetListOfQueriesForSeeding()
         {
-            return new QueryComment(){
-                Comment="what is Query",
-                CreatedBy=1,
-                QueryId=2
+            return new List<Query>(){
+             new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = false, IsActive = true, CreatedBy = 1},
+              new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = false, IsActive = true, CreatedBy = 2},
+               new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = true, IsActive = true, CreatedBy = 1},
+                new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = false, IsActive = true, CreatedBy = 1},
+                 new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = true, IsActive = true, CreatedBy = 2},
+                  new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = false, IsActive = true, CreatedBy = 2},
+                   new Query(){Title = "Sample Title", Content = "What is meant by Unit Testing?",code = "", IsSolved = true, IsActive = true, CreatedBy = 1},
 
             };
         }
-      public static List<QueryComment> GetListOfQueryComments(){
 
-      return new List<QueryComment>();
-      }
-        
-    
+        public static List<User> GetListOfUsersForSeeding()
+        {
+            return new List<User>(){
+                new User(){UserId=1,FullName="Mani Maran",AceNumber="ACE9898",EmailAddress="Mani.Venkat@aspiresys.com",GenderId=1,Password="88888888" },
+                 new User(){UserId=2,FullName="Mani Maran",AceNumber="ACE9898",EmailAddress="Mani.Venkat@aspiresys.com",GenderId=1 ,Password="898989898"},
+       
+        };
+        }
+
+        public static QueryComment GetValidQueryComment()
+        {
+            return new QueryComment()
+            {
+                Comment = "what is Query",
+                CreatedBy = 1,
+                QueryId = 2
+
+            };
+        }
+        public static List<QueryComment> GetListOfQueryComments()
+        {
+
+            return new List<QueryComment>();
+        }
+
+
     }
 
 

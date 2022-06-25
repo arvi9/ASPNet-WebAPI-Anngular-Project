@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
 using AspireOverflow.Services;
@@ -24,6 +25,7 @@ namespace AspireOverflowTest
         public QuertRepositoryTest()
         {
             _context = MockDBContext.GetInMemoryDbContext();
+            
             _queryRepository = new QueryRepository(_context, _logger.Object);
 
 
@@ -54,21 +56,51 @@ namespace AspireOverflowTest
             Query query = QueryMock.GetInValidQuery();
             Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
         }
-        // [Fact]
-        // public void AddQuery_ShouldThrowDBUpdateException()
-        // {
-        //     Query query = QueryMock.GetValidQuery();
+        
+          [Fact]
+        public void AddComment_ShouldReturnTrue_WhenQueryObjectIsValid()
+        {
+            QueryComment comment = QueryMock.GetValidQueryComment();
 
+            var Result = _queryRepository.AddComment(comment);
 
+            Assert.True(Result);
+        }
 
-        //     // _Mockcontext.Setup(item => item.Queries.Add(query)).Throws(new DbUpdateException());
+        [Theory]
+        [InlineData(null)]
+        public void AddComment_ShouldThrowValidationException_WhenQueryObjectIsNull(QueryComment comment)
+        {
 
-        //     Assert.Throws<DbUpdateException>(() => _queryRepository.AddQuery(query));
+            Assert.Throws<ValidationException>(() => _queryRepository.AddComment(comment));
+        }
 
-        //     // _queryRepository=new QueryRepository(_context,_logger.Object);
-        // }
+        [Fact]
+        public void AddComment_ShouldThrowValidationException_WhenQueryObjectIsInvalid()
 
+        {
+            QueryComment comment = new QueryComment();
 
+            Assert.Throws<ValidationException>(() => _queryRepository.AddComment(comment));
+        }
+        
+         [Fact]
+        public void AddCmment_ShouldThrowValidationException_WhenQueryObjectIsInvalid()
+
+        {
+            QueryComment comment = new QueryComment();
+
+            Assert.Throws<ValidationException>(() => _queryRepository.AddComment(comment));
+        }
+        [Fact]
+        public void GetQueries_ShouldReturnListOfQueries_WhenMethodIsCalled()
+        {
+            MockDBContext.SeedMockDataInMemoryDb(_context);
+
+            var Queries = QueryMock.GetListOfQueries();
+
+                      Assert.Equal(Queries.Count() + 1, _queryRepository.GetQueries().Count());
+        }
 
     }
 }

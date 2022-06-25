@@ -1,27 +1,115 @@
 {
   "format": 1,
   "restore": {
-    "E:\\API Projects\\Testing\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {}
+    "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {}
   },
   "projects": {
-    "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj": {
+    "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj",
-        "projectName": "AspireOverflow",
-        "projectPath": "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj",
-        "packagesPath": "C:\\Users\\Manim\\.nuget\\packages\\",
-        "outputPath": "E:\\API Projects\\AspireOverflow\\obj\\",
+        "projectUniqueName": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
+        "projectName": "AspireOverflow-Test",
+        "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
+        "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Manim\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj": {
+                "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.7.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.11.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.18.1, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj",
+        "projectName": "AspireOverflow",
+        "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj",
+        "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -127,99 +215,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "E:\\API Projects\\Testing\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\API Projects\\Testing\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
-        "projectName": "AspireOverflow-Test",
-        "projectPath": "E:\\API Projects\\Testing\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
-        "packagesPath": "C:\\Users\\Manim\\.nuget\\packages\\",
-        "outputPath": "E:\\API Projects\\Testing\\AspireOverflow-Test\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Manim\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj": {
-                "projectPath": "E:\\API Projects\\AspireOverflow\\AspireOverflow.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "FluentAssertions": {
-              "target": "Package",
-              "version": "[6.7.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.InMemory": {
-              "target": "Package",
-              "version": "[6.0.5, )"
-            },
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[16.11.0, )"
-            },
-            "Moq": {
-              "target": "Package",
-              "version": "[4.18.1, )"
-            },
-            "coverlet.collector": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.1.0, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.1, )"
-            },
-            "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.4.3, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

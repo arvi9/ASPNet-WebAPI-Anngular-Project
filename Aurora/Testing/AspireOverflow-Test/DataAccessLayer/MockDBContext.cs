@@ -16,7 +16,8 @@ public static class MockDBContext
 
     }       public static void SeedMockDataInMemoryDb(AspireOverflowContext dbContext)
         {
-           dbContext.Queries.AddRange(QueryMock.GetListOfQueries());
+           dbContext.Users.AddRange(QueryMock.GetListOfUsersForSeeding());
+           dbContext.Queries.AddRange(QueryMock.GetListOfQueriesForSeeding());
             dbContext.SaveChanges();
         }
 }
