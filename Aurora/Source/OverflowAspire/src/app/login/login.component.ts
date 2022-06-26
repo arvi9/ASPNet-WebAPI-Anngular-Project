@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { data } from 'jquery';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { Toaster } from 'ngx-toast-notifications';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +16,8 @@ showErrorMessage=false;
   IsAdmin:boolean=false;
   IsReviewer:boolean=false;
   IsLoading:boolean=false;
-  constructor(private spinnerService: NgxSpinnerService,private http: HttpClient,private route:Router) { }
+  IsVerified:string=''
+  constructor(private spinnerService: NgxSpinnerService,private http: HttpClient,private route:Router,private toaster: Toaster) { }
   user:any={
 
    Email: '',
@@ -42,7 +43,8 @@ showErrorMessage=false;
       {
 
         this.IsAdmin=data.isAdmin,
-        this.IsReviewer=data.isReviewer
+        this.IsReviewer=data.isReviewer,
+        this.IsVerified=data.IsVerified
         AuthService.SetDateWithExpiry("token",data.token,data.expiryInMinutes)
         AuthService.SetDateWithExpiry("Admin",data.isAdmin,data.expiryInMinutes)
         AuthService.SetDateWithExpiry("Reviewer",data.isReviewer,data.expiryInMinutes)
@@ -57,9 +59,17 @@ showErrorMessage=false;
         }else{
           this.route.navigateByUrl("/Home");
         }
+        if(this.IsVerified=="false"){
+          this.toaster.open({text: 'User is in Under Verification',position: 'top-center',type: 'primary'})
+          this.route.navigateByUrl("");
+        }
+        else{
+          this.route.navigateByUrl("/Home");
+        }
         console.log(data)
 
       },
+     
       error:(error)=>{
       
         this.showErrorMessage=true;
