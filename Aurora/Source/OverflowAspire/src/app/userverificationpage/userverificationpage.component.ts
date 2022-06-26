@@ -43,9 +43,10 @@ export class UserverificationpageComponent implements OnInit {
     .patch(`https://localhost:7197/User/ChangeUserVerifyStatus?UserId=${userId}&IsVerified=true`,Object,{headers:headers})  
     .subscribe({next:(data)=>{
       console.log(data);  
-      this.toaster.open('Hello world!');
+      
     }});
-    //this.routing.navigateByUrl("/Employee");
+    this.toaster.open({text: 'User Verified successfully',position: 'top-center',type: 'success'})
+    this.routing.navigateByUrl("/Employee");
     
   }
 
@@ -62,6 +63,7 @@ export class UserverificationpageComponent implements OnInit {
     .subscribe({next:(data)=>{
       console.log(data);
     }});
+    this.toaster.open({text: 'User removed successfully',position: 'top-center',type: 'danger'})
     this.routing.navigateByUrl("/Employee");
   }
 

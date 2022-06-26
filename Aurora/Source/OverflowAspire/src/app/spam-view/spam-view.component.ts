@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute} from '@angular/router';
-
+import { Toaster } from 'ngx-toast-notifications';
 @Component({
   selector: 'app-spam-view',
   templateUrl: './spam-view.component.html',
@@ -15,7 +15,7 @@ export class SpamViewComponent implements OnInit {
 
 
   @Input() Querysrc: string = `${application.URL}/Query/GetListOfSpams`;
-  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient,private toaster: Toaster) { }
 
   ngOnInit(): void {
     if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
@@ -56,8 +56,9 @@ export class SpamViewComponent implements OnInit {
     .subscribe({next:(data)=>{
       console.log("hello");
     }});
+    this.toaster.open({text: 'Query removed successfully',position: 'top-center',type: 'danger'})
     this.routing.navigateByUrl("/SpamReport");
-    window.alert("Done Successfully")
+   
   }
 
 
@@ -74,6 +75,7 @@ export class SpamViewComponent implements OnInit {
     .subscribe({next:(data)=>{
       console.log(data);
     }});
+    this.toaster.open({text: 'spam removed successfully',position: 'top-center',type: 'danger'})
     this.routing.navigateByUrl("/SpamReport");
   }
 }

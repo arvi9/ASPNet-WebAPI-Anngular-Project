@@ -5,7 +5,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { application } from 'Models/Application';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-
+import { Toaster } from 'ngx-toast-notifications';
 @Component({
   selector: 'app-report-spam',
   templateUrl: './report-spam.component.html',
@@ -18,7 +18,7 @@ export class ReportSpamComponent implements OnInit {
   queryId: number = 0
 
 
-  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient,private toaster: Toaster) { }
   reportspam: any = {
     spamId: 0,
     reason: '',
@@ -63,7 +63,8 @@ export class ReportSpamComponent implements OnInit {
         console.log(data)
 
   }});
-
+  this.toaster.open({text: 'Reported spam successfully',position: 'top-center',type: 'success'})
+  this.routing.navigateByUrl("/Home");
   }
 
 }

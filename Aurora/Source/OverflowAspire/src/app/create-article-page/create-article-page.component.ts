@@ -6,6 +6,7 @@ import { application } from 'Models/Application'
 import { catchError } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Toaster } from 'ngx-toast-notifications';
 
 
 declare var CKEDITOR: any;
@@ -28,7 +29,7 @@ export class CreateArticlePageComponent implements OnInit {
   public ckeditorContent: string = "";
 
 
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private http: HttpClient,private route:Router,private toaster: Toaster) { }
   article: any = {
     articleId: 0,
     title: '',
@@ -80,10 +81,12 @@ this.IsLoadingSubmit=true;
       this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .pipe(catchError(this.handleError)).subscribe({next:(data) => {
 
-        this.route.navigateByUrl("/MyArticles")
+        
         console.log(data)
 
       }});
+      this.toaster.open({text: 'Article submitted successfully',position: 'top-center',type: 'success'})
+      this.route.navigateByUrl("/MyArticles");
   }
   handleError(error:any) {
     let errorMessage = '';
@@ -112,10 +115,12 @@ this.IsLoadingSubmit=true;
 
     this.http.post<any>(`${application.URL}/Article/CreateArticle`, this.article, { headers: headers })
       .subscribe({next:(data) => {
-        this.route.navigateByUrl("/MyArticles")
+      
         console.log(data)
 
       }});
+      this.toaster.open({text: 'Article saved to draft',position: 'top-center',type: 'success'})
+      this.route.navigateByUrl("/MyArticles");
   }
 
 

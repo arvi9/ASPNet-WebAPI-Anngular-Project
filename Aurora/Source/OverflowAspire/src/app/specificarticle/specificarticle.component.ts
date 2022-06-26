@@ -6,6 +6,7 @@ import { data } from 'jquery';
 import { application } from 'Models/Application';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Toaster } from 'ngx-toast-notifications';
 @Component({
   selector: 'app-specificarticle',
   templateUrl: './specificarticle.component.html',
@@ -20,7 +21,7 @@ export class SpecificarticleComponent implements OnInit {
 
 
 
-  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient,private toaster: Toaster) { }
 
   article: any = {
     articleCommentId: 0,
@@ -118,7 +119,8 @@ public GetArticlesByArticleId():void{
 
         console.log(data)
       }});
-      this.GetArticlesByArticleId()
-
+      this.toaster.open({text: 'Comment Posted successfully',position: 'top-center',type: 'success'})
+      this.GetArticlesByArticleId()    
+      this.routing.navigateByUrl("/specificarticle/this.articleId");
   }
 }

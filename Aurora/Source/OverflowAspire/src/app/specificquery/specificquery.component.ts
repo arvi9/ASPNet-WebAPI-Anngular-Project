@@ -7,7 +7,7 @@ import{QueryComment} from 'Models/Query';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { application } from 'Models/Application';
-
+import { Toaster } from 'ngx-toast-notifications';
 
 declare type myarray = Array<{ content: string, coding: string, name: string }>
 @Component({
@@ -35,7 +35,7 @@ export class SpecificqueryComponent implements OnInit {
 
   }
 
-  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private routing:Router,private route: ActivatedRoute, private http: HttpClient,private toaster: Toaster) { }
 
   ngOnInit(): void {
     if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
@@ -94,8 +94,10 @@ this.GetQuery()
 
         console.log(data)
 
-      }}); this.GetQuery()
-
+      }}); 
+      this.toaster.open({text: 'Comment Posted successfully',position: 'top-center',type: 'success'})
+      this.GetQuery()
+      this.routing.navigateByUrl("/specificarticle/this.queryId");
  }
 
 
