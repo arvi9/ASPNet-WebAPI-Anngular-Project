@@ -32,7 +32,7 @@ import { LatestQueriesComponent } from './latest-queries/latest-queries.componen
 import { TrendingQueriespageComponent } from './trending-queriespage/trending-queriespage.component';
 import { LatestArticlepageComponent } from './latest-articlepage/latest-articlepage.component';
 import { TrendingArticlepageComponent } from './trending-articlepage/trending-articlepage.component';
-
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { ProfileComponent } from './profile/profile.component';
 import { SpecificqueryComponent } from './specificquery/specificquery.component';
 import { RaisequeryComponent } from './raisequery/raisequery.component';
@@ -53,7 +53,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { CreateArticlePageComponent } from './create-article-page/create-article-page.component';
 import { UpdateArticlePageComponent } from './update-article-page/update-article-page.component';
-
 import { HtmlToPlaintextPipe } from './html-to-plaintext.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditarticleComponent } from './editarticle/editarticle.component';
@@ -132,7 +131,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     Ng2SearchPipeModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-  
+    ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'})
    
 
   ],

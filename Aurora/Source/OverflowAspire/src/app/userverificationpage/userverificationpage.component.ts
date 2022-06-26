@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { application } from 'Models/Application';
 import { User } from 'Models/User';
 import { AuthService } from '../auth.service';
-import { MatDialog } from '@angular/material/dialog';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-userverificationpage',
@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class UserverificationpageComponent implements OnInit {
 
   @Input() Usersrc : string=`${application.URL}/User/GetUsersByVerifyStatusId?VerifyStatusID=3`;
-  constructor(private http: HttpClient,private routing:Router,private dialog: MatDialog) { }
+  constructor(private http: HttpClient,private routing:Router,private toaster: Toaster) { }
 
   ngOnInit(): void {
     if(AuthService.GetData("token")==null) this.routing.navigateByUrl("")
@@ -43,6 +43,7 @@ export class UserverificationpageComponent implements OnInit {
     .patch(`https://localhost:7197/User/ChangeUserVerifyStatus?UserId=${userId}&IsVerified=true`,Object,{headers:headers})  
     .subscribe({next:(data)=>{
       console.log(data);  
+      this.toaster.open('Hello world!');
     }});
     //this.routing.navigateByUrl("/Employee");
     

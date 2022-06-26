@@ -4,6 +4,7 @@ import { User } from 'Models/User';
 import { application } from 'Models/Application';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Toaster } from 'ngx-toast-notifications';
 
 
 
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class EmployeePageComponent implements OnInit {
   @Input() Usersrc : string=`${application.URL}/User/GetUsersByUserRoleId?RoleId=2`;
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private http: HttpClient,private route:Router,private toaster: Toaster) { }
 
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class EmployeePageComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data);
     });
+    this.toaster.open({text: 'User has Disabled',position: 'top-center',type: 'danger'})
     
   }
   onCheckboxChange(userId:any){
@@ -60,7 +62,7 @@ export class EmployeePageComponent implements OnInit {
         .subscribe((data)=>{
           console.log(data);
         });
-       
+        this.toaster.open({text: 'User marked as Reviewer',position: 'top-center',type: 'success'})
        
       } 
 
@@ -74,6 +76,7 @@ export class EmployeePageComponent implements OnInit {
         .subscribe((data)=>{
           console.log(data);
         });
+        this.toaster.open({text: 'User unmarked as Reviewer',position: 'top-center',type: 'secondary'})
       }
   }
   
