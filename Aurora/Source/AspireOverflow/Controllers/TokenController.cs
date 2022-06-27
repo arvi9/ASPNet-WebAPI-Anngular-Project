@@ -3,6 +3,8 @@ using AspireOverflow.Models;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Services;
 using System.ComponentModel.DataAnnotations;
+using AspireOverflow.DataAccessLayer.Interfaces;
+
 
 namespace AspireOverflow.Controllers
 {
@@ -12,9 +14,9 @@ namespace AspireOverflow.Controllers
     public class TokenController : BaseController
     {
 
-        private TokenService _tokenService;
+        private ITokenService _tokenService;
         private ILogger<TokenController> _logger;
-        public TokenController(TokenService tokenService, ILogger<TokenController> logger)
+        public TokenController(ITokenService tokenService, ILogger<TokenController> logger)
         {
 
             _tokenService = tokenService;
@@ -45,7 +47,7 @@ namespace AspireOverflow.Controllers
         {
           try
             {
-                if (!Validation.ValidateUserCredentials(Crendentials.Email, Crendentials.Password)) return BadRequest();
+                if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email, Crendentials.Password)) return BadRequest("Login Credentials cannot be null");
                 var Result = _tokenService.GenerateToken(Crendentials);
                 return Ok(Result);
 

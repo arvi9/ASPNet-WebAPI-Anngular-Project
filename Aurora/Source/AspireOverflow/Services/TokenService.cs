@@ -2,13 +2,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AspireOverflow.DataAccessLayer.Interfaces;
+
 using AspireOverflow.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AspireOverflow.Services
 {
-
-    public class TokenService
+   
+    public class TokenService : ITokenService
     {
         private IConfiguration _configuration;
         private UserService _userService;
@@ -53,7 +54,7 @@ namespace AspireOverflow.Services
                     ExpiryInMinutes = 360,
                     IsAdmin = user.UserRoleId == 1 ? true : false,
                     IsReviewer = user.IsReviewer,
-                    IsVerified=user.VerifyStatus?.Name
+                    IsVerified = user.VerifyStatus?.Name
                 };
 
                 return Result;

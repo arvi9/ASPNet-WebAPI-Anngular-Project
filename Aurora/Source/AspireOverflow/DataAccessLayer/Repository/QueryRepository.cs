@@ -73,7 +73,7 @@ namespace AspireOverflow.DataAccessLayer
 
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
         
-            if (IsSolved && IsDelete) throw new ArgumentException("Both parameter cannot be true at the same time");
+            if (IsSolved == IsDelete) throw new ArgumentException("Both parameter cannot be true/false at the same time");
             try
             {
                 var ExistingQuery = GetQueryByID(QueryId);
@@ -131,7 +131,6 @@ namespace AspireOverflow.DataAccessLayer
 
         public IEnumerable<QueryComment> GetComments()
         {
-
             try
             {
                 var ListOfComments = _context.QueryComments.Include("Query").Include("User").ToList();

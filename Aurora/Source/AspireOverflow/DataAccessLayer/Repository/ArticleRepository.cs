@@ -115,7 +115,7 @@ namespace AspireOverflow.DataAccessLayer
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                var ExistingDraftArticle = GetArticles().Where(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1).First();
+                var ExistingDraftArticle = GetArticles().ToList().Find(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1);
                 if (ExistingDraftArticle == null) throw new ItemNotFoundException($"No Matching data found with ArticleId:{ArticleId}");
 
                 _context.Articles.Remove(ExistingDraftArticle);

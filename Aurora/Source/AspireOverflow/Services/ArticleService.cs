@@ -102,7 +102,7 @@ namespace AspireOverflow.Services
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}"); try
             {
-                if (database.GetArticles().ToList().Find(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1) == null) throw new ItemNotFoundException("Only Draft Articles will be deleted");
+
                 return database.DeleteArticle(ArticleId); //only Draft article will be deleted
             }
             catch (Exception exception)
@@ -410,7 +410,7 @@ namespace AspireOverflow.Services
             try
             {
 
-                var ListOfArticles = GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
+                var ListOfArticles = database.GetArticles().Where(item => item.ArticleStatusID == ArticleStatusID).ToList();
                 if (ArticleStatusID == 2) ListOfArticles.Where(Item => Item.ArticleStatusID == 3);
                 return ListOfArticles.Select(Article => new
                 {

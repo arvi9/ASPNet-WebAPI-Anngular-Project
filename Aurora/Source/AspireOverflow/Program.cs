@@ -46,7 +46,7 @@ builder.Services.AddTransient<IQueryRepository,QueryRepository>();
 builder.Services.AddTransient<IArticleRepository,ArticleRepository>();
 builder.Services.AddTransient<IUserRepository,UserRepository>();
 builder.Services.AddTransient<IUserService,UserService>();
-builder.Services.AddTransient<TokenService>();
+builder.Services.AddTransient<ITokenService,TokenService>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<IArticleService,ArticleService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
