@@ -348,7 +348,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<object> GetSpams(int VerifyStatusID)
         {
-            if(VerifyStatusID <=0 && VerifyStatusID > 3) throw new ArgumentException("Verfiystatus Id must be greater than 0 and less than or eeeeeeequal to 4");
+            if(VerifyStatusID <=0 || VerifyStatusID > 3) throw new ArgumentException("Verfiystatus Id must be greater than 0 and less than or eeeeeeequal to 4");
             try
             {
                 var Spams = database.GetSpams().Where(item =>item.VerifyStatusID==VerifyStatusID).GroupBy(item => item.QueryId).OrderByDescending(item=>item.Count()).Select(item =>new{

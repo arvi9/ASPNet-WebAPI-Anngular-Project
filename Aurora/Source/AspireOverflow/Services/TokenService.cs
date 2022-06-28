@@ -12,9 +12,9 @@ namespace AspireOverflow.Services
     public class TokenService : ITokenService
     {
         private IConfiguration _configuration;
-        private UserService _userService;
+        private IUserService _userService;
         private ILogger<TokenService> _logger;
-        public TokenService(IConfiguration configuration, UserService userService, ILogger<TokenService> logger)
+        public TokenService(IConfiguration configuration, IUserService userService, ILogger<TokenService> logger)
         {
             _configuration = configuration;
             _userService = userService;
@@ -24,8 +24,10 @@ namespace AspireOverflow.Services
 
         public object GenerateToken(Login Credentials)
         {
+            if(Credentials == null )throw new ArgumentException();
+            if(!Validation.ValidateUserCredentials(Credentials.Email,Credentials.Password)) throw new ArgumentException("Invalid object passed"); 
             var user = _userService.GetUser(Credentials.Email, Credentials.Password);
-            if (user == null) throw new ArgumentNullException();
+            if (user == null) throw new ArgumentNullException("User object cannot be null");
             try
             {
                 //create claims details based on the user information

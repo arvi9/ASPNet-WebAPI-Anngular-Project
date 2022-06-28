@@ -29,7 +29,7 @@ namespace AspireOverflowTest
 
         [Fact]
 
-        public void AuthToken_ShouldReturnStatusCode400_WhenObjectIsNUll()
+        public void AuthToken_ShouldReturnStatusCode400_WhenObjectIsInValid()
         {
             Login Credentials = new Login() { Email = "Mani", Password = "Mkajkj@133" };
             var Result = _TokenController.AuthToken(Credentials) as ObjectResult;

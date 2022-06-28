@@ -69,8 +69,7 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticle(article);
             try
             {
-                _context.Entry<Article>(article).State = EntityState.Modified;
-                // _context.Articles.AddOrUpdate(article);
+                _context.Articles.Update(article);
                 _context.SaveChanges();
                 return true;
             }
@@ -88,7 +87,7 @@ namespace AspireOverflow.DataAccessLayer
         {
 
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
-            if (ArticleStatusID <= 0 && ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
+            if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
                 var ExistingArticle = GetArticleByID(ArticleId);

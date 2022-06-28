@@ -123,7 +123,7 @@ public class ArticleController : BaseController
     /// <response code="500">If there is problem in server. </response>
     /// <param name="comment"></param>
     [HttpPost]
-    public async Task<ActionResult<ArticleComment>> CreateComment(ArticleComment comment)
+    public async Task<ActionResult> CreateComment(ArticleComment comment)
     {
 
         if (comment == null) return BadRequest(Message("Null value is not supported"));
@@ -137,7 +137,6 @@ public class ArticleController : BaseController
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateComment(ArticleComment comment)", exception, comment));
             return BadRequest(Message(exception.Message, comment));
         }
-
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateComment(ArticleComment comment)", exception, comment));
@@ -222,8 +221,6 @@ public class ArticleController : BaseController
     public async Task<ActionResult> UpdateArticle(Article article)
     {
         if (article == null) return BadRequest(Message("Article can't be null"));
-
-
         try
         {
             return _articleService.UpdateArticle(article, GetCurrentUser().UserId) ? await Task.FromResult(Ok(Message("Successfully updated the article"))) : BadRequest(Message("Error Occured while Updating the article"));
@@ -233,7 +230,6 @@ public class ArticleController : BaseController
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdateArticle(Article article)", exception, article));
             return BadRequest(Message($"{exception.Message}", article));
         }
-
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdateArticle(Article article)", exception, article));
@@ -475,7 +471,7 @@ public class ArticleController : BaseController
     [HttpGet]
     public async Task<ActionResult> GetArticlesByUserId()
     {
-        //if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
+       
         try
         {
             var ListOfArticleByUserId = _articleService.GetArticlesByUserId(GetCurrentUser().UserId);

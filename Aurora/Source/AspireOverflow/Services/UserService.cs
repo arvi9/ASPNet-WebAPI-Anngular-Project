@@ -4,22 +4,22 @@ using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Security;
 using Microsoft.AspNetCore.Identity;
 using AspireOverflow.Models;
-
+using System.Linq;
 
 namespace AspireOverflow.Services
 {
 
 
-    public class UserService :IUserService
+    public class UserService : IUserService
     {
         private static IUserRepository database;
 
         private static ILogger<UserService> _logger;
 
-        public UserService(ILogger<UserService> logger,IUserRepository _userRepository)
+        public UserService(ILogger<UserService> logger, IUserRepository _userRepository)
         {
             _logger = logger;
-            database =_userRepository;
+            database = _userRepository;
 
         }
         public bool CreateUser(User user)
@@ -30,6 +30,11 @@ namespace AspireOverflow.Services
                 user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
 
                 return database.CreateUser(user);
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", "CreateUser(User user)", exception, user));
+                throw exception;
             }
             catch (Exception exception)
             {
@@ -53,12 +58,15 @@ namespace AspireOverflow.Services
 
         }
 
-        public bool  UpdateUserByIsReviewer(int UserId,bool IsReviewer){
-             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
-            try{
-                return database.UpdateUserByReviewer(UserId,IsReviewer);
+        public bool UpdateUserByIsReviewer(int UserId, bool IsReviewer)
+        {
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+            try
+            {
+                return database.UpdateUserByReviewer(UserId, IsReviewer);
 
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "UpdateUserByIsReviewer(int UserId,bool IsReviewer)", exception, UserId));
                 return false;
@@ -69,12 +77,12 @@ namespace AspireOverflow.Services
 
         public User GetUser(string Email, string Password)  //Method used in Token Controller
         {
-            if(Email == null || Password ==null) throw new ArgumentNullException("Email or Password cannot be null");
+            if (Email == null || Password == null) throw new ArgumentException("Email or Password cannot be null");
             try
             {
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
-                var User = GetUsers().Where(user => user.EmailAddress == Email).First();
-                if(User ==null) throw new ValidationException("Invalid Email");
+                var User = GetUsers().ToList().Find(user => user.EmailAddress == Email);
+                if (User == null) throw new ValidationException("Invalid Email");
                 return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new InvalidDataException("Password doesn't match");
             }
             catch (Exception exception)
@@ -85,7 +93,7 @@ namespace AspireOverflow.Services
             }
         }
 
-                public object GetUserByID(int UserId)
+        public object GetUserByID(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
@@ -126,7 +134,7 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
-            if(VerifyStatusID <=0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
                 return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID).Select(User => new
@@ -230,7 +238,7 @@ namespace AspireOverflow.Services
             {
                 var department = database.GetDepartments().Where(item => item.DepartmentId == DepartmentId).First();
                 return department.DepartmentName;
-               
+
             }
             catch (Exception exception)
             {
@@ -294,7 +302,7 @@ namespace AspireOverflow.Services
             }
         }
 
- 
+
 
     }
 

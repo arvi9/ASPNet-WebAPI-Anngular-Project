@@ -187,7 +187,7 @@ namespace AspireOverflow.DataAccessLayer
         {
 
             if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0 where QueryId:{QueryId}");
-            if (VerifyStatusID <= 0 && VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
             
             try
             {

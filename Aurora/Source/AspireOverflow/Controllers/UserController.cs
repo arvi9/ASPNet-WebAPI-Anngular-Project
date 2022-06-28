@@ -224,11 +224,6 @@ public class UserController : BaseController
             return await Task.FromResult(Ok( _UserService.GetUserByID(UserId)));
 
         }
-        catch (ItemNotFoundException exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage("UserController", "GetUser()", exception, UserId));
-            return BadRequest(Message($"{exception.Message} with UserId:{UserId}"));
-        }
         catch (Exception exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", "GetUser()", exception, UserId));
@@ -261,7 +256,7 @@ public class UserController : BaseController
     [HttpGet]
     public async Task<ActionResult> GetUsersByVerifyStatusId(int VerifyStatusID)
     {
-        if (VerifyStatusID <= 0 && VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}"));
+        if (VerifyStatusID <= 0 || VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusID must be greater than 0 and less than 3 - VerifyStatusId:{VerifyStatusID}"));
         try
         {
             var ListOfUsers = _UserService.GetUsersByVerifyStatus(VerifyStatusID);
@@ -298,7 +293,7 @@ public class UserController : BaseController
     [HttpGet]
     public async Task<ActionResult> GetUsersByUserRoleId(int RoleId)
     {
-        if (RoleId <= 0 && RoleId > 2) return BadRequest(Message($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}"));
+        if (RoleId <= 0 || RoleId > 2) return BadRequest(Message($"RoleId must be greater than 0 and less than 2 - RoleId:{RoleId}"));
         try
         {
             var ListOfUsers = _UserService.GetUsersByUserRoleID(RoleId);

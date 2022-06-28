@@ -479,7 +479,7 @@ namespace AspireOverflow.Services
 
 
         public bool AddLikeToArticle(ArticleLike Like)
-        {
+        {   if(Like==null) throw new ArgumentException("ArticleLike Object cannot be null");
             if (Like.ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{Like.ArticleId}");
             if (Like.UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{Like.UserId}");
             try
