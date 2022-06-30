@@ -1,0 +1,15 @@
+
+
+npm i
+
+ng add @angular-eslint/schematics
+
+ng lint
+
+
+
+=============
+
+eslintrc.json---file
+
+rules ---> "@angular-eslint/no-empty-lifecycle-method": "off"
