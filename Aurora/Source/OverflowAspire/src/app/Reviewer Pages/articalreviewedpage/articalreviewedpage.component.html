@@ -22,7 +22,6 @@
                         <th>Article No</th>
                         <th>Author Name</th>
                         <th>Article Name</th>
-                        <th>Published Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +30,6 @@
                         <td>{{item.authorName}}</td>
                         <td><a routerLinkActive="active"
                                 [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a></td>
-                        <td>{{item.date|date}}</td>
-
-
                     </tr>
                 </tbody>
             </table>

@@ -13,6 +13,7 @@ export class SpecificarticleComponent implements OnInit {
   articleDetails: any = this.route.params.subscribe(params => {
     this.articleId = params['articleId'];
   });
+
   articleId: number = this.articleDetails;
 
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
@@ -27,9 +28,8 @@ export class SpecificarticleComponent implements OnInit {
     createdOn: Date.now,
     updatedBy: 0,
     updatedOn: '',
-
-
   }
+
   like: any = {
     likeId: 0,
     articleId: this.article.articleId,
@@ -38,24 +38,20 @@ export class SpecificarticleComponent implements OnInit {
   }
 
 
-
-
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
-      this.GetArticlesByArticleId()
-    });
-  }
-
-  public GetArticlesByArticleId(): void {
-    this.connection.GetArticle(this.articleId)
+      this.connection.GetArticle(this.articleId)
       .subscribe({
         next: (data: Article) => {
           this.data = data;
         }
       });
+    });
   }
+
+ 
 
 
   public data: Article = new Article();
@@ -86,13 +82,13 @@ export class SpecificarticleComponent implements OnInit {
 
   PostComment() {
     this.article.articleId = this.articleId;
+    console.log(this.article)
     this.connection.PostArticleComment(this.article)
       .subscribe({
         next: (data) => {
         }
       });
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
-    this.GetArticlesByArticleId()
-    this.routing.navigateByUrl("/specificarticle/this.articleId");
+    this.routing.navigateByUrl("Articles");
   }
 }

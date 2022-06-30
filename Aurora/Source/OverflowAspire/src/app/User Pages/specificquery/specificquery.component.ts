@@ -21,7 +21,7 @@ export class SpecificqueryComponent implements OnInit {
   Query: any = {
     CommentId: 0,
     comment: '',
-    datetime: Date.now,
+    datetime:Date.now,
     code: "",
     userId: 1,
     queryId: 0,
@@ -45,7 +45,6 @@ export class SpecificqueryComponent implements OnInit {
       .subscribe({
         next: (data: Query) => {
           this.data = data;
-          console.log(data);
         }
       });
   }
@@ -53,24 +52,14 @@ export class SpecificqueryComponent implements OnInit {
 
   public data: Query = new Query();
 
-  displayStyle = "none";
-  openpopup() {
-    this.displayStyle = "block";
-  }
-
-  closePopup() {
-    this.displayStyle = "none";
-  }
-
   PostComment() {
     this.Query.queryId = this.queryId;
     this.connection.PostQueryComment(this.Query)
       .subscribe({
-        next: (data) => {
+        next: () => {
         }
       });
+      console.log(this.Query)
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
-    this.GetQuery()
-    this.routing.navigateByUrl("Queries");
   }
 }

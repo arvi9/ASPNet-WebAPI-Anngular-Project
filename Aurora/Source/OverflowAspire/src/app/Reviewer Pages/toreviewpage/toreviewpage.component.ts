@@ -16,11 +16,11 @@ export class ToreviewpageComponent implements OnInit {
     if (!AuthService.GetData("Reviewer")) {
       this.route.navigateByUrl("")
     }
-    if (!AuthService.IsAdmin()) this.route.navigateByUrl("error")
     this.connection.GetToReviewArticles()
       .subscribe({
         next: (data: Article[]) => {
           this.data = data;
+          console.log(this.data)
         }
       });
   }
