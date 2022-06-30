@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div style="margin:20px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Article Reviewed
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<div class="Content" style="min-height: 100vh;">
+    <h1>Article Reviewed</h1>
+    <div class="Container">
+        <div>
+            <table datatable class="table table-striped row-border hover">
+                <thead>
+                    <tr>
+                        <th>Article No</th>
+                        <th>Author Name</th>
+                        <th>Article Name</th>
+                        <th>Published Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="" *ngFor="let item of data">
+                        <td>{{item.articleId}}</td>
+                        <td>{{item.authorName}}</td>
+                        <td><a routerLinkActive="active"
+                                [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a></td>
+                        <td>{{item.date|date}}</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>

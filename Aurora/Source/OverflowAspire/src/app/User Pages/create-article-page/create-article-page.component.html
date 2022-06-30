@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="Content" style="min-height: 100vh;">
+    <div style="margin:20px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="Home.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="MyArticles.html">My Articles</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    Create Article
+                </li>
+
+            </ol>
+        </nav>
+    </div>
+    <div class="container editor">
+        <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="w-25">
+                <label class="form-label">Title:</label>
+                <input class="form-control" placeholder="Enter Title" name="title" [(ngModel)]="article.title">
+            </div>
+            <div class="w-25">
+                <label class="form-label">Image:</label><br>
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image">
+                <label class="text-danger"> {{imageError}}</label>
+            </div>
+            <br>
+            <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
+            </ckeditor>
+            <div class="editor-btn">
+                <button class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()" >Save To Draft  <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                <button class="custom-btn btn-1" type="submit" value="Submit" >Submit  <span *ngIf="IsLoadingSubmit" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+<app-footer></app-footer>

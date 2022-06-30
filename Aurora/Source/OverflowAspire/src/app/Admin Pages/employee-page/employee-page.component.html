@@ -1,0 +1,50 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="Content" style="min-height: 100vh;">
+    <div style="margin:70px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLinkActive="active" routerLink="/AdminDashboard">AdminDashboard</a>
+                </li>
+
+                <li class="breadcrumb-item active">
+                    Employees
+                </li>
+
+            </ol>
+        </nav>
+    </div>
+    <div id="page-content-wrapper">
+
+
+        <h1>Employee Details</h1>
+
+        <div class="Container">
+            <div>
+                <table datatable class="table table-striped row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ACE Number</th>
+                            <th>Email Address</th>
+                            <th>Reviewer</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="" *ngFor="let item of data">
+                            <td>{{item.fullName}}</td>
+                            <td>{{item.employeeId}}</td>
+                            <td>{{item.email}}</td>
+                            <td><input [(ngModel)]="item.isReviewer" type="checkbox"
+                                    (change)="onCheckboxChange(item.userId)"></td>
+                            <td><a (click)="DisableUser(item.userId)"><button>Disable</button></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <app-footer></app-footer>

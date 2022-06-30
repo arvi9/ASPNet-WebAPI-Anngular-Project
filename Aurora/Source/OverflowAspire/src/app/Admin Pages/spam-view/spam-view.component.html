@@ -1,0 +1,45 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="Content" style="min-height: 100vh;">
+  <div style="margin:20px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLinkActive="active" routerLink="/AdminDashboard">AdminDashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLinkActive="active" routerLink="/SpamReport">Spam Reports</a>
+        </li>
+        <li class="breadcrumb-item active">
+          SpamView
+        </li>
+
+      </ol>
+    </nav>
+  </div>
+  <div class="container">
+    <h1 style="text-align: center;">{{data[0].query.title}}</h1>
+    <br>
+    <div>
+      <p>{{data[0].query.content}}<br>
+      </p>
+    </div>
+    <button class="btn btn-danger" (click)="onReject()">Reject</button>
+
+    <button class="btn btn-success float-end " (click)="onAccept() ">Accept</button>
+
+    <br>
+    <br>
+
+    <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+      <dl class="example-dl p-2">
+        <ng-container *cdkVirtualFor="let comment of data[0].listOfSpams">
+          <dt class="example-dt"><i class="fa fa-solid fa-user mx-3 ">&nbsp;&nbsp;{{comment.name}}</i></dt>
+          <dd class="example-dd mx-5">{{comment.reason}}</dd>
+          <hr>
+        </ng-container>
+      </dl>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>
+
+<app-footer></app-footer>

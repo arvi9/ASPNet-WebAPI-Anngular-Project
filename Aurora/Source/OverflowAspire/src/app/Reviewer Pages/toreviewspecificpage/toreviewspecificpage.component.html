@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div style="margin:20px">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a routerLinkActive="active" routerLink="/ToReview">ToReview</a>
+            </li>
+            <li class="breadcrumb-item active">
+                ToReviewSpecific
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<div class="Content" style="min-height: 100vh;">
+    <div class="container">
+        <div class="text-center">
+            <h1>{{data.title}}</h1>
+        </div>
+        <div class="text-center pb-4">
+            <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
+        </div>
+        <p> {{data.content}}</p>
+
+        <div class="container d-flex justify-content-between">
+            <a (click)="PublishArticle(data.articleId)"><button type="button"
+                    class="custom-btn btn-1">Publish</button></a>
+            <a (click)="RejectArticle(data.articleId)"><button type="button"
+                    class="custom-btn btn-1">Reject</button></a>
+        </div>
+    </div>
+
+</div>
+<br>
+<app-footer></app-footer>

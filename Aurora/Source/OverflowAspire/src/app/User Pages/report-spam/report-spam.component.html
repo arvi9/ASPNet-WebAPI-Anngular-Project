@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div>
+    <div style="margin:20px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLinkActive="active" routerLink="/Home">Home</a>
+                </li>
+              
+                <li class="breadcrumb-item">
+                    <a routerLinkActive="active" [routerLink]="['/SpecificQuery',reportspam.queryId]">Specificquery</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>reportspam</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="Content" style="min-height: 100vh;">
+<div class="container  p-5 my-5 border">
+ <div class="panel panel-default">
+    <div>           
+    
+        <div>
+            {{data.content}}
+        </div>
+        <div>
+            {{data.code}}
+        </div>
+       
+    
+</div>
+</div>
+
+<div class="text-center my-4">
+    <h3>Reason For report</h3>
+    <div>
+        <form  #form="ngForm" (ngSubmit)="spamreport()" autocomplete="off">
+        <div class="bg-light p-2">
+           
+            <textarea type="text" name="reportspam" class="form-control" rows="5" cols="4" placeholder="maximum 200words" id="reportspam-name"
+            placeholder="Reason for Report" [(ngModel)]="reportspam.reason"></textarea>
+        </div>
+        <div class="mt-2 text-right"><button type="submit" class="custom-btn btn-1 btn-2">Report
+                Spam</button>
+    </div>
+        </form>
+</div>
+</div>
+</div>
+</div>
+<app-footer></app-footer>

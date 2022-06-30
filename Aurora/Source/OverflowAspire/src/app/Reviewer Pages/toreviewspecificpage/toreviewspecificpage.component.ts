@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { Article } from 'Models/Article';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
+import { ConnectionService } from 'src/app/Services/connection.service';
+
+@Component({
+  selector: 'app-toreviewspecificpage',
+  templateUrl: './toreviewspecificpage.component.html',
+  styleUrls: ['./toreviewspecificpage.component.css']
+})
+export class ToreviewspecificpageComponent implements OnInit {
+  articleId: number = 0;
+
+  constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService) { }
+  ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (!AuthService.GetData("Reviewer")) {
+      this.routing.navigateByUrl("")
+    }
+    this.route.params.subscribe(params => {
+      this.articleId = params['articleId'];
+      this.connection.GetArticle(this.articleId)
+        .subscribe({
+          next: (data: Article) => {
+            this.data = data;
+          }
+        });
+    });
+  }
+  public data: Article = new Article();
+
+  PublishArticle(articleId: number) {
+    this.connection.ApproveArticle(articleId)
+      .subscribe({
+        next: (data: any) => {
+        }
+      });
+    this.routing.navigateByUrl("/ToReview");
+
+  }
+
+  RejectArticle(articleId: number) {
+    this.connection.RejectArticle(articleId)
+      .subscribe({
+        next: (data: any) => {
+        }
+      });
+    this.routing.navigateByUrl("/ToReview");
+  }
+}
