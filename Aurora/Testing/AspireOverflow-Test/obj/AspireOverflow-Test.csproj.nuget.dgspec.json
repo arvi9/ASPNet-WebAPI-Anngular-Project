@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {}
+    "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {
+    "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow-Test\\AspireOverflow-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
+        "projectUniqueName": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
         "projectName": "AspireOverflow-Test",
-        "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
-        "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow-Test\\obj\\",
+        "projectPath": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow-Test\\AspireOverflow-Test.csproj",
+        "packagesPath": "C:\\Users\\sriram.mani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sriram.mani\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -26,8 +26,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj": {
-                "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj"
+              "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow\\AspireOverflow.csproj": {
+                "projectPath": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow\\AspireOverflow.csproj"
               }
             }
           }
@@ -94,17 +94,17 @@
         }
       }
     },
-    "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj": {
+    "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow\\AspireOverflow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj",
+        "projectUniqueName": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow\\AspireOverflow.csproj",
         "projectName": "AspireOverflow",
-        "projectPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\AspireOverflow.csproj",
-        "packagesPath": "C:\\Users\\manimaran.venkat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manimaran.venkat\\Documents\\Backup\\AspireOverflow\\obj\\",
+        "projectPath": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow\\AspireOverflow.csproj",
+        "packagesPath": "C:\\Users\\sriram.mani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sriram.mani\\Desktop\\AspireOverflow\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\manimaran.venkat\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sriram.mani\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

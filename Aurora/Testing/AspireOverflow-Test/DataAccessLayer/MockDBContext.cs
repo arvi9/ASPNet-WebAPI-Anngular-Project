@@ -1,7 +1,9 @@
-
+using System.Linq;
 using AspireOverflow.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+
+
 
 namespace  AspireOverflowTest.DataAccessLayer
 {
@@ -14,11 +16,21 @@ public static class MockDBContext
         return new AspireOverflowContext(Options);
     
 
-    }       public static void SeedMockDataInMemoryDb(AspireOverflowContext dbContext)
+    }     
+             public static void SeedMockDataInMemoryDb(AspireOverflowContext dbContext)
         {
-           dbContext.Users.AddRange(QueryMock.GetListOfUsersForSeeding());
+            
+           dbContext.Users.AddRange(ArticleMock.GetListOfUsersForSeeding());
+           dbContext.Articles.AddRange(ArticleMock.GetListOfArticleForSeeding());
+           dbContext.PrivateArticles.AddRange(ArticleMock.GetListOfPrivateArticleForSeeding());
+           dbContext.ArticleComments.AddRange(ArticleMock.GetCommentsForSeeding());
+           dbContext.Departments.AddRange(UserMock.GetListOfDepartmentsForSeeding());
+           dbContext.Designations.AddRange(UserMock.GetListOfDesignationForSeeding());
+           dbContext.Genders.AddRange(UserMock.GetListOfGenderForSeeding());
            dbContext.Queries.AddRange(QueryMock.GetListOfQueriesForSeeding());
-            dbContext.SaveChanges();
+           dbContext.QueryComments.AddRange(QueryMock.GetListOfCommentsForSeeding());
+            dbContext.ArticleLikes.AddRange(ArticleMock.GetListOfArticleLikesForSeeding());
+           dbContext.SaveChanges();
         }
 }
 }

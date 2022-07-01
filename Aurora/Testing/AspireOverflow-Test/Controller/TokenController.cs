@@ -43,7 +43,7 @@ namespace AspireOverflowTest
             var Result = _TokenController.AuthToken(Credentials) as ObjectResult;
             Assert.Equal("sampletoken", Result?.Value);
         }
-  [Fact]
+        [Fact]
         public void AuthToken_ShouldReturnStatusCode400_WhenAnyExceptionOccurs()
         {
             Login Credentials = new Login() { Email = "Mani@aspiresys.com", Password = "Mkajkj@133" };
@@ -51,8 +51,5 @@ namespace AspireOverflowTest
             var Result = _TokenController.AuthToken(Credentials) as ObjectResult;
             Assert.Equal(400, Result?.StatusCode);
         }
-        
-
-
     }
 }

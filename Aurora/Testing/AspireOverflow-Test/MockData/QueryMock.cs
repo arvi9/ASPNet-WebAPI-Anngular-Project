@@ -52,6 +52,15 @@ namespace AspireOverflowTest
             };
         }
 
+         public static List<Spam> GetListOfSpamsForSeeding()
+        {
+            return new List<Spam>(){
+              
+                new Spam(){Reason= "It contains sensitive information",QueryId = 1,UserId= 1,VerifyStatusID= 3},
+                 new Spam(){Reason= "It contains sensitive information",QueryId = 1,UserId= 2,VerifyStatusID= 3},
+            };
+        }
+
         public static List<User> GetListOfUsersForSeeding()
         {
             return new List<User>(){
@@ -76,9 +85,41 @@ namespace AspireOverflowTest
 
             return new List<QueryComment>();
         }
+        
+        public static Spam AddValidSpam()
+        {
+            return new Spam()
+            {
+        
+                Reason= "It contains sensitive information",
+                QueryId = 1,
+                UserId= 1,
+                VerifyStatusID= 3
+            };
+        }
 
+        public static List<Spam> GetListOfSpams()
+        {
+            return new List<Spam>(){
+                new Spam(){SpamId=1,Reason= "It contains sensitive information",QueryId = 1,UserId= 1,VerifyStatusID= 3},
+                 new Spam(){SpamId=2,Reason= "It contains sensitive information",QueryId = 1,UserId= 2,VerifyStatusID= 3},
+               
+            };
+        }
+public static List<QueryComment> GetListOfCommentsForSeeding(){
 
+      return new List<QueryComment>()
+      {
+        new QueryComment(){QueryId=1,Comment="what is Query",QueryCommentId=1,CreatedBy=1},
+           new QueryComment(){QueryId=1,Comment="what is Query",QueryCommentId=2,CreatedBy=1},
+              new QueryComment(){QueryId=1,Comment="Worst one",QueryCommentId=3,CreatedBy=1},
+                 new QueryComment(){QueryId=1,Comment="Excellent one",QueryCommentId=4,CreatedBy=1},
+                    new QueryComment(){QueryId=1,Comment="Good",QueryCommentId=5,CreatedBy=1},
+                       new QueryComment(){QueryId=1,Comment="Not Bad",QueryCommentId=6,CreatedBy=1},
+                            new QueryComment(){QueryId=1,Comment="Not Bad",QueryCommentId=7,CreatedBy=1},
+
+      };
     }
-
+    }
 
 }

@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using AspireOverflow.CustomExceptions;
 using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
 using AspireOverflow.Services;
@@ -26,8 +25,8 @@ namespace AspireOverflowTest
         public QuertRepositoryTest()
         {
             _context = MockDBContext.GetInMemoryDbContext();
-            
             _queryRepository = new QueryRepository(_context, _logger.Object);
+             
 
 
         }
@@ -57,53 +56,77 @@ namespace AspireOverflowTest
             Query query = QueryMock.GetInValidQuery();
             Assert.Throws<ValidationException>(() => _queryRepository.AddQuery(query));
         }
-        
-          [Fact]
-        public void AddComment_ShouldReturnTrue_WhenQueryObjectIsValid()
+        // [Fact]
+        // public void AddQuery_ShouldThrowDBUpdateException()
+        // {
+        //     Query query = QueryMock.GetValidQuery();
+
+
+
+        //     // _Mockcontext.Setup(item => item.Queries.Add(query)).Throws(new DbUpdateException());
+
+        //     Assert.Throws<DbUpdateException>(() => _queryRepository.AddQuery(query));
+
+        //     // _queryRepository=new QueryRepository(_context,_logger.Object);
+        // }
+
+        // Get Query by id
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void GetQueryById_ShouldThrowArgumentException_WhenQueryIdISLessThanZero(int QueryId){
+            Assert.Throws<ArgumentException>(()=> _queryRepository.GetQueryByID(QueryId));
+        }
+
+        // Get Queries
+
+        //  [Fact]
+        //  public void GetQueries_ShouldReturnListOfQueries_WhenMethodIsCalled()
+        //  {
+        //      var Queries = QueryMock.GetListOfQueriesForSeeding();
+        //      Assert.Equal(Queries.Count()  , _queryRepository.GetQueries().Count());
+        //  }
+
+         //  Get Comments
+         [Fact]
+         public void GetComments_ShouldReturnListOfComments_WhenMethodIsCalled()
+         {
+        //    MockDBContext.SeedMockDataInMemoryDb(_context);
+             var Comments = QueryMock.GetListOfCommentsForSeeding();
+             Assert.Equal(Comments.Count() ,_queryRepository.GetComments().Count());
+         }  
+
+         //AddSpam
+
+         [Theory]
+        [InlineData(null)]
+        public void AddSpam_ShouldThrowValidationException_WhenSpamObjectIsNull(Spam spam)
         {
-            QueryComment comment = QueryMock.GetValidQueryComment();
-
-            var Result = _queryRepository.AddComment(comment);
-
+              Assert.Throws<ValidationException>(() => _queryRepository.AddSpam(spam));
+        }
+        [Fact]
+        public void AddSpam_ShouldReturnValidationException_WhenSpamObjectIsInValid()
+        {
+            Spam spam = new Spam();
+            Assert.Throws<ValidationException>(() => _queryRepository.AddSpam(spam));
+        }
+        [Fact]
+        public void AddSpam_ShouldReturnTrue_WhenSpamObjectIsValid()
+        {
+            Spam spam = QueryMock.AddValidSpam(); 
+            var Result = _queryRepository.AddSpam(spam);
             Assert.True(Result);
         }
 
-        [Theory]
-        [InlineData(null)]
-        public void AddComment_ShouldThrowValidationException_WhenQueryObjectIsNull(QueryComment comment)
-        {
-
-            Assert.Throws<ValidationException>(() => _queryRepository.AddComment(comment));
-        }
-
-        [Fact]
-        public void AddComment_ShouldThrowValidationException_WhenQueryObjectIsInvalid()
-
-        {
-            QueryComment comment = new QueryComment();
-
-            Assert.Throws<ValidationException>(() => _queryRepository.AddComment(comment));
-        }
-        
-         [Fact]
-        public void AddCmment_ShouldThrowValidationException_WhenQueryObjectIsInvalid()
-
-        {
-            QueryComment comment = new QueryComment();
-
-            Assert.Throws<ValidationException>(() => _queryRepository.AddComment(comment));
-        }
-        [Fact]
-        public void GetQueries_ShouldReturnListOfQueries_WhenMethodIsCalled()
-        {
-            MockDBContext.SeedMockDataInMemoryDb(_context);
-
-            var Queries = QueryMock.GetListOfQueries();
-
-                      Assert.Equal(Queries.Count() + 1, _queryRepository.GetQueries().Count());
-        }
-
-
+        // [Fact]
+        // public void GetListOfSpams_ReturnList_WhenObjectIsPassed()
+        // {
+        //     MockDBContext.SeedMockDataInMemoryDb(_context);
+        //     var spams=QueryMock.GetListOfSpams();
+        //     var Result = _queryRepository.GetSpams();
+        //     Assert.Equal(spams.Count(),Result.Count());
+        // }
         [Theory]
         [InlineData(0)]
          [InlineData(-1)]
@@ -124,16 +147,11 @@ namespace AspireOverflowTest
             Assert.False( _queryRepository.UpdateQuery(QueryId,IsSolved,IsDelete));
         }
   
-        [Theory]
-        [InlineData(2,true,false)]
-         [InlineData(3,false,true)]
-        public void UpdateQuery_ShouldReturnTrue_WhenValidDataPassed(int QueryId,bool IsSolved,bool IsDelete){
-            Assert.True( _queryRepository.UpdateQuery(QueryId,IsSolved,IsDelete));
-        }
-  
-
-      
-
-
+        // [Theory]
+        // [InlineData(2,true,false)]
+        //  [InlineData(3,false,true)]
+        // public void UpdateQuery_ShouldReturnTrue_WhenValidDataPassed(int QueryId,bool IsSolved,bool IsDelete){
+        //     Assert.True( _queryRepository.UpdateQuery(QueryId,IsSolved,IsDelete));
+        // }
     }
 }

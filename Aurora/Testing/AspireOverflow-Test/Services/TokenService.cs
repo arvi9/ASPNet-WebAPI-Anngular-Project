@@ -1,4 +1,3 @@
-
 using System;
 using System.ComponentModel.DataAnnotations;
 using AspireOverflow.DataAccessLayer.Interfaces;
@@ -27,10 +26,10 @@ namespace AspireOverflowTest
                        .Build();
         public TokenServiceTest()
         {
-
             _tokenService = new TokenService(_configuration, _userService.Object, _logger.Object);
-
         }
+         
+        //GenerateToken
 
         [Theory]
         [InlineData(null)]
@@ -39,7 +38,6 @@ namespace AspireOverflowTest
             Assert.Throws<ArgumentException>(() => _tokenService.GenerateToken(obj));
 
         }
-
         [Fact]
         public void GenerateToken_ShouldThrowArgumentException_WhenObjectIsInValid()
         {
