@@ -1,0 +1,33 @@
+TOTAL =320 PASSED=306,FAILED =14
+
+FAILED
+ARTICLE REPOSITORY
+
+1) public void GetArticleByID_ShouldReturnArticle_WhenMethodIsCalled(int articleId)
+2) public void GetArticles_ShouldReturnListOfArticles_WhenMethodIsCalled()
+3) public void DeleteArticle_ShouldReturnTrue_WhenArticleObjectIsValid(int ArticleId)
+
+QUERY REPOSITORY
+
+1) public void AddQuery_ShouldThrowDBUpdateException()
+2) public void GetQueries_ShouldReturnListOfQueries_WhenMethodIsCalled()
+3) public void GetListOfSpams_ReturnList_WhenObjectIsPassed()
+4) public void UpdateQuery_ShouldReturnTrue_WhenValidDataPassed(int QueryId,bool IsSolved,bool IsDelete)
+
+USER REPOSITORY
+
+1) public void GetDepartments_ShouldReturnListOfDepartmrnts_WhenMethodIsCalled()
+2) public void GetUsers_ShouldReturnListOfUsers_WhenMethodIsCalled()
+3) public void RemoveUser_ShouldReturnTrue_WhenArticleObjectIsValid()
+4) public void ChangeUserVerifyStatus_ShouldReturnTrue_WhenValidDataPassed(int UserId, int VerifyStatusID)
+5) public void UpdateUserByReviewer_ShouldReturnTrue_WhenValidDataPassed(int QueryId,bool IsReviewer)
+
+ARTICLE SERVICE
+
+1) public void GetTrendingArticles_ShouldReturnListOfArticle_WhenMethodIsCalled()
+
+QUERY SERVICE
+
+1) public void GetQuerybyId_ShouldReturnQuery_WhenMethodIsCalled(int QueryId)
+
+
