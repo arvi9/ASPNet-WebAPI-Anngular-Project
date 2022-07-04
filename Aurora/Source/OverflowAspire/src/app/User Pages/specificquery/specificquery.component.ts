@@ -13,6 +13,7 @@ declare type myarray = Array<{ content: string, coding: string, name: string }>
   styleUrls: ['./specificquery.component.css']
 })
 export class SpecificqueryComponent implements OnInit {
+  issolved=false;
   queryDetails: any = this.route.params.subscribe(params => {
     this.queryId = params['queryId'];
   });
@@ -45,6 +46,7 @@ export class SpecificqueryComponent implements OnInit {
       .subscribe({
         next: (data: Query) => {
           this.data = data;
+          this.issolved=data.isSolved;
         }
       });
   }

@@ -12,7 +12,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class EditarticleComponent implements OnInit {
   articleId: number = 0
-
+  @Input()  ShowStatus:boolean=true;
   constructor(private route: ActivatedRoute, private http: HttpClient,private routes:Router,private connection:ConnectionService) { }
   article: any = {
     articleCommentId: 0,

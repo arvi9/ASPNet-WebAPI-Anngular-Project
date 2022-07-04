@@ -60,9 +60,10 @@
   </cdk-virtual-scroll-viewport>
   <br>
   <br>
-  <h5>Comment Your Answer</h5>
+  
 
-  <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
+  <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off" *ngIf="data.isSolved==false">
+    <h5>Comment Your Answer</h5>
     <div class="container">
       <div class="bg-light p-2">
         <textarea type="text" name="comment" class="form-control form-control5" id="queryComment-message"

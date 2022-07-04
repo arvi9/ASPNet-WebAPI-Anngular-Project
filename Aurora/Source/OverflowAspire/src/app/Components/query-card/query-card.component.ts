@@ -82,5 +82,11 @@ export class QueryCardComponent implements OnInit {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) &&  item.isSolved == true});
     }
 }
+
+// reset_filter() {
+//   this.searchUnSolvedQueries = false;
+//   this.searchSolvedQueries = false;
+//   this.filteredData=this.data
+// }
 }
 

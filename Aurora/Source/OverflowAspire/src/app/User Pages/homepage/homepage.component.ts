@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { application } from 'Models/Application';
 import { Article } from 'Models/Article';
 import { Query } from 'Models/Query';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -19,8 +18,6 @@ export class HomePage{
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
-  public UrlString:string=`${application.URL}/Dashboard/GetHomePage`
   
   constructor(private connection:ConnectionService,private route:Router) { }
   ngOnInit(): void {
