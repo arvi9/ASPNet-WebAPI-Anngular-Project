@@ -12,9 +12,9 @@ namespace AspireOverflow.Services
 
     public class UserService : IUserService
     {
-        private static IUserRepository database;
+        private readonly IUserRepository database;
 
-        private static ILogger<UserService> _logger;
+        private readonly ILogger<UserService> _logger;
 
         public UserService(ILogger<UserService> logger, IUserRepository _userRepository)
         {
@@ -34,7 +34,7 @@ namespace AspireOverflow.Services
             catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "CreateUser(User user)", exception, user));
-                throw exception;
+                throw;
             }
             catch (Exception exception)
             {
@@ -89,16 +89,16 @@ namespace AspireOverflow.Services
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService()", "GetUser(string Email, string Password)", exception, Email));
 
-                throw exception;
+                throw;
             }
         }
 
-        public object GetUserByID(int UserId)
+        public object GetUserByID(int UserID)
         {
-            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+            if (UserID <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserID:{UserID}");
             try
             {
-                var User = database.GetUserByID(UserId);
+                var User = database.GetUserByID(UserID);
                 return new
                 {
                     UserId = User.UserId,
@@ -115,7 +115,7 @@ namespace AspireOverflow.Services
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByID(int UserId)", exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByID(int UserId)", exception, UserID));
                 throw;
             }
         }
@@ -188,18 +188,18 @@ namespace AspireOverflow.Services
 
         }
 
-        public bool ChangeUserVerificationStatus(int UserId, int VerifyStatusID)
+        public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID)
         {
-            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0  where UserId:{UserId}");
+            if (UserID <= 0) throw new ArgumentException($"User Id must be greater than 0  where UserID:{UserID}");
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be between 0 and 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
-                return database.UpdateUserByVerifyStatus(UserId, VerifyStatusID);
+                return database.UpdateUserByVerifyStatus(UserID, VerifyStatusID);
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserService", "ChangeUserVerificationStatus(int UserId, int VerifyStatusID)", exception, $"UserId:{UserId},VerifyStatusID:{VerifyStatusID}"));
-                throw exception;
+                _logger.LogError(HelperService.LoggerMessage("UserService", "ChangeUserVerificationStatus(int UserID, int VerifyStatusID)", exception, $"UserID:{UserID},VerifyStatusID:{VerifyStatusID}"));
+                throw;
             }
         }
 
@@ -236,7 +236,7 @@ namespace AspireOverflow.Services
             if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
             try
             {
-                var department = database.GetDepartments().Where(item => item.DepartmentId == DepartmentId).First();
+                var department = database.GetDepartments().First(item => item.DepartmentId == DepartmentId);
                 return department.DepartmentName;
 
             }
@@ -261,7 +261,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -280,7 +280,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", " GetDesignations()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -298,7 +298,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
-                throw exception;
+                throw;
             }
         }
 

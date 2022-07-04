@@ -15,7 +15,7 @@ namespace AspireOverflow.Models
         [Key]
         public int QueryCommentId { get; set; }
 
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         public DateTime Datetime { get; set; }
 

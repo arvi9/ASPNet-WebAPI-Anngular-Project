@@ -5,7 +5,7 @@ using AspireOverflow.Models;
 
 namespace AspireOverflow.Services
 {
-    public class Validation
+    public static class Validation
     {
 
 
@@ -17,9 +17,9 @@ namespace AspireOverflow.Services
             else if (query.CreatedBy <= 0) throw new ValidationException("CreatedBy Id  must be greater than 0");
             else if (String.IsNullOrEmpty(query.Title)) throw new ValidationException("Title cannot be null or empty");
             else if (String.IsNullOrEmpty(query.Content)) throw new ValidationException("content cannot be null or empty");
-            else if (query.Title.Length > 60) throw new ValidationException("Title length must be less than 60 charcter");
-            else if (query.IsActive != true) throw new ValidationException("IsActive must be true");
-            else if (query.IsSolved != false) throw new ValidationException("IsSolved must be false");
+            else if (query.Title.Length > 100) throw new ValidationException("Title length must be less than 60 charcter");
+            else if (!query.IsActive) throw new ValidationException("IsActive must be true");
+            else if (query.IsSolved ) throw new ValidationException("IsSolved must be false");
 
             else return true;
         }
@@ -72,7 +72,7 @@ namespace AspireOverflow.Services
 
             if (user == null) throw new ValidationException("User should not be null");
             else if (user.VerifyStatusID != 3) throw new ValidationException($"VerifyStatus must be 3  VerifyStatusId:{user.VerifyStatusID}");
-            else if (user.IsReviewer != false) throw new ValidationException($"IsReviewer must be false");
+            else if (user.IsReviewer) throw new ValidationException($"IsReviewer must be false");
             else if (user.GenderId <= 0 && user.GenderId > 2) throw new ValidationException($"Gender ID must be 1 or 2");
             else if (user.UserRoleId != 2) throw new ValidationException($"UserRoleId must be equal to 2 UserRole:{user.UserRoleId}");
             else if(!ValidateUserCredentials(user.EmailAddress,user.Password)) return false;
@@ -86,8 +86,7 @@ namespace AspireOverflow.Services
             if (spam == null) throw new ValidationException("Spam should not be null");
             else if (spam.QueryId <= 0) throw new ValidationException("Query Id must be greater than 0");
             else if (spam.UserId <= 0) throw new ValidationException("UserId must be greater than 0");
-            else if (spam.VerifyStatusID <= 0 && spam.VerifyStatusID > 3)
-            throw new ValidationException("Verify Status Id must be between 0 and 3");
+            else if (spam.VerifyStatusID <= 0 || spam.VerifyStatusID > 3) throw new ValidationException("Verify Status Id must be between 0 and 3");
             else if (String.IsNullOrEmpty(spam.Reason)) throw new ValidationException("Spam Reason cannot be null or empty");
             else return true;
         }

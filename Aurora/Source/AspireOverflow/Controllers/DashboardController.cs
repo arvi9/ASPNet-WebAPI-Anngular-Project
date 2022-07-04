@@ -14,10 +14,10 @@ namespace AspireOverflow.Controllers
     public class DashboardController : BaseController
     {
 
-        internal ILogger<DashboardController> _logger;
-        private IArticleService _articleService;
-        private IQueryService _queryService;
-        private IUserService _userService;
+        private readonly ILogger<DashboardController> _logger;
+        private readonly IArticleService _articleService;
+        private readonly IQueryService _queryService;
+        private readonly IUserService _userService;
         public DashboardController(ILogger<DashboardController> logger, IArticleService articleService, IQueryService queryService, IUserService userService)
         {
             _logger = logger;
@@ -48,15 +48,17 @@ namespace AspireOverflow.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult> GetReviewerDashboard(int ReviewerId) //reviewerID temporarily getting as input ,later it is retrived from claims.
+        public async Task<ActionResult> GetReviewerDashboard() //reviewerID temporarily getting as input ,later it is retrived from claims.
         {
             try
-            {
+            {int ReviewerId=GetCurrentUser().UserId;
                 var DashboardInformation = new
                 {
-                    TotalNumberOfArticles = _articleService.GetListOfArticles().Count(),
+                    TotalNumberOfArticles = _articleService.GetAll().Count(),
                     ArticlesTobeReviewed = _articleService.GetArticlesByArticleStatusId(2).Count(),
-                    ArticlesReviewed = _articleService.GetArticlesByReviewerId(ReviewerId).Count(),
+                    ArticlesReviewed =_articleService.GetArticlesByArticleStatusId(4).Count(),
+                    ArticlesPublished = _articleService.GetArticlesByReviewerId(ReviewerId).Count(),
+
 
                 }; return await Task.FromResult(Ok(DashboardInformation));
             }
@@ -116,7 +118,7 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a homepage. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         
-        [HttpGet][AllowAnonymous]
+        [HttpGet]
 
         public async Task<ActionResult> GetHomePage()
         {

@@ -1,9 +1,10 @@
 namespace AspireOverflow.CustomExceptions
 {
+    [Serializable]
     public class ItemNotFoundException : Exception
     {
 
-        public ItemNotFoundException() : base("Item not found") { }
+        protected ItemNotFoundException() : base("Item not found") { }
 
         public ItemNotFoundException(string message) : base(message) { }
 

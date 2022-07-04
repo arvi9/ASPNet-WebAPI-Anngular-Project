@@ -2,7 +2,7 @@
 using AspireOverflow.Models;
 namespace AspireOverflow.Security
 {
-    public class PasswordHasherFactory
+    public static class PasswordHasherFactory
     {
         public static BCryptPasswordHasher<User> GetPasswordHasherFactory()
         {

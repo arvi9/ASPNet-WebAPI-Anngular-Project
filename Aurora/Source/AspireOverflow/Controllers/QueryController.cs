@@ -16,8 +16,8 @@ namespace AspireOverflow.Controllers
     public class QueryController : BaseController
     {
 
-        internal ILogger<QueryController> _logger;
-        private IQueryService _queryService;
+        private readonly ILogger<QueryController> _logger;
+        private readonly IQueryService _queryService;
 
         
 
@@ -232,7 +232,7 @@ namespace AspireOverflow.Controllers
             {
                 var Queries = _queryService.GetLatestQueries().ToList();
 
-                if (Range <= Queries.Count())
+                if (Range <= Queries.Count)
                 {
                     Queries = Range > 0 ? Queries.GetRange(1, Range) : Queries;
                     return await Task.FromResult(Ok(Queries));
@@ -271,7 +271,7 @@ namespace AspireOverflow.Controllers
             {
                 var Queries = _queryService.GetTrendingQueries().ToList();
 
-                if (Range <= Queries.Count())
+                if (Range <= Queries.Count)
                 {
                     Queries = Range > 0 ? Queries.GetRange(0, Range) : Queries;
                     return await Task.FromResult(Ok(Queries));

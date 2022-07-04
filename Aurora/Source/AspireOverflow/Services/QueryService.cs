@@ -18,11 +18,11 @@ namespace AspireOverflow.Services
 
     public class QueryService :IQueryService
     {
-        private static IQueryRepository database;
+        private readonly  IQueryRepository database;
 
-        private static ILogger<QueryService> _logger;
+        private readonly  ILogger<QueryService> _logger;
 
-        private MailService _mailService;
+        private readonly MailService _mailService;
 
         public QueryService(ILogger<QueryService> logger, MailService mailService,IQueryRepository _queryRepository)
         {
@@ -40,7 +40,7 @@ namespace AspireOverflow.Services
             {
                 query.CreatedOn = DateTime.Now;
                 var IsAddedSuccessfully = database.AddQuery(query);
-                if (IsAddedSuccessfully) _mailService?.SendEmailAsync(HelperService.QueryMail("Manimaran.0610@gmail.com", query.Title, "Query Created Successfully"));
+                if (IsAddedSuccessfully) _mailService?.SendEmailAsync(HelperService.QueryMail("Manimaran.0610@gmail.com", query.Title!, "Query Created Successfully"));
                 return IsAddedSuccessfully;
             }
             catch (Exception exception)
@@ -84,12 +84,12 @@ namespace AspireOverflow.Services
             }
         }
 
-        public Object GetQuery(int QueryId)
+        public Object GetQuery(int QueryID)
         {
-            if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            if (QueryID <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryID:{QueryID}");
             try
             {
-                var Query = database.GetQueryByID(QueryId);
+                var Query = database.GetQueryByID(QueryID);
                 return new
                 {
                     QueryId = Query.QueryId,
@@ -97,15 +97,16 @@ namespace AspireOverflow.Services
                     Content = Query.Content,
                     code = Query.code,
                     Date = Query.CreatedOn,
-                    RaiserName = Query.User.FullName,
-                    Comments = GetComments(QueryId)
+                    RaiserName = Query.User?.FullName,
+                    IsSolved=Query.IsSolved,
+                    Comments = GetComments(QueryID)
 
                 };
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQuery(int QueryId)", exception, QueryId));
-                throw exception;
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQuery(int QueryId)", exception, QueryID));
+                throw;
             }
 
         }
@@ -121,7 +122,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
-                throw exception;
+                throw;
             }
 
         }
@@ -142,7 +143,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
-                throw exception;
+                throw;
             }
 
         }
@@ -167,7 +168,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetLatestQueries()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -178,29 +179,28 @@ namespace AspireOverflow.Services
             try
             {
 
-                var data = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
+                var  ListOfComments= (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
 
-                var ListOfQueryId = (from item in data select item.First().QueryId).ToList();
-                var ListOfQueries = GetQueries().Where(item => item.IsSolved == false).ToList();
+                var ListOfQueryId = (from queryComment in ListOfComments select queryComment.First().QueryId).ToList();
+                var ListOfQueries = GetQueries().Where(item => !item.IsSolved).ToList();
                 var TrendingQueries = new List<Query>();
                 foreach (var id in ListOfQueryId)
                 {
-                    TrendingQueries.Add(ListOfQueries.Find(item => item.QueryId == id));
+                    TrendingQueries.Add(ListOfQueries.Find(item => item.QueryId == id)!);
                 }
-
-                return TrendingQueries.Select(item => new
+               return TrendingQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                      IsSolved=item.IsSolved
+                    IsSolved=item.IsSolved
                 });
             }
 
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetTrendingQueries()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -224,7 +224,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByUserId(int UserId)", exception, UserId));
-                throw exception;
+                throw;
             }
 
         }
@@ -232,10 +232,10 @@ namespace AspireOverflow.Services
 
         public IEnumerable<Object> GetQueriesByTitle(String Title)
         {
-            if (String.IsNullOrEmpty(Title)) throw new ArgumentNullException("Query Title value can't be null");
+            if (String.IsNullOrEmpty(Title)) throw new ArgumentException(" Title value can't be null");
             try
             {
-                var ListOfQueries = GetQueries().Where(query => query.Title.Contains(Title));
+                var ListOfQueries = GetQueries().Where(query => query.Title!.Contains(Title));
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
@@ -248,7 +248,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByTitle(String Title)", exception, Title));
-                throw exception;
+                throw;
             }
         }
 
@@ -269,7 +269,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries(bool IsSolved)", exception, IsSolved));
-                throw exception;
+                throw;
             }
         }
 
@@ -279,6 +279,8 @@ namespace AspireOverflow.Services
             Validation.ValidateComment(comment);
             try
             {
+                comment.CreatedOn=DateTime.Now;
+                 comment.Datetime=DateTime.Now;
                 return database.AddComment(comment);
             }
             catch (Exception exception)
@@ -306,7 +308,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetComments(int QueryId)", exception, QueryId));
-                throw exception;
+                throw;
             }
 
         }
@@ -326,7 +328,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId,VerifyStatusID));
-                throw exception;
+                throw;
             }
         }
 

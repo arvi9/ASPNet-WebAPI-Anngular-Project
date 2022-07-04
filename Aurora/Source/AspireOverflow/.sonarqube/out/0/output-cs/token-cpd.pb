@@ -1,11 +1,11 @@
-˙—
-mC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Controllers\ArticleController.cs
+Ì—
+ZC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Controllers\ArticleController.cs
 	namespace		 	
 AspireOverflow		
  
 .		 
 Controllers		 $
-;		$ %
+{		$ %
 [
 
  
@@ -23,26 +23,28 @@ mC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Co
 [ 
 Route 
 ( 
-$str 
-) 
-]  
+$str #
+)# $
+]$ %
 public 
 class 
 ArticleController 
 :  
 BaseController! /
 { 
-private 
-ILogger 
-< 
-ArticleController %
->% &
-_logger' .
-;. /
-private 
-IArticleService 
-_articleService +
-;+ ,
+private 
+readonly 
+ILogger 
+< 
+ArticleController .
+>. /
+_logger0 7
+;7 8
+private 
+readonly 
+IArticleService $
+_articleService% 4
+;4 5
 public 
 
 ArticleController 
@@ -281,18 +283,19 @@ BadRequestQQ. 8
 ;QQ` a
 tryRR 
 {SS 	
-privateArticleDtoTT 
-.TT 
-articleTT %
-.TT% &
-	CreatedByTT& /
-=TT0 1
-GetCurrentUserTT2 @
-(TT@ A
-)TTA B
-.TTB C
-UserIdTTC I
-;TTI J
+privateArticleDtoTT 
+.TT 
+articleTT &
+!TT& '
+.TT' (
+	CreatedByTT( 1
+=TT2 3
+GetCurrentUserTT4 B
+(TTB C
+)TTC D
+.TTD E
+UserIdTTE K
+;TTK L
 returnUU 
 _articleServiceUU "
 .UU" #
@@ -2045,12 +2048,8 @@ BadRequest
 ––! "
 Count
 ––" '
-(
+)
 ––' (
-)
-––( )
-)
-––) *
 {
 —— 
 Articles
@@ -2276,12 +2275,8 @@ BadRequest
 ˘˘! "
 Count
 ˘˘" '
-(
+)
 ˘˘' (
-)
-˘˘( )
-)
-˘˘) *
 {
 ˙˙ 
 Articles
@@ -3900,8 +3895,9 @@ FromResult
 ∑∑ 	
 }
 ªª 
-}¿¿ Ã
-jC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Controllers\BaseController.cs
+}¿¿ 
+}¡¡ π
+WC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Controllers\BaseController.cs
 	namespace 	
 AspireOverflow
  
@@ -4096,8 +4092,8 @@ IsReviewer &
 ;!! 
 }%% 	
 }&& 
-}'' ¯@
-oC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Controllers\DashboardController.cs
+}'' áD
+\C:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Controllers\DashboardController.cs
 	namespace		 	
 AspireOverflow		
  
@@ -4126,26 +4122,30 @@ oC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Co
 DashboardController $
 :% &
 BaseController' 5
-{ 
-internal 
-ILogger 
-< 
-DashboardController ,
->, -
-_logger. 5
-;5 6
-private 
-IArticleService 
-_articleService  /
-;/ 0
-private 
-IQueryService 
-_queryService +
-;+ ,
-private 
-IUserService 
-_userService )
-;) *
+{ 
+private 
+readonly 
+ILogger  
+<  !
+DashboardController! 4
+>4 5
+_logger6 =
+;= >
+private 
+readonly 
+IArticleService (
+_articleService) 8
+;8 9
+private 
+readonly 
+IQueryService &
+_queryService' 4
+;4 5
+private 
+readonly 
+IUserService %
+_userService& 2
+;2 3
 public 
 DashboardController "
 (" #
@@ -4196,14 +4196,21 @@ oC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Co
 ActionResult33 &
 >33& ' 
 GetReviewerDashboard33( <
-(33< =
-int33= @
-
-ReviewerId33A K
-)33K L
+(33< =
+)33= >
 {44 	
 try55 
 {66 
+int66 
+
+ReviewerId66 
+=66 
+GetCurrentUser66 *
+(66* +
+)66+ ,
+.66, -
+UserId66- 3
+;663 4
 var77  
 DashboardInformation77 (
 =77) *
@@ -4212,15 +4219,15 @@ ReviewerId33A K
 TotalNumberOfArticles99 )
 =99* +
 _articleService99, ;
-.99; <
-GetListOfArticles99< M
-(99M N
-)99N O
-.99O P
-Count99P U
-(99U V
-)99V W
-,99W X 
+.99; <
+GetAll99< B
+(99B C
+)99C D
+.99D E
+Count99E J
+(99J K
+)99K L
+,99L M 
 ArticlesTobeReviewed:: (
 =::) *
 _articleService::+ :
@@ -4236,387 +4243,406 @@ ReviewerId33A K
 ,::b c
 ArticlesReviewed;; $
 =;;% &
-_articleService;;' 6
-.;;6 7#
-GetArticlesByReviewerId;;7 N
-(;;N O
+_articleService;;& 5
+.;;5 6(
+GetArticlesByArticleStatusId;;6 R
+(;;R S
+$num;;S T
+);;T U
+.;;U V
+Count;;V [
+(;;[ \
+);;\ ]
+,;;] ^
+ArticlesPublished<< %
+=<<& '
+_articleService<<( 7
+.<<7 8#
+GetArticlesByReviewerId<<8 O
+(<<O P
 
-ReviewerId;;O Y
-);;Y Z
-.;;Z [
-Count;;[ `
-(;;` a
-);;a b
-,;;b c
-}== 
-;== 
-return== 
-await== 
-Task==  $
-.==$ %
+ReviewerId<<P Z
+)<<Z [
+.<<[ \
+Count<<\ a
+(<<a b
+)<<b c
+,<<c d
+}?? 
+;?? 
+return?? 
+await?? 
+Task??  $
+.??$ %
 
-FromResult==% /
-(==/ 0
-Ok==0 2
-(==2 3 
-DashboardInformation==3 G
-)==G H
-)==H I
-;==I J
-}>> 
-catch?? 
-(?? 
-	Exception?? 
-	exception?? &
-)??& '
-{@@ 
-_loggerAA 
-.AA 
-LogErrorAA  
-(AA  !
-HelperServiceAA! .
-.AA. /
-LoggerMessageAA/ <
-(AA< =
-$strAA= R
-,AAR S
-$strAAT z
-,AAz {
-	exception	AA| Ö
+FromResult??% /
+(??/ 0
+Ok??0 2
+(??2 3 
+DashboardInformation??3 G
+)??G H
+)??H I
+;??I J
+}@@ 
+catchAA 
+(AA 
+	ExceptionAA 
+	exceptionAA &
+)AA& '
+{BB 
+_loggerCC 
+.CC 
+LogErrorCC  
+(CC  !
+HelperServiceCC! .
+.CC. /
+LoggerMessageCC/ <
+(CC< =
+$strCC= R
+,CCR S
+$strCCT z
+,CCz {
+	exception	CC| Ö
 )
-AAÖ Ü
+CCÖ Ü
 )
-AAÜ á
+CCÜ á
 ;
-AAá à
-returnBB 
+CCá à
+returnDD 
 
-BadRequestBB !
-(BB! "
-$strBB" O
-)BBO P
-;BBP Q
-}CC 
-}DD 	
-[SS 	
-HttpGetSS	 
-]SS 
-publicUU 
-asyncUU 
-TaskUU 
-<UU 
-ActionResultUU &
->UU& '
-GetAdminDashboardUU( 9
-(UU9 :
-)UU: ;
-{VV 	
-tryWW 
-{XX 
-varYY  
-DashboardInformationYY (
-=YY) *
-newYY+ .
-{ZZ !
-TotalNumberOfArticles[[ )
-=[[* +
-_articleService[[, ;
-.[[; <
-GetAll[[< B
-([[B C
-)[[C D
-.[[D E
-Count[[E J
-([[J K
-)[[K L
-,[[L M
-TotalNumberOfUsers\\ &
-=\\' (
-_userService\\) 5
-.\\5 6
-GetUsers\\6 >
-(\\> ?
-)\\? @
-.\\@ A
-Count\\A F
-(\\F G
-)\\G H
-,\\H I!
-TotalNumberOfReviwers]] )
-=]]* +
-_userService]], 8
-.]]8 9 
-GetUsersByIsReviewer]]9 M
-(]]M N
-true]]N R
-)]]R S
-.]]S T
-Count]]T Y
-(]]Y Z
-)]]Z [
-,]][ \ 
-TotalNumberofQueries^^ (
-=^^) *
-_queryService^^+ 8
-.^^8 9
-GetListOfQueries^^9 I
-(^^I J
-)^^J K
-.^^K L
-Count^^L Q
-(^^Q R
-)^^R S
-,^^S T%
-TotaNumberofSolvedQueries__ -
-=__. /
-_queryService__0 =
-.__= >
+BadRequestDD !
+(DD! "
+$strDD" O
+)DDO P
+;DDP Q
+}EE 
+}FF 	
+[UU 	
+HttpGetUU	 
+]UU 
+publicWW 
+asyncWW 
+TaskWW 
+<WW 
+ActionResultWW &
+>WW& '
+GetAdminDashboardWW( 9
+(WW9 :
+)WW: ;
+{XX 	
+tryYY 
+{ZZ 
+var[[  
+DashboardInformation[[ (
+=[[) *
+new[[+ .
+{\\ !
+TotalNumberOfArticles]] )
+=]]* +
+_articleService]], ;
+.]]; <
+GetAll]]< B
+(]]B C
+)]]C D
+.]]D E
+Count]]E J
+(]]J K
+)]]K L
+,]]L M
+TotalNumberOfUsers^^ &
+=^^' (
+_userService^^) 5
+.^^5 6
+GetUsers^^6 >
+(^^> ?
+)^^? @
+.^^@ A
+Count^^A F
+(^^F G
+)^^G H
+,^^H I!
+TotalNumberOfReviwers__ )
+=__* +
+_userService__, 8
+.__8 9 
+GetUsersByIsReviewer__9 M
+(__M N
+true__N R
+)__R S
+.__S T
+Count__T Y
+(__Y Z
+)__Z [
+,__[ \ 
+TotalNumberofQueries`` (
+=``) *
+_queryService``+ 8
+.``8 9
+GetListOfQueries``9 I
+(``I J
+)``J K
+.``K L
+Count``L Q
+(``Q R
+)``R S
+,``S T%
+TotaNumberofSolvedQueriesaa -
+=aa. /
+_queryServiceaa0 =
+.aa= >
 
-GetQueries__> H
-(__H I
-true__I M
-)__M N
-.__N O
-Count__O T
-(__T U
-)__U V
-,__V W(
-TotalNumberOfUnSolvedQueries`` 0
-=``1 2
-_queryService``3 @
-.``@ A
+GetQueriesaa> H
+(aaH I
+trueaaI M
+)aaM N
+.aaN O
+CountaaO T
+(aaT U
+)aaU V
+,aaV W(
+TotalNumberOfUnSolvedQueriesbb 0
+=bb1 2
+_queryServicebb3 @
+.bb@ A
 
-GetQueries``A K
-(``K L
-false``L Q
-)``Q R
-.``R S
-Count``S X
-(``X Y
-)``Y Z
-,``Z [
-}bb 
-;bb 
-returnbb 
-awaitbb 
-Taskbb  $
-.bb$ %
+GetQueriesbbA K
+(bbK L
+falsebbL Q
+)bbQ R
+.bbR S
+CountbbS X
+(bbX Y
+)bbY Z
+,bbZ [
+}dd 
+;dd 
+returndd 
+awaitdd 
+Taskdd  $
+.dd$ %
 
-FromResultbb% /
-(bb/ 0
-Okbb0 2
-(bb2 3 
-DashboardInformationbb3 G
-)bbG H
-)bbH I
-;bbI J
-}cc 
-catchdd 
-(dd 
-	Exceptiondd 
-	exceptiondd &
-)dd& '
-{ee 
-_loggerff 
-.ff 
-LogErrorff  
-(ff  !
-HelperServiceff! .
-.ff. /
-LoggerMessageff/ <
-(ff< =
-$strff= R
-,ffR S
-$strffT i
-,ffi j
-	exceptionffk t
-)fft u
-)ffu v
-;ffv w
-returngg 
+FromResultdd% /
+(dd/ 0
+Okdd0 2
+(dd2 3 
+DashboardInformationdd3 G
+)ddG H
+)ddH I
+;ddI J
+}ee 
+catchff 
+(ff 
+	Exceptionff 
+	exceptionff &
+)ff& '
+{gg 
+_loggerhh 
+.hh 
+LogErrorhh  
+(hh  !
+HelperServicehh! .
+.hh. /
+LoggerMessagehh/ <
+(hh< =
+$strhh= R
+,hhR S
+$strhhT i
+,hhi j
+	exceptionhhk t
+)hht u
+)hhu v
+;hhv w
+returnii 
 
-BadRequestgg !
-(gg! "
-$strgg" O
-)ggO P
-;ggP Q
-}hh 
-}ii 	
-[ww 	
-HttpGetww	 
-]ww 
-[ww 
-AllowAnonymousww  
-]ww  !
-publicyy 
-asyncyy 
-Taskyy 
-<yy 
-ActionResultyy &
->yy& '
-GetHomePageyy( 3
-(yy3 4
-)yy4 5
-{zz 	
-try{{ 
-{|| 
-var}} 
-Data}} 
-=}} 
-new}} 
-{~~ 
-TrendingArticles $
-=% &
-_articleService' 6
-.6 7
-GetTrendingArticles7 J
-(J K
-)K L
-,L M
-LatestArticles
-ÄÄ "
+BadRequestii !
+(ii! "
+$strii" O
+)iiO P
+;iiP Q
+}jj 
+}kk 	
+[yy 	
+HttpGetyy	 
+]yy 
+public{{ 
+async{{ 
+Task{{ 
+<{{ 
+ActionResult{{ &
+>{{& '
+GetHomePage{{( 3
+({{3 4
+){{4 5
+{|| 	
+try}} 
+{~~ 
+var 
+Data 
+= 
+new 
+{
+ÄÄ 
+TrendingArticles
+ÅÅ $
 =
-ÄÄ# $
+ÅÅ% &
 _articleService
-ÄÄ% 4
+ÅÅ' 6
 .
-ÄÄ4 5
+ÅÅ6 7!
+GetTrendingArticles
+ÅÅ7 J
+(
+ÅÅJ K
+)
+ÅÅK L
+,
+ÅÅL M
+LatestArticles
+ÇÇ "
+=
+ÇÇ# $
+_articleService
+ÇÇ% 4
+.
+ÇÇ4 5
 GetLatestArticles
-ÄÄ5 F
+ÇÇ5 F
 (
-ÄÄF G
+ÇÇF G
 )
-ÄÄG H
+ÇÇG H
 ,
-ÄÄH I
+ÇÇH I
 TrendingQueries
-ÅÅ #
+ÉÉ #
 =
-ÅÅ$ %
+ÉÉ$ %
 _queryService
-ÅÅ& 3
+ÉÉ& 3
 .
-ÅÅ3 4 
+ÉÉ3 4 
 GetTrendingQueries
-ÅÅ4 F
+ÉÉ4 F
 (
-ÅÅF G
+ÉÉF G
 )
-ÅÅG H
+ÉÉG H
 ,
-ÅÅH I
+ÉÉH I
 LatestQueries
-ÇÇ !
+ÑÑ !
 =
-ÇÇ" #
+ÑÑ" #
 _queryService
-ÇÇ$ 1
+ÑÑ$ 1
 .
-ÇÇ1 2
+ÑÑ1 2
 GetLatestQueries
-ÇÇ2 B
+ÑÑ2 B
 (
-ÇÇB C
+ÑÑB C
 )
-ÇÇC D
+ÑÑC D
 ,
-ÇÇD E
+ÑÑD E
 }
-ÖÖ 
+áá 
 ;
-ÖÖ 
+áá 
 return
-ÖÖ 
+áá 
 await
-ÖÖ 
+áá 
 Task
-ÖÖ  $
+áá  $
 .
-ÖÖ$ %
+áá$ %
 
 FromResult
-ÖÖ% /
+áá% /
 (
-ÖÖ/ 0
+áá/ 0
 Ok
-ÖÖ0 2
+áá0 2
 (
-ÖÖ2 3
+áá2 3
 Data
-ÖÖ3 7
+áá3 7
 )
-ÖÖ7 8
+áá7 8
 )
-ÖÖ8 9
+áá8 9
 ;
-ÖÖ9 :
+áá9 :
 }
-ÜÜ 
+àà 
 catch
-áá 
+ââ 
 (
-áá 
+ââ 
 	Exception
-áá 
+ââ 
 	exception
-áá &
+ââ &
 )
-áá& '
+ââ& '
 {
-àà 
+ää 
 _logger
-ââ 
+ãã 
 .
-ââ 
+ãã 
 LogError
-ââ  
+ãã  
 (
-ââ  !
+ãã  !
 HelperService
-ââ! .
+ãã! .
 .
-ââ. /
+ãã. /
 LoggerMessage
-ââ/ <
+ãã/ <
 (
-ââ< =
+ãã< =
 $str
-ââ= R
+ãã= R
 ,
-ââR S
+ããR S
 $str
-ââT c
+ããT c
 ,
-ââc d
+ããc d
 	exception
-ââe n
+ããe n
 )
-âân o
+ããn o
 )
-ââo p
+ãão p
 ;
-ââp q
+ããp q
 return
-ää 
+åå 
 
 BadRequest
-ää !
+åå !
 (
-ää! "
+åå! "
 $str
-ää" O
+åå" O
 )
-ääO P
+ååO P
 ;
-ääP Q
+ååP Q
 }
-ãã 
+çç 
 }
-åå 	
+éé 	
 }
-êê 
-}ëë Ûï
-kC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Controllers\QueryController.cs
+íí 
+}ìì «ï
+XC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Controllers\QueryController.cs
 	namespace 	
 AspireOverflow
  
@@ -4640,18 +4666,20 @@ kC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Co
 QueryController  
 :! "
 BaseController# 1
-{ 
-internal 
-ILogger 
-< 
-QueryController (
->( )
-_logger* 1
-;1 2
-private 
-IQueryService 
-_queryService +
-;+ ,
+{ 
+private 
+readonly 
+ILogger  
+<  !
+QueryController! 0
+>0 1
+_logger2 9
+;9 :
+private 
+readonly 
+IQueryService &
+_queryService' 4
+;4 5
 public 
 QueryController 
 ( 
@@ -5758,12 +5786,8 @@ FromResult
 ÎÎ$ %
 Count
 ÎÎ% *
-(
+)
 ÎÎ* +
-)
-ÎÎ+ ,
-)
-ÎÎ, -
 {
 ÏÏ 
 Queries
@@ -5988,12 +6012,8 @@ BadRequest
 íí$ %
 Count
 íí% *
-(
+)
 íí* +
-)
-íí+ ,
-)
-íí, -
 {
 ìì 
 Queries
@@ -7802,8 +7822,8 @@ BadRequest
 ππ 
 }
 ΩΩ 
-}ææ Û
-kC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Controllers\TokenController.cs
+}ææ Ã
+XC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Controllers\TokenController.cs
 	namespace		 	
 AspireOverflow		
  
@@ -7830,17 +7850,19 @@ kC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Co
 :! "
 BaseController# 1
 { 
-private 
-ITokenService 
-_tokenService +
-;+ ,
-private 
-ILogger 
-< 
-TokenController '
->' (
-_logger) 0
-;0 1
+private 
+readonly 
+ITokenService &
+_tokenService' 4
+;4 5
+private 
+readonly 
+ILogger  
+<  !
+TokenController! 0
+>0 1
+_logger2 9
+;9 :
 public 
 TokenController 
 ( 
@@ -7892,24 +7914,26 @@ Validation22. 8
 Crendentials22Q ]
 .22] ^
 Email22^ c
-,22c d
-Crendentials22e q
-.22q r
-Password22r z
-)22z {
-)22{ |
-return	22} É
+!22c d
+,22d e
+Crendentials22f r
+.22r s
+Password22s {
+!22{ |
+)22| }
+)22} ~
+return	22 Ö
 
 BadRequest
-22Ñ é
+22Ü ê
 (
-22é è
+22ê ë
 $str
-22è ±
+22ë ≥
 )
-22± ≤
+22≥ ¥
 ;
-22≤ ≥
+22¥ µ
 var33 
 Result33 
 =33 
@@ -7954,12 +7978,14 @@ BadRequest
 99ì î
 Email
 99î ô
-)
+!
 99ô ö
 )
 99ö õ
+)
+99õ ú
 ;
-99õ ú
+99ú ù
 return:: 
 
 BadRequest:: !
@@ -7997,12 +8023,14 @@ BadRequest:: !
 ??ì î
 Email
 ??î ô
-)
+!
 ??ô ö
 )
 ??ö õ
+)
+??õ ú
 ;
-??õ ú
+??ú ù
 return@@ 
 
 BadRequest@@ !
@@ -8016,8 +8044,8 @@ BadRequest@@ !
 }AA 
 }CC 	
 }FF 
-}II áæ
-jC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Controllers\UserController.cs
+}II üæ
+WC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Controllers\UserController.cs
 	namespace 	
 AspireOverflow
  
@@ -8041,18 +8069,20 @@ jC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Co
 UserController 
 : 
 BaseController ,
-{ 
-internal 
-ILogger 
-< 
-UserController #
-># $
-_logger% ,
-;, -
-private 
-IUserService 
-_UserService %
-;% &
+{ 
+private 
+readonly 
+ILogger 
+< 
+UserController +
+>+ ,
+_logger- 4
+;4 5
+private 
+readonly 
+IUserService !
+_UserService" .
+;. /
 public 
 
 UserController 
@@ -10155,102 +10185,69 @@ FromResult
 íí 	
 }
 ìì 
-}óó è	
-vC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\CustomExceptions\ItemNotFoundException.cs
+}óó ∑	
+cC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\CustomExceptions\ItemNotFoundException.cs
 	namespace 	
 AspireOverflow
  
 . 
 CustomExceptions )
-{ 
-public 
+{ 
+[ 
+Serializable 
+] 
+public 
 
-class !
-ItemNotFoundException &
-:' (
-	Exception) 2
-{ 
-public !
-ItemNotFoundException $
-($ %
-)% &
-:' (
-base) -
-(- .
-$str. >
-)> ?
-{@ A
-}B C
-public !
-ItemNotFoundException $
-($ %
-string% +
-message, 3
-)3 4
-:5 6
-base7 ;
-(; <
-message< C
-)C D
-{E F
-}G H
-public
-
- !
-ItemNotFoundException
-
- $
-(
-
-$ %
-string
-
-% +
-message
-
-, 3
-,
-
-3 4
-	Exception
-
-5 >
-innerException
-
-? M
-)
-
-M N
-:
-
-O P
-base
-
-Q U
-(
-
-U V
-message
-
-V ]
-,
-
-] ^
-innerException
-
-_ m
-)
-
-m n
-{
-
-o p
-}
-
-q r
-} 
-} ‚B
-}C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Context\AspireOverflowContext.cs
+class !
+ItemNotFoundException &
+:' (
+	Exception) 2
+{ 
+	protected !
+ItemNotFoundException '
+(' (
+)( )
+:* +
+base, 0
+(0 1
+$str1 A
+)A B
+{C D
+}E F
+public		 !
+ItemNotFoundException		 $
+(		$ %
+string		% +
+message		, 3
+)		3 4
+:		5 6
+base		7 ;
+(		; <
+message		< C
+)		C D
+{		E F
+}		G H
+public !
+ItemNotFoundException $
+($ %
+string% +
+message, 3
+,3 4
+	Exception5 >
+innerException? M
+)M N
+:O P
+baseQ U
+(U V
+messageV ]
+,] ^
+innerException_ m
+)m n
+{o p
+}q r
+} 
+} œB
+jC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Context\AspireOverflowContext.cs
 	namespace 	
 AspireOverflow
  
@@ -10762,8 +10759,8 @@ UserRoleId33- 7
 ;<< 
 }>> 	
 }?? 
-}@@ Ç
-ÑC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Factory\AspireOverflowContextFactory.cs
+}@@ æ
+qC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Factory\AspireOverflowContextFactory.cs
 	namespace 	
 AspireOverflow
  
@@ -10777,127 +10774,124 @@ UserRoleId33- 7
 {
 
  
-private 
-static !
-AspireOverflowContext ,"
-_aspireOverflowContext- C
-;C D
-public 
-static !
-AspireOverflowContext +*
-GetAspireOverflowContextObject, J
-(J K
-)K L
+private !
+AspireOverflowContext &
+?& '"
+_aspireOverflowContext( >
+;> ?
+public !
+AspireOverflowContext %*
+GetAspireOverflowContextObject& D
+(D E
+)E F
 { 	
-var 
-optionsBuilder 
-=  
-new! $#
-DbContextOptionsBuilder% <
-<< =!
-AspireOverflowContext= R
->R S
-(S T
-)T U
-;U V
-try 
-{ 
-IConfigurationRoot "
-configuration# 0
-=1 2
-new3 6 
-ConfigurationBuilder7 K
-(K L
-)L M
+var 
+optionsBuilder 
+=  
+new! $#
+DbContextOptionsBuilder% <
+<< =!
+AspireOverflowContext= R
+>R S
+(S T
+)T U
+;U V
+try 
+{ 
+IConfigurationRoot "
+configuration# 0
+=1 2
+new3 6 
+ConfigurationBuilder7 K
+(K L
+)L M
+. 
+SetBasePath 
+( 
+	AppDomain &
+.& '
+CurrentDomain' 4
+.4 5
+BaseDirectory5 B
+)B C
 . 
-SetBasePath 
-( 
-	AppDomain &
-.& '
-CurrentDomain' 4
-.4 5
-BaseDirectory5 B
-)B C
-. 
-AddJsonFile 
-( 
-$str /
-)/ 0
-. 
-Build 
-( 
-) 
-; 
-var 
-connectionString $
-=% &
-configuration' 4
-.4 5
-GetConnectionString5 H
-(H I
-$strI R
-)R S
-;S T
-optionsBuilder 
-. 
-UseSqlServer +
-(+ ,
-connectionString, <
-??) +
-throw, 1
-new2 5"
-NullReferenceException6 L
-(L M
-$"- /
-$str/ S
-{S T
-nameofT Z
-(Z [
-connectionString[ k
-)k l
-}l m
-"m n
-)n o
-)o p
-;p q"
-_aspireOverflowContext (
-=) *
-new, /!
-AspireOverflowContext0 E
-(E F
-optionsBuilderF T
-.T U
-OptionsU \
-)\ ]
-;] ^
-return "
-_aspireOverflowContext /
-;/ 0
-} 
-catch   
-(   
-	Exception   
-	exception   &
-)  & '
-{!! 
-Console"" 
-."" 
-	WriteLine"" !
-(""! "
-	exception""" +
-.""+ ,
-Message"", 3
-)""3 4
-;""4 5
-throw## 
-	exception## 
-;##  
-}$$ 
-})) 	
-}++ 
-}-- {
-yC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Factory\RepositoryFactory.cs’
-}C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IArticleRepository.cs
+AddJsonFile 
+( 
+$str /
+)/ 0
+. 
+Build 
+( 
+) 
+; 
+var 
+connectionString $
+=% &
+configuration' 4
+.4 5
+GetConnectionString5 H
+(H I
+$strI R
+)R S
+;S T
+optionsBuilder 
+. 
+UseSqlServer +
+(+ ,
+connectionString, <
+??) +
+throw, 1
+new2 5"
+NullReferenceException6 L
+(L M
+$"- /
+$str/ S
+{S T
+nameofT Z
+(Z [
+connectionString[ k
+)k l
+}l m
+"m n
+)n o
+)o p
+;p q"
+_aspireOverflowContext (
+=) *
+new, /!
+AspireOverflowContext0 E
+(E F
+optionsBuilderF T
+.T U
+OptionsU \
+)\ ]
+;] ^
+return "
+_aspireOverflowContext /
+;/ 0
+} 
+catch 
+( 
+	Exception 
+	exception &
+)& '
+{   
+Console!! 
+.!! 
+	WriteLine!! !
+(!!! "
+	exception!!" +
+.!!+ ,
+Message!!, 3
+)!!3 4
+;!!4 5
+throw"" 
+;"" 
+}## 
+}(( 	
+}** 
+},, ¬
+jC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IArticleRepository.cs
 	namespace 	
 AspireOverflow
  
@@ -11063,8 +11057,8 @@ AddComment 
 )1 2
 ;2 3
 }   
-}!! ›
-zC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IArticleService.cs
+}!! Ÿ
+gC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IArticleService.cs
 	namespace 	
 AspireOverflow
  
@@ -11092,13 +11086,14 @@ Interfaces) 3
 List		, 0
 <		0 1
 int		1 4
->		4 5
-SharedUsersId		6 C
-=		D E
-default		F M
-!		M N
-)		N O
-;		O P
+>		4 5
+?		5 6
+SharedUsersId		7 D
+=		E F
+default		G N
+!		N O
+)		O P
+;		P Q
 bool
 
  $
@@ -11288,8 +11283,8 @@ ReviewerId8 B
 )**' (
 ;**( )
 },, 
-}-- á
-xC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IEmailService.cs
+}-- Ù
+eC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IEmailService.cs
 	namespace 	
 AspireOverflow
  
@@ -11312,8 +11307,8 @@ Interfaces) 3
 )/ 0
 ;0 1
 } 
-} ’
-{C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IQueryRepository.cs
+} ¬
+hC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IQueryRepository.cs
 	namespace 	
 AspireOverflow
  
@@ -11426,8 +11421,8 @@ UpdateSpam"" 
 )""7 8
 ;""8 9
 }$$ 
-}%% ›
-xC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IQueryService.cs
+}%%  
+eC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IQueryService.cs
 	namespace 	
 AspireOverflow
  
@@ -11600,8 +11595,8 @@ GetQueries &
 )%%= >
 ;%%> ?
 }'' 
-})) ö
-xC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\ITokenService.cs
+})) á
+eC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\ITokenService.cs
 	namespace 	
 AspireOverflow
  
@@ -11626,8 +11621,8 @@ Interfaces) 3
 } 
 }
 
- ˚
-zC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IUserRepository.cs
+ Ë
+gC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IUserRepository.cs
 	namespace 	
 AspireOverflow
  
@@ -11730,8 +11725,8 @@ GetGenders# -
 )9 :
 ;: ;
 } 
-} ⁄
-wC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Interfaces\IUserService.cs
+} «
+dC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Interfaces\IUserService.cs
 	namespace 	
 AspireOverflow
  
@@ -11917,8 +11912,8 @@ GetGenders# -
 ). /
 ;/ 0
 } 
-} ≈ü
-|C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Repository\ArticleRepository.cs
+} û†
+iC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Repository\ArticleRepository.cs
 	namespace 	
 AspireOverflow
  
@@ -11942,17 +11937,19 @@ GetGenders# -
 
 % 7
 { 
-private !
-AspireOverflowContext %
-_context& .
-;. /
-private 
-ILogger 
-< 
-ArticleRepository )
->) *
-_logger+ 2
-;2 3
+private 
+readonly !
+AspireOverflowContext .
+_context/ 7
+;7 8
+private 
+readonly 
+ILogger  
+<  !
+ArticleRepository! 2
+>2 3
+_logger4 ;
+;; <
 public 
 ArticleRepository  
 (  !!
@@ -12100,11 +12097,9 @@ Validation-- 
 SharedUsersId22B O
 .22O P
 Count22P U
-(22U V
-)22V W
->22X Y
-$num22Z [
-)22[ \
+>22V W
+$num22X Y
+)22Y Z
 {33 
 SharedUsersId44 !
 .44! "
@@ -12715,11 +12710,9 @@ ValidationEE 
 )èèà â
 ;èèâ ä
 throw
-êê 
-	exception
-êê 
+êê 
 ;
-êê  
+êê 
 }
 ëë 
 }
@@ -12763,31 +12756,47 @@ ValidationEE 
 Include
 òò6 =
 (
-òò= >
-$str
-òò> M
-)
-òòM N
+òò= >
+e
+òò> ?
+=>
+òò? A
+e
+òòA B
 .
-òòN O
-Include
-òòO V
-(
-òòV W
-$str
-òòW ]
+òòB C
+ArticleStatus
+òòC P
 )
+òòP Q
+.
+òòQ R
+Include
+òòR Y
+(
+òòY Z
+e
+òòZ [
+=>
+òò[ ]
+e
 òò] ^
 .
-òò^ _
-ToList
-òò_ e
-(
-òòe f
+òò^ _
+User
+òò_ c
 )
-òòf g
+òòc d
+.
+òòd e
+ToList
+òòe k
+(
+òòk l
+)
+òòl m
 ;
-òòg h
+òòm n
 return
 ôô 
 ListOfArticle
@@ -12841,11 +12850,9 @@ ValidationEE 
 ;
 ûûn o
 throw
-†† 
-	exception
-†† 
+†† 
 ;
-††  
+†† 
 }
 °° 
 }
@@ -12947,11 +12954,9 @@ ValidationEE 
 ;
 ∞∞u v
 throw
-≤≤ 
-	exception
-≤≤ 
+≤≤ 
 ;
-≤≤  
+≤≤ 
 }
 ≥≥ 
 }
@@ -13179,11 +13184,9 @@ Validation
 ;
 ŸŸn o
 throw
-€€ 
-	exception
-€€ 
+€€ 
 ;
-€€  
+€€ 
 }
 ‹‹ 
 }
@@ -13424,21 +13427,29 @@ Validation
 Include
 ˘˘? F
 (
-˘˘F G
-$str
-˘˘G P
-)
-˘˘P Q
+˘˘F G
+e
+˘˘G H
+=>
+˘˘H J
+e
+˘˘J K
 .
-˘˘Q R
-ToList
-˘˘R X
-(
-˘˘X Y
+˘˘K L
+Article
+˘˘L S
 )
-˘˘Y Z
+˘˘S T
+.
+˘˘T U
+ToList
+˘˘U [
+(
+˘˘[ \
+)
+˘˘\ ]
 ;
-˘˘Z [
+˘˘] ^
 return
 ˙˙  
 ListOfArticleLikes
@@ -13492,19 +13503,17 @@ Validation
 ;
 ˇˇk l
 throw
-ÅÅ 
-	exception
-ÅÅ 
+ÅÅ 
 ;
-ÅÅ  
+ÅÅ 
 }
 ÇÇ 
 }
 ÉÉ 	
 }
 ÑÑ 
-}ÖÖ ìÄ
-zC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Repository\QueryRepository.cs
+}ÖÖ ∆Ç
+gC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Repository\QueryRepository.cs
 	namespace
 
  	
@@ -13526,17 +13535,19 @@ zC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Da
 :! "
 IQueryRepository# 3
 { 
-private !
-AspireOverflowContext %
-_context& .
-;. /
-private 
-ILogger 
-< 
-QueryRepository '
->' (
-_logger) 0
-;0 1
+private 
+readonly !
+AspireOverflowContext .
+_context/ 7
+;7 8
+private 
+readonly 
+ILogger  
+<  !
+QueryRepository! 0
+>0 1
+_logger2 9
+;9 :
 public 
 QueryRepository 
 ( !
@@ -13704,1067 +13715,1098 @@ Validation55 
 ,GG+ ,
 boolGG- 1
 IsSolvedGG2 :
-,GG: ;
-boolGG< @
-IsDeleteGGA I
-)GGI J
+=GG: ;
+falseGG; @
+,GG@ A
+boolGGB F
+IsDeleteGGG O
+=GGO P
+falseGGP U
+)GGU V
 {HH 	
+ifII 
+(II 
+QueryIdII 
+<=II 
+$numII 
+)II 
+throwII #
+newII$ '
+ArgumentExceptionII( 9
+(II9 :
+$"II: <
+$strII< j
+{IIj k
+QueryIdIIk r
+}IIr s
+"IIs t
+)IIt u
+;IIu v
 ifJJ 
-(JJ 
-QueryIdJJ 
-<=JJ 
-$numJJ 
-)JJ 
-throwJJ #
-newJJ$ '
-ArgumentExceptionJJ( 9
-(JJ9 :
-$"JJ: <
-$strJJ< j
-{JJj k
-QueryIdJJk r
-}JJr s
-"JJs t
-)JJt u
-;JJu v
-ifLL 
-(LL 
-IsSolvedLL 
-==LL 
-IsDeleteLL $
-)LL$ %
-throwLL& +
-newLL, /
-ArgumentExceptionLL0 A
-(LLA B
-$strLLB x
-)LLx y
-;LLy z
-tryMM 
-{NN 
-varOO 
-ExistingQueryOO !
-=OO" #
-GetQueryByIDOO$ 0
-(OO0 1
-QueryIdOO1 8
-)OO8 9
-;OO9 :
-ifQQ 
-(QQ 
-IsSolvedQQ 
-)QQ 
-ExistingQueryQQ +
-.QQ+ ,
-IsSolvedQQ, 4
-=QQ5 6
-IsSolvedQQ7 ?
-;QQ? @
-ifRR 
-(RR 
-IsDeleteRR 
-)RR 
-ExistingQueryRR +
-.RR+ ,
-IsActiveRR, 4
-=RR5 6
-falseRR7 <
-;RR< =
-_contextTT 
-.TT 
-QueriesTT  
-.TT  !
-UpdateTT! '
-(TT' (
-ExistingQueryTT( 5
-)TT5 6
-;TT6 7
-_contextUU 
-.UU 
-SaveChangesUU $
-(UU$ %
-)UU% &
-;UU& '
-returnVV 
-trueVV 
-;VV 
-}WW 
-catchXX 
-(XX 
-	ExceptionXX 
-	exceptionXX &
-)XX& '
-{YY 
-_loggerZZ 
-.ZZ 
-LogErrorZZ  
-(ZZ  !
-HelperServiceZZ! .
-.ZZ. /
-LoggerMessageZZ/ <
-(ZZ< =
-$strZZ= N
-,ZZN O
-$str	ZZP à
+(JJ 
+IsSolvedJJ 
+==JJ 
+IsDeleteJJ $
+)JJ$ %
+throwJJ& +
+newJJ, /
+ArgumentExceptionJJ0 A
+(JJA B
+$strJJB x
+)JJx y
+;JJy z
+tryKK 
+{LL 
+varMM 
+ExistingQueryMM !
+=MM" #
+GetQueryByIDMM$ 0
+(MM0 1
+QueryIdMM1 8
+)MM8 9
+;MM9 :
+ifNN 
+(NN 
+IsSolvedNN 
+)NN 
+ExistingQueryNN +
+.NN+ ,
+IsSolvedNN, 4
+=NN5 6
+IsSolvedNN7 ?
+;NN? @
+ifOO 
+(OO 
+IsDeleteOO 
+)OO 
+ExistingQueryOO +
+.OO+ ,
+IsActiveOO, 4
+=OO5 6
+falseOO7 <
+;OO< =
+_contextPP 
+.PP 
+QueriesPP  
+.PP  !
+UpdatePP! '
+(PP' (
+ExistingQueryPP( 5
+)PP5 6
+;PP6 7
+_contextQQ 
+.QQ 
+SaveChangesQQ $
+(QQ$ %
+)QQ% &
+;QQ& '
+returnRR 
+trueRR 
+;RR 
+}SS 
+catchTT 
+(TT 
+	ExceptionTT 
+	exceptionTT &
+)TT& '
+{UU 
+_loggerVV 
+.VV 
+LogErrorVV  
+(VV  !
+HelperServiceVV! .
+.VV. /
+LoggerMessageVV/ <
+(VV< =
+$strVV= N
+,VVN O
+$str	VVP à
 ,
-ZZà â
+VVà â
 	exception
-ZZä ì
+VVä ì
 ,
-ZZì î
+VVì î
 IsSolved
-ZZï ù
+VVï ù
 ?
-ZZû ü
+VVû ü
 IsSolved
-ZZ† ®
+VV† ®
 :
-ZZ© ™
+VV© ™
 IsDelete
-ZZ´ ≥
+VV´ ≥
 )
-ZZ≥ ¥
+VV≥ ¥
 )
-ZZ¥ µ
+VV¥ µ
 ;
-ZZµ ∂
-return[[ 
-false[[ 
-;[[ 
-}]] 
-}^^ 	
-publicaa 
-Queryaa 
-GetQueryByIDaa !
-(aa! "
-intaa" %
-QueryIdaa& -
-)aa- .
-{bb 	
-ifcc 
-(cc 
-QueryIdcc 
-<=cc 
-$numcc 
-)cc 
-throwcc $
-newcc% (
-ArgumentExceptioncc) :
-(cc: ;
-$"cc; =
-$strcc= k
-{cck l
-QueryIdccl s
-}ccs t
-"cct u
-)ccu v
-;ccv w
-Querydd 
-?dd 
-ExistingQuerydd  
-;dd  !
-tryee 
-{ff 
-ExistingQuerygg 
-=gg 
+VVµ ∂
+returnWW 
+falseWW 
+;WW 
+}YY 
+}ZZ 	
+public]] 
+Query]] 
+GetQueryByID]] !
+(]]! "
+int]]" %
+QueryId]]& -
+)]]- .
+{^^ 	
+if__ 
+(__ 
+QueryId__ 
+<=__ 
+$num__ 
+)__ 
+throw__ $
+new__% (
+ArgumentException__) :
+(__: ;
+$"__; =
+$str__= k
+{__k l
+QueryId__l s
+}__s t
+"__t u
+)__u v
+;__v w
+Query`` 
+?`` 
+ExistingQuery``  
+;``  !
+tryaa 
+{bb 
+ExistingQuerycc 
+=cc 
 
-GetQueriesgg  *
-(gg* +
-)gg+ ,
-.gg, -
-ToListgg- 3
-(gg3 4
-)gg4 5
-.gg5 6
-Findgg6 :
-(gg: ;
-querygg; @
-=>ggA C
-queryggC H
-.ggH I
-QueryIdggI P
-==ggP R
-QueryIdggR Y
-)ggY Z
-;ggZ [
-returnhh 
-ExistingQueryhh $
-!=hh% '
-nullhh( ,
-?hh- .
-ExistingQueryhh/ <
-:hh= >
-throwhh? D
-newhhE H!
-ItemNotFoundExceptionhhI ^
-(hh^ _
-$"hh_ a
-$str	hha è
+GetQueriescc  *
+(cc* +
+)cc+ ,
+.cc, -
+ToListcc- 3
+(cc3 4
+)cc4 5
+.cc5 6
+Findcc6 :
+(cc: ;
+querycc; @
+=>ccA C
+queryccC H
+.ccH I
+QueryIdccI P
+==ccP R
+QueryIdccR Y
+)ccY Z
+;ccZ [
+returndd 
+ExistingQuerydd $
+!=dd% '
+nulldd( ,
+?dd- .
+ExistingQuerydd/ <
+:dd= >
+throwdd? D
+newddE H!
+ItemNotFoundExceptionddI ^
+(dd^ _
+$"dd_ a
+$str	dda è
 {
-hhè ê
+ddè ê
 QueryId
-hhê ó
+ddê ó
 }
-hhó ò
+ddó ò
 "
-hhò ô
+ddò ô
 )
-hhô ö
+ddô ö
 ;
-hhö õ
-}ii 
-catchjj 
-(jj 
-	Exceptionjj 
-	exceptionjj &
-)jj& '
-{kk 
-_loggerll 
-.ll 
-LogErrorll  
-(ll  !
-HelperServicell! .
-.ll. /
-LoggerMessagell/ <
-(ll< =
-$strll= N
-,llN O
-$strllP k
-,llk l
-	exceptionllm v
-,llv w
-QueryIdllx 
-)	ll Ä
+ddö õ
+}ee 
+catchff 
+(ff 
+	Exceptionff 
+	exceptionff &
+)ff& '
+{gg 
+_loggerhh 
+.hh 
+LogErrorhh  
+(hh  !
+HelperServicehh! .
+.hh. /
+LoggerMessagehh/ <
+(hh< =
+$strhh= N
+,hhN O
+$strhhP k
+,hhk l
+	exceptionhhm v
+,hhv w
+QueryIdhhx 
+)	hh Ä
 )
-llÄ Å
+hhÄ Å
 ;
-llÅ Ç
-throwmm 
-	exceptionmm 
-;mm  
-}nn 
-}oo 	
-publicqq 
-IEnumerableqq 
-<qq 
-Queryqq  
->qq  !
+hhÅ Ç
+throwii 
+;ii 
+}jj 
+}kk 	
+publicmm 
+IEnumerablemm 
+<mm 
+Querymm  
+>mm  !
 
-GetQueriesqq" ,
-(qq, -
-)qq- .
-{rr 	
-tryss 
-{tt 
-varuu 
-ListOfQueriesuu !
-=uu" #
-_contextuu$ ,
-.uu, -
-Queriesuu- 4
-.uu4 5
-Whereuu5 :
-(uu: ;
-itemuu; ?
-=>uu@ B
-itemuuC G
-.uuG H
-IsActiveuuH P
-==uuQ S
-trueuuT X
-)uuX Y
-.uuY Z
-IncludeuuZ a
-(uua b
-$struub h
-)uuh i
-.uui j
-ToListuuj p
-(uup q
-)uuq r
-;uur s
-returnvv 
-ListOfQueriesvv $
-;vv$ %
-}xx 
-catchyy 
-(yy 
-	Exceptionyy 
-	exceptionyy &
-)yy& '
-{zz 
-_logger{{ 
-.{{ 
-LogError{{  
-({{  !
-HelperService{{! .
-.{{. /
-LoggerMessage{{/ <
-({{< =
-$str{{= N
-,{{N O
-$str{{P ^
-,{{^ _
-	exception{{` i
-){{i j
-){{j k
-;{{k l
-throw}} 
-	exception}} 
-;}}  
-}~~ 
-}
-ÅÅ 	
+GetQueriesmm" ,
+(mm, -
+)mm- .
+{nn 	
+tryoo 
+{pp 
+varqq 
+ListOfQueriesqq !
+=qq" #
+_contextqq$ ,
+.qq, -
+Queriesqq- 4
+.qq4 5
+Whereqq5 :
+(qq: ;
+itemqq; ?
+=>qq@ B
+itemqqC G
+.qqG H
+IsActiveqqH P
+)qqP Q
+.qqQ R
+IncludeqqR Y
+(qqY Z
+eqqZ [
+=>qq[ ]
+eqq] ^
+.qq^ _
+Userqq_ c
+)qqc d
+.qqd e
+ToListqqe k
+(qqk l
+)qql m
+;qqm n
+returnrr 
+ListOfQueriesrr $
+;rr$ %
+}tt 
+catchuu 
+(uu 
+	Exceptionuu 
+	exceptionuu &
+)uu& '
+{vv 
+_loggerww 
+.ww 
+LogErrorww  
+(ww  !
+HelperServiceww! .
+.ww. /
+LoggerMessageww/ <
+(ww< =
+$strww= N
+,wwN O
+$strwwP ^
+,ww^ _
+	exceptionww` i
+)wwi j
+)wwj k
+;wwk l
+throwyy 
+;yy 
+}zz 
+}}} 	
 public
-ÑÑ 
+ÄÄ 
 IEnumerable
-ÑÑ 
+ÄÄ 
 <
-ÑÑ 
+ÄÄ 
 QueryComment
-ÑÑ '
+ÄÄ '
 >
-ÑÑ' (
+ÄÄ' (
 GetComments
-ÑÑ) 4
+ÄÄ) 4
 (
-ÑÑ4 5
+ÄÄ4 5
 )
-ÑÑ5 6
+ÄÄ5 6
 {
-ÖÖ 	
+ÅÅ 	
 try
-ÜÜ 
+ÇÇ 
 {
-áá 
+ÉÉ 
 var
-àà 
+ÑÑ 
 ListOfComments
-àà "
+ÑÑ "
 =
-àà# $
+ÑÑ# $
 _context
-àà% -
+ÑÑ% -
 .
-àà- .
+ÑÑ- .
 QueryComments
-àà. ;
+ÑÑ. ;
 .
-àà; <
+ÑÑ; <
 Include
-àà< C
+ÑÑ< C
 (
-ààC D
-$str
-ààD K
-)
-ààK L
+ÑÑC D
+e
+ÑÑD E
+=>
+ÑÑE G
+e
+ÑÑG H
 .
-ààL M
+ÑÑH I
+Query
+ÑÑI N
+)
+ÑÑN O
+.
+ÑÑO P
 Include
-ààM T
+ÑÑP W
 (
-ààT U
-$str
-ààU [
-)
-àà[ \
+ÑÑW X
+e
+ÑÑX Y
+=>
+ÑÑY [
+e
+ÑÑ[ \
 .
-àà\ ]
+ÑÑ\ ]
+User
+ÑÑ] a
+)
+ÑÑa b
+.
+ÑÑb c
 ToList
-àà] c
+ÑÑc i
 (
-ààc d
+ÑÑi j
 )
-ààd e
+ÑÑj k
 ;
-ààe f
+ÑÑk l
 return
-ââ 
+ÖÖ 
 ListOfComments
-ââ %
+ÖÖ %
 ;
-ââ% &
+ÖÖ% &
 }
-ãã 
+áá 
 catch
-åå 
+àà 
 (
-åå 
+àà 
 	Exception
-åå 
+àà 
 	exception
-åå &
+àà &
 )
-åå& '
+àà& '
 {
-çç 
+ââ 
 _logger
-éé 
+ää 
 .
-éé 
+ää 
 LogError
-éé  
+ää  
 (
-éé  !
+ää  !
 HelperService
-éé! .
+ää! .
 .
-éé. /
+ää. /
 LoggerMessage
-éé/ <
+ää/ <
 (
-éé< =
+ää< =
 $str
-éé= N
+ää= N
 ,
-ééN O
+ääN O
 $str
-ééP _
+ääP _
 ,
-éé_ `
+ää_ `
 	exception
-ééa j
+ääa j
 )
-ééj k
+ääj k
 )
-éék l
+ääk l
 ;
-éél m
+ääl m
 throw
-êê 
-	exception
-êê 
+åå 
 ;
-êê  
+åå 
 }
-ëë 
+çç 
 }
-íí 	
+éé 	
 public
-îî 
+êê 
 bool
-îî 
+êê 
 AddSpam
-îî 
+êê 
 (
-îî 
+êê 
 Spam
-îî  
+êê  
 spam
-îî! %
+êê! %
 )
-îî% &
+êê% &
 {
-ïï 	
+ëë 	
 
 Validation
-ññ 
+íí 
 .
-ññ 
+íí 
 ValidateSpam
-ññ "
+íí "
 (
-ññ" #
+íí" #
 spam
-ññ# '
+íí# '
 )
-ññ' (
+íí' (
 ;
-ññ( )
+íí( )
 try
-óó 
+ìì 
 {
-òò 
+îî 
 if
-ôô 
+ïï 
 (
-ôô 
+ïï 
 GetSpams
-ôô 
+ïï 
 (
-ôô 
+ïï 
 )
-ôô 
+ïï 
 .
-ôô 
-ToList
-ôô $
+ïï 
+AsEnumerable
+ïï *
 (
-ôô$ %
+ïï* +
 )
-ôô% &
+ïï+ ,
 .
-ôô& '
+ïï, -
 Any
-ôô' *
+ïï- 0
 (
-ôô* +
+ïï0 1
 item
-ôô+ /
+ïï1 5
 =>
-ôô0 2
+ïï6 8
 item
-ôô3 7
+ïï9 =
 .
-ôô7 8
+ïï= >
 UserId
-ôô8 >
+ïï> D
 ==
-ôô? A
+ïïE G
 spam
-ôôB F
+ïïH L
 .
-ôôF G
+ïïL M
 UserId
-ôôG M
+ïïM S
 &&
-ôôN P
+ïïT V
 item
-ôôQ U
+ïïW [
 .
-ôôU V
+ïï[ \
 QueryId
-ôôV ]
+ïï\ c
 ==
-ôô^ `
+ïïd f
 spam
-ôôa e
+ïïg k
 .
-ôôe f
+ïïk l
 QueryId
-ôôf m
+ïïl s
 )
-ôôm n
+ïïs t
 )
-ôôn o
+ïït u
 throw
-ôôp u
+ïïv {
 new
-ôôv y 
-ArgumentExceptionôôz ã
-(ôôã å
-$strôôå ¬
-)ôô¬ √
-;ôô√ ƒ
+ïï| !
+ArgumentExceptionïïÄ ë
+(ïïë í
+$strïïí »
+)ïï» …
+;ïï…  
 _context
-õõ 
+óó 
 .
-õõ 
+óó 
 Spams
-õõ 
+óó 
 .
-õõ 
+óó 
 AddRange
-õõ '
+óó '
 (
-õõ' (
+óó' (
 spam
-õõ( ,
+óó( ,
 )
-õõ, -
+óó, -
 ;
-õõ- .
+óó- .
 _context
-úú 
+òò 
 .
-úú 
+òò 
 SaveChanges
-úú $
+òò $
 (
-úú$ %
+òò$ %
 )
-úú% &
+òò% &
 ;
-úú& '
+òò& '
 return
-ùù 
+ôô 
 true
-ùù 
+ôô 
 ;
-ùù 
+ôô 
 }
-ûû 
+öö 
 catch
-üü 
+õõ 
 (
-üü 
+õõ 
 	Exception
-üü 
+õõ 
 	exception
-üü &
+õõ &
 )
-üü& '
+õõ& '
 {
-†† 
+úú 
 _logger
-°° 
+ùù 
 .
-°° 
+ùù 
 LogError
-°°  
+ùù  
 (
-°°  !
+ùù  !
 HelperService
-°°! .
+ùù! .
 .
-°°. /
+ùù. /
 LoggerMessage
-°°/ <
+ùù/ <
 (
-°°< =
+ùù< =
 $str
-°°= N
+ùù= N
 ,
-°°N O
+ùùN O
 $str
-°°P d
+ùùP d
 ,
-°°d e
+ùùd e
 	exception
-°°f o
+ùùf o
 ,
-°°o p
+ùùo p
 spam
-°°q u
+ùùq u
 )
-°°u v
+ùùu v
 )
-°°v w
+ùùv w
 ;
-°°w x
+ùùw x
 return
-££ 
+üü 
 false
-££ 
+üü 
 ;
-££ 
+üü 
 }
-•• 
+°° 
 }
-¶¶ 	
+¢¢ 	
 public
-©© 
+•• 
 IEnumerable
-©© 
+•• 
 <
-©© 
+•• 
 Spam
-©© 
+•• 
 >
-©©  
+••  
 GetSpams
-©©! )
+••! )
 (
-©©) *
+••) *
 )
-©©* +
+••* +
 {
-™™ 	
+¶¶ 	
 try
-´´ 
+ßß 
 {
-¨¨ 
+®® 
 var
-≠≠ 
+©© 
 ListOfSpams
-≠≠ 
+©© 
 =
-≠≠  !
+©©  !
 _context
-≠≠" *
+©©" *
 .
-≠≠* +
+©©* +
 Spams
-≠≠+ 0
+©©+ 0
 .
-≠≠0 1
+©©0 1
 Include
-≠≠1 8
+©©1 8
 (
-≠≠8 9
-$str
-≠≠9 @
-)
-≠≠@ A
+©©8 9
+e
+©©9 :
+=>
+©©: <
+e
+©©< =
 .
-≠≠A B
+©©= >
+Query
+©©> C
+)
+©©C D
+.
+©©D E
 Include
-≠≠B I
+©©E L
 (
-≠≠I J
-$str
-≠≠J P
-)
-≠≠P Q
+©©L M
+e
+©©M N
+=>
+©©N P
+e
+©©P Q
 .
-≠≠Q R
+©©Q R
+User
+©©R V
+)
+©©V W
+.
+©©W X
 ToList
-≠≠R X
+©©X ^
 (
-≠≠X Y
+©©^ _
 )
-≠≠Y Z
+©©_ `
 ;
-≠≠Z [
+©©` a
 return
-ÆÆ 
+™™ 
 ListOfSpams
-ÆÆ "
+™™ "
 ;
-ÆÆ" #
+™™" #
 }
-∞∞ 
+¨¨ 
 catch
-±± 
+≠≠ 
 (
-±± 
+≠≠ 
 	Exception
-±± 
+≠≠ 
 	exception
-±± &
+≠≠ &
 )
-±±& '
+≠≠& '
 {
-≤≤ 
+ÆÆ 
 _logger
-≥≥ 
+ØØ 
 .
-≥≥ 
+ØØ 
 LogError
-≥≥  
+ØØ  
 (
-≥≥  !
+ØØ  !
 HelperService
-≥≥! .
+ØØ! .
 .
-≥≥. /
+ØØ. /
 LoggerMessage
-≥≥/ <
+ØØ/ <
 (
-≥≥< =
+ØØ< =
 $str
-≥≥= N
+ØØ= N
 ,
-≥≥N O
+ØØN O
 $str
-≥≥P \
+ØØP \
 ,
-≥≥\ ]
+ØØ\ ]
 	exception
-≥≥^ g
+ØØ^ g
 )
-≥≥g h
+ØØg h
 )
-≥≥h i
+ØØh i
 ;
-≥≥i j
+ØØi j
 throw
-¥¥ 
-	exception
-¥¥ 
+∞∞ 
 ;
-¥¥  
+∞∞ 
 }
-µµ 
+±± 
 }
-∂∂ 	
+≤≤ 	
 public
-∫∫ 
+∂∂ 
 bool
-∫∫ 
+∂∂ 
 
 UpdateSpam
-∫∫ 
+∂∂ 
 (
-∫∫ 
+∂∂ 
 int
-∫∫ "
+∂∂ "
 QueryId
-∫∫# *
+∂∂# *
 ,
-∫∫* +
+∂∂* +
 int
-∫∫, /
+∂∂, /
 VerifyStatusID
-∫∫0 >
+∂∂0 >
 )
-∫∫> ?
+∂∂> ?
 {
-ªª 	
+∑∑ 	
 if
-ΩΩ 
+ππ 
 (
-ΩΩ 
+ππ 
 QueryId
-ΩΩ 
+ππ 
 <=
-ΩΩ 
+ππ 
 $num
-ΩΩ 
+ππ 
 )
-ΩΩ 
+ππ 
 throw
-ΩΩ #
+ππ #
 new
-ΩΩ$ '
+ππ$ '
 ArgumentException
-ΩΩ( 9
+ππ( 9
 (
-ΩΩ9 :
+ππ9 :
 $"
-ΩΩ: <
+ππ: <
 $str
-ΩΩ< j
+ππ< j
 {
-ΩΩj k
+ππj k
 QueryId
-ΩΩk r
+ππk r
 }
-ΩΩr s
+ππr s
 "
-ΩΩs t
+ππs t
 )
-ΩΩt u
+ππt u
 ;
-ΩΩu v
+ππu v
 if
-ææ 
+∫∫ 
 (
-ææ 
+∫∫ 
 VerifyStatusID
-ææ 
+∫∫ 
 <=
-ææ !
+∫∫ !
 $num
-ææ" #
+∫∫" #
 ||
-ææ$ &
+∫∫$ &
 VerifyStatusID
-ææ' 5
+∫∫' 5
 >
-ææ6 7
+∫∫6 7
 $num
-ææ8 9
+∫∫8 9
 )
-ææ9 :
+∫∫9 :
 throw
-ææ; @
+∫∫; @
 new
-ææA D
+∫∫A D
 ArgumentException
-ææE V
+∫∫E V
 (
-ææV W
+∫∫V W
 $"
-ææW Y
-$strææY ñ
-{ææñ ó
-VerifyStatusIDææó •
-}ææ• ¶
-"ææ¶ ß
-)ææß ®
-;ææ® ©
+∫∫W Y
+$str∫∫Y ñ
+{∫∫ñ ó
+VerifyStatusID∫∫ó •
+}∫∫• ¶
+"∫∫¶ ß
+)∫∫ß ®
+;∫∫® ©
 try
-¿¿ 
+ºº 
 {
-¡¡ 
+ΩΩ 
 var
-¬¬ 
+ææ 
 ExistingSpam
-¬¬ 
+ææ 
 =
-¬¬  
+ææ  
 GetSpams
-¬¬! )
+ææ! )
 (
-¬¬) *
+ææ) *
 )
-¬¬* +
+ææ* +
 .
-¬¬+ ,
+ææ+ ,
 Where
-¬¬, 1
+ææ, 1
 (
-¬¬1 2
+ææ1 2
 item
-¬¬2 6
+ææ2 6
 =>
-¬¬6 8
+ææ6 8
 item
-¬¬8 <
+ææ8 <
 .
-¬¬< =
+ææ< =
 QueryId
-¬¬= D
+ææ= D
 ==
-¬¬D F
+ææD F
 QueryId
-¬¬F M
+ææF M
 )
-¬¬M N
+ææM N
 .
-¬¬N O
+ææN O
 ToList
-¬¬O U
+ææO U
 (
-¬¬U V
+ææU V
 )
-¬¬V W
+ææV W
 ;
-¬¬W X
+ææW X
 if
-√√ 
+øø 
 (
-√√ 
+øø 
 ExistingSpam
-√√ 
+øø 
 ==
-√√ !
+øø !
 null
-√√" &
+øø" &
 )
-√√& '
+øø& '
 throw
-√√( -
+øø( -
 new
-√√. 1#
+øø. 1#
 ItemNotFoundException
-√√2 G
+øø2 G
 (
-√√G H
+øøG H
 $"
-√√H J
+øøH J
 $str
-√√J w
+øøJ w
 {
-√√w x
+øøw x
 QueryId
-√√x 
-}√√ Ä
-"√√Ä Å
-)√√Å Ç
-;√√Ç É
+øøx 
+}øø Ä
+"øøÄ Å
+)øøÅ Ç
+;øøÇ É
 ExistingSpam
-ƒƒ 
+¿¿ 
 .
-ƒƒ 
+¿¿ 
 ForEach
-ƒƒ %
+¿¿ %
 (
-ƒƒ% &
+¿¿% &
 Item
-ƒƒ& *
+¿¿& *
 =>
-ƒƒ+ -
+¿¿+ -
 Item
-ƒƒ- 1
+¿¿- 1
 .
-ƒƒ1 2
+¿¿1 2
 VerifyStatusID
-ƒƒ2 @
+¿¿2 @
 =
-ƒƒ@ A
+¿¿@ A
 VerifyStatusID
-ƒƒA O
+¿¿A O
 )
-ƒƒO P
+¿¿O P
 ;
-ƒƒP Q
+¿¿P Q
 _context
-≈≈ 
+¡¡ 
 .
-≈≈ 
+¡¡ 
 Spams
-≈≈ 
+¡¡ 
 .
-≈≈ 
+¡¡ 
 UpdateRange
-≈≈ *
+¡¡ *
 (
-≈≈* +
+¡¡* +
 ExistingSpam
-≈≈+ 7
+¡¡+ 7
 )
-≈≈7 8
+¡¡7 8
 ;
-≈≈8 9
+¡¡8 9
 _context
-∆∆ 
+¬¬ 
 .
-∆∆ 
+¬¬ 
 SaveChanges
-∆∆ $
+¬¬ $
 (
-∆∆$ %
+¬¬$ %
 )
-∆∆% &
+¬¬% &
 ;
-∆∆& '
+¬¬& '
 return
-«« 
+√√ 
 true
-«« 
+√√ 
 ;
-«« 
+√√ 
 }
-»» 
+ƒƒ 
 catch
-…… 
+≈≈ 
 (
-…… 
+≈≈ 
 	Exception
-…… 
+≈≈ 
 	exception
-…… &
+≈≈ &
 )
-……& '
+≈≈& '
 {
-   
+∆∆ 
 _logger
-ÀÀ 
+«« 
 .
-ÀÀ 
+«« 
 LogError
-ÀÀ  
+««  
 (
-ÀÀ  !
+««  !
 HelperService
-ÀÀ! .
+««! .
 .
-ÀÀ. /
+««. /
 LoggerMessage
-ÀÀ/ <
+««/ <
 (
-ÀÀ< =
+««< =
 $str
-ÀÀ= N
+««= N
 ,
-ÀÀN O
+««N O
 $str
-ÀÀP }
+««P }
 ,
-ÀÀ} ~
-	exceptionÀÀ à
-,ÀÀà â
-VerifyStatusIDÀÀä ò
-)ÀÀò ô
-)ÀÀô ö
-;ÀÀö õ
+««} ~
+	exception«« à
+,««à â
+VerifyStatusID««ä ò
+)««ò ô
+)««ô ö
+;««ö õ
 return
-ÃÃ 
+»» 
 false
-ÃÃ 
+»» 
 ;
-ÃÃ 
+»» 
 }
-ŒŒ 
+   
 }
-œœ 	
+ÀÀ 	
 }
-‘‘ 
-}÷÷ ‚z
-yC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\DataAccessLayer\Repository\UserRepository.cs
+–– 
+}““ ≈|
+fC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\DataAccessLayer\Repository\UserRepository.cs
 	namespace
 
  	
@@ -14786,17 +14828,19 @@ yC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Da
 :  !
 IUserRepository" 1
 { 
-private !
-AspireOverflowContext %
-_context& .
-;. /
-private 
-ILogger 
-< 
-UserRepository &
->& '
-_logger( /
-;/ 0
+private 
+readonly !
+AspireOverflowContext .
+_context/ 7
+;7 8
+private 
+readonly 
+ILogger  
+<  !
+UserRepository! /
+>/ 0
+_logger1 8
+;8 9
 public 
 UserRepository 
 ( !
@@ -14825,7 +14869,7 @@ yC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Da
 CreateUser 
 ( 
 User #
-user$ (
+User$ (
 )( )
 { 	
 
@@ -14833,7 +14877,7 @@ Validation 
 . 
 ValidateUser #
 (# $
-user$ (
+User$ (
 )( )
 ;) *
 try 
@@ -14861,7 +14905,7 @@ Validation 
 .  2 3
 	AceNumber  3 <
 ==  = ?
-user  @ D
+User  @ D
 .  D E
 	AceNumber  E N
 )  N O
@@ -14887,7 +14931,7 @@ Validation 
 .!!2 3
 EmailAddress!!3 ?
 ==!!@ B
-user!!C G
+User!!C G
 .!!G H
 EmailAddress!!H T
 )!!T U
@@ -14907,7 +14951,7 @@ Validation 
 ."" 
 Add"" "
 (""" #
-user""# '
+User""# '
 )""' (
 ;""( )
 _context## 
@@ -14940,13 +14984,12 @@ Validation 
 ,((f g
 	exception((h q
 ,((q r
-user((s w
+User((s w
 )((w x
 )((x y
 ;((y z
-throw)) 
-	exception)) 
-;))  
+throw)) 
+;)) 
 }** 
 catch++ 
 (++ 
@@ -14968,7 +15011,7 @@ Validation 
 ,--f g
 	exception--h q
 ,--q r
-user--s w
+User--s w
 )--w x
 )--x y
 ;--y z
@@ -15173,9 +15216,8 @@ RemoveUser55 
 )UU{ |
 )UU| }
 ;UU} ~
-throwVV 
-	exceptionVV 
-;VV  
+throwVV 
+;VV 
 }WW 
 }XX 	
 public[[ 
@@ -15195,32 +15237,51 @@ RemoveUser55 
 Users``  %
 .``% &
 Include``& -
-(``- .
-$str``. ;
-)``; <
-.``< =
-Include``= D
-(``D E
-$str``E O
-)``O P
-.``P Q
-Include``Q X
-(``X Y
-$str``Y a
-)``a b
-.``b c
-Include``c j
-(``j k
-$str``k y
-)``y z
-.``z {
-ToList	``{ Å
-(
-``Å Ç
+(``- .
+e``. /
+=>``/ 1
+e``1 2
+.``2 3
+Designation``3 >
+)``> ?
+.``? @
+Include``@ G
+(``G H
+e``H I
+=>``I K
+e``K L
+.``L M
+UserRole``M U
+)``U V
+.``V W
+Include``W ^
+(``^ _
+e``_ `
+=>``` b
+e``b c
+.``c d
+Gender``d j
+)``j k
+.``k l
+Include``l s
+(``s t
+e``t u
+=>``u w
+e``w x
+.``x y
+VerifyStatus	``y Ö
 )
-``Ç É
+``Ö Ü
+.
+``Ü á
+ToList
+``á ç
+(
+``ç é
+)
+``é è
 ;
-``É Ñ
+``è ê
 }aa 
 catchbb 
 (bb 
@@ -15244,9 +15305,8 @@ RemoveUser55 
 )ddf g
 )ddg h
 ;ddh i
-throwee 
-	exceptionee 
-;ee  
+throwee 
+;ee 
 }ff 
 }gg 	
 publicii 
@@ -15660,11 +15720,9 @@ GetGenders
 ;
 õõk l
 throw
-úú 
-	exception
-úú 
+úú 
 ;
-úú  
+úú 
 }
 ùù 
 }
@@ -15704,21 +15762,30 @@ GetGenders
 Include
 ••- 4
 (
-••4 5
-$str
-••5 A
-)
-••A B
+••4 5
+e
+••5 6
+=>
+••6 8
+e
+••8 9
 .
-••B C
-ToList
-••C I
-(
-••I J
+••9 :
+
+Department
+••: D
 )
-••J K
+••D E
+.
+••E F
+ToList
+••F L
+(
+••L M
+)
+••M N
 ;
-••K L
+••N O
 }
 ¶¶ 
 catch
@@ -15766,11 +15833,9 @@ GetGenders
 ;
 ©©p q
 throw
-™™ 
-	exception
-™™ 
+™™ 
 ;
-™™  
+™™ 
 }
 ´´ 
 }
@@ -15863,6723 +15928,17 @@ Department
 ;
 ∂∂o p
 throw
-∑∑ 
-	exception
-∑∑ 
+∑∑ 
 ;
-∑∑  
+∑∑ 
 }
 ∏∏ 
 }
 ππ 	
 }
 ºº 
-}ΩΩ Ÿ≥
-rC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Migrations\20220504145823_dbupdate.cs
-	namespace 	
-AspireOverflow
- 
-. 
-
-Migrations #
-{ 
-public 
-
-partial 
-class 
-dbupdate !
-:" #
-	Migration$ -
-{		 
-	protected
-
- 
-override
-
- 
-void
-
- 
-Up
-
-  "
-(
-
-" #
-MigrationBuilder
-
-# 3
-migrationBuilder
-
-4 D
-)
-
-D E
-{ 	
-migrationBuilder 
-. 
-CreateTable (
-(( )
-name 
-: 
-$str %
-,% &
-columns 
-: 
-table 
-=> !
-new" %
-{ 
-ArticleStatusID #
-=$ %
-table& +
-.+ ,
-Column, 2
-<2 3
-int3 6
->6 7
-(7 8
-type8 <
-:< =
-$str> C
-,C D
-nullableE M
-:M N
-falseO T
-)T U
-. 
-
-Annotation #
-(# $
-$str$ 8
-,8 9
-$str: @
-)@ A
-,A B
-Status 
-= 
-table "
-." #
-Column# )
-<) *
-string* 0
->0 1
-(1 2
-type2 6
-:6 7
-$str8 G
-,G H
-nullableI Q
-:Q R
-falseS X
-)X Y
-} 
-, 
-constraints 
-: 
-table "
-=># %
-{ 
-table 
-. 
-
-PrimaryKey $
-($ %
-$str% 7
-,7 8
-x9 :
-=>; =
-x> ?
-.? @
-ArticleStatusID@ O
-)O P
-;P Q
-} 
-) 
-; 
-migrationBuilder 
-. 
-CreateTable (
-(( )
-name 
-: 
-$str #
-,# $
-columns 
-: 
-table 
-=> !
-new" %
-{ 
-DepartmentId  
-=! "
-table# (
-.( )
-Column) /
-</ 0
-int0 3
->3 4
-(4 5
-type5 9
-:9 :
-$str; @
-,@ A
-nullableB J
-:J K
-falseL Q
-)Q R
-. 
-
-Annotation #
-(# $
-$str$ 8
-,8 9
-$str: @
-)@ A
-,A B
-DepartmentName "
-=# $
-table% *
-.* +
-Column+ 1
-<1 2
-string2 8
->8 9
-(9 :
-type: >
-:> ?
-$str@ N
-,N O
-	maxLengthP Y
-:Y Z
-$num[ ]
-,] ^
-nullable_ g
-:g h
-falsei n
-)n o
-}   
-,   
-constraints!! 
-:!! 
-table!! "
-=>!!# %
-{"" 
-table## 
-.## 
-
-PrimaryKey## $
-(##$ %
-$str##% 5
-,##5 6
-x##7 8
-=>##9 ;
-x##< =
-.##= >
-DepartmentId##> J
-)##J K
-;##K L
-}$$ 
-)$$ 
-;$$ 
-migrationBuilder&& 
-.&& 
-CreateTable&& (
-(&&( )
-name'' 
-:'' 
-$str'' 
-,'' 
-columns(( 
-:(( 
-table(( 
-=>(( !
-new((" %
-{)) 
-GenderId** 
-=** 
-table** $
-.**$ %
-Column**% +
-<**+ ,
-int**, /
->**/ 0
-(**0 1
-type**1 5
-:**5 6
-$str**7 <
-,**< =
-nullable**> F
-:**F G
-false**H M
-)**M N
-,**N O
-Name++ 
-=++ 
-table++  
-.++  !
-Column++! '
-<++' (
-string++( .
->++. /
-(++/ 0
-type++0 4
-:++4 5
-$str++6 D
-,++D E
-	maxLength++F O
-:++O P
-$num++Q S
-,++S T
-nullable++U ]
-:++] ^
-false++_ d
-)++d e
-},, 
-,,, 
-constraints-- 
-:-- 
-table-- "
-=>--# %
-{.. 
-table// 
-.// 
-
-PrimaryKey// $
-(//$ %
-$str//% 0
-,//0 1
-x//2 3
-=>//4 6
-x//7 8
-.//8 9
-GenderId//9 A
-)//A B
-;//B C
-}00 
-)00 
-;00 
-migrationBuilder22 
-.22 
-CreateTable22 (
-(22( )
-name33 
-:33 
-$str33 !
-,33! "
-columns44 
-:44 
-table44 
-=>44 !
-new44" %
-{55 
-
-UserRoleId66 
-=66  
-table66! &
-.66& '
-Column66' -
-<66- .
-int66. 1
->661 2
-(662 3
-type663 7
-:667 8
-$str669 >
-,66> ?
-nullable66@ H
-:66H I
-false66J O
-)66O P
-,66P Q
-RoleName77 
-=77 
-table77 $
-.77$ %
-Column77% +
-<77+ ,
-string77, 2
->772 3
-(773 4
-type774 8
-:778 9
-$str77: I
-,77I J
-nullable77K S
-:77S T
-false77U Z
-)77Z [
-}88 
-,88 
-constraints99 
-:99 
-table99 "
-=>99# %
-{:: 
-table;; 
-.;; 
-
-PrimaryKey;; $
-(;;$ %
-$str;;% 3
-,;;3 4
-x;;5 6
-=>;;7 9
-x;;: ;
-.;;; <
-
-UserRoleId;;< F
-);;F G
-;;;G H
-}<< 
-)<< 
-;<< 
-migrationBuilder>> 
-.>> 
-CreateTable>> (
-(>>( )
-name?? 
-:?? 
-$str?? $
-,??$ %
-columns@@ 
-:@@ 
-table@@ 
-=>@@ !
-new@@" %
-{AA 
-VerifyStatusIDBB "
-=BB# $
-tableBB% *
-.BB* +
-ColumnBB+ 1
-<BB1 2
-intBB2 5
->BB5 6
-(BB6 7
-typeBB7 ;
-:BB; <
-$strBB= B
-,BBB C
-nullableBBD L
-:BBL M
-falseBBN S
-)BBS T
-,BBT U
-NameCC 
-=CC 
-tableCC  
-.CC  !
-ColumnCC! '
-<CC' (
-stringCC( .
->CC. /
-(CC/ 0
-typeCC0 4
-:CC4 5
-$strCC6 E
-,CCE F
-nullableCCG O
-:CCO P
-falseCCQ V
-)CCV W
-}DD 
-,DD 
-constraintsEE 
-:EE 
-tableEE "
-=>EE# %
-{FF 
-tableGG 
-.GG 
-
-PrimaryKeyGG $
-(GG$ %
-$strGG% 6
-,GG6 7
-xGG8 9
-=>GG: <
-xGG= >
-.GG> ?
-VerifyStatusIDGG? M
-)GGM N
-;GGN O
-}HH 
-)HH 
-;HH 
-migrationBuilderJJ 
-.JJ 
-CreateTableJJ (
-(JJ( )
-nameKK 
-:KK 
-$strKK $
-,KK$ %
-columnsLL 
-:LL 
-tableLL 
-=>LL !
-newLL" %
-{MM 
-DesignationIdNN !
-=NN" #
-tableNN$ )
-.NN) *
-ColumnNN* 0
-<NN0 1
-intNN1 4
->NN4 5
-(NN5 6
-typeNN6 :
-:NN: ;
-$strNN< A
-,NNA B
-nullableNNC K
-:NNK L
-falseNNM R
-)NNR S
-.OO 
-
-AnnotationOO #
-(OO# $
-$strOO$ 8
-,OO8 9
-$strOO: @
-)OO@ A
-,OOA B
-DesignationNamePP #
-=PP$ %
-tablePP& +
-.PP+ ,
-ColumnPP, 2
-<PP2 3
-stringPP3 9
->PP9 :
-(PP: ;
-typePP; ?
-:PP? @
-$strPPA O
-,PPO P
-	maxLengthPPQ Z
-:PPZ [
-$numPP\ ^
-,PP^ _
-nullablePP` h
-:PPh i
-falsePPj o
-)PPo p
-,PPp q
-DepartmentIdQQ  
-=QQ! "
-tableQQ# (
-.QQ( )
-ColumnQQ) /
-<QQ/ 0
-intQQ0 3
->QQ3 4
-(QQ4 5
-typeQQ5 9
-:QQ9 :
-$strQQ; @
-,QQ@ A
-nullableQQB J
-:QQJ K
-falseQQL Q
-)QQQ R
-}RR 
-,RR 
-constraintsSS 
-:SS 
-tableSS "
-=>SS# %
-{TT 
-tableUU 
-.UU 
-
-PrimaryKeyUU $
-(UU$ %
-$strUU% 6
-,UU6 7
-xUU8 9
-=>UU: <
-xUU= >
-.UU> ?
-DesignationIdUU? L
-)UUL M
-;UUM N
-tableVV 
-.VV 
-
-ForeignKeyVV $
-(VV$ %
-nameWW 
-:WW 
-$strWW H
-,WWH I
-columnXX 
-:XX 
-xXX  !
-=>XX" $
-xXX% &
-.XX& '
-DepartmentIdXX' 3
-,XX3 4
-principalTableYY &
-:YY& '
-$strYY( 5
-,YY5 6
-principalColumnZZ '
-:ZZ' (
-$strZZ) 7
-,ZZ7 8
-onDelete[[  
-:[[  !
-ReferentialAction[[" 3
-.[[3 4
-NoAction[[4 <
-)[[< =
-;[[= >
-}\\ 
-)\\ 
-;\\ 
-migrationBuilder^^ 
-.^^ 
-CreateTable^^ (
-(^^( )
-name__ 
-:__ 
-$str__ 
-,__ 
-columns`` 
-:`` 
-table`` 
-=>`` !
-new``" %
-{aa 
-UserIdbb 
-=bb 
-tablebb "
-.bb" #
-Columnbb# )
-<bb) *
-intbb* -
->bb- .
-(bb. /
-typebb/ 3
-:bb3 4
-$strbb5 :
-,bb: ;
-nullablebb< D
-:bbD E
-falsebbF K
-)bbK L
-.cc 
-
-Annotationcc #
-(cc# $
-$strcc$ 8
-,cc8 9
-$strcc: @
-)cc@ A
-,ccA B
-FullNamedd 
-=dd 
-tabledd $
-.dd$ %
-Columndd% +
-<dd+ ,
-stringdd, 2
->dd2 3
-(dd3 4
-typedd4 8
-:dd8 9
-$strdd: H
-,ddH I
-	maxLengthddJ S
-:ddS T
-$numddU W
-,ddW X
-nullableddY a
-:dda b
-falseddc h
-)ddh i
-,ddi j
-GenderIdee 
-=ee 
-tableee $
-.ee$ %
-Columnee% +
-<ee+ ,
-intee, /
->ee/ 0
-(ee0 1
-typeee1 5
-:ee5 6
-$stree7 <
-,ee< =
-nullableee> F
-:eeF G
-falseeeH M
-)eeM N
-,eeN O
-	AceNumberff 
-=ff 
-tableff  %
-.ff% &
-Columnff& ,
-<ff, -
-stringff- 3
->ff3 4
-(ff4 5
-typeff5 9
-:ff9 :
-$strff; I
-,ffI J
-	maxLengthffK T
-:ffT U
-$numffV X
-,ffX Y
-nullableffZ b
-:ffb c
-falseffd i
-)ffi j
-,ffj k
-EmailAddressgg  
-=gg! "
-tablegg# (
-.gg( )
-Columngg) /
-<gg/ 0
-stringgg0 6
->gg6 7
-(gg7 8
-typegg8 <
-:gg< =
-$strgg> M
-,ggM N
-nullableggO W
-:ggW X
-falseggY ^
-)gg^ _
-,gg_ `
-Passwordhh 
-=hh 
-tablehh $
-.hh$ %
-Columnhh% +
-<hh+ ,
-stringhh, 2
->hh2 3
-(hh3 4
-typehh4 8
-:hh8 9
-$strhh: I
-,hhI J
-nullablehhK S
-:hhS T
-falsehhU Z
-)hhZ [
-,hh[ \
-DateOfBirthii 
-=ii  !
-tableii" '
-.ii' (
-Columnii( .
-<ii. /
-DateTimeii/ 7
->ii7 8
-(ii8 9
-typeii9 =
-:ii= >
-$strii? J
-,iiJ K
-nullableiiL T
-:iiT U
-falseiiV [
-)ii[ \
-,ii\ ]
-VerifyStatusIDjj "
-=jj# $
-tablejj% *
-.jj* +
-Columnjj+ 1
-<jj1 2
-intjj2 5
->jj5 6
-(jj6 7
-typejj7 ;
-:jj; <
-$strjj= B
-,jjB C
-nullablejjD L
-:jjL M
-falsejjN S
-)jjS T
-,jjT U
-
-IsReviewerkk 
-=kk  
-tablekk! &
-.kk& '
-Columnkk' -
-<kk- .
-boolkk. 2
->kk2 3
-(kk3 4
-typekk4 8
-:kk8 9
-$strkk: ?
-,kk? @
-nullablekkA I
-:kkI J
-falsekkK P
-)kkP Q
-,kkQ R
-
-UserRoleIdll 
-=ll  
-tablell! &
-.ll& '
-Columnll' -
-<ll- .
-intll. 1
->ll1 2
-(ll2 3
-typell3 7
-:ll7 8
-$strll9 >
-,ll> ?
-nullablell@ H
-:llH I
-falsellJ O
-)llO P
-,llP Q
-DesignationIdmm !
-=mm" #
-tablemm$ )
-.mm) *
-Columnmm* 0
-<mm0 1
-intmm1 4
->mm4 5
-(mm5 6
-typemm6 :
-:mm: ;
-$strmm< A
-,mmA B
-nullablemmC K
-:mmK L
-falsemmM R
-)mmR S
-,mmS T
-	CreatedOnnn 
-=nn 
-tablenn  %
-.nn% &
-Columnnn& ,
-<nn, -
-DateTimenn- 5
->nn5 6
-(nn6 7
-typenn7 ;
-:nn; <
-$strnn= H
-,nnH I
-nullablennJ R
-:nnR S
-falsennT Y
-)nnY Z
-,nnZ [
-	UpdatedOnoo 
-=oo 
-tableoo  %
-.oo% &
-Columnoo& ,
-<oo, -
-DateTimeoo- 5
->oo5 6
-(oo6 7
-typeoo7 ;
-:oo; <
-$stroo= H
-,ooH I
-nullableooJ R
-:ooR S
-trueooT X
-)ooX Y
-,ooY Z
-	UpdatedBypp 
-=pp 
-tablepp  %
-.pp% &
-Columnpp& ,
-<pp, -
-intpp- 0
->pp0 1
-(pp1 2
-typepp2 6
-:pp6 7
-$strpp8 =
-,pp= >
-nullablepp? G
-:ppG H
-trueppI M
-)ppM N
-}qq 
-,qq 
-constraintsrr 
-:rr 
-tablerr "
-=>rr# %
-{ss 
-tablett 
-.tt 
-
-PrimaryKeytt $
-(tt$ %
-$strtt% /
-,tt/ 0
-xtt1 2
-=>tt3 5
-xtt6 7
-.tt7 8
-UserIdtt8 >
-)tt> ?
-;tt? @
-tableuu 
-.uu 
-
-ForeignKeyuu $
-(uu$ %
-namevv 
-:vv 
-$strvv 2
-,vv2 3
-columnww 
-:ww 
-xww  !
-=>ww" $
-xww% &
-.ww& '
-DesignationIdww' 4
-,ww4 5
-principalTablexx &
-:xx& '
-$strxx( 6
-,xx6 7
-principalColumnyy '
-:yy' (
-$stryy) 8
-)yy8 9
-;yy9 :
-tablezz 
-.zz 
-
-ForeignKeyzz $
-(zz$ %
-name{{ 
-:{{ 
-$str{{ .
-,{{. /
-column|| 
-:|| 
-x||  !
-=>||" $
-x||% &
-.||& '
-GenderId||' /
-,||/ 0
-principalTable}} &
-:}}& '
-$str}}( 0
-,}}0 1
-principalColumn~~ '
-:~~' (
-$str~~) 3
-)~~3 4
-;~~4 5
-table 
-. 
-
-ForeignKey $
-($ %
-name
-ÄÄ 
-:
-ÄÄ 
-$str
-ÄÄ 0
-,
-ÄÄ0 1
-column
-ÅÅ 
-:
-ÅÅ 
-x
-ÅÅ  !
-=>
-ÅÅ" $
-x
-ÅÅ% &
-.
-ÅÅ& '
-
-UserRoleId
-ÅÅ' 1
-,
-ÅÅ1 2
-principalTable
-ÇÇ &
-:
-ÇÇ& '
-$str
-ÇÇ( 3
-,
-ÇÇ3 4
-principalColumn
-ÉÉ '
-:
-ÉÉ' (
-$str
-ÉÉ) 5
-)
-ÉÉ5 6
-;
-ÉÉ6 7
-table
-ÑÑ 
-.
-ÑÑ 
-
-ForeignKey
-ÑÑ $
-(
-ÑÑ$ %
-name
-ÖÖ 
-:
-ÖÖ 
-$str
-ÖÖ 4
-,
-ÖÖ4 5
-column
-ÜÜ 
-:
-ÜÜ 
-x
-ÜÜ  !
-=>
-ÜÜ" $
-x
-ÜÜ% &
-.
-ÜÜ& '
-VerifyStatusID
-ÜÜ' 5
-,
-ÜÜ5 6
-principalTable
-áá &
-:
-áá& '
-$str
-áá( 6
-,
-áá6 7
-principalColumn
-àà '
-:
-àà' (
-$str
-àà) 9
-)
-àà9 :
-;
-àà: ;
-}
-ââ 
-)
-ââ 
-;
-ââ 
-migrationBuilder
-ãã 
-.
-ãã 
-CreateTable
-ãã (
-(
-ãã( )
-name
-åå 
-:
-åå 
-$str
-åå  
-,
-åå  !
-columns
-çç 
-:
-çç 
-table
-çç 
-=>
-çç !
-new
-çç" %
-{
-éé 
-ArtileId
-èè 
-=
-èè 
-table
-èè $
-.
-èè$ %
-Column
-èè% +
-<
-èè+ ,
-int
-èè, /
->
-èè/ 0
-(
-èè0 1
-type
-èè1 5
-:
-èè5 6
-$str
-èè7 <
-,
-èè< =
-nullable
-èè> F
-:
-èèF G
-false
-èèH M
-)
-èèM N
-.
-êê 
-
-Annotation
-êê #
-(
-êê# $
-$str
-êê$ 8
-,
-êê8 9
-$str
-êê: @
-)
-êê@ A
-,
-êêA B
-Title
-ëë 
-=
-ëë 
-table
-ëë !
-.
-ëë! "
-Column
-ëë" (
-<
-ëë( )
-string
-ëë) /
->
-ëë/ 0
-(
-ëë0 1
-type
-ëë1 5
-:
-ëë5 6
-$str
-ëë7 F
-,
-ëëF G
-nullable
-ëëH P
-:
-ëëP Q
-false
-ëëR W
-)
-ëëW X
-,
-ëëX Y
-Content
-íí 
-=
-íí 
-table
-íí #
-.
-íí# $
-Column
-íí$ *
-<
-íí* +
-string
-íí+ 1
->
-íí1 2
-(
-íí2 3
-type
-íí3 7
-:
-íí7 8
-$str
-íí9 H
-,
-ííH I
-nullable
-ííJ R
-:
-ííR S
-false
-ííT Y
-)
-ííY Z
-,
-ííZ [
-Image
-ìì 
-=
-ìì 
-table
-ìì !
-.
-ìì! "
-Column
-ìì" (
-<
-ìì( )
-byte
-ìì) -
-[
-ìì- .
-]
-ìì. /
->
-ìì/ 0
-(
-ìì0 1
-type
-ìì1 5
-:
-ìì5 6
-$str
-ìì7 G
-,
-ììG H
-nullable
-ììI Q
-:
-ììQ R
-false
-ììS X
-)
-ììX Y
-,
-ììY Z
-ArticleStatusID
-îî #
-=
-îî$ %
-table
-îî& +
-.
-îî+ ,
-Column
-îî, 2
-<
-îî2 3
-int
-îî3 6
->
-îî6 7
-(
-îî7 8
-type
-îî8 <
-:
-îî< =
-$str
-îî> C
-,
-îîC D
-nullable
-îîE M
-:
-îîM N
-false
-îîO T
-)
-îîT U
-,
-îîU V
-
-ReviewerId
-ïï 
-=
-ïï  
-table
-ïï! &
-.
-ïï& '
-Column
-ïï' -
-<
-ïï- .
-int
-ïï. 1
->
-ïï1 2
-(
-ïï2 3
-type
-ïï3 7
-:
-ïï7 8
-$str
-ïï9 >
-,
-ïï> ?
-nullable
-ïï@ H
-:
-ïïH I
-true
-ïïJ N
-)
-ïïN O
-,
-ïïO P
-Datetime
-ññ 
-=
-ññ 
-table
-ññ $
-.
-ññ$ %
-Column
-ññ% +
-<
-ññ+ ,
-DateTime
-ññ, 4
->
-ññ4 5
-(
-ññ5 6
-type
-ññ6 :
-:
-ññ: ;
-$str
-ññ< G
-,
-ññG H
-nullable
-ññI Q
-:
-ññQ R
-false
-ññS X
-)
-ññX Y
-,
-ññY Z
-	CreatedBy
-óó 
-=
-óó 
-table
-óó  %
-.
-óó% &
-Column
-óó& ,
-<
-óó, -
-int
-óó- 0
->
-óó0 1
-(
-óó1 2
-type
-óó2 6
-:
-óó6 7
-$str
-óó8 =
-,
-óó= >
-nullable
-óó? G
-:
-óóG H
-false
-óóI N
-)
-óóN O
-,
-óóO P
-	CreatedOn
-òò 
-=
-òò 
-table
-òò  %
-.
-òò% &
-Column
-òò& ,
-<
-òò, -
-DateTime
-òò- 5
->
-òò5 6
-(
-òò6 7
-type
-òò7 ;
-:
-òò; <
-$str
-òò= H
-,
-òòH I
-nullable
-òòJ R
-:
-òòR S
-false
-òòT Y
-)
-òòY Z
-,
-òòZ [
-	UpdatedBy
-ôô 
-=
-ôô 
-table
-ôô  %
-.
-ôô% &
-Column
-ôô& ,
-<
-ôô, -
-int
-ôô- 0
->
-ôô0 1
-(
-ôô1 2
-type
-ôô2 6
-:
-ôô6 7
-$str
-ôô8 =
-,
-ôô= >
-nullable
-ôô? G
-:
-ôôG H
-true
-ôôI M
-)
-ôôM N
-,
-ôôN O
-	UpdatedOn
-öö 
-=
-öö 
-table
-öö  %
-.
-öö% &
-Column
-öö& ,
-<
-öö, -
-DateTime
-öö- 5
->
-öö5 6
-(
-öö6 7
-type
-öö7 ;
-:
-öö; <
-$str
-öö= H
-,
-ööH I
-nullable
-ööJ R
-:
-ööR S
-true
-ööT X
-)
-ööX Y
-}
-õõ 
-,
-õõ 
-constraints
-úú 
-:
-úú 
-table
-úú "
-=>
-úú# %
-{
-ùù 
-table
-ûû 
-.
-ûû 
-
-PrimaryKey
-ûû $
-(
-ûû$ %
-$str
-ûû% 2
-,
-ûû2 3
-x
-ûû4 5
-=>
-ûû6 8
-x
-ûû9 :
-.
-ûû: ;
-ArtileId
-ûû; C
-)
-ûûC D
-;
-ûûD E
-table
-üü 
-.
-üü 
-
-ForeignKey
-üü $
-(
-üü$ %
-name
-†† 
-:
-†† 
-$str
-†† I
-,
-††I J
-column
-°° 
-:
-°° 
-x
-°°  !
-=>
-°°" $
-x
-°°% &
-.
-°°& '
-ArticleStatusID
-°°' 6
-,
-°°6 7
-principalTable
-¢¢ &
-:
-¢¢& '
-$str
-¢¢( 7
-,
-¢¢7 8
-principalColumn
-££ '
-:
-££' (
-$str
-££) :
-,
-££: ;
-onDelete
-§§  
-:
-§§  !
-ReferentialAction
-§§" 3
-.
-§§3 4
-NoAction
-§§4 <
-)
-§§< =
-;
-§§= >
-table
-•• 
-.
-•• 
-
-ForeignKey
-•• $
-(
-••$ %
-name
-¶¶ 
-:
-¶¶ 
-$str
-¶¶ ;
-,
-¶¶; <
-column
-ßß 
-:
-ßß 
-x
-ßß  !
-=>
-ßß" $
-x
-ßß% &
-.
-ßß& '
-	CreatedBy
-ßß' 0
-,
-ßß0 1
-principalTable
-®® &
-:
-®®& '
-$str
-®®( /
-,
-®®/ 0
-principalColumn
-©© '
-:
-©©' (
-$str
-©©) 1
-,
-©©1 2
-onDelete
-™™  
-:
-™™  !
-ReferentialAction
-™™" 3
-.
-™™3 4
-NoAction
-™™4 <
-)
-™™< =
-;
-™™= >
-}
-´´ 
-)
-´´ 
-;
-´´ 
-migrationBuilder
-≠≠ 
-.
-≠≠ 
-CreateTable
-≠≠ (
-(
-≠≠( )
-name
-ÆÆ 
-:
-ÆÆ 
-$str
-ÆÆ 
-,
-ÆÆ  
-columns
-ØØ 
-:
-ØØ 
-table
-ØØ 
-=>
-ØØ !
-new
-ØØ" %
-{
-∞∞ 
-QueryId
-±± 
-=
-±± 
-table
-±± #
-.
-±±# $
-Column
-±±$ *
-<
-±±* +
-int
-±±+ .
->
-±±. /
-(
-±±/ 0
-type
-±±0 4
-:
-±±4 5
-$str
-±±6 ;
-,
-±±; <
-nullable
-±±= E
-:
-±±E F
-false
-±±G L
-)
-±±L M
-.
-≤≤ 
-
-Annotation
-≤≤ #
-(
-≤≤# $
-$str
-≤≤$ 8
-,
-≤≤8 9
-$str
-≤≤: @
-)
-≤≤@ A
-,
-≤≤A B
-Title
-≥≥ 
-=
-≥≥ 
-table
-≥≥ !
-.
-≥≥! "
-Column
-≥≥" (
-<
-≥≥( )
-string
-≥≥) /
->
-≥≥/ 0
-(
-≥≥0 1
-type
-≥≥1 5
-:
-≥≥5 6
-$str
-≥≥7 F
-,
-≥≥F G
-nullable
-≥≥H P
-:
-≥≥P Q
-false
-≥≥R W
-)
-≥≥W X
-,
-≥≥X Y
-Content
-¥¥ 
-=
-¥¥ 
-table
-¥¥ #
-.
-¥¥# $
-Column
-¥¥$ *
-<
-¥¥* +
-string
-¥¥+ 1
->
-¥¥1 2
-(
-¥¥2 3
-type
-¥¥3 7
-:
-¥¥7 8
-$str
-¥¥9 H
-,
-¥¥H I
-nullable
-¥¥J R
-:
-¥¥R S
-false
-¥¥T Y
-)
-¥¥Y Z
-,
-¥¥Z [
-code
-µµ 
-=
-µµ 
-table
-µµ  
-.
-µµ  !
-Column
-µµ! '
-<
-µµ' (
-string
-µµ( .
->
-µµ. /
-(
-µµ/ 0
-type
-µµ0 4
-:
-µµ4 5
-$str
-µµ6 E
-,
-µµE F
-nullable
-µµG O
-:
-µµO P
-false
-µµQ V
-)
-µµV W
-,
-µµW X
-IsSolved
-∂∂ 
-=
-∂∂ 
-table
-∂∂ $
-.
-∂∂$ %
-Column
-∂∂% +
-<
-∂∂+ ,
-bool
-∂∂, 0
->
-∂∂0 1
-(
-∂∂1 2
-type
-∂∂2 6
-:
-∂∂6 7
-$str
-∂∂8 =
-,
-∂∂= >
-nullable
-∂∂? G
-:
-∂∂G H
-false
-∂∂I N
-)
-∂∂N O
-,
-∂∂O P
-IsActive
-∑∑ 
-=
-∑∑ 
-table
-∑∑ $
-.
-∑∑$ %
-Column
-∑∑% +
-<
-∑∑+ ,
-bool
-∑∑, 0
->
-∑∑0 1
-(
-∑∑1 2
-type
-∑∑2 6
-:
-∑∑6 7
-$str
-∑∑8 =
-,
-∑∑= >
-nullable
-∑∑? G
-:
-∑∑G H
-false
-∑∑I N
-)
-∑∑N O
-,
-∑∑O P
-	CreatedBy
-∏∏ 
-=
-∏∏ 
-table
-∏∏  %
-.
-∏∏% &
-Column
-∏∏& ,
-<
-∏∏, -
-int
-∏∏- 0
->
-∏∏0 1
-(
-∏∏1 2
-type
-∏∏2 6
-:
-∏∏6 7
-$str
-∏∏8 =
-,
-∏∏= >
-nullable
-∏∏? G
-:
-∏∏G H
-false
-∏∏I N
-)
-∏∏N O
-,
-∏∏O P
-	CreatedOn
-ππ 
-=
-ππ 
-table
-ππ  %
-.
-ππ% &
-Column
-ππ& ,
-<
-ππ, -
-DateTime
-ππ- 5
->
-ππ5 6
-(
-ππ6 7
-type
-ππ7 ;
-:
-ππ; <
-$str
-ππ= H
-,
-ππH I
-nullable
-ππJ R
-:
-ππR S
-false
-ππT Y
-)
-ππY Z
-,
-ππZ [
-	UpdatedBy
-∫∫ 
-=
-∫∫ 
-table
-∫∫  %
-.
-∫∫% &
-Column
-∫∫& ,
-<
-∫∫, -
-int
-∫∫- 0
->
-∫∫0 1
-(
-∫∫1 2
-type
-∫∫2 6
-:
-∫∫6 7
-$str
-∫∫8 =
-,
-∫∫= >
-nullable
-∫∫? G
-:
-∫∫G H
-true
-∫∫I M
-)
-∫∫M N
-,
-∫∫N O
-	UpdatedOn
-ªª 
-=
-ªª 
-table
-ªª  %
-.
-ªª% &
-Column
-ªª& ,
-<
-ªª, -
-DateTime
-ªª- 5
->
-ªª5 6
-(
-ªª6 7
-type
-ªª7 ;
-:
-ªª; <
-$str
-ªª= H
-,
-ªªH I
-nullable
-ªªJ R
-:
-ªªR S
-true
-ªªT X
-)
-ªªX Y
-}
-ºº 
-,
-ºº 
-constraints
-ΩΩ 
-:
-ΩΩ 
-table
-ΩΩ "
-=>
-ΩΩ# %
-{
-ææ 
-table
-øø 
-.
-øø 
-
-PrimaryKey
-øø $
-(
-øø$ %
-$str
-øø% 1
-,
-øø1 2
-x
-øø3 4
-=>
-øø5 7
-x
-øø8 9
-.
-øø9 :
-QueryId
-øø: A
-)
-øøA B
-;
-øøB C
-table
-¿¿ 
-.
-¿¿ 
-
-ForeignKey
-¿¿ $
-(
-¿¿$ %
-name
-¡¡ 
-:
-¡¡ 
-$str
-¡¡ -
-,
-¡¡- .
-column
-¬¬ 
-:
-¬¬ 
-x
-¬¬  !
-=>
-¬¬" $
-x
-¬¬% &
-.
-¬¬& '
-	CreatedBy
-¬¬' 0
-,
-¬¬0 1
-principalTable
-√√ &
-:
-√√& '
-$str
-√√( /
-,
-√√/ 0
-principalColumn
-ƒƒ '
-:
-ƒƒ' (
-$str
-ƒƒ) 1
-)
-ƒƒ1 2
-;
-ƒƒ2 3
-}
-≈≈ 
-)
-≈≈ 
-;
-≈≈ 
-migrationBuilder
-«« 
-.
-«« 
-CreateTable
-«« (
-(
-««( )
-name
-»» 
-:
-»» 
-$str
-»» '
-,
-»»' (
-columns
-…… 
-:
-…… 
-table
-…… 
-=>
-…… !
-new
-……" %
-{
-   
-ArticleCommentId
-ÀÀ $
-=
-ÀÀ% &
-table
-ÀÀ' ,
-.
-ÀÀ, -
-Column
-ÀÀ- 3
-<
-ÀÀ3 4
-int
-ÀÀ4 7
->
-ÀÀ7 8
-(
-ÀÀ8 9
-type
-ÀÀ9 =
-:
-ÀÀ= >
-$str
-ÀÀ? D
-,
-ÀÀD E
-nullable
-ÀÀF N
-:
-ÀÀN O
-false
-ÀÀP U
-)
-ÀÀU V
-.
-ÃÃ 
-
-Annotation
-ÃÃ #
-(
-ÃÃ# $
-$str
-ÃÃ$ 8
-,
-ÃÃ8 9
-$str
-ÃÃ: @
-)
-ÃÃ@ A
-,
-ÃÃA B
-Comment
-ÕÕ 
-=
-ÕÕ 
-table
-ÕÕ #
-.
-ÕÕ# $
-Column
-ÕÕ$ *
-<
-ÕÕ* +
-string
-ÕÕ+ 1
->
-ÕÕ1 2
-(
-ÕÕ2 3
-type
-ÕÕ3 7
-:
-ÕÕ7 8
-$str
-ÕÕ9 H
-,
-ÕÕH I
-nullable
-ÕÕJ R
-:
-ÕÕR S
-false
-ÕÕT Y
-)
-ÕÕY Z
-,
-ÕÕZ [
-Datetime
-ŒŒ 
-=
-ŒŒ 
-table
-ŒŒ $
-.
-ŒŒ$ %
-Column
-ŒŒ% +
-<
-ŒŒ+ ,
-DateTime
-ŒŒ, 4
->
-ŒŒ4 5
-(
-ŒŒ5 6
-type
-ŒŒ6 :
-:
-ŒŒ: ;
-$str
-ŒŒ< G
-,
-ŒŒG H
-nullable
-ŒŒI Q
-:
-ŒŒQ R
-false
-ŒŒS X
-)
-ŒŒX Y
-,
-ŒŒY Z
-UserId
-œœ 
-=
-œœ 
-table
-œœ "
-.
-œœ" #
-Column
-œœ# )
-<
-œœ) *
-int
-œœ* -
->
-œœ- .
-(
-œœ. /
-type
-œœ/ 3
-:
-œœ3 4
-$str
-œœ5 :
-,
-œœ: ;
-nullable
-œœ< D
-:
-œœD E
-false
-œœF K
-)
-œœK L
-,
-œœL M
-	CreatedBy
-–– 
-=
-–– 
-table
-––  %
-.
-––% &
-Column
-––& ,
-<
-––, -
-int
-––- 0
->
-––0 1
-(
-––1 2
-type
-––2 6
-:
-––6 7
-$str
-––8 =
-,
-––= >
-nullable
-––? G
-:
-––G H
-false
-––I N
-)
-––N O
-,
-––O P
-	ArticleId
-—— 
-=
-—— 
-table
-——  %
-.
-——% &
-Column
-——& ,
-<
-——, -
-int
-——- 0
->
-——0 1
-(
-——1 2
-type
-——2 6
-:
-——6 7
-$str
-——8 =
-,
-——= >
-nullable
-——? G
-:
-——G H
-false
-——I N
-)
-——N O
-,
-——O P
-	CreatedOn
-““ 
-=
-““ 
-table
-““  %
-.
-““% &
-Column
-““& ,
-<
-““, -
-DateTime
-““- 5
->
-““5 6
-(
-““6 7
-type
-““7 ;
-:
-““; <
-$str
-““= H
-,
-““H I
-nullable
-““J R
-:
-““R S
-false
-““T Y
-)
-““Y Z
-,
-““Z [
-	UpdatedBy
-”” 
-=
-”” 
-table
-””  %
-.
-””% &
-Column
-””& ,
-<
-””, -
-int
-””- 0
->
-””0 1
-(
-””1 2
-type
-””2 6
-:
-””6 7
-$str
-””8 =
-,
-””= >
-nullable
-””? G
-:
-””G H
-true
-””I M
-)
-””M N
-,
-””N O
-	UpdatedOn
-‘‘ 
-=
-‘‘ 
-table
-‘‘  %
-.
-‘‘% &
-Column
-‘‘& ,
-<
-‘‘, -
-DateTime
-‘‘- 5
->
-‘‘5 6
-(
-‘‘6 7
-type
-‘‘7 ;
-:
-‘‘; <
-$str
-‘‘= H
-,
-‘‘H I
-nullable
-‘‘J R
-:
-‘‘R S
-true
-‘‘T X
-)
-‘‘X Y
-}
-’’ 
-,
-’’ 
-constraints
-÷÷ 
-:
-÷÷ 
-table
-÷÷ "
-=>
-÷÷# %
-{
-◊◊ 
-table
-ÿÿ 
-.
-ÿÿ 
-
-PrimaryKey
-ÿÿ $
-(
-ÿÿ$ %
-$str
-ÿÿ% 9
-,
-ÿÿ9 :
-x
-ÿÿ; <
-=>
-ÿÿ= ?
-x
-ÿÿ@ A
-.
-ÿÿA B
-ArticleCommentId
-ÿÿB R
-)
-ÿÿR S
-;
-ÿÿS T
-table
-ŸŸ 
-.
-ŸŸ 
-
-ForeignKey
-ŸŸ $
-(
-ŸŸ$ %
-name
-⁄⁄ 
-:
-⁄⁄ 
-$str
-⁄⁄ E
-,
-⁄⁄E F
-column
-€€ 
-:
-€€ 
-x
-€€  !
-=>
-€€" $
-x
-€€% &
-.
-€€& '
-	ArticleId
-€€' 0
-,
-€€0 1
-principalTable
-‹‹ &
-:
-‹‹& '
-$str
-‹‹( 2
-,
-‹‹2 3
-principalColumn
-›› '
-:
-››' (
-$str
-››) 3
-,
-››3 4
-onDelete
-ﬁﬁ  
-:
-ﬁﬁ  !
-ReferentialAction
-ﬁﬁ" 3
-.
-ﬁﬁ3 4
-NoAction
-ﬁﬁ4 <
-)
-ﬁﬁ< =
-;
-ﬁﬁ= >
-table
-ﬂﬂ 
-.
-ﬂﬂ 
-
-ForeignKey
-ﬂﬂ $
-(
-ﬂﬂ$ %
-name
-‡‡ 
-:
-‡‡ 
-$str
-‡‡ ?
-,
-‡‡? @
-column
-·· 
-:
-·· 
-x
-··  !
-=>
-··" $
-x
-··% &
-.
-··& '
-UserId
-··' -
-,
-··- .
-principalTable
-‚‚ &
-:
-‚‚& '
-$str
-‚‚( /
-,
-‚‚/ 0
-principalColumn
-„„ '
-:
-„„' (
-$str
-„„) 1
-,
-„„1 2
-onDelete
-‰‰  
-:
-‰‰  !
-ReferentialAction
-‰‰" 3
-.
-‰‰3 4
-NoAction
-‰‰4 <
-)
-‰‰< =
-;
-‰‰= >
-}
-ÂÂ 
-)
-ÂÂ 
-;
-ÂÂ 
-migrationBuilder
-ÁÁ 
-.
-ÁÁ 
-CreateTable
-ÁÁ (
-(
-ÁÁ( )
-name
-ËË 
-:
-ËË 
-$str
-ËË $
-,
-ËË$ %
-columns
-ÈÈ 
-:
-ÈÈ 
-table
-ÈÈ 
-=>
-ÈÈ !
-new
-ÈÈ" %
-{
-ÍÍ 
-LikeId
-ÎÎ 
-=
-ÎÎ 
-table
-ÎÎ "
-.
-ÎÎ" #
-Column
-ÎÎ# )
-<
-ÎÎ) *
-int
-ÎÎ* -
->
-ÎÎ- .
-(
-ÎÎ. /
-type
-ÎÎ/ 3
-:
-ÎÎ3 4
-$str
-ÎÎ5 :
-,
-ÎÎ: ;
-nullable
-ÎÎ< D
-:
-ÎÎD E
-false
-ÎÎF K
-)
-ÎÎK L
-.
-ÏÏ 
-
-Annotation
-ÏÏ #
-(
-ÏÏ# $
-$str
-ÏÏ$ 8
-,
-ÏÏ8 9
-$str
-ÏÏ: @
-)
-ÏÏ@ A
-,
-ÏÏA B
-	ArticleId
-ÌÌ 
-=
-ÌÌ 
-table
-ÌÌ  %
-.
-ÌÌ% &
-Column
-ÌÌ& ,
-<
-ÌÌ, -
-int
-ÌÌ- 0
->
-ÌÌ0 1
-(
-ÌÌ1 2
-type
-ÌÌ2 6
-:
-ÌÌ6 7
-$str
-ÌÌ8 =
-,
-ÌÌ= >
-nullable
-ÌÌ? G
-:
-ÌÌG H
-false
-ÌÌI N
-)
-ÌÌN O
-,
-ÌÌO P
-UserId
-ÓÓ 
-=
-ÓÓ 
-table
-ÓÓ "
-.
-ÓÓ" #
-Column
-ÓÓ# )
-<
-ÓÓ) *
-int
-ÓÓ* -
->
-ÓÓ- .
-(
-ÓÓ. /
-type
-ÓÓ/ 3
-:
-ÓÓ3 4
-$str
-ÓÓ5 :
-,
-ÓÓ: ;
-nullable
-ÓÓ< D
-:
-ÓÓD E
-false
-ÓÓF K
-)
-ÓÓK L
-}
-ÔÔ 
-,
-ÔÔ 
-constraints
- 
-:
- 
-table
- "
-=>
-# %
-{
-ÒÒ 
-table
-ÚÚ 
-.
-ÚÚ 
-
-PrimaryKey
-ÚÚ $
-(
-ÚÚ$ %
-$str
-ÚÚ% 6
-,
-ÚÚ6 7
-x
-ÚÚ8 9
-=>
-ÚÚ: <
-x
-ÚÚ= >
-.
-ÚÚ> ?
-LikeId
-ÚÚ? E
-)
-ÚÚE F
-;
-ÚÚF G
-table
-ÛÛ 
-.
-ÛÛ 
-
-ForeignKey
-ÛÛ $
-(
-ÛÛ$ %
-name
-ÙÙ 
-:
-ÙÙ 
-$str
-ÙÙ B
-,
-ÙÙB C
-column
-ıı 
-:
-ıı 
-x
-ıı  !
-=>
-ıı" $
-x
-ıı% &
-.
-ıı& '
-	ArticleId
-ıı' 0
-,
-ıı0 1
-principalTable
-ˆˆ &
-:
-ˆˆ& '
-$str
-ˆˆ( 2
-,
-ˆˆ2 3
-principalColumn
-˜˜ '
-:
-˜˜' (
-$str
-˜˜) 3
-,
-˜˜3 4
-onDelete
-¯¯  
-:
-¯¯  !
-ReferentialAction
-¯¯" 3
-.
-¯¯3 4
-NoAction
-¯¯4 <
-)
-¯¯< =
-;
-¯¯= >
-table
-˘˘ 
-.
-˘˘ 
-
-ForeignKey
-˘˘ $
-(
-˘˘$ %
-name
-˙˙ 
-:
-˙˙ 
-$str
-˙˙ <
-,
-˙˙< =
-column
-˚˚ 
-:
-˚˚ 
-x
-˚˚  !
-=>
-˚˚" $
-x
-˚˚% &
-.
-˚˚& '
-UserId
-˚˚' -
-,
-˚˚- .
-principalTable
-¸¸ &
-:
-¸¸& '
-$str
-¸¸( /
-,
-¸¸/ 0
-principalColumn
-˝˝ '
-:
-˝˝' (
-$str
-˝˝) 1
-,
-˝˝1 2
-onDelete
-˛˛  
-:
-˛˛  !
-ReferentialAction
-˛˛" 3
-.
-˛˛3 4
-NoAction
-˛˛4 <
-)
-˛˛< =
-;
-˛˛= >
-}
-ˇˇ 
-)
-ˇˇ 
-;
-ˇˇ 
-migrationBuilder
-ÅÅ 
-.
-ÅÅ 
-CreateTable
-ÅÅ (
-(
-ÅÅ( )
-name
-ÇÇ 
-:
-ÇÇ 
-$str
-ÇÇ %
-,
-ÇÇ% &
-columns
-ÉÉ 
-:
-ÉÉ 
-table
-ÉÉ 
-=>
-ÉÉ !
-new
-ÉÉ" %
-{
-ÑÑ 
-QueryCommentId
-ÖÖ "
-=
-ÖÖ# $
-table
-ÖÖ% *
-.
-ÖÖ* +
-Column
-ÖÖ+ 1
-<
-ÖÖ1 2
-int
-ÖÖ2 5
->
-ÖÖ5 6
-(
-ÖÖ6 7
-type
-ÖÖ7 ;
-:
-ÖÖ; <
-$str
-ÖÖ= B
-,
-ÖÖB C
-nullable
-ÖÖD L
-:
-ÖÖL M
-false
-ÖÖN S
-)
-ÖÖS T
-.
-ÜÜ 
-
-Annotation
-ÜÜ #
-(
-ÜÜ# $
-$str
-ÜÜ$ 8
-,
-ÜÜ8 9
-$str
-ÜÜ: @
-)
-ÜÜ@ A
-,
-ÜÜA B
-Comment
-áá 
-=
-áá 
-table
-áá #
-.
-áá# $
-Column
-áá$ *
-<
-áá* +
-string
-áá+ 1
->
-áá1 2
-(
-áá2 3
-type
-áá3 7
-:
-áá7 8
-$str
-áá9 H
-,
-ááH I
-nullable
-ááJ R
-:
-ááR S
-false
-ááT Y
-)
-ááY Z
-,
-ááZ [
-Datetime
-àà 
-=
-àà 
-table
-àà $
-.
-àà$ %
-Column
-àà% +
-<
-àà+ ,
-DateTime
-àà, 4
->
-àà4 5
-(
-àà5 6
-type
-àà6 :
-:
-àà: ;
-$str
-àà< G
-,
-ààG H
-nullable
-ààI Q
-:
-ààQ R
-false
-ààS X
-)
-ààX Y
-,
-ààY Z
-QueryId
-ââ 
-=
-ââ 
-table
-ââ #
-.
-ââ# $
-Column
-ââ$ *
-<
-ââ* +
-int
-ââ+ .
->
-ââ. /
-(
-ââ/ 0
-type
-ââ0 4
-:
-ââ4 5
-$str
-ââ6 ;
-,
-ââ; <
-nullable
-ââ= E
-:
-ââE F
-false
-ââG L
-)
-ââL M
-,
-ââM N
-	CreatedBy
-ää 
-=
-ää 
-table
-ää  %
-.
-ää% &
-Column
-ää& ,
-<
-ää, -
-int
-ää- 0
->
-ää0 1
-(
-ää1 2
-type
-ää2 6
-:
-ää6 7
-$str
-ää8 =
-,
-ää= >
-nullable
-ää? G
-:
-ääG H
-false
-ääI N
-)
-ääN O
-,
-ääO P
-	CreatedOn
-ãã 
-=
-ãã 
-table
-ãã  %
-.
-ãã% &
-Column
-ãã& ,
-<
-ãã, -
-DateTime
-ãã- 5
->
-ãã5 6
-(
-ãã6 7
-type
-ãã7 ;
-:
-ãã; <
-$str
-ãã= H
-,
-ããH I
-nullable
-ããJ R
-:
-ããR S
-false
-ããT Y
-)
-ããY Z
-,
-ããZ [
-	UpdatedBy
-åå 
-=
-åå 
-table
-åå  %
-.
-åå% &
-Column
-åå& ,
-<
-åå, -
-int
-åå- 0
->
-åå0 1
-(
-åå1 2
-type
-åå2 6
-:
-åå6 7
-$str
-åå8 =
-,
-åå= >
-nullable
-åå? G
-:
-ååG H
-true
-ååI M
-)
-ååM N
-,
-ååN O
-	UpdatedOn
-çç 
-=
-çç 
-table
-çç  %
-.
-çç% &
-Column
-çç& ,
-<
-çç, -
-DateTime
-çç- 5
->
-çç5 6
-(
-çç6 7
-type
-çç7 ;
-:
-çç; <
-$str
-çç= H
-,
-ççH I
-nullable
-ççJ R
-:
-ççR S
-true
-ççT X
-)
-ççX Y
-}
-éé 
-,
-éé 
-constraints
-èè 
-:
-èè 
-table
-èè "
-=>
-èè# %
-{
-êê 
-table
-ëë 
-.
-ëë 
-
-PrimaryKey
-ëë $
-(
-ëë$ %
-$str
-ëë% 7
-,
-ëë7 8
-x
-ëë9 :
-=>
-ëë; =
-x
-ëë> ?
-.
-ëë? @
-QueryCommentId
-ëë@ N
-)
-ëëN O
-;
-ëëO P
-table
-íí 
-.
-íí 
-
-ForeignKey
-íí $
-(
-íí$ %
-name
-ìì 
-:
-ìì 
-$str
-ìì 5
-,
-ìì5 6
-column
-îî 
-:
-îî 
-x
-îî  !
-=>
-îî" $
-x
-îî% &
-.
-îî& '
-QueryId
-îî' .
-,
-îî. /
-principalTable
-ïï &
-:
-ïï& '
-$str
-ïï( 1
-,
-ïï1 2
-principalColumn
-ññ '
-:
-ññ' (
-$str
-ññ) 2
-)
-ññ2 3
-;
-ññ3 4
-table
-óó 
-.
-óó 
-
-ForeignKey
-óó $
-(
-óó$ %
-name
-òò 
-:
-òò 
-$str
-òò 4
-,
-òò4 5
-column
-ôô 
-:
-ôô 
-x
-ôô  !
-=>
-ôô" $
-x
-ôô% &
-.
-ôô& '
-	CreatedBy
-ôô' 0
-,
-ôô0 1
-principalTable
-öö &
-:
-öö& '
-$str
-öö( /
-,
-öö/ 0
-principalColumn
-õõ '
-:
-õõ' (
-$str
-õõ) 1
-)
-õõ1 2
-;
-õõ2 3
-}
-úú 
-)
-úú 
-;
-úú 
-migrationBuilder
-ûû 
-.
-ûû 
-CreateTable
-ûû (
-(
-ûû( )
-name
-üü 
-:
-üü 
-$str
-üü 
-,
-üü 
-columns
-†† 
-:
-†† 
-table
-†† 
-=>
-†† !
-new
-††" %
-{
-°° 
-SpamId
-¢¢ 
-=
-¢¢ 
-table
-¢¢ "
-.
-¢¢" #
-Column
-¢¢# )
-<
-¢¢) *
-int
-¢¢* -
->
-¢¢- .
-(
-¢¢. /
-type
-¢¢/ 3
-:
-¢¢3 4
-$str
-¢¢5 :
-,
-¢¢: ;
-nullable
-¢¢< D
-:
-¢¢D E
-false
-¢¢F K
-)
-¢¢K L
-.
-££ 
-
-Annotation
-££ #
-(
-££# $
-$str
-££$ 8
-,
-££8 9
-$str
-££: @
-)
-££@ A
-,
-££A B
-QueryId
-§§ 
-=
-§§ 
-table
-§§ #
-.
-§§# $
-Column
-§§$ *
-<
-§§* +
-int
-§§+ .
->
-§§. /
-(
-§§/ 0
-type
-§§0 4
-:
-§§4 5
-$str
-§§6 ;
-,
-§§; <
-nullable
-§§= E
-:
-§§E F
-false
-§§G L
-)
-§§L M
-,
-§§M N
-UserId
-•• 
-=
-•• 
-table
-•• "
-.
-••" #
-Column
-••# )
-<
-••) *
-int
-••* -
->
-••- .
-(
-••. /
-type
-••/ 3
-:
-••3 4
-$str
-••5 :
-,
-••: ;
-nullable
-••< D
-:
-••D E
-false
-••F K
-)
-••K L
-,
-••L M
-VerifyStatusID
-¶¶ "
-=
-¶¶# $
-table
-¶¶% *
-.
-¶¶* +
-Column
-¶¶+ 1
-<
-¶¶1 2
-int
-¶¶2 5
->
-¶¶5 6
-(
-¶¶6 7
-type
-¶¶7 ;
-:
-¶¶; <
-$str
-¶¶= B
-,
-¶¶B C
-nullable
-¶¶D L
-:
-¶¶L M
-false
-¶¶N S
-)
-¶¶S T
-}
-ßß 
-,
-ßß 
-constraints
-®® 
-:
-®® 
-table
-®® "
-=>
-®®# %
-{
-©© 
-table
-™™ 
-.
-™™ 
-
-PrimaryKey
-™™ $
-(
-™™$ %
-$str
-™™% /
-,
-™™/ 0
-x
-™™1 2
-=>
-™™3 5
-x
-™™6 7
-.
-™™7 8
-SpamId
-™™8 >
-)
-™™> ?
-;
-™™? @
-table
-´´ 
-.
-´´ 
-
-ForeignKey
-´´ $
-(
-´´$ %
-name
-¨¨ 
-:
-¨¨ 
-$str
-¨¨ 8
-,
-¨¨8 9
-column
-≠≠ 
-:
-≠≠ 
-x
-≠≠  !
-=>
-≠≠" $
-x
-≠≠% &
-.
-≠≠& '
-QueryId
-≠≠' .
-,
-≠≠. /
-principalTable
-ÆÆ &
-:
-ÆÆ& '
-$str
-ÆÆ( 1
-,
-ÆÆ1 2
-principalColumn
-ØØ '
-:
-ØØ' (
-$str
-ØØ) 2
-,
-ØØ2 3
-onDelete
-∞∞  
-:
-∞∞  !
-ReferentialAction
-∞∞" 3
-.
-∞∞3 4
-NoAction
-∞∞4 <
-)
-∞∞< =
-;
-∞∞= >
-table
-±± 
-.
-±± 
-
-ForeignKey
-±± $
-(
-±±$ %
-name
-≤≤ 
-:
-≤≤ 
-$str
-≤≤ 5
-,
-≤≤5 6
-column
-≥≥ 
-:
-≥≥ 
-x
-≥≥  !
-=>
-≥≥" $
-x
-≥≥% &
-.
-≥≥& '
-UserId
-≥≥' -
-,
-≥≥- .
-principalTable
-¥¥ &
-:
-¥¥& '
-$str
-¥¥( /
-,
-¥¥/ 0
-principalColumn
-µµ '
-:
-µµ' (
-$str
-µµ) 1
-,
-µµ1 2
-onDelete
-∂∂  
-:
-∂∂  !
-ReferentialAction
-∂∂" 3
-.
-∂∂3 4
-NoAction
-∂∂4 <
-)
-∂∂< =
-;
-∂∂= >
-table
-∑∑ 
-.
-∑∑ 
-
-ForeignKey
-∑∑ $
-(
-∑∑$ %
-name
-∏∏ 
-:
-∏∏ 
-$str
-∏∏ D
-,
-∏∏D E
-column
-ππ 
-:
-ππ 
-x
-ππ  !
-=>
-ππ" $
-x
-ππ% &
-.
-ππ& '
-VerifyStatusID
-ππ' 5
-,
-ππ5 6
-principalTable
-∫∫ &
-:
-∫∫& '
-$str
-∫∫( 6
-,
-∫∫6 7
-principalColumn
-ªª '
-:
-ªª' (
-$str
-ªª) 9
-,
-ªª9 :
-onDelete
-ºº  
-:
-ºº  !
-ReferentialAction
-ºº" 3
-.
-ºº3 4
-NoAction
-ºº4 <
-)
-ºº< =
-;
-ºº= >
-}
-ΩΩ 
-)
-ΩΩ 
-;
-ΩΩ 
-migrationBuilder
-øø 
-.
-øø 
-
-InsertData
-øø '
-(
-øø' (
-table
-¿¿ 
-:
-¿¿ 
-$str
-¿¿ &
-,
-¿¿& '
-columns
-¡¡ 
-:
-¡¡ 
-new
-¡¡ 
-[
-¡¡ 
-]
-¡¡ 
-{
-¡¡  
-$str
-¡¡! 2
-,
-¡¡2 3
-$str
-¡¡4 <
-}
-¡¡= >
-,
-¡¡> ?
-values
-¬¬ 
-:
-¬¬ 
-new
-¬¬ 
-object
-¬¬ "
-[
-¬¬" #
-,
-¬¬# $
-]
-¬¬$ %
-{
-√√ 
-{
-ƒƒ 
-$num
-ƒƒ 
-,
-ƒƒ 
-$str
-ƒƒ "
-}
-ƒƒ# $
-,
-ƒƒ$ %
-{
-≈≈ 
-$num
-≈≈ 
-,
-≈≈ 
-$str
-≈≈ '
-}
-≈≈( )
-,
-≈≈) *
-{
-∆∆ 
-$num
-∆∆ 
-,
-∆∆ 
-$str
-∆∆ &
-}
-∆∆' (
-,
-∆∆( )
-{
-«« 
-$num
-«« 
-,
-«« 
-$str
-«« $
-}
-««% &
-}
-»» 
-)
-»» 
-;
-»» 
-migrationBuilder
-   
-.
-   
-
-InsertData
-   '
-(
-  ' (
-table
-ÀÀ 
-:
-ÀÀ 
-$str
-ÀÀ 
-,
-ÀÀ  
-columns
-ÃÃ 
-:
-ÃÃ 
-new
-ÃÃ 
-[
-ÃÃ 
-]
-ÃÃ 
-{
-ÃÃ  
-$str
-ÃÃ! +
-,
-ÃÃ+ ,
-$str
-ÃÃ- 3
-}
-ÃÃ4 5
-,
-ÃÃ5 6
-values
-ÕÕ 
-:
-ÕÕ 
-new
-ÕÕ 
-object
-ÕÕ "
-[
-ÕÕ" #
-,
-ÕÕ# $
-]
-ÕÕ$ %
-{
-ŒŒ 
-{
-œœ 
-$num
-œœ 
-,
-œœ 
-$str
-œœ 
-}
-œœ  !
-,
-œœ! "
-{
-–– 
-$num
-–– 
-,
-–– 
-$str
-–– !
-}
-––" #
-}
-—— 
-)
-—— 
-;
-—— 
-migrationBuilder
-”” 
-.
-”” 
-
-InsertData
-”” '
-(
-””' (
-table
-‘‘ 
-:
-‘‘ 
-$str
-‘‘ "
-,
-‘‘" #
-columns
-’’ 
-:
-’’ 
-new
-’’ 
-[
-’’ 
-]
-’’ 
-{
-’’  
-$str
-’’! -
-,
-’’- .
-$str
-’’/ 9
-}
-’’: ;
-,
-’’; <
-values
-÷÷ 
-:
-÷÷ 
-new
-÷÷ 
-object
-÷÷ "
-[
-÷÷" #
-,
-÷÷# $
-]
-÷÷$ %
-{
-◊◊ 
-{
-ÿÿ 
-$num
-ÿÿ 
-,
-ÿÿ 
-$str
-ÿÿ  
-}
-ÿÿ! "
-,
-ÿÿ" #
-{
-ŸŸ 
-$num
-ŸŸ 
-,
-ŸŸ 
-$str
-ŸŸ 
-}
-ŸŸ  !
-}
-⁄⁄ 
-)
-⁄⁄ 
-;
-⁄⁄ 
-migrationBuilder
-‹‹ 
-.
-‹‹ 
-
-InsertData
-‹‹ '
-(
-‹‹' (
-table
-›› 
-:
-›› 
-$str
-›› %
-,
-››% &
-columns
-ﬁﬁ 
-:
-ﬁﬁ 
-new
-ﬁﬁ 
-[
-ﬁﬁ 
-]
-ﬁﬁ 
-{
-ﬁﬁ  
-$str
-ﬁﬁ! 1
-,
-ﬁﬁ1 2
-$str
-ﬁﬁ3 9
-}
-ﬁﬁ: ;
-,
-ﬁﬁ; <
-values
-ﬂﬂ 
-:
-ﬂﬂ 
-new
-ﬂﬂ 
-object
-ﬂﬂ "
-[
-ﬂﬂ" #
-,
-ﬂﬂ# $
-]
-ﬂﬂ$ %
-{
-‡‡ 
-{
-·· 
-$num
-·· 
-,
-·· 
-$str
-·· #
-}
-··$ %
-,
-··% &
-{
-‚‚ 
-$num
-‚‚ 
-,
-‚‚ 
-$str
-‚‚ #
-}
-‚‚$ %
-,
-‚‚% &
-{
-„„ 
-$num
-„„ 
-,
-„„ 
-$str
-„„ &
-}
-„„' (
-}
-‰‰ 
-)
-‰‰ 
-;
-‰‰ 
-migrationBuilder
-ÊÊ 
-.
-ÊÊ 
-CreateIndex
-ÊÊ (
-(
-ÊÊ( )
-name
-ÁÁ 
-:
-ÁÁ 
-$str
-ÁÁ 4
-,
-ÁÁ4 5
-table
-ËË 
-:
-ËË 
-$str
-ËË (
-,
-ËË( )
-column
-ÈÈ 
-:
-ÈÈ 
-$str
-ÈÈ #
-)
-ÈÈ# $
-;
-ÈÈ$ %
-migrationBuilder
-ÎÎ 
-.
-ÎÎ 
-CreateIndex
-ÎÎ (
-(
-ÎÎ( )
-name
-ÏÏ 
-:
-ÏÏ 
-$str
-ÏÏ 1
-,
-ÏÏ1 2
-table
-ÌÌ 
-:
-ÌÌ 
-$str
-ÌÌ (
-,
-ÌÌ( )
-column
-ÓÓ 
-:
-ÓÓ 
-$str
-ÓÓ  
-)
-ÓÓ  !
-;
-ÓÓ! "
-migrationBuilder
- 
-.
- 
-CreateIndex
- (
-(
-( )
-name
-ÒÒ 
-:
-ÒÒ 
-$str
-ÒÒ 1
-,
-ÒÒ1 2
-table
-ÚÚ 
-:
-ÚÚ 
-$str
-ÚÚ %
-,
-ÚÚ% &
-column
-ÛÛ 
-:
-ÛÛ 
-$str
-ÛÛ #
-)
-ÛÛ# $
-;
-ÛÛ$ %
-migrationBuilder
-ıı 
-.
-ıı 
-CreateIndex
-ıı (
-(
-ıı( )
-name
-ˆˆ 
-:
-ˆˆ 
-$str
-ˆˆ .
-,
-ˆˆ. /
-table
-˜˜ 
-:
-˜˜ 
-$str
-˜˜ %
-,
-˜˜% &
-column
-¯¯ 
-:
-¯¯ 
-$str
-¯¯  
-)
-¯¯  !
-;
-¯¯! "
-migrationBuilder
-˙˙ 
-.
-˙˙ 
-CreateIndex
-˙˙ (
-(
-˙˙( )
-name
-˚˚ 
-:
-˚˚ 
-$str
-˚˚ 3
-,
-˚˚3 4
-table
-¸¸ 
-:
-¸¸ 
-$str
-¸¸ !
-,
-¸¸! "
-column
-˝˝ 
-:
-˝˝ 
-$str
-˝˝ )
-)
-˝˝) *
-;
-˝˝* +
-migrationBuilder
-ˇˇ 
-.
-ˇˇ 
-CreateIndex
-ˇˇ (
-(
-ˇˇ( )
-name
-ÄÄ 
-:
-ÄÄ 
-$str
-ÄÄ -
-,
-ÄÄ- .
-table
-ÅÅ 
-:
-ÅÅ 
-$str
-ÅÅ !
-,
-ÅÅ! "
-column
-ÇÇ 
-:
-ÇÇ 
-$str
-ÇÇ #
-)
-ÇÇ# $
-;
-ÇÇ$ %
-migrationBuilder
-ÑÑ 
-.
-ÑÑ 
-CreateIndex
-ÑÑ (
-(
-ÑÑ( )
-name
-ÖÖ 
-:
-ÖÖ 
-$str
-ÖÖ 4
-,
-ÖÖ4 5
-table
-ÜÜ 
-:
-ÜÜ 
-$str
-ÜÜ %
-,
-ÜÜ% &
-column
-áá 
-:
-áá 
-$str
-áá &
-)
-áá& '
-;
-áá' (
-migrationBuilder
-ââ 
-.
-ââ 
-CreateIndex
-ââ (
-(
-ââ( )
-name
-ää 
-:
-ää 
-$str
-ää ,
-,
-ää, -
-table
-ãã 
-:
-ãã 
-$str
-ãã  
-,
-ãã  !
-column
-åå 
-:
-åå 
-$str
-åå #
-)
-åå# $
-;
-åå$ %
-migrationBuilder
-éé 
-.
-éé 
-CreateIndex
-éé (
-(
-éé( )
-name
-èè 
-:
-èè 
-$str
-èè 2
-,
-èè2 3
-table
-êê 
-:
-êê 
-$str
-êê &
-,
-êê& '
-column
-ëë 
-:
-ëë 
-$str
-ëë #
-)
-ëë# $
-;
-ëë$ %
-migrationBuilder
-ìì 
-.
-ìì 
-CreateIndex
-ìì (
-(
-ìì( )
-name
-îî 
-:
-îî 
-$str
-îî 0
-,
-îî0 1
-table
-ïï 
-:
-ïï 
-$str
-ïï &
-,
-ïï& '
-column
-ññ 
-:
-ññ 
-$str
-ññ !
-)
-ññ! "
-;
-ññ" #
-migrationBuilder
-òò 
-.
-òò 
-CreateIndex
-òò (
-(
-òò( )
-name
-ôô 
-:
-ôô 
-$str
-ôô (
-,
-ôô( )
-table
-öö 
-:
-öö 
-$str
-öö 
-,
-öö 
-column
-õõ 
-:
-õõ 
-$str
-õõ !
-)
-õõ! "
-;
-õõ" #
-migrationBuilder
-ùù 
-.
-ùù 
-CreateIndex
-ùù (
-(
-ùù( )
-name
-ûû 
-:
-ûû 
-$str
-ûû '
-,
-ûû' (
-table
-üü 
-:
-üü 
-$str
-üü 
-,
-üü 
-column
-†† 
-:
-†† 
-$str
-††  
-)
-††  !
-;
-††! "
-migrationBuilder
-¢¢ 
-.
-¢¢ 
-CreateIndex
-¢¢ (
-(
-¢¢( )
-name
-££ 
-:
-££ 
-$str
-££ /
-,
-££/ 0
-table
-§§ 
-:
-§§ 
-$str
-§§ 
-,
-§§ 
-column
-•• 
-:
-•• 
-$str
-•• (
-)
-••( )
-;
-••) *
-migrationBuilder
-ßß 
-.
-ßß 
-CreateIndex
-ßß (
-(
-ßß( )
-name
-®® 
-:
-®® 
-$str
-®® .
-,
-®®. /
-table
-©© 
-:
-©© 
-$str
-©© 
-,
-©© 
-column
-™™ 
-:
-™™ 
-$str
-™™ '
-)
-™™' (
-;
-™™( )
-migrationBuilder
-¨¨ 
-.
-¨¨ 
-CreateIndex
-¨¨ (
-(
-¨¨( )
-name
-≠≠ 
-:
-≠≠ 
-$str
-≠≠ )
-,
-≠≠) *
-table
-ÆÆ 
-:
-ÆÆ 
-$str
-ÆÆ 
-,
-ÆÆ 
-column
-ØØ 
-:
-ØØ 
-$str
-ØØ "
-)
-ØØ" #
-;
-ØØ# $
-migrationBuilder
-±± 
-.
-±± 
-CreateIndex
-±± (
-(
-±±( )
-name
-≤≤ 
-:
-≤≤ 
-$str
-≤≤ +
-,
-≤≤+ ,
-table
-≥≥ 
-:
-≥≥ 
-$str
-≥≥ 
-,
-≥≥ 
-column
-¥¥ 
-:
-¥¥ 
-$str
-¥¥ $
-)
-¥¥$ %
-;
-¥¥% &
-migrationBuilder
-∂∂ 
-.
-∂∂ 
-CreateIndex
-∂∂ (
-(
-∂∂( )
-name
-∑∑ 
-:
-∑∑ 
-$str
-∑∑ /
-,
-∑∑/ 0
-table
-∏∏ 
-:
-∏∏ 
-$str
-∏∏ 
-,
-∏∏ 
-column
-ππ 
-:
-ππ 
-$str
-ππ (
-)
-ππ( )
-;
-ππ) *
-}
-∫∫ 	
-	protected
-ºº 
-override
-ºº 
-void
-ºº 
-Down
-ºº  $
-(
-ºº$ %
-MigrationBuilder
-ºº% 5
-migrationBuilder
-ºº6 F
-)
-ººF G
-{
-ΩΩ 	
-migrationBuilder
-ææ 
-.
-ææ 
-	DropTable
-ææ &
-(
-ææ& '
-name
-øø 
-:
-øø 
-$str
-øø '
-)
-øø' (
-;
-øø( )
-migrationBuilder
-¡¡ 
-.
-¡¡ 
-	DropTable
-¡¡ &
-(
-¡¡& '
-name
-¬¬ 
-:
-¬¬ 
-$str
-¬¬ $
-)
-¬¬$ %
-;
-¬¬% &
-migrationBuilder
-ƒƒ 
-.
-ƒƒ 
-	DropTable
-ƒƒ &
-(
-ƒƒ& '
-name
-≈≈ 
-:
-≈≈ 
-$str
-≈≈ %
-)
-≈≈% &
-;
-≈≈& '
-migrationBuilder
-«« 
-.
-«« 
-	DropTable
-«« &
-(
-««& '
-name
-»» 
-:
-»» 
-$str
-»» 
-)
-»» 
-;
-»» 
-migrationBuilder
-   
-.
-   
-	DropTable
-   &
-(
-  & '
-name
-ÀÀ 
-:
-ÀÀ 
-$str
-ÀÀ  
-)
-ÀÀ  !
-;
-ÀÀ! "
-migrationBuilder
-ÕÕ 
-.
-ÕÕ 
-	DropTable
-ÕÕ &
-(
-ÕÕ& '
-name
-ŒŒ 
-:
-ŒŒ 
-$str
-ŒŒ 
-)
-ŒŒ  
-;
-ŒŒ  !
-migrationBuilder
-–– 
-.
-–– 
-	DropTable
-–– &
-(
-––& '
-name
-—— 
-:
-—— 
-$str
-—— %
-)
-——% &
-;
-——& '
-migrationBuilder
-”” 
-.
-”” 
-	DropTable
-”” &
-(
-””& '
-name
-‘‘ 
-:
-‘‘ 
-$str
-‘‘ 
-)
-‘‘ 
-;
-‘‘ 
-migrationBuilder
-÷÷ 
-.
-÷÷ 
-	DropTable
-÷÷ &
-(
-÷÷& '
-name
-◊◊ 
-:
-◊◊ 
-$str
-◊◊ $
-)
-◊◊$ %
-;
-◊◊% &
-migrationBuilder
-ŸŸ 
-.
-ŸŸ 
-	DropTable
-ŸŸ &
-(
-ŸŸ& '
-name
-⁄⁄ 
-:
-⁄⁄ 
-$str
-⁄⁄ 
-)
-⁄⁄ 
-;
-⁄⁄  
-migrationBuilder
-‹‹ 
-.
-‹‹ 
-	DropTable
-‹‹ &
-(
-‹‹& '
-name
-›› 
-:
-›› 
-$str
-›› !
-)
-››! "
-;
-››" #
-migrationBuilder
-ﬂﬂ 
-.
-ﬂﬂ 
-	DropTable
-ﬂﬂ &
-(
-ﬂﬂ& '
-name
-‡‡ 
-:
-‡‡ 
-$str
-‡‡ $
-)
-‡‡$ %
-;
-‡‡% &
-migrationBuilder
-‚‚ 
-.
-‚‚ 
-	DropTable
-‚‚ &
-(
-‚‚& '
-name
-„„ 
-:
-„„ 
-$str
-„„ #
-)
-„„# $
-;
-„„$ %
-}
-‰‰ 	
-}
-ÂÂ 
-}ÊÊ ¨j
-sC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Migrations\20220509023705_DbUpdate2.cs
-	namespace 	
-AspireOverflow
- 
-. 
-
-Migrations #
-{ 
-public 
-
-partial 
-class 
-	DbUpdate2 "
-:# $
-	Migration% .
-{ 
-	protected		 
-override		 
-void		 
-Up		  "
-(		" #
-MigrationBuilder		# 3
-migrationBuilder		4 D
-)		D E
-{
-
- 	
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name 
-: 
-$str %
-,% &
-table 
-: 
-$str  
-)  !
-;! "
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name 
-: 
-$str -
-,- .
-table 
-: 
-$str &
-)& '
-;' (
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name 
-: 
-$str ,
-,, -
-table 
-: 
-$str &
-)& '
-;' (
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name 
-: 
-$str *
-,* +
-table 
-: 
-$str 
-) 
-;  
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name 
-: 
-$str &
-,& '
-table 
-: 
-$str 
-) 
-;  
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name   
-:   
-$str   (
-,  ( )
-table!! 
-:!! 
-$str!! 
-)!! 
-;!!  
-migrationBuilder## 
-.## 
-DropForeignKey## +
-(##+ ,
-name$$ 
-:$$ 
-$str$$ ,
-,$$, -
-table%% 
-:%% 
-$str%% 
-)%% 
-;%%  
-migrationBuilder'' 
-.'' 
-
-UpdateData'' '
-(''' (
-table(( 
-:(( 
-$str(( &
-,((& '
-	keyColumn)) 
-:)) 
-$str)) ,
-,)), -
-keyValue** 
-:** 
-$num** 
-,** 
-column++ 
-:++ 
-$str++  
-,++  !
-value,, 
-:,, 
-$str,, '
-),,' (
-;,,( )
-migrationBuilder.. 
-... 
-
-UpdateData.. '
-(..' (
-table// 
-:// 
-$str// &
-,//& '
-	keyColumn00 
-:00 
-$str00 ,
-,00, -
-keyValue11 
-:11 
-$num11 
-,11 
-column22 
-:22 
-$str22  
-,22  !
-value33 
-:33 
-$str33 %
-)33% &
-;33& '
-migrationBuilder55 
-.55 
-AddForeignKey55 *
-(55* +
-name66 
-:66 
-$str66 2
-,662 3
-table77 
-:77 
-$str77  
-,77  !
-column88 
-:88 
-$str88 #
-,88# $
-principalTable99 
-:99 
-$str99  '
-,99' (
-principalColumn:: 
-:::  
-$str::! )
-,::) *
-onDelete;; 
-:;; 
-ReferentialAction;; +
-.;;+ ,
-NoAction;;, 4
-);;4 5
-;;;5 6
-migrationBuilder== 
-.== 
-AddForeignKey== *
-(==* +
-name>> 
-:>> 
-$str>> 8
-,>>8 9
-table?? 
-:?? 
-$str?? &
-,??& '
-column@@ 
-:@@ 
-$str@@ !
-,@@! "
-principalTableAA 
-:AA 
-$strAA  )
-,AA) *
-principalColumnBB 
-:BB  
-$strBB! *
-,BB* +
-onDeleteCC 
-:CC 
-ReferentialActionCC +
-.CC+ ,
-NoActionCC, 4
-)CC4 5
-;CC5 6
-migrationBuilderEE 
-.EE 
-AddForeignKeyEE *
-(EE* +
-nameFF 
-:FF 
-$strFF 8
-,FF8 9
-tableGG 
-:GG 
-$strGG &
-,GG& '
-columnHH 
-:HH 
-$strHH #
-,HH# $
-principalTableII 
-:II 
-$strII  '
-,II' (
-principalColumnJJ 
-:JJ  
-$strJJ! )
-,JJ) *
-onDeleteKK 
-:KK 
-ReferentialActionKK +
-.KK+ ,
-NoActionKK, 4
-)KK4 5
-;KK5 6
-migrationBuilderMM 
-.MM 
-AddForeignKeyMM *
-(MM* +
-nameNN 
-:NN 
-$strNN ;
-,NN; <
-tableOO 
-:OO 
-$strOO 
-,OO 
-columnPP 
-:PP 
-$strPP '
-,PP' (
-principalTableQQ 
-:QQ 
-$strQQ  .
-,QQ. /
-principalColumnRR 
-:RR  
-$strRR! 0
-,RR0 1
-onDeleteSS 
-:SS 
-ReferentialActionSS +
-.SS+ ,
-NoActionSS, 4
-)SS4 5
-;SS5 6
-migrationBuilderUU 
-.UU 
-AddForeignKeyUU *
-(UU* +
-nameVV 
-:VV 
-$strVV 0
-,VV0 1
-tableWW 
-:WW 
-$strWW 
-,WW 
-columnXX 
-:XX 
-$strXX "
-,XX" #
-principalTableYY 
-:YY 
-$strYY  (
-,YY( )
-principalColumnZZ 
-:ZZ  
-$strZZ! +
-,ZZ+ ,
-onDelete[[ 
-:[[ 
-ReferentialAction[[ +
-.[[+ ,
-NoAction[[, 4
-)[[4 5
-;[[5 6
-migrationBuilder]] 
-.]] 
-AddForeignKey]] *
-(]]* +
-name^^ 
-:^^ 
-$str^^ 5
-,^^5 6
-table__ 
-:__ 
-$str__ 
-,__ 
-column`` 
-:`` 
-$str`` $
-,``$ %
-principalTableaa 
-:aa 
-$straa  +
-,aa+ ,
-principalColumnbb 
-:bb  
-$strbb! -
-,bb- .
-onDeletecc 
-:cc 
-ReferentialActioncc +
-.cc+ ,
-NoActioncc, 4
-)cc4 5
-;cc5 6
-migrationBuilderee 
-.ee 
-AddForeignKeyee *
-(ee* +
-nameff 
-:ff 
-$strff <
-,ff< =
-tablegg 
-:gg 
-$strgg 
-,gg 
-columnhh 
-:hh 
-$strhh (
-,hh( )
-principalTableii 
-:ii 
-$strii  .
-,ii. /
-principalColumnjj 
-:jj  
-$strjj! 1
-,jj1 2
-onDeletekk 
-:kk 
-ReferentialActionkk +
-.kk+ ,
-NoActionkk, 4
-)kk4 5
-;kk5 6
-}ll 	
-	protectednn 
-overridenn 
-voidnn 
-Downnn  $
-(nn$ %
-MigrationBuildernn% 5
-migrationBuildernn6 F
-)nnF G
-{oo 	
-migrationBuilderpp 
-.pp 
-DropForeignKeypp +
-(pp+ ,
-nameqq 
-:qq 
-$strqq 2
-,qq2 3
-tablerr 
-:rr 
-$strrr  
-)rr  !
-;rr! "
-migrationBuildertt 
-.tt 
-DropForeignKeytt +
-(tt+ ,
-nameuu 
-:uu 
-$struu 8
-,uu8 9
-tablevv 
-:vv 
-$strvv &
-)vv& '
-;vv' (
-migrationBuilderxx 
-.xx 
-DropForeignKeyxx +
-(xx+ ,
-nameyy 
-:yy 
-$stryy 8
-,yy8 9
-tablezz 
-:zz 
-$strzz &
-)zz& '
-;zz' (
-migrationBuilder|| 
-.|| 
-DropForeignKey|| +
-(||+ ,
-name}} 
-:}} 
-$str}} ;
-,}}; <
-table~~ 
-:~~ 
-$str~~ 
-)~~ 
-;~~  
-migrationBuilder
-ÄÄ 
-.
-ÄÄ 
-DropForeignKey
-ÄÄ +
-(
-ÄÄ+ ,
-name
-ÅÅ 
-:
-ÅÅ 
-$str
-ÅÅ 0
-,
-ÅÅ0 1
-table
-ÇÇ 
-:
-ÇÇ 
-$str
-ÇÇ 
-)
-ÇÇ 
-;
-ÇÇ  
-migrationBuilder
-ÑÑ 
-.
-ÑÑ 
-DropForeignKey
-ÑÑ +
-(
-ÑÑ+ ,
-name
-ÖÖ 
-:
-ÖÖ 
-$str
-ÖÖ 5
-,
-ÖÖ5 6
-table
-ÜÜ 
-:
-ÜÜ 
-$str
-ÜÜ 
-)
-ÜÜ 
-;
-ÜÜ  
-migrationBuilder
-àà 
-.
-àà 
-DropForeignKey
-àà +
-(
-àà+ ,
-name
-ââ 
-:
-ââ 
-$str
-ââ <
-,
-ââ< =
-table
-ää 
-:
-ää 
-$str
-ää 
-)
-ää 
-;
-ää  
-migrationBuilder
-åå 
-.
-åå 
-
-UpdateData
-åå '
-(
-åå' (
-table
-çç 
-:
-çç 
-$str
-çç &
-,
-çç& '
-	keyColumn
-éé 
-:
-éé 
-$str
-éé ,
-,
-éé, -
-keyValue
-èè 
-:
-èè 
-$num
-èè 
-,
-èè 
-column
-êê 
-:
-êê 
-$str
-êê  
-,
-êê  !
-value
-ëë 
-:
-ëë 
-$str
-ëë %
-)
-ëë% &
-;
-ëë& '
-migrationBuilder
-ìì 
-.
-ìì 
-
-UpdateData
-ìì '
-(
-ìì' (
-table
-îî 
-:
-îî 
-$str
-îî &
-,
-îî& '
-	keyColumn
-ïï 
-:
-ïï 
-$str
-ïï ,
-,
-ïï, -
-keyValue
-ññ 
-:
-ññ 
-$num
-ññ 
-,
-ññ 
-column
-óó 
-:
-óó 
-$str
-óó  
-,
-óó  !
-value
-òò 
-:
-òò 
-$str
-òò $
-)
-òò$ %
-;
-òò% &
-migrationBuilder
-öö 
-.
-öö 
-AddForeignKey
-öö *
-(
-öö* +
-name
-õõ 
-:
-õõ 
-$str
-õõ %
-,
-õõ% &
-table
-úú 
-:
-úú 
-$str
-úú  
-,
-úú  !
-column
-ùù 
-:
-ùù 
-$str
-ùù #
-,
-ùù# $
-principalTable
-ûû 
-:
-ûû 
-$str
-ûû  '
-,
-ûû' (
-principalColumn
-üü 
-:
-üü  
-$str
-üü! )
-)
-üü) *
-;
-üü* +
-migrationBuilder
-°° 
-.
-°° 
-AddForeignKey
-°° *
-(
-°°* +
-name
-¢¢ 
-:
-¢¢ 
-$str
-¢¢ -
-,
-¢¢- .
-table
-££ 
-:
-££ 
-$str
-££ &
-,
-££& '
-column
-§§ 
-:
-§§ 
-$str
-§§ !
-,
-§§! "
-principalTable
-•• 
-:
-•• 
-$str
-••  )
-,
-••) *
-principalColumn
-¶¶ 
-:
-¶¶  
-$str
-¶¶! *
-)
-¶¶* +
-;
-¶¶+ ,
-migrationBuilder
-®® 
-.
-®® 
-AddForeignKey
-®® *
-(
-®®* +
-name
-©© 
-:
-©© 
-$str
-©© ,
-,
-©©, -
-table
-™™ 
-:
-™™ 
-$str
-™™ &
-,
-™™& '
-column
-´´ 
-:
-´´ 
-$str
-´´ #
-,
-´´# $
-principalTable
-¨¨ 
-:
-¨¨ 
-$str
-¨¨  '
-,
-¨¨' (
-principalColumn
-≠≠ 
-:
-≠≠  
-$str
-≠≠! )
-)
-≠≠) *
-;
-≠≠* +
-migrationBuilder
-ØØ 
-.
-ØØ 
-AddForeignKey
-ØØ *
-(
-ØØ* +
-name
-∞∞ 
-:
-∞∞ 
-$str
-∞∞ *
-,
-∞∞* +
-table
-±± 
-:
-±± 
-$str
-±± 
-,
-±± 
-column
-≤≤ 
-:
-≤≤ 
-$str
-≤≤ '
-,
-≤≤' (
-principalTable
-≥≥ 
-:
-≥≥ 
-$str
-≥≥  .
-,
-≥≥. /
-principalColumn
-¥¥ 
-:
-¥¥  
-$str
-¥¥! 0
-)
-¥¥0 1
-;
-¥¥1 2
-migrationBuilder
-∂∂ 
-.
-∂∂ 
-AddForeignKey
-∂∂ *
-(
-∂∂* +
-name
-∑∑ 
-:
-∑∑ 
-$str
-∑∑ &
-,
-∑∑& '
-table
-∏∏ 
-:
-∏∏ 
-$str
-∏∏ 
-,
-∏∏ 
-column
-ππ 
-:
-ππ 
-$str
-ππ "
-,
-ππ" #
-principalTable
-∫∫ 
-:
-∫∫ 
-$str
-∫∫  (
-,
-∫∫( )
-principalColumn
-ªª 
-:
-ªª  
-$str
-ªª! +
-)
-ªª+ ,
-;
-ªª, -
-migrationBuilder
-ΩΩ 
-.
-ΩΩ 
-AddForeignKey
-ΩΩ *
-(
-ΩΩ* +
-name
-ææ 
-:
-ææ 
-$str
-ææ (
-,
-ææ( )
-table
-øø 
-:
-øø 
-$str
-øø 
-,
-øø 
-column
-¿¿ 
-:
-¿¿ 
-$str
-¿¿ $
-,
-¿¿$ %
-principalTable
-¡¡ 
-:
-¡¡ 
-$str
-¡¡  +
-,
-¡¡+ ,
-principalColumn
-¬¬ 
-:
-¬¬  
-$str
-¬¬! -
-)
-¬¬- .
-;
-¬¬. /
-migrationBuilder
-ƒƒ 
-.
-ƒƒ 
-AddForeignKey
-ƒƒ *
-(
-ƒƒ* +
-name
-≈≈ 
-:
-≈≈ 
-$str
-≈≈ ,
-,
-≈≈, -
-table
-∆∆ 
-:
-∆∆ 
-$str
-∆∆ 
-,
-∆∆ 
-column
-«« 
-:
-«« 
-$str
-«« (
-,
-««( )
-principalTable
-»» 
-:
-»» 
-$str
-»»  .
-,
-»». /
-principalColumn
-…… 
-:
-……  
-$str
-……! 1
-)
-……1 2
-;
-……2 3
-}
-   	
-}
-ÀÀ 
-}ÃÃ Ó
-yC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Migrations\20220511055645_UpdateSpamTable.cs
-	namespace 	
-AspireOverflow
- 
-. 
-
-Migrations #
-{ 
-public 
-
-partial 
-class 
-UpdateSpamTable (
-:) *
-	Migration+ 4
-{ 
-	protected		 
-override		 
-void		 
-Up		  "
-(		" #
-MigrationBuilder		# 3
-migrationBuilder		4 D
-)		D E
-{
-
- 	
-migrationBuilder 
-. 
-	AddColumn &
-<& '
-string' -
->- .
-(. /
-name 
-: 
-$str 
-, 
-table 
-: 
-$str 
-, 
-type 
-: 
-$str %
-,% &
-nullable 
-: 
-false 
-,  
-defaultValue 
-: 
-$str  
-)  !
-;! "
-} 	
-	protected 
-override 
-void 
-Down  $
-($ %
-MigrationBuilder% 5
-migrationBuilder6 F
-)F G
-{ 	
-migrationBuilder 
-. 
-
-DropColumn '
-(' (
-name 
-: 
-$str 
-, 
-table 
-: 
-$str 
-) 
-;  
-} 	
-} 
-} ¯
-~C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Migrations\20220512034537_UpdateArticleComment.cs
-	namespace 	
-AspireOverflow
- 
-. 
-
-Migrations #
-{ 
-public 
-
-partial 
-class  
-UpdateArticleComment -
-:. /
-	Migration0 9
-{ 
-	protected		 
-override		 
-void		 
-Up		  "
-(		" #
-MigrationBuilder		# 3
-migrationBuilder		4 D
-)		D E
-{
-
- 	
-migrationBuilder 
-. 
-	AddColumn &
-<& '
-string' -
->- .
-(. /
-name 
-: 
-$str 
-, 
-table 
-: 
-$str &
-,& '
-type 
-: 
-$str %
-,% &
-nullable 
-: 
-false 
-,  
-defaultValue 
-: 
-$str  
-)  !
-;! "
-} 	
-	protected 
-override 
-void 
-Down  $
-($ %
-MigrationBuilder% 5
-migrationBuilder6 F
-)F G
-{ 	
-migrationBuilder 
-. 
-
-DropColumn '
-(' (
-name 
-: 
-$str 
-, 
-table 
-: 
-$str &
-)& '
-;' (
-} 	
-} 
-} ˛=
-ÑC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Migrations\20220528043920_CreatedPrivateArticleTable.cs
-	namespace 	
-AspireOverflow
- 
-. 
-
-Migrations #
-{ 
-public 
-
-partial 
-class &
-CreatedPrivateArticleTable 3
-:4 5
-	Migration6 ?
-{ 
-	protected		 
-override		 
-void		 
-Up		  "
-(		" #
-MigrationBuilder		# 3
-migrationBuilder		4 D
-)		D E
-{
-
- 	
-migrationBuilder 
-. 
-DropForeignKey +
-(+ ,
-name 
-: 
-$str 7
-,7 8
-table 
-: 
-$str (
-)( )
-;) *
-migrationBuilder 
-. 
-	AddColumn &
-<& '
-bool' +
->+ ,
-(, -
-name 
-: 
-$str !
-,! "
-table 
-: 
-$str !
-,! "
-type 
-: 
-$str 
-, 
-nullable 
-: 
-false 
-,  
-defaultValue 
-: 
-false #
-)# $
-;$ %
-migrationBuilder 
-. 
-AlterColumn (
-<( )
-int) ,
->, -
-(- .
-name 
-: 
-$str 
-, 
-table 
-: 
-$str (
-,( )
-type 
-: 
-$str 
-, 
-nullable 
-: 
-false 
-,  
-defaultValue 
-: 
-$num 
-,  
-
-oldClrType 
-: 
-typeof "
-(" #
-int# &
-)& '
-,' (
-oldType 
-: 
-$str 
-, 
-oldNullable 
-: 
-true !
-)! "
-;" #
-migrationBuilder   
-.   
-CreateTable   (
-(  ( )
-name!! 
-:!! 
-$str!! '
-,!!' (
-columns"" 
-:"" 
-table"" 
-=>"" !
-new""" %
-{## 
-Id$$ 
-=$$ 
-table$$ 
-.$$ 
-Column$$ %
-<$$% &
-int$$& )
->$$) *
-($$* +
-type$$+ /
-:$$/ 0
-$str$$1 6
-,$$6 7
-nullable$$8 @
-:$$@ A
-false$$B G
-)$$G H
-.%% 
-
-Annotation%% #
-(%%# $
-$str%%$ 8
-,%%8 9
-$str%%: @
-)%%@ A
-,%%A B
-	ArticleId&& 
-=&& 
-table&&  %
-.&&% &
-Column&&& ,
-<&&, -
-int&&- 0
->&&0 1
-(&&1 2
-type&&2 6
-:&&6 7
-$str&&8 =
-,&&= >
-nullable&&? G
-:&&G H
-false&&I N
-)&&N O
-,&&O P
-UserId'' 
-='' 
-table'' "
-.''" #
-Column''# )
-<'') *
-int''* -
->''- .
-(''. /
-type''/ 3
-:''3 4
-$str''5 :
-,'': ;
-nullable''< D
-:''D E
-false''F K
-)''K L
-}(( 
-,(( 
-constraints)) 
-:)) 
-table)) "
-=>))# %
-{** 
-table++ 
-.++ 
-
-PrimaryKey++ $
-(++$ %
-$str++% 9
-,++9 :
-x++; <
-=>++= ?
-x++@ A
-.++A B
-Id++B D
-)++D E
-;++E F
-table,, 
-.,, 
-
-ForeignKey,, $
-(,,$ %
-name-- 
-:-- 
-$str-- E
-,--E F
-column.. 
-:.. 
-x..  !
-=>.." $
-x..% &
-...& '
-	ArticleId..' 0
-,..0 1
-principalTable// &
-://& '
-$str//( 2
-,//2 3
-principalColumn00 '
-:00' (
-$str00) 3
-,003 4
-onDelete11  
-:11  !
-ReferentialAction11" 3
-.113 4
-NoAction114 <
-)11< =
-;11= >
-table22 
-.22 
-
-ForeignKey22 $
-(22$ %
-name33 
-:33 
-$str33 ?
-,33? @
-column44 
-:44 
-x44  !
-=>44" $
-x44% &
-.44& '
-UserId44' -
-,44- .
-principalTable55 &
-:55& '
-$str55( /
-,55/ 0
-principalColumn66 '
-:66' (
-$str66) 1
-,661 2
-onDelete77  
-:77  !
-ReferentialAction77" 3
-.773 4
-NoAction774 <
-)77< =
-;77= >
-}88 
-)88 
-;88 
-migrationBuilder:: 
-.:: 
-CreateIndex:: (
-(::( )
-name;; 
-:;; 
-$str;; 4
-,;;4 5
-table<< 
-:<< 
-$str<< (
-,<<( )
-column== 
-:== 
-$str== #
-)==# $
-;==$ %
-migrationBuilder?? 
-.?? 
-CreateIndex?? (
-(??( )
-name@@ 
-:@@ 
-$str@@ 1
-,@@1 2
-tableAA 
-:AA 
-$strAA (
-,AA( )
-columnBB 
-:BB 
-$strBB  
-)BB  !
-;BB! "
-migrationBuilderDD 
-.DD 
-AddForeignKeyDD *
-(DD* +
-nameEE 
-:EE 
-$strEE 7
-,EE7 8
-tableFF 
-:FF 
-$strFF (
-,FF( )
-columnGG 
-:GG 
-$strGG  
-,GG  !
-principalTableHH 
-:HH 
-$strHH  '
-,HH' (
-principalColumnII 
-:II  
-$strII! )
-,II) *
-onDeleteJJ 
-:JJ 
-ReferentialActionJJ +
-.JJ+ ,
-NoActionJJ, 4
-)JJ4 5
-;JJ5 6
-}KK 	
-	protectedMM 
-overrideMM 
-voidMM 
-DownMM  $
-(MM$ %
-MigrationBuilderMM% 5
-migrationBuilderMM6 F
-)MMF G
-{NN 	
-migrationBuilderOO 
-.OO 
-DropForeignKeyOO +
-(OO+ ,
-namePP 
-:PP 
-$strPP 7
-,PP7 8
-tableQQ 
-:QQ 
-$strQQ (
-)QQ( )
-;QQ) *
-migrationBuilderSS 
-.SS 
-	DropTableSS &
-(SS& '
-nameTT 
-:TT 
-$strTT '
-)TT' (
-;TT( )
-migrationBuilderVV 
-.VV 
-
-DropColumnVV '
-(VV' (
-nameWW 
-:WW 
-$strWW !
-,WW! "
-tableXX 
-:XX 
-$strXX !
-)XX! "
-;XX" #
-migrationBuilderZZ 
-.ZZ 
-AlterColumnZZ (
-<ZZ( )
-intZZ) ,
->ZZ, -
-(ZZ- .
-name[[ 
-:[[ 
-$str[[ 
-,[[ 
-table\\ 
-:\\ 
-$str\\ (
-,\\( )
-type]] 
-:]] 
-$str]] 
-,]] 
-nullable^^ 
-:^^ 
-true^^ 
-,^^ 
-
-oldClrType__ 
-:__ 
-typeof__ "
-(__" #
-int__# &
-)__& '
-,__' (
-oldType`` 
-:`` 
-$str`` 
-)`` 
-;``  
-migrationBuilderbb 
-.bb 
-AddForeignKeybb *
-(bb* +
-namecc 
-:cc 
-$strcc 7
-,cc7 8
-tabledd 
-:dd 
-$strdd (
-,dd( )
-columnee 
-:ee 
-$stree  
-,ee  !
-principalTableff 
-:ff 
-$strff  '
-,ff' (
-principalColumngg 
-:gg  
-$strgg! )
-)gg) *
-;gg* +
-}hh 	
-}ii 
-}jj §5
-^C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Article.cs
+}ΩΩ õ6
+KC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Article.cs
 	namespace 	
 AspireOverflow
  
@@ -22607,23 +15966,25 @@ oldClrType__ 
 ;& '
 }( )
 public 
-string 
-Title 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
+string 
+? 
+Title 
+{ 
+get "
+;" #
+set$ '
+;' (
+}) *
 public 
-string 
-Content 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
+string 
+? 
+Content 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
 public 
 byte 
 [ 
@@ -22634,7 +15995,11 @@ oldClrType__ 
 ;! "
 set# &
 ;& '
-}( )
+}( )
+=) *
+null* .
+!. /
+;/ 0
 public 
 int 
 ArticleStatusID "
@@ -22718,14 +16083,15 @@ ReviewerId 
 	NotMapped""	 
 ]"" 
 public## 
-string## 
-ImageString## !
-{##" #
-get##$ '
-;##' (
-set##) ,
-;##, -
-}##. /
+string## 
+?## 
+ImageString## "
+{### $
+get##% (
+;##( )
+set##* -
+;##- .
+}##/ 0
 [%% 	
 
 ForeignKey%%	 
@@ -22950,29 +16316,31 @@ ForeignKeyLL	 
 PrivateArticleDtoSS *
 {SS+ ,
 publicUU 
-ArticleUU 
-articleUU 
-{UU  
-getUU! $
-;UU$ %
-setUU& )
-;UU) *
-}UU+ ,
+ArticleUU 
+?UU 
+articleUU 
+{UU  !
+getUU" %
+;UU% &
+setUU' *
+;UU* +
+}UU, -
 publicVV 
 ListVV 
 <VV 
 intVV 
->VV 
-SharedUsersIdVV &
-{VV' (
-getVV) ,
-;VV, -
-setVV. 1
-;VV1 2
-}VV3 4
+>VV 
+?VV 
+SharedUsersIdVV '
+{VV( )
+getVV* -
+;VV- .
+setVV/ 2
+;VV2 3
+}VV4 5
 }WW 
-}[[ √
-eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\ArticleComment.cs
+}[[ ø
+RC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\ArticleComment.cs
 	namespace 	
 AspireOverflow
  
@@ -23018,14 +16386,15 @@ eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ;. /
 }0 1
 public 
-string 
-Comment 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
+string 
+? 
+Comment 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
 public 
 DateTime 
 Datetime  
@@ -23148,8 +16517,8 @@ ForeignKey**	 
 !,,6 7
 ;,,7 8
 }-- 
-}.. Ÿ
-bC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\ArticleLike.cs
+}.. ∆
+OC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\ArticleLike.cs
 	namespace 	
 AspireOverflow
  
@@ -23252,8 +16621,8 @@ ForeignKey 
 !5 6
 ;6 7
 } 
-} Ü
-dC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\ArticleStatus.cs
+} ë
+QC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\ArticleStatus.cs
 	namespace 	
 AspireOverflow
  
@@ -23281,14 +16650,15 @@ dC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ;- .
 }/ 0
 public 
-string 
-Status 
-{ 
-get "
-;" #
-set$ '
-;' (
-}) *
+string 
+? 
+Status 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
 [ 	
 InverseProperty	 
 ( 
@@ -23300,17 +16670,18 @@ dC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ICollection "
 <" #
 Article# *
->* +
-Articles, 4
-{5 6
-get7 :
-;: ;
-set< ?
-;? @
-}A B
+>* +
+?+ ,
+Articles- 5
+{6 7
+get8 ;
+;; <
+set= @
+;@ A
+}B C
 } 
-} †
-aC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Department.cs
+} ç
+NC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Department.cs
 	namespace 	
 AspireOverflow
  
@@ -23396,8 +16767,8 @@ Department
 ;G H
 }I J
 } 
-} Õ
-bC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Designation.cs
+} ∫
+OC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Designation.cs
 	namespace 	
 AspireOverflow
  
@@ -23504,8 +16875,8 @@ Department" ,
 !B C
 ;C D
 } 
-} Ö
-pC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Enum\Enum-DevelopmentTeam.cs
+} Ú
+]C:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Enum\Enum-DevelopmentTeam.cs
 	namespace 	
 AspireOverflow
  
@@ -23523,8 +16894,8 @@ pC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 }		 
 }
 
- õ
-]C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Gender.cs
+ à
+JC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Gender.cs
 	namespace 	
 AspireOverflow
  
@@ -23628,8 +16999,8 @@ pC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ;9 :
 }; <
 } 
-} ¶
-mC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Interfaces\IAuditField.cs
+} ì
+ZC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Interfaces\IAuditField.cs
 	namespace 	
 AspireOverflow
  
@@ -23697,8 +17068,8 @@ Interfaces  *
 ;' (
 }) *
 } 
-} “
-[C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Mail.cs
+} ®
+HC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Mail.cs
 	namespace 	
 AspireOverflow
  
@@ -23712,34 +17083,37 @@ Interfaces  *
 { 
 public 
 
-string 
-ToEmail 
-{ 
-get 
-;  
-set! $
-;$ %
-}& '
+string 
+? 
+ToEmail 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
 public 
 
-string 
-Subject 
-{ 
-get 
-;  
-set! $
-;$ %
-}& '
+string 
+? 
+Subject 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
 public 
 
-string 
-Body 
-{ 
-get 
-; 
-set !
-;! "
-}# $
+string 
+? 
+Body 
+{ 
+get 
+; 
+set "
+;" #
+}$ %
 }
 
  
@@ -23749,41 +17123,45 @@ Interfaces  *
 MailSettings 
 { 
 public 
-string 
-Mail 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
+string 
+? 
+Mail 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
 public 
-string 
-DisplayName !
-{" #
-get$ '
-;' (
-set) ,
-;, -
-}. /
+string 
+? 
+DisplayName "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
 public 
-string 
-Password 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
+string 
+? 
+Password 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
 public 
-string 
-Host 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
+string 
+? 
+Host 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
 public 
 int 
 Port 
@@ -23794,8 +17172,8 @@ Interfaces  *
 ;" #
 }$ %
 } 
-} ¯
-\C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Query.cs
+} í
+IC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Query.cs
 	namespace 	
 AspireOverflow
  
@@ -23859,32 +17237,35 @@ Interfaces  *
 ;% &
 }' (
 public 
-string 
-Title 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
+string 
+? 
+Title 
+{ 
+get "
+;" #
+set$ '
+;' (
+}) *
 public 
-string 
-Content 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
+string 
+? 
+Content 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
 public 
-string 
-code 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
+string 
+? 
+code 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
 public 
 bool 
 IsSolved 
@@ -23989,8 +17370,8 @@ ForeignKey## 
 ;%%( )
 }%%) *
 }&& 
-}'' «
-cC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\QueryComment.cs
+}'' √
+PC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\QueryComment.cs
 	namespace 	
 AspireOverflow
  
@@ -24036,14 +17417,15 @@ cC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ;, -
 }. /
 public 
-string 
-Comment 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
+string 
+? 
+Comment 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
 public 
 DateTime 
 Datetime  
@@ -24161,8 +17543,8 @@ ForeignKey&&
 ;((( )
 }(() *
 }** 
-}** ¬
-[C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\Spam.cs
+}** æ
+HC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\Spam.cs
 	namespace 	
 AspireOverflow
  
@@ -24187,14 +17569,15 @@ ForeignKey&&
 ;		$ %
 }		& '
 public 
-string 
-Reason 
-{ 
-get "
-;" #
-set$ '
-;' (
-}) *
+string 
+? 
+Reason 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
 public 
 int 
 QueryId 
@@ -24277,8 +17660,8 @@ ForeignKey	 
 ;, -
 }. /
 } 
-} §C
-[C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\User.cs
+} ØC
+HC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\User.cs
 	namespace 	
 AspireOverflow
  
@@ -24717,23 +18100,25 @@ ForeignKeyCC	 
 LoginYY 
 {YY 
 publicZZ 
-stringZZ 
-EmailZZ 
-{ZZ 
-getZZ "
-;ZZ" #
-setZZ$ '
-;ZZ' (
-}ZZ) *
+stringZZ 
+?ZZ 
+EmailZZ 
+{ZZ 
+getZZ  #
+;ZZ# $
+setZZ% (
+;ZZ( )
+}ZZ* +
 public[[ 
-string[[ 
-Password[[ 
-{[[  
-get[[! $
-;[[$ %
-set[[& )
-;[[) *
-}[[+ ,
+string[[ 
+?[[ 
+Password[[ 
+{[[  !
+get[[" %
+;[[% &
+set[[' *
+;[[* +
+}[[, -
 }\\ 
 public^^ 
 
@@ -24779,8 +18164,8 @@ IsRevieweree !
 ;ee, -
 }ee. /
 }ff 
-}gg ü
-_C:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\UserRole.cs
+}gg õ
+LC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\UserRole.cs
 	namespace 	
 AspireOverflow
  
@@ -24833,14 +18218,15 @@ UserRoleId 
 ;( )
 }* +
 public 
-string 
-RoleName 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
+string 
+? 
+RoleName 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
 [ 	
 InverseProperty	 
 ( 
@@ -24861,8 +18247,8 @@ UserRoleId 
 ;9 :
 }; <
 } 
-} ´
-cC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Models\VerifyStatus.cs
+} ß
+PC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Models\VerifyStatus.cs
 	namespace 	
 AspireOverflow
  
@@ -24914,14 +18300,15 @@ cC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ;, -
 }. /
 public 
-string 
-Name 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
+string 
+? 
+Name 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
 [ 	
 InverseProperty	 
 ( 
@@ -24942,8 +18329,8 @@ cC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Mo
 ;9 :
 }; <
 } 
-} ıV
-WC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Program.cs
+} ùU
+DC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Program.cs
 var 
 builder 
 = 
@@ -25116,17 +18503,6 @@ WC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Pr
 (119 :
 )11: ;
 ;11; <
-builder22 
-.22 
-Services22 
-.22 
-AddTransient22 
-<22 
-UserService22 )
->22) *
-(22* +
-)22+ ,
-;22, -
 builder33 
 .33 
 Services33 
@@ -25603,8 +18979,8 @@ UseSwagger|| 
 ìì 	
 ;
 ìì	 
-Ü
-gC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Security\PasswordHasher.cs
+Û
+TC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Security\PasswordHasher.cs
 	namespace 	
 AspireOverflow
  
@@ -25723,8 +19099,8 @@ gC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 ;_ `
 } 
 } 
-} »
-nC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Security\PasswordHasherFactory.cs
+} …
+[C:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Security\PasswordHasherFactory.cs
 	namespace 	
 AspireOverflow
  
@@ -25732,9 +19108,10 @@ nC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 Security !
 { 
 public 
-
-class !
-PasswordHasherFactory &
+
+static 
+class !
+PasswordHasherFactory -
 { 
 public 
 static  
@@ -25757,8 +19134,8 @@ nC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 ;		3 4
 } 	
 } 
-} ∫˛
-gC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\ArticleService.cs
+} ≥˘
+TC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\ArticleService.cs
 	namespace 	
 AspireOverflow
  
@@ -25772,21 +19149,24 @@ gC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 :  !
 IArticleService" 1
 { 
-private 
-IArticleRepository "
-database# +
-;+ ,
-private 
-ILogger 
-< 
-ArticleService &
->& '
-_logger( /
-;/ 0
-private 
-MailService 
-_mailService (
-;( )
+private 
+readonly 
+IArticleRepository +
+database, 4
+;4 5
+private 
+readonly 
+ILogger  
+<  !
+ArticleService! /
+>/ 0
+_logger1 8
+;8 9
+private 
+readonly 
+MailService $
+_mailService% 1
+;1 2
 public 
 ArticleService 
 ( 
@@ -25826,11 +19206,12 @@ gC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 List  3 7
 <  7 8
 int  8 ;
->  ; <
-SharedUsersId  = J
-=  K L
-null  M Q
-)  Q R
+>  ; <
+?  < =
+SharedUsersId  > K
+=  L M
+null  N R
+)  R S
 {!! 	
 if## 
 (## 
@@ -25865,8 +19246,9 @@ Validation## 
 article&&@ G
 .&&G H
 ImageString&&H S
-)&&S T
-;&&T U
+!&&S T
+)&&T U
+;&&U V
 article'' 
 .'' 
 	CreatedOn'' !
@@ -25888,25 +19270,23 @@ Validation## 
 SharedUsersId))B O
 .))O P
 Count))P U
-())U V
-)))V W
->))X Y
-$num))Z [
-)))[ \
-return))] c
-database))d l
-.))l m
-AddPrivateArticle))m ~
-())~ 
-article	)) Ü
+>))V W
+$num))X Y
+)))Y Z
+return))[ a
+database))b j
+.))j k
+AddPrivateArticle))k |
+())| }
+article	))} Ñ
 ,
-))Ü á
+))Ñ Ö
 SharedUsersId
-))à ï
+))Ü ì
 )
-))ï ñ
+))ì î
 ;
-))ñ ó
+))î ï
 return** 
 database** 
 .**  
@@ -25956,9 +19336,9 @@ AddArticle**  *
 Article77" )
 article77* 1
 ,771 2
-int773 6
-CurrentUser777 B
-)77B C
+int773 6
+_currentUserId777 E
+)77E F
 {88 	
 if:: 
 (:: 
@@ -26069,9 +19449,9 @@ Validation:: 
 ExistingArticleBB 
 .BB  
 	UpdatedByBB  )
-=BB* +
-CurrentUserBB, 7
-;BB7 8
+=BB* +
+_currentUserIdBB, :
+;BB: ;
 ExistingArticleCC 
 .CC  
 ArticleStatusIDCC  /
@@ -26093,8 +19473,9 @@ Validation:: 
 articleDDH O
 .DDO P
 ImageStringDDP [
-)DD[ \
-;DD\ ]
+!DD[ \
+)DD\ ]
+;DD] ^
 returnGG 
 databaseGG 
 .GG  
@@ -26145,18 +19526,18 @@ Validation:: 
 ChangeArticleStatusRR '
 (RR' (
 intRR( +
-	ArticleIdRR, 5
+	ArticleIDRR, 5
 ,RR5 6
 intRR7 :
 ArticleStatusIDRR; J
 ,RRJ K
-intRRL O
-UpdatedByUserIdRRP _
-)RR_ `
+intRRL O
+UserIdRRP V
+)RRV W
 {SS 	
 ifTT 
 (TT 
-	ArticleIdTT 
+	ArticleIDTT 
 <=TT 
 $numTT 
 )TT 
@@ -26167,7 +19548,7 @@ Validation:: 
 $"TT< >
 $strTT> p
 {TTp q
-	ArticleIdTTq z
+	ArticleIDTTq z
 }TTz {
 "TT{ |
 )TT| }
@@ -26209,13 +19590,13 @@ Validation:: 
 .XX/ 0
 UpdateArticleXX0 =
 (XX= >
-	ArticleIdXX> G
+	ArticleIDXX> G
 ,XXG H
 ArticleStatusIDXXI X
-,XXX Y
-UpdatedByUserIdXXZ i
-)XXi j
-;XXj k
+,XXX Y
+UserIdXXZ `
+)XX` a
+;XXa b
 ifYY 
 (YY 
 IsAddedSuccfullyYY $
@@ -26275,7 +19656,7 @@ Validation:: 
 ^^© ™
 ,
 ^^™ ´
-	ArticleId
+	ArticleID
 ^^¨ µ
 ,
 ^^µ ∂
@@ -26285,9 +19666,8 @@ Validation:: 
 ^^∆ «
 ;
 ^^« »
-throw`` 
-	exception`` 
-;``  
+throw`` 
+;`` 
 }aa 
 }bb 	
 publicee 
@@ -26553,11 +19933,9 @@ AuthorName~~ 
 )ääÖ Ü
 ;ääÜ á
 throw
-åå 
-	exception
-åå 
+åå 
 ;
-åå  
+åå 
 }
 çç 
 }
@@ -26784,11 +20162,9 @@ AuthorName
 ;
 ••q r
 throw
-¶¶ 
-	exception
-¶¶ 
+¶¶ 
 ;
-¶¶  
+¶¶ 
 }
 ßß 
 }
@@ -27013,10 +20389,12 @@ AuthorName
 ∂∂V X
 )
 ∂∂X Y
-)
+!
 ∂∂Y Z
-;
+)
 ∂∂Z [
+;
+∂∂[ \
 }
 ∑∑ 
 return
@@ -27187,11 +20565,9 @@ AuthorName
 ;
 ∆∆s t
 throw
-«« 
-	exception
-«« 
+«« 
 ;
-««  
+«« 
 }
 »» 
 }
@@ -27474,11 +20850,9 @@ AuthorName
 )‚‚Ñ Ö
 ;‚‚Ö Ü
 throw
-‰‰ 
-	exception
-‰‰ 
+‰‰ 
 ;
-‰‰  
+‰‰ 
 }
 ÂÂ 
 }
@@ -27598,11 +20972,9 @@ AuthorName
 ;
 ıık l
 throw
-ˆˆ 
-	exception
-ˆˆ 
+ˆˆ 
 ;
-ˆˆ  
+ˆˆ 
 }
 ˜˜ 
 }
@@ -27700,11 +21072,9 @@ AuthorName
 ;
 ÜÜf g
 throw
-áá 
-	exception
-áá 
+áá 
 ;
-áá  
+áá 
 }
 àà 
 }
@@ -27752,21 +21122,19 @@ AuthorName
 Item
 ìì9 =
 =>
-ìì> @
+ìì> @
+!
+ììA B
 Item
-ììA E
+ììB F
 .
-ììE F
+ììF G
 	IsPrivate
-ììF O
-==
-ììP R
-false
-ììS X
+ììG P
 )
-ììX Y
+ììP Q
 ;
-ììY Z
+ììQ R
 return
 îî 
 ListOfArticles
@@ -27935,11 +21303,9 @@ AuthorName
 ;
 ££k l
 throw
-§§ 
-	exception
-§§ 
+§§ 
 ;
-§§  
+§§ 
 }
 •• 
 }
@@ -28087,11 +21453,9 @@ AuthorName
 ;
 µµ| }
 throw
-∂∂ 
-	exception
-∂∂ 
+∂∂ 
 ;
-∂∂  
+∂∂ 
 }
 ∑∑ 
 }
@@ -28182,20 +21546,22 @@ AuthorName
 √√K L
 Title
 √√L Q
+!
+√√Q R
 .
-√√Q R
+√√R S
 Contains
-√√R Z
+√√S [
 (
-√√Z [
+√√[ \
 Title
-√√[ `
-)
-√√` a
+√√\ a
 )
 √√a b
+)
+√√b c
 ;
-√√b c
+√√c d
 return
 ƒƒ 
 ListOfArticles
@@ -28364,11 +21730,9 @@ AuthorName
 )””Ñ Ö
 ;””Ö Ü
 throw
-’’ 
-	exception
-’’ 
+’’ 
 ;
-’’  
+’’ 
 }
 ÷÷ 
 }
@@ -28418,17 +21782,17 @@ AuthorName
 throw
 ﬁﬁ2 7
 new
-ﬁﬁ8 ;#
-ArgumentNullException
-ﬁﬁ< Q
+ﬁﬁ8 ;
+ArgumentException
+ﬁﬁ< M
 (
-ﬁﬁQ R
+ﬁﬁM N
 $str
-ﬁﬁR r
+ﬁﬁN n
 )
-ﬁﬁr s
+ﬁﬁn o
 ;
-ﬁﬁs t
+ﬁﬁo p
 try
 ﬂﬂ 
 {
@@ -28461,25 +21825,27 @@ AuthorName
 ··K L
 User
 ··L P
+!
+··P Q
 .
-··P Q
+··Q R
 FullName
-··Q Y
+··R Z
 .
-··Y Z
+··Z [
 Contains
-··Z b
+··[ c
 (
-··b c
+··c d
 
 AuthorName
-··c m
-)
-··m n
+··d n
 )
 ··n o
+)
+··o p
 ;
-··o p
+··p q
 return
 ‚‚ 
 ListOfArticles
@@ -28647,11 +22013,9 @@ AuthorNameÒÒÑ é
 )ÒÒè ê
 ;ÒÒê ë
 throw
-ÛÛ 
-	exception
-ÛÛ 
+ÛÛ 
 ;
-ÛÛ  
+ÛÛ 
 }
 ÙÙ 
 }
@@ -28924,11 +22288,9 @@ ReviewerIdééÜ ê
 )ééë í
 ;ééí ì
 throw
-êê 
-	exception
-êê 
+êê 
 ;
-êê  
+êê 
 }
 ëë 
 }
@@ -28997,1113 +22359,1071 @@ ReviewerIdééÜ ê
 {
 õõ 
 var
-ùù 
+úú 
 ListOfArticles
-ùù "
+úú "
 =
-ùù# $
+úú# $
 database
-ùù% -
+úú% -
 .
-ùù- .
+úú- .
 GetArticles
-ùù. 9
+úú. 9
 (
-ùù9 :
+úú9 :
 )
-ùù: ;
+úú: ;
 .
-ùù; <
+úú; <
 Where
-ùù< A
+úú< A
 (
-ùùA B
+úúA B
 item
-ùùB F
+úúB F
 =>
-ùùG I
+úúG I
 item
-ùùJ N
+úúJ N
 .
-ùùN O
+úúN O
 ArticleStatusID
-ùùO ^
+úúO ^
 ==
-ùù_ a
+úú_ a
 ArticleStatusID
-ùùb q
+úúb q
 )
-ùùq r
+úúq r
 .
-ùùr s
+úúr s
 ToList
-ùùs y
+úús y
 (
-ùùy z
+úúy z
 )
-ùùz {
+úúz {
 ;
-ùù{ |
-if
-ûû 
-(
-ûû 
-ArticleStatusID
-ûû #
-==
-ûû$ &
-$num
-ûû' (
-)
-ûû( )
-ListOfArticles
-ûû* 8
-.
-ûû8 9
-Where
-ûû9 >
-(
-ûû> ?
-Item
-ûû? C
-=>
-ûûD F
-Item
-ûûG K
-.
-ûûK L
-ArticleStatusID
-ûûL [
-==
-ûû\ ^
-$num
-ûû_ `
-)
-ûû` a
-;
-ûûa b
+úú{ |
 return
-üü 
+ùù 
 ListOfArticles
-üü %
+ùù %
 .
-üü% &
+ùù% &
 Select
-üü& ,
+ùù& ,
 (
-üü, -
+ùù, -
 Article
-üü- 4
+ùù- 4
 =>
-üü5 7
+ùù5 7
 new
-üü8 ;
+ùù8 ;
 {
-†† 
+ûû 
 	ArticleId
-°° 
+üü 
 =
-°° 
+üü 
 Article
-°°  '
+üü  '
 .
-°°' (
+üü' (
 ArtileId
-°°( 0
+üü( 0
 ,
-°°0 1
+üü0 1
 title
-¢¢ 
+†† 
 =
-¢¢ 
+†† 
 Article
-¢¢ #
+†† #
 .
-¢¢# $
+††# $
 Title
-¢¢$ )
+††$ )
 ,
-¢¢) *
+††) *
 
 AuthorName
-££ 
+°° 
 =
-££  
+°°  
 Article
-££! (
+°°! (
 .
-££( )
+°°( )
 User
-££) -
+°°) -
 ?
-££- .
+°°- .
 .
-££. /
+°°. /
 FullName
-££/ 7
+°°/ 7
 ,
-££7 8
+°°7 8
 content
-§§ 
+¢¢ 
 =
-§§ 
+¢¢ 
 Article
-§§ %
+¢¢ %
 .
-§§% &
+¢¢% &
 Content
-§§& -
+¢¢& -
 ,
-§§- .
+¢¢- .
 image
-•• 
+££ 
 =
-•• 
+££ 
 Article
-•• #
+££ #
 .
-••# $
+££# $
 Image
-••$ )
+££$ )
 ,
-••) *
+££) *
 date
-¶¶ 
+§§ 
 =
-¶¶ 
+§§ 
 Article
-¶¶ "
+§§ "
 .
-¶¶" #
+§§" #
 	UpdatedOn
-¶¶# ,
+§§# ,
 ,
-¶¶, -
+§§, -
 status
-ßß 
+•• 
 =
-ßß 
+•• 
 Article
-ßß $
+•• $
 .
-ßß$ %
+••$ %
 ArticleStatus
-ßß% 2
+••% 2
 ?
-ßß2 3
+••2 3
 .
-ßß3 4
+••3 4
 Status
-ßß4 :
+••4 :
 ,
-ßß: ;
+••: ;
 }
-©© 
+¶¶ 
 )
-©© 
+¶¶ 
 ;
-©© 
+¶¶ 
 }
-™™ 
+ßß 
 catch
-´´ 
+®® 
 (
-´´ 
+®® 
 	Exception
-´´ 
+®® 
 	exception
-´´ &
+®® &
 )
-´´& '
+®®& '
 {
-¨¨ 
+©© 
 _logger
-≠≠ 
+™™ 
 .
-≠≠ 
+™™ 
 LogError
-≠≠  
+™™  
 (
-≠≠  !
+™™  !
 HelperService
-≠≠! .
+™™! .
 .
-≠≠. /
+™™. /
 LoggerMessage
-≠≠/ <
+™™/ <
 (
-≠≠< =
+™™< =
 $str
-≠≠= M
+™™= M
 ,
-≠≠M N
-$str≠≠O Ç
-,≠≠Ç É
-	exception≠≠Ñ ç
-)≠≠ç é
-,≠≠é è
-ArticleStatusID≠≠ê ü
-)≠≠ü †
-;≠≠† °
+™™M N
+$str™™O Ç
+,™™Ç É
+	exception™™Ñ ç
+)™™ç é
+,™™é è
+ArticleStatusID™™ê ü
+)™™ü †
+;™™† °
 throw
-ØØ 
-	exception
-ØØ 
+¨¨ 
 ;
-ØØ  
+¨¨ 
 }
-∞∞ 
+≠≠ 
 }
-≤≤ 	
+ØØ 	
 public
-∂∂ 
+≥≥ 
 bool
-∂∂ 
+≥≥ 
 CreateComment
-∂∂ !
+≥≥ !
 (
-∂∂! "
+≥≥! "
 ArticleComment
-∂∂" 0
+≥≥" 0
 comment
-∂∂1 8
+≥≥1 8
 )
-∂∂8 9
+≥≥8 9
 {
-∑∑ 	
+¥¥ 	
 
 Validation
-∏∏ 
+µµ 
 .
-∏∏ $
+µµ $
 ValidateArticleComment
-∏∏ -
+µµ -
 (
-∏∏- .
+µµ- .
 comment
-∏∏. 5
+µµ. 5
 )
-∏∏5 6
+µµ5 6
 ;
-∏∏6 7
+µµ6 7
 try
-ππ 
+∂∂ 
 {
-∫∫ 
+∑∑ 
 comment
-ªª 
+∏∏ 
 .
-ªª 
+∏∏ 
 	CreatedBy
-ªª !
+∏∏ !
 =
-ªª" #
+∏∏" #
 comment
-ªª$ +
+∏∏$ +
 .
-ªª+ ,
+∏∏+ ,
 UserId
-ªª, 2
+∏∏, 2
 ;
-ªª2 3
+∏∏2 3
 var
-ºº #
+ππ #
 IsCommentSuccessfully
-ºº )
+ππ )
 =
-ºº* +
+ππ* +
 database
-ºº, 4
+ππ, 4
 .
-ºº4 5
+ππ4 5
 
 AddComment
-ºº5 ?
+ππ5 ?
 (
-ºº? @
+ππ? @
 comment
-ºº@ G
+ππ@ G
 )
-ººG H
+ππG H
 ;
-ººH I
+ππH I
 if
-ΩΩ 
+∫∫ 
 (
-ΩΩ #
+∫∫ #
 IsCommentSuccessfully
-ΩΩ )
+∫∫ )
 )
-ΩΩ) *
+∫∫) *
 _mailService
-ΩΩ+ 7
+∫∫+ 7
 ?
-ΩΩ7 8
+∫∫7 8
 .
-ΩΩ8 9
+∫∫8 9
 SendEmailAsync
-ΩΩ9 G
+∫∫9 G
 (
-ΩΩG H
+∫∫G H
 HelperService
-ΩΩH U
+∫∫H U
 .
-ΩΩU V
+∫∫U V
 CommentMail
-ΩΩV a
+∫∫V a
 (
-ΩΩa b
-$strΩΩb Ö
-,ΩΩÖ Ü
-$strΩΩá é
-,ΩΩé è
-$strΩΩê Æ
-)ΩΩÆ Ø
-)ΩΩØ ∞
-;ΩΩ∞ ±
+∫∫a b
+$str∫∫b Ö
+,∫∫Ö Ü
+$str∫∫á é
+,∫∫é è
+$str∫∫ê Æ
+)∫∫Æ Ø
+)∫∫Ø ∞
+;∫∫∞ ±
 return
-ææ #
+ªª #
 IsCommentSuccessfully
-ææ ,
+ªª ,
 ;
-ææ, -
+ªª, -
 }
-øø 
+ºº 
 catch
-¿¿ 
+ΩΩ 
 (
-¿¿ 
+ΩΩ 
 	Exception
-¿¿ 
+ΩΩ 
 	exception
-¿¿ &
+ΩΩ &
 )
-¿¿& '
+ΩΩ& '
 {
-¡¡ 
+ææ 
 _logger
-¬¬ 
+øø 
 .
-¬¬ 
+øø 
 LogError
-¬¬  
+øø  
 (
-¬¬  !
+øø  !
 HelperService
-¬¬! .
+øø! .
 .
-¬¬. /
+øø. /
 LoggerMessage
-¬¬/ <
+øø/ <
 (
-¬¬< =
+øø< =
 $str
-¬¬= M
+øø= M
 ,
-¬¬M N
+øøM N
 $str
-¬¬O `
+øøO `
 ,
-¬¬` a
+øø` a
 	exception
-¬¬b k
+øøb k
 )
-¬¬k l
+øøk l
 ,
-¬¬l m
+øøl m
 comment
-¬¬n u
+øøn u
 )
-¬¬u v
+øøu v
 ;
-¬¬v w
+øøv w
 return
-√√ 
+¿¿ 
 false
-√√ 
+¿¿ 
 ;
-√√ 
+¿¿ 
 }
-ƒƒ 
+¡¡ 
 }
-≈≈ 	
+¬¬ 	
 public
-»» 
+≈≈ 
 IEnumerable
-»» 
+≈≈ 
 <
-»» 
+≈≈ 
 Object
-»» !
+≈≈ !
 >
-»»! "
+≈≈! "
 GetComments
-»»# .
+≈≈# .
 (
-»». /
+≈≈. /
 int
-»»/ 2
-	ArticleId
-»»3 <
+≈≈/ 2
+	ArticleID
+≈≈3 <
 )
-»»< =
+≈≈< =
 {
-…… 	
+∆∆ 	
 if
-   
+«« 
 (
-   
-	ArticleId
-   
+«« 
+	ArticleID
+«« 
 <=
-   
+«« 
 $num
-   
+«« 
 )
-   
+«« 
 throw
-    %
+««  %
 new
-  & )
+««& )
 ArgumentException
-  * ;
+««* ;
 (
-  ; <
+««; <
 $"
-  < >
+««< >
 $str
-  > p
+««> p
 {
-  p q
-	ArticleId
-  q z
+««p q
+	ArticleID
+««q z
 }
-  z {
+««z {
 "
-  { |
+««{ |
 )
-  | }
+««| }
 ;
-  } ~
+««} ~
 try
-ÀÀ 
+»» 
 {
-ÃÃ 
+…… 
 var
-ÕÕ 
+   
 ListOfComments
-ÕÕ "
+   "
 =
-ÕÕ# $
+  # $
 database
-ÕÕ% -
+  % -
 .
-ÕÕ- .
+  - .
 GetComments
-ÕÕ. 9
+  . 9
 (
-ÕÕ9 :
+  9 :
 )
-ÕÕ: ;
+  : ;
 .
-ÕÕ; <
+  ; <
 Where
-ÕÕ< A
+  < A
 (
-ÕÕA B
+  A B
 comment
-ÕÕB I
+  B I
 =>
-ÕÕJ L
+  J L
 comment
-ÕÕM T
+  M T
 .
-ÕÕT U
+  T U
 	ArticleId
-ÕÕU ^
+  U ^
 ==
-ÕÕ_ a
-	ArticleId
-ÕÕb k
+  _ a
+	ArticleID
+  b k
 )
-ÕÕk l
+  k l
 ;
-ÕÕl m
+  l m
 return
-ŒŒ 
+ÀÀ 
 ListOfComments
-ŒŒ %
+ÀÀ %
 .
-ŒŒ% &
+ÀÀ% &
 Select
-ŒŒ& ,
+ÀÀ& ,
 (
-ŒŒ, -
+ÀÀ, -
 Item
-ŒŒ- 1
+ÀÀ- 1
 =>
-ŒŒ2 4
+ÀÀ2 4
 new
-ŒŒ5 8
+ÀÀ5 8
 {
-œœ 
+ÃÃ 
 	CommentId
+ÕÕ 
+=
+ÕÕ 
+Item
+ÕÕ  $
+.
+ÕÕ$ %
+ArticleCommentId
+ÕÕ% 5
+,
+ÕÕ5 6
+Message
+ŒŒ 
+=
+ŒŒ 
+Item
+ŒŒ "
+.
+ŒŒ" #
+Comment
+ŒŒ# *
+,
+ŒŒ* +
+Name
+œœ 
+=
+œœ 
+Item
+œœ 
+.
+œœ  
+User
+œœ  $
+?
+œœ$ %
+.
+œœ% &
+FullName
+œœ& .
+,
+œœ. /
+	ArticleId
 –– 
 =
 –– 
 Item
 ––  $
 .
-––$ %
-ArticleCommentId
-––% 5
-,
-––5 6
-Message
-—— 
-=
-—— 
-Item
-—— "
-.
-——" #
-Comment
-——# *
-,
-——* +
-Name
-““ 
-=
-““ 
-Item
-““ 
-.
-““  
-User
-““  $
-?
-““$ %
-.
-““% &
-FullName
-““& .
-,
-““. /
+––$ %
 	ArticleId
-”” 
-=
-”” 
-Item
-””  $
-.
-””$ %
-	ArticleId
-””% .
+––% .
 }
-’’ 
+““ 
 )
-’’ 
+““ 
 ;
-’’ 
+““ 
 }
-◊◊ 
+‘‘ 
 catch
-ÿÿ 
+’’ 
 (
-ÿÿ 
+’’ 
 	Exception
-ÿÿ 
+’’ 
 	exception
-ÿÿ &
+’’ &
 )
-ÿÿ& '
+’’& '
 {
-ŸŸ 
+÷÷ 
 _logger
-⁄⁄ 
+◊◊ 
 .
-⁄⁄ 
+◊◊ 
 LogError
-⁄⁄  
+◊◊  
 (
-⁄⁄  !
+◊◊  !
 HelperService
-⁄⁄! .
+◊◊! .
 .
-⁄⁄. /
+◊◊. /
 LoggerMessage
-⁄⁄/ <
+◊◊/ <
 (
-⁄⁄< =
+◊◊< =
 $str
-⁄⁄= M
+◊◊= M
 ,
-⁄⁄M N
+◊◊M N
 $str
-⁄⁄O ^
+◊◊O ^
 ,
-⁄⁄^ _
+◊◊^ _
 	exception
-⁄⁄` i
+◊◊` i
 ,
-⁄⁄i j
-	ArticleId
-⁄⁄k t
+◊◊i j
+	ArticleID
+◊◊k t
 )
-⁄⁄t u
+◊◊t u
 )
-⁄⁄u v
+◊◊u v
 ;
-⁄⁄v w
+◊◊v w
 throw
-€€ 
-	exception
-€€ 
+ÿÿ 
 ;
-€€  
+ÿÿ 
 }
-‹‹ 
+ŸŸ 
 }
-›› 	
+⁄⁄ 	
 public
-·· 
+ﬁﬁ 
 bool
-·· 
+ﬁﬁ 
 AddLikeToArticle
-·· $
+ﬁﬁ $
 (
-··$ %
+ﬁﬁ$ %
 ArticleLike
-··% 0
+ﬁﬁ% 0
 Like
-··1 5
+ﬁﬁ1 5
 )
-··5 6
+ﬁﬁ5 6
 {
-‚‚ 	
+ﬂﬂ 	
+if
+‡‡ 
+(
+‡‡ 
+Like
+‡‡ 
+==
+‡‡ 
+null
+‡‡ 
+)
+‡‡ 
+throw
+‡‡ #
+new
+‡‡$ '
+ArgumentException
+‡‡( 9
+(
+‡‡9 :
+$str
+‡‡: ]
+)
+‡‡] ^
+;
+‡‡^ _
+if
+·· 
+(
+·· 
+Like
+·· 
+.
+·· 
+	ArticleId
+·· 
+<=
+·· !
+$num
+··" #
+)
+··# $
+throw
+··% *
+new
+··+ .
+ArgumentException
+··/ @
+(
+··@ A
+$"
+··A C
+$str
+··C u
+{
+··u v
+Like
+··v z
+.
+··z {
+	ArticleId··{ Ñ
+}··Ñ Ö
+"··Ö Ü
+)··Ü á
+;··á à
 if
 ‚‚ 
 (
-‚‚ 
+‚‚ 
 Like
-‚‚ 
-==
-‚‚ 
-null
-‚‚ 
-)
-‚‚ 
-throw
-‚‚  
-new
-‚‚! $
-ArgumentException
-‚‚% 6
-(
-‚‚6 7
-$str
-‚‚7 Z
-)
-‚‚Z [
-;
-‚‚[ \
-if
-„„ 
-(
-„„ 
-Like
-„„ 
+‚‚ 
 .
-„„ 
-	ArticleId
-„„ 
-<=
-„„ !
-$num
-„„" #
-)
-„„# $
-throw
-„„% *
-new
-„„+ .
-ArgumentException
-„„/ @
-(
-„„@ A
-$"
-„„A C
-$str
-„„C u
-{
-„„u v
-Like
-„„v z
-.
-„„z {
-	ArticleId„„{ Ñ
-}„„Ñ Ö
-"„„Ö Ü
-)„„Ü á
-;„„á à
-if
-‰‰ 
-(
-‰‰ 
-Like
-‰‰ 
-.
-‰‰ 
+‚‚ 
 UserId
-‰‰ 
+‚‚ 
 <=
-‰‰ 
+‚‚ 
 $num
-‰‰  
+‚‚  
 )
-‰‰  !
+‚‚  !
 throw
-‰‰" '
+‚‚" '
 new
-‰‰( +
+‚‚( +
 ArgumentException
-‰‰, =
+‚‚, =
 (
-‰‰= >
+‚‚= >
 $"
-‰‰> @
+‚‚> @
 $str
-‰‰@ l
+‚‚@ l
 {
-‰‰l m
+‚‚l m
 Like
-‰‰m q
+‚‚m q
 .
-‰‰q r
+‚‚q r
 UserId
-‰‰r x
+‚‚r x
 }
-‰‰x y
+‚‚x y
 "
-‰‰y z
+‚‚y z
 )
-‰‰z {
+‚‚z {
 ;
-‰‰{ |
+‚‚{ |
 try
-ÂÂ 
+„„ 
 {
-ÊÊ 
+‰‰ 
 if
-ÁÁ 
+ÂÂ 
 (
-ÁÁ 
+ÂÂ 
 database
-ÁÁ 
+ÂÂ 
 .
-ÁÁ 
+ÂÂ 
 GetLikes
-ÁÁ %
+ÂÂ %
 (
-ÁÁ% &
+ÂÂ% &
 )
-ÁÁ& '
+ÂÂ& '
 .
-ÁÁ' (
+ÂÂ' (
 ToList
-ÁÁ( .
+ÂÂ( .
 (
-ÁÁ. /
+ÂÂ. /
 )
-ÁÁ/ 0
+ÂÂ/ 0
 .
-ÁÁ0 1
+ÂÂ0 1
 Find
-ÁÁ1 5
+ÂÂ1 5
 (
-ÁÁ5 6
+ÂÂ5 6
 item
-ÁÁ6 :
+ÂÂ6 :
 =>
-ÁÁ; =
+ÂÂ; =
 item
-ÁÁ> B
+ÂÂ> B
 .
-ÁÁB C
+ÂÂB C
 UserId
-ÁÁC I
+ÂÂC I
 ==
-ÁÁJ L
+ÂÂJ L
 Like
-ÁÁM Q
+ÂÂM Q
 .
-ÁÁQ R
+ÂÂQ R
 UserId
-ÁÁR X
+ÂÂR X
 &&
-ÁÁY [
+ÂÂY [
 item
-ÁÁ\ `
+ÂÂ\ `
 .
-ÁÁ` a
+ÂÂ` a
 	ArticleId
-ÁÁa j
+ÂÂa j
 ==
-ÁÁk m
+ÂÂk m
 Like
-ÁÁn r
+ÂÂn r
 .
-ÁÁr s
+ÂÂr s
 	ArticleId
-ÁÁs |
+ÂÂs |
 )
-ÁÁ| }
-!=ÁÁ~ Ä
-nullÁÁÅ Ö
-)ÁÁÖ Ü
-throwÁÁá å
-newÁÁç ê
-	ExceptionÁÁë ö
-(ÁÁö õ
-$strÁÁõ –
-)ÁÁ– —
-;ÁÁ— “
+ÂÂ| }
+!=ÂÂ~ Ä
+nullÂÂÅ Ö
+)ÂÂÖ Ü
+throwÂÂá å
+newÂÂç ê#
+ValidationExceptionÂÂë §
+(ÂÂ§ •
+$strÂÂ• ⁄
+)ÂÂ⁄ €
+;ÂÂ€ ‹
 return
-ÈÈ 
+ÁÁ 
 database
-ÈÈ 
+ÁÁ 
 .
-ÈÈ  
+ÁÁ  
 AddLike
-ÈÈ  '
+ÁÁ  '
 (
-ÈÈ' (
+ÁÁ' (
 Like
-ÈÈ( ,
+ÁÁ( ,
 )
-ÈÈ, -
+ÁÁ, -
 ;
-ÈÈ- .
+ÁÁ- .
 }
-ÍÍ 
+ËË 
 catch
-ÎÎ 
+ÈÈ 
 (
-ÎÎ 
+ÈÈ 
 	Exception
-ÎÎ 
+ÈÈ 
 	exception
-ÎÎ &
+ÈÈ &
 )
-ÎÎ& '
+ÈÈ& '
 {
-ÏÏ 
+ÍÍ 
 _logger
-ÌÌ 
+ÎÎ 
 .
-ÌÌ 
+ÎÎ 
 LogError
-ÌÌ  
+ÎÎ  
 (
-ÌÌ  !
+ÎÎ  !
 HelperService
-ÌÌ! .
+ÎÎ! .
 .
-ÌÌ. /
+ÎÎ. /
 LoggerMessage
-ÌÌ/ <
+ÎÎ/ <
 (
-ÌÌ< =
+ÎÎ< =
 $str
-ÌÌ= M
+ÎÎ= M
 ,
-ÌÌM N
+ÎÎM N
 $str
-ÌÌO c
+ÎÎO c
 ,
-ÌÌc d
+ÎÎc d
 	exception
-ÌÌe n
+ÎÎe n
 ,
-ÌÌn o
+ÎÎn o
 Like
-ÌÌp t
+ÎÎp t
 )
-ÌÌt u
+ÎÎt u
 )
-ÌÌu v
+ÎÎu v
 ;
-ÌÌv w
+ÎÎv w
 return
-ÓÓ 
+ÏÏ 
 false
-ÓÓ 
+ÏÏ 
 ;
-ÓÓ 
+ÏÏ 
 }
-ÔÔ 
+ÌÌ 
 }
- 	
+ÓÓ 	
 public
-ÛÛ 
+ÒÒ 
 int
-ÛÛ 
+ÒÒ 
 GetLikesCount
-ÛÛ  
+ÒÒ  
 (
-ÛÛ  !
+ÒÒ  !
 int
-ÛÛ! $
-	ArticleId
-ÛÛ% .
+ÒÒ! $
+	ArticleID
+ÒÒ% .
 )
-ÛÛ. /
+ÒÒ. /
 {
-ÙÙ 	
+ÚÚ 	
 if
-ıı 
+ÛÛ 
 (
-ıı 
-	ArticleId
-ıı 
+ÛÛ 
+	ArticleID
+ÛÛ 
 <=
-ıı 
+ÛÛ 
 $num
-ıı 
+ÛÛ 
 )
-ıı 
+ÛÛ 
 throw
-ıı  %
+ÛÛ  %
 new
-ıı& )
+ÛÛ& )
 ArgumentException
-ıı* ;
+ÛÛ* ;
 (
-ıı; <
+ÛÛ; <
 $"
-ıı< >
+ÛÛ< >
 $str
-ıı> p
+ÛÛ> p
 {
-ııp q
-	ArticleId
-ııq z
+ÛÛp q
+	ArticleID
+ÛÛq z
 }
-ıız {
+ÛÛz {
 "
-ıı{ |
+ÛÛ{ |
 )
-ıı| }
+ÛÛ| }
 ;
-ıı} ~
+ÛÛ} ~
 try
-ˆˆ 
+ÙÙ 
 {
-˜˜ 
+ıı 
 var
-¯¯ 
+ˆˆ 
 ArticleLikes
-¯¯  
+ˆˆ  
 =
-¯¯! "
+ˆˆ! "
 database
-¯¯# +
+ˆˆ# +
 .
-¯¯+ ,
+ˆˆ+ ,
 GetLikes
-¯¯, 4
+ˆˆ, 4
 (
-¯¯4 5
+ˆˆ4 5
 )
-¯¯5 6
+ˆˆ5 6
 .
-¯¯6 7
+ˆˆ6 7
 Count
-¯¯7 <
+ˆˆ7 <
 (
-¯¯< =
+ˆˆ< =
 item
-¯¯= A
+ˆˆ= A
 =>
-¯¯B D
+ˆˆB D
 item
-¯¯E I
+ˆˆE I
 .
-¯¯I J
+ˆˆI J
 	ArticleId
-¯¯J S
+ˆˆJ S
 ==
-¯¯T V
-	ArticleId
-¯¯W `
+ˆˆT V
+	ArticleID
+ˆˆW `
 )
-¯¯` a
+ˆˆ` a
 ;
-¯¯a b
+ˆˆa b
 return
-˘˘ 
+˜˜ 
 ArticleLikes
-˘˘ #
+˜˜ #
 ;
-˘˘# $
+˜˜# $
 }
-˙˙ 
+¯¯ 
 catch
-˚˚ 
+˘˘ 
 (
-˚˚ 
+˘˘ 
 	Exception
-˚˚ 
+˘˘ 
 	exception
-˚˚ &
+˘˘ &
 )
-˚˚& '
+˘˘& '
 {
-¸¸ 
+˙˙ 
 _logger
-˝˝ 
+˚˚ 
 .
-˝˝ 
+˚˚ 
 LogError
-˝˝  
+˚˚  
 (
-˝˝  !
+˚˚  !
 HelperService
-˝˝! .
+˚˚! .
 .
-˝˝. /
+˚˚. /
 LoggerMessage
-˝˝/ <
+˚˚/ <
 (
-˝˝< =
+˚˚< =
 $str
-˝˝= M
+˚˚= M
 ,
-˝˝M N
+˚˚M N
 $str
-˝˝O `
+˚˚O `
 ,
-˝˝` a
+˚˚` a
 	exception
-˝˝b k
+˚˚b k
 )
-˝˝k l
+˚˚k l
 )
-˝˝l m
+˚˚l m
 ;
-˝˝m n
+˚˚m n
 throw
-˛˛ 
+¸¸ 
 ;
-˛˛ 
+¸¸ 
 }
-ˇˇ 
+˝˝ 
 }
-ÄÄ 	
+˛˛ 	
 }
-ÉÉ 
-}ÑÑ †R
-gC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\HelperServices.cs
+ÅÅ 
+}ÇÇ ˛Q
+TC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\HelperServices.cs
 	namespace 	
 AspireOverflow
  
@@ -30220,11 +23540,12 @@ MethodName""I S
 	Exception""U ^
 	exception""_ h
 ,""h i
-object""j p
-Data""q u
-=""v w
-null""x |
-)""| }
+object""j p
+?""p q
+Data""r v
+=""w x
+null""y }
+)""} ~
 {## 	
 return%% 
 Data%% 
@@ -30283,7 +23604,6 @@ MethodName''! +
 }''N O
 "''O P
 ;''P Q
-;''R S
 }(( 	
 public++ 
 static++ 
@@ -30373,7 +23693,6 @@ MethodName00! +
 }00p q
 "00q r
 ;00r s
-;00t u
 }11 	
 public44 
 static44 
@@ -30739,8 +24058,8 @@ QueryTitleuuI S
 ÇÇ 	
 }
 ÉÉ 
-}ÑÑ ç
-dC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\MailService.cs
+}ÑÑ ˙
+QC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\MailService.cs
 	namespace
 
  	
@@ -30936,8 +24255,8 @@ Disconnect""	 
 ;"" 
 }## 
 }$$ 
-}%% Á˛
-eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\QueryService.cs
+}%% ¯Ä
+RC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\QueryService.cs
 	namespace 	
 AspireOverflow
  
@@ -30951,23 +24270,24 @@ eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 : 
 IQueryService ,
 { 
-private 
-static 
-IQueryRepository '
-database( 0
-;0 1
-private 
-static 
-ILogger 
-< 
-QueryService +
->+ ,
-_logger- 4
-;4 5
-private 
-MailService 
-_mailService (
-;( )
+private 
+readonly 
+IQueryRepository *
+database+ 3
+;3 4
+private 
+readonly 
+ILogger !
+<! "
+QueryService" .
+>. /
+_logger0 7
+;7 8
+private 
+readonly 
+MailService $
+_mailService% 1
+;1 2
 public 
 QueryService 
 ( 
@@ -31052,16 +24372,18 @@ Validation&& 
 .	++ Ä
 Title
 ++Ä Ö
+!
+++Ö Ü
 ,
-++Ö Ü
+++Ü á
 $str
-++á £
-)
-++£ §
+++à §
 )
 ++§ •
+)
+++• ¶
 ;
-++• ¶
+++¶ ß
 return,, 
 IsAddedSuccessfully,, *
 ;,,* +
@@ -31246,12 +24568,12 @@ Validation&& 
 GetQueryWW 
 (WW 
 intWW "
-QueryIdWW# *
+QueryIDWW# *
 )WW* +
 {XX 	
 ifYY 
 (YY 
-QueryIdYY 
+QueryIDYY 
 <=YY 
 $numYY 
 )YY 
@@ -31262,7 +24584,7 @@ Validation&& 
 $"YY: <
 $strYY< j
 {YYj k
-QueryIdYYk r
+QueryIDYYk r
 }YYr s
 "YYs t
 )YYt u
@@ -31276,7 +24598,7 @@ Validation&& 
 .\\$ %
 GetQueryByID\\% 1
 (\\1 2
-QueryId\\2 9
+QueryID\\2 9
 )\\9 :
 ;\\: ;
 return]] 
@@ -31318,713 +24640,710 @@ RaiserNamedd 
 Querydd! &
 .dd& '
 Userdd' +
-.dd+ ,
-FullNamedd, 4
-,dd4 5
-Commentsee 
-=ee 
-GetCommentsee *
-(ee* +
-QueryIdee+ 2
-)ee2 3
-}gg 
-;gg 
-}hh 
-catchii 
-(ii 
-	Exceptionii 
-	exceptionii &
-)ii& '
-{jj 
-_loggerkk 
-.kk 
-LogErrorkk  
-(kk  !
-HelperServicekk! .
-.kk. /
-LoggerMessagekk/ <
-(kk< =
-$strkk= K
-,kkK L
-$strkkM d
-,kkd e
-	exceptionkkf o
-,kko p
-QueryIdkkq x
-)kkx y
-)kky z
-;kkz {
-throwll 
-	exceptionll 
-;ll  
-}mm 
-}oo 	
-privaterr 
-IEnumerablerr 
-<rr 
-Queryrr !
->rr! "
+?dd+ ,
+.dd, -
+FullNamedd- 5
+,dd5 6
+IsSolvedee 
+=ee 
+Queryee "
+.ee" #
+IsSolvedee# +
+,ee+ ,
+Commentsff 
+=ff 
+GetCommentsff *
+(ff* +
+QueryIDff+ 2
+)ff2 3
+}hh 
+;hh 
+}ii 
+catchjj 
+(jj 
+	Exceptionjj 
+	exceptionjj &
+)jj& '
+{kk 
+_loggerll 
+.ll 
+LogErrorll  
+(ll  !
+HelperServicell! .
+.ll. /
+LoggerMessagell/ <
+(ll< =
+$strll= K
+,llK L
+$strllM d
+,lld e
+	exceptionllf o
+,llo p
+QueryIDllq x
+)llx y
+)lly z
+;llz {
+throwmm 
+;mm 
+}nn 
+}pp 	
+privatess 
+IEnumerabless 
+<ss 
+Queryss !
+>ss! "
 
-GetQueriesrr# -
-(rr- .
-)rr. /
-{ss 	
-trytt 
-{uu 
-varvv 
-ListOfQueriesvv !
-=vv" #
-databasevv$ ,
-.vv, -
+GetQueriesss# -
+(ss- .
+)ss. /
+{tt 	
+tryuu 
+{vv 
+varww 
+ListOfQueriesww !
+=ww" #
+databaseww$ ,
+.ww, -
 
-GetQueriesvv- 7
-(vv7 8
-)vv8 9
-;vv9 :
-returnww 
-ListOfQueriesww $
-;ww$ %
-}xx 
-catchyy 
-(yy 
-	Exceptionyy 
-	exceptionyy &
-)yy& '
-{zz 
-_logger{{ 
-.{{ 
-LogError{{  
-({{  !
-HelperService{{! .
-.{{. /
-LoggerMessage{{/ <
-({{< =
-$str{{= K
-,{{K L
-$str{{M [
-,{{[ \
-	exception{{] f
-){{f g
-){{g h
-;{{h i
-throw|| 
-	exception|| 
-;||  
-}}} 
-} 	
+GetQueriesww- 7
+(ww7 8
+)ww8 9
+;ww9 :
+returnxx 
+ListOfQueriesxx $
+;xx$ %
+}yy 
+catchzz 
+(zz 
+	Exceptionzz 
+	exceptionzz &
+)zz& '
+{{{ 
+_logger|| 
+.|| 
+LogError||  
+(||  !
+HelperService||! .
+.||. /
+LoggerMessage||/ <
+(||< =
+$str||= K
+,||K L
+$str||M [
+,||[ \
+	exception||] f
+)||f g
+)||g h
+;||h i
+throw}} 
+;}} 
+}~~ 
+}
+ÄÄ 	
 public
-ÅÅ 
+ÇÇ 
 IEnumerable
-ÅÅ 
+ÇÇ 
 <
-ÅÅ 
+ÇÇ 
 Object
-ÅÅ !
+ÇÇ !
 >
-ÅÅ! "
+ÇÇ! "
 GetListOfQueries
-ÅÅ# 3
+ÇÇ# 3
 (
-ÅÅ3 4
+ÇÇ3 4
 )
-ÅÅ4 5
+ÇÇ4 5
 {
-ÇÇ 	
+ÉÉ 	
 try
-ÉÉ 
+ÑÑ 
 {
-ÑÑ 
+ÖÖ 
 var
-ÖÖ 
+ÜÜ 
 ListOfQueries
-ÖÖ !
+ÜÜ !
 =
-ÖÖ" #
+ÜÜ" #
 database
-ÖÖ$ ,
+ÜÜ$ ,
 .
-ÖÖ, -
+ÜÜ, -
 
 GetQueries
-ÖÖ- 7
+ÜÜ- 7
 (
-ÖÖ7 8
+ÜÜ7 8
 )
-ÖÖ8 9
+ÜÜ8 9
 ;
-ÖÖ9 :
+ÜÜ9 :
 return
-ÜÜ 
+áá 
 ListOfQueries
-ÜÜ $
+áá $
 .
-ÜÜ$ %
+áá$ %
 Select
-ÜÜ% +
+áá% +
 (
-ÜÜ+ ,
+áá+ ,
 item
-ÜÜ, 0
+áá, 0
 =>
-ÜÜ1 3
+áá1 3
 new
-ÜÜ4 7
+áá4 7
 {
-áá 
+àà 
 QueryId
-àà 
+ââ 
 =
-àà 
+ââ 
 item
-àà "
+ââ "
 .
-àà" #
+ââ" #
 QueryId
-àà# *
+ââ# *
 ,
-àà* +
+ââ* +
 Title
-ââ 
+ää 
 =
-ââ 
+ää 
 item
-ââ  
+ää  
 .
-ââ  !
+ää  !
 Title
-ââ! &
+ää! &
 ,
-ââ& '
+ää& '
 content
-ää 
-=
-ää 
-item
-ää "
-.
-ää" #
-Content
-ää# *
-,
-ää* +
-IsSolved
-ãã 
+ãã 
 =
 ãã 
 item
-ãã !
+ãã "
 .
-ãã! "
+ãã" #
+Content
+ãã# *
+,
+ãã* +
 IsSolved
-ãã" *
-}
-åå 
-)
-åå 
-;
-åå 
-}
-çç 
-catch
-éé 
-(
-éé 
-	Exception
-éé 
-	exception
-éé &
-)
-éé& '
-{
-èè 
-_logger
-êê 
-.
-êê 
-LogError
-êê  
-(
-êê  !
-HelperService
-êê! .
-.
-êê. /
-LoggerMessage
-êê/ <
-(
-êê< =
-$str
-êê= K
-,
-êêK L
-$str
-êêM [
-,
-êê[ \
-	exception
-êê] f
-)
-êêf g
-)
-êêg h
-;
-êêh i
-throw
-ëë 
-	exception
-ëë 
-;
-ëë  
-}
-íí 
-}
-îî 	
-public
-òò 
-IEnumerable
-òò 
-<
-òò 
-Object
-òò !
->
-òò! "
-GetLatestQueries
-òò# 3
-(
-òò3 4
-)
-òò4 5
-{
-ôô 	
-try
-öö 
-{
-õõ 
-var
-úú 
-ListOfQueries
-úú !
+åå 
 =
-úú" #
+åå 
+item
+åå !
+.
+åå! "
+IsSolved
+åå" *
+}
+çç 
+)
+çç 
+;
+çç 
+}
+éé 
+catch
+èè 
+(
+èè 
+	Exception
+èè 
+	exception
+èè &
+)
+èè& '
+{
+êê 
+_logger
+ëë 
+.
+ëë 
+LogError
+ëë  
+(
+ëë  !
+HelperService
+ëë! .
+.
+ëë. /
+LoggerMessage
+ëë/ <
+(
+ëë< =
+$str
+ëë= K
+,
+ëëK L
+$str
+ëëM [
+,
+ëë[ \
+	exception
+ëë] f
+)
+ëëf g
+)
+ëëg h
+;
+ëëh i
+throw
+íí 
+;
+íí 
+}
+ìì 
+}
+ïï 	
+public
+ôô 
+IEnumerable
+ôô 
+<
+ôô 
+Object
+ôô !
+>
+ôô! "
+GetLatestQueries
+ôô# 3
+(
+ôô3 4
+)
+ôô4 5
+{
+öö 	
+try
+õõ 
+{
+úú 
+var
+ùù 
+ListOfQueries
+ùù !
+=
+ùù" #
 
 GetQueries
-úú$ .
+ùù$ .
 (
-úú. /
+ùù. /
 )
-úú/ 0
+ùù/ 0
 .
-úú0 1
+ùù0 1
 OrderByDescending
-úú1 B
+ùù1 B
 (
-úúB C
+ùùB C
 query
-úúC H
+ùùC H
 =>
-úúI K
+ùùI K
 query
-úúL Q
+ùùL Q
 .
-úúQ R
+ùùQ R
 	CreatedOn
-úúR [
+ùùR [
 )
-úú[ \
+ùù[ \
 ;
-úú\ ]
+ùù\ ]
 return
-ûû 
+üü 
 ListOfQueries
-ûû $
+üü $
 .
-ûû$ %
+üü$ %
 Select
-ûû% +
+üü% +
 (
-ûû+ ,
+üü+ ,
 item
-ûû, 0
+üü, 0
 =>
-ûû1 3
+üü1 3
 new
-ûû4 7
+üü4 7
 {
-üü 
+†† 
 QueryId
-†† 
+°° 
 =
-†† 
+°° 
 item
-†† "
+°° "
 .
-††" #
+°°" #
 QueryId
-††# *
+°°# *
 ,
-††* +
+°°* +
 Title
-°° 
+¢¢ 
 =
-°° 
+¢¢ 
 item
-°°  
+¢¢  
 .
-°°  !
+¢¢  !
 Title
-°°! &
+¢¢! &
 ,
-°°& '
+¢¢& '
 content
-¢¢ 
+££ 
 =
-¢¢ 
+££ 
 item
-¢¢ "
+££ "
 .
-¢¢" #
+££" #
 Content
-¢¢# *
+££# *
 ,
-¢¢* +
+££* +
 IsSolved
-££ 
+§§ 
 =
-££ 
+§§ 
 item
-££ #
+§§ #
 .
-££# $
+§§# $
 IsSolved
-££$ ,
+§§$ ,
 }
-§§ 
+•• 
 )
-§§ 
+•• 
 ;
-§§ 
+•• 
 }
-•• 
+¶¶ 
 catch
-ßß 
+®® 
 (
-ßß 
+®® 
 	Exception
-ßß 
+®® 
 	exception
-ßß &
+®® &
 )
-ßß& '
+®®& '
 {
-®® 
+©© 
 _logger
-©© 
+™™ 
 .
-©© 
+™™ 
 LogError
-©©  
+™™  
 (
-©©  !
+™™  !
 HelperService
-©©! .
+™™! .
 .
-©©. /
+™™. /
 LoggerMessage
-©©/ <
+™™/ <
 (
-©©< =
+™™< =
 $str
-©©= K
+™™= K
 ,
-©©K L
+™™K L
 $str
-©©M a
+™™M a
 ,
-©©a b
+™™a b
 	exception
-©©c l
+™™c l
 )
-©©l m
+™™l m
 )
-©©m n
+™™m n
 ;
-©©n o
+™™n o
 throw
-™™ 
-	exception
-™™ 
+´´ 
 ;
-™™  
+´´ 
 }
-´´ 
+¨¨ 
 }
-¨¨ 	
+≠≠ 	
 public
-∞∞ 
+±± 
 IEnumerable
-∞∞ 
+±± 
 <
-∞∞ 
+±± 
 Object
-∞∞ !
+±± !
 >
-∞∞! " 
+±±! " 
 GetTrendingQueries
-∞∞# 5
+±±# 5
 (
-∞∞5 6
+±±5 6
 )
-∞∞6 7
+±±6 7
 {
-±± 	
+≤≤ 	
 try
-≤≤ 
+≥≥ 
 {
-≥≥ 
+¥¥ 
 var
-µµ 
-data
-µµ 
+∂∂ 
+ListOfComments
+∂∂ #
 =
-µµ 
+∂∂# $
 (
-µµ 
+∂∂% &
 database
-µµ $
+∂∂& .
 .
-µµ$ %
+∂∂. /
 GetComments
-µµ% 0
+∂∂/ :
 (
-µµ0 1
+∂∂: ;
 )
-µµ1 2
+∂∂; <
 .
-µµ2 3
+∂∂< =
 GroupBy
-µµ3 :
+∂∂= D
 (
-µµ: ;
+∂∂D E
 item
-µµ; ?
+∂∂E I
 =>
-µµ@ B
+∂∂J L
 item
-µµC G
+∂∂M Q
 .
-µµG H
+∂∂Q R
 QueryId
-µµH O
+∂∂R Y
 )
-µµO P
+∂∂Y Z
 )
-µµP Q
+∂∂Z [
 .
-µµQ R
+∂∂[ \
 OrderByDescending
-µµR c
+∂∂\ m
 (
-µµc d
+∂∂m n
 item
-µµd h
+∂∂n r
 =>
-µµi k
+∂∂s u
 item
-µµl p
+∂∂v z
 .
-µµp q
-Count
-µµq v
-(
-µµv w
-)
-µµw x
-)
-µµx y
-;
-µµy z
-var
-∑∑ 
-ListOfQueryId
-∑∑ !
-=
-∑∑" #
-(
-∑∑$ %
-from
-∑∑% )
-item
-∑∑* .
-in
-∑∑/ 1
-data
-∑∑2 6
-select
-∑∑7 =
-item
-∑∑> B
-.
-∑∑B C
-First
-∑∑C H
-(
-∑∑H I
-)
-∑∑I J
-.
-∑∑J K
-QueryId
-∑∑K R
-)
-∑∑R S
-.
-∑∑S T
-ToList
-∑∑T Z
-(
-∑∑Z [
-)
-∑∑[ \
-;
-∑∑\ ]
+∂∂z {
+Count∂∂{ Ä
+(∂∂Ä Å
+)∂∂Å Ç
+)∂∂Ç É
+;∂∂É Ñ
 var
 ∏∏ 
-ListOfQueries
+ListOfQueryId
 ∏∏ !
 =
-∏∏" #
+∏∏" #
+(
+∏∏$ %
+from
+∏∏% )
+queryComment
+∏∏* 6
+in
+∏∏7 9
+ListOfComments
+∏∏: H
+select
+∏∏I O
+queryComment
+∏∏P \
+.
+∏∏\ ]
+First
+∏∏] b
+(
+∏∏b c
+)
+∏∏c d
+.
+∏∏d e
+QueryId
+∏∏e l
+)
+∏∏l m
+.
+∏∏m n
+ToList
+∏∏n t
+(
+∏∏t u
+)
+∏∏u v
+;
+∏∏v w
+var
+ππ 
+ListOfQueries
+ππ !
+=
+ππ" #
 
 GetQueries
-∏∏$ .
+ππ$ .
 (
-∏∏. /
+ππ. /
 )
-∏∏/ 0
+ππ/ 0
 .
-∏∏0 1
+ππ0 1
 Where
-∏∏1 6
+ππ1 6
 (
-∏∏6 7
+ππ6 7
 item
-∏∏7 ;
+ππ7 ;
 =>
-∏∏< >
+ππ< >
+!
+ππ? @
 item
-∏∏? C
+ππ@ D
 .
-∏∏C D
+ππD E
 IsSolved
-∏∏D L
-==
-∏∏M O
-false
-∏∏P U
+ππE M
 )
-∏∏U V
+ππM N
 .
-∏∏V W
+ππN O
 ToList
-∏∏W ]
+ππO U
 (
-∏∏] ^
+ππU V
 )
-∏∏^ _
+ππV W
 ;
-∏∏_ `
+ππW X
 var
-ππ 
+∫∫ 
 TrendingQueries
-ππ #
+∫∫ #
 =
-ππ$ %
+∫∫$ %
 new
-ππ& )
+∫∫& )
 List
-ππ* .
+∫∫* .
 <
-ππ. /
+∫∫. /
 Query
-ππ/ 4
+∫∫/ 4
 >
-ππ4 5
+∫∫4 5
 (
-ππ5 6
+∫∫5 6
 )
-ππ6 7
+∫∫6 7
 ;
-ππ7 8
+∫∫7 8
 foreach
-∫∫ 
+ªª 
 (
-∫∫ 
+ªª 
 var
-∫∫ 
+ªª 
 id
-∫∫ 
+ªª 
 in
-∫∫  "
+ªª  "
 ListOfQueryId
-∫∫# 0
+ªª# 0
 )
-∫∫0 1
+ªª0 1
 {
-ªª 
+ºº 
 TrendingQueries
-ºº #
+ΩΩ #
 .
-ºº# $
+ΩΩ# $
 Add
-ºº$ '
+ΩΩ$ '
 (
-ºº' (
+ΩΩ' (
 ListOfQueries
-ºº( 5
+ΩΩ( 5
 .
-ºº5 6
+ΩΩ5 6
 Find
-ºº6 :
+ΩΩ6 :
 (
-ºº: ;
+ΩΩ: ;
 item
-ºº; ?
+ΩΩ; ?
 =>
-ºº@ B
+ΩΩ@ B
 item
-ººC G
+ΩΩC G
 .
-ººG H
+ΩΩG H
 QueryId
-ººH O
+ΩΩH O
 ==
-ººP R
+ΩΩP R
 id
-ººS U
+ΩΩS U
 )
-ººU V
+ΩΩU V
+!
+ΩΩV W
 )
-ººV W
+ΩΩW X
 ;
-ººW X
+ΩΩX Y
 }
-ΩΩ 
+ææ 
 return
-øø 
+øø 
 TrendingQueries
-øø &
+øø %
 .
-øø& '
+øø% &
 Select
-øø' -
+øø& ,
 (
-øø- .
+øø, -
 item
-øø. 2
+øø- 1
 =>
-øø3 5
+øø2 4
 new
-øø6 9
+øø5 8
 {
 ¿¿ 
 QueryId
@@ -32064,15 +25383,15 @@ GetQueries
 ,
 √√* +
 IsSolved
-ƒƒ 
+ƒƒ 
 =
-ƒƒ 
+ƒƒ 
 item
-ƒƒ #
+ƒƒ !
 .
-ƒƒ# $
+ƒƒ! "
 IsSolved
-ƒƒ$ ,
+ƒƒ" *
 }
 ≈≈ 
 )
@@ -32126,11 +25445,9 @@ GetQueries
 ;
   p q
 throw
-ÀÀ 
-	exception
-ÀÀ 
+ÀÀ 
 ;
-ÀÀ  
+ÀÀ 
 }
 ÃÃ 
 }
@@ -32351,11 +25668,9 @@ GetQueries
 )‚‚Å Ç
 ;‚‚Ç É
 throw
-„„ 
-	exception
-„„ 
+„„ 
 ;
-„„  
+„„ 
 }
 ‰‰ 
 }
@@ -32403,17 +25718,17 @@ GetQueries
 throw
 ÎÎ- 2
 new
-ÎÎ3 6#
-ArgumentNullException
-ÎÎ7 L
+ÎÎ3 6
+ArgumentException
+ÎÎ7 H
 (
-ÎÎL M
+ÎÎH I
 $str
-ÎÎM n
+ÎÎI e
 )
-ÎÎn o
+ÎÎe f
 ;
-ÎÎo p
+ÎÎf g
 try
 ÏÏ 
 {
@@ -32447,20 +25762,22 @@ GetQueries
 ÓÓE F
 Title
 ÓÓF K
+!
+ÓÓK L
 .
-ÓÓK L
+ÓÓL M
 Contains
-ÓÓL T
+ÓÓM U
 (
-ÓÓT U
+ÓÓU V
 Title
-ÓÓU Z
-)
-ÓÓZ [
+ÓÓV [
 )
 ÓÓ[ \
+)
+ÓÓ\ ]
 ;
-ÓÓ\ ]
+ÓÓ] ^
 return
 ÔÔ 
 ListOfQueries
@@ -32578,11 +25895,9 @@ GetQueries
 )˙˙Å Ç
 ;˙˙Ç É
 throw
-˚˚ 
-	exception
-˚˚ 
+˚˚ 
 ;
-˚˚  
+˚˚ 
 }
 ¸¸ 
 }
@@ -32771,11 +26086,9 @@ GetQueries
 èè~ 
 ;èè Ä
 throw
-êê 
-	exception
-êê 
+êê 
 ;
-êê  
+êê 
 }
 ëë 
 }
@@ -32814,243 +26127,245 @@ Validation
 try
 òò 
 {
-ôô 
-return
-öö 
-database
-öö 
+ôô 
+comment
+öö 
 .
-öö  
+öö 
+	CreatedOn
+öö !
+=
+öö! "
+DateTime
+öö" *
+.
+öö* +
+Now
+öö+ .
+;
+öö. /
+comment
+õõ 
+.
+õõ 
+Datetime
+õõ !
+=
+õõ! "
+DateTime
+õõ" *
+.
+õõ* +
+Now
+õõ+ .
+;
+õõ. /
+return
+úú 
+database
+úú 
+.
+úú  
 
 AddComment
-öö  *
+úú  *
 (
-öö* +
+úú* +
 comment
-öö+ 2
+úú+ 2
 )
-öö2 3
+úú2 3
 ;
-öö3 4
+úú3 4
 }
-õõ 
+ùù 
 catch
-úú 
+ûû 
 (
-úú 
+ûû 
 	Exception
-úú 
+ûû 
 	exception
-úú &
+ûû &
 )
-úú& '
+ûû& '
 {
-ùù 
+üü 
 _logger
-ûû 
+†† 
 .
-ûû 
+†† 
 LogError
-ûû  
+††  
 (
-ûû  !
+††  !
 HelperService
-ûû! .
+††! .
 .
-ûû. /
+††. /
 LoggerMessage
-ûû/ <
+††/ <
 (
-ûû< =
+††< =
 $str
-ûû= K
+††= K
 ,
-ûûK L
+††K L
 $str
-ûûM r
+††M r
 ,
-ûûr s
+††r s
 	exception
-ûût }
+††t }
 ,
-ûû} ~
-commentûû Ü
-)ûûÜ á
-)ûûá à
-;ûûà â
+††} ~
+comment†† Ü
+)††Ü á
+)††á à
+;††à â
 return
-üü 
+°° 
 false
-üü 
+°° 
 ;
-üü 
+°° 
 }
-†† 
+¢¢ 
 }
-°° 	
+££ 	
 public
-££ 
+•• 
 IEnumerable
-££ 
+•• 
 <
-££ 
+•• 
 Object
-££ !
+•• !
 >
-££! "
+••! "
 GetComments
-££# .
+••# .
 (
-££. /
+••. /
 int
-££/ 2
+••/ 2
 QueryId
-££3 :
+••3 :
 )
-££: ;
+••: ;
 {
-§§ 	
+¶¶ 	
 if
-•• 
+ßß 
 (
-•• 
+ßß 
 QueryId
-•• 
+ßß 
 <=
-•• 
+ßß 
 $num
-•• 
+ßß 
 )
-•• 
+ßß 
 throw
-•• #
+ßß #
 new
-••$ '
+ßß$ '
 ArgumentException
-••( 9
+ßß( 9
 (
-••9 :
+ßß9 :
 $"
-••: <
+ßß: <
 $str
-••< j
+ßß< j
 {
-••j k
+ßßj k
 QueryId
-••k r
+ßßk r
 }
-••r s
+ßßr s
 "
-••s t
+ßßs t
 )
-••t u
+ßßt u
 ;
-••u v
+ßßu v
 try
-¶¶ 
+®® 
 {
-ßß 
+©© 
 var
-®® 
+™™ 
 ListOfComments
-®® "
+™™ "
 =
-®®# $
+™™# $
 database
-®®% -
+™™% -
 .
-®®- .
+™™- .
 GetComments
-®®. 9
+™™. 9
 (
-®®9 :
+™™9 :
 )
-®®: ;
+™™: ;
 .
-®®; <
+™™; <
 Where
-®®< A
+™™< A
 (
-®®A B
+™™A B
 comment
-®®B I
+™™B I
 =>
-®®J L
+™™J L
 comment
-®®M T
+™™M T
 .
-®®T U
+™™T U
 QueryId
-®®U \
+™™U \
 ==
-®®] _
+™™] _
 QueryId
-®®` g
+™™` g
 )
-®®g h
+™™g h
 ;
-®®h i
+™™h i
 return
-©© 
+´´ 
 ListOfComments
-©© %
+´´ %
 .
-©©% &
+´´% &
 Select
-©©& ,
+´´& ,
 (
-©©, -
+´´, -
 item
-©©- 1
+´´- 1
 =>
-©©2 4
+´´2 4
 new
-©©5 8
+´´5 8
 {
-™™ 
+¨¨ 
 	CommentId
-´´ 
+≠≠ 
 =
-´´ 
+≠≠ 
 item
-´´  $
-.
-´´$ %
-QueryCommentId
-´´% 3
-,
-´´3 4
-Message
-¨¨ 
-=
-¨¨ 
-item
-¨¨ "
-.
-¨¨" #
-Comment
-¨¨# *
-,
-¨¨* +
-Name
-≠≠ 
-=
-≠≠ 
-item
-≠≠ 
-.
-≠≠  
-User
 ≠≠  $
-?
-≠≠$ %
 .
-≠≠% &
-FullName
-≠≠& .
+≠≠$ %
+QueryCommentId
+≠≠% 3
 ,
-≠≠. /
-QueryId
+≠≠3 4
+Message
 ÆÆ 
 =
 ÆÆ 
@@ -33058,742 +26373,768 @@ AddComment
 ÆÆ "
 .
 ÆÆ" #
-QueryId
+Comment
 ÆÆ# *
-}
-ØØ 
-)
-ØØ 
-;
-ØØ 
-}
-±± 
-catch
-≤≤ 
-(
-≤≤ 
-	Exception
-≤≤ 
-	exception
-≤≤ &
-)
-≤≤& '
-{
-≥≥ 
-_logger
-¥¥ 
-.
-¥¥ 
-LogError
-¥¥  
-(
-¥¥  !
-HelperService
-¥¥! .
-.
-¥¥. /
-LoggerMessage
-¥¥/ <
-(
-¥¥< =
-$str
-¥¥= K
 ,
-¥¥K L
-$str
-¥¥M g
-,
-¥¥g h
-	exception
-¥¥i r
-,
-¥¥r s
-QueryId
-¥¥t {
-)
-¥¥{ |
-)
-¥¥| }
-;
-¥¥} ~
-throw
-µµ 
-	exception
-µµ 
-;
-µµ  
-}
-∂∂ 
-}
-∏∏ 	
-public
-ºº 
-bool
-ºº 
-ChangeSpamStatus
-ºº 
-(
-ºº 
-int
-ºº !
-QueryId
-ºº" )
-,
-ºº) *
-int
-ºº+ .
-VerifyStatusID
-ºº/ =
-)
-ºº= >
-{
-ΩΩ 	
-if
-ææ 
-(
-ææ 
-QueryId
-ææ 
-<=
-ææ 
-$num
-ææ 
-)
-ææ 
-throw
-ææ #
-new
-ææ$ '
-ArgumentException
-ææ( 9
-(
-ææ9 :
-$"
-ææ: <
-$str
-ææ< k
-{
-ææk l
-QueryId
-ææl s
-}
-ææs t
-"
-ææt u
-)
-ææu v
-;
-ææv w
-if
-øø 
-(
-øø 
-VerifyStatusID
-øø 
-<=
-øø  
-$num
-øø! "
-||
-øø# %
-VerifyStatusID
-øø& 4
->
-øø5 6
-$num
-øø7 8
-)
-øø8 9
-throw
-øø9 >
-new
-øø? B
-ArgumentException
-øøC T
-(
-øøT U
-$"
-øøU W
-$strøøW £
-{øø£ §
-VerifyStatusIDøø§ ≤
-}øø≤ ≥
-"øø≥ ¥
-)øø¥ µ
-;øøµ ∂
-try
-¿¿ 
-{
-¡¡ 
-var
-¬¬ "
-IsChangeSuccessfully
-¬¬ (
+ÆÆ* +
+Name
+ØØ 
 =
-¬¬) *
-database
-¬¬+ 3
+ØØ 
+item
+ØØ 
 .
-¬¬3 4
+ØØ  
+User
+ØØ  $
+?
+ØØ$ %
+.
+ØØ% &
+FullName
+ØØ& .
+,
+ØØ. /
+QueryId
+∞∞ 
+=
+∞∞ 
+item
+∞∞ "
+.
+∞∞" #
+QueryId
+∞∞# *
+}
+±± 
+)
+±± 
+;
+±± 
+}
+≥≥ 
+catch
+¥¥ 
+(
+¥¥ 
+	Exception
+¥¥ 
+	exception
+¥¥ &
+)
+¥¥& '
+{
+µµ 
+_logger
+∂∂ 
+.
+∂∂ 
+LogError
+∂∂  
+(
+∂∂  !
+HelperService
+∂∂! .
+.
+∂∂. /
+LoggerMessage
+∂∂/ <
+(
+∂∂< =
+$str
+∂∂= K
+,
+∂∂K L
+$str
+∂∂M g
+,
+∂∂g h
+	exception
+∂∂i r
+,
+∂∂r s
+QueryId
+∂∂t {
+)
+∂∂{ |
+)
+∂∂| }
+;
+∂∂} ~
+throw
+∑∑ 
+;
+∑∑ 
+}
+∏∏ 
+}
+∫∫ 	
+public
+ææ 
+bool
+ææ 
+ChangeSpamStatus
+ææ 
+(
+ææ 
+int
+ææ !
+QueryId
+ææ" )
+,
+ææ) *
+int
+ææ+ .
+VerifyStatusID
+ææ/ =
+)
+ææ= >
+{
+øø 	
+if
+¿¿ 
+(
+¿¿ 
+QueryId
+¿¿ 
+<=
+¿¿ 
+$num
+¿¿ 
+)
+¿¿ 
+throw
+¿¿ #
+new
+¿¿$ '
+ArgumentException
+¿¿( 9
+(
+¿¿9 :
+$"
+¿¿: <
+$str
+¿¿< k
+{
+¿¿k l
+QueryId
+¿¿l s
+}
+¿¿s t
+"
+¿¿t u
+)
+¿¿u v
+;
+¿¿v w
+if
+¡¡ 
+(
+¡¡ 
+VerifyStatusID
+¡¡ 
+<=
+¡¡  
+$num
+¡¡! "
+||
+¡¡# %
+VerifyStatusID
+¡¡& 4
+>
+¡¡5 6
+$num
+¡¡7 8
+)
+¡¡8 9
+throw
+¡¡9 >
+new
+¡¡? B
+ArgumentException
+¡¡C T
+(
+¡¡T U
+$"
+¡¡U W
+$str¡¡W £
+{¡¡£ §
+VerifyStatusID¡¡§ ≤
+}¡¡≤ ≥
+"¡¡≥ ¥
+)¡¡¥ µ
+;¡¡µ ∂
+try
+¬¬ 
+{
+√√ 
+var
+ƒƒ "
+IsChangeSuccessfully
+ƒƒ (
+=
+ƒƒ) *
+database
+ƒƒ+ 3
+.
+ƒƒ3 4
 
 UpdateSpam
-¬¬4 >
+ƒƒ4 >
 (
-¬¬> ?
+ƒƒ> ?
 QueryId
-¬¬? F
+ƒƒ? F
 ,
-¬¬F G
+ƒƒF G
 VerifyStatusID
-¬¬I W
+ƒƒI W
 )
-¬¬W X
+ƒƒW X
 ;
-¬¬X Y
+ƒƒX Y
 if
-√√ 
+≈≈ 
 (
-√√ "
+≈≈ "
 IsChangeSuccessfully
-√√ (
+≈≈ (
 )
-√√( )
+≈≈( )
 _mailService
-√√* 6
+≈≈* 6
 ?
-√√6 7
+≈≈6 7
 .
-√√7 8
+≈≈7 8
 SendEmailAsync
-√√8 F
+≈≈8 F
 (
-√√F G
+≈≈F G
 HelperService
-√√G T
+≈≈G T
 .
-√√T U
+≈≈T U
 SpamMail
-√√U ]
+≈≈U ]
 (
-√√] ^
+≈≈] ^
 $str
-√√^ x
+≈≈^ x
 ,
-√√x y
-$str√√y Ä
-,√√Ä Å
-$str√√Ç â
-,√√ä ã
-$num√√å ç
-)√√ç é
-)√√é è
-;√√è ê
+≈≈x y
+$str≈≈y Ä
+,≈≈Ä Å
+$str≈≈Ç â
+,≈≈ä ã
+$num≈≈å ç
+)≈≈ç é
+)≈≈é è
+;≈≈è ê
 return
-ƒƒ "
+∆∆ "
 IsChangeSuccessfully
-ƒƒ +
+∆∆ +
 ;
-ƒƒ+ ,
+∆∆+ ,
 }
-≈≈ 
+«« 
 catch
-∆∆ 
+»» 
 (
-∆∆ 
+»» 
 	Exception
-∆∆ 
+»» 
 	exception
-∆∆ &
+»» &
 )
-∆∆& '
+»»& '
 {
-«« 
+…… 
 _logger
-»» 
+   
 .
-»» 
+   
 LogError
-»»  
+    
 (
-»»  !
+    !
 HelperService
-»»! .
+  ! .
 .
-»». /
+  . /
 LoggerMessage
-»»/ <
+  / <
 (
-»»< =
+  < =
 $"
-»»= ?
+  = ?
 $str
-»»? K
+  ? K
 "
-»»K L
+  K L
 ,
-»»L M
-$str»»N Å
-,»»Å Ç
-	exception»»É å
-,»»å ç
-QueryId»»é ï
-,»»ï ñ
-VerifyStatusID»»ñ §
-)»»§ •
-)»»• ¶
-;»»¶ ß
+  L M
+$str  N Å
+,  Å Ç
+	exception  É å
+,  å ç
+QueryId  é ï
+,  ï ñ
+VerifyStatusID  ñ §
+)  § •
+)  • ¶
+;  ¶ ß
 throw
-…… 
-	exception
-…… 
+ÀÀ 
 ;
-……  
+ÀÀ 
 }
-   
+ÃÃ 
 }
-ÀÀ 	
+ÕÕ 	
 public
-ŒŒ 
+–– 
 bool
-ŒŒ 
+–– 
 AddSpam
-ŒŒ 
+–– 
 (
-ŒŒ 
+–– 
 Spam
-ŒŒ  
-spam
-ŒŒ! %
-)
-ŒŒ% &
-{
-œœ 	
-
-Validation
-––	 
-.
-–– 
-ValidateSpam
-––  
-(
-––  !
+––  
 spam
 ––! %
 )
 ––% &
-;
-––& '
-try
-—— 
 {
-““ 
-return
-”” 
-database
-”” 
+—— 	
+
+Validation
+““	 
 .
-””  
+““ 
+ValidateSpam
+““  
+(
+““  !
+spam
+““! %
+)
+““% &
+;
+““& '
+try
+”” 
+{
+‘‘ 
+return
+’’ 
+database
+’’ 
+.
+’’  
 AddSpam
-””  '
+’’  '
 (
-””' (
+’’' (
 spam
-””( ,
+’’( ,
 )
-””, -
+’’, -
 ;
-””- .
+’’- .
 }
-‘‘ 
+÷÷ 
 catch
-’’ 
+◊◊ 
 (
-’’ 
+◊◊ 
 	Exception
-’’ 
+◊◊ 
 	exception
-’’ &
+◊◊ &
 )
-’’& '
+◊◊& '
 {
-÷÷ 
+ÿÿ 
 _logger
-◊◊ 
+ŸŸ 
 .
-◊◊ 
+ŸŸ 
 LogError
-◊◊  
+ŸŸ  
 (
-◊◊  !
+ŸŸ  !
 HelperService
-◊◊! .
+ŸŸ! .
 .
-◊◊. /
+ŸŸ. /
 LoggerMessage
-◊◊/ <
+ŸŸ/ <
 (
-◊◊< =
+ŸŸ< =
 $str
-◊◊= K
+ŸŸ= K
 ,
-◊◊K L
+ŸŸK L
 $str
-◊◊M o
+ŸŸM o
 ,
-◊◊o p
+ŸŸo p
 	exception
-◊◊q z
+ŸŸq z
 ,
-◊◊z {
-spam◊◊| Ä
-)◊◊Ä Å
-)◊◊Å Ç
-;◊◊Ç É
+ŸŸz {
+spamŸŸ| Ä
+)ŸŸÄ Å
+)ŸŸÅ Ç
+;ŸŸÇ É
 return
-ÿÿ 
+⁄⁄ 
 false
-ÿÿ 
+⁄⁄ 
 ;
-ÿÿ 
+⁄⁄ 
 }
-ŸŸ 
+€€ 
 }
-⁄⁄ 	
+‹‹ 	
 public
-›› 
+ﬂﬂ 
 IEnumerable
-›› 
+ﬂﬂ 
 <
-›› 
+ﬂﬂ 
 object
-›› !
+ﬂﬂ !
 >
-››! "
+ﬂﬂ! "
 GetSpams
-››# +
+ﬂﬂ# +
 (
-››+ ,
+ﬂﬂ+ ,
 int
-››, /
+ﬂﬂ, /
 VerifyStatusID
-››0 >
+ﬂﬂ0 >
 )
-››> ?
+ﬂﬂ> ?
 {
-ﬁﬁ 	
+‡‡ 	
 if
-ﬂﬂ 
+·· 
 (
-ﬂﬂ 
+·· 
 VerifyStatusID
-ﬂﬂ 
+·· 
 <=
-ﬂﬂ  
+··  
 $num
-ﬂﬂ  !
+··  !
 ||
-ﬂﬂ" $
+··" $
 VerifyStatusID
-ﬂﬂ% 3
+··% 3
 >
-ﬂﬂ4 5
+··4 5
 $num
-ﬂﬂ6 7
+··6 7
 )
-ﬂﬂ7 8
+··7 8
 throw
-ﬂﬂ9 >
+··9 >
 new
-ﬂﬂ? B
+··? B
 ArgumentException
-ﬂﬂC T
+··C T
 (
-ﬂﬂT U
-$strﬂﬂU ü
-)ﬂﬂü †
-;ﬂﬂ† °
+··T U
+$str··U ü
+)··ü †
+;··† °
 try
-‡‡ 
+‚‚ 
 {
-·· 
+„„ 
 var
-‚‚ 
+‰‰ 
 Spams
-‚‚ 
+‰‰ 
 =
-‚‚ 
+‰‰ 
 database
-‚‚ $
-.
-‚‚$ %
-GetSpams
-‚‚% -
-(
-‚‚- .
-)
-‚‚. /
-.
-‚‚/ 0
-Where
-‚‚0 5
-(
-‚‚5 6
-item
-‚‚6 :
-=>
-‚‚; =
-item
-‚‚= A
-.
-‚‚A B
-VerifyStatusID
-‚‚B P
-==
-‚‚P R
-VerifyStatusID
-‚‚R `
-)
-‚‚` a
-.
-‚‚a b
-GroupBy
-‚‚b i
-(
-‚‚i j
-item
-‚‚j n
-=>
-‚‚o q
-item
-‚‚r v
-.
-‚‚v w
-QueryId
-‚‚w ~
-)
-‚‚~ 
-.‚‚ Ä!
-OrderByDescending‚‚Ä ë
-(‚‚ë í
-item‚‚í ñ
-=>‚‚ñ ò
-item‚‚ò ú
-.‚‚ú ù
-Count‚‚ù ¢
-(‚‚¢ £
-)‚‚£ §
-)‚‚§ •
-.‚‚• ¶
-Select‚‚¶ ¨
-(‚‚¨ ≠
-item‚‚≠ ±
-=>‚‚≤ ¥
-new‚‚¥ ∑
-{‚‚∑ ∏
-ListOfSpams
-„„ 
-=
-„„ 
-item
-„„ !
-.
-„„! "
-Select
-„„" (
-(
-„„( )
-spam
-„„) -
-=>
-„„. 0
-new
-„„0 3
-{
-„„4 5
-Name
-‰‰ 
-=
-‰‰ 
-spam
-‰‰ 
-.
-‰‰ 
-User
-‰‰ #
-?
-‰‰# $
+‰‰ $
 .
 ‰‰$ %
-FullName
+GetSpams
 ‰‰% -
-,
-‰‰- .
-Reason
-ÂÂ 
+(
+‰‰- .
+)
+‰‰. /
+.
+‰‰/ 0
+Where
+‰‰0 5
+(
+‰‰5 6
+item
+‰‰6 :
+=>
+‰‰; =
+item
+‰‰= A
+.
+‰‰A B
+VerifyStatusID
+‰‰B P
+==
+‰‰P R
+VerifyStatusID
+‰‰R `
+)
+‰‰` a
+.
+‰‰a b
+GroupBy
+‰‰b i
+(
+‰‰i j
+item
+‰‰j n
+=>
+‰‰o q
+item
+‰‰r v
+.
+‰‰v w
+QueryId
+‰‰w ~
+)
+‰‰~ 
+.‰‰ Ä!
+OrderByDescending‰‰Ä ë
+(‰‰ë í
+item‰‰í ñ
+=>‰‰ñ ò
+item‰‰ò ú
+.‰‰ú ù
+Count‰‰ù ¢
+(‰‰¢ £
+)‰‰£ §
+)‰‰§ •
+.‰‰• ¶
+Select‰‰¶ ¨
+(‰‰¨ ≠
+item‰‰≠ ±
+=>‰‰≤ ¥
+new‰‰¥ ∑
+{‰‰∑ ∏
+ListOfSpams
+ÂÂ 
 =
-ÂÂ 
+ÂÂ 
+item
+ÂÂ !
+.
+ÂÂ! "
+Select
+ÂÂ" (
+(
+ÂÂ( )
 spam
-ÂÂ 
-.
-ÂÂ  
-Reason
-ÂÂ  &
-}
-ÊÊ 
-)
-ÊÊ 
-,
-ÊÊ 
-Query
-ÁÁ 
-=
-ÁÁ 
+ÂÂ) -
+=>
+ÂÂ. 0
 new
-ÁÁ 
+ÂÂ0 3
 {
-ÁÁ 
-QueryId
-ËË 
+ÂÂ4 5
+Name
+ÊÊ 
 =
-ËË 
-item
-ËË  
+ÊÊ 
+spam
+ÊÊ 
 .
-ËË  !
-First
-ËË! &
-(
-ËË& '
-)
-ËË' (
-.
-ËË( )
-QueryId
-ËË) 0
-,
-ËË0 1
-Content
-ÈÈ 
-=
-ÈÈ 
-item
-ÈÈ  
-.
-ÈÈ  !
-First
-ÈÈ! &
-(
-ÈÈ& '
-)
-ÈÈ' (
-.
-ÈÈ( )
-Query
-ÈÈ) .
+ÊÊ 
+User
+ÊÊ #
 ?
-ÈÈ. /
+ÊÊ# $
 .
-ÈÈ/ 0
-Content
-ÈÈ0 7
+ÊÊ$ %
+FullName
+ÊÊ% -
 ,
-ÈÈ7 8
-Title
-ÍÍ 
+ÊÊ- .
+Reason
+ÁÁ 
 =
-ÍÍ 
-item
-ÍÍ 
+ÁÁ 
+spam
+ÁÁ 
 .
-ÍÍ 
-First
-ÍÍ $
-(
-ÍÍ$ %
+ÁÁ  
+Reason
+ÁÁ  &
+}
+ËË 
 )
-ÍÍ% &
-.
-ÍÍ& '
+ËË 
+,
+ËË 
 Query
-ÍÍ' ,
-?
-ÍÍ, -
+ÈÈ 
+=
+ÈÈ 
+new
+ÈÈ 
+{
+ÈÈ 
+QueryId
+ÍÍ 
+=
+ÍÍ 
+item
+ÍÍ  
 .
-ÍÍ- .
-Title
-ÍÍ. 3
-}
-ÎÎ 
-}
-ÎÎ 
+ÍÍ  !
+First
+ÍÍ! &
+(
+ÍÍ& '
 )
-ÎÎ 
+ÍÍ' (
+.
+ÍÍ( )
+QueryId
+ÍÍ) 0
+,
+ÍÍ0 1
+Content
+ÎÎ 
+=
+ÎÎ 
+item
+ÎÎ  
+.
+ÎÎ  !
+First
+ÎÎ! &
+(
+ÎÎ& '
+)
+ÎÎ' (
+.
+ÎÎ( )
+Query
+ÎÎ) .
+?
+ÎÎ. /
+.
+ÎÎ/ 0
+Content
+ÎÎ0 7
+,
+ÎÎ7 8
+Title
+ÏÏ 
+=
+ÏÏ 
+item
+ÏÏ 
+.
+ÏÏ 
+First
+ÏÏ $
+(
+ÏÏ$ %
+)
+ÏÏ% &
+.
+ÏÏ& '
+Query
+ÏÏ' ,
+?
+ÏÏ, -
+.
+ÏÏ- .
+Title
+ÏÏ. 3
+}
+ÌÌ 
+}
+ÌÌ 
+)
+ÌÌ 
 ;
-ÎÎ 
+ÌÌ 
 return
-ÏÏ 
+ÓÓ 
 Spams
-ÏÏ 
+ÓÓ 
 ;
-ÏÏ 
+ÓÓ 
 }
-ÌÌ 
+ÔÔ 
 catch
-ÓÓ 
+ 
 (
-ÓÓ 
+ 
 	Exception
-ÓÓ 
+ 
 	exception
-ÓÓ &
+ &
 )
-ÓÓ& '
+& '
 {
-ÔÔ 
+ÒÒ 
 _logger
- 
+ÚÚ 
 .
- 
+ÚÚ 
 LogError
-  
+ÚÚ  
 (
-  !
+ÚÚ  !
 HelperService
-! .
+ÚÚ! .
 .
-. /
+ÚÚ. /
 LoggerMessage
-/ <
+ÚÚ/ <
 (
-< =
+ÚÚ< =
 $str
-= K
+ÚÚ= K
 ,
-K L
+ÚÚK L
 $str
-M Y
+ÚÚM Y
 ,
-Y Z
+ÚÚY Z
 	exception
-[ d
+ÚÚ[ d
 )
-d e
+ÚÚd e
 )
-e f
+ÚÚe f
 ;
-f g
+ÚÚf g
 throw
-ÒÒ 
+ÛÛ 
 ;
-ÒÒ 
+ÛÛ 
 }
-ÚÚ 
+ÙÙ 
 }
-ÛÛ 	
+ıı 	
 }
-ÙÙ 
-}ıı –8
-eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\TokenService.cs
+ˆˆ 
+}˜˜ Ô8
+RC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\TokenService.cs
 	namespace		 	
 AspireOverflow		
  
@@ -33809,21 +27150,24 @@ eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 : 
 ITokenService  -
 { 
-private 
-IConfiguration 
-_configuration -
-;- .
-private 
-IUserService 
-_userService )
-;) *
-private 
-ILogger 
-< 
-TokenService $
->$ %
-_logger& -
-;- .
+private 
+readonly 
+IConfiguration '
+_configuration( 6
+;6 7
+private 
+readonly 
+IUserService %
+_userService& 2
+;2 3
+private 
+readonly 
+ILogger  
+<  !
+TokenService! -
+>- .
+_logger/ 6
+;6 7
 public 
 TokenService 
 ( 
@@ -33870,9 +27214,10 @@ eC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 throw$ )
 new* -
 ArgumentException. ?
-(? @
-)@ A
-;A B
+(? @
+$str@ \
+)\ ]
+;] ^
 if 
 ( 
 ! 
@@ -33884,21 +27229,23 @@ Validation 
 Credentials3 >
 .> ?
 Email? D
-,D E
-CredentialsE P
-.P Q
-PasswordQ Y
-)Y Z
-)Z [
-throw\ a
-newb e
-ArgumentExceptionf w
-(w x
-$str	x è
+!D E
+,E F
+CredentialsF Q
+.Q R
+PasswordR Z
+!Z [
+)[ \
+)\ ]
+throw^ c
+newd g
+ArgumentExceptionh y
+(y z
+$str	z ë
 )
-è ê
+ë í
 ;
-ê ë
+í ì
 var 
 user 
 = 
@@ -33909,12 +27256,14 @@ Validation 
 Credentials, 7
 .7 8
 Email8 =
-,= >
-Credentials? J
-.J K
-PasswordK S
-)S T
-;T U
+!= >
+,> ?
+Credentials@ K
+.K L
+PasswordL T
+!T U
+)U V
+;V W
 if 
 ( 
 user 
@@ -33922,12 +27271,12 @@ Validation 
 null 
 ) 
 throw #
-new$ '!
-ArgumentNullException( =
-(= >
-$str> Z
-)Z [
-;[ \
+new$ '
+ArgumentException( 9
+(9 :
+$str: V
+)V W
+;W X
 try 
 {   
 var"" 
@@ -34143,11 +27492,7 @@ WriteToken77: D
 UserRoleId99# -
 ==99. 0
 $num991 2
-?993 4
-true995 9
-:99: ;
-false99< A
-,99A B
+,992 3
 
 IsReviewer:: 
 =::  
@@ -34200,14 +27545,13 @@ IsVerified;; 
 CCï ñ
 ;
 CCñ ó
-throwDD 
-	exceptionDD 
-;DD  
+throwDD 
+;DD 
 }FF 
 }GG 	
 }HH 
-}II ‘€
-dC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\UserService.cs
+}II ÎŸ
+QC:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\UserService.cs
 	namespace		 	
 AspireOverflow		
  
@@ -34223,19 +27567,19 @@ dC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 : 
 IUserService +
 { 
-private 
-static 
-IUserRepository &
-database' /
-;/ 0
-private 
-static 
-ILogger 
-< 
-UserService *
->* +
-_logger, 3
-;3 4
+private 
+readonly 
+IUserRepository (
+database) 1
+;1 2
+private 
+readonly 
+ILogger  
+<  !
+UserService! ,
+>, -
+_logger. 5
+;5 6
 public 
 UserService 
 ( 
@@ -34330,9 +27674,8 @@ CreateUser    *
 )$$t u
 )$$u v
 ;$$v w
-throw%% 
-	exception%% 
-;%%  
+throw%% 
+;%% 
 }&& 
 catch'' 
 ('' 
@@ -34649,9 +27992,8 @@ IsReviewerBB= G
 ZZå ç
 ;
 ZZç é
-throw\\ 
-	exception\\ 
-;\\  
+throw\\ 
+;\\ 
 }]] 
 }^^ 	
 public`` 
@@ -34659,12 +28001,12 @@ IsReviewerBB= G
 GetUserByID`` !
 (``! "
 int``" %
-UserId``& ,
+UserID``& ,
 )``, -
 {aa 	
 ifbb 
 (bb 
-UserIdbb 
+UserIDbb 
 <=bb 
 $numbb 
 )bb 
@@ -34675,7 +28017,7 @@ IsReviewerBB= G
 $"bb9 ;
 $strbb; g
 {bbg h
-UserIdbbh n
+UserIDbbh n
 }bbn o
 "bbo p
 )bbp q
@@ -34689,7 +28031,7 @@ IsReviewerBB= G
 .ee# $
 GetUserByIDee$ /
 (ee/ 0
-UserIdee0 6
+UserIDee0 6
 )ee6 7
 ;ee7 8
 returnff 
@@ -34784,7 +28126,7 @@ IsReviewerpp& 0
 ,vvf g
 	exceptionvvh q
 ,vvq r
-UserIdvvs y
+UserIDvvs y
 )vvy z
 )vvz {
 ;vv{ |
@@ -35474,7 +28816,7 @@ UserRoleID∏∏ â
 øø0 1
 int
 øø1 4
-UserId
+UserID
 øø5 ;
 ,
 øø; <
@@ -35490,7 +28832,7 @@ UserRoleID∏∏ â
 ¡¡ 
 (
 ¡¡ 
-UserId
+UserID
 ¡¡ 
 <=
 ¡¡ 
@@ -35512,7 +28854,7 @@ UserRoleID∏∏ â
 ¡¡; h
 {
 ¡¡h i
-UserId
+UserID
 ¡¡i o
 }
 ¡¡o p
@@ -35573,7 +28915,7 @@ UserRoleID∏∏ â
 ≈≈  8
 (
 ≈≈8 9
-UserId
+UserID
 ≈≈9 ?
 ,
 ≈≈? @
@@ -35624,7 +28966,7 @@ UserRoleID∏∏ â
 $"……ó ô
 $str……ô †
 {……† °
-UserId……° ß
+UserID……° ß
 }……ß ®
 $str……® ∏
 {……∏ π
@@ -35635,11 +28977,9 @@ UserRoleID∏∏ â
 )……  À
 ;……À Ã
 throw
-   
-	exception
-   
+   
 ;
-    
+   
 }
 ÀÀ 
 }
@@ -35988,7 +29328,7 @@ department
 ÔÔ9 :
 .
 ÔÔ: ;
-Where
+First
 ÔÔ; @
 (
 ÔÔ@ A
@@ -36008,16 +29348,8 @@ department
 ÔÔ^ j
 )
 ÔÔj k
-.
-ÔÔk l
-First
-ÔÔl q
-(
-ÔÔq r
-)
-ÔÔr s
 ;
-ÔÔs t
+ÔÔk l
 return
  
 
@@ -36218,11 +29550,9 @@ GetGenders
 ;
 ááh i
 throw
-àà 
-	exception
-àà 
+àà 
 ;
-àà  
+àà 
 }
 ââ 
 }
@@ -36372,11 +29702,9 @@ GetGenders
 ;
 ööm n
 throw
-õõ 
-	exception
-õõ 
+õõ 
 ;
-õõ  
+õõ 
 }
 úú 
 }
@@ -36514,19 +29842,17 @@ GetGenders
 ;
 ¨¨o p
 throw
-≠≠ 
-	exception
-≠≠ 
+≠≠ 
 ;
-≠≠  
+≠≠ 
 }
 ÆÆ 
 }
 ØØ 	
 }
 ≥≥ 
-}µµ ˚g
-nC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Services\Validation\Validation.cs
+}µµ ®g
+[C:\Users\manimaran.venkat\Documents\Backup\AspireOverflow\Services\Validation\Validation.cs
 	namespace 	
 AspireOverflow
  
@@ -36534,10 +29860,11 @@ nC:\Users\ponvizhi.uday\Documents\GitHub\Project\Aurora\Source\AspireOverflow\Se
 Services !
 { 
 public 
-
-class 
+
+static 
+class 
 
-Validation 
+Validation "
 {		 
 public 
 static 
@@ -36624,47 +29951,44 @@ Validation 
 .  !
 Length! '
 >( )
-$num* ,
-), -
-throw. 3
-new4 7
-ValidationException8 K
-(K L
-$strL x
-)x y
-;y z
+$num* -
+)- .
+throw/ 4
+new5 8
+ValidationException9 L
+(L M
+$strM y
+)y z
+;z {
 else 
 if 
-( 
-query 
-. 
-IsActive #
-!=$ &
-true' +
-)+ ,
-throw- 2
-new3 6
-ValidationException7 J
-(J K
-$strK b
-)b c
-;c d
+( 
+! 
+query 
+. 
+IsActive $
+)$ %
+throw& +
+new, /
+ValidationException0 C
+(C D
+$strD [
+)[ \
+;\ ]
 else 
 if 
 ( 
 query 
 . 
-IsSolved #
-!=$ &
-false' ,
-), -
-throw. 3
-new4 7
-ValidationException8 K
-(K L
-$strL d
-)d e
-;e f
+IsSolved #
+)$ %
+throw& +
+new, /
+ValidationException0 C
+(C D
+$strD \
+)\ ]
+;] ^
 else 
 return 
 true 
@@ -37004,19 +30328,17 @@ Validation 
 userKK 
 .KK 
 
-IsReviewerKK $
-!=KK% '
-falseKK( -
-)KK- .
-throwKK/ 4
-newKK5 8
-ValidationExceptionKK9 L
-(KKL M
-$"KKM O
-$strKKO g
-"KKg h
-)KKh i
-;KKi j
+IsReviewerKK $
+)KK$ %
+throwKK& +
+newKK, /
+ValidationExceptionKK0 C
+(KKC D
+$"KKD F
+$strKKF ^
+"KK^ _
+)KK_ `
+;KK` a
 elseLL 
 ifLL 
 (LL 
@@ -37155,129 +30477,131 @@ UserRoleId	MMx Ç
 VerifyStatusIDYY (
 <=YY) +
 $numYY, -
-&&YY. 0
+||YY. 0
 spamYY1 5
 .YY5 6
 VerifyStatusIDYY6 D
 >YYE F
 $numYYG H
 )YYH I
-throwZZ 
-newZZ 
-ValidationExceptionZZ )
-(ZZ) *
-$strZZ* T
-)ZZT U
-;ZZU V
-else[[ 
-if[[ 
-([[ 
-String[[ 
-.[[ 
-IsNullOrEmpty[[ )
-([[) *
-spam[[* .
-.[[. /
-Reason[[/ 5
-)[[5 6
-)[[6 7
-throw[[8 =
-new[[> A
-ValidationException[[B U
-([[U V
-$str[[V {
-)[[{ |
-;[[| }
-else\\ 
-return\\ 
-true\\ 
-;\\ 
-}]] 	
-public^^ 
-static^^ 
-bool^^ #
-ValidateUserCredentials^^ +
-(^^+ ,
-String^^, 2
-Email^^3 8
-,^^8 9
-String^^9 ?
-Password^^@ H
-)^^I J
-{__ 	
-var`` 
-mail`` 
-=`` 
-new`` 
-Regex``  
-(``  !
-$str``! D
-)``D E
-;``E F
-varaa 
-passwordaa 
-=aa 
-newaa 
-Regexaa $
-(aa$ %
-$straa% e
-)aae f
-;aaf g
-ifbb 
-(bb 
-!bb 
-mailbb 
-.bb 
-IsMatchbb 
-(bb 
-Emailbb #
-)bb# $
-)bb$ %
-throwbb& +
-newbb, /
-ValidationExceptionbb0 C
-(bbC D
-$"bbD F
-$strbbF m
-{bbm n
-Emailbbo t
-}bbu v
-"bbv w
-)bbw x
-;bbx y
-elsecc 
-ifcc 
-(cc 
-!cc 
-passwordcc 
-.cc 
-IsMatchcc %
-(cc% &
-Passwordcc& .
-)cc. /
-)cc/ 0
-throwcc0 5
-newcc6 9
-ValidationExceptioncc: M
-(ccM N
-$"ccN P
-$str	ccP ö
-{
-ccö õ
-Password
-ccõ £
-}
-cc£ §
-"
-cc§ •
+throwYYJ O
+newYYP S
+ValidationExceptionYYT g
+(YYg h
+$str	YYh í
 )
-cc• ¶
+YYí ì
 ;
-cc¶ ß
-elsedd 
-returndd 
-truedd 
-;dd 
-}ee 	
-}ii 
-}mm 
+YYì î
+elseZZ 
+ifZZ 
+(ZZ 
+StringZZ 
+.ZZ 
+IsNullOrEmptyZZ )
+(ZZ) *
+spamZZ* .
+.ZZ. /
+ReasonZZ/ 5
+)ZZ5 6
+)ZZ6 7
+throwZZ8 =
+newZZ> A
+ValidationExceptionZZB U
+(ZZU V
+$strZZV {
+)ZZ{ |
+;ZZ| }
+else[[ 
+return[[ 
+true[[ 
+;[[ 
+}\\ 	
+public]] 
+static]] 
+bool]] #
+ValidateUserCredentials]] +
+(]]+ ,
+String]], 2
+Email]]3 8
+,]]8 9
+String]]9 ?
+Password]]@ H
+)]]I J
+{^^ 	
+var__ 
+mail__ 
+=__ 
+new__ 
+Regex__  
+(__  !
+$str__! D
+)__D E
+;__E F
+var`` 
+password`` 
+=`` 
+new`` 
+Regex`` $
+(``$ %
+$str``% e
+)``e f
+;``f g
+ifaa 
+(aa 
+!aa 
+mailaa 
+.aa 
+IsMatchaa 
+(aa 
+Emailaa #
+)aa# $
+)aa$ %
+throwaa& +
+newaa, /
+ValidationExceptionaa0 C
+(aaC D
+$"aaD F
+$straaF m
+{aam n
+Emailaao t
+}aau v
+"aav w
+)aaw x
+;aax y
+elsebb 
+ifbb 
+(bb 
+!bb 
+passwordbb 
+.bb 
+IsMatchbb %
+(bb% &
+Passwordbb& .
+)bb. /
+)bb/ 0
+throwbb0 5
+newbb6 9
+ValidationExceptionbb: M
+(bbM N
+$"bbN P
+$str	bbP ö
+{
+bbö õ
+Password
+bbõ £
+}
+bb£ §
+"
+bb§ •
+)
+bb• ¶
+;
+bb¶ ß
+elsecc 
+returncc 
+truecc 
+;cc 
+}dd 	
+}hh 
+}ll 

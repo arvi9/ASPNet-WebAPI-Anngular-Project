@@ -12,9 +12,9 @@ namespace AspireOverflow.Models
         [Key]
         public int QueryId { get; set; }
 
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public string code { get; set; }
+        public string? Title { get; set; }
+        public string? Content { get; set; }
+        public string? code { get; set; }
 
         public bool IsSolved { get; set; }
 

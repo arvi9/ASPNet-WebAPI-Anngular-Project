@@ -6,14 +6,14 @@ using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
 using AspireOverflow.DataAccessLayer.Interfaces;
 
-namespace AspireOverflow.Controllers;
+namespace AspireOverflow.Controllers{
 [ApiController]
 [Authorize]
-[Route("[controller]/[action]")]
+[Route("[controller]/[actio 'ASDn]")]
 public class ArticleController : BaseController
 {
-    private ILogger<ArticleController> _logger;
-    private IArticleService _articleService;
+    private readonly ILogger<ArticleController> _logger;
+    private readonly IArticleService _articleService;
 
 
 
@@ -81,7 +81,7 @@ public class ArticleController : BaseController
         if (privateArticleDto == null) return BadRequest(Message("Null value is not supported"));
         try
         {
-            privateArticleDto.article.CreatedBy = GetCurrentUser().UserId;
+             privateArticleDto.article!.CreatedBy = GetCurrentUser().UserId;
             return _articleService.CreateArticle(privateArticleDto.article, privateArticleDto.SharedUsersId) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding private Article ", privateArticleDto));
         }
         catch (ValidationException exception)
@@ -333,7 +333,7 @@ public class ArticleController : BaseController
         {
             var Articles = _articleService.GetLatestArticles().ToList();
 
-            if (Range <= Articles.Count())
+            if (Range <= Articles.Count)
             {
                 Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
                 return await Task.FromResult(Ok(Articles));
@@ -374,7 +374,7 @@ public class ArticleController : BaseController
         {
             var Articles = _articleService.GetTrendingArticles().ToList();
 
-            if (Range <= Articles.Count())
+            if (Range <= Articles.Count)
             {
                 Articles = Range > 0 ? Articles.GetRange(0, Range) : Articles;
                 return await Task.FromResult(Ok(Articles));
@@ -701,4 +701,5 @@ public class ArticleController : BaseController
 
 
 
+}
 }

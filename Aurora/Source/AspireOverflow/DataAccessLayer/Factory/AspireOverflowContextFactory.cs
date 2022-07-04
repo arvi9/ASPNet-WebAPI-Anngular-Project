@@ -8,11 +8,10 @@ namespace AspireOverflow.DataAccessLayer
     public class AspireOverflowContextFactory
     
     {
-        private static AspireOverflowContext _aspireOverflowContext;
-        public static AspireOverflowContext GetAspireOverflowContextObject()
+        private  AspireOverflowContext? _aspireOverflowContext;
+        public  AspireOverflowContext GetAspireOverflowContextObject()
         {
-            // if(_aspireOverflowContext != null) return _aspireOverflowContext;  //SingleTon concept applied here 
-
+  
             var optionsBuilder = new DbContextOptionsBuilder<AspireOverflowContext>();
             try
             {
@@ -32,7 +31,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
-                throw exception;
+                throw;
             }
          
              

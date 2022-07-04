@@ -11,9 +11,9 @@ namespace AspireOverflow.Services
    
     public class TokenService : ITokenService
     {
-        private IConfiguration _configuration;
-        private IUserService _userService;
-        private ILogger<TokenService> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
+        private readonly ILogger<TokenService> _logger;
         public TokenService(IConfiguration configuration, IUserService userService, ILogger<TokenService> logger)
         {
             _configuration = configuration;
@@ -24,10 +24,10 @@ namespace AspireOverflow.Services
 
         public object GenerateToken(Login Credentials)
         {
-            if(Credentials == null )throw new ArgumentException();
-            if(!Validation.ValidateUserCredentials(Credentials.Email,Credentials.Password)) throw new ArgumentException("Invalid object passed"); 
-            var user = _userService.GetUser(Credentials.Email, Credentials.Password);
-            if (user == null) throw new ArgumentNullException("User object cannot be null");
+            if(Credentials == null )throw new ArgumentException("Credentials cannot be null");
+            if(!Validation.ValidateUserCredentials(Credentials.Email!,Credentials.Password!)) throw new ArgumentException("Invalid object passed"); 
+            var user = _userService.GetUser(Credentials.Email!, Credentials.Password!);
+            if (user == null) throw new ArgumentException("User object cannot be null");
             try
             {
                 //create claims details based on the user information
@@ -54,7 +54,7 @@ namespace AspireOverflow.Services
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     ExpiryInMinutes = 360,
-                    IsAdmin = user.UserRoleId == 1 ? true : false,
+                    IsAdmin = user.UserRoleId == 1,
                     IsReviewer = user.IsReviewer,
                     IsVerified = user.VerifyStatus?.Name
                 };
@@ -65,7 +65,7 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenService", " GenerateToken(String Email, string Password)", exception, Credentials));
-                throw exception;
+                throw;
 
             }
         }

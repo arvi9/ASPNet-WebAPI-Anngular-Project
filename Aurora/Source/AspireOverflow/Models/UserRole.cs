@@ -16,7 +16,7 @@ namespace AspireOverflow.Models
 
         [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserRoleId { get; set; }
-        public string RoleName { get; set; }
+        public string? RoleName { get; set; }
 
         [InverseProperty("UserRole")]
         public virtual ICollection<User> Users { get; set; }

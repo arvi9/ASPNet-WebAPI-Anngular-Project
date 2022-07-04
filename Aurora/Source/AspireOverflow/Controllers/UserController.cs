@@ -15,8 +15,8 @@ namespace AspireOverflow.Controllers;
 public class UserController : BaseController
 {
 
-    internal ILogger<UserController> _logger;
-    private IUserService _UserService;
+    private readonly ILogger<UserController> _logger;
+    private readonly IUserService _UserService;
 
     public UserController(ILogger<UserController> logger, IUserService UserService)
     {

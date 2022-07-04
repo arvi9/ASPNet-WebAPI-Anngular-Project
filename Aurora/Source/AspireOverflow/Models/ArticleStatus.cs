@@ -12,10 +12,10 @@ namespace AspireOverflow.Models
 
         [Key]
         public int ArticleStatusID { get; set; }
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
 
         [InverseProperty("ArticleStatus")]
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Article>? Articles { get; set; }
     }
 }

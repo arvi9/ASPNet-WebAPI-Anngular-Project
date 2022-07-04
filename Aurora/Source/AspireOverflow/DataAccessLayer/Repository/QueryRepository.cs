@@ -12,9 +12,9 @@ namespace AspireOverflow.DataAccessLayer
 
     public class QueryRepository : IQueryRepository
     {
-        private AspireOverflowContext _context;
+        private readonly AspireOverflowContext _context;
 
-        private ILogger<QueryRepository> _logger;
+        private readonly ILogger<QueryRepository> _logger;
         public QueryRepository(AspireOverflowContext context, ILogger<QueryRepository> logger)
         {
             _context = context;
@@ -68,19 +68,15 @@ namespace AspireOverflow.DataAccessLayer
 
         //Updating query Either by marking as Solved 
         //Same method using to disable or soft delete the query
-        public bool UpdateQuery(int QueryId, bool IsSolved, bool IsDelete)
+        public bool UpdateQuery(int QueryId, bool IsSolved=false, bool IsDelete=false)
         {
-
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
-        
             if (IsSolved == IsDelete) throw new ArgumentException("Both parameter cannot be true/false at the same time");
             try
             {
                 var ExistingQuery = GetQueryByID(QueryId);
-
                 if (IsSolved) ExistingQuery.IsSolved = IsSolved;
                 if (IsDelete) ExistingQuery.IsActive = false;
-
                 _context.Queries.Update(ExistingQuery);
                 _context.SaveChanges();
                 return true;
@@ -106,7 +102,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetQueryByID(int QueryId)", exception, QueryId));
-                throw exception;
+                throw;
             }
         }
 
@@ -114,7 +110,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive == true).Include("User").ToList();
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive).Include(e=>e.User).ToList();
                 return ListOfQueries;
 
             }
@@ -122,7 +118,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetQueries()", exception));
 
-                throw exception;
+                throw;
             }
 
 
@@ -133,7 +129,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfComments = _context.QueryComments.Include("Query").Include("User").ToList();
+                var ListOfComments = _context.QueryComments.Include(e=>e.Query).Include(e=>e.User).ToList();
                 return ListOfComments;
 
             }
@@ -141,7 +137,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetComments()", exception));
 
-                throw exception;
+                throw;
             }
         }
 
@@ -150,7 +146,7 @@ namespace AspireOverflow.DataAccessLayer
            Validation.ValidateSpam(spam);
             try
             {
-               if (GetSpams().ToList().Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("Unable to Create spam to same Query with same UserID");
+               if (GetSpams().AsEnumerable().Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("Unable to Create spam to same Query with same UserID");
                
                 _context.Spams.AddRange(spam);
                 _context.SaveChanges();
@@ -170,14 +166,14 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfSpams = _context.Spams.Include("Query").Include("User").ToList();
+                var ListOfSpams = _context.Spams.Include(e=>e.Query).Include(e=>e.User).ToList();
                 return ListOfSpams;
 
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetSpams()", exception));
-                throw exception;
+                throw;
             }
         }
 

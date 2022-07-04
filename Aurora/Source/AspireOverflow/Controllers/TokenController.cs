@@ -14,8 +14,8 @@ namespace AspireOverflow.Controllers
     public class TokenController : BaseController
     {
 
-        private ITokenService _tokenService;
-        private ILogger<TokenController> _logger;
+        private readonly ITokenService _tokenService;
+        private readonly ILogger<TokenController> _logger;
         public TokenController(ITokenService tokenService, ILogger<TokenController> logger)
         {
 
@@ -47,20 +47,20 @@ namespace AspireOverflow.Controllers
         {
           try
             {
-                if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email, Crendentials.Password)) return BadRequest("Login Credentials cannot be null");
+                if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email!, Crendentials.Password!)) return BadRequest("Login Credentials cannot be null");
                 var Result = _tokenService.GenerateToken(Crendentials);
                 return Ok(Result);
 
             }
             catch (ValidationException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email));
+                _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email!));
                 return BadRequest(exception.Message);
 
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email));
+                _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email!));
                 return BadRequest(Message("Error Occured while Validating your  credentials"));
             }
 

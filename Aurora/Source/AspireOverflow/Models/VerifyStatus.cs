@@ -16,7 +16,7 @@ namespace AspireOverflow.Models
 
         [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int VerifyStatusID { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [InverseProperty("VerifyStatus")]
         public virtual ICollection<User> Users { get; set; }

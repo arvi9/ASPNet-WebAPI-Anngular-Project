@@ -9,9 +9,9 @@ namespace AspireOverflow.DataAccessLayer
 {
     public class ArticleRepository : IArticleRepository
     {
-        private AspireOverflowContext _context;
+        private readonly AspireOverflowContext _context;
 
-        private ILogger<ArticleRepository> _logger;
+        private readonly ILogger<ArticleRepository> _logger;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleRepository> logger)
         {
             _context = context;
@@ -47,7 +47,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 var entry = _context.Articles.Add(article);
                 _context.SaveChanges();
-                if (article.IsPrivate && SharedUsersId != null && SharedUsersId.Count() > 0)
+                if (article.IsPrivate && SharedUsersId != null && SharedUsersId.Count > 0)
                 {
                     SharedUsersId.ForEach(item => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArtileId, item)));
                     _context.SaveChanges();
@@ -141,7 +141,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticleByID(int ArticleId)", exception, ArticleId));
-                throw exception;
+                throw;
             }
         }
 
@@ -149,7 +149,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles.Include("ArticleStatus").Include("User").ToList();
+                var ListOfArticle = _context.Articles.Include(e=>e.ArticleStatus).Include(e=>e.User).ToList();
                 return ListOfArticle;
 
             }
@@ -157,7 +157,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticles()", exception));
 
-                throw exception;
+                throw;
             }
 
 
@@ -175,7 +175,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticles()", exception));
 
-                throw exception;
+                throw;
             }
 
 
@@ -216,7 +216,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetComments()", exception));
 
-                throw exception;
+                throw;
             }
         }
 
@@ -246,7 +246,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.Include("Article").ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include(e=>e.Article).ToList();
                 return ListOfArticleLikes;
 
             }
@@ -254,7 +254,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetLikes()", exception));
 
-                throw exception;
+                throw;
             }
         }
     }

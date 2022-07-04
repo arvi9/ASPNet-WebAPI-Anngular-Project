@@ -31,12 +31,12 @@ namespace AspireOverflow.Services
 
 
 
-        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, object Data = null)
+        public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, object? Data = null)
         {
 
             return Data != null ? $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {PropertyList(Data)}}}\nException :{exception.ToString()}" :
 
-             $"{RepositoryName}:{MethodName}\nException :{exception.ToString()}"; ;
+             $"{RepositoryName}:{MethodName}\nException :{exception.ToString()}"; 
         }
 
 
@@ -45,7 +45,7 @@ namespace AspireOverflow.Services
 
             return secondId != null ? $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {FirstId}, {secondId} }}\nException :{exception.ToString()}" :
 
-             $"{RepositoryName}:{MethodName}\n Data passed :{{ \n {FirstId} }}\nException :{exception.ToString()}"; ;
+             $"{RepositoryName}:{MethodName}\n Data passed :{{ \n {FirstId} }}\nException :{exception.ToString()}"; 
         }
 
 

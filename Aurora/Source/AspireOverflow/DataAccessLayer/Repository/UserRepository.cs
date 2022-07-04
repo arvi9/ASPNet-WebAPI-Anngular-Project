@@ -12,9 +12,9 @@ namespace AspireOverflow.DataAccessLayer
 
     public class UserRepository : IUserRepository
     {
-        private AspireOverflowContext _context;
+        private readonly AspireOverflowContext _context;
 
-        private ILogger<UserRepository> _logger;
+        private readonly ILogger<UserRepository> _logger;
         public UserRepository(AspireOverflowContext context, ILogger<UserRepository> logger)
         {
             _context = context;
@@ -23,26 +23,26 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
-        public bool CreateUser(User user)
+        public bool CreateUser(User User)
         {
-            Validation.ValidateUser(user);
+            Validation.ValidateUser(User);
             try
             {
                 var ExistingUsers = _context.Users.ToList();
-                if (ExistingUsers.Any(Item => Item.AceNumber == user.AceNumber)) throw new ValidationException("ACE Number Already Exists");
-                if (ExistingUsers.Any(Item => Item.EmailAddress == user.EmailAddress)) throw new ValidationException("Email Address Already Exists");
-                _context.Users.Add(user);
+                if (ExistingUsers.Any(Item => Item.AceNumber == User.AceNumber)) throw new ValidationException("ACE Number Already Exists");
+                if (ExistingUsers.Any(Item => Item.EmailAddress == User.EmailAddress)) throw new ValidationException("Email Address Already Exists");
+                _context.Users.Add(User);
                 _context.SaveChanges();
                 return true;
             }
             catch (ValidationException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser(User user)", exception, user));
-                throw exception;
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser(User user)", exception, User));
+                throw;
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser(User user)", exception, user));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "CreateUser(User user)", exception, User));
                 return false;
 
             }
@@ -83,7 +83,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUserByID(int UserId)", exception, UserId));
-                throw exception;
+                throw;
             }
         }
 
@@ -93,12 +93,12 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
 
-                return _context.Users.Include("Designation").Include("UserRole").Include("Gender").Include("VerifyStatus").ToList();
+                return _context.Users.Include(e=>e.Designation).Include(e=>e.UserRole).Include(e=>e.Gender).Include(e=>e.VerifyStatus).ToList();
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsers()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -153,7 +153,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetGenders()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -162,12 +162,12 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
 
-                return _context.Designations.Include("Department").ToList();
+                return _context.Designations.Include(e=>e.Department).ToList();
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDesignations()", exception));
-                throw exception;
+                throw;
             }
         }
 
@@ -180,7 +180,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
-                throw exception;
+                throw;
             }
         }
 
