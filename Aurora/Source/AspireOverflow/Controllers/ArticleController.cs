@@ -9,7 +9,7 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Controllers{
 [ApiController]
 [Authorize]
-[Route("[controller]/[actio 'ASDn]")]
+[Route("[controller]/[action]")]
 public class ArticleController : BaseController
 {
     private readonly ILogger<ArticleController> _logger;
@@ -26,7 +26,27 @@ public class ArticleController : BaseController
 
     }
 
-
+///<summary>
+/// Create Article
+/// </summary>
+/// <remarks>
+/// Sample request:
+///
+/// url : https://localhost:7197/Article/CreateArticle
+///
+/// * fields are required
+///
+/// body{
+/// articleId*: int,
+/// title*: string,
+/// content*: string,
+/// image*: string,
+///
+/// </remarks>
+/// <response code="200">If the article was created. </response>
+/// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+/// <response code="500">If there is problem in server. </response>
+/// <param name="article"></param>
     [HttpPost]
     public async Task<ActionResult> CreateArticle(Article article)
     {
