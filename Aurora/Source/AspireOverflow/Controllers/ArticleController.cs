@@ -16,13 +16,10 @@ public class ArticleController : BaseController
     private readonly IArticleService _articleService;
 
 
-
-
     public ArticleController(ILogger<ArticleController> logger, IArticleService articleService)
     {
         _logger = logger;
         _articleService = articleService;
-
 
     }
 
@@ -186,6 +183,7 @@ public class ArticleController : BaseController
     /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
     /// <response code="500">If there is problem in server. </response>
     /// <param name="Like"></param>
+
     [HttpPost]
     public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
     {
@@ -237,7 +235,6 @@ public class ArticleController : BaseController
     /// <response code="500">If there is problem in server. </response>
     /// <param name="article"></param>
     [HttpPut]
-
     public async Task<ActionResult> UpdateArticle(Article article)
     {
         if (article == null) return BadRequest(Message("Article can't be null"));

@@ -208,7 +208,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfComments = _context.ArticleComments.ToList();
+                var ListOfComments = _context.ArticleComments.Include(e=>e.User).ToList();
                 return ListOfComments;
 
             }

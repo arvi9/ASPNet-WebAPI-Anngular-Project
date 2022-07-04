@@ -47,7 +47,6 @@ namespace AspireOverflow.Controllers
         /// <param name="ReviewerId"></param>
 
         [HttpGet]
-
         public async Task<ActionResult> GetReviewerDashboard() //reviewerID temporarily getting as input ,later it is retrived from claims.
         {
             try
