@@ -46,6 +46,7 @@ export class SpecificarticleComponent implements OnInit {
       .subscribe({
         next: (data: Article) => {
           this.data = data;
+          console.log(data)
         }
       });
     });
@@ -89,6 +90,6 @@ export class SpecificarticleComponent implements OnInit {
         }
       });
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
-    this.routing.navigateByUrl("Articles");
+   this.ngOnInit();
   }
 }

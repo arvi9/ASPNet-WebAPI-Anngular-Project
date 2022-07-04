@@ -23,7 +23,7 @@
         <div class="text-center pb-4">
             <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
-        <p> {{data.content}}</p>
+        <p> {{data.content|htmlToPlaintext}}</p>
 
         <div class="container d-flex justify-content-between">
             <a (click)="PublishArticle(data.articleId)"><button type="button"

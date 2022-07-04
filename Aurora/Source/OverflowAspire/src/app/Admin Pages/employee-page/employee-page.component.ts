@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -14,7 +15,9 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./employee-page.component.css']
 })
 export class EmployeePageComponent implements OnInit {
-
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  
   constructor(private http: HttpClient, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
 
   ngOnInit(): void {
@@ -22,6 +25,11 @@ export class EmployeePageComponent implements OnInit {
     if (!AuthService.GetData("Admin")) {
       this.route.navigateByUrl("")
     }
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
     this.connection.GetEmployeePage().subscribe((data: User[]) => {
       this.data = data;
     })

@@ -3,6 +3,7 @@ import { Article } from 'Models/Article';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-toreviewspecificpage',
@@ -12,7 +13,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class ToreviewspecificpageComponent implements OnInit {
   articleId: number = 0;
 
-  constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService) { }
+  constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService,private toaster: Toaster) { }
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     if (!AuthService.GetData("Reviewer")) {
@@ -36,6 +37,7 @@ export class ToreviewspecificpageComponent implements OnInit {
         next: (data: any) => {
         }
       });
+    this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
     this.routing.navigateByUrl("/ToReview");
 
   }
@@ -46,6 +48,7 @@ export class ToreviewspecificpageComponent implements OnInit {
         next: (data: any) => {
         }
       });
+    this.toaster.open({ text: 'Article Rejected successfully', position: 'top-center', type: 'warning' })
     this.routing.navigateByUrl("/ToReview");
   }
 }

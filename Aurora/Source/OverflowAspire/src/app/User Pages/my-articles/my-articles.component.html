@@ -35,10 +35,10 @@
                     </div>
                     <div class="card__body">
                         <div *ngIf="ShowStatus">
-                            <span *ngIf="item.status==='Published'" class="tag tag-Material">Published</span>
-                            <span *ngIf="item.status==='Under Review' || item.status==='To Be Reviewed'"
+                            <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
+                            <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
                                 class="tag tag-brown">Under Review</span>
-                            <span *ngIf="item.status==='InDraft'" class="tag tag-red">InDraft</span>
+                            <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
                         </div>
                         <h4 class="card-title text-truncate">{{item.title}}</h4>
                         <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>

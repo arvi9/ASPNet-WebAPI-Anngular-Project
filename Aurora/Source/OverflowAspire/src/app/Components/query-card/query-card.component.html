@@ -19,9 +19,9 @@
                 <div class="icon">
                     <img class="QueryImgIcon" src="http://primedepartamentos.com/images/icons/chat-icon.png">
                 </div>
-                <h4 class="card-text">{{item.title}}</h4>
+                <h4 class="card-text text-truncate">{{item.title}}</h4>
                 <p class="truncate-line-clamp">{{item.content}}</p>
-                <a class="btntag  tag-blue" routerLinkActive="active"
+                <a class="btntag tag-blue d-flex flex-column" routerLinkActive="active"
                 [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
 
             </div>

@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     emailAddress: ['', [Validators.required, Validators.pattern("([a-zA-Z0-9-_\.]+)@(aspiresys.com)")]],
     DesignationValidate: ['', [Validators.required]],
     dateOfBirth: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.maxLength(10)]],
+    password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
 
   })
   todayAsString: any;

@@ -12,11 +12,11 @@ export class AdminNavbarComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").on("click",function(e) { 
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
-    $("#sidebar-wrapper").click(function(e) {
+    $("#sidebar-wrapper").on("click",function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
@@ -25,6 +25,7 @@ export class AdminNavbarComponent implements OnInit {
   LogOut(){
     localStorage.clear();
     this.route.navigateByUrl("")
+    return 100;
   }
   
 }

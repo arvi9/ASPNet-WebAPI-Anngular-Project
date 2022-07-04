@@ -4,6 +4,7 @@ import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-userverificationpage',
@@ -11,7 +12,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./userverificationpage.component.css']
 })
 export class UserverificationpageComponent implements OnInit {
-
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   constructor(private routing: Router, private toaster: Toaster, private connection: ConnectionService) { }
 
   ngOnInit(): void {
@@ -19,6 +21,11 @@ export class UserverificationpageComponent implements OnInit {
     if (!AuthService.GetData("Admin")) {
       this.routing.navigateByUrl("")
     }
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
     this.connection.GetUsers()
       .subscribe({
         next: (data: User[]) => {
