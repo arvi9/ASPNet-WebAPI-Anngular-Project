@@ -4,6 +4,7 @@ using AspireOverflow.Services;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace AspireOverflow.DataAccessLayer
 {
@@ -91,6 +92,7 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 var ExistingArticle = GetArticleByID(ArticleId);
+                if (ExistingArticle.CreatedBy == UpdatedByUserId) throw new ValidationException("Reviewer cannot update status of thier own articles");
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
@@ -100,6 +102,11 @@ namespace AspireOverflow.DataAccessLayer
                 _context.Articles.Update(ExistingArticle);
                 _context.SaveChanges();
                 return true;
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception));
+                throw;
             }
             catch (Exception exception)
             {
@@ -149,7 +156,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles.Include(e=>e.ArticleStatus).Include(e=>e.User).ToList();
+                var ListOfArticle = _context.Articles.Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
 
             }
@@ -208,7 +215,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfComments = _context.ArticleComments.Include(e=>e.User).ToList();
+                var ListOfComments = _context.ArticleComments.Include(e => e.User).ToList();
                 return ListOfComments;
 
             }
@@ -246,7 +253,7 @@ namespace AspireOverflow.DataAccessLayer
 
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.Include(e=>e.Article).ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).ToList();
                 return ListOfArticleLikes;
 
             }

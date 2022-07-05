@@ -1,0 +1,3450 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "4.2.0.0",
+        "fileVersion": "4.2.0-4.22220.5 (432d17a8)",
+        "semanticVersion": "4.2.0",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "S3925",
+          "level": "warning",
+          "message": "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/CustomExceptions/ItemNotFoundException.cs",
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 18,
+                  "endLine": 4,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/CustomExceptions/ItemNotFoundException.cs",
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 12,
+                  "endLine": 4,
+                  "endColumn": 17
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/CustomExceptions/ItemNotFoundException.cs",
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 12,
+                  "endLine": 4,
+                  "endColumn": 17
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Add 'System.SerializableAttribute' attribute on 'ItemNotFoundException' because it implements 'ISerializable'.",
+              "1": "Add a 'protected' constructor 'ItemNotFoundException(SerializationInfo, StreamingContext)'."
+            }
+          }
+        },
+        {
+          "ruleId": "S1450",
+          "level": "warning",
+          "message": "Remove the field '_aspireOverflowContext' and declare it as a local variable in the relevant methods.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Factory/AspireOverflowContextFactory.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 41,
+                  "endLine": 11,
+                  "endColumn": 63
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S4792",
+          "level": "warning",
+          "message": "Make sure that this logger's configuration is safe.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Program.cs",
+                "region": {
+                  "startLine": 102,
+                  "startColumn": 18,
+                  "endLine": 102,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S5122",
+          "level": "warning",
+          "message": "Make sure this permissive CORS policy is safe here.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Program.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 5,
+                  "endLine": 139,
+                  "endColumn": 22
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1825",
+          "level": "note",
+          "message": "Avoid unnecessary zero-length array allocations.  Use Array.Empty<string>() instead.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Program.cs",
+                "region": {
+                  "startLine": 88,
+                  "startColumn": 13,
+                  "endLine": 88,
+                  "endColumn": 28
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 34,
+                  "endLine": 36,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 34,
+                  "endLine": 41,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 34,
+                  "endLine": 68,
+                  "endColumn": 124
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 30,
+                  "endLine": 66,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 30,
+                  "endLine": 71,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 34,
+                  "endLine": 55,
+                  "endColumn": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 34,
+                  "endLine": 40,
+                  "endColumn": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 34,
+                  "endLine": 45,
+                  "endColumn": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 85,
+                  "startColumn": 34,
+                  "endLine": 85,
+                  "endColumn": 125
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 34,
+                  "endLine": 71,
+                  "endColumn": 149
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 34,
+                  "endLine": 90,
+                  "endColumn": 141
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 108,
+                  "startColumn": 30,
+                  "endLine": 108,
+                  "endColumn": 150
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 113,
+                  "startColumn": 30,
+                  "endLine": 113,
+                  "endColumn": 150
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 100,
+                  "startColumn": 34,
+                  "endLine": 100,
+                  "endColumn": 104
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 130,
+                  "startColumn": 34,
+                  "endLine": 130,
+                  "endColumn": 101
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 118,
+                  "startColumn": 34,
+                  "endLine": 118,
+                  "endColumn": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 30,
+                  "endLine": 150,
+                  "endColumn": 151
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 155,
+                  "startColumn": 30,
+                  "endLine": 155,
+                  "endColumn": 149
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 195,
+                  "startColumn": 30,
+                  "endLine": 195,
+                  "endColumn": 120
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 200,
+                  "startColumn": 30,
+                  "endLine": 200,
+                  "endColumn": 120
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 229,
+                  "startColumn": 30,
+                  "endLine": 229,
+                  "endColumn": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 156,
+                  "startColumn": 34,
+                  "endLine": 156,
+                  "endColumn": 149
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 119,
+                  "startColumn": 34,
+                  "endLine": 119,
+                  "endColumn": 205
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 267,
+                  "startColumn": 30,
+                  "endLine": 267,
+                  "endColumn": 134
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 139,
+                  "startColumn": 34,
+                  "endLine": 139,
+                  "endColumn": 190
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 155,
+                  "startColumn": 34,
+                  "endLine": 155,
+                  "endColumn": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 304,
+                  "startColumn": 30,
+                  "endLine": 304,
+                  "endColumn": 122
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 169,
+                  "startColumn": 34,
+                  "endLine": 169,
+                  "endColumn": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 341,
+                  "startColumn": 30,
+                  "endLine": 341,
+                  "endColumn": 128
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 184,
+                  "startColumn": 34,
+                  "endLine": 184,
+                  "endColumn": 139
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 356,
+                  "startColumn": 30,
+                  "endLine": 356,
+                  "endColumn": 103
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 34,
+                  "endLine": 182,
+                  "endColumn": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 34,
+                  "endLine": 40,
+                  "endColumn": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 374,
+                  "startColumn": 30,
+                  "endLine": 374,
+                  "endColumn": 108
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 34,
+                  "endLine": 63,
+                  "endColumn": 136
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 400,
+                  "startColumn": 28,
+                  "endLine": 400,
+                  "endColumn": 105
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 34,
+                  "endLine": 86,
+                  "endColumn": 181
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 104,
+                  "startColumn": 34,
+                  "endLine": 104,
+                  "endColumn": 129
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 201,
+                  "startColumn": 34,
+                  "endLine": 201,
+                  "endColumn": 203
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 119,
+                  "startColumn": 34,
+                  "endLine": 119,
+                  "endColumn": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 34,
+                  "endLine": 138,
+                  "endColumn": 108
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 245,
+                  "startColumn": 34,
+                  "endLine": 245,
+                  "endColumn": 140
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 228,
+                  "startColumn": 34,
+                  "endLine": 228,
+                  "endColumn": 140
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 263,
+                  "startColumn": 34,
+                  "endLine": 263,
+                  "endColumn": 104
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 157,
+                  "startColumn": 34,
+                  "endLine": 157,
+                  "endColumn": 119
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 175,
+                  "startColumn": 34,
+                  "endLine": 175,
+                  "endColumn": 105
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 282,
+                  "startColumn": 34,
+                  "endLine": 282,
+                  "endColumn": 109
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/UserService.cs",
+                "region": {
+                  "startLine": 300,
+                  "startColumn": 34,
+                  "endLine": 300,
+                  "endColumn": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S927",
+          "level": "warning",
+          "message": "Rename parameter 'QueryId' to 'SpamId' to match the interface declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 36,
+                  "endLine": 182,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 34,
+                  "endLine": 78,
+                  "endColumn": 136
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 34,
+                  "endLine": 35,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 34,
+                  "endLine": 60,
+                  "endColumn": 165
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2012",
+          "level": "note",
+          "message": "ValueTask instances returned from method calls should always be used, typically awaited. Not doing so often represents a functional bug, but even if it doesn't, it can result in degraded performance if the target method pools objects for use with ValueTasks.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 51,
+                  "endLine": 52,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/QueryRepository.cs",
+                "region": {
+                  "startLine": 199,
+                  "startColumn": 34,
+                  "endLine": 199,
+                  "endColumn": 154
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 106,
+                  "startColumn": 34,
+                  "endLine": 106,
+                  "endColumn": 167
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 143,
+                  "startColumn": 34,
+                  "endLine": 143,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/TokenController.cs",
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 34,
+                  "endLine": 57,
+                  "endColumn": 156
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/TokenController.cs",
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 34,
+                  "endLine": 63,
+                  "endColumn": 156
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/TokenService.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 34,
+                  "endLine": 67,
+                  "endColumn": 150
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 34,
+                  "endLine": 127,
+                  "endColumn": 136
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 176,
+                  "startColumn": 34,
+                  "endLine": 176,
+                  "endColumn": 117
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 158,
+                  "startColumn": 34,
+                  "endLine": 158,
+                  "endColumn": 110
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 196,
+                  "startColumn": 34,
+                  "endLine": 196,
+                  "endColumn": 140
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 217,
+                  "startColumn": 34,
+                  "endLine": 217,
+                  "endColumn": 110
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 34,
+                  "endLine": 69,
+                  "endColumn": 126
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 34,
+                  "endLine": 74,
+                  "endColumn": 126
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 113,
+                  "startColumn": 34,
+                  "endLine": 113,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 118,
+                  "startColumn": 34,
+                  "endLine": 118,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 236,
+                  "startColumn": 34,
+                  "endLine": 236,
+                  "endColumn": 128
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 135,
+                  "startColumn": 34,
+                  "endLine": 135,
+                  "endColumn": 134
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 140,
+                  "startColumn": 34,
+                  "endLine": 140,
+                  "endColumn": 134
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/DataAccessLayer/Repository/ArticleRepository.cs",
+                "region": {
+                  "startLine": 255,
+                  "startColumn": 34,
+                  "endLine": 255,
+                  "endColumn": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 34,
+                  "endLine": 48,
+                  "endColumn": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 34,
+                  "endLine": 63,
+                  "endColumn": 134
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 171,
+                  "startColumn": 34,
+                  "endLine": 171,
+                  "endColumn": 125
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 176,
+                  "startColumn": 34,
+                  "endLine": 176,
+                  "endColumn": 125
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 34,
+                  "endLine": 81,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 203,
+                  "startColumn": 34,
+                  "endLine": 203,
+                  "endColumn": 103
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 124,
+                  "startColumn": 34,
+                  "endLine": 124,
+                  "endColumn": 104
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 108,
+                  "startColumn": 34,
+                  "endLine": 108,
+                  "endColumn": 122
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 245,
+                  "startColumn": 34,
+                  "endLine": 245,
+                  "endColumn": 124
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 145,
+                  "startColumn": 34,
+                  "endLine": 145,
+                  "endColumn": 104
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 30,
+                  "endLine": 62,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 30,
+                  "endLine": 67,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 303,
+                  "startColumn": 34,
+                  "endLine": 303,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 283,
+                  "startColumn": 34,
+                  "endLine": 283,
+                  "endColumn": 126
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 30,
+                  "endLine": 110,
+                  "endColumn": 159
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 115,
+                  "startColumn": 30,
+                  "endLine": 115,
+                  "endColumn": 159
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 170,
+                  "startColumn": 34,
+                  "endLine": 170,
+                  "endColumn": 110
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 322,
+                  "startColumn": 34,
+                  "endLine": 322,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 361,
+                  "startColumn": 34,
+                  "endLine": 361,
+                  "endColumn": 140
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 157,
+                  "startColumn": 30,
+                  "endLine": 157,
+                  "endColumn": 139
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 162,
+                  "startColumn": 30,
+                  "endLine": 162,
+                  "endColumn": 139
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 406,
+                  "startColumn": 34,
+                  "endLine": 406,
+                  "endColumn": 140
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 412,
+                  "startColumn": 34,
+                  "endLine": 412,
+                  "endColumn": 140
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 203,
+                  "startColumn": 30,
+                  "endLine": 203,
+                  "endColumn": 130
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 208,
+                  "startColumn": 30,
+                  "endLine": 208,
+                  "endColumn": 130
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 451,
+                  "startColumn": 34,
+                  "endLine": 451,
+                  "endColumn": 129
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 250,
+                  "startColumn": 30,
+                  "endLine": 250,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 255,
+                  "startColumn": 30,
+                  "endLine": 255,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 495,
+                  "startColumn": 34,
+                  "endLine": 495,
+                  "endColumn": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 500,
+                  "startColumn": 34,
+                  "endLine": 500,
+                  "endColumn": 119
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 527,
+                  "startColumn": 34,
+                  "endLine": 527,
+                  "endColumn": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 297,
+                  "startColumn": 30,
+                  "endLine": 297,
+                  "endColumn": 176
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 302,
+                  "startColumn": 30,
+                  "endLine": 302,
+                  "endColumn": 176
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/QueryController.cs",
+                "region": {
+                  "startLine": 566,
+                  "startColumn": 30,
+                  "endLine": 566,
+                  "endColumn": 163
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 319,
+                  "startColumn": 30,
+                  "endLine": 319,
+                  "endColumn": 143
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 324,
+                  "startColumn": 30,
+                  "endLine": 324,
+                  "endColumn": 143
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 366,
+                  "startColumn": 30,
+                  "endLine": 366,
+                  "endColumn": 122
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/DashboardController.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 34,
+                  "endLine": 67,
+                  "endColumn": 135
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 406,
+                  "startColumn": 30,
+                  "endLine": 406,
+                  "endColumn": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 47,
+                  "startColumn": 34,
+                  "endLine": 47,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/DashboardController.cs",
+                "region": {
+                  "startLine": 104,
+                  "startColumn": 34,
+                  "endLine": 104,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 475,
+                  "startColumn": 30,
+                  "endLine": 475,
+                  "endColumn": 102
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/DashboardController.cs",
+                "region": {
+                  "startLine": 139,
+                  "startColumn": 34,
+                  "endLine": 139,
+                  "endColumn": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 440,
+                  "startColumn": 30,
+                  "endLine": 440,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 445,
+                  "startColumn": 30,
+                  "endLine": 445,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 504,
+                  "startColumn": 30,
+                  "endLine": 504,
+                  "endColumn": 124
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 34,
+                  "endLine": 110,
+                  "endColumn": 144
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 34,
+                  "endLine": 76,
+                  "endColumn": 151
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 34,
+                  "endLine": 94,
+                  "endColumn": 171
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 544,
+                  "startColumn": 30,
+                  "endLine": 544,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 585,
+                  "startColumn": 30,
+                  "endLine": 585,
+                  "endColumn": 132
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 34,
+                  "endLine": 138,
+                  "endColumn": 134
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 628,
+                  "startColumn": 30,
+                  "endLine": 628,
+                  "endColumn": 143
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 670,
+                  "startColumn": 30,
+                  "endLine": 670,
+                  "endColumn": 142
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Controllers/ArticleController.cs",
+                "region": {
+                  "startLine": 711,
+                  "startColumn": 30,
+                  "endLine": 711,
+                  "endColumn": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 165,
+                  "startColumn": 34,
+                  "endLine": 165,
+                  "endColumn": 113
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 226,
+                  "startColumn": 34,
+                  "endLine": 226,
+                  "endColumn": 130
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 202,
+                  "startColumn": 34,
+                  "endLine": 202,
+                  "endColumn": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 198,
+                  "startColumn": 34,
+                  "endLine": 198,
+                  "endColumn": 115
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 250,
+                  "startColumn": 34,
+                  "endLine": 250,
+                  "endColumn": 130
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 245,
+                  "startColumn": 34,
+                  "endLine": 245,
+                  "endColumn": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 262,
+                  "startColumn": 34,
+                  "endLine": 262,
+                  "endColumn": 102
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 271,
+                  "startColumn": 34,
+                  "endLine": 271,
+                  "endColumn": 127
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 288,
+                  "startColumn": 34,
+                  "endLine": 288,
+                  "endColumn": 136
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 226,
+                  "startColumn": 34,
+                  "endLine": 226,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 330,
+                  "startColumn": 34,
+                  "endLine": 330,
+                  "endColumn": 166
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 310,
+                  "startColumn": 34,
+                  "endLine": 310,
+                  "endColumn": 125
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 291,
+                  "startColumn": 34,
+                  "endLine": 291,
+                  "endColumn": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 345,
+                  "startColumn": 34,
+                  "endLine": 345,
+                  "endColumn": 130
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 309,
+                  "startColumn": 34,
+                  "endLine": 309,
+                  "endColumn": 124
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 339,
+                  "startColumn": 34,
+                  "endLine": 339,
+                  "endColumn": 133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 369,
+                  "startColumn": 34,
+                  "endLine": 369,
+                  "endColumn": 144
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 398,
+                  "startColumn": 34,
+                  "endLine": 398,
+                  "endColumn": 146
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 447,
+                  "startColumn": 34,
+                  "endLine": 447,
+                  "endColumn": 109
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/QueryService.cs",
+                "region": {
+                  "startLine": 370,
+                  "startColumn": 34,
+                  "endLine": 370,
+                  "endColumn": 102
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 426,
+                  "startColumn": 34,
+                  "endLine": 426,
+                  "endColumn": 143
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 471,
+                  "startColumn": 34,
+                  "endLine": 471,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 507,
+                  "startColumn": 34,
+                  "endLine": 507,
+                  "endColumn": 109
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA2254",
+          "level": "note",
+          "message": "The logging message template should not vary between calls to 'LoggerExtensions.LogError(ILogger, string?, params object?[])'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/manimaran.venkat/Documents/Backup/AspireOverflow/Services/ArticleService.cs",
+                "region": {
+                  "startLine": 491,
+                  "startColumn": 34,
+                  "endLine": 491,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "CA1825": {
+          "id": "CA1825",
+          "shortDescription": "Avoid zero-length array allocations",
+          "defaultLevel": "note",
+          "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1825",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "CA2012": {
+          "id": "CA2012",
+          "shortDescription": "Use ValueTasks correctly",
+          "fullDescription": "ValueTasks returned from member invocations are intended to be directly awaited.  Attempts to consume a ValueTask multiple times or to directly access one's result before it's known to be completed may result in an exception or corruption.  Ignoring such a ValueTask is likely an indication of a functional bug and may degrade performance.",
+          "defaultLevel": "note",
+          "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2012",
+          "properties": {
+            "category": "Reliability",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "CA2254": {
+          "id": "CA2254",
+          "shortDescription": "Template should be a static expression",
+          "fullDescription": "The logging message template should not vary between calls.",
+          "defaultLevel": "note",
+          "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2254",
+          "properties": {
+            "category": "Usage",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "S1450": {
+          "id": "S1450",
+          "shortDescription": "Private fields only used as local variables in methods should become local variables",
+          "fullDescription": "When the value of a private field is always assigned to in a class' methods before being read, then it is not being used to store class information. Therefore, it should become a local variable in the relevant methods to prevent any misunderstanding.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1450",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope"
+            ]
+          }
+        },
+        "S3925": {
+          "id": "S3925",
+          "shortDescription": "\"ISerializable\" should be implemented correctly",
+          "fullDescription": "The ISerializable interface is the mechanism to control the type serialization process. If not implemented correctly this could result in an invalid serialization and hard to detect bugs.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3925",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope"
+            ]
+          }
+        },
+        "S4792": {
+          "id": "S4792",
+          "shortDescription": "Configuring loggers is security-sensitive",
+          "fullDescription": "Configuring loggers is security-sensitive. It has led in the past to the following vulnerabilities:",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-4792",
+          "properties": {
+            "category": "Critical Security Hotspot",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "NotConfigurable"
+            ]
+          }
+        },
+        "S5122": {
+          "id": "S5122",
+          "shortDescription": "Having a permissive Cross-Origin Resource Sharing policy is security-sensitive",
+          "fullDescription": "Having a permissive Cross-Origin Resource Sharing policy is security-sensitive. It has led in the past to the following vulnerabilities:",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-5122",
+          "properties": {
+            "category": "Minor Security Hotspot",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "NotConfigurable"
+            ]
+          }
+        },
+        "S927": {
+          "id": "S927",
+          "shortDescription": "Parameter names should match base declaration and other partial definitions",
+          "fullDescription": "The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-927",
+          "properties": {
+            "category": "Critical Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "TestSourceScope"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

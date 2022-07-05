@@ -37,7 +37,8 @@ namespace AspireOverflow.Services
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim(ClaimTypes.Email,user.EmailAddress),
                         new Claim("UserId",user.UserId.ToString()),
-                        new Claim(ClaimTypes.Role,user.UserRoleId.ToString()),
+                        new Claim("RoleId",user.UserRoleId.ToString()),
+                          new Claim(ClaimTypes.Role,user.UserRole?.RoleName!),
                         new Claim("IsReviewer",user.IsReviewer.ToString())
                     };
 

@@ -183,18 +183,21 @@ namespace AspireOverflow.Services
 
                 var ListOfQueryId = (from queryComment in ListOfComments select queryComment.First().QueryId).ToList();
                 var ListOfQueries = GetQueries().Where(item => !item.IsSolved).ToList();
-                var TrendingQueries = new List<Query>();
-                foreach (var id in ListOfQueryId)
+                List<Query> TrendingQueries = new List<Query>();
+                foreach (var Id in ListOfQueryId)
                 {
-                    TrendingQueries.Add(ListOfQueries.Find(item => item.QueryId == id)!);
+                    var Query =ListOfQueries.Find(item => item.QueryId == Id);
+                    if(Query!= null)TrendingQueries.Add(Query);
                 }
-               return TrendingQueries.Select(item => new
+               return (from Query in TrendingQueries select Query).Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
                     IsSolved=item.IsSolved
                 });
+               
+               
             }
 
             catch (Exception exception)

@@ -9,7 +9,8 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Controllers
 {
 
-    [ApiController][Authorize]
+    [ApiController]
+    [Authorize]
     [Route("[controller]/[action]")]
     public class DashboardController : BaseController
     {
@@ -43,19 +44,21 @@ namespace AspireOverflow.Controllers
         ///     }
         /// </remarks>
         /// <response code="200">Returns a reviewer dashboard by reviewer id. </response>
-          /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <param name="ReviewerId"></param>
 
         [HttpGet]
+      
         public async Task<ActionResult> GetReviewerDashboard() //reviewerID temporarily getting as input ,later it is retrived from claims.
         {
             try
-            {int ReviewerId=GetCurrentUser().UserId;
+            {
+                int ReviewerId = GetCurrentUser().UserId;
                 var DashboardInformation = new
                 {
                     TotalNumberOfArticles = _articleService.GetAll().Count(),
                     ArticlesTobeReviewed = _articleService.GetArticlesByArticleStatusId(2).Count(),
-                    ArticlesReviewed =_articleService.GetArticlesByArticleStatusId(4).Count(),
+                    ArticlesReviewed = _articleService.GetArticlesByArticleStatusId(4).Count(),
                     ArticlesPublished = _articleService.GetArticlesByReviewerId(ReviewerId).Count(),
 
 
@@ -82,7 +85,7 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
 
         [HttpGet]
-
+       
         public async Task<ActionResult> GetAdminDashboard()
         {
             try
@@ -116,7 +119,7 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a homepage. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        
+
         [HttpGet]
 
         public async Task<ActionResult> GetHomePage()

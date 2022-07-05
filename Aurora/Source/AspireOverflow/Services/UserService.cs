@@ -81,7 +81,7 @@ namespace AspireOverflow.Services
             try
             {
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
-                var User = GetUsers().ToList().Find(user => user.EmailAddress == Email && user.VerifyStatusID==1);
+                var User = GetUsers().ToList().Find(user => user.EmailAddress.ToLower() == Email.ToLower() && user.VerifyStatusID==1);
                 if (User == null) throw new ValidationException("Invalid Email");
                 return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new InvalidDataException("Password doesn't match");
             }
@@ -107,7 +107,7 @@ namespace AspireOverflow.Services
                     email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.DesignationId),
+                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
@@ -145,7 +145,7 @@ namespace AspireOverflow.Services
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.DesignationId),
+                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
@@ -173,7 +173,7 @@ namespace AspireOverflow.Services
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.DesignationId),
+                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
@@ -217,7 +217,7 @@ namespace AspireOverflow.Services
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.DesignationId),
+                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
 
@@ -236,8 +236,8 @@ namespace AspireOverflow.Services
             if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
             try
             {
-                var department = database.GetDepartments().First(item => item.DepartmentId == DepartmentId);
-                return department.DepartmentName;
+                var department = database.GetDepartments().ToList().Find(item => item.DepartmentId == DepartmentId);
+                return department?.DepartmentName!;
 
             }
             catch (Exception exception)

@@ -19,7 +19,7 @@ namespace AspireOverflow.Services
                 var stringBuilder = new StringBuilder();
                 foreach (var data in properties)
                 {
-                    stringBuilder.AppendLine(data.Name + ": " + data.GetValue(obj, null));
+                    stringBuilder.AppendFormat(data.Name + ": " + data.GetValue(obj, null));
                 }
                 return stringBuilder.ToString();
             }
@@ -34,25 +34,25 @@ namespace AspireOverflow.Services
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, object? Data = null)
         {
 
-            return Data != null ? $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {PropertyList(Data)}}}\nException :{exception.ToString()}" :
+            return Data != null ? $"{RepositoryName}:{MethodName}-Exception:{exception.ToString()} DataPassed:{{{PropertyList(Data)}}}" :
 
-             $"{RepositoryName}:{MethodName}\nException :{exception.ToString()}"; 
+             $"{RepositoryName}:{MethodName}-Exception:{exception.ToString()}"; 
         }
 
 
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, int FirstId, int? secondId)
         {
 
-            return secondId != null ? $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {FirstId}, {secondId} }}\nException :{exception.ToString()}" :
+            return secondId != null ? $"{RepositoryName}:{MethodName}-Exception:{exception.ToString()} DataPassed:{{ {FirstId}, {secondId} }}" :
 
-             $"{RepositoryName}:{MethodName}\n Data passed :{{ \n {FirstId} }}\nException :{exception.ToString()}"; 
+             $"{RepositoryName}:{MethodName}-Exception:{exception.ToString()} DataPassed:{{  {FirstId} }}"; 
         }
 
 
         public static string LoggerMessage(string RepositoryName, string MethodName, Exception exception, string data)
         {
 
-            return $"{RepositoryName}:{MethodName}\n  Data passed :{{ \n {data} }}\nException :{exception.ToString()}";
+            return $"{RepositoryName}:{MethodName}-Exception:{exception.ToString()} Datapassed:{{ {data} }}";
         }
 
 

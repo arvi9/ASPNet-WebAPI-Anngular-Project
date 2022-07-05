@@ -179,7 +179,8 @@ namespace AspireOverflow.Services
                 var TrendingArticles = new List<Article>();
                 foreach (var Id in ListOfArticleId)
                 {
-                    TrendingArticles.Add(ListOfArticles.Find(item => item.ArtileId == Id)!);
+                    var Article=ListOfArticles.Find(item => item.ArtileId == Id);
+                    if(Article != null )TrendingArticles.Add(Article);
                 }
                 return TrendingArticles.Select(Article => new
                 {

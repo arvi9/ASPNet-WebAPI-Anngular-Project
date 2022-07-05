@@ -269,7 +269,7 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var Queries = _queryService.GetTrendingQueries().ToList();
+               List<object> Queries = _queryService.GetTrendingQueries().ToList();
 
                 if (Range <= Queries.Count)
                 {
