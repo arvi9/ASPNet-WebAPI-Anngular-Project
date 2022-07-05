@@ -1,6 +1,6 @@
 <app-admin-navbar></app-admin-navbar>
 <div class="Content" style="min-height: 100vh;">
-    <div style="margin:70px;">
+    <div style="margin:50px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -15,13 +15,11 @@
         </nav>
     </div>
 
-
     <h1>Spam Reports</h1>
     <div class="Container">
-        <div>
-            <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
+                   <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
                 <thead>
-                    <tr>
+                    <tr class="tablecolor">
                         <th>Query ID</th>
                         <th>Query Title</th>
                         <th>No Of Reports</th>
@@ -29,17 +27,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="" *ngFor="let item of data">
+                    <tr class="table-default" *ngFor="let item of data">
                         <td>{{item.query.queryId}}</td>
                         <td>{{item.query.title}}</td>
                         <td>{{item.listOfSpams.length}}</td>
 
                         <td><a routerLinkActive="active"
-                                [routerLink]="['/SpamView',item.query.queryId]"><button>View</button></a></td>
+                                [routerLink]="['/SpamView',item.query.queryId]"><button class="btn btn-info">View</button></a></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+       
     </div>
 
 </div>

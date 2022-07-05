@@ -1,6 +1,6 @@
 <app-admin-navbar></app-admin-navbar>
 <div class="Content" style="min-height: 100vh;">
-    <div style="margin:70px;">
+    <div style="margin:50px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -20,7 +20,7 @@
 
         <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
             <thead>
-                <tr>
+                <tr class="tablecolor">
                     <th>Name</th>
                     <th>Date of Birth </th>
                     <th>Employee Id</th>
@@ -30,15 +30,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="" *ngFor="let item of data">
+                <tr class="table-default" *ngFor="let item of data">
                     <td>{{item.fullName}}</td>
                     <td>{{item.dateOfBirth}}</td>
                     <td>{{item.employeeId}}</td>
                     <td>{{item.designation}}</td>
                     <td>{{item.email}}</td>
 
-                    <td><a (click)="AcceptUser(item.userId)"><button>Accept</button></a>&nbsp;
-                        <a (click)="RejectUser(item.userId)"><button>Reject</button></a>
+                    <td><a (click)="AcceptUser(item.userId)"><button class="btn btn-success">Accept</button></a>&nbsp;
+                        <a (click)="RejectUser(item.userId)"><button class="btn btn-danger">Reject</button></a>
                     </td>
                 </tr>
             </tbody>

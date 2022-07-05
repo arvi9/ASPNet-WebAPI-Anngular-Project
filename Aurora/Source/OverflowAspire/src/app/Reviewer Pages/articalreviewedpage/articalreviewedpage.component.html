@@ -16,16 +16,16 @@
     <h1>Article Reviewed</h1>
     <div class="Container">
         <div>
-            <table datatable class="table table-striped row-border hover">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
                 <thead>
-                    <tr>
+                    <tr class="tablecolor">
                         <th>Article No</th>
                         <th>Author Name</th>
                         <th>Article Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="" *ngFor="let item of data">
+                    <tr class="table-default" *ngFor="let item of data">
                         <td>{{item.articleId}}</td>
                         <td>{{item.authorName}}</td>
                         <td><a routerLinkActive="active"

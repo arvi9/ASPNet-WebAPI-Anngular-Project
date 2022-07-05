@@ -1,6 +1,6 @@
 <app-admin-navbar></app-admin-navbar>
 <div class="Content" style="min-height: 100vh;">
-    <div style="margin:70px;">
+    <div style="margin:50px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -14,37 +14,37 @@
             </ol>
         </nav>
     </div>
-    <div id="page-content-wrapper">
+  
 
 
         <h1>Employee Details</h1>
 
         <div class="Container">
-            <div>
+          
                 <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
                     <thead>
-                        <tr>
+                        <tr  class="tablecolor">
                             <th>Name</th>
                             <th>ACE Number</th>
                             <th>Email Address</th>
                             <th>Reviewer</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="" *ngFor="let item of data">
+                        <tr class="table-default" *ngFor="let item of data">
                             <td>{{item.fullName}}</td>
                             <td>{{item.employeeId}}</td>
                             <td>{{item.email}}</td>
                             <td><input [(ngModel)]="item.isReviewer" type="checkbox"
                                     (change)="onCheckboxChange(item.userId)"></td>
-                            <td><a (click)="DisableUser(item.userId)"><button>Disable</button></a></td>
+                            <td><a (click)="DisableUser(item.userId)"><button class="btn btn-danger">Disable</button></a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
+      
 
-    </div>
+
 
     <app-footer></app-footer>

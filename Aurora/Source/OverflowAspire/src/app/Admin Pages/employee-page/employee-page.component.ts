@@ -28,7 +28,8 @@ export class EmployeePageComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      "retrieve": true,
     };
     this.connection.GetEmployeePage().subscribe((data: User[]) => {
       this.data = data;
