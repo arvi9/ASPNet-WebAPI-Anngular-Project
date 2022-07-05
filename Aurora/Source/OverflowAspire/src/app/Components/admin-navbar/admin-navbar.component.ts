@@ -12,15 +12,16 @@ export class AdminNavbarComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-    $("#menu-toggle").on("click",function(e) { 
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-    $("#sidebar-wrapper").on("click",function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
+    
     }
+    status: boolean = false;
+  clickEvent(){
+      this.status = !this.status;       
+  }
+  sideStatus:boolean=true;
+  clickSideEvent(){
+    this.sideStatus=!this.sideStatus;
+  }
 
   LogOut(){
     localStorage.clear();

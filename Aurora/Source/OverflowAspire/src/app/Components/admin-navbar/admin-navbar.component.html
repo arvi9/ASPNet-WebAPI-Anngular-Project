@@ -2,7 +2,7 @@
   <!-- /#sidebar-wrapper -->
   
         <nav class="navbar  bg-light navbar-light  px-2 py-20">
-          <button mat-button class="sidenav-toggler" type="button"  id="menu-toggle">
+          <button mat-button class="sidenav-toggler" type="button" (click)="clickEvent()">
             <span class="navbar-toggler-icon"></span>
           </button>
       
@@ -12,14 +12,14 @@
         
             <div class="navbar-nav align-items-center ms-auto">
               <div class="nav-item dropdown">
-                <button mat-button color="warn" (click)="LogOut()">Logout</button>
+                <button class="custom-btn btn-1" (click)="LogOut()">Logout</button>
               </div>
             </div>
         </nav>
       <div>
         <div class="d-flex" id="wrapper">
           <!-- Sidebar -->
-          <div class="bg-light border-right text" data-bs-toggle="offcanvas" id="sidebar-wrapper">
+          <div class="bg-light border-right text" data-bs-toggle="offcanvas" id="sidebar-wrapper"  [ngClass]="status ? 'hide' : 'show'">
             <div class="list-group test">
               <a class="nav-item nav-link active" routerLink="/AdminDashboard" id="hideMenu"><i class="fa fa-desktop me-2" aria-hidden="true"></i>Dashboard</a>
               <a class="nav-item nav-link" routerLink="/Employee" id="hideMenu" routerLinkActive="nav-item nav-link"><i class="fa fa-child me-2" aria-hidden="true"></i> Employees</a>
