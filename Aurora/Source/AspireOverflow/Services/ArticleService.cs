@@ -29,7 +29,7 @@ namespace AspireOverflow.Services
 
         }
 
-//SharedUsersId is Optional and It has to be specified only once creating the Private articles.
+        //SharedUsersId is Optional and It has to be specified only once creating the Private articles.
         public bool CreateArticle(Article article, List<int>? SharedUsersId = null)
         {
             //throws Validation Exception if any validation fails.
@@ -52,19 +52,20 @@ namespace AspireOverflow.Services
 
 
 
-        //article object and _currentUserId msu
-        public bool UpdateArticle(Article article, int _currentUserId)
+        //Article is Updating using article object and UpdatedByUserId.
+        public bool UpdateArticle(Article article, int UpdatedByUserId)
         {
          //throws Validation Exception if any validation fails.
            Validation.ValidateArticle(article);
             try
             {
                 var ExistingArticle = database.GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
+                //throws Exception when ExistingArticle is null.
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
-                ExistingArticle.UpdatedBy = _currentUserId;
+                ExistingArticle.UpdatedBy = UpdatedByUserId ;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
 
@@ -80,6 +81,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //Changes the Status of the article 1->In draft 2->To be Reviewed 3->Under Review 4->Published.
         public bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId)
         {
             if (ArticleID <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleID}");
@@ -87,6 +89,7 @@ namespace AspireOverflow.Services
             try
             {
                 var IsAddedSuccfully = database.UpdateArticle(ArticleID, ArticleStatusID, UserId);
+                //If the article status is changed successfully , mail will be sent for the required status 2 and 4.
                 if (IsAddedSuccfully) _mailService?.SendEmailAsync(HelperService.ArticleMail("manimaran.0610@gmail.com", "Title", "Article Created Successfully", 2));
                 return IsAddedSuccfully;
             }
@@ -98,13 +101,14 @@ namespace AspireOverflow.Services
             }
         }
 
-
+        
+        //The article will be deleted using ArticleId and Draft article only will be deleted.
         public bool DeleteArticleByArticleId(int ArticleId)
         {
-            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}"); try
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}"); 
+            try
             {
-
-                return database.DeleteArticle(ArticleId); //only Draft article will be deleted
+                return database.DeleteArticle(ArticleId); 
             }
             catch (Exception exception)
             {
@@ -113,6 +117,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //To Fetch the articles using ArticleId.
         public object GetArticleById(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
@@ -143,11 +148,12 @@ namespace AspireOverflow.Services
 
         }
 
+        //To get the Latest Articles by using published date.
         public IEnumerable<object> GetLatestArticles()
         {
             try
             {
-                var ListOfArticles = GetArticles().OrderByDescending(article => article.CreatedOn);
+                var ListOfArticles = GetArticles().OrderByDescending(article => article.UpdatedOn);
                 return ListOfArticles.Select(Article => new
                 {
                     ArticleId = Article.ArtileId,
@@ -169,10 +175,12 @@ namespace AspireOverflow.Services
         }
 
 
+        //To Get the trending article based on the number of likes.
         public IEnumerable<Object> GetTrendingArticles()
         {
             try
             {
+                //Get number of likes and grouped based on ArticleId and sorted by Descending oreder.
                 var data = (database.GetLikes().GroupBy(item => item.ArticleId)).OrderByDescending(item => item.Count());
 
                 var ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
@@ -203,6 +211,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //Fetching the articles using UserId.
         public IEnumerable<object> GetArticlesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -233,10 +242,12 @@ namespace AspireOverflow.Services
         }
 
 
+        //The articles will be fetched only when the status is 4->published.
         private IEnumerable<Article> GetArticles()
         {
             try
             {
+                //get the aricles only when the ArticleStatusID is 4->published.
                 var ListOfArticles = database.GetArticles().Where(item => item.ArticleStatusID == 4);
                 return ListOfArticles;
             }
@@ -247,6 +258,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //All the article list will be fetched.
         public IEnumerable<Article> GetAll()
         {
             try
@@ -262,10 +274,12 @@ namespace AspireOverflow.Services
         }
 
 
+        //to get a list of articles and the article should not be a private article.
         public IEnumerable<Object> GetListOfArticles()
         {
             try
             {
+                //to get the articles where private is false.
                 var ListOfArticles = GetArticles().Where(Item => !Item.IsPrivate);
                 return ListOfArticles.Select(Article => new
                 {
@@ -285,6 +299,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //to fetch the article which is private using UserId.
         public IEnumerable<Object> GetPrivateArticles(int UserId)
         {
             try
@@ -302,6 +317,7 @@ namespace AspireOverflow.Services
 
 
 
+        //to get article by its title.
         public IEnumerable<object> GetArticlesByTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
@@ -331,7 +347,7 @@ namespace AspireOverflow.Services
         }
 
 
-
+        //Get the article with its user name.
         public IEnumerable<object> GetArticlesByAuthor(string AuthorName)
         {
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentException("AuthorName value can't be null");
@@ -361,6 +377,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //Get the articles by the Reviewer's Id. Reviewer who reviews the article before publishing.
         public IEnumerable<object> GetArticlesByReviewerId(int ReviewerId)
         {
             if (ReviewerId <= 0) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
@@ -390,9 +407,11 @@ namespace AspireOverflow.Services
         }
 
 
+        //To get the article by it's ArticleStatusId.
         public IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID)
         {
-
+            //throws exception when article status is not inbetween 0 to 4.  
+            //1->In draft 2->To be Reviewed 3->Under Review 4->Published.
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
@@ -418,7 +437,7 @@ namespace AspireOverflow.Services
         }
 
 
-        //Article Comment
+        //to add an comment under an article.
         public bool CreateComment(ArticleComment comment)
         {
             Validation.ValidateArticleComment(comment);
@@ -437,6 +456,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //get the comments of a n particular article using the ArticleId.
         public IEnumerable<Object> GetComments(int ArticleID)
         {
             if (ArticleID <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleID}");
@@ -462,6 +482,7 @@ namespace AspireOverflow.Services
 
 
 
+        //to add a like to an article using ArticleId and UserId.
         public bool AddLikeToArticle(ArticleLike Like)
         {
             if (Like == null) throw new ArgumentException("ArticleLike Object cannot be null");
@@ -481,6 +502,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //to fetch the number of likes for the particular article using ArticleId.
         public int GetLikesCount(int ArticleID)
         {
             if (ArticleID <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleID}");
