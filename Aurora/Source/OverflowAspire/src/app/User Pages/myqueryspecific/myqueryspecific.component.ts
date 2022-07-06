@@ -58,4 +58,16 @@ export class MyqueryspecificComponent implements OnInit {
     this.routing.navigateByUrl("/MyQueries");
   }
 
+  PostComment() {
+    this.Query.queryId = this.queryId;
+    this.connection.PostQueryComment(this.Query)
+      .subscribe({
+        next: () => {
+        }
+      });
+    console.log(this.Query)
+    this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
+    this.ngOnInit();
+  }
+
 }

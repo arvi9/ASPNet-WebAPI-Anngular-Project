@@ -19,6 +19,7 @@ import { HtmlToPlaintextPipe } from './Services/html-to-plaintext.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
+import { TagInputModule } from 'ngx-chips';
 
 import { AdmindashboardComponent } from './Admin Pages/admindashboard/admindashboard.component';
 import { EmployeePageComponent } from './Admin Pages/employee-page/employee-page.component';
@@ -119,7 +120,8 @@ import { ErrorPageComponent } from './Shared Pages/error-page/error-page.compone
     Ng2SearchPipeModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'})
+    ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'}),
+    TagInputModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

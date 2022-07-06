@@ -104,12 +104,20 @@ export class ConnectionService {
     return this.http.patch(this.URL + `Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=4`,Object,{ headers: this.headers })  
   }
 
+  ChangeToUnderReview(articleId:number): any {
+    return this.http.patch(this.URL + `Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=3`,Object,{ headers: this.headers })  
+  }
+
   RejectArticle(articleId:number): any {
     return this.http.patch(this.URL + `Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=1`,Object,{ headers: this.headers })  
   }
 
   CreateArticle(article: any) {
     return this.http.post<any>(this.URL + 'Article/CreateArticle', article, { headers: this.headers })
+  }
+
+  CreatePrivateArticle(article: any) {
+    return this.http.post<any>(this.URL + 'Article/CreatePrivateArticle', article, { headers: this.headers })
   }
 
   MarkQueryAsSolved(queryId:number): any {

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { share } from 'Models/share'
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { catchError } from 'rxjs';
+
 
 
 declare var CKEDITOR: any;
@@ -14,6 +16,9 @@ declare var CKEDITOR: any;
   styleUrls: ['./create-article-page.component.css']
 })
 export class CreateArticlePageComponent implements OnInit {
+  value: any;
+  display!: string;
+
   IsLoadingSubmit: boolean = false;
   IsLoadingSaveDraft: boolean = false;
   imageError: string = "";
@@ -43,13 +48,23 @@ export class CreateArticlePageComponent implements OnInit {
     articleComments: [],
     articleLikes: null,
   }
+  public items = [
+    { display: '', value: 0 },
+  ];
+
+  public goalitems: share[] = [];
+
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    CKEDITOR.on("instanceCreated", function (event: { editor: any; }, data: any) {
+    CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
       var editor = event.editor,
         element = editor.element;
       editor.name = "content";
+      this.connection.GetEmployeePage().subscribe((data: any[]) => {
+        //
+        data.forEach(item => this.items.push({ display: item.email, value: item.userId }))
+      })
     });
   }
 
@@ -59,10 +74,12 @@ export class CreateArticlePageComponent implements OnInit {
     this.connection.CreateArticle(this.article)
       .pipe(catchError(this.handleError)).subscribe({
         next: (data: any) => {
+          this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+          this.route.navigateByUrl("/MyArticles");
         }
       });
-    this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
-    this.route.navigateByUrl("/MyArticles");
+   
+    // console.log(this.goalitems)
   }
 
   handleError(error: any) {
@@ -80,10 +97,11 @@ export class CreateArticlePageComponent implements OnInit {
     this.connection.CreateArticle(this.article)
       .subscribe({
         next: (data: any) => {
+          this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
+          this.route.navigateByUrl("/MyArticles");
         }
       });
-    this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
-    this.route.navigateByUrl("/MyArticles");
+
   }
 
   fileChangeEvent(fileInput: any) {

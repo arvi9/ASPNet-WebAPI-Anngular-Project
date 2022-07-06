@@ -26,10 +26,10 @@
         <p> {{data.content|htmlToPlaintext}}</p>
 
         <div class="container d-flex justify-content-between">
-            <a (click)="PublishArticle(data.articleId)"><button type="button"
-                    class="custom-btn btn-1">Publish</button></a>
             <a (click)="RejectArticle(data.articleId)"><button type="button"
-                    class="custom-btn btn-1">Reject</button></a>
+                class="custom-btn btn-1">Reject</button></a>
+            <a (click)="PublishArticle(data.articleId)"><button type="button"
+                    class="custom-btn btn-1">Publish</button></a>          
         </div>
     </div>
 

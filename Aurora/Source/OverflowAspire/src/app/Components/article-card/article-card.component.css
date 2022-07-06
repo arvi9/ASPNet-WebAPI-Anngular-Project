@@ -252,7 +252,7 @@ a:hover {
 
 .card {
   margin-top: 2%;
-  max-width: 80%;
+  max-width: 60%;
   height: auto;
   padding: 10px;
   margin-bottom: 40px;
@@ -263,10 +263,28 @@ a:hover {
 
 .labeltext {
   font-weight: bold;
-  padding: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
 
 }
 
+.labeltextauthor {
+  font-weight: bold;
+  padding-left: 30px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.labeltextto {
+  font-weight: bold;
+  padding-left: 80px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
 .Searchbar {
   margin-right: 1%;
 }

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
+
 declare type myarray = Array<{ content: string, coding: string, name: string }>
 
 @Component({
@@ -61,8 +62,8 @@ export class SpecificqueryComponent implements OnInit {
         next: () => {
         }
       });
-    console.log(this.Query)
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
     this.ngOnInit();
+    this.Query=''
   }
 }

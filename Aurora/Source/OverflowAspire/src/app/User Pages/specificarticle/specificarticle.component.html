@@ -50,7 +50,7 @@
         <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
             <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{data.likes}}</span>
         </div>
-        <div class="like p-2 cursor"><i class="fa fa-share mx-2"></i><span class="ml-1">Share</span></div>
+        <!-- <div class="like p-2 cursor"><i class="fa fa-share mx-2"></i><span class="ml-1">Share</span></div> -->
     </div>
     <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
     <div class="container">
