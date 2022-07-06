@@ -22,6 +22,8 @@ namespace AspireOverflow.Services
             database = _userRepository;
 
         }
+
+        //to create an user using user object.
         public bool CreateUser(User user)
         {
             Validation.ValidateUser(user);
@@ -43,6 +45,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //to remove an existing user using UserId.
         public bool RemoveUser(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -58,6 +61,7 @@ namespace AspireOverflow.Services
 
         }
 
+        //to update the user as reviewer using UserId and IsReviewer.
         public bool UpdateUserByIsReviewer(int UserId, bool IsReviewer)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -75,6 +79,7 @@ namespace AspireOverflow.Services
 
         }
 
+        //to get the user using their email and password.
         public User GetUser(string Email, string Password)  //Method used in Token Controller
         {
             if (Email == null || Password == null) throw new ArgumentException("Email or Password cannot be null");
@@ -91,7 +96,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
+ 
+        //to get the user by UserID from database.
         public object GetUserByID(int UserID)
         {
             if (UserID <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserID:{UserID}");
@@ -118,6 +124,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
+        //to get all the user from the database.
         public IEnumerable<User> GetUsers()
         {
             try
@@ -131,6 +139,8 @@ namespace AspireOverflow.Services
             }
         }
 
+
+        //to get the users using VerifyStatusID.
         public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
@@ -158,7 +168,7 @@ namespace AspireOverflow.Services
         }
 
 
-
+        //to fet the users using UserRoleID.
         public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID)
         {
             if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
@@ -187,6 +197,7 @@ namespace AspireOverflow.Services
 
         }
 
+        //to change the status of the user uding UserID and VerifyStatusID.
         public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID)
         {
             if (UserID <= 0) throw new ArgumentException($"User Id must be greater than 0  where UserID:{UserID}");
@@ -203,7 +214,7 @@ namespace AspireOverflow.Services
         }
 
 
-
+        //to get the user by IsReviewer.
         public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer)
         {
             try
@@ -229,7 +240,8 @@ namespace AspireOverflow.Services
             }
         }
 
-
+         
+        //to get the department using DepartmentId.
         private string GetDepartmentByID(int DepartmentId)
         {
             if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
@@ -246,6 +258,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //to get the gender from the database.
         public IEnumerable<Object> GetGenders()
         {
             try
@@ -264,6 +277,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //to get the designation from the database.
         public IEnumerable<Object> GetDesignations()
         {
             try
@@ -282,7 +296,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
+ 
+        //to get the departments from the database.
         public IEnumerable<object> GetDepartments()
         {
             try

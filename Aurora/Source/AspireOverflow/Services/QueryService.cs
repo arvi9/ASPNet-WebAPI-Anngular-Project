@@ -33,6 +33,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //to raise an query in the forum.
         public bool CreateQuery(Query query)
         {
             Validation.ValidateQuery(query);
@@ -50,7 +51,8 @@ namespace AspireOverflow.Services
             }
         }
 
-
+     
+        //To Remove the raised query using QueryId if it is an spam.
         public bool RemoveQueryByQueryId(int QueryId)
         {
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
@@ -68,6 +70,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //To mark the query as solved when the query is solved using QueryId.
         public bool MarkQueryAsSolved(int QueryId)
         {
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
@@ -84,6 +87,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //to get the query using QueryId.
         public Object GetQuery(int QueryID)
         {
             if (QueryID <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryID:{QueryID}");
@@ -111,22 +115,8 @@ namespace AspireOverflow.Services
 
         }
 
-
-        private IEnumerable<Query> GetQueries()
-        {
-            try
-            {
-                var ListOfQueries = database.GetQueries();
-                return ListOfQueries;
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
-                throw;
-            }
-
-        }
-
+        
+        ////to fetch the list of queries inthe database.
         public IEnumerable<Object> GetListOfQueries()
         {
             try
@@ -150,11 +140,13 @@ namespace AspireOverflow.Services
 
 
 
+        //to fetch the list of latest queries using it's creation date.
         public IEnumerable<Object> GetLatestQueries()
         {
             try
             {
-                var ListOfQueries = GetQueries().OrderByDescending(query => query.CreatedOn);
+                //get queries from the database using Creation date by descending order.
+                var ListOfQueries = database.GetQueries().OrderByDescending(query => query.CreatedOn);
 
                 return ListOfQueries.Select(item => new
                 {
@@ -173,16 +165,15 @@ namespace AspireOverflow.Services
         }
 
 
-
+        //To Fetch the trending articles using number of comments and usolved query.
         public IEnumerable<Object> GetTrendingQueries()
         {
             try
             {
-
+                //get the comments and group by QueryId using decending order in count.
                 var  ListOfComments= (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
-
                 var ListOfQueryId = (from queryComment in ListOfComments select queryComment.First().QueryId).ToList();
-                var ListOfQueries = GetQueries().Where(item => !item.IsSolved).ToList();
+                var ListOfQueries = database.GetQueries().Where(item => !item.IsSolved).ToList();
                 List<Query> TrendingQueries = new List<Query>();
                 foreach (var Id in ListOfQueryId)
                 {
@@ -209,12 +200,13 @@ namespace AspireOverflow.Services
 
 
 
+        //get the query by UserId.
         public IEnumerable<Object> GetQueriesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var ListOfQueries = GetQueries().Where(query => query.CreatedBy == UserId);
+                var ListOfQueries = database.GetQueries().Where(query => query.CreatedBy == UserId);
 
                 return ListOfQueries.Select(item => new
                 {
@@ -233,12 +225,13 @@ namespace AspireOverflow.Services
         }
 
 
+        //Fetch the query by the query title.
         public IEnumerable<Object> GetQueriesByTitle(String Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ArgumentException(" Title value can't be null");
             try
             {
-                var ListOfQueries = GetQueries().Where(query => query.Title!.Contains(Title));
+                var ListOfQueries = database.GetQueries().Where(query => query.Title!.Contains(Title));
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
@@ -256,11 +249,12 @@ namespace AspireOverflow.Services
         }
 
 
+        //to fetch the query when the query is solved.
         public IEnumerable<Object> GetQueries(bool IsSolved)
         {
             try
             {
-                var ListOfQueries = GetQueries().Where(query => query.IsSolved == IsSolved);
+                var ListOfQueries = database.GetQueries().Where(query => query.IsSolved == IsSolved);
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
@@ -277,6 +271,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //Add an comment for the particular query.
         public bool CreateComment(QueryComment comment)
         {
             Validation.ValidateComment(comment);
@@ -293,6 +288,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //get the comments for the query using QueryId.
         public IEnumerable<Object> GetComments(int QueryId)
         {
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
@@ -317,10 +313,11 @@ namespace AspireOverflow.Services
         }
 
 
-
- public bool ChangeSpamStatus(int QueryId, int VerifyStatusID)
+        //to change the status of the query if it is reported as spam using the QueryId and VerifyStatusID.
+        public bool ChangeSpamStatus(int QueryId, int VerifyStatusID)
         {
             if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0  where QueryId:{QueryId}");
+            //VerifyStatusID should be inbetween 0 and 3, where 1->Approved, 2->Rejected, 3->To be Reviewed.
             if(VerifyStatusID <= 0 || VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
@@ -336,6 +333,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //to add the query as spam using spam object.
         public bool AddSpam(Spam spam)
         {
          Validation.ValidateSpam(spam);
@@ -351,6 +349,7 @@ namespace AspireOverflow.Services
         }
 
 
+        //to get the spam queries using  VerifyStatusID.
         public IEnumerable<object> GetSpams(int VerifyStatusID)
         {
             if(VerifyStatusID <=0 || VerifyStatusID > 3) throw new ArgumentException("Verfiystatus Id must be greater than 0 and less than or eeeeeeequal to 4");

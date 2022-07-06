@@ -8,7 +8,7 @@ namespace AspireOverflow.Services
     {
 
 
-
+        
         public static string PropertyList(this object obj)
         {
             if (obj == null) return "";
@@ -57,6 +57,7 @@ namespace AspireOverflow.Services
 
 
 
+    //to generate mail for the Article.
     public static MailRequest ArticleMail(string RecieverEmail,string ArticleTitle,string Subject,int ArticleStatusID)
     {
             var mail=new MailRequest();
@@ -81,7 +82,7 @@ namespace AspireOverflow.Services
         }
 
 
-
+    //to generate mail for the Spam Reported query.
     public static MailRequest SpamMail(string RecieverEmail,string QueryTitle,string Subject,int VerifyStatusID)
         {
             var mail=new MailRequest();
@@ -108,7 +109,7 @@ namespace AspireOverflow.Services
           
         }
 
-
+        //to generate mail for the Query.
         public static MailRequest QueryMail(string RecieverEmail,string QueryTitle,string Subject)
         {
             var mail=new MailRequest();
@@ -118,7 +119,8 @@ namespace AspireOverflow.Services
             return mail;
 
         }
-
+        
+        //to generate mail for the Comments.
         public static MailRequest CommentMail(string RecieverEmail,string Title,string Subject)
         {
             var mail=new MailRequest();
