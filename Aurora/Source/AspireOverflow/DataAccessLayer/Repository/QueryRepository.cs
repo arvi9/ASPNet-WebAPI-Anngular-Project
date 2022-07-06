@@ -24,6 +24,7 @@ namespace AspireOverflow.DataAccessLayer
         }
 
 
+        //to add query using query object.
         public bool AddQuery(Query query)
         {
             Validation.ValidateQuery(query);
@@ -47,7 +48,7 @@ namespace AspireOverflow.DataAccessLayer
         }
 
 
-
+        //to add comments for the query using query oject.
         public bool AddComment(QueryComment comment)
         {
             Validation.ValidateComment(comment);
@@ -89,7 +90,8 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-
+        
+        //to get the query using QueryId.
         public Query GetQueryByID(int QueryId)
         {
              if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
@@ -106,6 +108,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to get the list of queries.
         public IEnumerable<Query> GetQueries()
         {
             try
@@ -124,7 +127,8 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
-
+        
+        //to get the list of query comments.
         public IEnumerable<QueryComment> GetComments()
         {
             try
@@ -141,6 +145,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to add a query as spam using spam object.
         public bool AddSpam(Spam spam)
         {
            Validation.ValidateSpam(spam);
@@ -161,7 +166,8 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-
+        
+        //to get the list of spam queries.
         public IEnumerable<Spam> GetSpams()
         {
             try
@@ -177,8 +183,8 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-
-
+  
+        //to update the query as spam using QueryId and VerifyStatusId.
         public bool UpdateSpam(int QueryId, int VerifyStatusID)
         {
 

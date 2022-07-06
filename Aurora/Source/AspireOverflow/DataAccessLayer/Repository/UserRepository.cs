@@ -23,6 +23,7 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+        //to create an user using user object.
         public bool CreateUser(User User)
         {
             Validation.ValidateUser(User);
@@ -71,6 +72,8 @@ namespace AspireOverflow.DataAccessLayer
             }
 
         }
+
+        //to fetch the users using UserId.
         public User GetUserByID(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -87,7 +90,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-
+        //to get the list of users.
         public IEnumerable<User> GetUsers()
         {
             try
@@ -102,6 +105,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to Update the user using UserId and VerifyStatusId.
         public bool UpdateUserByVerifyStatus(int UserId, int VerifyStatusID)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -123,6 +127,7 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+        //to update the user using userId and IsReviewer.
         public bool UpdateUserByReviewer(int UserId, bool IsReviewer)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -143,6 +148,7 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+        //to Get the Genders 
         public IEnumerable<Gender> GetGenders()
         {
             try
@@ -157,6 +163,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to get the designation of the user.
         public IEnumerable<Designation> GetDesignations()
         {
             try
@@ -171,6 +178,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to get the department of the user.
         public IEnumerable<Department> GetDepartments()
         {
             try

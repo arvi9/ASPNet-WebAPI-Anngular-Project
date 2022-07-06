@@ -20,6 +20,8 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+
+        //to add an article using article object.
         public bool AddArticle(Article article)
         {
             Validation.ValidateArticle(article);
@@ -41,6 +43,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to create a private article using article object and list of shared user Id.
         public bool AddPrivateArticle(Article article, List<int> SharedUsersId)
         {
             Validation.ValidateArticle(article);
@@ -65,6 +68,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to update an article using article object.
         public bool UpdateArticle(Article article)
         {
             Validation.ValidateArticle(article);
@@ -84,6 +88,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to update an article using ArticleId , ArticleStatusID and UpdatedByUserId.
         public bool UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)
         {
 
@@ -116,6 +121,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to delete an article using ArticleId.
         public bool DeleteArticle(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
@@ -136,6 +142,8 @@ namespace AspireOverflow.DataAccessLayer
 
             }
         }
+
+        //to fetch the article using ArticleId.
         public Article GetArticleByID(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
@@ -152,6 +160,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //to get the list of articles.
         public IEnumerable<Article> GetArticles()
         {
             try
@@ -170,6 +179,7 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+        //to get the list of privately shared articles 
         public IEnumerable<PrivateArticle> GetPrivateArticles()
         {
             try
@@ -188,6 +198,7 @@ namespace AspireOverflow.DataAccessLayer
 
         }
 
+        //to to add comments for the article.
         public bool AddComment(ArticleComment comment)
         {
             Validation.ValidateArticleComment(comment);
@@ -209,7 +220,7 @@ namespace AspireOverflow.DataAccessLayer
         }
 
 
-
+        //to get the added comments for the article.
         public IEnumerable<ArticleComment> GetComments()
         {
 
@@ -227,7 +238,8 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-
+        
+        //to add like for the article.
         public bool AddLike(ArticleLike like)
         {
             if (like.ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{like.ArticleId}");
@@ -247,7 +259,8 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-
+        
+        //to get the likes for the article.
         public IEnumerable<ArticleLike> GetLikes()
         {
 
