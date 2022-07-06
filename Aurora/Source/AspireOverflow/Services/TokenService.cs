@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -21,15 +22,13 @@ namespace AspireOverflow.Services
             _logger = logger;
 
         }
-
+      
         public object GenerateToken(Login Credentials)
         {
-            if(Credentials == null )throw new ArgumentException("Credentials cannot be null");
-            if(!Validation.ValidateUserCredentials(Credentials.Email!,Credentials.Password!)) throw new ArgumentException("Invalid object passed"); 
-            var user = _userService.GetUser(Credentials.Email!, Credentials.Password!);
-            if (user == null) throw new ArgumentException("User object cannot be null");
+         ValidateUser(Credentials);
             try
             {
+                 var user = _userService.GetUser(Credentials.Email!, Credentials.Password!);
                 //create claims details based on the user information
                 var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
@@ -62,6 +61,11 @@ namespace AspireOverflow.Services
 
                 return Result;
 
+            } catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("TokenService", " GenerateToken(String Email, string Password)", exception, Credentials));
+                throw;
+
             }
             catch (Exception exception)
             {
@@ -70,5 +74,10 @@ namespace AspireOverflow.Services
 
             }
         }
+          private void ValidateUser(Login Credentials){
+            if(Credentials == null )throw new ArgumentException("Credentials cannot be null");
+             Validation.ValidateUserCredentials(Credentials.Email!,Credentials.Password!);
+        }
+
     }
 }

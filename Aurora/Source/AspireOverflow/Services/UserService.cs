@@ -83,12 +83,11 @@ namespace AspireOverflow.Services
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
                 var User = GetUsers().ToList().Find(user => user.EmailAddress.ToLower() == Email.ToLower() && user.VerifyStatusID==1);
                 if (User == null) throw new ValidationException("Invalid Email");
-                return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new InvalidDataException("Password doesn't match");
+                return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new ValidationException("Password doesn't match");
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService()", "GetUser(string Email, string Password)", exception, Email));
-
                 throw;
             }
         }

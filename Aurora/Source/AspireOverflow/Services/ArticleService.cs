@@ -29,10 +29,11 @@ namespace AspireOverflow.Services
 
         }
 
+//SharedUsersId is Optional and It has to be specified only once creating the Private articles.
         public bool CreateArticle(Article article, List<int>? SharedUsersId = null)
         {
-
-            if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
+            //throws Validation Exception if any validation fails.
+            Validation.ValidateArticle(article);
             try
             {
                 article.Image = System.Convert.FromBase64String(article.ImageString!);
@@ -51,11 +52,11 @@ namespace AspireOverflow.Services
 
 
 
-
+        //article object and _currentUserId msu
         public bool UpdateArticle(Article article, int _currentUserId)
         {
-
-            if (!Validation.ValidateArticle(article)) throw new ValidationException("Given data is InValid");
+         //throws Validation Exception if any validation fails.
+           Validation.ValidateArticle(article);
             try
             {
                 var ExistingArticle = database.GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
@@ -67,7 +68,7 @@ namespace AspireOverflow.Services
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
 
-
+                //Returns true once successfully updated.
                 return database.UpdateArticle(ExistingArticle);
             }
 
@@ -234,43 +235,35 @@ namespace AspireOverflow.Services
 
         private IEnumerable<Article> GetArticles()
         {
-
             try
             {
                 var ListOfArticles = database.GetArticles().Where(item => item.ArticleStatusID == 4);
                 return ListOfArticles;
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
                 throw;
             }
-
-
         }
+
         public IEnumerable<Article> GetAll()
         {
-
             try
             {
                 var ListOfArticles = database.GetArticles();
                 return ListOfArticles;
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetAll()", exception));
                 throw;
             }
-
-
         }
 
 
         public IEnumerable<Object> GetListOfArticles()
         {
-
             try
             {
                 var ListOfArticles = GetArticles().Where(Item => !Item.IsPrivate);
@@ -283,22 +276,17 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
                 throw;
             }
-
-
         }
 
         public IEnumerable<Object> GetPrivateArticles(int UserId)
         {
-
             try
             {
                 var ListOfPrivateArticles = database.GetPrivateArticles().Where(Item => Item.UserId == UserId);
@@ -310,8 +298,6 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetPrivateArticles(int UserId)", exception));
                 throw;
             }
-
-
         }
 
 

@@ -44,13 +44,11 @@ namespace AspireOverflow.Controllers
 
         [HttpPost]
         public IActionResult AuthToken(Login Crendentials)
-        {
+        {  if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email!, Crendentials.Password!)) return BadRequest("Login Credentials cannot be null");
           try
             {
-                if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email!, Crendentials.Password!)) return BadRequest("Login Credentials cannot be null");
                 var Result = _tokenService.GenerateToken(Crendentials);
                 return Ok(Result);
-
             }
             catch (ValidationException exception)
             {
