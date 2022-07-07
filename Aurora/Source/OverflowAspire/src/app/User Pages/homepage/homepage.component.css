@@ -20,7 +20,7 @@ h3 {
     }
 
     100% {
-        opaicty: 1
+        opacity: 1
     }
 }
 
@@ -38,7 +38,7 @@ h3 {
     }
 
     100% {
-        opaicty: 1
+        opacity: 1
     }
 }
 
@@ -56,7 +56,7 @@ h3 {
     }
 
     100% {
-        opaicty: 1
+        opacity: 1
     }
 }
 
@@ -74,7 +74,7 @@ h3 {
     }
 
     100% {
-        opaicty: 1
+        opacity: 1
     }
 }
 
@@ -92,7 +92,7 @@ body {
     -o-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .3);
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .3);
     margin-bottom: 30px;
-    Margin: 20px
+    margin: 20px
 }
 
 .img-card:hover {
