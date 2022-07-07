@@ -4,58 +4,62 @@
 
     <h2 class="heading">Overview of Dashboard</h2>
 
-
-    <div class="Container">
+    <div >
         <div class="wrapper">
             <canvas id="piechart" width="76" height="76"></canvas>
         </div>
-        <div class="cardRight" style="width: 18rem;">
+        <div class="card" style="width: 20rem;">
+            <div class="cardRight" style="width: 18rem;">
 
-            <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfUsers}}</h5>
-                <p class="card-text" style="text-align: center;">Total Number of Users</p>
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfUsers}}</h5>
+                    <p class="card-text" style="text-align: center;">Total Number of Users</p>
+
+                </div>
+            </div>
+            <br><br>
+            <div class="cardRight" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfReviwers}}</h5>
+                    <p class="card-text" style="text-align: center;">Total Number of Reviewers</p>
+
+                </div>
+            </div>
+            <br><br>
+            <div class="cardRight" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfArticles}}</h5>
+                    <p class="card-text" style="text-align: center;">Total Number of Articles</p>
+
+                </div>
 
             </div>
-        </div>
-        <br><br>
-        <div class="cardLeft" style="width: 18rem;">
+            <br><br>
+            <div class="cardRight" style="width: 18rem;">
 
-            <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfReviwers}}</h5>
-                <p class="card-text" style="text-align: center;">Total Number of Reviewers</p>
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">{{piedata.totaNumberofSolvedQueries}}</h5>
+                    <p class="card-text" style="text-align: center;">Solved Query</p>
 
-            </div>
-        </div>
-        <br><br>
-        <div class="cardBottom" style="width: 18rem;">
-
-            <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfArticles}}</h5>
-                <p class="card-text" style="text-align: center;">Total Number of Articles</p>
+                </div>
 
             </div>
+            <br><br>
+            <div class="cardRight" style="width: 18rem;">
 
-        </div>
-        <br><br>
-        <div class="cardLeft1" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfUnSolvedQueries}}</h5>
+                    <p class="card-text" style="text-align: center;">UnSolved Query</p>
 
-            <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{piedata.totaNumberofSolvedQueries}}</h5>
-                <p class="card-text" style="text-align: center;">Solved Query</p>
-
-            </div>
-
-        </div>
-        <br><br>
-        <div class="cardBottom1" style="width: 18rem;">
-
-            <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfUnSolvedQueries}}</h5>
-                <p class="card-text" style="text-align: center;">UnSolved Query</p>
+                </div>
 
             </div>
-
         </div>
     </div>
 </div>
+<br><br>   
+
+
 <app-footer></app-footer>

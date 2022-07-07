@@ -12,8 +12,6 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class ReviewerdashboardComponent implements OnInit {
   constructor(private route: Router, private connection: ConnectionService) { }
-
-  // Get Reviewer dashboard and shows the Reviewed articles,Article to be reviewed.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Reviewer")) {

@@ -3,7 +3,6 @@
     --light: #f3f6f9;
     --dark: #191c24
 }
-
 body {
     position: relative;
     height: 100vh;
@@ -12,65 +11,31 @@ body {
     justify-content: center
 }
 
-:root {
-    --primary: #009cff;
-    --light: #f3f6f9;
-    --dark: #191c24
+.card{
+    margin-left: 1%;
+    margin-top: 3rem;
+    float: right;
+    margin-right: 13rem;
 }
 
-.card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px
-}
-
-:root {
-    --primary: #009cff;
-    --light: #f3f6f9;
-    --dark: #191c24
-}
-
-body {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center
-}
 
 .cardRight {
+    
     border-style: solid
 }
 
-.cardLeft {
-    border-style: solid
-}
-
-.cardBottom {
-    border-style: solid
-}
-
-.Container {
-    margin-left: 20%
-}
 
 .heading {
-    text-align: center;
-}
-
-.cardRight:hover {
-    color: coral
-}
-
-.cardLeft:hover {
-    color: coral
+    text-align: center
 }
 
 .wrapper {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    margin-top: 1%;
-    margin-left: 30%;
-
+    width: 350px;
+    height: 350px;
+    margin-top: 3rem;
+    margin-right: 10rem;
+    margin-left: 2%;
+    float:right;
+    
 }
+

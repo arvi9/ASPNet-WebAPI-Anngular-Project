@@ -13,7 +13,6 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class AdmindashboardComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router) { }
 
-  // Get the admin dashboard and shows the Number of articles,Number og queries.
   ngOnInit(): void {
     if (!AuthService.GetData("Admin")) {
       this.route.navigateByUrl("")
