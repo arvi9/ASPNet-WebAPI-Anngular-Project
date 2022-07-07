@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Toaster } from 'ngx-toast-notifications';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
@@ -11,7 +10,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class RaisequeryComponent implements OnInit {
 
-  constructor(private connection: ConnectionService, private routing: Router, private toaster: Toaster) { }
+  constructor(private connection: ConnectionService, private routing: Router) { }
   IsLoading: boolean = false;
   query: any = {
     queryId: 0,
@@ -33,11 +32,9 @@ export class RaisequeryComponent implements OnInit {
     this.connection.CreateQuery(this.query)
       .subscribe({
         next: (data) => {
-          this.toaster.open({ text: 'Query Added Successfully', position: 'top-center', type: 'secondary' })
-          this.routing.navigateByUrl("MyQueries");
         }
       });
-   
+    this.routing.navigateByUrl("MyQueries");
   }
 
 
