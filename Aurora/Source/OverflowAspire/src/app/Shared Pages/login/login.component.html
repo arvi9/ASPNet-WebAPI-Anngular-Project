@@ -9,26 +9,23 @@
 			</div>
 			<div class="card-body p-5 p-lg-5 border ">
 				<h5 class="card-title text-center ">Login</h5>
-				<form [formGroup]="user" (ngSubmit)="onSubmit()" novalidate>
+				<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 					<div class="mt-3" *ngIf="showErrorMessage">
-						<p class="text-danger text-center"> Invalid Email or password</p>
+						<p class="text-danger text-center"> Invalid username or password</p>
 					  </div>
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Email </label>
-						<input type="text" class="form-control" required formControlName="emailAddress"
-                                name="emailAddress">
-                            <span class="text-danger"
-                                *ngIf=" this.user.controls['emailAddress'] &&  this.user.controls['emailAddress'].invalid &&  this.user.controls['emailAddress'].touched">Email
-                                Address field
-                                is Required(Example-xxx@aspiresys.com) </span>
+						<input type="text" id="email" #email="ngModel" class="form-control" name="email" [(ngModel)]="user.Email" required>
+						<div class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors?.['required']">
+							Email Address is required.
+						  </div>
 					</div>
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Password</label>
-						<input type="password" class="form-control" formControlName="password" required name="password">
-						<span class="text-danger"
-							*ngIf=" this.user.controls['password'] &&  this.user.controls['password'].invalid &&  this.user.controls['password'].touched">Password
-							field is required
-						</span>
+						<input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="user.Password" required>
+						<div class="text-danger" [class.d-none]="password.valid || password.untouched" *ngIf="password.errors?.['required']">
+							Password is required.
+						  </div>
 					</div>
 
 					<div class="text-center mb-2 p-2">
