@@ -13,9 +13,9 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class ReportSpamComponent implements OnInit {
   data: any;
   queryId: number = 0
-
+  error = ""
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
-  
+
   reportspam: any = {
     spamId: 0,
     reason: '',
@@ -42,10 +42,16 @@ export class ReportSpamComponent implements OnInit {
     this.connection.ReportSpam(this.reportspam)
       .subscribe({
         next: (data) => {
+        },
+        error: (error) => {
+          this.error = error.error.message;
+        },
+        complete: () => {
+          this.toaster.open({ text: 'Reported spam successfully', position: 'top-center', type: 'success' })
+          this.routing.navigateByUrl("/Home");
         }
       });
-    this.toaster.open({ text: 'Reported spam successfully', position: 'top-center', type: 'success' })
-    this.routing.navigateByUrl("/Home");
+    
   }
 
 }

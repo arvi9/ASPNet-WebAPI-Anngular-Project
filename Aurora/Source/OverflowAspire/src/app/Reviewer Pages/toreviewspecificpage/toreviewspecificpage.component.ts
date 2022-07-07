@@ -12,8 +12,8 @@ import { Toaster } from 'ngx-toast-notifications';
 })
 export class ToreviewspecificpageComponent implements OnInit {
   articleId: number = 0;
-
-  constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService,private toaster: Toaster) { }
+  error = ""
+  constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService, private toaster: Toaster) { }
   // Get article by article id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
@@ -36,10 +36,16 @@ export class ToreviewspecificpageComponent implements OnInit {
     this.connection.ApproveArticle(articleId)
       .subscribe({
         next: (data: any) => {
+        },
+        error: (error: { error: { message: string; }; }) => {
+          this.error = error.error.message;
+        },
+        complete: () => {
+          this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
+          this.routing.navigateByUrl("/ToReview");
         }
       });
-    this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
-    this.routing.navigateByUrl("/ToReview");
+
 
   }
 
@@ -47,20 +53,28 @@ export class ToreviewspecificpageComponent implements OnInit {
     this.connection.RejectArticle(articleId)
       .subscribe({
         next: (data: any) => {
+        },
+        complete: () => {
+          this.toaster.open({ text: 'Article Rejected successfully', position: 'top-center', type: 'warning' })
+          this.routing.navigateByUrl("/ToReview");
         }
       });
-    this.toaster.open({ text: 'Article Rejected successfully', position: 'top-center', type: 'warning' })
-    this.routing.navigateByUrl("/ToReview");
+
   }
 
   ChangeToUnderReview(articleId: number) {
     this.connection.ChangeToUnderReview(articleId)
       .subscribe({
         next: (data: any) => {
-          
+        },
+        error: (error: { error: { message: string; }; }) => {
+          this.error = error.error.message;
+        },
+        complete: () => {
+          this.ngOnInit()
+          this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' })
         }
       });
-      this.ngOnInit()
-      this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' }) 
+
   }
 }

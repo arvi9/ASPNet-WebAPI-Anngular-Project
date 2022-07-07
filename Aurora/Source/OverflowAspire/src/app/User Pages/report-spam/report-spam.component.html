@@ -34,6 +34,9 @@
 </div>
 
 <div class="text-center my-4">
+    <div>
+        <h5 class="text-center text-danger">{{error}}</h5>
+    </div>
     <h3>Reason For report</h3>
     <div>
         <form  #form="ngForm" (ngSubmit)="spamreport()" autocomplete="off">

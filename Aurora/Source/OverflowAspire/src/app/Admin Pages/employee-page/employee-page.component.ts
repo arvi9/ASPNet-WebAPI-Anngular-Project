@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
 import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
@@ -36,12 +36,16 @@ export class EmployeePageComponent implements OnInit {
     })
   }
 
-    // Here the admin can disable the user.
+ // Here the admin can disable the user.
   DisableUser(userId: number) {
     this.connection.DisableUser(userId)
-      .subscribe((data: any) => {
-      });
-    this.toaster.open({ text: 'User has Disabled', position: 'top-center', type: 'danger' })
+    .subscribe({
+      next: () => {},
+      complete: () => {
+        this.toaster.open({ text: 'User has Disabled', position: 'top-center', type: 'danger' })
+      }
+    }); 
+    this.ngOnInit();  
   }
 
      // Here the admin can mark a user as reviewer.
@@ -49,18 +53,27 @@ export class EmployeePageComponent implements OnInit {
     var res = this.data.find(item => item.userId == userId)?.isReviewer
     if (res == true) {
       this.connection.MarkAsReviewer(userId)
-        .subscribe((data: any) => {
-        });
-      this.toaster.open({ text: 'User marked as Reviewer', position: 'top-center', type: 'success' })
+      .subscribe({
+        next: () => {},
+        complete: () => {
+          this.toaster.open({ text: 'User marked as Reviewer', position: 'top-center', type: 'success' })
+        }
+      });
+      
     }
     //Here the admin can unmark a user as reviewer.
     else {
       this.connection.UnmarkAsReviewer(userId)
-        .subscribe((data: any) => {
-        });
-      this.toaster.open({ text: 'User unmarked as Reviewer', position: 'top-center', type: 'secondary' })
-    }
+      .subscribe({
+        next: () => {},
+        complete: () => {
+          this.toaster.open({ text: 'User unmarked as Reviewer', position: 'top-center', type: 'secondary' })  
+        }
+      });
+      }
   }
 
+
   public data: User[] = []
+
 }
