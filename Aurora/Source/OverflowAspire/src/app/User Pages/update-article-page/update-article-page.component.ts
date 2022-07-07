@@ -39,6 +39,7 @@ export class UpdateArticlePageComponent implements OnInit {
     articleLikes: null
   }
 
+  //Get article by its id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.router.navigateByUrl("")
     this.route.params.subscribe(params => {
@@ -57,6 +58,7 @@ export class UpdateArticlePageComponent implements OnInit {
   
   public data: Article = new Article();
 
+  // Update article and submit.
   onSubmit() {
     this.article.articleStatusID = 2;
     this.connection.UpdateArticle(this.article)
@@ -79,6 +81,7 @@ export class UpdateArticlePageComponent implements OnInit {
     return "";
   }
 
+  //Add image to the article.
   fileChangeEvent(fileInput: any) {
     this.imageError = "";
     if (fileInput.target.files && fileInput.target.files[0]) {

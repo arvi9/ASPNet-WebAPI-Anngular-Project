@@ -31,6 +31,8 @@ export class SpecificqueryComponent implements OnInit {
   }
 
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService,private toaster: Toaster) { }
+  
+  //Get specific query by its id.
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
@@ -39,8 +41,7 @@ export class SpecificqueryComponent implements OnInit {
       this.GetQuery()
     });
   }
-
-
+  
   GetQuery(): void {
     this.connection.GetQuery(this.queryId)
       .subscribe({
@@ -51,7 +52,7 @@ export class SpecificqueryComponent implements OnInit {
       });
   }
 
-
+  //Add comment to that query.
   public data: Query = new Query();
 
   PostComment() {

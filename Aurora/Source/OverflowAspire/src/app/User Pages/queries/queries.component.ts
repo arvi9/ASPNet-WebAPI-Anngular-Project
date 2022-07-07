@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/Services/auth.service';
   templateUrl: './queries.component.html',
   styleUrls: ['./queries.component.css']
 })
+
+  //Get all queries.
 export class QueriesComponent implements OnInit {
 
 Url:string ="allQueries"

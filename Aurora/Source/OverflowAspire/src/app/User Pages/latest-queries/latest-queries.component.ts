@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   templateUrl: './latest-queries.component.html',
   styleUrls: ['./latest-queries.component.css']
 })
+
+//Show latest queries page.
 export class LatestQueriesComponent implements OnInit {
 
    url: string = "latestQueries";

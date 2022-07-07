@@ -31,7 +31,7 @@ export class MyqueryspecificComponent implements OnInit {
   }
 
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
-
+  //Get specific query by its id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     this.route.params.subscribe(params => {

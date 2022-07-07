@@ -17,7 +17,7 @@
 <!-- Breadcrums End-->
 
 <div class="container mb-4">
-  <a><button type="button" class="custom-btn btn-1 btn-3 " *ngIf=" issolved ===  false" id="button-code"
+  <a><button type="button" class="custom-btn btn-1 btn-3 " *ngIf=" issolved == false" id="button-code"
       (click)="MarkQueryAsSolved(queryId)">Mark Query As Solved</button></a>
 
 </div>
@@ -28,36 +28,27 @@
     <h1>{{data.title}}</h1>
 
   </div>
-  <div class="panel panel-default"><br>
+  <pre>
     {{data.content}}
-    <br>
-    <br>
+    </pre>
     <pre class="">
      {{data.code}}
-    </pre>
-
-
+ </pre>
 
     <h4>{{data.comments.length}} Answers</h4>
     <div>
-
-
-
-
       <br>
     </div>
-  </div>
 
 
-  <cdk-virtual-scroll-viewport class="example-viewport" itemSize="">
-    <dl class="example-dl p-2">
-      <ng-container *cdkVirtualFor="let comment of data.comments">
-        <dt class="example-dt"><i class="fa fa-solid fa-user mx-3">Answer : {{comment.message}}</i></dt>
-        <dd class="example-dd mx-5">{{comment.code}}</dd>
-        <dd class="example-dd mx-5">Answered by : {{comment.name}}</dd>
-        <hr>
-      </ng-container>
-    </dl>
+ <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+    <table>
+           <tr *cdkVirtualFor="let comment of data.comments">     
+       <td class="example-dt"><br><i class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>{{comment.message}}</i> <hr></td>
+       <br>   
+       
+ 
+  </table>
   </cdk-virtual-scroll-viewport>
   <br>
   <br>

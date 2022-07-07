@@ -11,6 +11,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class ProfileComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router) { }
+  
+  //Get user profile.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     this.connection.GetUser()

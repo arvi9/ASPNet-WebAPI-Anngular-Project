@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { share } from 'Models/share'
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { catchError } from 'rxjs';
+import { TagInputComponent } from 'ngx-chips';
+
+export interface sharedItem{
+  display:string,
+  value:number
+}
+
 
 
 declare var CKEDITOR: any;
@@ -14,6 +22,15 @@ declare var CKEDITOR: any;
   styleUrls: ['./create-article-page.component.css']
 })
 export class CreateArticlePageComponent implements OnInit {
+  value: any;
+  display!: string;
+  sharedUsersId:any=[]
+
+  itemsAsObjects: any = {
+    id:0,
+    name:''
+  }
+
   IsLoadingSubmit: boolean = false;
   IsLoadingSaveDraft: boolean = false;
   imageError: string = "";
@@ -39,30 +56,65 @@ export class CreateArticlePageComponent implements OnInit {
     updatedOn: '',
     articleStatus: null,
     user: null,
-    IsPrivate: true,
+    IsPrivate: false,
     articleComments: [],
     articleLikes: null,
   }
+  
+  public items = [
+    { display: '', value: 0 },
+  ];
 
+  public goalitems:sharedItem[] = []
+    
+privateArticle:any={
+  article:this.article,
+  SharedusersId:[]
+}
+
+  //
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    CKEDITOR.on("instanceCreated", function (event: { editor: any; }, data: any) {
+    CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
       var editor = event.editor,
         element = editor.element;
       editor.name = "content";
+      this.connection.GetEmployeePage().subscribe((data: any[]) => {
+        data.forEach(item => this.items.push({ display: item.email, value: item.userId }))
+      })
     });
   }
 
+    //Create and post the article.
   onSubmit() {
     this.IsLoadingSubmit = true;
     this.article.articleStatusID = 2;
+    if(this.goalitems.length==0){
     this.connection.CreateArticle(this.article)
       .pipe(catchError(this.handleError)).subscribe({
         next: (data: any) => {
+          this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+          this.route.navigateByUrl("/MyArticles");
         }
       });
-    this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
-    this.route.navigateByUrl("/MyArticles");
+    }
+    //Create private article.
+    else{
+      this.article.IsPrivate=true;
+      this.goalitems.forEach(item =>this.sharedUsersId.push(item.value))
+      this.privateArticle={
+        article:this.article,
+        sharedUsersId:this.sharedUsersId
+      }
+      this.connection.CreatePrivateArticle(this.privateArticle)
+      .pipe(catchError(this.handleError)).subscribe({
+        next: (data: any) => {
+          this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+          this.route.navigateByUrl("/MyArticles");
+        }
+      });
+    }
+    
   }
 
   handleError(error: any) {
@@ -75,17 +127,19 @@ export class CreateArticlePageComponent implements OnInit {
     return "";
   }
 
+  //Create article and save it to draft.
   saveToDraft() {
     this.IsLoadingSaveDraft = true;
     this.connection.CreateArticle(this.article)
       .subscribe({
         next: (data: any) => {
+          this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
+          this.route.navigateByUrl("/MyArticles");
         }
       });
-    this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
-    this.route.navigateByUrl("/MyArticles");
-  }
 
+  }
+  //Add image in article.
   fileChangeEvent(fileInput: any) {
     this.imageError = "";
     if (fileInput.target.files && fileInput.target.files[0]) {
@@ -117,4 +171,5 @@ export class CreateArticlePageComponent implements OnInit {
       reader.readAsDataURL(fileInput.target.files[0]);
     } return false
   }
+  
 }

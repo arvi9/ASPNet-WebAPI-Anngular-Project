@@ -7,14 +7,14 @@
                     <a routerLink="/Home" routerLinkActive="active">Home</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    MyArticles
+                    Shared With Me
                 </li>
 
             </ol>
         </nav>
     </div>
 
-    <h1>My Articles</h1>
+    <h1>Shared With Me</h1>
     <div class="container card">
         <form>
             <label class="labeltext">Title</label>
@@ -34,12 +34,6 @@
                         <img [src]="'data:image/jpg;base64,'+ item.image" />
                     </div>
                     <div class="card__body">
-                        <div *ngIf="ShowStatus">
-                            <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
-                            <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
-                                class="tag tag-brown">Under Review</span>
-                            <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
-                        </div>
                         <h4 class="card-title text-truncate">{{item.title}}</h4>
                         <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                     </div>

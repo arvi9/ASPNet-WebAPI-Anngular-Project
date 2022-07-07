@@ -12,7 +12,7 @@ export class AdminNavbarComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-  
+    
     }
     status: boolean = false;
   clickEvent(){
@@ -21,7 +21,8 @@ export class AdminNavbarComponent implements OnInit {
   sideStatus:boolean=true;
   clickSideEvent(){
     this.sideStatus=!this.sideStatus;
-  }
+  } 
+  // Here the user can logout.
 
   LogOut(){
     localStorage.clear();

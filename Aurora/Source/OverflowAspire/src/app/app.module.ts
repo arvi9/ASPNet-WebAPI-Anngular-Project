@@ -19,6 +19,7 @@ import { HtmlToPlaintextPipe } from './Services/html-to-plaintext.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
+import { TagInputModule } from 'ngx-chips';
 
 import { AdmindashboardComponent } from './Admin Pages/admindashboard/admindashboard.component';
 import { EmployeePageComponent } from './Admin Pages/employee-page/employee-page.component';
@@ -56,6 +57,7 @@ import { TrendingArticlepageComponent } from './User Pages/trending-articlepage/
 import { TrendingQueriespageComponent } from './User Pages/trending-queriespage/trending-queriespage.component';
 import { UpdateArticlePageComponent } from './User Pages/update-article-page/update-article-page.component';
 import { ErrorPageComponent } from './Shared Pages/error-page/error-page.component';
+import { PrivatearticlesComponent } from './User Pages/privatearticles/privatearticles.component';
 
 
 
@@ -98,7 +100,8 @@ import { ErrorPageComponent } from './Shared Pages/error-page/error-page.compone
     TrendingArticlepageComponent,
     TrendingQueriespageComponent,
     UpdateArticlePageComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    PrivatearticlesComponent
   ],
 
   imports: [
@@ -119,7 +122,8 @@ import { ErrorPageComponent } from './Shared Pages/error-page/error-page.compone
     Ng2SearchPipeModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'})
+    ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'}),
+    TagInputModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

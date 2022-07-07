@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css']
 })
+
+ 
 export class ArticlesComponent implements OnInit {
   url:string="allArticles";
 

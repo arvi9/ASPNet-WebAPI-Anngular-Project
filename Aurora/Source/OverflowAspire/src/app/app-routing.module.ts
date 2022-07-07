@@ -31,6 +31,7 @@ import { TrendingArticlepageComponent } from './User Pages/trending-articlepage/
 import { TrendingQueriespageComponent } from './User Pages/trending-queriespage/trending-queriespage.component';
 import { UpdateArticlePageComponent } from './User Pages/update-article-page/update-article-page.component';
 import { ErrorPageComponent } from './Shared Pages/error-page/error-page.component';
+import { PrivatearticlesComponent } from './User Pages/privatearticles/privatearticles.component';
 
 
 const routes: Routes = [
@@ -66,7 +67,7 @@ const routes: Routes = [
   {path:'UpdateArticle/:articleId',component:UpdateArticlePageComponent},
   {path:'EditArticle/:articleId',component:EditarticleComponent},
   {path:'myqueryspecific/:queryId',component:MyqueryspecificComponent},
-  
+  {path:'PrivateArticles',component:PrivatearticlesComponent},
   
 ];
 

@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/Services/auth.service';
   templateUrl: './trending-articlepage.component.html',
   styleUrls: ['./trending-articlepage.component.css']
 })
+
+  //Show trending Articles.
 export class TrendingArticlepageComponent implements OnInit {
   url: string = 'trendingArticles';
   

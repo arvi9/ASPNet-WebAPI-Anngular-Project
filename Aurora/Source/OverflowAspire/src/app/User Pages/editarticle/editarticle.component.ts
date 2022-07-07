@@ -32,7 +32,7 @@ export class EditarticleComponent implements OnInit {
 
 }
 
-
+//Get article by article id.
 ngOnInit(): void {
   if(AuthService.GetData("token")==null) this.routes.navigateByUrl("")
   this.route.params.subscribe(params => {

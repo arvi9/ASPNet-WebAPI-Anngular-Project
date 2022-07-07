@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { application } from 'Models/Application';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -15,6 +14,7 @@ export class SpamViewComponent implements OnInit {
   queryId: number = 0;
   constructor(private routing: Router, private route: ActivatedRoute, private http: HttpClient, private connection: ConnectionService, private toaster: Toaster) { }
 
+  //Get spams by query id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
@@ -32,13 +32,14 @@ export class SpamViewComponent implements OnInit {
 
   public data: any[] = []
 
-
+  //Here the admin can approve spam by query id.
   onAccept() {
     this.connection.ApproveSpam(this.queryId)
       .subscribe({
         next: (data: any) => {
         }
       });
+      // Here the admin can remove query by query id.
     this.connection.RemoveQuery(this.queryId)
       .subscribe({
         next: (data: any) => {
@@ -48,7 +49,7 @@ export class SpamViewComponent implements OnInit {
     this.routing.navigateByUrl("/SpamReport");
   }
 
-
+  //Here the admin can reject spam by query id.
   onReject() {
     this.connection.RejectSpam(this.queryId)
       .subscribe({

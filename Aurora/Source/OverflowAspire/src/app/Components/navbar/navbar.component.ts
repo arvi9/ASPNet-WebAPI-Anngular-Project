@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
    }
+   // Here the user can logout the application.
   LogOut(){
     AuthService.Logout();
     this.route.navigateByUrl("")
@@ -25,15 +26,15 @@ export class NavbarComponent implements OnInit {
 
   public user:User={
     userId: 0,
-    fullName: 'Pooja',
+    fullName: '',
     genderId: 1,
-    aceNumber: 'ACE0564',
+    aceNumber: '',
     employeeId:'',
-    email: 'pooja@gmail.com',
-    department:'dotnet',
+    email: '',
+    department:'',
     designation:'',
     password: '',
-    dateOfBirth: '05/05/2001',
+    dateOfBirth: '',
     verifyStatusID: 0,
     isReviewer: false,
     userRoleId: 0,

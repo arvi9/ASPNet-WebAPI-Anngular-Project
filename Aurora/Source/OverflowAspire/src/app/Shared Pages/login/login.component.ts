@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+    //Screen login time = 30minutes.
+    // Admin cannot verify the user means User is in under verification..
+    //Admin can verified user means user can login and enter to homepage.
   onSubmit() {
     this.IsLoading = true;
     this.showErrorMessage = false;

@@ -19,6 +19,8 @@ export class ArticleCardComponent implements OnInit {
 
 
   constructor(private connection: ConnectionService) { }
+  
+  //Get all articles.
 
   ngOnInit(): void {
     if(this.artsrc=="allArticles"){
@@ -29,6 +31,8 @@ export class ArticleCardComponent implements OnInit {
         this.totalLength = data.length;
       }});
     }
+
+     //Get latest articles.
     else if(this.artsrc=="latestArticles")
     {
       this.connection.GetLatestArticles()
@@ -37,6 +41,8 @@ export class ArticleCardComponent implements OnInit {
         this.filteredData = data;
         this.totalLength = data.length;
       }});
+
+      // Get Trending articles.
     }
     else(this.artsrc=="trendingArticles")
     {
@@ -52,6 +58,7 @@ export class ArticleCardComponent implements OnInit {
   public data: Article[] = [
 
   ];
+  // Filter articles by Title,Author,Fromdate and Todate.
 
   public filteredData: Article[] = [];
   samplefun(searchTitle: string, searchAuthor: string, FromDate: any, ToDate: any) {
@@ -115,7 +122,7 @@ export class ArticleCardComponent implements OnInit {
      else if (searchTitle.length != 0 && searchAuthor== ''&& FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
     }
-    //14.search by Title,Author,Fromdate and Todate
+    //15.search by Title,Author,Fromdate and Todate
     else if (searchTitle.length != 0 && searchAuthor.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase())&&item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
     }

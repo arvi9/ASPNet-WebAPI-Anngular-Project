@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'Models/User';
-import { application } from 'Models/Application';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
@@ -15,11 +14,12 @@ import { Subject } from 'rxjs';
   styleUrls: ['./employee-page.component.css']
 })
 export class EmployeePageComponent implements OnInit {
-  dtOptions: any = {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   
   constructor(private http: HttpClient, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
-
+ 
+  // Get the Employee page and shows the employee data
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
@@ -36,7 +36,7 @@ export class EmployeePageComponent implements OnInit {
     })
   }
 
-
+    // Here the admin can disable the user.
   DisableUser(userId: number) {
     this.connection.DisableUser(userId)
       .subscribe((data: any) => {
@@ -44,7 +44,7 @@ export class EmployeePageComponent implements OnInit {
     this.toaster.open({ text: 'User has Disabled', position: 'top-center', type: 'danger' })
   }
 
-
+     // Here the admin can mark a user as reviewer.
   onCheckboxChange(userId: any) {
     var res = this.data.find(item => item.userId == userId)?.isReviewer
     if (res == true) {
@@ -53,6 +53,7 @@ export class EmployeePageComponent implements OnInit {
         });
       this.toaster.open({ text: 'User marked as Reviewer', position: 'top-center', type: 'success' })
     }
+    //Here the admin can unmark a user as reviewer.
     else {
       this.connection.UnmarkAsReviewer(userId)
         .subscribe((data: any) => {

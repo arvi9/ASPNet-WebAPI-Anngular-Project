@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   templateUrl: './latest-articlepage.component.html',
   styleUrls: ['./latest-articlepage.component.css']
 })
+
+//Show latest article page.
 export class LatestArticlepageComponent implements OnInit {
 
   url: string = "latestArticles";

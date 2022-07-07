@@ -10,9 +10,11 @@ import { Subject } from 'rxjs';
   styleUrls: ['./spamreportpage.component.css']
 })
 export class SpamreportpageComponent implements OnInit {
-  dtOptions: any = {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private connection: ConnectionService, private route: Router) { }
+
+  // Get reported spams.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {

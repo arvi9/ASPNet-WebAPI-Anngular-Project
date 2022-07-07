@@ -20,7 +20,7 @@ describe('AdminNavbarComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeUndefined();
-  // });
+  it('should create', () => {
+    expect(component).toBeUndefined();
+  });
 });

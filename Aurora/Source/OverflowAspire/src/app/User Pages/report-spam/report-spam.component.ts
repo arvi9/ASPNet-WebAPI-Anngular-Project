@@ -24,7 +24,7 @@ export class ReportSpamComponent implements OnInit {
     verifyStatusID: 3,
   }
 
-
+  //Get query by its id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     this.route.params.subscribe(params => {
@@ -36,7 +36,7 @@ export class ReportSpamComponent implements OnInit {
     });
   }
 
-
+  //Report query as spam.
   spamreport() {
     this.reportspam.queryId = this.queryId;
     this.connection.ReportSpam(this.reportspam)

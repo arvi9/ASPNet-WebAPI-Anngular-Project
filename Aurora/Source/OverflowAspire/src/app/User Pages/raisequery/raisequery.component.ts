@@ -27,6 +27,7 @@ export class RaisequeryComponent implements OnInit {
     user: null
   }
 
+  //User can create query.
   RaiseQuery() {
     this.IsLoading = true;
     this.connection.CreateQuery(this.query)

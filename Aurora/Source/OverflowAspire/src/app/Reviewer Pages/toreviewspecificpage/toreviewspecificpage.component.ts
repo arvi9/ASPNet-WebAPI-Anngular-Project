@@ -14,6 +14,7 @@ export class ToreviewspecificpageComponent implements OnInit {
   articleId: number = 0;
 
   constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService,private toaster: Toaster) { }
+  // Get article by article id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     if (!AuthService.GetData("Reviewer")) {
@@ -50,5 +51,16 @@ export class ToreviewspecificpageComponent implements OnInit {
       });
     this.toaster.open({ text: 'Article Rejected successfully', position: 'top-center', type: 'warning' })
     this.routing.navigateByUrl("/ToReview");
+  }
+
+  ChangeToUnderReview(articleId: number) {
+    this.connection.ChangeToUnderReview(articleId)
+      .subscribe({
+        next: (data: any) => {
+          
+        }
+      });
+      this.ngOnInit()
+      this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' }) 
   }
 }

@@ -10,9 +10,11 @@ import { Subject } from 'rxjs';
   styleUrls: ['./articalreviewedpage.component.css']
 })
 export class ArticalreviewedpageComponent implements OnInit {
-  dtOptions: any= {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private route: Router, private connection: ConnectionService) { }
+
+  // Reviewer can get reviewed articles.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Reviewer")) {

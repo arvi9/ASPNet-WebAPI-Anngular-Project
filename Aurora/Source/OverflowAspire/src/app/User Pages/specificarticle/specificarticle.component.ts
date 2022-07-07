@@ -37,6 +37,7 @@ export class SpecificarticleComponent implements OnInit {
 
   }
 
+  //Get Specific article by its id.
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
@@ -60,7 +61,7 @@ export class SpecificarticleComponent implements OnInit {
   likeCount = 0;
   isLiked = false;
 
-
+  //Add like to article.
   likeTheButton = () => {
     this.like.articleId = this.articleId;
     this.connection.AddLike(this.like)
@@ -80,6 +81,7 @@ export class SpecificarticleComponent implements OnInit {
     this.iReadMore = !this.iReadMore
   }
 
+  // Add comment to the article.
 
   PostComment() {
     this.article.articleId = this.articleId;

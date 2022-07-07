@@ -12,6 +12,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class ArticlereviewedspecificpageComponent implements OnInit {
   articleId: number = 0
   constructor(private route: ActivatedRoute, private routes: Router, private connection: ConnectionService) { }
+
+  //Get article by article id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
     if (!AuthService.GetData("Reviewer")) {

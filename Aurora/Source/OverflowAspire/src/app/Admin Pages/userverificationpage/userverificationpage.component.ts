@@ -12,10 +12,11 @@ import { Subject } from 'rxjs';
   styleUrls: ['./userverificationpage.component.css']
 })
 export class UserverificationpageComponent implements OnInit {
-  dtOptions: any = {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private routing: Router, private toaster: Toaster, private connection: ConnectionService) { }
-
+    
+    // Get Users.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
@@ -34,7 +35,7 @@ export class UserverificationpageComponent implements OnInit {
       });
   }
 
-
+    // Here the admin can accept user.
   AcceptUser(userId: number) {
     this.connection.ApproveUser(userId)
       .subscribe({
@@ -45,7 +46,8 @@ export class UserverificationpageComponent implements OnInit {
     this.routing.navigateByUrl("/Employee");
 
   }
-
+  
+    // Here the admin can reject user.
 
   RejectUser(userId: number) {
     this.connection.RemoveUser(userId)
