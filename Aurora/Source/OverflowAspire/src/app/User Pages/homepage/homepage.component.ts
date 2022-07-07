@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from 'Models/Article';
 import { Query } from 'Models/Query';
@@ -18,7 +18,7 @@ export class HomePage{
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  @Input() ShowStatus: boolean = true;
+  
   constructor(private connection:ConnectionService,private route:Router) { }
   ngOnInit(): void {
     if(AuthService.GetData("token")==null) this.route.navigateByUrl("")

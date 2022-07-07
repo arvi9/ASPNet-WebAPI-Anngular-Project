@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { application } from 'Models/Application';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';

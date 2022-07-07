@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'Models/User';
+import { application } from 'Models/Application';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
@@ -14,7 +15,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./employee-page.component.css']
 })
 export class EmployeePageComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
   
   constructor(private http: HttpClient, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }

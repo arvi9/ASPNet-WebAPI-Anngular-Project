@@ -108,7 +108,7 @@
                     <div class="col-md-6 mb-4">
                         <div class="label">
                             <label class="form-label" for="name">Password</label>
-                            <input type="password" class="form-control" formControlName="password" required name="password">
+                            <input type="text" class="form-control" formControlName="password" required name="password">
                             <span class="text-danger"
                                 *ngIf=" this.user.controls['password'] &&  this.user.controls['password'].invalid &&  this.user.controls['password'].touched">Password
                                 field is Invalid</span>

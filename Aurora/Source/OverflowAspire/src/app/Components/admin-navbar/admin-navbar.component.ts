@@ -12,7 +12,7 @@ export class AdminNavbarComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-    
+  
     }
     status: boolean = false;
   clickEvent(){

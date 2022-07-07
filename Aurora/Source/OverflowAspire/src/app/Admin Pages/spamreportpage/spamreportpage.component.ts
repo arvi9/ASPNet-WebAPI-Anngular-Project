@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./spamreportpage.component.css']
 })
 export class SpamreportpageComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private connection: ConnectionService, private route: Router) { }
   ngOnInit(): void {

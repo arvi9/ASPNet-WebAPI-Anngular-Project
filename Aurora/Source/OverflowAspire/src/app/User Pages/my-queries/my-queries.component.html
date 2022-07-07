@@ -34,14 +34,9 @@
         <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength }">
             <div class="our-skills">
                 <div class="box-shadow">
-                    <div *ngIf="ShowStatus">
-                        <span *ngIf="item.isSolved==true" class="tag tag-Material">Solved</span>
-                        <span *ngIf="item.isSolved==false" class="tag tag-red">UnSolved</span>
-                    </div>
                     <div class="icon">
                         <img class="QueryImgIcon" src="http://primedepartamentos.com/images/icons/chat-icon.png">
                     </div>
-                    
                     <h4 class="card-text text-truncate">{{item.title}}</h4>
                     <p class="truncate-line-clamp">{{item.content}}</p>
                     <a class="btntag  tag-blue" routerLinkActive="active"

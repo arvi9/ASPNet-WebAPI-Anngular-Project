@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./userverificationpage.component.css']
 })
 export class UserverificationpageComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private routing: Router, private toaster: Toaster, private connection: ConnectionService) { }
 

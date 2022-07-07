@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { formatDate } from '@angular/common';
 import { ConnectionService } from 'src/app/Services/connection.service';
-import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-register',
@@ -35,7 +34,7 @@ export class RegisterComponent implements OnInit {
   age: Number = 0;
   year: number = 0;
 
-  constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router,private toaster: Toaster) { }
+  constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router) { }
 
 
   dobmessage: string = ''
@@ -133,7 +132,6 @@ export class RegisterComponent implements OnInit {
         next: (data) => {
         }
       });
-      this.toaster.open({ text: 'User Registered Successfully', position: 'top-center', type: 'success' })
     this.router.navigateByUrl("");
   }
 

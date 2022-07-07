@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./articalreviewedpage.component.css']
 })
 export class ArticalreviewedpageComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any= {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private route: Router, private connection: ConnectionService) { }
   ngOnInit(): void {

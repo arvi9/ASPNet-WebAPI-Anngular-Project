@@ -17,11 +17,7 @@
 </div>
 <div class="Content" style="min-height: 100vh;">
     <div class="container">
-        <div  *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"><button type="button" style="float:right"
-                    class="custom-btn btn-1">Check In</button></a>
-        </div>
         <div class="text-center">
-            <br>
             <h1>{{data.title}}</h1>
         </div>
         <div class="text-center pb-4">
@@ -30,10 +26,10 @@
         <p> {{data.content|htmlToPlaintext}}</p>
 
         <div class="container d-flex justify-content-between">
-            <a (click)="RejectArticle(data.articleId)"><button type="button"
-                    class="custom-btn btn-1">Reject</button></a>
             <a (click)="PublishArticle(data.articleId)"><button type="button"
                     class="custom-btn btn-1">Publish</button></a>
+            <a (click)="RejectArticle(data.articleId)"><button type="button"
+                    class="custom-btn btn-1">Reject</button></a>
         </div>
     </div>
 

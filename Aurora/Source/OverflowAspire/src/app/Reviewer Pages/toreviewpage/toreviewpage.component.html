@@ -18,7 +18,7 @@
     <h1>To Review</h1>
     <div class="Container">
         <div>
-            <table class="table table-striped row-border hover">
+            <table  class="table table-striped row-border hover">
 
                 <thead>
                     <tr class="tablecolor">
@@ -34,9 +34,9 @@
                         <td>{{item.articleId}}</td>
                         <td>{{item.authorName}}</td>
                         <td>{{item.title}}</td>
-                        <td><a routerLinkActive="active" 
-                                [routerLink]="['/ToReviewSpecific',item.articleId]">{{item.status}}</a></td>
-                        <td></td>
+                        <td><a routerLinkActive="active" btn.disabled="clicked" clicked=true (click)="actionMethod()"
+                                [routerLink]="['/ToReviewSpecific',item.articleId]">{{button}}</a></td>
+                        <td>Manimaran</td>
                     </tr>
                 </tbody>
             </table>

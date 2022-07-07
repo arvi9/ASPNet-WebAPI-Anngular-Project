@@ -28,23 +28,11 @@
                 <label class="text-danger"> {{imageError}}</label>
             </div>
             <br>
-            <label class="form-label" for="email">Invite People(optional):</label><br>
-            <tag-input [(ngModel)]='goalitems' name="out"
-                [onlyFromAutocomplete]="true" [editable]='true' [separatorKeyCodes]="[32,188,186,13,9]"
-                [placeholder]="'Add email'" secondaryPlaceholder="Add email address" [clearOnBlur]="true"
-                [addOnPaste]="true" [addOnBlur]="true" theme='bootstrap' required>
-                <tag-input-dropdown [autocompleteItems]="items" [showDropdownIfEmpty]="false" [dynamicUpdate]="true">
-                </tag-input-dropdown>
-            </tag-input>
-            <br>
             <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
             </ckeditor>
             <div class="editor-btn">
-                <button class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()">Save To
-                    Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
-                        aria-hidden="true"></span></button>
-                <button class="custom-btn btn-1" type="submit" value="Submit">Submit <span *ngIf="IsLoadingSubmit"
-                        class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                <button class="custom-btn btn-1" type="button" value="Save To Draft" (click)="saveToDraft()" >Save To Draft  <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                <button class="custom-btn btn-1" type="submit" value="Submit" >Submit  <span *ngIf="IsLoadingSubmit" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
 
             </div>
         </form>

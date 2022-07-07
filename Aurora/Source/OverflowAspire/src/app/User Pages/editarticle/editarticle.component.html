@@ -12,8 +12,7 @@
               <li class="breadcrumb-item active">
                   <a>Edit Article</a>
               </li>
-
-          </ol>
+            </ol>
       </nav>
     </div>
 <br>
@@ -21,7 +20,7 @@
 <br>
 
 <div class="container p-1">
-    <a  *ngIf="data.status=='InDraft'" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>
+    <a  *ngIf="data.status==='InDraft'" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button" class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>
   </div>
 <div class="container p-5 my-5 border">
     <div class="text-center">
