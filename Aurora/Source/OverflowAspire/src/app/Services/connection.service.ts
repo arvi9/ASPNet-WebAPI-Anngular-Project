@@ -35,6 +35,10 @@ export class ConnectionService {
     return this.http.get<any>(this.URL + 'Article/GetArticlesByArticleStatusId?ArticleStatusID=4', { headers: this.headers });
   }
 
+  GetUnderReviewArticles(): any {
+    return this.http.get<any>(this.URL + 'Article/GetArticlesByArticleStatusId?ArticleStatusID=3', { headers: this.headers });
+  }
+
   GetToReviewArticles(): any {
     return this.http.get<any>(this.URL + 'Article/GetArticlesByArticleStatusId?ArticleStatusID=2', { headers: this.headers });
   }
@@ -53,6 +57,10 @@ export class ConnectionService {
 
   GetMyArticles(): any {
     return this.http.get<any>(this.URL + 'Article/GetArticlesByUserId', { headers: this.headers });
+  }
+
+  GetPrivateArticles(): any {
+    return this.http.get<any>(this.URL + 'Article/GetPrivateArticles', { headers: this.headers });
   }
 
   GetMyQueries(): any {
@@ -79,6 +87,7 @@ export class ConnectionService {
   UnmarkAsReviewer(userId:number): any {
     return this.http.patch(this.URL + `User/UpdateUserByIsReviewer?UserId=${userId}&IsReviewer=False`,Object,{ headers: this.headers })  
   }
+  
 
   ApproveSpam(queryId:number): any {
     return this.http.patch(this.URL + `Query/UpdateSpamStatus?QueryId=${queryId}&VerifyStatusID=1`,Object,{ headers: this.headers })  
@@ -116,8 +125,8 @@ export class ConnectionService {
     return this.http.post<any>(this.URL + 'Article/CreateArticle', article, { headers: this.headers })
   }
 
-  CreatePrivateArticle(article: any) {
-    return this.http.post<any>(this.URL + 'Article/CreatePrivateArticle', article, { headers: this.headers })
+  CreatePrivateArticle(privatearticle: any) {
+    return this.http.post<any>(this.URL + 'Article/CreatePrivateArticle', privatearticle, { headers: this.headers })
   }
 
   MarkQueryAsSolved(queryId:number): any {

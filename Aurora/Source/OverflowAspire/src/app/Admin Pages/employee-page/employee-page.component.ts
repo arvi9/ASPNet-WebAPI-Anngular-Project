@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'Models/User';
-import { application } from 'Models/Application';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';

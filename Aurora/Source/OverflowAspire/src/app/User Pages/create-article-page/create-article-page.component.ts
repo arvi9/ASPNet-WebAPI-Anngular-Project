@@ -5,6 +5,12 @@ import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
+import { TagInputComponent } from 'ngx-chips';
+
+export interface sharedItem{
+  display:string,
+  value:number
+}
 
 
 
@@ -18,6 +24,12 @@ declare var CKEDITOR: any;
 export class CreateArticlePageComponent implements OnInit {
   value: any;
   display!: string;
+  sharedUsersId:any=[]
+
+  itemsAsObjects: any = {
+    id:0,
+    name:''
+  }
 
   IsLoadingSubmit: boolean = false;
   IsLoadingSaveDraft: boolean = false;
@@ -44,16 +56,21 @@ export class CreateArticlePageComponent implements OnInit {
     updatedOn: '',
     articleStatus: null,
     user: null,
-    IsPrivate: true,
+    IsPrivate: false,
     articleComments: [],
     articleLikes: null,
   }
+  
   public items = [
     { display: '', value: 0 },
   ];
 
-  public goalitems: share[] = [];
-
+  public goalitems:sharedItem[] = []
+    
+privateArticle:any={
+  article:this.article,
+  SharedusersId:[]
+}
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
@@ -62,7 +79,6 @@ export class CreateArticlePageComponent implements OnInit {
         element = editor.element;
       editor.name = "content";
       this.connection.GetEmployeePage().subscribe((data: any[]) => {
-        //
         data.forEach(item => this.items.push({ display: item.email, value: item.userId }))
       })
     });
@@ -71,6 +87,7 @@ export class CreateArticlePageComponent implements OnInit {
   onSubmit() {
     this.IsLoadingSubmit = true;
     this.article.articleStatusID = 2;
+    if(this.goalitems.length==0){
     this.connection.CreateArticle(this.article)
       .pipe(catchError(this.handleError)).subscribe({
         next: (data: any) => {
@@ -78,8 +95,23 @@ export class CreateArticlePageComponent implements OnInit {
           this.route.navigateByUrl("/MyArticles");
         }
       });
-   
-    // console.log(this.goalitems)
+    }
+    else{
+      this.article.IsPrivate=true;
+      this.goalitems.forEach(item =>this.sharedUsersId.push(item.value))
+      this.privateArticle={
+        article:this.article,
+        sharedUsersId:this.sharedUsersId
+      }
+      this.connection.CreatePrivateArticle(this.privateArticle)
+      .pipe(catchError(this.handleError)).subscribe({
+        next: (data: any) => {
+          this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+          this.route.navigateByUrl("/MyArticles");
+        }
+      });
+    }
+    
   }
 
   handleError(error: any) {
@@ -135,4 +167,5 @@ export class CreateArticlePageComponent implements OnInit {
       reader.readAsDataURL(fileInput.target.files[0]);
     } return false
   }
+  
 }

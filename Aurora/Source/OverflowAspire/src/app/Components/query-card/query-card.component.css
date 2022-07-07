@@ -123,14 +123,13 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
 }
 
 .tag-red {
-
-background: linear-gradient(to bottom, #ef473a, #cb2d3e);
-  color: #fafafa;
-}
-
-.tag-Material {
-
-  background: linear-gradient(to bottom,  blue, #9c27b0,#9c27b0);
+    background: linear-gradient(to bottom, #ce100d, #cd0a0a);
+    color: #fafafa;
+    
+  }
+  
+  .tag-Material {
+    background: linear-gradient(to bottom,  #58de54, #39d45b);
     color: #fafafa;
   }
 

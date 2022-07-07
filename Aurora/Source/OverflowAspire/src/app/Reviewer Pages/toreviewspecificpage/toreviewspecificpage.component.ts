@@ -51,4 +51,15 @@ export class ToreviewspecificpageComponent implements OnInit {
     this.toaster.open({ text: 'Article Rejected successfully', position: 'top-center', type: 'warning' })
     this.routing.navigateByUrl("/ToReview");
   }
+
+  ChangeToUnderReview(articleId: number) {
+    this.connection.ChangeToUnderReview(articleId)
+      .subscribe({
+        next: (data: any) => {
+          
+        }
+      });
+      this.ngOnInit()
+      this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' }) 
+  }
 }

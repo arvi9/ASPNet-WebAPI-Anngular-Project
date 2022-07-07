@@ -28,11 +28,11 @@
                 <label class="text-danger"> {{imageError}}</label>
             </div>
             <br>
-            <label class="form-label">Invite People(optional):</label><br>
-            <tag-input [ngModel]="goalitems" name="goalitems" [onlyFromAutocomplete]="true" 
-                [editable]='true' [separatorKeyCodes]="[32,188,186,13,9]" [placeholder]="'Add email'"
-                [clearOnBlur]="true" [addOnPaste]="true"
-                [addOnBlur]="true" theme='bootstrap' required>
+            <label class="form-label" for="email">Invite People(optional):</label><br>
+            <tag-input [(ngModel)]='goalitems' name="out"
+                [onlyFromAutocomplete]="true" [editable]='true' [separatorKeyCodes]="[32,188,186,13,9]"
+                [placeholder]="'Add email'" secondaryPlaceholder="Add email address" [clearOnBlur]="true"
+                [addOnPaste]="true" [addOnBlur]="true" theme='bootstrap' required>
                 <tag-input-dropdown [autocompleteItems]="items" [showDropdownIfEmpty]="false" [dynamicUpdate]="true">
                 </tag-input-dropdown>
             </tag-input>

@@ -9,6 +9,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./my-queries.component.css']
 })
 export class MyQueriesComponent implements OnInit {
+  @Input() ShowStatus: boolean = true;
   totalLength: any;
   page: number = 1;
   searchTitle="";
