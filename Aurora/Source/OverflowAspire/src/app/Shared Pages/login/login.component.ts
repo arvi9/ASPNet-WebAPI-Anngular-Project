@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { FormBuilder ,Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,17 +17,14 @@ export class LoginComponent implements OnInit {
   IsReviewer: boolean = false;
   IsLoading: boolean = false;
   IsVerified: string = ''
-  constructor(private spinnerService: NgxSpinnerService, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
-  user: any = {
-    Email: '',
-    Password: '',
-  }
+  constructor(private fb: FormBuilder,private spinnerService: NgxSpinnerService, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
+  user = this.fb.group({
+    emailAddress: ['', [Validators.required, Validators.pattern("([a-zA-Z0-9-_\.]+)@(aspiresys.com)")]],
+    password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
+  })
   ngOnInit(): void {
   }
 
-    //Screen login time = 30minutes.
-    // Admin cannot verify the user means User is in under verification..
-    //Admin can verified user means user can login and enter to homepage.
   onSubmit() {
     this.IsLoading = true;
     this.showErrorMessage = false;
