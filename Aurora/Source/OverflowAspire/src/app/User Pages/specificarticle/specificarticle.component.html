@@ -19,27 +19,32 @@
         <h1>{{data.title}}</h1>
     </div>
     <div class="panel panel-default p-3">
-        <div class="panel-heading bold"  [ngStyle]="{'font-weight':'600'}">Author Name:&nbsp;{{data.authorName}}</div>
+        <div class="panel-heading bold" [ngStyle]="{'font-weight':'600'}">Author Name:&nbsp;{{data.authorName}}</div>
         <div class="panel-body bold">Date:&nbsp;{{createdOn}}</div>
-    <div class="text-center pb-4 ">
+        <div class="text-center pb-4 ">
             <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
-        <div  [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
+        <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
 
         </div>
         <button type="custom-btn btn-1" (click)="showText()">
             {{ isReadMore ? 'Read More': 'Read Less' }}
         </button>
     </div>
+    <div *ngIf="data.comments.length!=0">
     <h4>{{data.comments.length}} comments</h4>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
         <table>
-          <tr *cdkVirtualFor="let comment of data.comments" >
-            <td class="example-dt"><br><i class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.message}}</i><hr></td>
-            <br>
-          </table>
-   
-      </cdk-virtual-scroll-viewport>
+            <tr *cdkVirtualFor="let comment of data.comments">
+                <td class="example-dt"><br><i
+                        class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.message}}</i>
+                    <hr>
+                </td>
+                <br>
+        </table>
+
+    </cdk-virtual-scroll-viewport>
+    </div>
 
     <br>
     <hr>
@@ -52,15 +57,15 @@
         <div class="like p-2 cursor"><i class="fa fa-share mx-2"></i><span class="ml-1">Share</span></div>
     </div>
     <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
-    <div class="container">
+        <div class="container">
 
-        <div class="d-flex flex-row align-items-start"><textarea
-            class="form-control form-control5" name="QueryComment" [(ngModel)]="article.comment"  placeholder="Enter comments"></textarea></div>
-        <div class="mt-2">
-            <input class="custom-btn btn-1"  type="submit" value="Post Comment"/>
+            <div class="d-flex flex-row align-items-start"><textarea class="form-control form-control5"
+                    name="QueryComment" [(ngModel)]="article.comment" placeholder="Enter comments"></textarea></div>
+            <div class="mt-2">
+                <input class="custom-btn btn-1" type="submit" value="Post Comment" />
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 </div>
 
 <app-footer></app-footer>

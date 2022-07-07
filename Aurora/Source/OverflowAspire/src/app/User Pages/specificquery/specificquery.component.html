@@ -39,26 +39,18 @@
 </pre>
 
 
-
-  <h4>{{data.comments.length}} Answers</h4>
-  <div>
-
-
-
-
-    <br>
+  <div *ngIf="data.comments.length!=0">
+    <h4>{{data.comments.length}}Answers</h4>
+    <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+      <table>
+        <tr *cdkVirtualFor="let comment of data.comments">
+          <td class="example-dt"><br><i class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>{{comment.message}}</i>
+            <hr>
+          </td>
+          <br>
+      </table>
+    </cdk-virtual-scroll-viewport>
   </div>
-
-
-  <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
-    <table>
-           <tr *cdkVirtualFor="let comment of data.comments">     
-       <td class="example-dt"><br><i class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>{{comment.message}}</i> <hr></td>
-       <br>   
-       
- 
-  </table>
-  </cdk-virtual-scroll-viewport>
   <br>
   <br>
 
