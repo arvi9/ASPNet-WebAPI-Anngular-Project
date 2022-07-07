@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AspireOverflow.Services
 {
-   
+
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
@@ -22,14 +22,13 @@ namespace AspireOverflow.Services
             _logger = logger;
 
         }
-      
-        //to generate token using login credentials.
+
         public object GenerateToken(Login Credentials)
         {
-         ValidateUser(Credentials);
+            ValidateUser(Credentials);
             try
             {
-                 var user = _userService.GetUser(Credentials.Email!, Credentials.Password!);
+                var user = _userService.GetUser(Credentials.Email!, Credentials.Password!);
                 //create claims details based on the user information
                 var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
@@ -44,12 +43,18 @@ namespace AspireOverflow.Services
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                 var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var token = new JwtSecurityToken(
-                    _configuration["Jwt:Issuer"],
+               
+                var encryptingCredentials = new EncryptingCredentials(key, JwtConstants.DirectKeyUseAlg, SecurityAlgorithms.Aes256CbcHmacSha512);
+
+                var token = new JwtSecurityTokenHandler().CreateJwtSecurityToken(
+                  _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
-                        claims,
-                    expires: DateTime.UtcNow.AddMinutes(360),
-                    signingCredentials: signIn);
+                    new ClaimsIdentity(claims),
+                    DateTime.Now,
+                    DateTime.Now.AddHours(1),
+                    DateTime.Now,
+                    signIn,
+                    encryptingCredentials);
 
                 var Result = new
                 {
@@ -62,7 +67,8 @@ namespace AspireOverflow.Services
 
                 return Result;
 
-            } catch (ValidationException exception)
+            }
+            catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenService", " GenerateToken(String Email, string Password)", exception, Credentials));
                 throw;
@@ -75,9 +81,10 @@ namespace AspireOverflow.Services
 
             }
         }
-          private void ValidateUser(Login Credentials){
-            if(Credentials == null )throw new ArgumentException("Credentials cannot be null");
-             Validation.ValidateUserCredentials(Credentials.Email!,Credentials.Password!);
+        private void ValidateUser(Login Credentials)
+        {
+            if (Credentials == null) throw new ArgumentException("Credentials cannot be null");
+            Validation.ValidateUserCredentials(Credentials.Email!, Credentials.Password!);
         }
 
     }

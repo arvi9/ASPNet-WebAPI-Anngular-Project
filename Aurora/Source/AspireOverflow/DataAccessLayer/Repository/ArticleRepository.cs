@@ -97,7 +97,7 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 var ExistingArticle = GetArticleByID(ArticleId);
-                if (ExistingArticle.CreatedBy == UpdatedByUserId) throw new ValidationException("Reviewer cannot update status of thier own articles");
+                if (ExistingArticle.CreatedBy == UpdatedByUserId && ArticleStatusID > 2) throw new ValidationException("Reviewer cannot update status of thier own articles");
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;

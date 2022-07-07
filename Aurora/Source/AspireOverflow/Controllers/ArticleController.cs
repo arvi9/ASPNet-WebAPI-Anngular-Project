@@ -529,19 +529,19 @@ namespace AspireOverflow.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> GetPrivateArticles(int UserId)
+        public async Task<ActionResult> GetPrivateArticles()
         {
-            if (UserId <= 0) return BadRequest(Message("UserId must be greater than 0"));
+          
             try
             {
-                var ListOfPrivateArticles = _articleService.GetPrivateArticles(UserId);
+                var ListOfPrivateArticles = _articleService.GetPrivateArticles(GetCurrentUser().UserId);
 
                 return await Task.FromResult(Ok(ListOfPrivateArticles));
             }
 
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleController", " GetPrivateArticles(int UserId)", exception, UserId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleController", " GetPrivateArticles()", exception));
                 return Problem($"Error Occured while processing your request");
             }
 

@@ -47,7 +47,6 @@ builder.Services.AddTransient<IArticleRepository,ArticleRepository>();
 builder.Services.AddTransient<IUserRepository,UserRepository>();
 builder.Services.AddTransient<IUserService,UserService>();
 builder.Services.AddTransient<ITokenService,TokenService>();
-
 builder.Services.AddTransient<IArticleService,ArticleService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<MailService>();
@@ -56,13 +55,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
+    
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidAudience = builder.Configuration["Jwt:Audience"],
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        TokenDecryptionKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
 builder.Services.AddSwaggerGen(c => {
@@ -110,14 +111,9 @@ catch (Exception exception)
     Console.WriteLine(exception.Message);
 
 }
-
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 
 if (app.Environment.IsDevelopment())
 {
@@ -125,14 +121,10 @@ if (app.Environment.IsDevelopment())
 
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
-
 app.UseHttpLogging();
 app.UseAuthentication();
 app.UseAuthorization();
-
-
 app.UseCors(builder =>
 {
     builder
@@ -140,8 +132,5 @@ app.UseCors(builder =>
     .AllowAnyMethod()
     .AllowAnyHeader();
 });
-
-
 app.MapControllers();
-
 app.Run();
