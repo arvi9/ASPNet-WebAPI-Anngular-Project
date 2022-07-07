@@ -11,6 +11,9 @@
     <div class="col-xl-5 mx-auto">
         <div class="card-body p-4 p-lg-5 border">
             <form [formGroup]="user" (ngSubmit)="userdata()" novalidate>
+                <div>
+                    <h5 class="text-center text-danger">{{error}}</h5>
+                </div>
                 <h5 class="card-title text-center">Registration</h5>
 
                 <div class="row">
@@ -108,7 +111,8 @@
                     <div class="col-md-6 mb-4">
                         <div class="label">
                             <label class="form-label" for="name">Password</label>
-                            <input type="password" class="form-control" formControlName="password" required name="password">
+                            <input type="password" class="form-control" formControlName="password" required
+                                name="password">
                             <span class="text-danger"
                                 *ngIf=" this.user.controls['password'] &&  this.user.controls['password'].invalid &&  this.user.controls['password'].touched">Password
                                 field is Invalid</span>
@@ -130,8 +134,7 @@
                                 *ngIf=" this.user.controls['dateOfBirth'] &&  this.user.controls['dateOfBirth'].invalid &&  this.user.controls['dateOfBirth'].touched">dateOfBirth
                                 field is Required</span>
 
-                            <span class="text-danger"
-                                *ngIf="validateDateOfBirth()">datebirth
+                            <span class="text-danger" *ngIf="validateDateOfBirth()">datebirth
                                 is invalid</span>
 
                         </div>

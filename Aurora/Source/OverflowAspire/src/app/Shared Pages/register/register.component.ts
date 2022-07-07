@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { formatDate } from '@angular/common';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { Toaster } from 'ngx-toast-notifications';
+import { ThemeService } from 'ng2-charts';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +13,13 @@ import { Toaster } from 'ngx-toast-notifications';
   styleUrls: ['./register.component.css']
 })
 
-  //User can register his details.
+//User can register his details.
 export class RegisterComponent implements OnInit {
   IsLoading: boolean = false;
   designationDetails: any;
   departmentDetails: any;
   GenderDetails: any;
-
+  error: string = ""
   Designationlist: any[] = []
   Designationlist1: any[] = []
   user = this.fb.group({
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
   age: Number = 0;
   year: number = 0;
 
-  constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router,private toaster: Toaster) { }
+  constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router, private toaster: Toaster) { }
 
 
   dobmessage: string = ''
@@ -57,7 +58,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-   this.connection.GetDesignations()
+    this.connection.GetDesignations()
       .subscribe({
         next: (data) => {
           this.designationDetails = data;
@@ -133,10 +134,18 @@ export class RegisterComponent implements OnInit {
     this.connection.Register(registeruser)
       .subscribe({
         next: (data) => {
+        },
+        error: (error) => {
+          this.error = error.error.message;
+          this.IsLoading=false;
+          this.user.reset();
+        },
+        complete: () => {
+          this.toaster.open({ text: 'User Registered Successfully', position: 'top-center', type: 'success' })
+          this.router.navigateByUrl("");
         }
       });
-      this.toaster.open({ text: 'User Registered Successfully', position: 'top-center', type: 'success' })
-    this.router.navigateByUrl("");
+
   }
 
 }
