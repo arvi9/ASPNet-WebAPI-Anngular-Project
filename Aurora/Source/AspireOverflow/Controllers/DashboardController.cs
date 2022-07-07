@@ -67,7 +67,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("DashboardController", "GetReviewerDashboard(int ReviewerId)", exception));
-                return BadRequest("Error Occured while processing your request");
+                return BadRequest(Message("Error Occured while processing your request"));
             }
         }
 
@@ -104,7 +104,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("DashboardController", "GetAdminDashboard()", exception));
-                return BadRequest("Error Occured while processing your request");
+                return BadRequest(Message("Error Occured while processing your request"));
             }
         }
 
@@ -139,7 +139,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("DashboardController", "GetHomePage()", exception));
-                return BadRequest("Error Occured while processing your request");
+                return BadRequest(Message("Error Occured while processing your request"));
             }
         }
 

@@ -188,7 +188,7 @@ namespace AspireOverflow.Controllers
         [HttpPost]
         public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
         {
-            if (Like == null) return BadRequest("Object cannot be null");
+            if (Like == null) return BadRequest(Message("Object cannot be null"));
             if (Like.ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
             Like.UserId = GetCurrentUser().UserId;
             try
@@ -287,7 +287,6 @@ namespace AspireOverflow.Controllers
             if (ArticleStatusID >= 3 && !GetCurrentUser().IsReviewer) return BadRequest(Message("Only Reviewer can able to change the status"));
             try
             {
-
                 return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID, GetCurrentUser().UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest(Message($"Error Occurred while updating the status of the Article:{ArticleId}"));
             }
             catch (ItemNotFoundException exception)
@@ -298,7 +297,7 @@ namespace AspireOverflow.Controllers
             catch (ValidationException exception)  //Occurs When Reviewer updating status for his own articles
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "ChangeArticleStatus(int ArticleId, int ArticleStatusID)", exception, ArticleId, ArticleStatusID));
-                return BadRequest($"{exception.Message}");
+                return BadRequest(Message($"{exception.Message}"));
             }
             catch (Exception exception)
             {
@@ -315,7 +314,7 @@ namespace AspireOverflow.Controllers
             if (ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
             try
             {
-                return _articleService.DeleteArticleByArticleId(ArticleId) ? await Task.FromResult(Ok("Successfully Deleted the draft article")) : BadRequest(Message($"Error Occured while deleting article with ArticleID:{ArticleId} "));
+                return _articleService.DeleteArticleByArticleId(ArticleId) ? await Task.FromResult(Ok(Message("Successfully Deleted the draft article"))) : BadRequest(Message($"Error Occured while deleting article with ArticleID:{ArticleId} "));
             }
             catch (ArgumentException exception)
             {

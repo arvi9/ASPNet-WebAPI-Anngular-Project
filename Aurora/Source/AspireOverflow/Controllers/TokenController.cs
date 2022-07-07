@@ -44,7 +44,7 @@ namespace AspireOverflow.Controllers
 
         [HttpPost]
         public IActionResult AuthToken(Login Crendentials)
-        {  if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email!, Crendentials.Password!)) return BadRequest("Login Credentials cannot be null");
+        {  if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email!, Crendentials.Password!)) return BadRequest(Message("Login Credentials cannot be null"));
           try
             {
                 var Result = _tokenService.GenerateToken(Crendentials);
@@ -53,7 +53,7 @@ namespace AspireOverflow.Controllers
             catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email!));
-                return BadRequest(exception.Message);
+                return BadRequest(Message(exception.Message));
 
             }
             catch (Exception exception)

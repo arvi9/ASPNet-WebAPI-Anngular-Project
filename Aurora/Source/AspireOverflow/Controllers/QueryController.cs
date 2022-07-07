@@ -399,7 +399,7 @@ namespace AspireOverflow.Controllers
             try
             {
                 comment.CreatedBy=GetCurrentUser().UserId;
-                return _queryService.CreateComment(comment) ? await Task.FromResult(Ok("Successfully added comment to the Query")) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
+                return _queryService.CreateComment(comment) ? await Task.FromResult(Ok(Message("Successfully added comment to the Query"))) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
             }
             catch (ValidationException exception)
             {

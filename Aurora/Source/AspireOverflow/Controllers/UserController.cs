@@ -58,7 +58,7 @@ public class UserController : BaseController
         try
         {
             //Development.Web is Enum constants which indicated the request approaching team.
-            return _UserService.CreateUser(User) ? await Task.FromResult(Ok("Successfully Created")) : BadRequest(Message($"Error Occured while Adding User :{HelperService.PropertyList(User)}"));
+            return _UserService.CreateUser(User) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding User :{HelperService.PropertyList(User)}"));
         }
         catch (ValidationException exception)
         {
@@ -100,8 +100,8 @@ public class UserController : BaseController
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
-            if (IsVerified) return _UserService.ChangeUserVerificationStatus(UserId, 1) ? await Task.FromResult(Ok($"Successfully marked as Verified User in the record with UserId :{UserId}")) : BadRequest(Message($"Error Occurred while marking User as Verified with UserId :{UserId}"));
-            else return _UserService.ChangeUserVerificationStatus(UserId, 2) ? await Task.FromResult(Ok($"Successfully marked as UnVerified User in the record with UserId :{UserId}")) : BadRequest(Message($"Error Occurred while marking User as UnVerified with UserId :{UserId}"));
+            if (IsVerified) return _UserService.ChangeUserVerificationStatus(UserId, 1) ? await Task.FromResult(Ok(Message($"Successfully marked as Verified User in the record with UserId :{UserId}"))) : BadRequest(Message($"Error Occurred while marking User as Verified with UserId :{UserId}"));
+            else return _UserService.ChangeUserVerificationStatus(UserId, 2) ? await Task.FromResult(Ok(Message($"Successfully marked as UnVerified User in the record with UserId :{UserId}"))) : BadRequest(Message($"Error Occurred while marking User as UnVerified with UserId :{UserId}"));
         }
         catch (ItemNotFoundException exception)
         {
@@ -142,7 +142,7 @@ public class UserController : BaseController
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
-           return _UserService.UpdateUserByIsReviewer(UserId, IsReviewer) ? await Task.FromResult( Ok($"Successfully Updated the Reviewer status with UserId :{UserId}")) : BadRequest(Message($"Error Occurred while updating the reviewer status with UserId :{UserId}"));
+           return _UserService.UpdateUserByIsReviewer(UserId, IsReviewer) ? await Task.FromResult( Ok(Message($"Successfully Updated the Reviewer status with UserId :{UserId}"))) : BadRequest(Message($"Error Occurred while updating the reviewer status with UserId :{UserId}"));
           
         }
         catch (ItemNotFoundException exception)
@@ -188,7 +188,7 @@ public class UserController : BaseController
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
         try
         {
-            return _UserService.RemoveUser(UserId) ? await Task.FromResult(Ok("Not Verified User has been rejected succfully")) : BadRequest(Message($"Not Allowed to remove User with UserId:{UserId}"));
+            return _UserService.RemoveUser(UserId) ? await Task.FromResult(Ok(Message("Not Verified User has been rejected succfully"))) : BadRequest(Message($"Not Allowed to remove User with UserId:{UserId}"));
         }
         catch (ItemNotFoundException exception)
         {
