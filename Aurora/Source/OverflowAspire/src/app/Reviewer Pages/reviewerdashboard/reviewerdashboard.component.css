@@ -21,7 +21,10 @@ body {
 
 .cardRight {
     
-    border-style: solid
+    border-style: solid;
+    width: 18rem;
+    margin: 10px;
+
 }
 
 
@@ -38,4 +41,26 @@ body {
     float:right;
     
 }
+.Content
+{
+    min-height: 100vh;
+}
 
+.cardtitle
+{
+    text-align: center;
+}
+
+.cardtext
+{
+    text-align: center;
+}
+#piechart
+{
+    width: 76;
+    height: 76;
+}
+.breadcrumb
+{
+    margin: 20px;
+}

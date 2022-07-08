@@ -40,3 +40,13 @@
   background: rgb(4, 149, 206);
 
 }
+
+.Content
+{
+  min-height: 100vh;
+}
+
+.breadcrumb
+{
+  margin: 20px;
+}

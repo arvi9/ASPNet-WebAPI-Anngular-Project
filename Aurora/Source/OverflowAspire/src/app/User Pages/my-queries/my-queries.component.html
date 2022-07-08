@@ -1,18 +1,18 @@
 <app-navbar></app-navbar>
 
-<div style="margin:20px;">
+<div class="breadcrumb">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a routerLink="/Home" routerLinkActive="active">Home</a>
+              <a routerLink="/Home"  routerLinkActive="active">Home</a>
             </li>
             <li class="breadcrumb-item active">
                 My Queries
             </li>
-
+  
         </ol>
     </nav>
-</div>
+  </div>
 <div class="Content" style="min-height: 100vh;">
     <div *ngIf="data.length>0; else ArrayEmpty">
         <h1>My Queries</h1>

@@ -190,3 +190,7 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
     background: rgb(4, 149, 206);
 
 }
+.breadcrumb
+{
+    margin: 20px;
+}

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div style="margin:20px">
+<div class="breadcrumb">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -15,7 +15,7 @@
         </ol>
     </nav>
 </div>
-<div class="Content" style="min-height: 100vh;">
+<div class="Content">
     <div class="container">
         <div  *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"><button type="button" style="float:right"
                     class="custom-btn btn-1">Check In</button></a>

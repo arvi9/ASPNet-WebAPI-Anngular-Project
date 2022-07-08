@@ -1,49 +1,49 @@
 <app-navbar></app-navbar>
-<div style="margin:20px">
+<div class="breadcrumb">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a routerLink="/ReviewerDashboard" routerLinkActive="active">Dashboard</a>
-    </li>
+      </li>
     </ol>
   </nav>
 </div>
 
 
-<div class="Content" style="min-height: 100vh;">
+<div class="Content">
 
-    <h2 class="heading">Overview of Dashboard</h2>
+  <h2 class="heading">Overview of Dashboard</h2>
 
 
-    <div class="Container">
-        <div class="wrapper">
-            <canvas id="piechart" width="76" height="76"></canvas>
-        </div>
-        <div class="card">
-          <div class="cardRight" style="width: 18rem; margin:10px" routerLink="/ToReview" routerLinkActive="active" >
-            <div class="card-body">
-              <h5 class="card-title" style="text-align: center;">{{piedata.articlesTobeReviewed}}</h5>
-              <p class="card-text" style="text-align: center;"> Articles To Review</p>
-            </div>
-          </div>        
-        
-          <div class="cardRight" style="width: 18rem; margin:10px" routerLink="/ArticleReviewed" routerLinkActive="active">
-            <div class="card-body">
-              <h5 class="card-title" style="text-align: center;">{{piedata.articlesReviewed}}</h5>
-              <p class="card-text" style="text-align: center;"> Articles Reviewed</p>
-  
-            </div>
-          </div> 
-         
-          <div class="cardRight" style="width: 18rem ; margin:10px">
-            <div class="card-body">
-              <h5 class="card-title" style="text-align: center;">{{piedata.totalNumberOfArticles}}</h5>
-              <p class="card-text" style="text-align: center;">Total Number of Articles</p>
-            </div>
-  
-          </div>
-            
-        </div>
+  <div class="Container">
+    <div class="wrapper">
+      <canvas id="piechart" ></canvas>
     </div>
+    <div class="card">
+      <div class="cardRight" routerLink="/ToReview" routerLinkActive="active">
+        <div class="card-body">
+          <h5 class="cardtitle">{{piedata.articlesTobeReviewed}}</h5>
+          <p class="cardtext"> Articles To Review</p>
+        </div>
+      </div>
+
+      <div class="cardRight" routerLink="/ArticleReviewed" routerLinkActive="active">
+        <div class="card-body">
+          <h5 class="cardtitle">{{piedata.articlesReviewed}}</h5>
+          <p class="cardtext"> Articles Reviewed</p>
+
+        </div>
+      </div>
+
+      <div class="cardRight">
+        <div class="card-body">
+          <h5 class="cardtitle">{{piedata.totalNumberOfArticles}}</h5>
+          <p class="cardtext">Total Number of Articles</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>

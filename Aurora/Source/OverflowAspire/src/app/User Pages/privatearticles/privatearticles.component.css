@@ -461,4 +461,11 @@ h4{
   .user__info > small {
     color: #666;
   }
+  .Content{
+    min-height: 100vh;
+  }
+  .breadcrumb
+  {
+    margin: 20px;
+  }
 
