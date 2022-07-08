@@ -15,10 +15,13 @@
 					  </div>
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Email </label>
-						<input type="text" id="email" #email="ngModel" class="form-control" name="email" [(ngModel)]="user.Email" required>
-						<div class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors?.['required']">
+						<input type="text" id="email" #email="ngModel" class="form-control" name="email" [(ngModel)]="user.Email" pattern="([a-zA-Z0-9-_\.]+)@(aspiresys.com)" required>
+						<div *ngIf="email.errors && (email.invalid || email.touched)">
+						<small class="text-danger" *ngIf="email.errors['pattern']">Email should be valid (Example-xxx@aspiresys.com)</small>
+						<small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors?.['required']">
 							Email Address is required.
-						  </div>
+						</small>
+						</div>
 					</div>
 					<div class="form-group mb-3 p-2">
 						<label class="label" for="name">Password</label>

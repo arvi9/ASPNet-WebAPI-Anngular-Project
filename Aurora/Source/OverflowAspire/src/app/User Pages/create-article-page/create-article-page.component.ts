@@ -38,7 +38,7 @@ export class CreateArticlePageComponent implements OnInit {
   cardImageBase64: string = "";
   test: any;
   public ckeditorContent: string = "";
-
+  clicked = false;
 
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
   article: any = {
@@ -87,9 +87,11 @@ privateArticle:any={
 
     //Create and post the article.
   onSubmit() {
+
     this.IsLoadingSubmit = true;
     this.article.articleStatusID = 2;
     if(this.goalitems.length==0){
+    
     this.connection.CreateArticle(this.article)
       .pipe(catchError(this.handleError)).subscribe({
         next: (data: any) => {
@@ -106,6 +108,7 @@ privateArticle:any={
         article:this.article,
         sharedUsersId:this.sharedUsersId
       }
+    
       this.connection.CreatePrivateArticle(this.privateArticle)
       .pipe(catchError(this.handleError)).subscribe({
         next: (data: any) => {
@@ -150,6 +153,11 @@ privateArticle:any={
           'Maximum size allowed is ' + max_size / 1000 + 'Mb';
         return false;
       }
+      // if (fileInput.target.files[0].size<0) {
+      //   this.imageError =
+      //     'image is required';
+      //   return false;
+      // }
       if (!allowed_types.includes(fileInput.target.files[0].type)) {
         this.imageError = 'Only Images are allowed ( JPG | PNG )';
         return false;
