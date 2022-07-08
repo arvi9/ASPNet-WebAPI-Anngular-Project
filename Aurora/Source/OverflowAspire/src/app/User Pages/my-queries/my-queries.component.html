@@ -14,7 +14,7 @@
     </nav>
   </div>
 <div class="Content" style="min-height: 100vh;">
-    <div *ngIf="data.length>0; else ArrayEmpty">
+    
     <h1>My Queries</h1>
     <div class="container card">
         <form>
@@ -59,10 +59,4 @@
     </div>
     
 </div>
-</div>
-<ng-template #ArrayEmpty>
-  <div class="text-center">
-    No records found.
-  </div>
-</ng-template>
 <app-footer></app-footer>

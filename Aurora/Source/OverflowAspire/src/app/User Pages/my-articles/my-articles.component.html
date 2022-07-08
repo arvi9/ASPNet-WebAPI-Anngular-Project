@@ -1,7 +1,5 @@
 <app-navbar></app-navbar>
-
 <div class="Content" style="min-height: 100vh;">
-   
     <div style="margin:20px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -15,16 +13,16 @@
             </ol>
         </nav>
     </div>
-    <div *ngIf="data.length>0; else ArrayEmpty">
+
     <h1>My Articles</h1>
     <div class="container card">
         <form>
-            <label class="labeltext">Title</label>
-            <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off">
-            <label class="labeltext">From</label>
-            <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off">
-            <label class="labeltext">To</label>
-            <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off">
+            <label class="labeltext">Title <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" /></label>
+            
+            <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off" /></label>
+            
+            <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off"/></label>
+            
             <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
         </form>
     </div>
@@ -59,11 +57,4 @@
             <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
-</div>
-</div>
-    <ng-template #ArrayEmpty>
-        <div class="text-center">
-            No records found.
-        </div>
-    </ng-template>
     <app-footer></app-footer>

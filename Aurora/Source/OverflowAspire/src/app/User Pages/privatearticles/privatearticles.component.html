@@ -17,12 +17,13 @@
     <h1>Shared With Me</h1>
     <div class="container card">
         <form>
-            <label class="labeltext">Title</label>
-            <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off">
-            <label class="labeltext">From</label>
-            <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off">
-            <label class="labeltext">To</label>
-            <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off">
+            <label class="labeltext">Title 
+                <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off"/></label>
+            
+            <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off"/></label>
+            
+            <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off" /<input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off">></label>
+            
             <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
         </form>
     </div>

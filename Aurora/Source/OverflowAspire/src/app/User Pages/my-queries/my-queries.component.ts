@@ -36,25 +36,28 @@ export class MyQueriesComponent implements OnInit {
 
 
     //1.Search by title
-    if (searchTitle.length != 0 && searchSolvedQueries==false && searchUnSolvedQueries==false) {
+    else if (searchTitle.length != 0 && searchSolvedQueries==false && searchUnSolvedQueries==false) {
       this.data = this.filteredData.filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
     }
     //2.Search by SolvedQueries
-    if (searchTitle == '' && searchSolvedQueries!=false && searchUnSolvedQueries==false) {
+    else if (searchTitle == '' && searchSolvedQueries!=false && searchUnSolvedQueries==false) {
       this.data = this.filteredData.filter((item) => item.isSolved== true);
     }
     //3. Search by UnsolvedQueries
-    if (searchTitle == '' && searchSolvedQueries==false && searchUnSolvedQueries!=false) {    
+    else if (searchTitle == '' && searchSolvedQueries==false && searchUnSolvedQueries!=false) {    
       this.data = this.filteredData.filter(item=> item.isSolved == false);
     }
     //4. Search by title and unsolved Queries
-    if (searchTitle.length != 0 && searchSolvedQueries==false && searchUnSolvedQueries!=false) {
+    else if (searchTitle.length != 0 && searchSolvedQueries==false && searchUnSolvedQueries!=false) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) &&  item.isSolved == false });
     }
     //5. search by title and Solved Queries
-    if (searchTitle.length != 0 && searchSolvedQueries!=false && searchUnSolvedQueries==false) {
+    else if (searchTitle.length != 0 && searchSolvedQueries!=false && searchUnSolvedQueries==false) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) &&  item.isSolved == true});
     }
+    this.searchTitle='';
+    this.searchSolvedQueries=false;
+    this.searchUnSolvedQueries=false;
 }
 }
 

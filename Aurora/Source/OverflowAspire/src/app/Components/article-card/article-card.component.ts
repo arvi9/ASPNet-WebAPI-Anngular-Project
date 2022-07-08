@@ -55,9 +55,7 @@ export class ArticleCardComponent implements OnInit {
     }
     
   }
-  public data: Article[] = [
-
-  ];
+  public data: Article[] = [];
   // Filter articles by Title,Author,Fromdate and Todate.
 
   public filteredData: Article[] = [];
