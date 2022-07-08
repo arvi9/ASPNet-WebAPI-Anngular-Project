@@ -8,3 +8,11 @@ h1 {
 .tablecolor{
     background:lightskyblue;
 }
+.breadcrumb
+{
+    margin: 50px;
+}
+.Content
+{
+    min-height: 100vh;
+}

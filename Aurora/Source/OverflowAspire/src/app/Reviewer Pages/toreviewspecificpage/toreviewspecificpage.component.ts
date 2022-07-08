@@ -74,7 +74,12 @@ export class ToreviewspecificpageComponent implements OnInit {
           this.ngOnInit()
           this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' })
         }
-      });
-
+      });  
+      setTimeout(
+        () => {
+          location.reload(); // the code to execute after the timeout
+        },
+        1000// the time to sleep to delay for
+    );
   }
 }

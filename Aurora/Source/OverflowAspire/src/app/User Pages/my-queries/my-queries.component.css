@@ -59,10 +59,6 @@ h4 {
     height: 60px;
     width: 60px;
     margin-left: 12px;
-
-
-
-
 }
 
 .readmore {
@@ -193,4 +189,8 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
 .breadcrumb
 {
     margin: 20px;
+}
+.Content
+{
+    min-height: 100vh;
 }

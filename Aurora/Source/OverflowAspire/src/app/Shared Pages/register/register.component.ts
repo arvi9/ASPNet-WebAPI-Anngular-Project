@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   Designationlist: any[] = []
   Designationlist1: any[] = []
   user = this.fb.group({
-    fullName: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("^[A-Za-z ]+$")]],
+    fullName: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(20), Validators.pattern("^[A-Za-z ]+$")]],
     gender: ['', [Validators.required]],
     aceNumber: ['', [Validators.required, Validators.pattern("ACE+[0-9]{4}")]],
     departmentValidate: ['', [Validators.required]],

@@ -41,12 +41,14 @@
 
 }
 
-.Content
-{
+.Content {
   min-height: 100vh;
 }
 
-.breadcrumb
-{
+.breadcrumb {
   margin: 20px;
+}
+
+.checkin {
+  float:right;
 }

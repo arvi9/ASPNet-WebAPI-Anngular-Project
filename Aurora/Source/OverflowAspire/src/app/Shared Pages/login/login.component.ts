@@ -31,12 +31,13 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.IsAdmin = data.isAdmin,
-            this.IsReviewer = data.isReviewer,
-            this.IsVerified = data.isVerified
+          this.IsReviewer = data.isReviewer,
+          this.IsVerified = data.isVerified
           AuthService.SetDataWithExpiry("token", data.token, data.expiryInMinutes)
           AuthService.SetDataWithExpiry("Admin", data.isAdmin, data.expiryInMinutes)
           AuthService.SetDataWithExpiry("Reviewer", data.isReviewer, data.expiryInMinutes)
           this.connection.initializeTokenHeader(AuthService.GetData("token"))
+           console.log(data)
           if (this.IsAdmin) {
             this.route.navigateByUrl("/AdminDashboard");
           }
@@ -50,17 +51,11 @@ export class LoginComponent implements OnInit {
             }
           }
         },
-
+        
         error: (error) => {
           this.IsLoading = false;
           this.showErrorMessage = true;
         }
       });
-
-
-
-
-
   }
-
 }

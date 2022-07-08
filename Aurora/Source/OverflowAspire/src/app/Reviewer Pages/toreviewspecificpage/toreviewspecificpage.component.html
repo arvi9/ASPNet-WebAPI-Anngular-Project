@@ -17,8 +17,8 @@
 </div>
 <div class="Content">
     <div class="container">
-        <div  *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"><button type="button" style="float:right"
-                    class="custom-btn btn-1">Check In</button></a>
+        <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)" class="checkin">
+            <button type="button"  class="custom-btn btn-1">Check In</button></a>
         </div>
         <div>
             <h5 class="text-center text-danger">{{error}}</h5>
@@ -31,13 +31,14 @@
             <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
         <p> {{data.content|htmlToPlaintext}}</p>
-
-        <div class="container d-flex justify-content-between" >
-            <a (click)="RejectArticle(data.articleId)"><button type="button"
-                    class="custom-btn btn-1">Reject</button></a>
-            <a (click)="PublishArticle(data.articleId)"><button type="button"
-                    class="custom-btn btn-1">Publish</button></a>
+        <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
+            <a (click)="RejectArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
+                    type="button" class="custom-btn btn-1">Reject</button></a>
+            <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
+                    type="button" class="custom-btn btn-1">Publish</button></a>
         </div>
+
+
     </div>
 
 </div>
