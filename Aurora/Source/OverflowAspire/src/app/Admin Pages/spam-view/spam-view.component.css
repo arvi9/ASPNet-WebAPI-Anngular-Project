@@ -15,4 +15,13 @@
 
 .Content {
   margin-left: 20%;
+  min-height: 100vh;
+}
+.Title
+{
+  text-align: center;
+}
+.breadcrumb
+{
+  margin: 20px;
 }

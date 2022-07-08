@@ -219,3 +219,7 @@ body {
   height: 150px;
   width: 103%
 }
+.breadcrumb
+{
+  margin: 20px;
+}

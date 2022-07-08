@@ -1,377 +1,291 @@
 h1,
 h2 {
-    font-weight: 700 !important
+  font-weight: 700 !important
 }
 
 h3,
 h4 {
-    font-weight: 600 !important
+  font-weight: 600 !important
 }
 
 h5,
 h6 {
-    font-weight: 500 !important
+  font-weight: 500 !important
 }
 
 .custom-btn {
-
   width: auto;
-
   height: 40px;
-
   color: #fff;
-
   border-radius: 5px;
-
   padding: 10px 15px;
-
-  font-family: 'Lato', sans-serif;
-
+  font-family: Lato, sans-serif;
   font-weight: 500;
-
-  background: transparent;
-
+  background: 0 0;
   cursor: pointer;
-
-  transition: all 0.3s ease;
-
+  transition: all .3s ease;
   position: relative;
-
   display: inline-block;
-
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-
-    7px 7px 20px 0px rgba(0, 0, 0, .1),
-
-    4px 4px 5px 0px rgba(0, 0, 0, .1);
-
-  outline: none;
-
-  margin-left: 15px;
-
+  box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, .5), 7px 7px 20px 0 rgba(0, 0, 0, .1), 4px 4px 5px 0 rgba(0, 0, 0, .1);
+  outline: 0;
+  margin-left: 15px
 }
-
-
-
-/* 1 */
 
 .btn-1 {
-
-  background: rgb(0, 172, 238);
-
-  border: none;
-
+  background: #00acee;
+  border: none
 }
-
-
 
 .btn-1:hover {
-
-  background: rgb(4, 149, 206);
-
-
-
+  background: #0495ce
 }
+
 .LogoImg {
-  
-    height:60px;
-    width: 60px;  
-    
-}
-  .btn-lg{
-    display: table-cell;
-    width: 100px;
-  }
-  .text{
-      font-size: 40px;
-      padding-left:1%;
-      color: skyblue;
-  }
-  .example-button-row {
-    display: table-cell;
-    width: 490px;
-  }
-
-  .navbar-toggler-icon{
-    height:25px;
-    width:25px;
-  }
-  a:link{
-    text-decoration: none;
-    color: black;
-    }
-    a:visited{      
-        text-decoration:none;
-        color: black;
-    }
-    a:hover{
-        text-decoration: none;
-        color: #88DDEF;
-    }
-    a:active{
-    text-decoration: none;
-    color: #08102A; 
-    }
-  .sidenav-toggler {
-    height: 40px !important;
-    width: 40px !important;
-    margin-top: 1px;
-    margin-left: 5px;
-    border-color: white;
-}
- .nav-link {
-    font-family: Jost, sans-serif;
-    margin-top: 25px;
-    color: black;
-    outline: 0;
-    transition: .5s
+  height: 60px;
+  width: 60px
 }
 
-
-.navbar{
-padding-right: 5px;
+.text {
+  font-size: 40px;
+  padding-left: 1%;
+  color: #87ceeb
 }
+
+.navbar-toggler-icon {
+  height: 25px;
+  width: 25px
+}
+
+a:link {
+  text-decoration: none;
+  color: #000
+}
+
+a:visited {
+  text-decoration: none;
+  color: #000
+}
+
+a:hover {
+  text-decoration: none;
+  color: #88ddef
+}
+
+a:active {
+  text-decoration: none;
+  color: #08102a
+}
+
+.sidenav-toggler {
+  height: 40px !important;
+  width: 40px !important;
+  margin-top: 1px;
+  margin-left: 5px;
+  border-color: #fff
+}
+
+.nav-link {
+  font-family: Jost, sans-serif;
+  margin-top: 25px;
+  color: #000;
+  outline: 0;
+  transition: .5s
+}
+
+.navbar {
+  padding-right: 5px
+}
+
 .sidebar {
-    height: 100%; /* 100% Full-height */
-    width: 15%; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    left: 0;
-    background-color: whitesmoke; /* Black*/
-    overflow-x: hidden; 
-    overflow-y: hidden;/* Disable horizontal scroll */
-    padding-top: 10px; /* Place content 60px from the top */
-     /* 0.5 second transition effect to slide in the sidebar */
-  }
-  
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 10px
+}
 
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -20rem;
+  position: absolute;
+  z-index: 5;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out
+}
+
+#sidebar-wrapper .list-group {
+  font-family: Jost, sans-serif;
+  width: 13rem;
+  font-size: 20px;
+  font-weight: 500;
+  overflow: auto
+}
+
+@media (min-width:768px) {
   #sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -20rem;
-    position: absolute;
-    z-index: 5;
-    -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
-    -o-transition: margin .25s ease-out;
-    transition: margin .25s ease-out;
+    margin-left: 0
   }
-  
+}
 
-  #sidebar-wrapper .list-group {
-    font-family: Jost, sans-serif;
-    width: 13rem;
-    font-size: 20px;
-    font-weight:500 ;
-    overflow: auto;
-  
-  }
-  #page-content-wrapper {
-    min-width: 100vw;
-  }
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-  }
-  @media (min-width: 768px) {
-    #sidebar-wrapper {
-      margin-left: 0;
-    }
-    #page-content-wrapper {
-      min-width: 0;
-      width: 100%;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-      margin-left: -20rem;
-    }
-  }
-  .sidenav-toggler{
-    margin-right: 25px;
-  }
+.sidenav-toggler {
+  margin-right: 25px
+}
 
+body {
+  overflow-x: hidden
+}
 
-  body {
-    overflow-x: hidden;
-  }
-  
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem
+}
+
+@media (min-width:768px) {
   #sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
-    -o-transition: margin .25s ease-out;
-    transition: margin .25s ease-out;
+    margin-left: 0
   }
-  
-  #sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
+
+  .show {
+    margin-left: 0 !important
   }
-  
-  #sidebar-wrapper .list-group {
-    width: 15rem;
+
+  .hide {
+    margin-left: -15rem !important
   }
-  
-  #page-content-wrapper {
-    min-width: 100vw;
+}
+
+@media (max-width:767px) {
+  .show {
+    margin-left: -15rem !important
   }
-  
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
+
+  .hide {
+    margin-left: 0 !important
   }
-  
-   
-  @media (min-width: 768px) {
-    #sidebar-wrapper {
-      margin-left: 0;
-    }
-  
-    #page-content-wrapper {
-      min-width: 0;
-      width: 100%;
-    }
-    .show
-    {
-      margin-left: 0!important;
-    }
-    .hide
-    {
-      margin-left: -15rem!important;
-    }
+}
+
+h1,
+h2 {
+  font-weight: 700 !important
+}
+
+h3,
+h4 {
+  font-weight: 600 !important
+}
+
+h5,
+h6 {
+  font-weight: 500 !important
+}
+
+.LogoImg {
+  height: 60px;
+  width: 60px
+}
+
+.text {
+  font-size: 40px;
+  padding-left: 1%;
+  color: #87ceeb
+}
+
+.navbar-toggler-icon {
+  height: 25px;
+  width: 25px
+}
+
+a:link {
+  text-decoration: none;
+  color: #000
+}
+
+a:visited {
+  text-decoration: none;
+  color: #000
+}
+
+a:hover {
+  text-decoration: none;
+  color: #88ddef
+}
+
+a:active {
+  text-decoration: none;
+  color: #08102a
+}
+
+.sidenav-toggler {
+  height: 40px !important;
+  width: 40px !important;
+  margin-top: 1px;
+  margin-left: 5px;
+  border-color: #fff
+}
+
+.nav-link {
+  font-family: Jost, sans-serif;
+  margin-top: 20px;
+  color: #000;
+  outline: 0;
+  transition: .5s
+}
+
+.navbar {
+  padding-right: 5px
+}
+
+.sidebar {
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 10px
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -20rem;
+  position: absolute;
+  z-index: 5;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out
+}
+
+#sidebar-wrapper .list-group {
+  font-family: Jost, sans-serif;
+  width: 13rem;
+  font-size: 20px;
+  font-weight: 500;
+  overflow: auto
+}
+
+@media (min-width:768px) {
+  #sidebar-wrapper {
+    margin-left: 0
   }
-  @media (max-width: 767px) {
-    .show
-    {
-      margin-left: -15rem!important;
-    }
-    .hide
-    {
-      margin-left: -0!important;
-    }
-  }
-  h1,
-  h2 {
-      font-weight: 700 !important
-  }
-  
-  h3,
-  h4 {
-      font-weight: 600 !important
-  }
-  
-  h5,
-  h6 {
-      font-weight: 500 !important
-  }
-  .LogoImg {
-    
-      height:60px;
-      width: 60px;  
-      
-  }
-    .btn-lg{
-      display: table-cell;
-      width: 100px;
-    }
-    .text{
-        font-size: 40px;
-        padding-left:1%;
-        color: skyblue;
-    }
-    .example-button-row {
-      display: table-cell;
-      width: 490px;
-    }
-  
-    .navbar-toggler-icon{
-      height:25px;
-      width:25px;
-    }
-    a:link{
-      text-decoration: none;
-      color: black;
-      }
-      a:visited{      
-          text-decoration:none;
-          color: black;
-      }
-      a:hover{
-          text-decoration: none;
-          color: #88DDEF;
-      }
-      a:active{
-      text-decoration: none;
-      color: #08102A; 
-      }
-    .sidenav-toggler {
-      height: 40px !important;
-      width: 40px !important;
-      margin-top: 1px;
-      margin-left: 5px;
-      border-color: white;
-  }
-   .nav-link {
-      font-family: Jost, sans-serif;
-      margin-top: 20px;
-      color: black;
-      outline: 0;
-      transition: .5s
-  }
-  
-  .navbar{
-  padding-right: 5px;
-  }
-  .sidebar {
-      height: 100%; /* 100% Full-height */
-      width: 15%; /* 0 width - change this with JavaScript */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Stay on top */
-      left: 0;
-      background-color: whitesmoke; /* Black*/
-      overflow-x: hidden; 
-      overflow-y: hidden;/* Disable horizontal scroll */
-      padding-top: 10px; /* Place content 60px from the top */
-       /* 0.5 second transition effect to slide in the sidebar */
-    }
-    
-  
-    #sidebar-wrapper {
-      min-height: 100vh;
-      margin-left: -20rem;
-      position: absolute;
-      z-index: 5;
-      -webkit-transition: margin .25s ease-out;
-      -moz-transition: margin .25s ease-out;
-      -o-transition: margin .25s ease-out;
-      transition: margin .25s ease-out;
-    }
-    
-  
-    #sidebar-wrapper .list-group {
-      font-family: Jost, sans-serif;
-      width: 13rem;
-      font-size: 20px;
-      font-weight:500 ;
-      overflow: auto;
-    
-    }
-    #page-content-wrapper {
-      min-width: 100vw;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-      margin-left: 0;
-    }
-    @media (min-width: 768px) {
-      #sidebar-wrapper {
-        margin-left: 0;
-      }
-      #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-      }
-      #wrapper.toggled #sidebar-wrapper {
-        margin-left: -20rem;
-      }
-    }
-    .sidenav-toggler{
-      margin-right: 25px;
-    }
-  
+}
+
+.sidenav-toggler {
+  margin-right: 25px
+}

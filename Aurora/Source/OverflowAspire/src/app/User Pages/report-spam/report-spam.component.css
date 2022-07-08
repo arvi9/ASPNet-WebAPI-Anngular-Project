@@ -48,5 +48,11 @@
     text-align: center;
     padding-bottom:5px;
   }
-  
-  
+  .breadcrumb
+  {
+    margin: 20px;
+  }
+  .Content
+  {
+    min-height: 100vh;
+  }

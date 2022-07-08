@@ -158,4 +158,7 @@ pre {
     width: 100%;
 }
 
-
+.breadcrumb
+{
+    margin: 20px;
+}

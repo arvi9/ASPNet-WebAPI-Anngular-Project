@@ -93,6 +93,5 @@ export class SpecificarticleComponent implements OnInit {
       });
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
    this.ngOnInit();
-   this.article.comment=""
   }
 }

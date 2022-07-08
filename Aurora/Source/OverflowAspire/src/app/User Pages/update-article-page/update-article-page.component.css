@@ -31,3 +31,11 @@
     text-align: end;
     margin: 20px;
 }
+.Content
+{
+  min-height: 100vh;
+}
+.breadcrumb
+{
+  margin: 20px;
+}
