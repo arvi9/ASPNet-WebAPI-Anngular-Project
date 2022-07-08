@@ -37,7 +37,7 @@
                         <div class="card-image">
                             <img [src]="'data:image/jpg;base64,'+ item.image" />
                         </div>
-                        <div class="card__body">
+                        <div class="card__body d-flex flex-column">
                             <div *ngIf="ShowStatus">
                                 <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
                                 <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
@@ -47,8 +47,10 @@
                             <h4 class="card-title text-truncate">{{item.title}}</h4>
                             <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                         </div>
-                        <div class="btntag tag-blue " routerLinkActive="active"
-                            [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+                        <div class="mt-auto">
+                            <div class="btntag tag-blue " routerLinkActive="active"
+                                [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+                        </div>
                     </div>
 
                 </div>

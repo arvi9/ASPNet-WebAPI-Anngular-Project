@@ -65,5 +65,6 @@ export class SpecificqueryComponent implements OnInit {
     console.log(this.Query)
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
     this.ngOnInit();
+    this.Query.comment=""
   }
 }
