@@ -5,23 +5,18 @@ using AspireOverflow.Security;
 using Microsoft.AspNetCore.Identity;
 using AspireOverflow.Models;
 using System.Linq;
-
 namespace AspireOverflow.Services
 {
-
-
     public class UserService : IUserService
     {
         private readonly IUserRepository database;
-
         private readonly ILogger<UserService> _logger;
-
         public UserService(ILogger<UserService> logger, IUserRepository _userRepository)
         {
             _logger = logger;
             database = _userRepository;
-
         }
+
 
         //to create an user using user object.
         public bool CreateUser(User user)
@@ -30,7 +25,6 @@ namespace AspireOverflow.Services
             try
             {
                 user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
-
                 return database.CreateUser(user);
             }
             catch (ValidationException exception)
@@ -45,6 +39,7 @@ namespace AspireOverflow.Services
             }
         }
 
+
         //to remove an existing user using UserId.
         public bool RemoveUser(int UserId)
         {
@@ -58,8 +53,8 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "RemoveUser(int UserId)", exception, UserId));
                 return false;
             }
-
         }
+
 
         //to update the user as reviewer using UserId and IsReviewer.
         public bool UpdateUserByIsReviewer(int UserId, bool IsReviewer)
@@ -68,16 +63,14 @@ namespace AspireOverflow.Services
             try
             {
                 return database.UpdateUserByReviewer(UserId, IsReviewer);
-
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "UpdateUserByIsReviewer(int UserId,bool IsReviewer)", exception, UserId));
                 return false;
             }
-
-
         }
+
 
         //to get the user using their email and password.
         public User GetUser(string Email, string Password)  //Method used in Token Controller
@@ -96,7 +89,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
- 
+
+
         //to get the user by UserID from database.
         public object GetUserByID(int UserID)
         {
@@ -115,7 +109,6 @@ namespace AspireOverflow.Services
                     Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
-
                 };
             }
             catch (Exception exception)
@@ -124,6 +117,7 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
 
         //to get all the user from the database.
         public IEnumerable<User> GetUsers()
@@ -139,14 +133,13 @@ namespace AspireOverflow.Services
             }
         }
 
-
+        
         //to get the users using VerifyStatusID.
         public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
-                
                 return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID).Select(User => new
                 {
                     UserId = User.UserId,
@@ -158,7 +151,6 @@ namespace AspireOverflow.Services
                     Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
-
                 });
             }
             catch (Exception exception)
@@ -186,17 +178,15 @@ namespace AspireOverflow.Services
                     Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
-
                 });
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByUserRoleID(int UserRoleID)", exception, UserRoleID));
-
                 throw;
             }
-
         }
+
 
         //to change the status of the user uding UserID and VerifyStatusID.
         public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID)
@@ -231,7 +221,6 @@ namespace AspireOverflow.Services
                     Department = GetDepartmentByID(User.Designation!.DepartmentId),
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
-
                 });
             }
             catch (Exception exception)
@@ -241,7 +230,7 @@ namespace AspireOverflow.Services
             }
         }
 
-         
+
         //to get the department using DepartmentId.
         private string GetDepartmentByID(int DepartmentId)
         {
@@ -250,7 +239,6 @@ namespace AspireOverflow.Services
             {
                 var department = database.GetDepartments().ToList().Find(item => item.DepartmentId == DepartmentId);
                 return department?.DepartmentName!;
-
             }
             catch (Exception exception)
             {
@@ -258,6 +246,7 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
 
         //to get the gender from the database.
         public IEnumerable<Object> GetGenders()
@@ -278,6 +267,7 @@ namespace AspireOverflow.Services
             }
         }
 
+
         //to get the designation from the database.
         public IEnumerable<Object> GetDesignations()
         {
@@ -297,7 +287,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
- 
+
+        
         //to get the departments from the database.
         public IEnumerable<object> GetDepartments()
         {
@@ -316,9 +307,5 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
-
-
     }
-
 }

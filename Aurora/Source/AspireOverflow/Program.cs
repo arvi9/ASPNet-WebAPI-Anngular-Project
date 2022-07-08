@@ -9,13 +9,11 @@ using System.Text;
 using Serilog;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using Microsoft.OpenApi.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
 try
 {
     //Creates the instance for Db Context by fetching the Connection string from configuration file
@@ -27,7 +25,6 @@ try
 catch (SystemException Exception)
 {
     Console.WriteLine(Exception.Message);
-
 }
 //logs all the http requests
 builder.Services.AddHttpLogging(httpLogging =>
@@ -43,14 +40,11 @@ builder.Services.AddTransient<ITokenService,TokenService>();
 builder.Services.AddTransient<IArticleService,ArticleService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<MailService>();
-
-
 //Jwt Token Authentication 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;  
-    
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuer = true,
@@ -121,7 +115,6 @@ app.UseHttpsRedirection();
 app.UseHttpLogging(); //logs all the Http Request
 app.UseAuthentication(); //To enable Authentication
 app.UseAuthorization(); //To enable Role based Authentication
-
 //To fix Cors Origin Errors
 app.UseCors(builder =>
 {

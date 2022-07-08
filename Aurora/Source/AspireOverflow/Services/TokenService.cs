@@ -3,13 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AspireOverflow.DataAccessLayer.Interfaces;
-
 using AspireOverflow.Models;
 using Microsoft.IdentityModel.Tokens;
-
 namespace AspireOverflow.Services
 {
-
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
@@ -22,6 +19,7 @@ namespace AspireOverflow.Services
             _logger = logger;
 
         }
+
 
         public object GenerateToken(Login Credentials)
         {
@@ -40,12 +38,9 @@ namespace AspireOverflow.Services
                           new Claim(ClaimTypes.Role,user.UserRole?.RoleName!),
                         new Claim("IsReviewer",user.IsReviewer.ToString())
                     };
-
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                 var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-               
                 var encryptingCredentials = new EncryptingCredentials(key, JwtConstants.DirectKeyUseAlg, SecurityAlgorithms.Aes256CbcHmacSha512);
-
                 var token = new JwtSecurityTokenHandler().CreateJwtSecurityToken(
                   _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
@@ -55,7 +50,6 @@ namespace AspireOverflow.Services
                     DateTime.Now,
                     signIn,
                     encryptingCredentials);
-
                 var Result = new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -64,28 +58,25 @@ namespace AspireOverflow.Services
                     IsReviewer = user.IsReviewer,
                     IsVerified = user.VerifyStatus?.Name
                 };
-
                 return Result;
-
             }
             catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenService", " GenerateToken(String Email, string Password)", exception, Credentials));
                 throw;
-
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenService", " GenerateToken(String Email, string Password)", exception, Credentials));
                 throw;
-
             }
         }
+
+        
         private void ValidateUser(Login Credentials)
         {
             if (Credentials == null) throw new ArgumentException("Credentials cannot be null");
             Validation.ValidateUserCredentials(Credentials.Email!, Credentials.Password!);
         }
-
     }
 }

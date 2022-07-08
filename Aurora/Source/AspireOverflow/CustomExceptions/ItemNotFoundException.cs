@@ -1,6 +1,5 @@
 namespace AspireOverflow.CustomExceptions
 {
-  
     public class ItemNotFoundException : Exception
     {
 

@@ -1,8 +1,9 @@
-
 using AspireOverflow.Models;
-namespace AspireOverflow.DataAccessLayer.Interfaces{
-    public interface IEmailService
+
+namespace AspireOverflow.DataAccessLayer.Interfaces
 {
-    Task SendEmailAsync(MailRequest mailRequest);
-}
+    public interface IEmailService
+    {
+        Task SendEmailAsync(MailRequest mailRequest);
+    }
 }

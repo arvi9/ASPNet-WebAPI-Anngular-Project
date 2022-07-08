@@ -1,7 +1,7 @@
 using AspireOverflow.Models;
+
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
-
     public interface IUserService : IDesignations, IGenders
     {
         public bool CreateUser(User user);
@@ -20,10 +20,8 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public IEnumerable<Object> GetDesignations();
         public IEnumerable<Object> GetDepartments();
     }
-
     public interface IGenders
     {
         public IEnumerable<Object> GetGenders();
     }
-
 }

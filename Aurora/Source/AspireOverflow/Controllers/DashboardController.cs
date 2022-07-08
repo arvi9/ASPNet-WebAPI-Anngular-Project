@@ -2,19 +2,15 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using AspireOverflow.Models;
 using AspireOverflow.Services;
-
 using Microsoft.AspNetCore.Authorization;
 using AspireOverflow.DataAccessLayer.Interfaces;
-
 namespace AspireOverflow.Controllers
 {
-
     [ApiController]
     [Authorize]
     [Route("[controller]/[action]")]
     public class DashboardController : BaseController
     {
-
         private readonly ILogger<DashboardController> _logger;
         private readonly IArticleService _articleService;
         private readonly IQueryService _queryService;
@@ -25,9 +21,9 @@ namespace AspireOverflow.Controllers
             _articleService = articleService;
             _userService = userService;
             _queryService = queryService;
-
-
         }
+
+
         /// <summary>
         /// Gets a reviewer dashboard by reviewer id.
         /// </summary>
@@ -46,9 +42,7 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a reviewer dashboard by reviewer id. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <param name="ReviewerId"></param>
-
         [HttpGet]
-      
         public async Task<ActionResult> GetReviewerDashboard() //reviewerID temporarily getting as input ,later it is retrived from claims.
         {
             try
@@ -60,8 +54,6 @@ namespace AspireOverflow.Controllers
                     ArticlesTobeReviewed = _articleService.GetArticlesByArticleStatusId(2).Count(),
                     ArticlesReviewed = _articleService.GetArticlesByArticleStatusId(4).Count(),
                     ArticlesPublished = _articleService.GetArticlesByReviewerId(ReviewerId).Count(),
-
-
                 }; return await Task.FromResult(Ok(DashboardInformation));
             }
             catch (Exception exception)
@@ -70,6 +62,7 @@ namespace AspireOverflow.Controllers
                 return BadRequest(Message("Error Occured while processing your request"));
             }
         }
+
 
         /// <summary>
         /// Gets admin dashboard.
@@ -83,9 +76,7 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a admin dashboard. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
-
         [HttpGet]
-       
         public async Task<ActionResult> GetAdminDashboard()
         {
             try
@@ -98,7 +89,6 @@ namespace AspireOverflow.Controllers
                     TotalNumberofQueries = _queryService.GetListOfQueries().Count(),
                     TotaNumberofSolvedQueries = _queryService.GetQueries(true).Count(),
                     TotalNumberOfUnSolvedQueries = _queryService.GetQueries(false).Count(),
-
                 }; return await Task.FromResult(Ok(DashboardInformation));
             }
             catch (Exception exception)
@@ -107,6 +97,7 @@ namespace AspireOverflow.Controllers
                 return BadRequest(Message("Error Occured while processing your request"));
             }
         }
+
 
         /// <summary>
         /// Gets home page.
@@ -119,9 +110,7 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a homepage. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-
         [HttpGet]
-
         public async Task<ActionResult> GetHomePage()
         {
             try
@@ -132,8 +121,6 @@ namespace AspireOverflow.Controllers
                     LatestArticles = _articleService.GetLatestArticles(),
                     TrendingQueries = _queryService.GetTrendingQueries(),
                     LatestQueries = _queryService.GetLatestQueries(),
-
-
                 }; return await Task.FromResult(Ok(Data));
             }
             catch (Exception exception)
@@ -142,8 +129,5 @@ namespace AspireOverflow.Controllers
                 return BadRequest(Message("Error Occured while processing your request"));
             }
         }
-
-
-
     }
 }

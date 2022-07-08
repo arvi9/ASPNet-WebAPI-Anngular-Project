@@ -8,26 +8,20 @@ using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
 using AspireOverflow.CustomExceptions;
 using AspireOverflow.DataAccessLayer.Interfaces;
-
-
 namespace AspireOverflow.Services
 {
-
     public class ArticleService : IArticleService
     {
         private readonly IArticleRepository database;
-
         private readonly ILogger<ArticleService> _logger;
-
         private readonly MailService _mailService;
-
         public ArticleService(ILogger<ArticleService> logger, MailService mailService, IArticleRepository _articleRepository)
         {
             _logger = logger;
             _mailService = mailService;
             database = _articleRepository;
-
         }
+
 
         //SharedUsersId is Optional and It has to be specified only once creating the Private articles.
         public bool CreateArticle(Article article, List<int>? SharedUsersId = null)
@@ -42,14 +36,12 @@ namespace AspireOverflow.Services
                 if (SharedUsersId != null && article.IsPrivate && SharedUsersId.Count > 0) return database.AddPrivateArticle(article, SharedUsersId);
                 return database.AddArticle(article);
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle(Article article)", exception, article));
                 return false;
             }
         }
-
 
 
         //Article is Updating using article object and UpdatedByUserId.
@@ -68,11 +60,9 @@ namespace AspireOverflow.Services
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
-
                 //Returns true once successfully updated.
                 return database.UpdateArticle(ExistingArticle);
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", " UpdateArticle(Article article, int CurrentUser)", exception, article));
@@ -80,7 +70,7 @@ namespace AspireOverflow.Services
             }
         }
 
-
+        
         //Changes the Status of the article 1->In draft 2->To be Reviewed 3->Under Review 4->Published.
         public bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId)
         {
@@ -96,7 +86,6 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", " ChangeArticleStatus(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception), ArticleID, ArticleStatusID);
-
                 throw;
             }
         }
@@ -117,6 +106,8 @@ namespace AspireOverflow.Services
             }
         }
 
+
+
         //To Fetch the articles using ArticleId.
         public object GetArticleById(int ArticleId)
         {
@@ -135,18 +126,15 @@ namespace AspireOverflow.Services
                     Likes = GetLikesCount(article.ArtileId),
                     comments = GetComments(article.ArtileId),
                     status = article.ArticleStatus?.Status,
-
                 };
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById(int ArticleId)", exception, ArticleId));
-
                 throw;
             }
-
         }
+
 
         //To get the Latest Articles by using published date.
         public IEnumerable<object> GetLatestArticles()
@@ -163,10 +151,8 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetLatestArticles()", exception));
@@ -182,7 +168,6 @@ namespace AspireOverflow.Services
             {
                 //Get number of likes and grouped based on ArticleId and sorted by Descending oreder.
                 var data = (database.GetLikes().GroupBy(item => item.ArticleId)).OrderByDescending(item => item.Count());
-
                 var ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
                 var ListOfArticles = GetArticles().ToList();
                 var TrendingArticles = new List<Article>();
@@ -200,7 +185,6 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
             }
             catch (Exception exception)
@@ -227,18 +211,13 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
-
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByUserId(int UserId)", exception, UserId));
-
                 throw;
             }
-
         }
 
 
@@ -257,6 +236,7 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
 
         //All the article list will be fetched.
         public IEnumerable<Article> GetAll()
@@ -279,7 +259,6 @@ namespace AspireOverflow.Services
         {
             try
             {
-                _mailService?.SendEmailAsync(HelperService.ArticleMail("ponvizhi.uday@aspiresys.com", "Title", "Article Created Successfully", 2));
                 //to get the articles where private is false.
                 var ListOfArticles = GetArticles().Where(Item => !Item.IsPrivate);
                 return ListOfArticles.Select(Article => new
@@ -300,6 +279,7 @@ namespace AspireOverflow.Services
             }
         }
 
+
         //to fetch the article which is private using UserId.
         public IEnumerable<Object> GetPrivateArticles(int UserId)
         {
@@ -308,14 +288,12 @@ namespace AspireOverflow.Services
                 var ListOfPrivateArticles = database.GetPrivateArticles().Where(Item => Item.UserId == UserId);
                 return ListOfPrivateArticles.Select(PrivateArticle => GetArticleById(PrivateArticle.ArticleId));
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetPrivateArticles(int UserId)", exception));
                 throw;
             }
         }
-
 
 
         //to get article by its title.
@@ -334,17 +312,13 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle(string Title)", exception, Title));
-
                 throw;
             }
-
         }
 
 
@@ -364,17 +338,13 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByAuthor(string AuthorName)", exception, AuthorName));
-
                 throw;
             }
-
         }
 
 
@@ -394,17 +364,13 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
-
                 });
             }
             catch (Exception exception)
             {
-
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", " GetArticlesByReviewerId(int ReviewerId)", exception, ReviewerId));
-
                 throw;
             }
-
         }
 
 
@@ -432,10 +398,8 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByArticleStatusId(int ArticleStatusID)", exception), ArticleStatusID);
-
                 throw;
             }
-
         }
 
 
@@ -471,9 +435,7 @@ namespace AspireOverflow.Services
                     Message = Item.Comment,
                     Name = Item.User?.FullName,
                     ArticleId = Item.ArticleId
-
                 });
-
             }
             catch (Exception exception)
             {
@@ -481,7 +443,6 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
 
 
         //to add a like to an article using ArticleId and UserId.
@@ -493,7 +454,6 @@ namespace AspireOverflow.Services
             try
             {
                 if (database.GetLikes().ToList().Find(item => item.UserId == Like.UserId && item.ArticleId == Like.ArticleId) != null) throw new ValidationException("Unable to Add like to same article with same UserId");
-
                 return database.AddLike(Like);
             }
             catch (Exception exception)
@@ -503,7 +463,7 @@ namespace AspireOverflow.Services
             }
         }
 
-
+        
         //to fetch the number of likes for the particular article using ArticleId.
         public int GetLikesCount(int ArticleID)
         {
@@ -519,7 +479,5 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
-
     }
 }

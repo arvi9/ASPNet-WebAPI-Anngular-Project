@@ -5,7 +5,6 @@ using AspireOverflow.Services;
 using AspireOverflow.CustomExceptions;
 using Microsoft.AspNetCore.Authorization;
 using AspireOverflow.DataAccessLayer.Interfaces;
-
 namespace AspireOverflow.Controllers
 {
     [ApiController]
@@ -20,6 +19,7 @@ namespace AspireOverflow.Controllers
             _logger = logger;
             _articleService = articleService;
         }
+
 
         ///<summary>
         /// Create Article
@@ -63,6 +63,8 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occured while Adding Article :{HelperService.PropertyList(article)}");
             }
         }
+
+
         /// <summary>
         /// Create Private Article
         /// </summary>
@@ -88,7 +90,6 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="privateArticleDto"></param>
-
         [HttpPost]
         public async Task<ActionResult> CreatePrivateArticle(PrivateArticleDto privateArticleDto)
         {
@@ -110,6 +111,7 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occured while Adding private Article");
             }
         }
+
 
         /// <summary>
         /// Create a comment
@@ -155,8 +157,9 @@ namespace AspireOverflow.Controllers
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "CreateComment(ArticleComment comment)", exception, comment));
                 return Problem($"Error Occured while Adding comment :{HelperService.PropertyList(comment)}");
             }
-
         }
+
+
         /// <summary>
         /// Add Like to Article
         /// </summary>
@@ -179,7 +182,6 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Like"></param>
-
         [HttpPost]
         public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
         {
@@ -203,6 +205,8 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occurred while Adding Like  :{Like}");
             }
         }
+
+
         /// <summary>
         /// Update a article
         /// </summary>
@@ -230,6 +234,8 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="article"></param>
+
+
         [HttpPut]
         public async Task<ActionResult> UpdateArticle(Article article)
         {
@@ -248,8 +254,8 @@ namespace AspireOverflow.Controllers
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdateArticle(Article article)", exception, article));
                 return Problem($"Error Occured while Adding article :{HelperService.PropertyList(article)}");
             }
-
         }
+
 
         /// <summary>
         /// Change Article Status
@@ -273,8 +279,6 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleId"></param>
         /// <param name="ArticleStatusID"></param>
-
-
         [HttpPatch]
         public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID)
         {
@@ -302,7 +306,6 @@ namespace AspireOverflow.Controllers
         }
 
 
-
         [HttpDelete]
         public async Task<ActionResult> DeleteArticleByArticleId(int ArticleId)
         {
@@ -322,6 +325,8 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occurred while Adding like to ArticleId :{ArticleId}");
             }
         }
+
+
         /// <summary>
         /// Get Latest Articles.
         /// </summary>
@@ -341,22 +346,18 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Range"></param>
-
-
         [HttpGet]
         public async Task<ActionResult> GetLatestArticles(int Range = 0)
         {
             try
             {
                 var Articles = _articleService.GetLatestArticles().ToList();
-
                 if (Range <= Articles.Count)
                 {
                     Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
                     return await Task.FromResult(Ok(Articles));
                 }
                 else return BadRequest(Message("Range limit exceeded"));
-
             }
             catch (Exception exception)
             {
@@ -364,6 +365,7 @@ namespace AspireOverflow.Controllers
                 return Problem("Error occured while processing your request");
             }
         }
+
 
         /// <summary>
         /// Get Trending Articles.
@@ -390,7 +392,6 @@ namespace AspireOverflow.Controllers
             try
             {
                 var Articles = _articleService.GetTrendingArticles().ToList();
-
                 if (Range <= Articles.Count)
                 {
                     Articles = Range > 0 ? Articles.GetRange(0, Range) : Articles;
@@ -404,6 +405,8 @@ namespace AspireOverflow.Controllers
                 return Problem("Error occured while processing your request");
             }
         }
+
+
         /// <summary>
         /// Get a Article by its Id
         /// </summary>
@@ -423,7 +426,6 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleId"></param>
-
         [HttpGet]
         public async Task<ActionResult> GetArticleById(int ArticleId)
         {
@@ -444,6 +446,7 @@ namespace AspireOverflow.Controllers
             }
         }
 
+
         /// <summary>
         /// Gets list of articles.
         /// </summary>
@@ -455,15 +458,13 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a list of articles. </response>
         /// <response code="500">If there is problem in server. </response>
-
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-
             try
             {
                 var Articles = _articleService.GetListOfArticles();    // "ArticleController" is a property of enum class
-                  return await Task.FromResult(Ok(Articles));
+                return await Task.FromResult(Ok(Articles));
             }
             catch (Exception exception)
             {
@@ -471,6 +472,8 @@ namespace AspireOverflow.Controllers
                 return Problem("Error occured while processing your request");
             }
         }
+
+
         /// <summary>
         /// Gets list of articles by user id.
         /// </summary>
@@ -482,24 +485,22 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a list of articles by user. </response>
         /// <response code="500">If there is problem in server. </response>
-
         [HttpGet]
         public async Task<ActionResult> GetArticlesByUserId()
         {
-
             try
             {
                 var ListOfArticleByUserId = _articleService.GetArticlesByUserId(GetCurrentUser().UserId);
                 return await Task.FromResult(Ok(ListOfArticleByUserId));
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByUserId(int UserId)", exception));
                 return Problem($"Error Occured while processing your request with UserId in Articles :");
             }
-
         }
+
+
         /// <summary>
         /// Gets a list of private articles in articles by user id.
         /// </summary>
@@ -520,26 +521,22 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="UserId"></param>
-
-
         [HttpGet]
         public async Task<ActionResult> GetPrivateArticles()
         {
-          
             try
             {
                 var ListOfPrivateArticles = _articleService.GetPrivateArticles(GetCurrentUser().UserId);
-
                 return await Task.FromResult(Ok(ListOfPrivateArticles));
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", " GetPrivateArticles()", exception));
                 return Problem($"Error Occured while processing your request");
             }
-
         }
+
+
         /// <summary>
         /// Gets a list of articles by title.
         /// </summary>
@@ -558,11 +555,8 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a list of article by title.. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Title"></param>
-
-
         [HttpGet]
         public async Task<ActionResult> GetArticlesByTitle(string Title)
         {
@@ -570,19 +564,16 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfArticlesByTitle = _articleService.GetArticlesByTitle(Title);
-
                 return await Task.FromResult(Ok(ListOfArticlesByTitle));
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByTitle(string Title)", exception, Title));
                 return Problem($"Error Occured while processing your request with Title :{Title}");
-
             }
-
-
         }
+
+
         /// <summary>
         /// Gets a list of articles by author name.
         /// </summary>
@@ -603,9 +594,6 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="AuthorName"></param>
-
-
-
         [HttpGet]
         public async Task<ActionResult> GetArticlesByAuthor(string AuthorName)
         {
@@ -613,18 +601,16 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfArticlesByAuthor = _articleService.GetArticlesByTitle(AuthorName);
-
                 return await Task.FromResult(Ok(ListOfArticlesByAuthor));
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByAuthor(string AuthorName)", exception, AuthorName));
                 return Problem($"Error Occured while processing your request with Title :{AuthorName}");
-
             }
-
         }
+
+ 
         /// <summary>
         /// Gets a list of article by article status id.
         /// </summary>
@@ -645,27 +631,22 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleStatusID"></param>
-
         [HttpGet]
         public async Task<IActionResult> GetArticlesByArticleStatusId(int ArticleStatusID)
         {
-
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) return BadRequest(Message($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}"));
             try
             {
-
                 var ListOfArticles = _articleService.GetArticlesByArticleStatusId(ArticleStatusID);
                 return await Task.FromResult(Ok(ListOfArticles));
-
-
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticlesByArticleStatusId(int ArticleStatusID)", exception), ArticleStatusID);
                 return Problem("Some Internal Error Occurred");
             }
-
         }
+
 
         /// <summary>
         /// Gets a list of comments by article id.
@@ -687,8 +668,6 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleId"></param>
-
-
         [HttpGet]
         public async Task<ActionResult> GetComments(int ArticleId)
         {
@@ -696,24 +675,13 @@ namespace AspireOverflow.Controllers
             try
             {
                 var ListOfComments = _articleService.GetComments(ArticleId);
-
                 return await Task.FromResult(Ok(ListOfComments));
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", nameof(GetComments), exception, ArticleId));
                 return Problem($"Error Occured while processing your request with ArticleId :{ArticleId}");
-
-
             }
-
-
-
         }
-
-
-
-
     }
 }

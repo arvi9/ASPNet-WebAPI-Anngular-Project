@@ -1,10 +1,8 @@
-
 using AspireOverflow.Models;
-
-namespace AspireOverflow.DataAccessLayer.Interfaces{
- public interface ITokenService
+namespace AspireOverflow.DataAccessLayer.Interfaces
+{
+    public interface ITokenService
     {
-      public  object GenerateToken(Login Credentials);
+        public object GenerateToken(Login Credentials);
     }
-
 }

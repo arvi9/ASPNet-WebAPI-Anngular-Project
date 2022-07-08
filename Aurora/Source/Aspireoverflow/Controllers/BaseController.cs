@@ -1,17 +1,14 @@
-
 using AspireOverflow.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-
-
 namespace AspireOverflow.Controllers
 {
-
     public class BaseController : ControllerBase
     {
-
         //Message function takes a string as Input Sends back as Object Result 
         //obj parameter is Optional 
+      
+      
         protected object Message(string message, object? obj = null)
         {
             if (Message != null && obj == null) return new { Message = message };
@@ -19,6 +16,7 @@ namespace AspireOverflow.Controllers
             else return new { };
         }
 
+        
         //Returns the Current Application User's Data By using the Claims.
         protected CurrentUser GetCurrentUser()
         {
@@ -29,13 +27,9 @@ namespace AspireOverflow.Controllers
                 CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
                 CurrentUser.RoleId = Convert.ToInt32(User.FindFirst("RoleId")?.Value);
                 CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
-
                 return CurrentUser;
             }
             return CurrentUser;
-
-
-
         }
     }
 }

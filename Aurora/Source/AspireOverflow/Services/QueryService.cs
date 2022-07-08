@@ -6,30 +6,19 @@ using AspireOverflow.DataAccessLayer;
 using AspireOverflow.Models;
 using AspireOverflow.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
-
 using AspireOverflow.DataAccessLayer.Interfaces;
-
-
-
-
 namespace AspireOverflow.Services
 {
-
-
     public class QueryService :IQueryService
     {
         private readonly  IQueryRepository database;
-
         private readonly  ILogger<QueryService> _logger;
-
         private readonly MailService _mailService;
-
         public QueryService(ILogger<QueryService> logger, MailService mailService,IQueryRepository _queryRepository)
         {
             _logger = logger;
             _mailService = mailService;
             database =_queryRepository;
-
         }
 
 
@@ -51,7 +40,7 @@ namespace AspireOverflow.Services
             }
         }
 
-     
+
         //To Remove the raised query using QueryId if it is an spam.
         public bool RemoveQueryByQueryId(int QueryId)
         {
@@ -63,10 +52,8 @@ namespace AspireOverflow.Services
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "RemoveQueryByQueryId(int QueryId)", exception, QueryId));
-
                 return false;
             }
-
         }
 
 
@@ -78,14 +65,13 @@ namespace AspireOverflow.Services
             {
                 return database.UpdateQuery(QueryId, IsSolved: true);
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", " MarkQueryAsSolved(int QueryId)", exception, QueryId));
-
                 return false;
             }
         }
+
 
         //to get the query using QueryId.
         public Object GetQuery(int QueryID)
@@ -104,7 +90,6 @@ namespace AspireOverflow.Services
                     RaiserName = Query.User?.FullName,
                     IsSolved=Query.IsSolved,
                     Comments = GetComments(QueryID)
-
                 };
             }
             catch (Exception exception)
@@ -112,10 +97,9 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQuery(int QueryId)", exception, QueryID));
                 throw;
             }
-
         }
 
-        
+
         ////to fetch the list of queries inthe database.
         public IEnumerable<Object> GetListOfQueries()
         {
@@ -135,9 +119,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
                 throw;
             }
-
         }
-
 
 
         //to fetch the list of latest queries using it's creation date.
@@ -147,7 +129,6 @@ namespace AspireOverflow.Services
             {
                 //get queries from the database using Creation date by descending order.
                 var ListOfQueries = database.GetQueries().OrderByDescending(query => query.CreatedOn);
-
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
@@ -156,7 +137,6 @@ namespace AspireOverflow.Services
                       IsSolved=item.IsSolved
                 });
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetLatestQueries()", exception));
@@ -187,17 +167,13 @@ namespace AspireOverflow.Services
                     content = item.Content,
                     IsSolved=item.IsSolved
                 });
-               
-               
             }
-
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetTrendingQueries()", exception));
                 throw;
             }
         }
-
 
 
         //get the query by UserId.
@@ -207,7 +183,6 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfQueries = database.GetQueries().Where(query => query.CreatedBy == UserId);
-
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
@@ -221,7 +196,6 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByUserId(int UserId)", exception, UserId));
                 throw;
             }
-
         }
 
 
@@ -239,7 +213,6 @@ namespace AspireOverflow.Services
                     content = item.Content,
                       IsSolved=item.IsSolved
                 });
-
             }
             catch (Exception exception)
             {
@@ -288,6 +261,7 @@ namespace AspireOverflow.Services
             }
         }
 
+
         //get the comments for the query using QueryId.
         public IEnumerable<Object> GetComments(int QueryId)
         {
@@ -302,14 +276,12 @@ namespace AspireOverflow.Services
                     Name = item.User?.FullName,
                     QueryId = item.QueryId
                 });
-
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetComments(int QueryId)", exception, QueryId));
                 throw;
             }
-
         }
 
 
@@ -348,7 +320,7 @@ namespace AspireOverflow.Services
             }
         }
 
-
+        
         //to get the spam queries using  VerifyStatusID.
         public IEnumerable<object> GetSpams(int VerifyStatusID)
         {
