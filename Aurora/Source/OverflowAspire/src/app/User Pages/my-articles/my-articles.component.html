@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
+
 <div class="Content" style="min-height: 100vh;">
+   
     <div style="margin:20px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -13,7 +15,7 @@
             </ol>
         </nav>
     </div>
-
+    <div *ngIf="data.length>0; else ArrayEmpty">
     <h1>My Articles</h1>
     <div class="container card">
         <form>
@@ -57,4 +59,11 @@
             <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
+</div>
+</div>
+    <ng-template #ArrayEmpty>
+        <div class="text-center">
+            No records found.
+        </div>
+    </ng-template>
     <app-footer></app-footer>

@@ -1,45 +1,54 @@
-<div class="container card">
-    <form>
-        <div>
-            <label class="labeltext">Title</label>
-            <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off">
-            <label class="labeltextauthor">Author</label>
-            <input type="text" name="searchAuthor" [(ngModel)]="searchAuthor" autocomplete="off">
-        </div>
-        <div>
-            <label class="labeltext">From</label>
-            <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off">
-            <label class="labeltextto">To</label>
-            <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off">
-            <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchAuthor,FromDate,ToDate)"> Apply</button>
-        </div>
-        
-    </form>
-</div>
-<div class="container justify-content-center d-flex flex-wrap">
-    <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
-        <div class="img-card iCard-style2 onhover">
-            <div class="card-content">
-                <div class="card-image">
-                    <img [src]="'data:image/jpg;base64,'+ item.image" />
+<div *ngIf="data.length>0; else ArrayEmpty">
+    <div class="container card">
+        <form>
+            <div>
+                <label class="labeltext">Title</label>
+                <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off">
+                <label class="labeltextauthor">Author</label>
+                <input type="text" name="searchAuthor" [(ngModel)]="searchAuthor" autocomplete="off">
+            </div>
+            <div>
+                <label class="labeltext">From</label>
+                <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off">
+                <label class="labeltextto">To</label>
+                <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off">
+                <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchAuthor,FromDate,ToDate)">
+                    Apply</button>
+            </div>
+        </form>
+    </div>
+    <div class="container justify-content-center d-flex flex-wrap">
+        <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
+            <div class="img-card iCard-style2 onhover">
+                <div class="card-content">
+                    <div class="card-image">
+                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                    </div>
+
+                    <h4 class="card-title text-truncate">{{item.title}}</h4>
+                    <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+
+
                 </div>
 
-                <h4 class="card-title text-truncate">{{item.title}}</h4>
-                <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
-
+                <div class=" btntag tag-blue " routerLinkActive="active"
+                    [routerLink]="['/specificarticle',item.articleId]">
+                    Read More</div>
 
             </div>
+        </div>
 
-            <div class=" btntag tag-blue " routerLinkActive="active" [routerLink]="['/specificarticle',item.articleId]">
-                Read More</div>
 
+    </div>
+    <div class="Container justify-content-center d-flex">
+        <div class="stickypagination">
+            <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
-
-
 </div>
-<div class="Container justify-content-center d-flex">
-    <div class="stickypagination">
-        <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
+<ng-template #ArrayEmpty>
+    <div class="text-center">
+        No records found.
     </div>
-</div>
+</ng-template>
