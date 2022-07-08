@@ -13,43 +13,51 @@
             </ol>
         </nav>
     </div>
+    <div *ngIf="data.length>0; else ArrayEmpty">
+        <h1>Shared With Me</h1>
+        <div class="container card">
+            <form>
+                <label class="labeltext">Title
+                    <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" /></label>
 
-    <h1>Shared With Me</h1>
-    <div class="container card">
-        <form>
-            <label class="labeltext">Title 
-                <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off"/></label>
-            
-            <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off"/></label>
-            
-            <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off" /<input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off">></label>
-            
-            <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
-        </form>
-    </div>
-    <div class="container justify-content-center d-flex flex-wrap">
-        <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
-            <div class="img-card iCard-style2 onhover">
-                <div class="card-content">
-                    <div class="card-image">
-                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate"
+                        autocomplete="off" /></label>
+
+                <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off" />
+                    <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off"></label>
+
+                <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
+            </form>
+        </div>
+        <div class="container justify-content-center d-flex flex-wrap">
+            <div class=""
+                *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
+                <div class="img-card iCard-style2 onhover">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img [src]="'data:image/jpg;base64,'+ item.image" />
+                        </div>
+                        <div class="card__body">
+                            <h4 class="card-title text-truncate">{{item.title}}</h4>
+                            <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+                        </div>
+                        <div class="btntag tag-blue " routerLinkActive="active"
+                            [routerLink]="['/EditArticle',item.articleId]">Read More</div>
                     </div>
-                    <div class="card__body">
-                        <h4 class="card-title text-truncate">{{item.title}}</h4>
-                        <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
-                    </div>
-                    <div class="btntag tag-blue " routerLinkActive="active"
-                        [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+
                 </div>
-
             </div>
         </div>
-
-
-    </div>
-    <div class="Container justify-content-center d-flex">
-        <div class="stickypagination">
-            <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+        <div class="Container justify-content-center d-flex">
+            <div class="stickypagination">
+                <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+            </div>
         </div>
     </div>
+    <ng-template #ArrayEmpty>
+        <div class="text-center">
+            <h1>No records found.</h1>
+        </div>
+    </ng-template>
+
     <app-footer></app-footer>

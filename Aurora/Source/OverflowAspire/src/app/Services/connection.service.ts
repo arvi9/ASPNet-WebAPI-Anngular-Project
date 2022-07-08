@@ -14,6 +14,13 @@ export class ConnectionService {
     'Authorization': `Bearer ${AuthService.GetData("token")}`
   })
 
+  initializeTokenHeader(token:string|null){
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+  }
+
   //Get admin dashboard
   GetAdminDashboard(): any {
     return this.http.get<any>(this.URL + 'Dashboard/GetAdminDashboard', { headers: this.headers });

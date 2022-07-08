@@ -1,54 +1,61 @@
-<div class="card">
-    <form class="form-inline">
-        <div class="text">
-            
-            <label class="labeltext">Title
-                <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
-            </label>
-            
-            <label class="labeltextFrom">From
-                <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off"/>
-            </label>
-            
-            
-        </div>
-        <div class="text">
-            <label class="labeltextauthor">Author
-                <input type="text" name="searchAuthor" [(ngModel)]="searchAuthor" autocomplete="off"/>
-            </label>
-            
-            <label class="labeltextto">To  <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off"/>
-            </label>
-           
-            <button class="custom-btn btn-1 labeltextclick" (click)="samplefun(searchTitle,searchAuthor,FromDate,ToDate)"> Apply</button>
-        </div>
-        
-    </form>
-</div>
-<div class="container justify-content-center d-flex flex-wrap">
-    <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
-        <div class="img-card iCard-style2 onhover">
-            <div class="card-content">
-                <div class="card-image">
-                    <img [src]="'data:image/jpg;base64,'+ item.image" />
-                </div>
+<div *ngIf="data.length>0; else ArrayEmpty">
+    <div class="card">
+        <form class="form-inline">
+            <div class="text">
 
-                <h4 class="card-title text-truncate">{{item.title}}</h4>
-                <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+                <label class="labeltext">Title
+                    <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
+                </label>
+
+                <label class="labeltextFrom">From
+                    <input type="date" name="FromDate" [(ngModel)]="FromDate" autocomplete="off" />
+                </label>
 
 
             </div>
+            <div class="text">
+                <label class="labeltextauthor">Author
+                    <input type="text" name="searchAuthor" [(ngModel)]="searchAuthor" autocomplete="off" />
+                </label>
 
-            <div class=" btntag tag-blue " routerLinkActive="active" [routerLink]="['/specificarticle',item.articleId]">
-                Read More</div>
+                <label class="labeltextto">To <input type="date" name="ToDate" [(ngModel)]="ToDate"
+                        autocomplete="off" />
+                </label>
 
+                <button class="custom-btn btn-1 labeltextclick"
+                    (click)="samplefun(searchTitle,searchAuthor,FromDate,ToDate)"> Apply</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="container justify-content-center d-flex flex-wrap">
+        <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
+            <div class="img-card iCard-style2 onhover">
+                <div class="card-content">
+                    <div class="card-image">
+                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                    </div>
+
+                    <h4 class="card-title text-truncate">{{item.title}}</h4>
+                    <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+
+
+                </div>
+                <div class=" btntag tag-blue " routerLinkActive="active"
+                    [routerLink]="['/specificarticle',item.articleId]">
+                    Read More</div>
+            </div>
         </div>
     </div>
-
-
-</div>
-<div class="Container justify-content-center d-flex">
-    <div class="stickypagination">
-        <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+    <div class="Container justify-content-center d-flex">
+        <div class="stickypagination">
+            <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+        </div>
     </div>
 </div>
+
+<ng-template #ArrayEmpty>
+    <div class="text-center">
+        <h1>No records found.</h1>
+    </div>
+</ng-template>
