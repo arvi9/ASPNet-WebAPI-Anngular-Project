@@ -151,7 +151,7 @@ namespace AspireOverflow.DataAccessLayer
            Validation.ValidateSpam(spam);
             try
             {
-               if (GetSpams().AsEnumerable().Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("Unable to Create spam to same Query with same UserID");
+               if (GetSpams().AsEnumerable().Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("You have already reported the same query as Spam");
                
                 _context.Spams.AddRange(spam);
                 _context.SaveChanges();

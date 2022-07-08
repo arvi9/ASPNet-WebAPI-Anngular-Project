@@ -15,13 +15,10 @@ namespace AspireOverflow.Controllers
     {
         private readonly ILogger<ArticleController> _logger;
         private readonly IArticleService _articleService;
-
-
         public ArticleController(ILogger<ArticleController> logger, IArticleService articleService)
         {
             _logger = logger;
             _articleService = articleService;
-
         }
 
         ///<summary>
@@ -93,7 +90,6 @@ namespace AspireOverflow.Controllers
         /// <param name="privateArticleDto"></param>
 
         [HttpPost]
-
         public async Task<ActionResult> CreatePrivateArticle(PrivateArticleDto privateArticleDto)
         {
             if (privateArticleDto == null) return BadRequest(Message("Null value is not supported"));
@@ -143,7 +139,6 @@ namespace AspireOverflow.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateComment(ArticleComment comment)
         {
-
             if (comment == null) return BadRequest(Message("Null value is not supported"));
             try
             {
@@ -188,7 +183,7 @@ namespace AspireOverflow.Controllers
         [HttpPost]
         public async Task<ActionResult> AddLikeToArticle(ArticleLike Like)
         {
-            if (Like == null) return BadRequest(Message("Object cannot be null"));
+            if (Like == null) return BadRequest(Message("ArticleLike cannot be null"));
             if (Like.ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
             Like.UserId = GetCurrentUser().UserId;
             try
@@ -199,12 +194,12 @@ namespace AspireOverflow.Controllers
             }
             catch (ArgumentException exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, Like));
-                return Problem($"{exception.Message}");
+                _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(ArticleLike Like)", exception, Like));
+                return BadRequest(Message($"{exception.Message}"));
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(int ArticleId)", exception, Like));
+                _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(ArticleLike Like)", exception, Like));
                 return Problem($"Error Occurred while Adding Like  :{Like}");
             }
         }
@@ -289,10 +284,10 @@ namespace AspireOverflow.Controllers
             {
                 return _articleService.ChangeArticleStatus(ArticleId, ArticleStatusID, GetCurrentUser().UserId) ? await Task.FromResult(Ok($"Successfully updated the status of the Article :{ArticleId}")) : BadRequest(Message($"Error Occurred while updating the status of the Article:{ArticleId}"));
             }
-            catch (ItemNotFoundException exception)
+            catch (ItemNotFoundException exception) //Occurs When Existing article doesnot match with Article Id
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "ChangeArticleStatus(int ArticleId, int ArticleStatusID)", exception, ArticleId, ArticleStatusID));
-                return NotFound($"{exception.Message}");
+                return BadRequest($"{exception.Message}");
             }
             catch (ValidationException exception)  //Occurs When Reviewer updating status for his own articles
             {
@@ -319,12 +314,12 @@ namespace AspireOverflow.Controllers
             catch (ArgumentException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
-                return Problem($"{exception.Message}");
+                return BadRequest($"{exception.Message}");
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
-                return BadRequest(Message($"Error Occurred while Adding like to ArticleId :{ArticleId}"));
+                return Problem($"Error Occurred while Adding like to ArticleId :{ArticleId}");
             }
         }
         /// <summary>

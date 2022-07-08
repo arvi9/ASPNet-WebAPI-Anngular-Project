@@ -484,7 +484,6 @@ namespace AspireOverflow.Controllers
         public async Task<ActionResult> AddSpam(Spam spam)
         {
             if (spam == null ) return BadRequest(Message("spam object cannot be null"));
-
             try
             {
                 spam.UserId=GetCurrentUser().UserId;
@@ -519,7 +518,7 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var ListOfSpams = _queryService.GetSpams(3);
+                var ListOfSpams = _queryService.GetSpams(3); //verify status ->1-approved,2->Rejected,3->Not verified
                 return await Task.FromResult(Ok(ListOfSpams));
             }
             catch (Exception exception)

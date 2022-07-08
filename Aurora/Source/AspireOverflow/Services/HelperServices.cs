@@ -8,7 +8,7 @@ namespace AspireOverflow.Services
     {
 
 
-        
+        //Returns each property and its values in a Singe String
         public static string PropertyList(this object obj)
         {
             if (obj == null) return "";

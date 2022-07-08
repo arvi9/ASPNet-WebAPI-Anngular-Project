@@ -106,7 +106,7 @@ public class UserController : BaseController
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", " ChangeUserVerifyStatus(int UserId, bool IsVerified)", exception, UserId));
-            return NotFound($"{exception.Message}");
+            return BadRequest($"{exception.Message}");
         }
         catch (Exception exception)
         {

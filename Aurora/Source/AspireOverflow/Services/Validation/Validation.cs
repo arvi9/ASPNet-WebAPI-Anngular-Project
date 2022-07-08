@@ -11,7 +11,7 @@ namespace AspireOverflow.Services
             if (query.CreatedBy <= 0) throw new ValidationException("CreatedBy Id  must be greater than 0");
             if (String.IsNullOrEmpty(query.Title)) throw new ValidationException("Title cannot be null or empty");
             if (String.IsNullOrEmpty(query.Content)) throw new ValidationException("content cannot be null or empty");
-            if (query.Title.Length > 60) throw new ValidationException("Title length must be less than 60 charcter");
+            if (query.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
             if (!query.IsActive) throw new ValidationException("IsActive must be true");
             if (query.IsSolved) throw new ValidationException("IsSolved must be false");
             else return true;

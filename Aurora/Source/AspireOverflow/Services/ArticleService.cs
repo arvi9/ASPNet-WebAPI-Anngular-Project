@@ -55,8 +55,8 @@ namespace AspireOverflow.Services
         //Article is Updating using article object and UpdatedByUserId.
         public bool UpdateArticle(Article article, int UpdatedByUserId)
         {
-         //throws Validation Exception if any validation fails.
-           Validation.ValidateArticle(article);
+            //throws Validation Exception if any validation fails.
+            Validation.ValidateArticle(article);
             try
             {
                 var ExistingArticle = database.GetArticles().ToList().Find(Item => Item.ArtileId == article.ArtileId && Item.ArticleStatusID == 1);
@@ -65,7 +65,7 @@ namespace AspireOverflow.Services
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
-                ExistingArticle.UpdatedBy = UpdatedByUserId ;
+                ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
 
@@ -101,14 +101,14 @@ namespace AspireOverflow.Services
             }
         }
 
-        
+
         //The article will be deleted using ArticleId and Draft article only will be deleted.
         public bool DeleteArticleByArticleId(int ArticleId)
         {
-            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}"); 
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                return database.DeleteArticle(ArticleId); 
+                return database.DeleteArticle(ArticleId);
             }
             catch (Exception exception)
             {
@@ -188,8 +188,8 @@ namespace AspireOverflow.Services
                 var TrendingArticles = new List<Article>();
                 foreach (var Id in ListOfArticleId)
                 {
-                    var Article=ListOfArticles.Find(item => item.ArtileId == Id);
-                    if(Article != null )TrendingArticles.Add(Article);
+                    var Article = ListOfArticles.Find(item => item.ArtileId == Id);
+                    if (Article != null) TrendingArticles.Add(Article);
                 }
                 return TrendingArticles.Select(Article => new
                 {
@@ -279,6 +279,7 @@ namespace AspireOverflow.Services
         {
             try
             {
+                _mailService?.SendEmailAsync(HelperService.ArticleMail("ponvizhi.uday@aspiresys.com", "Title", "Article Created Successfully", 2));
                 //to get the articles where private is false.
                 var ListOfArticles = GetArticles().Where(Item => !Item.IsPrivate);
                 return ListOfArticles.Select(Article => new
@@ -425,6 +426,7 @@ namespace AspireOverflow.Services
                     image = Article.Image,
                     date = Article.UpdatedOn,
                     status = Article.ArticleStatus?.Status,
+                    ReviewerId = Article.ReviewerId
                 });
             }
             catch (Exception exception)
