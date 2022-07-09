@@ -79,7 +79,7 @@ namespace AspireOverflow.Services
             try
             {
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
-                var User = GetUsers().ToList().Find(user => user.EmailAddress.ToLower() == Email.ToLower() && user.VerifyStatusID==1);
+                var User = GetUsers().ToList().Find(user => user.EmailAddress.ToLower() == Email.ToLower() && (user.VerifyStatusID==1 || user.VerifyStatusID==3));
                 if (User == null) throw new ValidationException("Invalid Email");
                 return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new ValidationException("Password doesn't match");
             }

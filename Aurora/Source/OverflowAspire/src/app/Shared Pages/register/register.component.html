@@ -1,6 +1,6 @@
-<div class="container register">
+<div class="register">
     <div class=" col-xl-5 mx-auto">
-        <div class="container">
+        <div>
             <a>
                 <img class="LogoImg " src="assets/Logo.png">
             </a>
@@ -14,19 +14,18 @@
                 <div>
                     <h5 class="text-center text-danger">{{error}}</h5>
                 </div>
-                <h5 class="card-title text-center">Registration</h5>
-
+                <h4 class="card-title text-center mb-4" >Registration</h4>
+           
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="form-label">
                             <label class="form-label" for="fullName">Full Name </label>
-                            <input type="text" class="form-control" name="fullName" id="fullName"
+                            <input  type="text" class="form-control" name="fullName" id="fullName"
                                 formControlName="fullName">
-                            <span class="text-danger"
-                                *ngIf="user.controls['fullName'].invalid && user.controls['fullName'].touched">Name
-                                field is Required(it should contains only Alpahabets and can have max 20
-                                characters)</span>
-                            <!-- <div class="text-danger" *ngIf="submitted && fullName.invalid" >Invalid</div> -->
+                                <span [class.d-none]="user.controls['fullName'].valid || user.controls['fullName'].untouched" class="text-danger" *ngIf="user.controls['fullName'].errors?.['required']">Name is required</span>
+                                <span class="text-danger" *ngIf="user.controls['fullName'].errors?.['minlength']">Name should not have minimum 4 characters</span>
+                                <span class="text-danger" *ngIf="user.controls['fullName'].errors?.['maxlength']">Name should have maximum 20 characters</span>
+                                <span class="text-danger" *ngIf="user.controls['fullName'].errors?.['pattern']">Name must contain only characters</span>
                         </div>
                     </div>
 
@@ -39,10 +38,7 @@
                             <option value="" hidden>Choose Gender</option>
                             <option *ngFor="let item of GenderDetails" value={{item.genderId}}>{{item.name}}</option>
                         </select>
-                        <span class="text-danger"
-                            *ngIf="user.controls['gender'] && user.controls['gender'].invalid && user.controls['gender'].touched">Gender
-                            field is
-                            Required</span>
+                        <span [class.d-none]="user.controls['gender'].valid || user.controls['gender'].untouched" class="text-danger" *ngIf="user.controls['gender'].errors?.['required']">Gender is required</span>
                     </div>
 
                 </div>
@@ -51,11 +47,9 @@
                     <div class="col-md-6 mb-4">
                         <div class="label">
                             <label class="form-label" for="name">ACE Number</label>
-                            <input type="text" class="form-control" formControlName="aceNumber" required
-                                name="aceNumber">
-                            <span class="text-danger"
-                                *ngIf="user.controls['aceNumber'] && user.controls['aceNumber'].invalid && user.controls['aceNumber'].touched">ACE
-                                Number field is Required(It should starts with ACE and 4 digits)</span>
+                            <input type="text" class="form-control" formControlName="aceNumber" required name="aceNumber">
+                                <span [class.d-none]="user.controls['aceNumber'].valid || user.controls['aceNumber'].untouched" class="text-danger" *ngIf="user.controls['aceNumber'].errors?.['required']">ACE Number is required</span>
+                                <span class="text-danger" *ngIf="user.controls['aceNumber'].errors?.['pattern']">ACE Number is invalid (Example-ACE1234)</span>
 
                         </div>
                     </div>
@@ -69,9 +63,7 @@
                             <option *ngFor="let item of departmentDetails" value={{item.departmentId}}>{{item.name}}
                             </option>
                         </select>
-                        <span class="text-danger"
-                            *ngIf=" this.user.controls['departmentValidate'] &&  this.user.controls['departmentValidate'].invalid &&  this.user.controls['departmentValidate'].touched">Department
-                            field is Required</span>
+                        <span [class.d-none]="user.controls['departmentValidate'].valid || user.controls['departmentValidate'].untouched" class="text-danger" *ngIf="user.controls['departmentValidate'].errors?.['required']">Department is required</span>
 
                     </div>
 
@@ -83,12 +75,8 @@
                             <label class="form-label" for="name">Mail Address </label>
                             <input type="text" class="form-control" required formControlName="emailAddress"
                                 name="emailAddress">
-                            <span class="text-danger"
-                                *ngIf=" this.user.controls['emailAddress'] &&  this.user.controls['emailAddress'].invalid &&  this.user.controls['emailAddress'].touched">Email
-                                Address field
-                                is Required(Example-xxx@aspiresys.com) </span>
-
-
+                                <span [class.d-none]="user.controls['emailAddress'].valid || user.controls['emailAddress'].untouched" class="text-danger" *ngIf="user.controls['emailAddress'].errors?.['required']">Email Address is required</span>
+                                <span class="text-danger" *ngIf="user.controls['emailAddress'].errors?.['pattern']">Email Address is invalid (Example-xxx@aspiresys.com)</span>
                         </div>
                     </div>
 
@@ -101,10 +89,24 @@
                             <option *ngFor="let item of Designationlist" value={{item.designationId}}>
                                 {{item.name}} </option>
                         </select>
-                        <span class="text-danger"
-                            *ngIf=" this.user.controls['DesignationValidate'] &&  this.user.controls['DesignationValidate'].invalid &&  this.user.controls['DesignationValidate'].touched">Designation
-                            field
-                            is Required</span>
+                        <span [class.d-none]="user.controls['DesignationValidate'].valid || user.controls['DesignationValidate'].untouched" class="text-danger" *ngIf="user.controls['DesignationValidate'].errors?.['required']">Designation is required</span>
+                    </div>
+                </div>
+             
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="label">
+                            <label class="form-label">Date Of Birth</label>
+
+                            <input type="date" class="form-control rounded" placeholder="Date" aria-label="date"
+                                aria-describedby="search-addon" name="dateOfBirth" formControlName="dateOfBirth"
+                                required>
+
+                                <span [class.d-none]="user.controls['dateOfBirth'].valid || user.controls['dateOfBirth'].untouched" class="text-danger" *ngIf="user.controls['dateOfBirth'].errors?.['required']">Date of birth is required</span>
+
+                            <span class="text-danger" *ngIf="validateDateOfBirth()">Your age must be greater than 18 and less than 60</span>
+
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -113,32 +115,13 @@
                             <label class="form-label" for="name">Password</label>
                             <input type="password" class="form-control" formControlName="password" required
                                 name="password">
-                            <span class="text-danger"
-                                *ngIf=" this.user.controls['password'] &&  this.user.controls['password'].invalid &&  this.user.controls['password'].touched">Password
-                                field is Invalid</span>
+                            
+                            <span [class.d-none]="user.controls['password'].valid || user.controls['password'].untouched" class="text-danger"  *ngIf="user.controls['password'].errors?.['required']">Password is required</span>   
+                                <span class="text-danger" *ngIf="user.controls['password'].errors?.['pattern']">Password should be minimum 8 digits with 1 uppercase,1 lowercase,1 symbol and 1 number</span>
 
                         </div>
                     </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="label">
-                            <label class="form-label">Date Of Birth</label>
-
-                            <input type="date" class="form-control rounded" placeholder="Date" aria-label="date"
-                                aria-describedby="search-addon" name="dateOfBirth" formControlName="dateOfBirth"
-                                (change)="validateDateOfBirth()" required>
-
-                            <span class="text-danger"
-                                *ngIf=" this.user.controls['dateOfBirth'] &&  this.user.controls['dateOfBirth'].invalid &&  this.user.controls['dateOfBirth'].touched">dateOfBirth
-                                field is Required</span>
-
-                            <span class="text-danger" *ngIf="validateDateOfBirth()">datebirth
-                                is invalid</span>
-
-                        </div>
-                    </div>
                 </div>
                 <div class="text-center mb-2 p-2">
 

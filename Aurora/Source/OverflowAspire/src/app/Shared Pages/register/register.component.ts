@@ -22,6 +22,9 @@ export class RegisterComponent implements OnInit {
   error: string = ""
   Designationlist: any[] = []
   Designationlist1: any[] = []
+  todayAsString: any;
+  year: number = 0;
+  validateGendererror = true;
   user = this.fb.group({
     fullName: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(20), Validators.pattern("^[A-Za-z ]+$")]],
     gender: ['', [Validators.required]],
@@ -33,18 +36,15 @@ export class RegisterComponent implements OnInit {
     password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
 
   })
-  todayAsString: any;
-
-  age: Number = 0;
-  year: number = 0;
+  
 
   constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router, private toaster: Toaster) { }
 
 
-  dobmessage: string = ''
-  message: string = ''
-  minage: Number = 18;
-  validateGendererror = true;
+
+
+
+
   validateGender(value: any) {
     if (value === 'default') {
       this.validateGendererror = true;
@@ -93,7 +93,11 @@ export class RegisterComponent implements OnInit {
     this.todayAsString = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     if (this.user.value['dateOfBirth'] < this.todayAsString) {
       this.year = parseInt(this.user.value['dateOfBirth']);
-      if ((new Date().getFullYear() - this.year) <= 18) {
+      if (((new Date().getFullYear() - this.year) <= 18))
+       {
+        return true;
+      }
+      if((new Date().getFullYear() - this.year) >= 60){
         return true;
       }
       return false;
@@ -119,17 +123,7 @@ export class RegisterComponent implements OnInit {
       userRoleId: 2,
       designationId: this.user.value['DesignationValidate'],
       createdOn: Date.now,
-      updatedBy: 0,
-      updatedOn: null,
-      designation: null,
-      gender: null,
-      userRole: null,
-      verifyStatus: null,
-      queries: null,
-      queryComments: null,
-      articleComments: null,
-      articles: null,
-      likes: null
+      updatedBy: 0, 
     }
     this.connection.Register(registeruser)
       .subscribe({
@@ -138,7 +132,7 @@ export class RegisterComponent implements OnInit {
         error: (error) => {
           this.error = error.error.message;
           this.IsLoading=false;
-          this.user.reset();
+     
         },
         complete: () => {
           this.toaster.open({ text: 'User Registered Successfully', position: 'top-center', type: 'success' })
