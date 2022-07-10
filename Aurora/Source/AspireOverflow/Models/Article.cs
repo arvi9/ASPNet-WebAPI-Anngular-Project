@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 namespace AspireOverflow.Models
 {
+    
     public partial class Article : IAuditField
     {
 

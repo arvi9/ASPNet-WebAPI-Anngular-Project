@@ -47,14 +47,8 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                int ReviewerId = GetCurrentUser().UserId;
-                var DashboardInformation = new
-                {
-                    TotalNumberOfArticles = _articleService.GetAll().Count(),
-                    ArticlesTobeReviewed = _articleService.GetArticlesByArticleStatusId(2).Count(),
-                    ArticlesReviewed = _articleService.GetArticlesByArticleStatusId(4).Count(),
-                    ArticlesPublished = _articleService.GetArticlesByReviewerId(ReviewerId).Count(),
-                }; return await Task.FromResult(Ok(DashboardInformation));
+                var DashboardInformation = _articleService.GetCountOfArticles();
+                return await Task.FromResult(Ok(DashboardInformation));
             }
             catch (Exception exception)
             {
@@ -83,12 +77,9 @@ namespace AspireOverflow.Controllers
             {
                 var DashboardInformation = new
                 {
-                    TotalNumberOfArticles = _articleService.GetAll().Count(),
-                    TotalNumberOfUsers = _userService.GetUsers().Count(),
-                    TotalNumberOfReviwers = _userService.GetUsersByIsReviewer(true).Count(),
-                    TotalNumberofQueries = _queryService.GetListOfQueries().Count(),
-                    TotaNumberofSolvedQueries = _queryService.GetQueries(true).Count(),
-                    TotalNumberOfUnSolvedQueries = _queryService.GetQueries(false).Count(),
+                   Articles = _articleService.GetCountOfArticles(),
+                   Users = _userService.GetCountOfUsers(),
+                   Queries = _queryService.GetCountOfQueries()          
                 }; return await Task.FromResult(Ok(DashboardInformation));
             }
             catch (Exception exception)
@@ -112,8 +103,7 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         [HttpGet]
         public async Task<ActionResult> GetHomePage()
-        {
-            try
+        { try
             {
                 var Data = new
                 {

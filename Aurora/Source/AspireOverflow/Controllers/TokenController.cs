@@ -52,7 +52,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("TokenController", "AuthToken(String Email, string Password)", exception, Crendentials.Email!));
-                return BadRequest(Message("Error Occured while Validating your  credentials"));
+                return BadRequest(Message("Error Occured while Validating your credentials"));
             }
         }
     }

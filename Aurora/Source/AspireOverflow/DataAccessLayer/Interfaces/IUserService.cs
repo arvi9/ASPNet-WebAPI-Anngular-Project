@@ -14,6 +14,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID);
         public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID);
         public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer);
+         public object GetCountOfUsers();
     }
     public interface IDesignations
     {

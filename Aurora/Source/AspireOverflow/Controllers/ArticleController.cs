@@ -97,7 +97,7 @@ namespace AspireOverflow.Controllers
             try
             {
                 privateArticleDto.article!.CreatedBy = GetCurrentUser().UserId;
-                return _articleService.CreateArticle(privateArticleDto.article, privateArticleDto.SharedUsersId) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding private Article ", privateArticleDto));
+                return _articleService.CreateArticle(privateArticleDto.article, privateArticleDto.SharedUsersId!) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding private Article ", privateArticleDto));
             }
             catch (ValidationException exception)
             {
@@ -194,7 +194,7 @@ namespace AspireOverflow.Controllers
                 var Result = new { message = "Successfully added Like to article", LikesCount = _articleService.GetLikesCount(Like.ArticleId) };
                 return await Task.FromResult(Ok(Result));
             }
-            catch (ArgumentException exception)
+            catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "AddLikeToArticle(ArticleLike Like)", exception, Like));
                 return BadRequest(Message($"{exception.Message}"));

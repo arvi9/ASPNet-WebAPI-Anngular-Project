@@ -9,10 +9,12 @@ namespace AspireOverflow.DataAccessLayer
     {
         private readonly AspireOverflowContext _context;
         private readonly ILogger<QueryRepository> _logger;
-        public QueryRepository(AspireOverflowContext context, ILogger<QueryRepository> logger)
+        private readonly IConfiguration _configuration;
+        public QueryRepository(AspireOverflowContext context, ILogger<QueryRepository> logger, IConfiguration configuration)
         {
             _context = context;
-            _logger = logger ;
+            _logger = logger;
+            _configuration = configuration;
         }
 
 
@@ -29,7 +31,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddQuery(Query query)", exception, query));
-               return false;
+                return false;
             }
         }
 
@@ -54,7 +56,7 @@ namespace AspireOverflow.DataAccessLayer
 
         //Updating query Either by marking as Solved 
         //Same method using to disable or soft delete the query
-        public bool UpdateQuery(int QueryId, bool IsSolved=false, bool IsDelete=false)
+        public bool UpdateQuery(int QueryId, bool IsSolved = false, bool IsDelete = false)
         {
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             if (IsSolved == IsDelete) throw new ArgumentException("Both parameter cannot be true/false at the same time");
@@ -78,11 +80,11 @@ namespace AspireOverflow.DataAccessLayer
         //to get the query using QueryId.
         public Query GetQueryByID(int QueryId)
         {
-             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
+            if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             Query? ExistingQuery;
             try
             {
-                ExistingQuery =_context.Queries.FirstOrDefault(query =>query.QueryId==QueryId);
+                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId);
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
@@ -98,7 +100,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive).Include(e=>e.User).ToList();
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())).Include(e => e.User).ToList();
                 return ListOfQueries;
             }
             catch (Exception exception)
@@ -114,7 +116,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfComments = _context.QueryComments.Include(e=>e.Query).Include(e=>e.User).ToList();
+                var ListOfComments = _context.QueryComments.Include(e => e.Query).Include(e => e.User).ToList();
                 return ListOfComments;
             }
             catch (Exception exception)
@@ -128,10 +130,10 @@ namespace AspireOverflow.DataAccessLayer
         //to add a query as spam using spam object.
         public bool AddSpam(Spam spam)
         {
-           Validation.ValidateSpam(spam);
+            Validation.ValidateSpam(spam);
             try
             {
-               if (_context.Spams.Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("You have already reported the same query as Spam");
+                if (_context.Spams.Any(item => item.UserId == spam.UserId && item.QueryId == spam.QueryId)) throw new ArgumentException("You have already reported the same query as Spam");
                 _context.Spams.AddRange(spam);
                 _context.SaveChanges();
                 return true;
@@ -139,7 +141,7 @@ namespace AspireOverflow.DataAccessLayer
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "AddSpam(Spam spam)", exception, spam));
-               return false;
+                return false;
             }
         }
 
@@ -149,7 +151,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfSpams = _context.Spams.Include(e=>e.Query).Include(e=>e.User).ToList();
+                var ListOfSpams = _context.Spams.Include(e => e.Query).Include(e => e.User).ToList();
                 return ListOfSpams;
             }
             catch (Exception exception)
@@ -167,9 +169,9 @@ namespace AspireOverflow.DataAccessLayer
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
             try
             {
-              var ExistingSpam = _context.Spams.Where(item=>item.QueryId==QueryId).ToList();
-               if(ExistingSpam == null) throw new ItemNotFoundException($"There is no matching Spam data with QueryId :{QueryId}");
-                 ExistingSpam.ForEach(Item =>Item.VerifyStatusID=VerifyStatusID);
+                var ExistingSpam = _context.Spams.Where(item => item.QueryId == QueryId).ToList();
+                if (ExistingSpam == null) throw new ItemNotFoundException($"There is no matching Spam data with QueryId :{QueryId}");
+                ExistingSpam.ForEach(Item => Item.VerifyStatusID = VerifyStatusID);
                 _context.Spams.UpdateRange(ExistingSpam);
                 _context.SaveChanges();
                 return true;
@@ -178,6 +180,39 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryRepository", "UpdateSpam(int QueryId, int VerifyStatusID)", exception, VerifyStatusID));
                 return false;
+            }
+        }
+
+        public object GetCountOfQueries()
+        {
+            try
+            {
+                return new
+                {
+                    TotalNumberOfQueries = _context.Queries.Count(),
+                    SolvedQueries = _context.Queries.Count(item => item.IsSolved && item.IsActive),
+                    UnSolvedQueries = _context.Queries.Count(item => !item.IsSolved && item.IsActive),
+                };
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetCountOfQueries()", exception));
+                throw;
+            }
+        }
+
+        private int GetDuration()
+        {
+            try
+            {
+                var Duration = _configuration["Data_Fetching_Duration:In_months"];
+                return Duration != null ? Convert.ToInt32(Duration) : throw new Exception("Data_Fetching_Duration:In_months-> value is Invalif  in AppSettings.json ");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDuration()", exception));
+                throw;
+
             }
         }
     }

@@ -5,7 +5,7 @@ namespace AspireOverflow.Services
 {
     public static class Validation
     {
-       public static bool ValidateQuery(Query query)
+        public static bool ValidateQuery(Query query)
         {
             if (query == null) throw new ValidationException("Query should not be null");
             if (query.CreatedBy <= 0) throw new ValidationException("CreatedBy Id  must be greater than 0");
@@ -74,5 +74,20 @@ namespace AspireOverflow.Services
             else return true;
         }
 
+        public static bool ValidateEmail(String Email)
+        {
+            var mail = new Regex("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+            if (!mail.IsMatch(Email)) throw new ValidationException($"Email format is incorrect EmailEntered:{Email}");
+            else return true;
+        }
+
+        public static bool ValidateArticleLike(ArticleLike Like)
+        {
+            if (Like == null) throw new ValidationException("ArticleLike Object cannot be null");
+            if (Like.ArticleId <= 0) throw new ValidationException($"Article Id must be greater than 0 where ArticleId:{Like.ArticleId}");
+            if (Like.UserId <= 0) throw new ValidationException($"User Id must be greater than 0 where UserId:{Like.UserId}");
+            else return true;
+
+        }
     }
 }

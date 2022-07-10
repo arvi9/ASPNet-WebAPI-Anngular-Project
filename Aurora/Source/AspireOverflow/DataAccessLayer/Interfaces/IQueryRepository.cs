@@ -7,6 +7,8 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool UpdateQuery(int QueryId, bool IsSolved = false, bool IsDelete = false);
         Query GetQueryByID(int QueryId);
         IEnumerable<Query> GetQueries();
+        public object GetCountOfQueries();
+
     }
 
     public interface IQueryCommentRepository
@@ -14,7 +16,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         IEnumerable<QueryComment> GetComments();
         bool AddComment(QueryComment comment);
     }
-    
+
     public interface ISpamReportRepository
     {
         IEnumerable<Spam> GetSpams();

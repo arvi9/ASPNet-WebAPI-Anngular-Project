@@ -5,6 +5,8 @@ using AspireOverflow.Security;
 using Microsoft.AspNetCore.Identity;
 using AspireOverflow.Models;
 using System.Linq;
+using AspireOverflow.CustomExceptions;
+
 namespace AspireOverflow.Services
 {
     public class UserService : IUserService
@@ -79,9 +81,13 @@ namespace AspireOverflow.Services
             try
             {
                 var Hasher = PasswordHasherFactory.GetPasswordHasherFactory();
-                var User = GetUsers().ToList().Find(user => user.EmailAddress.ToLower() == Email.ToLower() && (user.VerifyStatusID==1 || user.VerifyStatusID==3));
-                if (User == null) throw new ValidationException("Invalid Email");
+                var User = database.GetUserByEmail(Email);
                 return Hasher.VerifyHashedPassword(User, User.Password, Password) == PasswordVerificationResult.Success ? User : throw new ValidationException("Password doesn't match");
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService()", "GetUser(string Email, string Password)", exception, Email));
+                throw;
             }
             catch (Exception exception)
             {
@@ -133,14 +139,14 @@ namespace AspireOverflow.Services
             }
         }
 
-        
+
         //to get the users using VerifyStatusID.
         public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
-                return GetUsers().Where(User => User.VerifyStatusID == VerifyStatusID).Select(User => new
+                return database.GetUsersByVerifyStatusId(VerifyStatusID).Select(User => new
                 {
                     UserId = User.UserId,
                     fullName = User.FullName,
@@ -148,7 +154,7 @@ namespace AspireOverflow.Services
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
+                    Department = User.Designation!.Department.DepartmentName,
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
                 });
@@ -167,7 +173,7 @@ namespace AspireOverflow.Services
             if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
-                return GetUsers().Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Select(User => new
+                return database.GetUsersByUserRoleID(UserRoleID).Select(User => new
                 {
                     UserId = User.UserId,
                     fullName = User.FullName,
@@ -175,7 +181,7 @@ namespace AspireOverflow.Services
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
+                    Department = User.Designation!.Department.DepartmentName,
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
                 });
@@ -210,7 +216,7 @@ namespace AspireOverflow.Services
         {
             try
             {
-                return GetUsers().Where(user => user.IsReviewer == IsReviewer && user.VerifyStatusID == 1).Select(User => new
+                return database.GetUsersByIsReviewer(IsReviewer).Select(User => new
                 {
                     UserId = User.UserId,
                     Name = User.FullName,
@@ -218,7 +224,7 @@ namespace AspireOverflow.Services
                     Email = User.EmailAddress,
                     DateOfBirth = User.DateOfBirth,
                     Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
+                    Department = User.Designation!.Department.DepartmentName,
                     Gender = User.Gender?.Name,
                     IsReviewer = User.IsReviewer
                 });
@@ -229,83 +235,94 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-
-
-        //to get the department using DepartmentId.
-        private string GetDepartmentByID(int DepartmentId)
+        public object GetCountOfUsers()
         {
-            if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
             try
             {
-                var department = database.GetDepartments().ToList().Find(item => item.DepartmentId == DepartmentId);
-                return department?.DepartmentName!;
+                return database.GetCountOfUsers();
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserService", "GetDepartmentByID(int DepartmentId)", exception, DepartmentId));
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetCountOfUsers()", exception));
                 throw;
             }
+
         }
-
-
-        //to get the gender from the database.
-        public IEnumerable<Object> GetGenders()
-        {
-            try
+            //to get the department using DepartmentId.
+            private string GetDepartmentByID(int DepartmentId)
             {
-                var Genders = database.GetGenders().Select(item => new
+                if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
+                try
                 {
-                    GenderId = item.GenderId,
-                    Name = item.Name
-                });
-                return Genders;
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
-                throw;
-            }
-        }
-
-
-        //to get the designation from the database.
-        public IEnumerable<Object> GetDesignations()
-        {
-            try
-            {
-                var designations = database.GetDesignations().Select(item => new
+                    var department = database.GetDepartments().FirstOrDefault(item => item.DepartmentId == DepartmentId);
+                    return department?.DepartmentName!;
+                }
+                catch (Exception exception)
                 {
-                    DesignationId = item.DesignationId,
-                    Name = item.DesignationName,
-                    DepartmentId = item.DepartmentId
-                });
-                return designations;
+                    _logger.LogError(HelperService.LoggerMessage("UserService", "GetDepartmentByID(int DepartmentId)", exception, DepartmentId));
+                    throw;
+                }
             }
-            catch (Exception exception)
-            {
-                _logger.LogError(HelperService.LoggerMessage("UserService", " GetDesignations()", exception));
-                throw;
-            }
-        }
 
-        
-        //to get the departments from the database.
-        public IEnumerable<object> GetDepartments()
-        {
-            try
+
+            //to get the gender from the database.
+            public IEnumerable<Object> GetGenders()
             {
-                var Departments = database.GetDepartments().Select(item => new
+                try
                 {
-                    DepartmentId = item.DepartmentId,
-                    Name = item.DepartmentName
-                });
-                return Departments;
+                    var Genders = database.GetGenders().Select(item => new
+                    {
+                        GenderId = item.GenderId,
+                        Name = item.Name
+                    });
+                    return Genders;
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
+                    throw;
+                }
             }
-            catch (Exception exception)
+
+
+            //to get the designation from the database.
+            public IEnumerable<Object> GetDesignations()
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
-                throw;
+                try
+                {
+                    var designations = database.GetDesignations().Select(item => new
+                    {
+                        DesignationId = item.DesignationId,
+                        Name = item.DesignationName,
+                        DepartmentId = item.DepartmentId
+                    });
+                    return designations;
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(HelperService.LoggerMessage("UserService", " GetDesignations()", exception));
+                    throw;
+                }
+            }
+
+
+            //to get the departments from the database.
+            public IEnumerable<object> GetDepartments()
+            {
+                try
+                {
+                    var Departments = database.GetDepartments().Select(item => new
+                    {
+                        DepartmentId = item.DepartmentId,
+                        Name = item.DepartmentName
+                    });
+                    return Departments;
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
+                    throw;
+                }
             }
         }
     }
-}

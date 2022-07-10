@@ -4,7 +4,8 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
 {
     public interface IArticleService : IArticleCommentService, IArticleLikeService
     {
-        bool CreateArticle(Article article, List<int>? SharedUsersId = default!);
+        bool CreateArticle(Article article, List<int> SharedUsersId);
+        bool CreateArticle(Article article);
         bool DeleteArticleByArticleId(int ArticleId);
         bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId);
         bool UpdateArticle(Article article, int _currentUserId);
@@ -15,6 +16,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         IEnumerable<Object> GetPrivateArticles(int UserId);
         IEnumerable<Object> GetArticlesByTitle(string Title);
         IEnumerable<Object> GetArticlesByAuthor(string AuthorName);
+        public object GetCountOfArticles();
         IEnumerable<Object> GetArticlesByUserId(int UserId);
         IEnumerable<Article> GetAll();
         IEnumerable<Object> GetArticlesByReviewerId(int ReviewerId);
@@ -26,7 +28,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool CreateComment(ArticleComment comment);
         IEnumerable<object> GetComments(int ArticleID);
     }
-    
+
     public interface IArticleLikeService
     {
         bool AddLikeToArticle(ArticleLike Like);

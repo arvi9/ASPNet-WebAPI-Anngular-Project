@@ -14,6 +14,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         IEnumerable<Object> GetQueriesByUserId(int UserId);
         IEnumerable<Object> GetQueriesByTitle(String Title);
         IEnumerable<Object> GetQueries(bool IsSolved);
+         public object GetCountOfQueries();
     }
 
     public interface IQueryCommentService

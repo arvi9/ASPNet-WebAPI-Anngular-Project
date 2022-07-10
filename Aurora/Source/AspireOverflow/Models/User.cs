@@ -2,12 +2,11 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-
+using Microsoft.EntityFrameworkCore;
 
 namespace AspireOverflow.Models
 {
-
+    [Index("AceNumber", "EmailAddress",IsUnique =true)]
     public partial class User
     {
         public User()
@@ -78,7 +77,7 @@ namespace AspireOverflow.Models
         public virtual ICollection<Article>? Articles { get; set; }
         [InverseProperty("LikedUser")]
         public virtual ICollection<ArticleLike>? Likes { get; set; }
-          [InverseProperty("user")]
+        [InverseProperty("user")]
         public virtual ICollection<PrivateArticle>? PrivateArticles { get; set; }
 
 
@@ -86,18 +85,20 @@ namespace AspireOverflow.Models
 
     }
 
-    public class Login{
-        public string?  Email { get; set; }
+    public class Login
+    {
+        public string? Email { get; set; }
         public string? Password { get; set; }
     }
 
-    public class CurrentUser{
-           public string? Email { get; set; }
+    public class CurrentUser
+    {
+        public string? Email { get; set; }
 
-           public int UserId { get; set; }
+        public int UserId { get; set; }
 
-           public int RoleId { get; set; }
+        public int RoleId { get; set; }
 
-           public bool IsReviewer { get; set; }
+        public bool IsReviewer { get; set; }
     }
 }

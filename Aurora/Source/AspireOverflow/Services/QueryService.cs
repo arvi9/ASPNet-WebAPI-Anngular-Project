@@ -242,7 +242,19 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+  public object GetCountOfQueries()
+        {
+            try
+            {
+                return database.GetCountOfQueries();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("Queryservice", "GetCountOfQueries()", exception));
+                throw;
+            }
 
+        }
 
         //Add an comment for the particular query.
         public bool CreateComment(QueryComment comment)

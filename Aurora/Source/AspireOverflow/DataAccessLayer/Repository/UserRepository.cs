@@ -10,10 +10,13 @@ namespace AspireOverflow.DataAccessLayer
     {
         private readonly AspireOverflowContext _context;
         private readonly ILogger<UserRepository> _logger;
-        public UserRepository(AspireOverflowContext context, ILogger<UserRepository> logger)
+        private readonly IConfiguration _configuration;
+
+        public UserRepository(AspireOverflowContext context, ILogger<UserRepository> logger, IConfiguration configuration)
         {
             _context = context;
             _logger = logger;
+            _configuration = configuration;
         }
 
 
@@ -22,10 +25,9 @@ namespace AspireOverflow.DataAccessLayer
         {
             Validation.ValidateUser(User);
             try
-            {
-                var ExistingUsers = _context.Users;
-                if (ExistingUsers.Any(Item => Item.AceNumber == User.AceNumber)) throw new ValidationException("ACE Number Already Exists");
-                if (ExistingUsers.Any(Item => Item.EmailAddress == User.EmailAddress)) throw new ValidationException("Email Address Already Exists");
+            {           
+                if ( _context.Users.Any(Item => Item.AceNumber == User.AceNumber)) throw new ValidationException("ACE Number Already Exists");
+                if ( _context.Users.Any(Item => Item.EmailAddress == User.EmailAddress)) throw new ValidationException("Email Address Already Exists");
                 _context.Users.Add(User);
                 _context.SaveChanges();
                 return true;
@@ -82,22 +84,28 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-     
-        //to get the list of users.
-        public IEnumerable<User> GetUsers()
+        public User GetUserByEmail(string Email)
         {
+            Validation.ValidateEmail(Email);
             try
             {
-                return _context.Users.Include(e=>e.Designation).Include(e=>e.UserRole).Include(e=>e.Gender).Include(e=>e.VerifyStatus).ToList();
+                var user = _context.Users.Include(e=>e.UserRole).FirstOrDefault(User => User.EmailAddress.ToLower() == Email.ToLower());
+                return user != null ? user : throw new ValidationException($"There is no matching User data with Email :{Email}");
+            }
+            catch (ItemNotFoundException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUserByID(int UserId)", exception, Email));
+                throw;
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsers()", exception));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUserByID(int Email)", exception, Email));
                 throw;
             }
         }
 
 
+       
         //to Update the user using UserId and VerifyStatusId.
         public bool UpdateUserByVerifyStatus(int UserId, int VerifyStatusID)
         {
@@ -137,14 +145,85 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+ //to get the list of users.
+        public IEnumerable<User> GetUsers()
+        {
+            try
+            {
+                return _context.Users.Include(e => e.Designation).Include(e => e.UserRole).Include(e => e.Gender).Include(e => e.VerifyStatus).ToList();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsers()", exception));
+                throw;
+            }
+        }
 
- 
+         public IEnumerable<User> GetUsersByVerifyStatusId(int VerifyStatusID)
+        {
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
+            try
+            {
+               return  _context.Users.Where(user =>user.VerifyStatusID==VerifyStatusID).Include(e => e.Designation).Include(e => e.Gender).Include(e=>e.Designation!.Department).ToList();
+          
+            }catch(Exception exception){
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsersByVerifyStatus(int VerifyStatusID)", exception,VerifyStatusID));
+                throw;
+
+            }
+
+        }
+           public IEnumerable<User> GetUsersByUserRoleID(int UserRoleID)
+        {
+            if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
+            try
+            {
+                return _context.Users.Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Include(e => e.Designation).Include(e => e.Gender).Include(e=>e.Designation!.Department);
+               
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsersByUserRoleID(int UserRoleID)", exception, UserRoleID));
+                throw;
+            }
+        }
+
+           public IEnumerable<User> GetUsersByIsReviewer(bool IsReviewer)
+        {
+            try
+            {
+                return _context.Users.Where(user => user.IsReviewer == IsReviewer && user.VerifyStatusID == 1).Include(e => e.Designation).Include(e => e.Gender).Include(e=>e.Designation!.Department);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsersByIsReviewer(bool IsReviewer)", exception, IsReviewer));
+                throw;
+            }
+        }
+           public object GetCountOfUsers()
+        {
+            try
+            {
+                return new{
+                    TotalNumberOfUsers = _context.Users.Count(),
+                    UsersToBeVerified = _context.Users.Count(item => item.VerifyStatusID == 3),
+                    VerifiedUsers=_context.Users.Count(item => item.VerifyStatusID == 1),
+                    NumberOfReviewers = _context.Users.Count(item => item.IsReviewer),            
+                };
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetCountOfUsers()", exception));
+                throw;
+            }
+        }
+
         //to Get the Genders 
         public IEnumerable<Gender> GetGenders()
         {
             try
             {
-              return _context.Genders.ToList();
+                return _context.Genders.ToList();
             }
             catch (Exception exception)
             {
@@ -159,7 +238,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                return _context.Designations.Include(e=>e.Department).ToList();
+                return _context.Designations.Include(e => e.Department).ToList();
             }
             catch (Exception exception)
             {
@@ -180,6 +259,21 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
                 throw;
+            }
+        }
+
+        private int GetDuration()
+        {
+            try
+            {
+                var Duration = _configuration["Data_Fetching_Duration:In_months"];
+                return Duration != null ? Convert.ToInt32(Duration) : throw new Exception("Data_Fetching_Duration:In_months-> value is Invalif  in AppSettings.json ");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDuration()", exception));
+                throw;
+
             }
         }
     }

@@ -6,9 +6,7 @@ namespace AspireOverflow.Controllers
     public class BaseController : ControllerBase
     {
         //Message function takes a string as Input Sends back as Object Result 
-        //obj parameter is Optional 
-      
-      
+        //obj parameter is Optional  
         protected object Message(string message, object? obj = null)
         {
             if (Message != null && obj == null) return new { Message = message };
@@ -22,12 +20,14 @@ namespace AspireOverflow.Controllers
         {
             var CurrentUser = new CurrentUser();
             if (User != null)
-            {
+            try{
                 CurrentUser.UserId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
                 CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
                 CurrentUser.RoleId = Convert.ToInt32(User.FindFirst("RoleId")?.Value);
                 CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
                 return CurrentUser;
+            }catch (Exception){
+                throw;
             }
             return CurrentUser;
         }
