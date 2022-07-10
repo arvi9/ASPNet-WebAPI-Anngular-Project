@@ -28,10 +28,13 @@
             </div>
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
-                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" >
-
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" #image="ngModel" [(ngModel)]="article.ImageString" required>            
                 <label class="text-danger"> {{imageError}}</label>
-               
+                <div *ngIf="image.errors && (image.invalid || image.touched)">               
+                    <small class="text-danger" [class.d-none]="image.valid || image.untouched" *ngIf="image.errors?.['required']">
+                      Image is required.
+                    </small>
+                    </div>
             </div>
 
          
@@ -55,7 +58,7 @@
                 </small>
                 </div>
             <div class="editor-btn">
-                <button class="btn btn-1 btn-2 text-white font-weight-normal" [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button" [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
                     Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
                         aria-hidden="true"></span></button>
                 <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit" [disabled]="!form.valid"

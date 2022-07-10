@@ -1,19 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { share } from 'Models/share'
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
-import { TagInputComponent } from 'ngx-chips';
-
 export interface sharedItem{
   display:string,
   value:number
 }
-
-
-
 declare var CKEDITOR: any;
 
 @Component({
@@ -22,43 +16,21 @@ declare var CKEDITOR: any;
   styleUrls: ['./create-article-page.component.css']
 })
 export class CreateArticlePageComponent implements OnInit {
-  value: any;
-  display!: string;
+  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
   sharedUsersId:any=[]
-
-  itemsAsObjects: any = {
-    id:0,
-    name:''
-  }
-
   IsLoadingSubmit: boolean = false;
   IsLoadingSaveDraft: boolean = false;
   imageError: string = "";
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
-  test: any;
-  public ckeditorContent: string = "";
-  clicked = false;
-
-  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
   article: any = {
     articleId: 0,
     title: '',
     content: '',
-    image: "",
-    articleStatusID: 1,
-    reviewerId: 0,
-    datetime: Date.now,
-    createdBy: 0,
     createdOn: Date.now,
-    updatedBy: 0,
+    updatedOn:Date.now,
     ImageString: this.cardImageBase64,
-    updatedOn: '',
-    articleStatus: null,
-    user: null,
-    IsPrivate: false,
-    articleComments: [],
-    articleLikes: null,
+
   }
   
   public items = [
@@ -72,7 +44,7 @@ privateArticle:any={
   SharedusersId:[]
 }
 
-  //
+
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
@@ -153,11 +125,7 @@ privateArticle:any={
           'Maximum size allowed is ' + max_size / 1000 + 'Mb';
         return false;
       }
-      // if (fileInput.target.files[0].size<0) {
-      //   this.imageError =
-      //     'image is required';
-      //   return false;
-      // }
+
       if (!allowed_types.includes(fileInput.target.files[0].type)) {
         this.imageError = 'Only Images are allowed ( JPG | PNG )';
         return false;
