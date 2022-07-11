@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Query } from 'Models/Query';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -20,8 +21,9 @@ export class MyQueriesComponent implements OnInit {
   public filteredData: Query[] = [];
 
   //Get My queries.
-  constructor(private connection: ConnectionService) { }
+  constructor(private connection: ConnectionService,private route:Router) { }
   ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     this.connection.GetMyQueries()
       .subscribe({
         next: (data: any[]) => {

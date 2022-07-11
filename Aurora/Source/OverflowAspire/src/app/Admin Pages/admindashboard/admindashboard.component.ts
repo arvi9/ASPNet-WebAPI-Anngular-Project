@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Dashboard } from 'Models/Dashboard';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ export class AdmindashboardComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router) { }
 
   ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
       this.route.navigateByUrl("")
     }

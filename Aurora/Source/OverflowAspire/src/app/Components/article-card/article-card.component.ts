@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Article } from 'Models/Article';
+import { AuthService } from 'src/app/Services/auth.service';
+import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
 @Component({
@@ -19,10 +21,11 @@ export class ArticleCardComponent implements OnInit {
   public data: Article[] = [];
   public filteredData: Article[] = [];
 
-  constructor(private connection: ConnectionService) { }
+  constructor(private connection: ConnectionService,private route:Router) { }
   
   //Get articles
   ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     //Get all the articles
     if(this.artsrc=="allArticles"){
      this.connection.GetAllArticles()

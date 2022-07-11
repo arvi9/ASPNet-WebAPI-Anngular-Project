@@ -95,10 +95,11 @@ export class ConnectionService {
   }
 
     //Get User.
-  GetUser(): any {
-    return this.http.get<any>(this.URL + `User/GetUser`, { headers: this.headers });
+  GetUserById(UserId:number): any {
+    return this.http.get<any>(this.URL + `User/GetUserById=${UserId}`, { headers: this.headers });
     
   }
+
 
   //Admin can disable user 
   DisableUser(userId:number): any {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class AdminNavbarComponent implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
   }
 
   clickEvent() {

@@ -29,6 +29,7 @@ ngOnInit(): void {
       .subscribe({
         next: (data: any[]) => {
           this.data = data
+          console.log(data)
           this.filteredData = data;
           this.totalLength = data.length;       
         }

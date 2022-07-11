@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
   }
 
   //Here the user can logout the application.

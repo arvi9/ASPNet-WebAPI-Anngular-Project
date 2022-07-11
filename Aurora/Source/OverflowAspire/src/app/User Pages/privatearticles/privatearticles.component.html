@@ -20,7 +20,7 @@
                     <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" /></label>
                 <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate"
                         autocomplete="off" /></label>
-                <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off" />
+                <label class="labeltext">To
                     <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off"></label>
                 <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
             </form>
@@ -38,7 +38,7 @@
                             <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                         </div>
                         <div class="btntag tag-blue " routerLinkActive="active"
-                            [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+                            [routerLink]="['/specificarticle',item.articleId]">Read More</div>
                     </div>
                 </div>
             </div>
