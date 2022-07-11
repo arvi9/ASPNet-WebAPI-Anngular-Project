@@ -9,8 +9,6 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['../specificquery/specificquery.component.css']
 })
 export class RaisequeryComponent implements OnInit {
-
-  constructor(private connection: ConnectionService, private routing: Router) { }
   IsLoading: boolean = false;
   query: any = {
     queryId: 0,
@@ -20,13 +18,15 @@ export class RaisequeryComponent implements OnInit {
     isSolved: false,
     isActive: true,
     createdBy: 1,
-    createdOn: Date.now,
+    createdOn: new Date(),
     updatedBy: 0,
-    updatedOn: null,
+    updatedOn: new Date(),
     queryComments: null,
     user: null
   }
 
+  constructor(private connection: ConnectionService, private routing: Router) { }
+ 
   //User can create query.
   RaiseQuery() {
     this.IsLoading = true;
@@ -37,7 +37,6 @@ export class RaisequeryComponent implements OnInit {
       });
     this.routing.navigateByUrl("MyQueries");
   }
-
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")

@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-
 <div class="breadcrumb">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -9,7 +8,6 @@
             <li class="breadcrumb-item active">
                 My Queries
             </li>
-  
         </ol>
     </nav>
   </div>
@@ -30,9 +28,6 @@
                     (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)"> Apply</button>
             </form>
         </div>
-
-
-
         <div class="container justify-content-center d-flex flex-wrap">
             <div class=""
                 *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength }">
@@ -45,7 +40,6 @@
                         <div class="icon">
                             <img class="QueryImgIcon" src="http://primedepartamentos.com/images/icons/chat-icon.png">
                         </div>
-
                         <h4 class="card-text text-truncate">{{item.title}}</h4>
                         <p class="truncate-line-clamp">{{item.content}}</p>
                         <div class="mt-auto">
@@ -54,10 +48,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
         <div class="Container justify-content-center d-flex flex-wrap">
             <div class="stickypagination">
                 <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>

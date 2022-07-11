@@ -1,5 +1,4 @@
 import { Component,OnInit } from '@angular/core';
-import { Query } from 'Models/Query';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,12 +10,10 @@ import { Router } from '@angular/router';
 
 //Show latest queries page.
 export class LatestQueriesComponent implements OnInit {
-
    url: string = "latestQueries";
    constructor(private route:Router) { }
+   
    ngOnInit(): void {
-     if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
-     
+     if(AuthService.GetData("token")==null) this.route.navigateByUrl("")   
    }  
-    public data: Query[] = [];
  }

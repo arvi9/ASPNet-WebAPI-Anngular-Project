@@ -8,13 +8,8 @@
     </ol>
   </nav>
 </div>
-
-
 <div class="Content">
-
   <h2 class="heading">Overview of Dashboard</h2>
-
-
   <div class="Container">
     <div class="wrapper">
       <canvas id="piechart" ></canvas>
@@ -22,27 +17,22 @@
     <div class="card">
       <div class="cardRight" routerLink="/ToReview" routerLinkActive="active">
         <div class="card-body">
-          <h5 class="cardtitle">{{piedata.articlesTobeReviewed}}</h5>
+          <h5 class="cardtitle">{{articles}}</h5>
           <p class="cardtext"> Articles To Review</p>
         </div>
       </div>
-
       <div class="cardRight" routerLink="/ArticleReviewed" routerLinkActive="active">
         <div class="card-body">
-          <h5 class="cardtitle">{{piedata.articlesReviewed}}</h5>
+          <h5 class="cardtitle">{{piedata.articleCounts.articlesPublished}}</h5>
           <p class="cardtext"> Articles Reviewed</p>
-
         </div>
       </div>
-
       <div class="cardRight">
         <div class="card-body">
-          <h5 class="cardtitle">{{piedata.totalNumberOfArticles}}</h5>
+          <h5 class="cardtitle">{{piedata.articleCounts.totalNumberOfArticles}}</h5>
           <p class="cardtext">Total Number of Articles</p>
         </div>
-
       </div>
-
     </div>
   </div>
 </div>

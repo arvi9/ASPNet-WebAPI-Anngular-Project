@@ -1,12 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
     <div class="navbar">
-
         <img class="LogoImg" src="./assets/Logo.png">
         <h1 class="Title p-3">Aspire Overflow</h1>
-
-
     </div>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,25 +21,21 @@
                 <div class="dropdown-content">
                     <li><a class=" dropdown-toggle dropbtn" data-bs-toggle="dropdown">My Articles</a>
                         <div class="dropdown-Subcontent dropdown-Subcontent-left">
-
-                    <li><a routerLink="/CreateArticle" class="dropdown-item">Create Article</a></li>
-                    <li><a routerLink="/MyArticles" class="dropdown-item" routerLinkActive="active">My Articles</a></li>
-                    <li><a routerLink="/PrivateArticles" class="dropdown-item" routerLinkActive="active">Shared with
-                            me</a></li>
+                            <li><a routerLink="/CreateArticle" class="dropdown-item">Create Article</a></li>
+                            <li><a routerLink="/MyArticles" class="dropdown-item" routerLinkActive="active">My Articles</a></li>
+                            <li><a routerLink="/PrivateArticles" class="dropdown-item" routerLinkActive="active">Shared with me</a></li>
+                        </div>
+                    </li>
+                    <li><a class="dropdown-toggle dropbtn">My Queries</a>
+                        <div class="dropdown-Subcontent dropdown-Subcontent-left">
+                            <li><a routerLink="/RaiseQuery" class="dropdown-item" routerLinkActive="active">Raise Query</a></li>
+                            <li><a routerLink="/MyQueries" class="dropdown-item" routerLinkActive="active">My Queries</a></li>
+                        </div>
+                    </li>
+                    <li><a routerLink="/MyProfile" class="dropdown" routerLinkActive="active">View Profile</a></li>
+                    <li><a class="dropdown" routerLinkActive="active" (click)="LogOut()">Logout <i class="fa fa-sign-out"></i></a></li>
                 </div>
-                </li>
-                <li><a class="dropdown-toggle dropbtn">My Queries</a>
-                    <div class="dropdown-Subcontent dropdown-Subcontent-left">
-                <li><a routerLink="/RaiseQuery" class="dropdown-item" routerLinkActive="active">Raise Query</a></li>
-                <li><a routerLink="/MyQueries" class="dropdown-item" routerLinkActive="active">My Queries</a></li>
             </div>
-            </li>
-            <li><a routerLink="/MyProfile" class="dropdown" routerLinkActive="active">View Profile</a></li>
-            <li><a class="dropdown" routerLinkActive="active" (click)="LogOut()">Logout <i
-                        class="fa fa-sign-out"></i></a>
-            </li>
         </div>
-    </div>
-    </div>
     </div>
 </nav>

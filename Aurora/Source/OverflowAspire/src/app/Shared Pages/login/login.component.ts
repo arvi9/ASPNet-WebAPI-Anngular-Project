@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
@@ -16,13 +15,16 @@ export class LoginComponent implements OnInit {
   IsReviewer: boolean = false;
   IsLoading: boolean = false;
   IsVerified: string = ''
-  constructor(private spinnerService: NgxSpinnerService, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
   user: any = {
     Email: '',
     Password: '',
   }
+
+  constructor( private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
+
   ngOnInit(): void {
   }
+
 
   onSubmit() {
     this.IsLoading = true;
@@ -43,28 +45,18 @@ export class LoginComponent implements OnInit {
           else {
             if (this.IsVerified == "NotVerified") {
               this.toaster.open({ text: 'User is in Under Verification', position: 'top-center', type: 'primary' })
-           
               this.IsLoading = false;
               this.route.navigateByUrl("");
-              
             }
             else {
               this.route.navigateByUrl("/Home");
             }
           }
         },
-
         error: (error) => {
           this.IsLoading = false;
           this.showErrorMessage = true;
-       
         }
       });
-
-
-
-
-
   }
-
 }

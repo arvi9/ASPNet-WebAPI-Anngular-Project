@@ -1,4 +1,4 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Query } from 'Models/Query';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -8,57 +8,57 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   templateUrl: './my-queries.component.html',
   styleUrls: ['./my-queries.component.css']
 })
+
 export class MyQueriesComponent implements OnInit {
   @Input() ShowStatus: boolean = true;
   totalLength: any;
   page: number = 1;
-  searchTitle="";
-  searchUnSolvedQueries=false;
-  searchSolvedQueries=false;
-
-    //Get My queries.
-  constructor(private connection:ConnectionService) { }
-  ngOnInit(): void {
-   this.connection.GetMyQueries()
-      .subscribe({next:(data:any[]) => {
-        this.data = data;
-        this.filteredData = data;
-        this.totalLength = data.length;
-
-  }});
-  }
+  searchTitle = "";
+  searchUnSolvedQueries = false;
+  searchSolvedQueries = false;
   public data: Query[] = [];
   public filteredData: Query[] = [];
 
-  samplefun(searchTitle: string, searchSolvedQueries: boolean, searchUnSolvedQueries:boolean) {
+  //Get My queries.
+  constructor(private connection: ConnectionService) { }
+  ngOnInit(): void {
+    this.connection.GetMyQueries()
+      .subscribe({
+        next: (data: any[]) => {
+          this.data = data;
+          this.filteredData = data;
+          this.totalLength = data.length;
+        }
+      });
+  }
 
-    if (searchTitle.length == 0 && searchSolvedQueries==false && searchUnSolvedQueries==false) this.data = this.filteredData
 
-
+  samplefun(searchTitle: string, searchSolvedQueries: boolean, searchUnSolvedQueries: boolean) {
+    if (searchTitle.length == 0 && searchSolvedQueries == false && searchUnSolvedQueries == false) this.data = this.filteredData
     //1.Search by title
-    else if (searchTitle.length != 0 && searchSolvedQueries==false && searchUnSolvedQueries==false) {
+    else if (searchTitle.length != 0 && searchSolvedQueries == false && searchUnSolvedQueries == false) {
       this.data = this.filteredData.filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
     }
     //2.Search by SolvedQueries
-    else if (searchTitle == '' && searchSolvedQueries!=false && searchUnSolvedQueries==false) {
-      this.data = this.filteredData.filter((item) => item.isSolved== true);
+    else if (searchTitle == '' && searchSolvedQueries != false && searchUnSolvedQueries == false) {
+      this.data = this.filteredData.filter((item) => item.isSolved == true);
     }
     //3. Search by UnsolvedQueries
-    else if (searchTitle == '' && searchSolvedQueries==false && searchUnSolvedQueries!=false) {    
-      this.data = this.filteredData.filter(item=> item.isSolved == false);
+    else if (searchTitle == '' && searchSolvedQueries == false && searchUnSolvedQueries != false) {
+      this.data = this.filteredData.filter(item => item.isSolved == false);
     }
     //4. Search by title and unsolved Queries
-    else if (searchTitle.length != 0 && searchSolvedQueries==false && searchUnSolvedQueries!=false) {
-      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) &&  item.isSolved == false });
+    else if (searchTitle.length != 0 && searchSolvedQueries == false && searchUnSolvedQueries != false) {
+      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && item.isSolved == false });
     }
     //5. search by title and Solved Queries
-    else if (searchTitle.length != 0 && searchSolvedQueries!=false && searchUnSolvedQueries==false) {
-      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) &&  item.isSolved == true});
+    else if (searchTitle.length != 0 && searchSolvedQueries != false && searchUnSolvedQueries == false) {
+      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && item.isSolved == true });
     }
-    this.searchTitle='';
-    this.searchSolvedQueries=false;
-    this.searchUnSolvedQueries=false;
-}
+    this.searchTitle = '';
+    this.searchSolvedQueries = false;
+    this.searchUnSolvedQueries = false;
+  }
 }
 
 

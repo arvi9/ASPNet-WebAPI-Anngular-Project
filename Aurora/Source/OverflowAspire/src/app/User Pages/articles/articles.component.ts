@@ -1,5 +1,4 @@
-import { Component, Input,OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { Component,OnInit } from '@angular/core';
 import { Article } from 'Models/Article';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
@@ -10,18 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./articles.component.css']
 })
 
- 
-export class ArticlesComponent implements OnInit {
-  url:string="allArticles";
 
-  totalLength: any;
-  page: number = 1;
+export class ArticlesComponent implements OnInit {
+  url: string = "allArticles";
   public data: Article[] = []
 
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
-    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")     
-}
-
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+  }
 }

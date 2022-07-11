@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UpdateArticlePageComponent } from './update-article-page.component';
 
 describe('UpdateArticlePageComponent', () => {

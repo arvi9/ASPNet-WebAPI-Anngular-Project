@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
 import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
@@ -13,14 +12,16 @@ import { Subject } from 'rxjs';
   templateUrl: './employee-page.component.html',
   styleUrls: ['./employee-page.component.css']
 })
+
 export class EmployeePageComponent implements OnInit {
+  public data: User[] = []
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   
-  constructor(private http: HttpClient, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
+  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
  
-  // Get the Employee page and shows the employee data
-  ngOnInit(): void {
+  //Get the Employee page and shows the employee data
+  ngOnInit(): void{
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
       this.route.navigateByUrl("")
@@ -32,12 +33,12 @@ export class EmployeePageComponent implements OnInit {
       "retrieve": true,
     };
     this.connection.GetEmployeePage().subscribe((data: User[]) => {
-      this.data = data;
+    this.data = data;
     })
   }
 
- // Here the admin can disable the user.
-  DisableUser(userId: number) {
+  //Here the admin can disable the user.
+  DisableUser(userId: number){
     this.connection.DisableUser(userId)
     .subscribe({
       next: () => {},
@@ -45,12 +46,19 @@ export class EmployeePageComponent implements OnInit {
         this.toaster.open({ text: 'User has Disabled', position: 'top-center', type: 'danger' })
       }
     }); 
-    this.ngOnInit();  
+    setTimeout(
+      () => {
+        location.reload(); // the code to execute after the timeout
+      },
+      1000// the time to sleep to delay for
+  ); 
   }
 
-     // Here the admin can mark a user as reviewer.
+     
+  //Method for marking and unmarking as reviewer
   onCheckboxChange(userId: any) {
     var res = this.data.find(item => item.userId == userId)?.isReviewer
+    //Here the admin can mark a user as reviewer.
     if (res == true) {
       this.connection.MarkAsReviewer(userId)
       .subscribe({
@@ -58,9 +66,9 @@ export class EmployeePageComponent implements OnInit {
         complete: () => {
           this.toaster.open({ text: 'User marked as Reviewer', position: 'top-center', type: 'success' })
         }
-      });
-      
+      }); 
     }
+
     //Here the admin can unmark a user as reviewer.
     else {
       this.connection.UnmarkAsReviewer(userId)
@@ -70,10 +78,6 @@ export class EmployeePageComponent implements OnInit {
           this.toaster.open({ text: 'User unmarked as Reviewer', position: 'top-center', type: 'secondary' })  
         }
       });
-      }
+    }
   }
-
-
-  public data: User[] = []
-
 }

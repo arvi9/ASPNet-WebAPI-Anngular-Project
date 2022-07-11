@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { QueryCardComponent } from './query-card.component';
 
 describe('QueryCardComponent', () => {

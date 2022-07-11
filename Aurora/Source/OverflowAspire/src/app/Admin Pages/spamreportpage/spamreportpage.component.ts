@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -9,12 +9,15 @@ import { Subject } from 'rxjs';
   templateUrl: './spamreportpage.component.html',
   styleUrls: ['./spamreportpage.component.css']
 })
+
 export class SpamreportpageComponent implements OnInit {
+  public data: any[] = []
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+
   constructor(private connection: ConnectionService, private route: Router) { }
 
-  // Get reported spams.
+  //Get reported spams.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
@@ -32,6 +35,4 @@ export class SpamreportpageComponent implements OnInit {
         }
       });
   }
-
-  public data: any[] = []
 }

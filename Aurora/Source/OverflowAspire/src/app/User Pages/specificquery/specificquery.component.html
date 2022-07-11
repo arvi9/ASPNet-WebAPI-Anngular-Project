@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-<!-- breadcrumb Start -->
 <div class="breadcrumb">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -10,35 +9,24 @@
       <li class="breadcrumb-item">
         <a>Specificquery</a>
       </li>
-
     </ol>
   </nav>
 </div>
-<!-- breadcrumb End-->
-
 <div class="container mb-4">
   <a routerLinkActive="active" [routerLink]="['/ReportSpam',data.queryId]"><button type="button"
       class="custom-btn btn-1 btn-3 " id="button-code">Report
       Spam</button></a>
 </div>
-
 <div class="container p-5 my-1 border">
   <div class="text-center">
-
     <h1>{{data.title}}</h1>
-
   </div>
-
-
   <pre>
     {{data.content}}
   </pre>
-
   <pre class="">
 {{data.code}}
 </pre>
-
-
   <div *ngIf="data.comments.length!=0">
     <h4>{{data.comments.length}}Answers</h4>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
@@ -53,8 +41,6 @@
   </div>
   <br>
   <br>
-
-
   <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off" *ngIf="data.isSolved==false">
     <h5>Comment Your Answer</h5>
     <div class="container">
@@ -64,13 +50,9 @@
                     </textarea>
       </div>
     </div>
-
     <div class="mt-2 text-right">
       <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">PostComment</button>
     </div>
-
   </form>
-
 </div>
-
 <app-footer></app-footer>

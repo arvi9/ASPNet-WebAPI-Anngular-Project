@@ -4,11 +4,9 @@
     --dark: #191c24
 }
 
-.Content
-{
-    min-height: 100vh ;
+.Content {
+    min-height: 100vh;
 }
-
 
 body {
     position: relative;
@@ -17,36 +15,29 @@ body {
     align-items: center;
     justify-content: center;
 }
-.cardtitle
-{
-    text-align: center;
-}
-.cardtext
-{
-    
+
+.cardtitle {
     text-align: center;
 }
 
-.card{
+.cardtext {
+
+    text-align: center;
+}
+
+.card {
     margin-top: 3%;
-    margin-left:1%;
+    margin-left: 1%;
     float: right;
     margin-right: 10rem;
     width: 20rem;
-   
-
 }
 
-
 .cardRight {
-    
     border-style: solid;
     width: 18rem;
     margin: 10px;
-    
-
 }
-
 
 .Container {
     margin-left: 15%;
@@ -56,7 +47,6 @@ body {
 
 .heading {
     text-align: center
-
 }
 
 .wrapper {
@@ -64,11 +54,10 @@ body {
     height: 400px;
     margin-right: 10rem;
     margin-top: 50px;
-    float:right;
+    float: right;
 }
-#piechart
-{
+
+#piechart {
     width: 76;
     height: 76;
 }
-

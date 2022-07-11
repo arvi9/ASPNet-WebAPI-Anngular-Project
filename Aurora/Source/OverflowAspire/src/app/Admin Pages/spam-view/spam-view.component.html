@@ -12,24 +12,17 @@
         <li class="breadcrumb-item active">
           SpamView
         </li>
-
       </ol>
     </nav>
   </div>
   <div class="container">
     <h1 class="Title">{{data[0].query.title}}</h1>
-    <br>
     <div>
-      <p>{{data[0].query.content}}<br>
-      </p>
+      <p>{{data[0].query.content}}</p>
     </div>
     <button class="btn btn-danger" (click)="onReject()">Cancel Spam</button>
-
     <button class="btn btn-success float-end " (click)="onAccept() ">Remove Query</button>
-
-    <br>
-    <br>
-
+    <br><br>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
       <dl class="example-dl p-2">
         <ng-container *cdkVirtualFor="let comment of data[0].listOfSpams">
@@ -41,5 +34,4 @@
     </cdk-virtual-scroll-viewport>
   </div>
 </div>
-
 <app-footer></app-footer>

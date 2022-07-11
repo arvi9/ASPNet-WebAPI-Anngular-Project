@@ -252,10 +252,11 @@ a:hover {
     width: fit-content;
     align-self: flex-end
 }
-.Content
-{
+
+.Content {
     min-height: 100vh;
 }
+
 .tag-blue {
     background: #56ccf2;
     background: linear-gradient(to bottom, #2f80ed, #56ccf2);
@@ -288,7 +289,7 @@ a:hover {
     border-radius: 10px;
     background-color: #87ceeb
 }
-.breadcrumb
-{
+
+.breadcrumb {
     margin: 20px;
 }

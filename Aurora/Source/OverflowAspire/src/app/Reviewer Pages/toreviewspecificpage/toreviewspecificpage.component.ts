@@ -13,7 +13,10 @@ import { Toaster } from 'ngx-toast-notifications';
 export class ToreviewspecificpageComponent implements OnInit {
   articleId: number = 0;
   error = ""
+  public data: Article = new Article();
+
   constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService, private toaster: Toaster) { }
+
   // Get article by article id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
@@ -30,7 +33,7 @@ export class ToreviewspecificpageComponent implements OnInit {
         });
     });
   }
-  public data: Article = new Article();
+  
 
   PublishArticle(articleId: number) {
     this.connection.ApproveArticle(articleId)
@@ -45,8 +48,6 @@ export class ToreviewspecificpageComponent implements OnInit {
           this.routing.navigateByUrl("/ToReview");
         }
       });
-
-
   }
 
   RejectArticle(articleId: number) {
@@ -59,7 +60,6 @@ export class ToreviewspecificpageComponent implements OnInit {
           this.routing.navigateByUrl("/ToReview");
         }
       });
-
   }
 
   ChangeToUnderReview(articleId: number) {

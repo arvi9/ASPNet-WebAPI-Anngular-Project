@@ -78,11 +78,11 @@ body {
   border: none;
   width: 130px
 }
-.Content
-{
+
+.Content {
   min-height: 100vh;
 }
-.breadcrumb
-{
+
+.breadcrumb {
   margin: 20px;
 }

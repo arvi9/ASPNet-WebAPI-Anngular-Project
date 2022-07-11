@@ -1,32 +1,23 @@
 <app-navbar></app-navbar>
-<!-- breadcrumb Start -->
 <div class="breadcrumb">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-
         <a routerLinkActive="active" routerLink="/Home">Home</a>
       </li>
       <li class="breadcrumb-item">
         <a>MyQuery</a>
       </li>
-
     </ol>
   </nav>
 </div>
-<!-- breadcrumb End-->
-
 <div class="container mb-4">
   <a><button type="button" class="custom-btn btn-1 btn-3 " *ngIf=" issolved == false" id="button-code"
       (click)="MarkQueryAsSolved(queryId)">Mark Query As Solved</button></a>
-
 </div>
-
 <div class="container p-5 my-1 border">
   <div class="text-center">
-
     <h1>{{data.title}}</h1>
-
   </div>
   <pre>
     {{data.content}}
@@ -34,7 +25,6 @@
   <pre class="">
      {{data.code}}
  </pre>
-
   <div *ngIf="data.comments.length!=0">
     <h4>{{data.comments.length}} Answers</h4>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
@@ -44,13 +34,8 @@
             <hr>
           </td>
           <br>
-
-
       </table>
     </cdk-virtual-scroll-viewport>
-
   </div>
-  <br>
-  <br>
 </div>
 <app-footer></app-footer>

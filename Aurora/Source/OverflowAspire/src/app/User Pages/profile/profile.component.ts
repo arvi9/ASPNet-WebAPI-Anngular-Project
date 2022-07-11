@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
@@ -9,20 +9,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
-  constructor(private connection: ConnectionService, private route: Router) { }
-  
-  //Get user profile.
-  ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    this.connection.GetUser()
-      .subscribe({
-        next: (data: User) => {
-          this.user = data;
-        }
-      });
-  }
 
+export class ProfileComponent implements OnInit {
   public user: User = {
     userId: 0,
     fullName: '',
@@ -39,5 +27,16 @@ export class ProfileComponent implements OnInit {
     userRoleId: 0,
     designationId: 0
   }
-  
+  constructor(private connection: ConnectionService, private route: Router) { }
+
+  //Get user profile.
+  ngOnInit(): void {
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    this.connection.GetCurrentApplicationUser()
+      .subscribe({
+        next: (data: User) => {
+          this.user = data;
+        }
+      });
+  }
 }

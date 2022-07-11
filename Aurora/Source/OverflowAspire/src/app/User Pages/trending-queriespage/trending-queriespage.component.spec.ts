@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TrendingQueriespageComponent } from './trending-queriespage.component';
 
 describe('TrendingQueriespageComponent', () => {

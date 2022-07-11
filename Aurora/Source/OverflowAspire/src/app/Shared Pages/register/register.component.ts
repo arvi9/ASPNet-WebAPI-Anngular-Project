@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { formatDate } from '@angular/common';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { Toaster } from 'ngx-toast-notifications';
-import { ThemeService } from 'ng2-charts';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +24,7 @@ export class RegisterComponent implements OnInit {
   todayAsString: any;
   year: number = 0;
   validateGendererror = true;
+
   user = this.fb.group({
     fullName: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(20), Validators.pattern("^[A-Za-z ]+$")]],
     gender: ['', [Validators.required]],
@@ -34,16 +34,10 @@ export class RegisterComponent implements OnInit {
     DesignationValidate: ['', [Validators.required]],
     dateOfBirth: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
-
   })
   
 
   constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router, private toaster: Toaster) { }
-
-
-
-
-
 
   validateGender(value: any) {
     if (value === 'default') {
@@ -54,10 +48,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
-
   ngOnInit(): void {
-
     this.connection.GetDesignations()
       .subscribe({
         next: (data) => {
@@ -74,8 +65,6 @@ export class RegisterComponent implements OnInit {
                 this.GenderDetails = data;
               }
             });
-
-
         }
       });
   }
@@ -122,9 +111,10 @@ export class RegisterComponent implements OnInit {
       isReviewer: false,
       userRoleId: 2,
       designationId: this.user.value['DesignationValidate'],
-      createdOn: Date.now,
+      createdOn:new Date(),
       updatedBy: 0, 
     }
+    
     this.connection.Register(registeruser)
       .subscribe({
         next: (data) => {
@@ -132,14 +122,11 @@ export class RegisterComponent implements OnInit {
         error: (error) => {
           this.error = error.error.message;
           this.IsLoading=false;
-     
         },
         complete: () => {
           this.toaster.open({ text: 'User Registered Successfully', position: 'top-center', type: 'success' })
           this.router.navigateByUrl("");
         }
       });
-
   }
-
 }

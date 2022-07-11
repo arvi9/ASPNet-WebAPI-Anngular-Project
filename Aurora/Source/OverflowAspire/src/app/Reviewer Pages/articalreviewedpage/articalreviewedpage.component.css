@@ -5,14 +5,15 @@
 h1 {
     text-align: center;
 }
-.tablecolor{
-    background:lightskyblue;
+
+.tablecolor {
+    background: lightskyblue;
 }
-.breadcrumb
-{
+
+.breadcrumb {
     margin: 50px;
 }
-.Content
-{
+
+.Content {
     min-height: 100vh;
 }

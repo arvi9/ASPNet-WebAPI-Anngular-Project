@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="Content">
-    <div  class="breadcrumb">
+    <div class="breadcrumb">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -9,24 +9,19 @@
                 <li class="breadcrumb-item active">
                     Shared With Me
                 </li>
-
             </ol>
         </nav>
     </div>
-
     <div *ngIf="data.length>0; else ArrayEmpty">
         <h1>Shared With Me</h1>
         <div class="container card">
             <form>
                 <label class="labeltext">Title
                     <input type="text" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" /></label>
-
                 <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate"
                         autocomplete="off" /></label>
-
                 <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off" />
                     <input type="date" name="ToDate" [(ngModel)]="ToDate" autocomplete="off"></label>
-
                 <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
             </form>
         </div>
@@ -45,7 +40,6 @@
                         <div class="btntag tag-blue " routerLinkActive="active"
                             [routerLink]="['/EditArticle',item.articleId]">Read More</div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -60,5 +54,5 @@
             <h1>No records found.</h1>
         </div>
     </ng-template>
-
-    <app-footer></app-footer>
+</div>
+<app-footer></app-footer>

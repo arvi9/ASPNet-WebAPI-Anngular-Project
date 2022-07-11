@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CreateArticlePageComponent } from './create-article-page.component';
 
 describe('CreateArticlePageComponent', () => {

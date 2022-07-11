@@ -1,65 +1,36 @@
 <app-admin-navbar></app-admin-navbar>
-
 <div class="Content">
-
     <h2 class="heading">Overview of Dashboard</h2>
-
     <div>
         <div class="wrapper">
             <canvas id="piechart"></canvas>
         </div>
         <div class="card">
             <div class="cardRight">
-
                 <div class="card-body">
-                    <h5 class="cardtitle">{{piedata.totalNumberOfUsers}}</h5>
+                    <h5 class="cardtitle">{{piedata.users.totalNumberOfUsers}}</h5>
                     <p class="cardtext">Total Number of Users</p>
-
                 </div>
             </div>
-
             <div class="cardRight">
-
                 <div class="card-body">
-                    <h5 class="cardtitle">{{piedata.totalNumberOfReviwers}}</h5>
+                    <h5 class="cardtitle">{{piedata.users.numberOfReviewers}}</h5>
                     <p class="cardtext">Total Number of Reviewers</p>
-
                 </div>
             </div>
-
             <div class="cardRight">
-
                 <div class="card-body">
-                    <h5 class="cardtitle">{{piedata.totalNumberOfArticles}}</h5>
+                    <h5 class="cardtitle">{{piedata.articles.totalNumberOfArticles}}</h5>
                     <p class="cardtext">Total Number of Articles</p>
-
                 </div>
-
             </div>
-
             <div class="cardRight">
-
                 <div class="card-body">
-                    <h5 class="cardtitle">{{piedata.totaNumberofSolvedQueries}}</h5>
-                    <p class="cardtext">Solved Query</p>
-
+                    <h5 class="cardtitle">{{piedata.queries.totalNumberOfQueries}}</h5>
+                    <p class="cardtext">Total Number of Queries</p>
                 </div>
-
-            </div>
-
-            <div class="cardRight">
-
-                <div class="card-body">
-                    <h5 class="cardtitle">{{piedata.totalNumberOfUnSolvedQueries}}</h5>
-                    <p class="cardtext">UnSolved Query</p>
-
-                </div>
-
             </div>
         </div>
     </div>
 </div>
-<br><br>
-
-
 <app-footer></app-footer>

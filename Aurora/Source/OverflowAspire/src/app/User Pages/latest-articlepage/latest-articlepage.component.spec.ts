@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LatestArticlepageComponent } from './latest-articlepage.component';
 
 describe('LatestArticlepageComponent', () => {

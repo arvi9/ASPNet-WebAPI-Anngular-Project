@@ -1,72 +1,72 @@
 @keyframes down-btn {
   0% {
-      bottom: 20px
+    bottom: 20px
   }
 
   100% {
-      bottom: 0
+    bottom: 0
   }
 
   0% {
-      opacity: 0
+    opacity: 0
   }
 
   100% {
-      opaicty: 1
+    opaicty: 1
   }
 }
 
 @-webkit-keyframes down-btn {
   0% {
-      bottom: 20px
+    bottom: 20px
   }
 
   100% {
-      bottom: 0
+    bottom: 0
   }
 
   0% {
-      opacity: 0
+    opacity: 0
   }
 
   100% {
-      opaicty: 1
+    opaicty: 1
   }
 }
 
 @-moz-keyframes down-btn {
   0% {
-      bottom: 20px
+    bottom: 20px
   }
 
   100% {
-      bottom: 0
+    bottom: 0
   }
 
   0% {
-      opacity: 0
+    opacity: 0
   }
 
   100% {
-      opaicty: 1
+    opaicty: 1
   }
 }
 
 @-o-keyframes down-btn {
   0% {
-      bottom: 20px
+    bottom: 20px
   }
 
   100% {
-      bottom: 0
+    bottom: 0
   }
 
   0% {
-      opacity: 0
+    opacity: 0
   }
 
   100% {
-      opaicty: 1
+    opaicty: 1
   }
 }
 
@@ -99,7 +99,6 @@ body {
   overflow: hidden;
   border-radius: 25px 25px 0 0;
   height: 200px
-
 }
 
 
@@ -123,9 +122,9 @@ body {
   line-height: 1.5;
 
 }
-h4{
-  font-size: 1.5rem;
 
+h4 {
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -133,7 +132,6 @@ h4{
   padding: 20px 15px 30px;
   width: -webkit-fill-available;
   text-align: center;
-
 }
 
 .img-card .card-link a {
@@ -168,8 +166,8 @@ h4{
   font-family: Roboto, sans-serif;
   text-align: center;
   padding-left: 20px;
-
 }
+
 img {
   max-width: 100%;
   height: 100%;
@@ -204,10 +202,6 @@ img {
   transition: all .4s
 }
 
-.img-card.iCard-style2 .card-link a:hover {
-  /* background: #000 */
-}
-
 .img-card.iCard-style2 .card-link a:hover span {
   color: #fff
 }
@@ -228,7 +222,6 @@ img {
   -webkit-box-orient: vertical;
   width: 250px;
   overflow: hidden;
-
 }
 
 .readmore {
@@ -261,9 +254,8 @@ a:hover {
   border-radius: 10px;
   background-color: skyblue;
 }
+
 @media (max-width: 800px) {
-  
-  
   .form-inline {
     flex-direction: column;
     align-items: stretch;
@@ -275,41 +267,42 @@ a:hover {
   float: center;
   padding-left: 20px;
   padding-right: 30px;
-  padding-top:10px;
-  padding-bottom:10px;
-
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
+
 .labeltextFrom {
   font-weight: bold;
   padding-left: 20px;
   padding-right: 30px;
-  padding-top:10px;
-  padding-bottom:10px;
-
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .labeltextauthor {
   font-weight: bold;
-  float:center;
+  float: center;
   margin-left: 5%;
   padding-left: 25px;
   padding-right: 30px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .labeltextto {
   font-weight: bold;
   padding-left: 20px;
   margin-left: 3%;
-  float:center;
+  float: center;
   padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.labeltextclick{
+
+.labeltextclick {
   float: center;
 }
+
 .Searchbar {
   margin-right: 1%;
 }
@@ -328,13 +321,12 @@ a:hover {
   position: relative;
   display: inline-block;
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-      7px 7px 20px 0px rgba(0, 0, 0, .1),
-      4px 4px 5px 0px rgba(0, 0, 0, .1);
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
   outline: none;
   margin-left: 15px;
 }
 
-/* 1 */
 .btn-1 {
   background: rgb(0, 172, 238);
   border: none;
@@ -348,10 +340,9 @@ a:hover {
 .btntag {
   align-self: flex-end;
   cursor: pointer;
-margin-left: 195px;
-margin-top: 15px;
-margin-bottom: 0px;
-
+  margin-left: 195px;
+  margin-top: 15px;
+  margin-bottom: 0px;
   padding: .25em .75em;
   border-radius: 1em;
   font-size: .75rem;
@@ -360,6 +351,6 @@ margin-bottom: 0px;
 
 .tag-blue {
   background: #56CCF2;
-background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  background: linear-gradient(to bottom, #2F80ED, #56CCF2);
   color: #fafafa;
 }

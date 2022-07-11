@@ -1,7 +1,8 @@
-h1{
+h1 {
     text-align: center;
- }
- .our-skills {
+}
+
+.our-skills {
     padding: 70px 0px 20px;
     width: 300px;
     height: 200px;
@@ -83,56 +84,58 @@ a:hover {
     top: 110%;
 
 }
-.tag {
-  align-self: flex-start;
-  padding: .25em .75em;
-  border-radius: 1em;
-  font-size: .75rem;
-  
-}
-.btntag {
-  align-self: flex-end;
-  cursor: pointer;
-  margin-left: 125px;
-  margin-top: 30px;
-  margin-bottom: 15px;
- 
 
-  padding: .25em .75em;
-  border-radius: 1em;
-  font-size: .75rem;
-  width: fit-content;
+.tag {
+    align-self: flex-start;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+
+}
+
+.btntag {
+    align-self: flex-end;
+    cursor: pointer;
+    margin-left: 125px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+
+
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+    width: fit-content;
 }
 
 .tag-blue {
-  background: #56CCF2;
-background: linear-gradient(to bottom, #2F80ED, #56CCF2);
-  color: #fafafa;
+    background: #56CCF2;
+    background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+    color: #fafafa;
 }
 
-.tag + .tag {
-  margin-left: .5em;
+.tag+.tag {
+    margin-left: .5em;
 }
 
 
 
 .tag-brown {
-  background: #D1913C;
-background: linear-gradient(to bottom, #ff9800, #ed6c02);
-  color: #fafafa;
+    background: #D1913C;
+    background: linear-gradient(to bottom, #ff9800, #ed6c02);
+    color: #fafafa;
 }
 
 .tag-red {
 
-  background: linear-gradient(to bottom, #ce100d, #cd0a0a);
-  color: #fafafa;
-  
+    background: linear-gradient(to bottom, #ce100d, #cd0a0a);
+    color: #fafafa;
+
 }
 
 .tag-Material {
 
-  background: linear-gradient(to bottom,  #58de54, #39d45b);
-  color: #fafafa;
+    background: linear-gradient(to bottom, #58de54, #39d45b);
+    color: #fafafa;
 }
 
 .card {
@@ -176,7 +179,6 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
     margin-left: 15px;
 }
 
-/* 1 */
 .btn-1 {
     background: rgb(0, 172, 238);
     border: none;
@@ -184,13 +186,12 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
 
 .btn-1:hover {
     background: rgb(4, 149, 206);
-
 }
-.breadcrumb
-{
+
+.breadcrumb {
     margin: 20px;
 }
-.Content
-{
+
+.Content {
     min-height: 100vh;
 }

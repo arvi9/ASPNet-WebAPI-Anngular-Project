@@ -12,7 +12,6 @@
                 <li class="breadcrumb-item active">
                     Create Article
                 </li>
-
             </ol>
         </nav>
     </div>
@@ -20,51 +19,55 @@
         <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">
                 <label class="form-label">Title:</label>
-                <input type="text" #title="ngModel" class="form-control mb-4" id="createarticle" placeholder="Enter Article Title" name="title" [(ngModel)]="article.title" [class.is-invalid]="title.invalid && title.touched" pattern="^.{1,100}$" required>
-                        <div *ngIf="title.errors && (title.invalid || title.touched)">
-                            <small class="text-danger" *ngIf="title.errors['pattern']">Article Title should have maximum 100 characters</small>
-                            <small class="text-danger" [class.d-none]="title.valid||title.untouched" *ngIf="title.errors['required']">Article Title is required</small>
-                          </div>
+                <input type="text" #title="ngModel" class="form-control mb-4" id="createarticle"
+                    placeholder="Enter Article Title" name="title" [(ngModel)]="article.title"
+                    [class.is-invalid]="title.invalid && title.touched" pattern="^.{1,100}$" required>
+                <div *ngIf="title.errors && (title.invalid || title.touched)">
+                    <small class="text-danger" *ngIf="title.errors['pattern']">Article Title should have maximum 100
+                        characters</small>
+                    <small class="text-danger" [class.d-none]="title.valid||title.untouched"
+                        *ngIf="title.errors['required']">Article Title is required</small>
+                </div>
             </div>
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
-                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image" #image="ngModel" [(ngModel)]="article.ImageString" required>            
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image"
+                    #image="ngModel" [(ngModel)]="article.ImageString" >
                 <label class="text-danger"> {{imageError}}</label>
-                <div *ngIf="image.errors && (image.invalid || image.touched)">               
-                    <small class="text-danger" [class.d-none]="image.valid || image.untouched" *ngIf="image.errors?.['required']">
-                      Image is required.
+                <div *ngIf="image.errors && (image.invalid || image.touched)">
+                    <small class="text-danger" [class.d-none]="image.valid || image.untouched"
+                        *ngIf="image.errors?.['required']">
+                        Image is required.
                     </small>
-                    </div>
+                </div>
             </div>
-
-         
             <br>
             <label class="form-label" for="email">Invite People(optional):</label><br>
-            <tag-input [(ngModel)]='goalitems' name="out"
-                [onlyFromAutocomplete]="true" [editable]='true' [separatorKeyCodes]="[32,188,186,13,9]"
-                [placeholder]="'Add email'" secondaryPlaceholder="Add email address" [clearOnBlur]="true"
-                [addOnPaste]="true" [addOnBlur]="true" theme='bootstrap'>
+            <tag-input [(ngModel)]='goalitems' name="out" [onlyFromAutocomplete]="true" [editable]='true'
+                [separatorKeyCodes]="[32,188,186,13,9]" [placeholder]="'Add email'"
+                secondaryPlaceholder="Add email address" [clearOnBlur]="true" [addOnPaste]="true" [addOnBlur]="true"
+                theme='bootstrap'>
                 <tag-input-dropdown [autocompleteItems]="items" [showDropdownIfEmpty]="false" [dynamicUpdate]="true">
                 </tag-input-dropdown>
             </tag-input>
             <br>
-            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500" required>
-               
+            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}"
+                debounce="500" required>
             </ckeditor>
             <div *ngIf="content.errors && (content.invalid || content.touched)">
-                 
-                <small class="text-danger" [class.d-none]="content.valid || content.untouched" *ngIf="content.errors?.['required']">
-                   Article content is required.
+                <small class="text-danger" [class.d-none]="content.valid || content.untouched"
+                    *ngIf="content.errors?.['required']">
+                    Article content is required.
                 </small>
-                </div>
+            </div>
             <div class="editor-btn">
-                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button" [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button"
+                    [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
                     Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
                         aria-hidden="true"></span></button>
-                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit" [disabled]="!form.valid"
-               >Submit <span *ngIf="IsLoadingSubmit"
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit"
+                    [disabled]="!form.valid">Submit <span *ngIf="IsLoadingSubmit"
                         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-
             </div>
         </form>
     </div>

@@ -7,9 +7,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   selector: 'app-query-card',
   templateUrl: './query-card.component.html',
   styleUrls: ['./query-card.component.css']
-
-
 })
+
 export class QueryCardComponent implements OnInit {
   @Input() ShowStatus: boolean = true;
   @Input() Querysrc: string = "";
@@ -18,12 +17,15 @@ export class QueryCardComponent implements OnInit {
   searchTitle = "";
   searchUnSolvedQueries = false;
   searchSolvedQueries = false;
+  public data: Query[] = [];
+  public filteredData: Query[] = [];
 
   constructor(private connection: ConnectionService) { }
 
-  // Get all queries.
+  // Get queries.
   ngOnInit(): void {
     if (this.Querysrc == "allQueries") {
+      //Get all the queries
       this.connection.GetAllQueries()
         .subscribe({
           next: (data) => {
@@ -33,6 +35,7 @@ export class QueryCardComponent implements OnInit {
           }
         });
     }
+
     // Get latest queries.
     else if (this.Querysrc == "latestQueries") {
       this.connection.GetLatestQueries()
@@ -44,6 +47,7 @@ export class QueryCardComponent implements OnInit {
           }
         });
     }
+
     // Get Trending queries.
     else if (this.Querysrc == "trendingQueries") {
       this.connection.GetTrendingQueries()
@@ -55,19 +59,13 @@ export class QueryCardComponent implements OnInit {
           }
         });
     }
-    else {
-      this.connection.GetAdminDashboard()
-    }
   }
 
   //Filter query by Solved and unsolved queries.
-  public data: Query[] = [];
-  public filteredData: Query[] = [];
-
   samplefun(searchTitle: string, searchSolvedQueries: boolean, searchUnSolvedQueries: boolean) {
 
+    //No filter is applied this condition will executed
     if (searchTitle.length == 0 && searchSolvedQueries == false && searchUnSolvedQueries == false) this.data = this.filteredData
-
 
     //1.Search by title
     else if (searchTitle.length != 0 && searchSolvedQueries == false && searchUnSolvedQueries == false) {
@@ -89,15 +87,9 @@ export class QueryCardComponent implements OnInit {
     else if (searchTitle.length != 0 && searchSolvedQueries != false && searchUnSolvedQueries == false) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && item.isSolved == true });
     }
-    this.searchTitle='';
-    this.searchSolvedQueries=false;
-    this.searchUnSolvedQueries=false;
+    this.searchTitle = '';
+    this.searchSolvedQueries = false;
+    this.searchUnSolvedQueries = false;
   }
-
-  // reset_filter() {
-  //   this.searchUnSolvedQueries = false;
-  //   this.searchSolvedQueries = false;
-  //   this.filteredData=this.data
-  // }
 }
 

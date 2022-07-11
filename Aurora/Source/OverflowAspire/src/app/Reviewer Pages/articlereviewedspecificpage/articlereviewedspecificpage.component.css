@@ -9,9 +9,11 @@
   width: 50%;
   height: 50%;
 }
+
 .breadcrumb {
   margin: 50px;
 }
+
 .Content {
   min-height: 100vh;
 }

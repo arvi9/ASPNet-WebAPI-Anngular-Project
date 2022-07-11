@@ -3,6 +3,7 @@
     --light: #f3f6f9;
     --dark: #191c24
 }
+
 body {
     position: relative;
     height: 100vh;
@@ -11,22 +12,20 @@ body {
     justify-content: center
 }
 
-.card{
+.card {
     margin-left: 1%;
     margin-top: 3rem;
     float: right;
     margin-right: 13rem;
 }
 
-
 .cardRight {
-    
+
     border-style: solid;
     width: 18rem;
     margin: 10px;
 
 }
-
 
 .heading {
     text-align: center
@@ -38,29 +37,27 @@ body {
     margin-top: 3rem;
     margin-right: 10rem;
     margin-left: 2%;
-    float:right;
-    
+    float: right;
+
 }
-.Content
-{
+
+.Content {
     min-height: 100vh;
 }
 
-.cardtitle
-{
+.cardtitle {
     text-align: center;
 }
 
-.cardtext
-{
+.cardtext {
     text-align: center;
 }
-#piechart
-{
+
+#piechart {
     width: 76;
     height: 76;
 }
-.breadcrumb
-{
+
+.breadcrumb {
     margin: 20px;
 }

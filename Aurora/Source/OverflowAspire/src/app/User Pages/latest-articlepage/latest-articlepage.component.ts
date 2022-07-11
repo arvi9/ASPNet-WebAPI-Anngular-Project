@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Article } from 'Models/Article';
+import { Component,OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 
@@ -12,13 +10,11 @@ import { Router } from '@angular/router';
 
 //Show latest article page.
 export class LatestArticlepageComponent implements OnInit {
-
   url: string = "latestArticles";
 
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private route: Router) { }
+
   ngOnInit(): void {
-    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
-
-  } public data: Article[] = [];
-
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+  }
 }

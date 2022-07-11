@@ -10,44 +10,45 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   templateUrl: './admindashboard.component.html',
   styleUrls: ['./admindashboard.component.css']
 })
+
 export class AdmindashboardComponent implements OnInit {
+
   constructor(private connection: ConnectionService, private route: Router) { }
 
   ngOnInit(): void {
     if (!AuthService.GetData("Admin")) {
       this.route.navigateByUrl("")
     }
-    this.connection.GetAdminDashboard()
-      .subscribe(
-        {
-          next: (data: Dashboard) => {
-            this.piedata = data;
-            var names = ['Number of Articles', 'Number of Queries'];
-            var details = [];
-            details.push(data.totalNumberOfArticles);
-            details.push(data.totalNumberofQueries);
-            new Chart('piechart', {
-              type: 'pie',
-              data: {
-                labels: names,
-                datasets: [{
-                  data: details,
-                }]
-              },
-              options: {
-                plugins: {
-                  legend: {
-                    position: 'top',
-                    display: true,
-                  },
+
+    this.connection.GetAdminDashboard().subscribe(
+      {
+        next: (data: any) => {
+          this.piedata = data;
+          console.log(data)
+          var names = ['Number of Articles', 'Number of Queries'];
+          var details = [];
+          details.push(data.articles.totalNumberOfArticles);
+          details.push(data.queries.totalNumberOfQueries);
+          new Chart('piechart', {
+            type: 'pie',
+            data: {
+              labels: names,
+              datasets: [{ data: details }]
+            },
+            options: {
+              plugins: {
+                legend: {
+                  position: 'top',
+                  display: true,
                 },
-              }
-            });
+              },
+            }
           }
-        });
-
-
+          );
+        }
+      }
+    );
   }
-  public piedata: Dashboard = new Dashboard();
 
+  public piedata: any = new Dashboard();
 }

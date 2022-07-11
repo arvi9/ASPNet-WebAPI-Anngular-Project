@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditarticleComponent } from './editarticle.component';
 
 describe('EditarticleComponent', () => {

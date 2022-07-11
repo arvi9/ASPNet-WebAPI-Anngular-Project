@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
+
 export interface sharedItem{
   display:string,
   value:number
 }
+
 declare var CKEDITOR: any;
 
 @Component({
@@ -15,34 +17,41 @@ declare var CKEDITOR: any;
   templateUrl: './create-article-page.component.html',
   styleUrls: ['./create-article-page.component.css']
 })
+
 export class CreateArticlePageComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
-  sharedUsersId:any=[]
-  IsLoadingSubmit: boolean = false;
-  IsLoadingSaveDraft: boolean = false;
-  imageError: string = "";
-  isImageSaved: boolean = false;
-  cardImageBase64: string = "";
-  article: any = {
-    articleId: 0,
-    title: '',
-    content: '',
-    createdOn: Date.now,
-    updatedOn:Date.now,
-    ImageString: this.cardImageBase64,
-
-  }
-  
-  public items = [
-    { display: '', value: 0 },
-  ];
-
-  public goalitems:sharedItem[] = []
-    
-privateArticle:any={
-  article:this.article,
-  SharedusersId:[]
+sharedUsersId:any=[]
+IsLoadingSubmit: boolean = false;
+IsLoadingSaveDraft: boolean = false;
+imageError: string = "";
+isImageSaved: boolean = false;
+cardImageBase64: string = "";
+article: any = {
+ articleId: 0,
+ title: '',
+ content: '',
+ image: "",
+ articleStatusID: 1,
+ datetime: new Date(),
+ createdBy: 0,
+ createdOn: new Date(),
+ updatedBy: 0,
+ ImageString: this.cardImageBase64,
+ updatedOn: null,
+ reviewerId:0
 }
+ 
+ public items = [
+ { display: '', value: 0 },
+];
+
+public goalitems:sharedItem[] = []
+
+privateArticle:any={
+ article:this.article,
+ SharedusersId:[]
+}
+
 
 
   ngOnInit(): void {

@@ -17,9 +17,6 @@ export class UpdateArticlePageComponent implements OnInit {
   imageError: string = "";
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
-
-  constructor(private route: ActivatedRoute, private connection: ConnectionService, private router: Router) { }
-  
   article: any = {
     artileId: 0,
     title: '',
@@ -27,17 +24,16 @@ export class UpdateArticlePageComponent implements OnInit {
     image: "",
     articleStatusID: 1,
     reviewerId: 0,
-    datetime: Date.now,
+    datetime: new Date(),
     createdBy: 1,
-    createdOn: Date.now,
+    createdOn: new Date(),
     updatedBy: 0,
     ImageString: this.cardImageBase64,
     updatedOn: '',
-    articleStatus: null,
-    user: null,
-    articleComments: [],
-    articleLikes: null
   }
+  public data: Article = new Article();
+
+  constructor(private route: ActivatedRoute, private connection: ConnectionService, private router: Router) { }
 
   //Get article by its id.
   ngOnInit(): void {
@@ -55,8 +51,6 @@ export class UpdateArticlePageComponent implements OnInit {
         });
     });
   }
-  
-  public data: Article = new Article();
 
   // Update article and submit.
   onSubmit() {
@@ -67,8 +61,9 @@ export class UpdateArticlePageComponent implements OnInit {
           this.router.navigateByUrl("MyArticles")
         }
       });
-
   }
+
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -109,12 +104,8 @@ export class UpdateArticlePageComponent implements OnInit {
           this.article.ImageString = this.cardImageBase64;
           this.isImageSaved = true;
         }
-
       };
-
       reader.readAsDataURL(fileInput.target.files[0]);
     } return false
   }
-
-
 }

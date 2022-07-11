@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Article } from 'Models/Article';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -10,18 +10,18 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./my-articles.component.css']
 })
 export class MyArticlesComponent implements OnInit {
-
   @Input() ShowStatus: boolean = true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
-  searchAuthor = "";
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
   userId: any = 0;
+  public data: Article[] = [];
+  public filteredData: Article[] = [];
 
-
-  constructor(private route: ActivatedRoute, private routes: Router, private connection: ConnectionService) { }
+  constructor(private routes: Router, private connection: ConnectionService) { }
+  
   //Get my articles.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
@@ -31,18 +31,13 @@ export class MyArticlesComponent implements OnInit {
           this.data = data;
           this.filteredData = data;
           this.totalLength = data.length;
-
         }
       });
   }
 
-  public data: Article[] = [];
-
-  public filteredData: Article[] = [];
+ 
   samplefun(searchTitle: string, FromDate: any, ToDate: any) {
-
     if (searchTitle.length == 0 && FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) this.data = this.filteredData
-
     //1.Search by title
     if (searchTitle.length != 0 && FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
@@ -55,7 +50,6 @@ export class MyArticlesComponent implements OnInit {
     else if (searchTitle == '' && FromDate == new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => new Date(item.date) <= new Date(ToDate));
     }
-
     //6.search by title and fromdate
     else if (searchTitle.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) });
@@ -76,7 +70,6 @@ export class MyArticlesComponent implements OnInit {
     else if (searchTitle.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
-
+    searchTitle = "";
   }
-
 }

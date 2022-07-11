@@ -10,7 +10,6 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./privatearticles.component.css']
 })
 export class PrivatearticlesComponent implements OnInit {
-
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -18,7 +17,8 @@ export class PrivatearticlesComponent implements OnInit {
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
   userId:any=3;
-
+  public data: Article[] = [];
+  public filteredData: Article[] = [];
  
 constructor(private route: ActivatedRoute,private routes:Router,private connection:ConnectionService) { }
 
@@ -35,13 +35,9 @@ ngOnInit(): void {
       });
   }
   
-  public data: Article[] = [];
-
-  public filteredData: Article[] = [];
+ 
   samplefun(searchTitle: string, FromDate: any, ToDate: any) {
-
     if (searchTitle.length == 0 &&  FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) this.data = this.filteredData
-
     //1.Search by title
     if (searchTitle.length != 0 &&  FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
@@ -54,7 +50,6 @@ ngOnInit(): void {
     else if (searchTitle == '' && FromDate == new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => new Date(item.date) <= new Date(ToDate));
     }
-
     //6.search by title and fromdate
     else if (searchTitle.length != 0 &&  FromDate != new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) });
@@ -75,8 +70,5 @@ ngOnInit(): void {
     else if (searchTitle.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase())&& new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
     }
-
   }
-
-
 }

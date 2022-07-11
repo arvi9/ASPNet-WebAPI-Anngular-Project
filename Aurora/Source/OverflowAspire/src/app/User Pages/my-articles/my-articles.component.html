@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <div class="Content">
-   
     <div class="breadcrumb">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -10,7 +9,6 @@
                 <li class="breadcrumb-item active">
                     MyArticles
                 </li>
-
             </ol>
         </nav>
     </div>
@@ -20,13 +18,10 @@
             <form>
                 <label class="labeltext">Title <input type="text" name="searchTitle" [(ngModel)]="searchTitle"
                         autocomplete="off" /></label>
-
                 <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate"
                         autocomplete="off" /></label>
-
                 <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate"
                         autocomplete="off" /></label>
-
                 <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
             </form>
         </div>
@@ -63,10 +58,10 @@
             </div>
         </div>
     </div>
-
     <ng-template #ArrayEmpty>
         <div class="text-center">
             <h1>No records found.</h1>
         </div>
     </ng-template>
-    <app-footer></app-footer>
+</div>
+<app-footer></app-footer>

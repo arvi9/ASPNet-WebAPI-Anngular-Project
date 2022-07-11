@@ -11,10 +11,11 @@ h1 {
     min-height: 100vh;
 
 }
-.tablecolor{
-    background:lightskyblue;
+
+.tablecolor {
+    background: lightskyblue;
 }
-.breadcrumb
-{
+
+.breadcrumb {
     margin: 50px;
 }

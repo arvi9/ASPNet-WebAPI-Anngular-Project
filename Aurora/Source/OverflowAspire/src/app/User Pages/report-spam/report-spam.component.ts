@@ -1,21 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QueryService } from 'src/app/Services/query.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+
 @Component({
   selector: 'app-report-spam',
   templateUrl: './report-spam.component.html',
   styleUrls: ['../specificquery/specificquery.component.css'],
   providers: [QueryService]
 })
+
 export class ReportSpamComponent implements OnInit {
   data: any;
   queryId: number = 0
   error = ""
-  constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
-
   reportspam: any = {
     spamId: 0,
     reason: '',
@@ -23,6 +23,8 @@ export class ReportSpamComponent implements OnInit {
     userId: 0,
     verifyStatusID: 3,
   }
+
+  constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
 
   //Get query by its id.
   ngOnInit(): void {
@@ -50,8 +52,7 @@ export class ReportSpamComponent implements OnInit {
           this.toaster.open({ text: 'Reported spam successfully', position: 'top-center', type: 'success' })
           this.routing.navigateByUrl("/Home");
         }
-      });
-    
+      }); 
   }
 
 }

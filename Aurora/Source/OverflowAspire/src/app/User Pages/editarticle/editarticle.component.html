@@ -12,14 +12,9 @@
         <li class="breadcrumb-item active">
           <a>Edit Article</a>
         </li>
-
       </ol>
     </nav>
   </div>
-  <br>
-  <br>
-  <br>
-
   <div class="container p-1">
     <a *ngIf="data.status=='InDraft'" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button"
         class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>
@@ -35,7 +30,6 @@
         <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
       </div>
       <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
-
       </div>
       <button type="button" (click)="showText()">
         {{ isReadMore ? 'Read More': 'Read Less' }}
@@ -54,10 +48,5 @@
       </cdk-virtual-scroll-viewport>
     </div>
   </div>
-  <br>
-  <hr>
-  <br>
-
 </div>
-
 <app-footer></app-footer>

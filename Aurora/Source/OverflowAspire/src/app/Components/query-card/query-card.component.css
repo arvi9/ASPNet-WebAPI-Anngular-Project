@@ -33,7 +33,6 @@
 p {
     font-size: 15px;
     line-height: 23px;
-
     text-align: center;
 }
 
@@ -46,9 +45,7 @@ a {
 }
 
 h4 {
-
     text-align: center;
-
     font-weight: 600;
 }
 
@@ -56,10 +53,6 @@ h4 {
     height: 60px;
     width: 60px;
     margin-left: 12px;
-
-
-
-
 }
 
 .readmore {
@@ -82,56 +75,54 @@ a:hover {
 .stickypagination {
     position: sticky;
     top: 110%;
+}
 
-}
 .tag {
-  align-self: flex-start;
-  padding: .25em .75em;
-  border-radius: 1em;
-  font-size: .75rem;
+    align-self: flex-start;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
 }
+
 .btntag {
-  align-self: flex-end;
-  cursor: pointer;
-  margin-left: 125px;
-  margin-top:30px;
-  padding: .25em .75em;
-  border-radius: 1em;
-  font-size: .75rem;
-  width: fit-content;
- 
+    align-self: flex-end;
+    cursor: pointer;
+    margin-left: 125px;
+    margin-top: 30px;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+    width: fit-content;
 }
 
 .tag-blue {
-  background: #56CCF2;
-background: linear-gradient(to bottom, #2F80ED, #56CCF2);
-  color: #fafafa;
-  display: flex;
-  flex-direction: column;
+    background: #56CCF2;
+    background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+    color: #fafafa;
+    display: flex;
+    flex-direction: column;
 }
 
-.tag + .tag {
-  margin-left: .5em;
+.tag+.tag {
+    margin-left: .5em;
 }
-
-
 
 .tag-brown {
-  background: #D1913C;
-background: linear-gradient(to bottom, #ff9800, #ed6c02);
-  color: #fafafa;
+    background: #D1913C;
+    background: linear-gradient(to bottom, #ff9800, #ed6c02);
+    color: #fafafa;
 }
 
 .tag-red {
     background: linear-gradient(to bottom, #ce100d, #cd0a0a);
     color: #fafafa;
-    
-  }
-  
-  .tag-Material {
-    background: linear-gradient(to bottom,  #58de54, #39d45b);
+
+}
+
+.tag-Material {
+    background: linear-gradient(to bottom, #58de54, #39d45b);
     color: #fafafa;
-  }
+}
 
 .card {
     margin-top: 2%;
@@ -147,7 +138,6 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
 .labeltext {
     font-weight: bold;
     padding: 10px;
-
 }
 
 .Searchbar {
@@ -174,7 +164,6 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
     margin-left: 15px;
 }
 
-/* 1 */
 .btn-1 {
     background: rgb(0, 172, 238);
     border: none;
@@ -182,5 +171,4 @@ background: linear-gradient(to bottom, #ff9800, #ed6c02);
 
 .btn-1:hover {
     background: rgb(4, 149, 206);
-
 }

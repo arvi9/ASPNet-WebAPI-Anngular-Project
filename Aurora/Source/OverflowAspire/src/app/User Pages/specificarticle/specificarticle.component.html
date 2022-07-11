@@ -6,7 +6,6 @@
                 <li class="breadcrumb-item">
                     <a routerLinkActive="active" routerLink="/Home">Home</a>
                 </li>
-
                 <li class="breadcrumb-item">
                     <a>specificarticle</a>
                 </li>
@@ -20,36 +19,31 @@
     </div>
     <div class="panel panel-default p-3">
         <div class="panel-heading bold" [ngStyle]="{'font-weight':'600'}">Author Name:&nbsp;{{data.authorName}}</div>
-        <div class="panel-body bold">Date:&nbsp;{{createdOn}}</div>
+        <div class="panel-body bold">Date:&nbsp;{{data.publishedDate| date}}</div>
         <div class="text-center pb-4 ">
             <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
         </div>
         <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
-
         </div>
         <button type="custom-btn btn-1" (click)="showText()">
             {{ isReadMore ? 'Read More': 'Read Less' }}
         </button>
     </div>
     <div *ngIf="data.comments.length!=0">
-    <h4>{{data.comments.length}} comments</h4>
-    <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
-        <table>
-            <tr *cdkVirtualFor="let comment of data.comments">
-                <td class="example-dt"><br><i
-                        class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.message}}</i>
-                    <hr>
-                </td>
-                <br>
-        </table>
-
-    </cdk-virtual-scroll-viewport>
+        <h4>{{data.comments.length}} comments</h4>
+        <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+            <table>
+                <tr *cdkVirtualFor="let comment of data.comments">
+                    <td class="example-dt"><br><i
+                            class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.message}}</i>
+                    </td>
+                    <br>
+            </table>
+        </cdk-virtual-scroll-viewport>
     </div>
-
     <br>
     <hr>
     <br>
-
     <div class=" iconstyle d-flex flex-row fs-12">
         <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
             <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{data.likes}}</span>
@@ -58,7 +52,6 @@
     </div>
     <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
         <div class="container">
-
             <div class="d-flex flex-row align-items-start"><textarea class="form-control form-control5"
                     name="QueryComment" [(ngModel)]="article.comment" placeholder="Enter comments"></textarea></div>
             <div class="mt-2">
@@ -67,5 +60,4 @@
         </div>
     </form>
 </div>
-
 <app-footer></app-footer>

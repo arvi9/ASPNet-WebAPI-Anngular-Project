@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SpecificqueryComponent } from './specificquery.component';
 
 describe('SpecificqueryComponent', () => {

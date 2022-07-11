@@ -23,6 +23,7 @@
 .btn-counter:hover:after {
   text-shadow: none;
 }
+
 .custom-btn {
   width: auto;
   height: 40px;
@@ -36,22 +37,24 @@
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-   7px 7px 20px 0px rgba(0,0,0,.1),
-   4px 4px 5px 0px rgba(0,0,0,.1);
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
   outline: none;
-  margin-left:15px;
+  margin-left: 15px;
 }
 
 /* 1 */
 .btn-1 {
-  background: rgb(0,172,238);
+  background: rgb(0, 172, 238);
   border: none;
 }
+
 .btn-1:hover {
-   background:  rgb(4, 149, 206);
+  background: rgb(4, 149, 206);
 
 }
+
 .btn-counter:after {
   border-radius: 3px;
   border: 1px solid #d3d3d3;
@@ -106,14 +109,16 @@ body {
 .shadow-none {
   box-shadow: none
 }
-.article-img{
+
+.article-img {
   max-height: 350px;
-  
+
   justify-content: center;
   justify-items: center;
   border-radius: 12px;
 
 }
+
 .name {
   color: #007bff
 }
@@ -129,22 +134,27 @@ body {
 .textarea {
   resize: none
 }
-.buttonp{
- margin-left: 91%;
+
+.buttonp {
+  margin-left: 91%;
 
 }
-.buttonu{
-  margin-left:2%;
+
+.buttonu {
+  margin-left: 2%;
 }
+
 .limitTextHeight {
-  height:75px;
+  height: 75px;
   overflow: hidden;
 }
-.commentleft{
-  margin-left:4%;
+
+.commentleft {
+  margin-left: 4%;
 }
-.usernamestyle{
-  font-weight:500;
+
+.usernamestyle {
+  font-weight: 500;
 }
 
 
@@ -158,11 +168,13 @@ body {
   font-weight: bold;
   color: #1565c0;
 }
-.iconstyle{
-  font-size:120%;
+
+.iconstyle {
+  font-size: 120%;
 }
+
 .limitcommentHeight {
-  height:150px;
+  height: 150px;
   overflow: hidden;
 }
 
@@ -194,32 +206,34 @@ body {
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-   7px 7px 20px 0px rgba(0,0,0,.1),
-   4px 4px 5px 0px rgba(0,0,0,.1);
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
   outline: none;
-  margin-left:15px;
+  margin-left: 15px;
 }
 
 /* 1 */
 .btn-1 {
-  background: rgb(0,172,238);
+  background: rgb(0, 172, 238);
   border: none;
 }
+
 .btn-1:hover {
-   background:  rgb(4, 149, 206);
+  background: rgb(4, 149, 206);
 
 }
 
-.mt-2{
-  text-align:right;
+.mt-2 {
+  text-align: right;
 }
+
 .form-control5 {
   resize: none;
   height: 150px;
   width: 103%
 }
-.breadcrumb
-{
+
+.breadcrumb {
   margin: 20px;
 }

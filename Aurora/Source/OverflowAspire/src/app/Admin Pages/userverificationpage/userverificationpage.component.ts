@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -11,12 +11,14 @@ import { Subject } from 'rxjs';
   templateUrl: './userverificationpage.component.html',
   styleUrls: ['./userverificationpage.component.css']
 })
+
 export class UserverificationpageComponent implements OnInit {
+  public data: User[] = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   constructor(private routing: Router, private toaster: Toaster, private connection: ConnectionService) { }
-    
-    // Get Users.
+
+  //Get all the Users.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
     if (!AuthService.GetData("Admin")) {
@@ -35,7 +37,7 @@ export class UserverificationpageComponent implements OnInit {
       });
   }
 
-    // Here the admin can accept user.
+  //Here the admin can accept user.
   AcceptUser(userId: number) {
     this.connection.ApproveUser(userId)
       .subscribe({
@@ -44,11 +46,10 @@ export class UserverificationpageComponent implements OnInit {
       });
     this.toaster.open({ text: 'User Verified successfully', position: 'top-center', type: 'success' })
     this.routing.navigateByUrl("/Employee");
-
   }
-  
-    // Here the admin can reject user.
 
+
+  //Here the admin can reject user.
   RejectUser(userId: number) {
     this.connection.RemoveUser(userId)
       .subscribe({
@@ -58,8 +59,6 @@ export class UserverificationpageComponent implements OnInit {
     this.toaster.open({ text: 'User removed successfully', position: 'top-center', type: 'danger' })
     this.routing.navigateByUrl("/Employee");
   }
-
-  public data: User[] = [];
 }
 
 

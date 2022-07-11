@@ -1,19 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+
 @Component({
   selector: 'app-spam-view',
   templateUrl: './spam-view.component.html',
   styleUrls: ['./spam-view.component.css']
 })
+
 export class SpamViewComponent implements OnInit {
-  queryId: number = 0;
-  constructor(private routing: Router, private route: ActivatedRoute, private http: HttpClient, private connection: ConnectionService, private toaster: Toaster) { }
   error = ""
+  queryId: number = 0;
+  public data: any[] = []
+
+  constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
+
   //Get spams by query id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
@@ -30,8 +34,6 @@ export class SpamViewComponent implements OnInit {
     });
   }
 
-  public data: any[] = []
-
   //Here the admin can approve spam by query id.
   onAccept() {
     this.connection.ApproveSpam(this.queryId)
@@ -39,7 +41,7 @@ export class SpamViewComponent implements OnInit {
         next: (data: any) => {
         },
       });
-    // Here the admin can remove query by query id.
+    //Here the admin can remove query by query id.
     this.connection.RemoveQuery(this.queryId)
       .subscribe({
         next: (data: any) => {
@@ -47,7 +49,6 @@ export class SpamViewComponent implements OnInit {
       });
     this.toaster.open({ text: 'Query removed successfully', position: 'top-center', type: 'danger' })
     this.routing.navigateByUrl("/SpamReport");
-
   }
 
   //Here the admin can reject spam by query id.
@@ -56,10 +57,8 @@ export class SpamViewComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
-
       });
     this.toaster.open({ text: 'spam removed successfully', position: 'top-center', type: 'danger' })
     this.routing.navigateByUrl("/SpamReport");
-
   }
 }

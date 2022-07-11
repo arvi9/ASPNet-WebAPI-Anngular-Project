@@ -9,13 +9,13 @@ import { AuthService } from 'src/app/Services/auth.service';
   styleUrls: ['./trending-articlepage.component.css']
 })
 
-  //Show trending Articles.
 export class TrendingArticlepageComponent implements OnInit {
   url: string = 'trendingArticles';
-  
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private http: HttpClient, private route: Router) { }
+
+  //Show trending Articles.
   ngOnInit(): void {
-    if(AuthService.GetData("token")==null) this.route.navigateByUrl("")
+    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
   }
 
 }

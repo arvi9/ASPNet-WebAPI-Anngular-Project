@@ -8,7 +8,6 @@
             <li class="breadcrumb-item active">
                 Article Reviewed
             </li>
-
         </ol>
     </nav>
 </div>
@@ -29,13 +28,12 @@
                         <td>{{item.articleId}}</td>
                         <td>{{item.authorName}}</td>
                         <td><a routerLinkActive="active"
-                                [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a></td>
+                                [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
-
 <app-footer></app-footer>

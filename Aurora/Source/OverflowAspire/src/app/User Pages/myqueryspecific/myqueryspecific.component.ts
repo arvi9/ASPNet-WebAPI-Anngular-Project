@@ -5,15 +5,15 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
-declare type myarray = Array<{ content: string, coding: string, name: string }>
-
 @Component({
   selector: 'app-myqueryspecific',
   templateUrl: './myqueryspecific.component.html',
   styleUrls: ['./myqueryspecific.component.css']
 })
+
 export class MyqueryspecificComponent implements OnInit {
   issolved: any
+  public data: Query = new Query();
   queryDetails: any = this.route.params.subscribe(params => {
     this.queryId = params['queryId'];
   });
@@ -45,8 +45,6 @@ export class MyqueryspecificComponent implements OnInit {
         });
     });
   }
-
-  public data: Query = new Query();
 
   MarkQueryAsSolved(QueryId: number) {
     this.connection.MarkQueryAsSolved(QueryId)

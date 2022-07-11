@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SpamViewComponent } from './spam-view.component';
 
 describe('SpamViewComponent', () => {

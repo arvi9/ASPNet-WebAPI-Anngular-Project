@@ -1,23 +1,24 @@
-.container{
+.container {
     margin-top: 10%;
     margin-bottom: 10%;
 }
-.col{
- 
+
+.col {
+
     margin-left: 35%;
 }
-.row{
-    margin-left:10%;
-    margin-right:10%;
-    margin-bottom:2%;
+
+.row {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 2%;
     margin-top: 2;
 }
 
-.breadcrumb
-{
+.breadcrumb {
     margin: 20px;
 }
-.Content
-{
+
+.Content {
     min-height: 100vh;
 }

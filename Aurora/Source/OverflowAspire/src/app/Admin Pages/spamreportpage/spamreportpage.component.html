@@ -6,13 +6,10 @@
                 <li class="breadcrumb-item">
                     <a routerLinkActive="active" routerLink="/AdminDashboard">AdminDashboard</a>
                 </li>
-
                 <li class="breadcrumb-item active">Spam Reports</li>
-
             </ol>
         </nav>
     </div>
-
     <h1>Spam Reports</h1>
     <div class="Container">
         <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
@@ -29,15 +26,12 @@
                     <td>{{item.query.queryId}}</td>
                     <td>{{item.query.title}}</td>
                     <td>{{item.listOfSpams.length}}</td>
-
-                    <td><a routerLinkActive="active" [routerLink]="['/SpamView',item.query.queryId]"><button
-                                class="btn btn-info">View</button></a></td>
+                    <td><a routerLinkActive="active" [routerLink]="['/SpamView',item.query.queryId]">
+                        <button class="btn btn-info">View</button></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
-
     </div>
-
 </div>
-
 <app-footer></app-footer>

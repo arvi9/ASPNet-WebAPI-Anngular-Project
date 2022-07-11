@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SpecificarticleComponent } from './specificarticle.component';
 
 describe('SpecificarticleComponent', () => {

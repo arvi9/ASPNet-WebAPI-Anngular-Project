@@ -20,6 +20,10 @@ export class ConnectionService {
       'Authorization': `Bearer ${token}`
     })
   }
+  //Get Current User
+  GetCurrentApplicationUser(): any {
+    return this.http.get<any>(this.URL + 'User/GetCurrentApplicationUser', { headers: this.headers });
+  }
 
   //Get admin dashboard
   GetAdminDashboard(): any {

@@ -10,8 +10,13 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   templateUrl: './reviewerdashboard.component.html',
   styleUrls: ['./reviewerdashboard.component.css']
 })
+
+
 export class ReviewerdashboardComponent implements OnInit {
+  public piedata: any = new Dashboard();
   constructor(private route: Router, private connection: ConnectionService) { }
+  articles:any;
+
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     if (!AuthService.GetData("Reviewer")) {
@@ -19,12 +24,13 @@ export class ReviewerdashboardComponent implements OnInit {
     }
     this.connection.GetReviewerDashboard()
       .subscribe({
-        next: (data: Dashboard) => {
+        next: (data: any) => {
           this.piedata = data;
+          this.articles=data.articleCounts.toBeReviewedArticles+data.articleCounts.underReviewArticles
           var names = ['Articles to be Reviewed', 'Articles Reviewed'];
           var details = [];
-          details.push(data.articlesTobeReviewed);
-          details.push(data.articlesReviewed);
+          details.push( this.articles);
+          details.push(data.articleCounts.articlesPublished);
           new Chart('piechart', {
             type: 'pie',
             data: {
@@ -45,6 +51,6 @@ export class ReviewerdashboardComponent implements OnInit {
         }
       });
   }
-  public piedata: Dashboard = new Dashboard();
+  
 
 }

@@ -8,26 +8,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-navbar.component.css']
 })
 export class AdminNavbarComponent implements OnInit {
-
-  constructor(private route:Router) { }
+  status: boolean = false;
+  sideStatus: boolean = true;
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
-    
-    }
-    status: boolean = false;
-  clickEvent(){
-      this.status = !this.status;       
   }
-  sideStatus:boolean=true;
-  clickSideEvent(){
-    this.sideStatus=!this.sideStatus;
-  } 
-  // Here the user can logout.
 
-  LogOut(){
+  clickEvent() {
+    this.status = !this.status;
+  }
+
+  clickSideEvent() {
+    this.sideStatus = !this.sideStatus;
+  }
+
+  //Here the user can logout.
+  LogOut() {
     localStorage.clear();
     this.route.navigateByUrl("")
     return 100;
   }
-  
+
 }

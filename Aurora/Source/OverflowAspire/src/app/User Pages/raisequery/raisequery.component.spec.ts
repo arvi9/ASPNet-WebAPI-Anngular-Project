@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RaisequeryComponent } from './raisequery.component';
 
 describe('RaisequeryComponent', () => {

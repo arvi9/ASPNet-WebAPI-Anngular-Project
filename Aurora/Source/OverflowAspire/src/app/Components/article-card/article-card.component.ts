@@ -16,13 +16,14 @@ export class ArticleCardComponent implements OnInit {
   searchAuthor = "";
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
-
+  public data: Article[] = [];
+  public filteredData: Article[] = [];
 
   constructor(private connection: ConnectionService) { }
   
-  //Get all articles.
-
+  //Get articles
   ngOnInit(): void {
+    //Get all the articles
     if(this.artsrc=="allArticles"){
      this.connection.GetAllArticles()
       .subscribe({next:(data) => {
@@ -32,7 +33,7 @@ export class ArticleCardComponent implements OnInit {
       }});
     }
 
-     //Get latest articles.
+    //Get latest articles.
     else if(this.artsrc=="latestArticles")
     {
       this.connection.GetLatestArticles()
@@ -41,9 +42,9 @@ export class ArticleCardComponent implements OnInit {
         this.filteredData = data;
         this.totalLength = data.length;
       }});
-
-      // Get Trending articles.
     }
+
+    // Get Trending articles.
     else(this.artsrc=="trendingArticles")
     {
       this.connection.GetTrendingArticles()
@@ -52,17 +53,12 @@ export class ArticleCardComponent implements OnInit {
         this.filteredData = data;
         this.totalLength = data.length;
       }});
-    }
-    
+    }  
   }
-  public data: Article[] = [];
-  // Filter articles by Title,Author,Fromdate and Todate.
 
-  public filteredData: Article[] = [];
+  //Filter articles by Title,Author,Fromdate and Todate.
   samplefun(searchTitle: string, searchAuthor: string, FromDate: any, ToDate: any) {
-
     if (searchTitle.length == 0 && searchAuthor.length == 0 && FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) this.data = this.filteredData
-
 
     //1.Search by title
     if (searchTitle.length != 0 && searchAuthor == '' && FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) {
@@ -124,6 +120,7 @@ export class ArticleCardComponent implements OnInit {
     else if (searchTitle.length != 0 && searchAuthor.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase())&&item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
     }
-
+    this.searchTitle = '';
+    this.searchAuthor = '';
   }
 }

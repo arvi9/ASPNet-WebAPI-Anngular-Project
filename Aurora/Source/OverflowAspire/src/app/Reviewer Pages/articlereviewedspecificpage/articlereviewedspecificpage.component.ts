@@ -9,8 +9,11 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   templateUrl: './articlereviewedspecificpage.component.html',
   styleUrls: ['./articlereviewedspecificpage.component.css']
 })
+
 export class ArticlereviewedspecificpageComponent implements OnInit {
   articleId: number = 0
+  public data: Article = new Article();
+
   constructor(private route: ActivatedRoute, private routes: Router, private connection: ConnectionService) { }
 
   //Get article by article id.
@@ -29,6 +32,4 @@ export class ArticlereviewedspecificpageComponent implements OnInit {
         });
     });
   }
-
-  public data: Article = new Article();
 }

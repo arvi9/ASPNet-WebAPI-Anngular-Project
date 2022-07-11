@@ -6,18 +6,14 @@
                 <li class="breadcrumb-item">
                     <a routerLinkActive="active" routerLink="/AdminDashboard">AdminDashboard</a>
                 </li>
-
                 <li class="breadcrumb-item active">
                     UserVerification
                 </li>
-
             </ol>
         </nav>
     </div>
-
     <h1>User Verification</h1>
     <div class="Container">
-
         <table datatable [dtOptions]="dtOptions" class="table table-striped row-border hover">
             <thead>
                 <tr class="tablecolor">
@@ -32,11 +28,10 @@
             <tbody>
                 <tr class="table-default" *ngFor="let item of data">
                     <td>{{item.fullName}}</td>
-                    <td>{{item.dateOfBirth}}</td>
+                    <td>{{item.dateOfBirth|date}}</td>
                     <td>{{item.employeeId}}</td>
                     <td>{{item.designation}}</td>
                     <td>{{item.email}}</td>
-
                     <td><a (click)="AcceptUser(item.userId)"><button class="btn btn-success">Accept</button></a>&nbsp;
                         <a (click)="RejectUser(item.userId)"><button class="btn btn-danger">Reject</button></a>
                     </td>
@@ -45,7 +40,4 @@
         </table>
     </div>
 </div>
-
-
-
 <app-footer></app-footer>
