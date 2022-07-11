@@ -74,7 +74,7 @@ namespace AspireOverflow.DataAccessLayer
             User? user;
             try
             {
-                user = _context.Users.FirstOrDefault(User => User.UserId == UserId);
+                user = _context.Users.Include(e=>e.Designation).Include(e=>e.Gender).Include(e=>e.Designation!.Department).Include(e=>e.UserRole).FirstOrDefault(User => User.UserId == UserId);
                 return user != null ? user : throw new ItemNotFoundException($"There is no matching User data with UserID :{UserId}");
             }
             catch (Exception exception)
@@ -145,7 +145,7 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
- //to get the list of users.
+       //to get the list of users.
         public IEnumerable<User> GetUsers()
         {
             try

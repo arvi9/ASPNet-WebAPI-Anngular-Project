@@ -47,7 +47,7 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var DashboardInformation = _articleService.GetCountOfArticles();
+                var DashboardInformation = new {articleCounts =_articleService.GetCountOfArticles()};
                 return await Task.FromResult(Ok(DashboardInformation));
             }
             catch (Exception exception)

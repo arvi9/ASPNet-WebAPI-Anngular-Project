@@ -130,7 +130,7 @@ namespace AspireOverflow.DataAccessLayer
             Article? ExistingArticle;
             try
             {
-                ExistingArticle = _context.Articles.FirstOrDefault(item => item.ArtileId == ArticleId);
+                ExistingArticle = _context.Articles.Include(e=>e.ArticleStatus).Include(e=>e.User).FirstOrDefault(item => item.ArtileId == ArticleId);
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)
@@ -201,7 +201,6 @@ namespace AspireOverflow.DataAccessLayer
 
         //Get the articles by the Reviewer's Id. Reviewer who reviews the article before publishing.
         public IEnumerable<Article> GetArticlesByReviewerId(int ReviewerId)
-
         {
             if (ReviewerId <= 0) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
             try
@@ -254,8 +253,8 @@ namespace AspireOverflow.DataAccessLayer
                 return new{
                     TotalNumberOfArticles = _context.Articles.Count(),
                     DraftArticles = _context.Articles.Count(item => item.ArticleStatusID == 1),
-                    ToBeReviewedArticles = _context.Articles.Count(item => item.ArticleStatusID == 1),
-                    UnderReviewArticles = _context.Articles.Count(item => item.ArticleStatusID == 1),
+                    ToBeReviewedArticles = _context.Articles.Count(item => item.ArticleStatusID == 2),
+                    UnderReviewArticles = _context.Articles.Count(item => item.ArticleStatusID == 3),
                     ArticlesPublished = _context.Articles.Count(item => item.ArticleStatusID == 4)
                 };
             }

@@ -130,7 +130,7 @@ namespace AspireOverflow.Services
                 return new
                 {
                     articleId = article.ArtileId,
-                    PublishedDate = article.UpdatedBy,
+                    PublishedDate = article.UpdatedOn,
                     title = article.Title,
                     AuthorName = article.User?.FullName,
                     content = article.Content,

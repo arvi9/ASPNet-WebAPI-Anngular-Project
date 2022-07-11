@@ -8,7 +8,6 @@ namespace AspireOverflow.Services
         public static bool ValidateQuery(Query query)
         {
             if (query == null) throw new ValidationException("Query should not be null");
-            if (query.CreatedBy <= 0) throw new ValidationException("CreatedBy Id  must be greater than 0");
             if (String.IsNullOrEmpty(query.Title)) throw new ValidationException("Title cannot be null or empty");
             if (String.IsNullOrEmpty(query.Content)) throw new ValidationException("content cannot be null or empty");
             if (query.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
@@ -20,7 +19,6 @@ namespace AspireOverflow.Services
         public static bool ValidateComment(QueryComment Comment)
         {
             if (Comment == null) throw new ValidationException("Comment should not be null");
-            if (Comment.CreatedBy <= 0) throw new ValidationException("CreatedBy  must be greater than 0");
             if (Comment.QueryId <= 0) throw new ValidationException("Query Id  must be greater than 0");
             if (String.IsNullOrEmpty(Comment.Comment)) throw new ValidationException("Comment cannot be null or empty");
             else return true;
@@ -40,7 +38,6 @@ namespace AspireOverflow.Services
         public static bool ValidateArticleComment(ArticleComment Comment)
         {
             if (Comment == null) throw new ValidationException("Comment should not be null");
-            if (Comment.CreatedBy <= 0) throw new ValidationException("CreatedBy  must be greater than 0");
             if (Comment.ArticleId <= 0) throw new ValidationException("Article Id  must be greater than 0");
             if (String.IsNullOrEmpty(Comment.Comment)) throw new ValidationException("Comment cannot be null or empty");
             else return true;
