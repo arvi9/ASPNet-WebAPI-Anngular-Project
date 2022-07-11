@@ -19,16 +19,37 @@
         <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">
                 <label class="form-label">Title:</label>
-                <input class="form-control" placeholder="Enter Title" name="title" value={{article.title}}
-                    [(ngModel)]="article.title">
+                <input type="text" #title="ngModel" class="form-control mb-4" id="createarticle"
+                placeholder="Enter Article Title" name="title" [(ngModel)]="article.title"
+                [class.is-invalid]="title.invalid && title.touched" pattern="^.{1,100}$" required>
+            <div *ngIf="title.errors && (title.invalid || title.touched)">
+                <small class="text-danger" *ngIf="title.errors['pattern']">Article Title should have maximum 100
+                    characters</small>
+                <small class="text-danger" [class.d-none]="title.valid||title.untouched"
+                    *ngIf="title.errors['required']">Article Title is required</small>
+            </div>
             </div>
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
-                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image">
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image"
+                    #image="ngModel" [(ngModel)]="article.ImageString" required>
+                <label class="text-danger"> {{imageError}}</label>
+                <div *ngIf="image.errors && (image.invalid || image.touched)">
+                    <small class="text-danger" [class.d-none]="image.valid || image.untouched"
+                        *ngIf="image.errors?.['required']">
+                        Image is required.
+                    </small>
+                </div>
             </div>
             <br>
-            <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
+            <ckeditor name="content" #content="ngModel"  [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500" required>
             </ckeditor>
+            <div *ngIf="content.errors && (content.invalid || content.touched)">
+                <small class="text-danger" [class.d-none]="content.valid || content.untouched"
+                    *ngIf="content.errors?.['required']">
+                    Article content is required.
+                </small>
+            </div>
             <div class="editor-btn">
                 <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button"
                     [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
