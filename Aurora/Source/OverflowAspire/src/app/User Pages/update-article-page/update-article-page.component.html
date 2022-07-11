@@ -30,7 +30,13 @@
             <ckeditor name="content" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500">
             </ckeditor>
             <div class="editor-btn">
-                <input class="custom-btn btn-1" type="submit" value="Submit" />
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button"
+                    [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
+                    Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span></button>
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit"
+                    [disabled]="!form.valid">Submit <span *ngIf="IsLoadingSubmit"
+                        class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
             </div>
         </form>
     </div>

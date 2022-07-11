@@ -11,7 +11,6 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./reviewerdashboard.component.css']
 })
 
-
 export class ReviewerdashboardComponent implements OnInit {
   public piedata: any = new Dashboard();
   constructor(private route: Router, private connection: ConnectionService) { }
@@ -52,5 +51,4 @@ export class ReviewerdashboardComponent implements OnInit {
       });
   }
   
-
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'Models/Article';
+import { Toaster } from 'ngx-toast-notifications';
 import { catchError } from 'rxjs';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -15,6 +16,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class UpdateArticlePageComponent implements OnInit {
   @Input() articleId: number = 0
   imageError: string = "";
+  IsLoadingSubmit: boolean = false;
+  IsLoadingSaveDraft: boolean = false;
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
   article: any = {
@@ -24,16 +27,13 @@ export class UpdateArticlePageComponent implements OnInit {
     image: "",
     articleStatusID: 1,
     reviewerId: 0,
-    datetime: new Date(),
     createdBy: 1,
-    createdOn: new Date(),
-    updatedBy: 0,
     ImageString: this.cardImageBase64,
-    updatedOn: '',
+    updatedOn: new Date(),
   }
   public data: Article = new Article();
 
-  constructor(private route: ActivatedRoute, private connection: ConnectionService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private connection: ConnectionService, private router: Router, private toaster: Toaster) { }
 
   //Get article by its id.
   ngOnInit(): void {
@@ -58,9 +58,21 @@ export class UpdateArticlePageComponent implements OnInit {
     this.connection.UpdateArticle(this.article)
       .pipe(catchError(this.handleError)).subscribe({
         next: (data: any) => {
-          this.router.navigateByUrl("MyArticles")
+          this.toaster.open({ text: 'Article Submitted Succesfully', position: 'top-center', type: 'success' })
+          this.router.navigateByUrl("/MyArticles");
         }
       });
+  }
+
+  saveToDraft() {
+    this.connection.UpdateArticle(this.article)
+      .subscribe({
+        next: (data: any) => {
+          this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'warning' })
+          this.router.navigateByUrl("/MyArticles");
+        }
+      });
+
   }
 
 

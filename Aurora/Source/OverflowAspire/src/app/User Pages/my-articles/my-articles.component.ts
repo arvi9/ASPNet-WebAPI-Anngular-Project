@@ -70,6 +70,6 @@ export class MyArticlesComponent implements OnInit {
     else if (searchTitle.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
-    searchTitle = "";
+    this.searchTitle = '';
   }
 }

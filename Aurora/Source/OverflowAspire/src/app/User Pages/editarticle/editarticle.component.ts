@@ -22,11 +22,9 @@ export class EditarticleComponent implements OnInit {
   article: any = {
     articleCommentId: 0,
     comment: '',
-    datetime: new Date(),
     userId: 1,
     createdBy: 1,
     articleId: 2,
-    createdOn: new Date(),
     updatedBy: 0,
     updatedOn: '',
   }
@@ -47,7 +45,6 @@ export class EditarticleComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
-            console.log(this.data)
           }
         });
     });

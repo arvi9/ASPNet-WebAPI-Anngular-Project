@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.IsAdmin = data.isAdmin,
-            this.IsReviewer = data.isReviewer,
-            this.IsVerified = data.isVerified
+          this.IsReviewer = data.isReviewer,
+          this.IsVerified = data.isVerified
+          console.log(data)
           AuthService.SetDataWithExpiry("token", data.token, data.expiryInMinutes)
           AuthService.SetDataWithExpiry("Admin", data.isAdmin, data.expiryInMinutes)
           AuthService.SetDataWithExpiry("Reviewer", data.isReviewer, data.expiryInMinutes)

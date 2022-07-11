@@ -37,7 +37,6 @@ article: any = {
  createdOn: new Date(),
  updatedBy: 0,
  ImageString: this.cardImageBase64,
- updatedOn: null,
  reviewerId:0
 }
  

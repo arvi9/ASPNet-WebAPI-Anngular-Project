@@ -21,6 +21,7 @@
 .btn-1 {
   background: rgb(0, 172, 238);
   border: none;
+  margin:2px;
 }
 
 .btn-1:hover {
