@@ -16,7 +16,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public IEnumerable<Article> GetArticlesByAuthor(string AuthorName);
         public IEnumerable<Article> GetArticlesByUserId(int UserId);
         public IEnumerable<PrivateArticle> GetPrivateArticlesByUserId(int UserId);
-        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID);
+        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID,bool IsReviewer=false);
         public object GetCountOfArticles();
     }
 

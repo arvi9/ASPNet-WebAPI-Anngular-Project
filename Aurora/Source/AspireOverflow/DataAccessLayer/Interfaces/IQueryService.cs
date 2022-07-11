@@ -9,11 +9,11 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool MarkQueryAsSolved(int QueryId);
         Object GetQuery(int QueryID);
         IEnumerable<Object> GetListOfQueries();
-        IEnumerable<Object> GetTrendingQueries();
-        IEnumerable<Object> GetLatestQueries();
+        IEnumerable<Object> GetTrendingQueries(int Range=0);
+        IEnumerable<Object> GetLatestQueries(int Range=0);
         IEnumerable<Object> GetQueriesByUserId(int UserId);
         IEnumerable<Object> GetQueriesByTitle(String Title);
-        IEnumerable<Object> GetQueries(bool IsSolved);
+        IEnumerable<Object> GetQueriesByIsSolved(bool IsSolved);
          public object GetCountOfQueries();
     }
 

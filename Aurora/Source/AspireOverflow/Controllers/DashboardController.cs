@@ -102,15 +102,15 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a homepage. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         [HttpGet]
-        public async Task<ActionResult> GetHomePage()
+        public async Task<ActionResult> GetHomePage(int DataRange)
         { try
             {
                 var Data = new
                 {
-                    TrendingArticles = _articleService.GetTrendingArticles(),
-                    LatestArticles = _articleService.GetLatestArticles(),
-                    TrendingQueries = _queryService.GetTrendingQueries(),
-                    LatestQueries = _queryService.GetLatestQueries(),
+                    TrendingArticles = _articleService.GetTrendingArticles(DataRange),
+                    LatestArticles = _articleService.GetLatestArticles(DataRange),
+                    TrendingQueries = _queryService.GetTrendingQueries(DataRange),
+                    LatestQueries = _queryService.GetLatestQueries(DataRange),
                 }; return await Task.FromResult(Ok(Data));
             }
             catch (Exception exception)

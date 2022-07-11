@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using AspireOverflow.DataAccessLayer.Interfaces;
 namespace AspireOverflow.Services
 {
-    public class QueryService :IQueryService
+    public class QueryService : IQueryService
     {
-        private readonly  IQueryRepository database;
-        private readonly  ILogger<QueryService> _logger;
+        private readonly IQueryRepository database;
+        private readonly ILogger<QueryService> _logger;
         private readonly MailService _mailService;
-        public QueryService(ILogger<QueryService> logger, MailService mailService,IQueryRepository _queryRepository)
+        public QueryService(ILogger<QueryService> logger, MailService mailService, IQueryRepository _queryRepository)
         {
             _logger = logger;
             _mailService = mailService;
-            database =_queryRepository;
+            database = _queryRepository;
         }
 
 
@@ -88,7 +88,7 @@ namespace AspireOverflow.Services
                     code = Query.code,
                     Date = Query.CreatedOn,
                     RaiserName = Query.User?.FullName,
-                    IsSolved=Query.IsSolved,
+                    IsSolved = Query.IsSolved,
                     Comments = GetComments(QueryID)
                 };
             }
@@ -111,7 +111,7 @@ namespace AspireOverflow.Services
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                    IsSolved=item.IsSolved
+                    IsSolved = item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -123,18 +123,19 @@ namespace AspireOverflow.Services
 
 
         //to fetch the list of latest queries using it's creation date.
-        public IEnumerable<Object> GetLatestQueries()
+        public IEnumerable<Object> GetLatestQueries(int Range)
         {
             try
             {
                 //get queries from the database using Creation date by descending order.
-                var ListOfQueries = database.GetQueries().OrderByDescending(query => query.CreatedOn);
+                var ListOfQueries = database.GetQueries().OrderByDescending(query => query.CreatedOn).ToList();
+                   if (ListOfQueries.Count > Range && Range != 0) ListOfQueries = ListOfQueries.GetRange(0, Range);
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                      IsSolved=item.IsSolved
+                    IsSolved = item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -146,26 +147,28 @@ namespace AspireOverflow.Services
 
 
         //To Fetch the trending articles using number of comments and usolved query.
-        public IEnumerable<Object> GetTrendingQueries()
+        public IEnumerable<Object> GetTrendingQueries(int Range)
         {
             try
             {
                 //get the comments and group by QueryId using decending order in count.
-                var  ListOfComments= (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
+                var ListOfComments = (database.GetComments().GroupBy(item => item.QueryId)).OrderByDescending(item => item.Count());
                 var ListOfQueryId = (from queryComment in ListOfComments select queryComment.First().QueryId).ToList();
-                var ListOfQueries = database.GetQueries().Where(item => !item.IsSolved).ToList();
+                var ListOfQueries = database.GetQueriesByIsSolved(false).ToList();
+
+                if (ListOfQueryId.Count > Range && Range != 0) ListOfQueryId = ListOfQueryId.GetRange(0, Range);
                 List<Query> TrendingQueries = new List<Query>();
                 foreach (var Id in ListOfQueryId)
                 {
-                    var Query =ListOfQueries.Find(item => item.QueryId == Id);
-                    if(Query!= null)TrendingQueries.Add(Query);
+                    var Query = ListOfQueries.Find(item => item.QueryId == Id);
+                    if (Query != null) TrendingQueries.Add(Query);
                 }
-               return (from Query in TrendingQueries select Query).Select(item => new
+                return (from Query in TrendingQueries select Query).Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                    IsSolved=item.IsSolved
+                    IsSolved = item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -182,13 +185,13 @@ namespace AspireOverflow.Services
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var ListOfQueries = database.GetQueries().Where(query => query.CreatedBy == UserId);
+                var ListOfQueries = database.GetQueriesByUserId(UserId);
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                      IsSolved=item.IsSolved
+                    IsSolved = item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -205,13 +208,13 @@ namespace AspireOverflow.Services
             if (String.IsNullOrEmpty(Title)) throw new ArgumentException(" Title value can't be null");
             try
             {
-                var ListOfQueries = database.GetQueries().Where(query => query.Title!.Contains(Title));
+                var ListOfQueries = database.GetQueriesByTitle(Title);
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                      IsSolved=item.IsSolved
+                    IsSolved = item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -223,17 +226,17 @@ namespace AspireOverflow.Services
 
 
         //to fetch the query when the query is solved.
-        public IEnumerable<Object> GetQueries(bool IsSolved)
+        public IEnumerable<Object> GetQueriesByIsSolved(bool IsSolved)
         {
             try
             {
-                var ListOfQueries = database.GetQueries().Where(query => query.IsSolved == IsSolved);
+                var ListOfQueries = database.GetQueriesByIsSolved(IsSolved);
                 return ListOfQueries.Select(item => new
                 {
                     QueryId = item.QueryId,
                     Title = item.Title,
                     content = item.Content,
-                      IsSolved=item.IsSolved
+                    IsSolved = item.IsSolved
                 });
             }
             catch (Exception exception)
@@ -242,7 +245,7 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
-  public object GetCountOfQueries()
+        public object GetCountOfQueries()
         {
             try
             {
@@ -262,8 +265,8 @@ namespace AspireOverflow.Services
             Validation.ValidateComment(comment);
             try
             {
-                comment.CreatedOn=DateTime.Now;
-                 comment.Datetime=DateTime.Now;
+                comment.CreatedOn = DateTime.Now;
+                comment.Datetime = DateTime.Now;
                 return database.AddComment(comment);
             }
             catch (Exception exception)
@@ -302,16 +305,16 @@ namespace AspireOverflow.Services
         {
             if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0  where QueryId:{QueryId}");
             //VerifyStatusID should be inbetween 0 and 3, where 1->Approved, 2->Rejected, 3->To be Reviewed.
-            if(VerifyStatusID <= 0 || VerifyStatusID > 3)throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
-                var IsChangeSuccessfully = database.UpdateSpam(QueryId,  VerifyStatusID);
-                if (IsChangeSuccessfully) _mailService?.SendEmailAsync(HelperService.SpamMail("Manimaran.0610@gmail.com","Title", "Hello" , 2));
+                var IsChangeSuccessfully = database.UpdateSpam(QueryId, VerifyStatusID);
+                if (IsChangeSuccessfully) _mailService?.SendEmailAsync(HelperService.SpamMail("Manimaran.0610@gmail.com", "Title", "Hello", 2));
                 return IsChangeSuccessfully;
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId,VerifyStatusID));
+                _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId, VerifyStatusID));
                 throw;
             }
         }
@@ -320,7 +323,7 @@ namespace AspireOverflow.Services
         //to add the query as spam using spam object.
         public bool AddSpam(Spam spam)
         {
-         Validation.ValidateSpam(spam);
+            Validation.ValidateSpam(spam);
             try
             {
                 return database.AddSpam(spam);
@@ -332,23 +335,27 @@ namespace AspireOverflow.Services
             }
         }
 
-        
+
         //to get the spam queries using  VerifyStatusID.
         public IEnumerable<object> GetSpams(int VerifyStatusID)
         {
-            if(VerifyStatusID <=0 || VerifyStatusID > 3) throw new ArgumentException("Verfiystatus Id must be greater than 0 and less than or eeeeeeequal to 4");
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("Verfiystatus Id must be greater than 0 and less than or eeeeeeequal to 4");
             try
             {
-                var Spams = database.GetSpams().Where(item =>item.VerifyStatusID==VerifyStatusID).GroupBy(item => item.QueryId).OrderByDescending(item=>item.Count()).Select(item =>new{
-                ListOfSpams =item.Select(spam =>new {
-                    Name =spam.User?.FullName,
-                    Reason=spam.Reason
-                }),
-                Query=new {
-                    QueryId=item.First().QueryId,
-                    Content=item.First().Query?.Content,
-                    Title=item.First().Query?.Title
-                }});
+                var Spams = database.GetSpams().Where(item => item.VerifyStatusID == VerifyStatusID).GroupBy(item => item.QueryId).OrderByDescending(item => item.Count()).Select(item => new
+                {
+                    ListOfSpams = item.Select(spam => new
+                    {
+                        Name = spam.User?.FullName,
+                        Reason = spam.Reason
+                    }),
+                    Query = new
+                    {
+                        QueryId = item.First().QueryId,
+                        Content = item.First().Query?.Content,
+                        Title = item.First().Query?.Title
+                    }
+                });
                 return Spams;
             }
             catch (Exception exception)

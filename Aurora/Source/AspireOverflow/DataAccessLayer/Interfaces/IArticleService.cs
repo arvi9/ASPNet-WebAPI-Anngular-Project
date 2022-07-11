@@ -10,8 +10,8 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId);
         bool UpdateArticle(Article article, int _currentUserId);
         Object GetArticleById(int ArticleId);
-        IEnumerable<Object> GetTrendingArticles();
-        IEnumerable<Object> GetLatestArticles();
+        IEnumerable<Object> GetTrendingArticles(int Range=0);
+        IEnumerable<Object> GetLatestArticles(int Range=0);
         IEnumerable<Object> GetListOfArticles();
         IEnumerable<Object> GetPrivateArticles(int UserId);
         IEnumerable<Object> GetArticlesByTitle(string Title);
@@ -20,7 +20,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         IEnumerable<Object> GetArticlesByUserId(int UserId);
         IEnumerable<Article> GetAll();
         IEnumerable<Object> GetArticlesByReviewerId(int ReviewerId);
-        IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID);
+        IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID,bool IsReviewer);
     }
 
     public interface IArticleCommentService

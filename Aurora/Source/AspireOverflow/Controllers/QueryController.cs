@@ -51,14 +51,14 @@ namespace AspireOverflow.Controllers
             if (query == null) return BadRequest(Message("Null value is not supported"));
             try
             {
-               query.CreatedBy=GetCurrentUser().UserId;
+                query.CreatedBy = GetCurrentUser().UserId;
                 return _queryService.CreateQuery(query) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding Query :{HelperService.PropertyList(query)}"));
             }
             catch (ValidationException exception)
             {
                 //HelperService.LoggerMessage - returns string for logger with detailed info
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "CreateQuery(Query query)", exception, query));
-                return BadRequest(Message($"{exception.Message}",query));
+                return BadRequest(Message($"{exception.Message}", query));
             }
             catch (Exception exception)
             {
@@ -219,13 +219,8 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var Queries = _queryService.GetLatestQueries().ToList();
-                if (Range <= Queries.Count)
-                {
-                    Queries = Range > 0 ? Queries.GetRange(1, Range) : Queries;
-                    return await Task.FromResult(Ok(Queries));
-                }
-                else return BadRequest(Message("Range limit exceeded"));
+                var Queries = _queryService.GetLatestQueries(Range).ToList();
+                    return await Task.FromResult(Ok(Queries));              
             }
             catch (Exception exception)
             {
@@ -258,13 +253,10 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-               List<object> Queries = _queryService.GetTrendingQueries().ToList();
-                if (Range <= Queries.Count)
-                {
-                    Queries = Range > 0 ? Queries.GetRange(0, Range) : Queries;
-                    return await Task.FromResult(Ok(Queries));
-                }
-                else return BadRequest(Message("Range limit exceeded"));
+                List<object> Queries = _queryService.GetTrendingQueries(Range).ToList();
+
+                return await Task.FromResult(Ok(Queries));
+
             }
             catch (Exception exception)
             {
@@ -277,7 +269,7 @@ namespace AspireOverflow.Controllers
         [HttpGet]
         public async Task<ActionResult> GetQueriesByUserId()
         {
-            int UserId=GetCurrentUser().UserId;
+            int UserId = GetCurrentUser().UserId;
             try
             {
                 var ListOfQueriesByUserId = _queryService.GetQueriesByUserId(UserId);
@@ -316,7 +308,7 @@ namespace AspireOverflow.Controllers
         ///
         ///     url : https://localhost:7197/Query/GetQueriesByIsSolved
         ///
-         ///  * fields are required
+        ///  * fields are required
         /// 
         ///     body
         ///     {
@@ -332,7 +324,7 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var ListOfQueriesByIsSolved = _queryService.GetQueries(IsSolved);
+                var ListOfQueriesByIsSolved = _queryService.GetQueriesByIsSolved(IsSolved);
                 return await Task.FromResult(Ok(ListOfQueriesByIsSolved));
             }
             catch (Exception exception)
@@ -373,13 +365,13 @@ namespace AspireOverflow.Controllers
             if (comment == null) return BadRequest(Message("Null value is not supported"));
             try
             {
-                comment.CreatedBy=GetCurrentUser().UserId;
+                comment.CreatedBy = GetCurrentUser().UserId;
                 return _queryService.CreateComment(comment) ? await Task.FromResult(Ok(Message("Successfully added comment to the Query"))) : BadRequest(Message($"Error Occured while Adding Comment :{HelperService.PropertyList(comment)}"));
             }
             catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", " CreateComment(QueryComment comment)", exception, comment));
-                return BadRequest(Message($"{exception.Message}",comment));
+                return BadRequest(Message($"{exception.Message}", comment));
             }
             catch (Exception exception)
             {
@@ -452,11 +444,11 @@ namespace AspireOverflow.Controllers
         [HttpPost]
         public async Task<ActionResult> AddSpam(Spam spam)
         {
-            if (spam == null ) return BadRequest(Message("spam object cannot be null"));
+            if (spam == null) return BadRequest(Message("spam object cannot be null"));
             try
             {
-                spam.UserId=GetCurrentUser().UserId;
-                return _queryService.AddSpam( spam) ? await Task.FromResult(Ok(Message("Successfully added spam for the query"))) : BadRequest(Message("Error Occured while adding spam to the query "));
+                spam.UserId = GetCurrentUser().UserId;
+                return _queryService.AddSpam(spam) ? await Task.FromResult(Ok(Message("Successfully added spam for the query"))) : BadRequest(Message("Error Occured while adding spam to the query "));
             }
             catch (ValidationException exception)
             {
@@ -466,7 +458,7 @@ namespace AspireOverflow.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "AddSpam(int Query)", exception, spam));
-                return BadRequest(Message("Error Occurred while Adding Spam with Spam data",spam));
+                return BadRequest(Message("Error Occurred while Adding Spam with Spam data", spam));
             }
         }
 
@@ -506,7 +498,7 @@ namespace AspireOverflow.Controllers
         ///
         ///     url : https://localhost:7197/Query/UpdateSpamStatus
         ///
-         ///     * fields are required
+        ///     * fields are required
         /// 
         ///     body
         ///     {
@@ -520,20 +512,20 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="SpamId"></param>
         /// <param name="VerifyStatusID"></param>
-    [HttpPatch]
-    public ActionResult UpdateSpamStatus(int QueryId, int VerifyStatusID)
-    {
-        if (QueryId <= 0) return BadRequest(Message($"QueryId Id must be greater than 0  where QueryId:{QueryId}"));
-        if (VerifyStatusID <= 0 || VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
-        try
+        [HttpPatch]
+        public ActionResult UpdateSpamStatus(int QueryId, int VerifyStatusID)
         {
-            return _queryService.ChangeSpamStatus(QueryId, VerifyStatusID)? Ok(Message("successfully Updated")): BadRequest(Message($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}"));
+            if (QueryId <= 0) return BadRequest(Message($"QueryId Id must be greater than 0  where QueryId:{QueryId}"));
+            if (VerifyStatusID <= 0 || VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
+            try
+            {
+                return _queryService.ChangeSpamStatus(QueryId, VerifyStatusID) ? Ok(Message("successfully Updated")) : BadRequest(Message($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}"));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId, VerifyStatusID));
+                return Problem($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}");
+            }
         }
-        catch (Exception exception)
-        {
-            _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId, VerifyStatusID));
-            return Problem($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}");
-        }
-    }
     }
 }

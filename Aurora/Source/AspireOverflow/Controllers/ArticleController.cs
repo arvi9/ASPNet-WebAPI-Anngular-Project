@@ -352,12 +352,7 @@ namespace AspireOverflow.Controllers
             try
             {
                 var Articles = _articleService.GetLatestArticles().ToList();
-                if (Range <= Articles.Count)
-                {
-                    Articles = Range > 0 ? Articles.GetRange(1, Range) : Articles;
-                    return await Task.FromResult(Ok(Articles));
-                }
-                else return BadRequest(Message("Range limit exceeded"));
+                return await Task.FromResult(Ok(Articles));
             }
             catch (Exception exception)
             {
@@ -391,13 +386,8 @@ namespace AspireOverflow.Controllers
         {
             try
             {
-                var Articles = _articleService.GetTrendingArticles().ToList();
-                if (Range <= Articles.Count)
-                {
-                    Articles = Range > 0 ? Articles.GetRange(0, Range) : Articles;
-                    return await Task.FromResult(Ok(Articles));
-                }
-                else return BadRequest(Message("Range limit exceeded"));
+                var Articles = _articleService.GetTrendingArticles(Range).ToList();
+                return await Task.FromResult(Ok(Articles));
             }
             catch (Exception exception)
             {
@@ -610,7 +600,7 @@ namespace AspireOverflow.Controllers
             }
         }
 
- 
+
         /// <summary>
         /// Gets a list of article by article status id.
         /// </summary>
@@ -637,7 +627,7 @@ namespace AspireOverflow.Controllers
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) return BadRequest(Message($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}"));
             try
             {
-                var ListOfArticles = _articleService.GetArticlesByArticleStatusId(ArticleStatusID);
+                var ListOfArticles = _articleService.GetArticlesByArticleStatusId(ArticleStatusID, GetCurrentUser().IsReviewer);
                 return await Task.FromResult(Ok(ListOfArticles));
             }
             catch (Exception exception)

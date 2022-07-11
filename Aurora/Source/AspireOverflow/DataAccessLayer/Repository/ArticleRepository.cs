@@ -145,7 +145,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticle = _context.Articles.Where(item => item.UpdatedOn > DateTime.Now.AddMonths(-GetDuration())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
             }
             catch (Exception exception)
@@ -155,14 +155,18 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID)
+        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID,bool IsReviewer)
 
         {
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
-            {
-                var ListOfArticle = _context.Articles.Where(item => item.UpdatedOn > DateTime.Now.AddMonths(-GetDuration()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
-                return ListOfArticle;
+            {   
+           //Articles with status (to be reviewed) and (Under Review) can only be accessible only to reviewer with PrivateArticles.
+           var ListOfArticle = (ArticleStatusID ==2 || ArticleStatusID==3) && IsReviewer?_context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())&& item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList():
+           _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetDuration()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+            
+            
+            return ListOfArticle;
             }
             catch (Exception exception)
             {
@@ -270,7 +274,9 @@ namespace AspireOverflow.DataAccessLayer
         {
             Validation.ValidateArticleComment(comment);
             try
-            {
+            { 
+                comment.Datetime=DateTime.Now;
+                comment.CreatedOn=DateTime.Now;
                 _context.ArticleComments.Add(comment);
                 _context.SaveChanges();
                 return true;

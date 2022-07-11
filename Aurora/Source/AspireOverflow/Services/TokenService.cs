@@ -46,14 +46,14 @@ namespace AspireOverflow.Services
                     _configuration["Jwt:Audience"],
                     new ClaimsIdentity(claims),
                     DateTime.Now,
-                    DateTime.Now.AddHours(1),
+                    DateTime.Now.AddMinutes(30),
                     DateTime.Now,
                     signIn,
                     encryptingCredentials);
                 var Result = new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    ExpiryInMinutes = 360,
+                    ExpiryInMinutes = 30,
                     IsAdmin = user.UserRoleId == 1,
                     IsReviewer = user.IsReviewer,
                     IsVerified = user.VerifyStatus?.Name

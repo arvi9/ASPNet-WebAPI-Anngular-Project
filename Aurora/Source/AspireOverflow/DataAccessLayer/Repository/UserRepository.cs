@@ -89,7 +89,7 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateEmail(Email);
             try
             {
-                var user = _context.Users.Include(e=>e.UserRole).FirstOrDefault(User => User.EmailAddress.ToLower() == Email.ToLower());
+                var user = _context.Users.Include(e=>e.UserRole).Include(e=>e.VerifyStatus).FirstOrDefault(User => User.EmailAddress.ToLower() == Email.ToLower());
                 return user != null ? user : throw new ValidationException($"There is no matching User data with Email :{Email}");
             }
             catch (ItemNotFoundException exception)

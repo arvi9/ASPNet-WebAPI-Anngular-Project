@@ -109,7 +109,47 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+        public IEnumerable<Query> GetQueriesByUserId(int UserId)
+        {
+            if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
+            try
+            {
+                return _context.Queries.Where(query => query.CreatedBy == UserId).Include(e => e.User);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryRepository", "GetQueriesByUserId(int UserId)", exception, UserId));
+                throw;
+            }
+        }
 
+        //Fetch the query by the query title.
+        public IEnumerable<Query> GetQueriesByTitle(String Title)
+        {
+            if (String.IsNullOrEmpty(Title)) throw new ArgumentException(" Title value can't be null");
+            try
+            {
+                return _context.Queries.Where(query => query.Title!.Contains(Title)).Include(e => e.User);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByTitle(String Title)", exception, Title));
+                throw;
+            }
+        }
+
+        public IEnumerable<Query> GetQueriesByIsSolved(bool IsSolved)
+        {
+            try
+            {
+                return _context.Queries.Where(item => item.IsSolved == IsSolved).Include(e => e.User);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries(bool IsSolved)", exception, IsSolved));
+                throw;
+            }
+        }
 
         //to get the list of query comments.
         public IEnumerable<QueryComment> GetComments()
