@@ -20,11 +20,17 @@ body {
 }
 
 .cardRight {
-
     border-style: solid;
     width: 18rem;
     margin: 10px;
 
+}
+.ToReview:hover{
+    background-color: rgb(111, 172, 246);
+}
+
+.ArticleReviewed:hover{
+    background-color: rgb(249, 134, 188);
 }
 
 .heading {

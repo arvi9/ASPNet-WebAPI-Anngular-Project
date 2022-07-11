@@ -13,6 +13,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class ToreviewpageComponent implements OnInit {
   public data: Article[] = [];
   public data1: Article[] = [];
+  public ReviewerID: any
+  reviewername:any;
 
   constructor(private connection: ConnectionService, private route: Router) { }
 
@@ -32,7 +34,8 @@ export class ToreviewpageComponent implements OnInit {
           .subscribe({
             next: (data: Article[]) => {
               this.data=this.data1.concat(data)
-              console.log(this.data)
+              console.log(data)
+              this.ReviewerID=this.data.map(x=>x.reviewerId)
             }
           });
         }

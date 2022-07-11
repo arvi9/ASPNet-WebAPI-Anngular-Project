@@ -12,31 +12,29 @@
     </nav>
 </div>
 <div class="Content">
-    <h1>To Review</h1>
+    <h1>Articles Waiting for Review</h1>
     <div class="Container">
-        <div>
-            <table class="table table-striped row-border hover">
-                <thead>
-                    <tr class="tablecolor">
-                        <th>Article No</th>
-                        <th>Author Name</th>
-                        <th>Article Name</th>
-                        <th>Status</th>
-                        <th>Reviewer Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-default" *ngFor="let item of data">
-                        <td>{{item.articleId}}</td>
-                        <td>{{item.authorName}}</td>
-                        <td>{{item.title}}</td>
-                        <td><a routerLinkActive="active" 
-                                [routerLink]="['/ToReviewSpecific',item.articleId]">{{item.status}}</a></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-striped row-border hover">
+            <thead>
+                <tr class="tablecolor">
+                    <th>Article No</th>
+                    <th>Author Name</th>
+                    <th>Article Name</th>
+                    <th>Status</th>
+                    <th>Reviewer Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-default" *ngFor="let item of data">
+                    <td>{{item.articleId}}</td>
+                    <td>{{item.authorName}}</td>
+                    <td>{{item.title}}</td>
+                    <td><a routerLinkActive="active"
+                            [routerLink]="['/ToReviewSpecific',item.articleId]">{{item.status}}</a></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <app-footer></app-footer>
