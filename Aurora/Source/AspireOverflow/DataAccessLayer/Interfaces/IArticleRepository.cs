@@ -2,10 +2,9 @@ using AspireOverflow.Models;
 
 namespace AspireOverflow.DataAccessLayer.Interfaces
 {
-    public interface IArticleRepository : IArticleComment, IArticleLike
+    public interface IArticleRepository : IArticleComment, IArticleLike,IsPrivateArticle
     {
         bool AddArticle(Article article);
-        public bool AddPrivateArticle(Article article, List<int> SharedUsersId);
         bool UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId);
         bool UpdateArticle(Article article);
         Article GetArticleByID(int ArticleId);
@@ -15,7 +14,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public IEnumerable<Article> GetArticlesByReviewerId(int ReviewerId);
         public IEnumerable<Article> GetArticlesByAuthor(string AuthorName);
         public IEnumerable<Article> GetArticlesByUserId(int UserId);
-        public IEnumerable<PrivateArticle> GetPrivateArticlesByUserId(int UserId);
+     
         public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID,bool IsReviewer=false);
         public object GetCountOfArticles();
     }
@@ -32,4 +31,10 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public IEnumerable<ArticleLike> GetLikes();
         public int GetCountOfLikes(int ArticleId);
     }
+     public interface IsPrivateArticle{
+   public IEnumerable<PrivateArticle> GetPrivateArticlesByUserId(int UserId);
+          public IEnumerable<PrivateArticle> GetPrivateArticlesByArticleId(int ArticleId);
+            public bool AddPrivateArticle(Article article, List<int> SharedUsersId);
+     }
+    
 }

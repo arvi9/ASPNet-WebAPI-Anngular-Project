@@ -127,6 +127,11 @@ namespace AspireOverflow.Services
             try
             {
                 var article = database.GetArticleByID(ArticleId);
+                var SharedUsers=article.IsPrivate?database.GetPrivateArticlesByArticleId(article.ArtileId).Select(Item=>new {
+                     UserId=Item.user!.UserId,
+                    FullName=Item.user!.FullName,
+                    Email=Item.user!.EmailAddress
+                }):null;
                 return new
                 {
                     articleId = article.ArtileId,
@@ -138,7 +143,9 @@ namespace AspireOverflow.Services
                     Likes = GetLikesCount(article.ArtileId),
                     comments = GetComments(article.ArtileId),
                     status = article.ArticleStatus?.Status,
-                    ReviewerId = article.ReviewerId
+                    ReviewerId = article.ReviewerId,
+                    SharedUsers=SharedUsers
+
                 };
             }
             catch (Exception exception)

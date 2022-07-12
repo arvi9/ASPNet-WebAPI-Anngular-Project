@@ -254,7 +254,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        //to get the list of privately shared articles 
+        //to get the list of privately shared articles by UserId
         public IEnumerable<PrivateArticle> GetPrivateArticlesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -265,14 +265,28 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticles()", exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticlesByUserId", exception));
+                throw;
+            }
+        }
+
+         public IEnumerable<PrivateArticle> GetPrivateArticlesByArticleId(int ArticleId)
+        {  if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+            try
+            {
+                var ListofPrivateArticles = _context.PrivateArticles.Where(item => item.ArticleId == ArticleId).Include(e => e.article);
+                return ListofPrivateArticles;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticlesByArticleId", exception));
                 throw;
             }
         }
 
         public object GetCountOfArticles()
         {
-            _stopWatch.Start();
+             _stopWatch.Start();
             try
             {
                 var ListOfCounts = new
@@ -388,6 +402,7 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
             }
         }
+        //Getting Range from Configuration for Data fetching duration
         private int GetRange()
         {
             try
