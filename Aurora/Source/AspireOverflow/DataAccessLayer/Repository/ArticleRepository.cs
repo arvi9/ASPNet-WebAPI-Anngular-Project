@@ -141,7 +141,7 @@ namespace AspireOverflow.DataAccessLayer
             Article? ExistingArticle;
             try
             {
-                ExistingArticle = _context.Articles.Include(e => e.ArticleStatus).Include(e => e.User).FirstOrDefault(item => item.ArtileId == ArticleId && item.CreatedOn > DateTime.Now.AddMonths(-GetRange()));
+                ExistingArticle = _context.Articles.Include(e => e.ArticleStatus).Include(e => e.User).FirstOrDefault(item => item.ArtileId == ArticleId);
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)
@@ -359,7 +359,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange())).ToList();
                 return ListOfArticleLikes;
             }
             catch (Exception exception)

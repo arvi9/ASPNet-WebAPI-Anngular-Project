@@ -138,7 +138,7 @@ namespace AspireOverflow.Services
                     Likes = GetLikesCount(article.ArtileId),
                     comments = GetComments(article.ArtileId),
                     status = article.ArticleStatus?.Status,
-                    ReviewerId=article.ReviewerId
+                    ReviewerId = article.ReviewerId
                 };
             }
             catch (Exception exception)
@@ -151,10 +151,11 @@ namespace AspireOverflow.Services
 
         //To get the Latest Articles by using published date.
         public IEnumerable<object> GetLatestArticles(int Range)
-        {  try
+        {
+            try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.UpdatedOn).ToList();
-             if( ListOfArticles.Count > Range && Range != 0) ListOfArticles= ListOfArticles.GetRange(0,Range);
+                if (ListOfArticles.Count > Range && Range != 0) ListOfArticles = ListOfArticles.GetRange(0, Range);
                 return ListOfArticles.Select(Article => new
                 {
                     ArticleId = Article.ArtileId,
@@ -182,12 +183,12 @@ namespace AspireOverflow.Services
                 //Get number of likes and grouped based on ArticleId and sorted by Descending oreder.
                 var data = (database.GetLikes().GroupBy(item => item.ArticleId)).OrderByDescending(item => item.Count());
                 List<int> ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
-
-                if(ListOfArticleId.Count > Range && Range != 0) ListOfArticleId=ListOfArticleId.GetRange(0,Range);
+                var ListOfArticles =database.GetArticlesByArticleStatusId(4).ToList();
+                if (ListOfArticleId.Count > Range && Range != 0) ListOfArticleId = ListOfArticleId.GetRange(0, Range);
                 var TrendingArticles = new List<Article>();
                 foreach (var Id in ListOfArticleId)
                 {
-                    var Article = database.GetArticleByID(Id);
+                    var Article =ListOfArticles.Find(item =>item.ArtileId==Id) ;
                     if (Article != null) TrendingArticles.Add(Article);
                 }
                 return TrendingArticles.Select(Article => new
@@ -389,14 +390,14 @@ namespace AspireOverflow.Services
 
 
         //To get the article by it's ArticleStatusId.
-        public IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID,bool IsReviewer)
+        public IEnumerable<object> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)
         {
             //throws exception when article status is not inbetween 0 to 4.  
             //1->In draft 2->To be Reviewed 3->Under Review 4->Published.
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
-                var ListOfArticles = database.GetArticlesByArticleStatusId(ArticleStatusID,IsReviewer);
+                var ListOfArticles = database.GetArticlesByArticleStatusId(ArticleStatusID, IsReviewer);
                 return ListOfArticles.Select(Article => new
                 {
                     ArticleId = Article.ArtileId,
