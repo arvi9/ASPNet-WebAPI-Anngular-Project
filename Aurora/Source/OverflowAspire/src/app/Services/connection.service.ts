@@ -71,7 +71,7 @@ export class ConnectionService {
 
   //Get Homepage
   GetHomePage(): any {
-    return this.http.get<any>(this.URL + 'Dashboard/GetHomePage', { headers: this.headers });
+    return this.http.get<any>(this.URL + 'Dashboard/GetHomePage?DataRange=3', { headers: this.headers });
   }
 
     //Get My Articles.

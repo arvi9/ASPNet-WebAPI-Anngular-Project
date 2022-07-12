@@ -21,7 +21,7 @@ export class UserverificationpageComponent implements OnInit {
   //Get all the Users.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
-    if (!AuthService.GetData("Admin")) {
+    if (!AuthService.IsAdmin()) {
       this.routing.navigateByUrl("")
     }
     this.dtOptions = {

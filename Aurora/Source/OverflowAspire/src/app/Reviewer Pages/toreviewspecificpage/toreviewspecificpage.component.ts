@@ -22,7 +22,7 @@ export class ToreviewspecificpageComponent implements OnInit {
   // Get article by article id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
-    if (!AuthService.GetData("Reviewer")) {
+    if (!AuthService.IsReviewer()) {
       this.routing.navigateByUrl("")
     }
     this.route.params.subscribe(params => {

@@ -20,7 +20,7 @@ export class ToreviewpageComponent implements OnInit {
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    if (!AuthService.GetData("Reviewer")) {
+    if (!AuthService.IsReviewer()) {
       this.route.navigateByUrl("")
     }
     // Get to review articles.

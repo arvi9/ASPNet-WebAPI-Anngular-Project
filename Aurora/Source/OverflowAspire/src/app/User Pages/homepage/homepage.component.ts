@@ -29,10 +29,10 @@ export class HomepageComponent implements OnInit {
     this.connection.GetHomePage()
       .subscribe({
         next: (data: HomePage) => {
-          this.data.latestArticles = data.latestArticles.slice(0, 3)
-          this.data.trendingArticles = data.trendingArticles.slice(0, 3)
-          this.data.trendingQueries = data.trendingQueries.slice(0, 3)
-          this.data.latestQueries = data.latestQueries.slice(0, 3)
+          this.data.latestArticles = data.latestArticles
+          this.data.trendingArticles = data.trendingArticles
+          this.data.trendingQueries = data.trendingQueries
+          this.data.latestQueries = data.latestQueries
         }
       });
   }

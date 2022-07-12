@@ -20,7 +20,7 @@ export class ArticalreviewedpageComponent implements OnInit {
   // Reviewer can get reviewed articles.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    if (!AuthService.GetData("Reviewer")) {
+    if (!AuthService.IsReviewer()) {
       this.route.navigateByUrl("")
     }
     this.dtOptions = {

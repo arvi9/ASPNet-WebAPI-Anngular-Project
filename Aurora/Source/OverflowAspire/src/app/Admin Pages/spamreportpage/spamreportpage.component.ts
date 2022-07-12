@@ -20,7 +20,7 @@ export class SpamreportpageComponent implements OnInit {
   //Get reported spams.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    if (!AuthService.GetData("Admin")) {
+    if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }
     this.dtOptions = {

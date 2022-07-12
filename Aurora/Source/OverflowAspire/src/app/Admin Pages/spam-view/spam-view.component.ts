@@ -21,7 +21,7 @@ export class SpamViewComponent implements OnInit {
   //Get spams by query id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
-    if (!AuthService.GetData("Admin")) {
+    if (!AuthService.IsAdmin()) {
       this.routing.navigateByUrl("")
     }
     this.route.params.subscribe(params => {

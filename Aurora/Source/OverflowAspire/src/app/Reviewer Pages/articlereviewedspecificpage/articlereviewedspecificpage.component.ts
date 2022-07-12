@@ -19,7 +19,7 @@ export class ArticlereviewedspecificpageComponent implements OnInit {
   //Get article by article id.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
-    if (!AuthService.GetData("Reviewer")) {
+    if (!AuthService.IsReviewer()) {
       this.routes.navigateByUrl("")
     }
     this.route.params.subscribe(params => {

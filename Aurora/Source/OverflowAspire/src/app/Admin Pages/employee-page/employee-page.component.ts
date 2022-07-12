@@ -23,7 +23,7 @@ export class EmployeePageComponent implements OnInit {
   //Get the Employee page and shows the employee data
   ngOnInit(): void{
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    if (!AuthService.GetData("Admin")) {
+    if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }
     this.dtOptions = {
