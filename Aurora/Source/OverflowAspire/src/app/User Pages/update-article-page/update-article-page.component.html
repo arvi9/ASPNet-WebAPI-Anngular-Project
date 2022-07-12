@@ -42,6 +42,15 @@
                 </div>
             </div>
             <br>
+            <!-- <label class="form-label" for="email">Invite People(optional):</label><br>
+            <tag-input [(ngModel)]="article.title" name="out" [onlyFromAutocomplete]="true" [editable]='true'
+                [separatorKeyCodes]="[32,188,186,13,9]" [placeholder]="'Add email'"
+                secondaryPlaceholder="Add email address" [clearOnBlur]="true" [addOnPaste]="true" [addOnBlur]="true"
+                theme='bootstrap'>
+                <tag-input-dropdown [autocompleteItems]="items" [showDropdownIfEmpty]="false" [dynamicUpdate]="true">
+                </tag-input-dropdown>
+            </tag-input> -->
+            <br>
             <ckeditor name="content" #content="ngModel"  [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}" debounce="500" required>
             </ckeditor>
             <div *ngIf="content.errors && (content.invalid || content.touched)">
@@ -52,11 +61,11 @@
             </div>
             <div class="editor-btn">
                 <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button"
-                    [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
+                     (click)="saveToDraft()">Save To
                     Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
                         aria-hidden="true"></span></button>
                 <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit"
-                    [disabled]="!form.valid">Submit <span *ngIf="IsLoadingSubmit"
+                    >Submit <span *ngIf="IsLoadingSubmit"
                         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
             </div>
         </form>

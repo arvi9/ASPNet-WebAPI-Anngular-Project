@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { data } from 'jquery';
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,6 @@ export class AuthService {
  }
 
  static IsAdmin():boolean{
-
   return this.GetData("Admin")?.includes("true")? true: false;
 
  }

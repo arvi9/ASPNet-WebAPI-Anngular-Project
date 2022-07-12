@@ -26,10 +26,9 @@
             </form>
         </div>
         <div class="container justify-content-center d-flex flex-wrap">
-            <div class=""
-                *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
-                <div class="img-card iCard-style2 onhover">
-                    <div class="card-content">
+            <div *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
+                <div class="img-card iCard-style2 onhover d-flex flex-column">
+                    <div class="card-content ">
                         <div class="card-image">
                             <img [src]="'data:image/jpg;base64,'+ item.image" />
                         </div>
@@ -38,7 +37,7 @@
                                 <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
                                 <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
                                     class="tag tag-brown">Under Review</span>
-                                <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
+                                <span *ngIf="item.status=='InDraft'" class="tag tag-red">In Draft</span>
                             </div>
                             <h4 class="card-title text-truncate">{{item.title}}</h4>
                             <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
