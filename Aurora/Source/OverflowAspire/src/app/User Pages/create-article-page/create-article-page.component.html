@@ -16,6 +16,7 @@
         </nav>
     </div>
     <div class="container editor">
+        <h5 class="text-center text-danger">{{error}}</h5>
         <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">
                 <label class="form-label">Title:</label>
@@ -32,7 +33,7 @@
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
                 <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image"
-                    #image="ngModel" [(ngModel)]="article.ImageString" >
+                    #image="ngModel" [(ngModel)]="article.ImageString">
                 <label class="text-danger"> {{imageError}}</label>
                 <div *ngIf="image.errors && (image.invalid || image.touched)">
                     <small class="text-danger" [class.d-none]="image.valid || image.untouched"

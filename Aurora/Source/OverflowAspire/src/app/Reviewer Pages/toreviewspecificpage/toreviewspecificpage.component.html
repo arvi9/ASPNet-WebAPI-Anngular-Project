@@ -15,7 +15,7 @@
     </nav>
 </div>
 <div class="Content">
-    <div *ngIf="userid == data.reviewerId; else disabledLink">
+    <div>
         <div class="container">
             <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
                     class="checkin">
@@ -40,8 +40,5 @@
             </div>
         </div>
     </div>
-    <ng-template #disabledLink>
-        <h1>You cannot view the other article which is reviewed by other reviewer</h1>
-    </ng-template>
 </div>
 <app-footer></app-footer>

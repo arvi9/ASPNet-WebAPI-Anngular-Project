@@ -10,6 +10,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class RaisequeryComponent implements OnInit {
   IsLoading: boolean = false;
+  error=""
   query: any = {
     queryId: 0,
     title: '',
@@ -33,6 +34,11 @@ export class RaisequeryComponent implements OnInit {
     this.connection.CreateQuery(this.query)
       .subscribe({
         next: (data) => {
+        },
+        error: (error) => {
+          this.error = error.error.message;
+          this.IsLoading=false;
+
         }
       });
     this.routing.navigateByUrl("MyQueries");

@@ -50,7 +50,7 @@ export class ReportSpamComponent implements OnInit {
         },
         complete: () => {
           this.toaster.open({ text: 'Reported spam successfully', position: 'top-center', type: 'success' })
-          this.routing.navigateByUrl("/Home");
+          this.routing.navigateByUrl("/Queries");
         }
       }); 
   }

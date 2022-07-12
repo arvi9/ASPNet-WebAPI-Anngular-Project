@@ -12,8 +12,6 @@
             </ol>
         </nav>
     </div>
-    <div *ngIf="data.length>0; else ArrayEmpty">
-        <h1>Shared With Me</h1>
         <div class="container card">
             <form>
                 <label class="labeltext">Title
@@ -25,6 +23,7 @@
                 <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
             </form>
         </div>
+    <div *ngIf="data.length>0; else ArrayEmpty">
         <div class="container justify-content-center d-flex flex-wrap">
             <div class=""
                 *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">

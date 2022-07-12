@@ -26,6 +26,7 @@ IsLoadingSaveDraft: boolean = false;
 imageError: string = "";
 isImageSaved: boolean = false;
 cardImageBase64: string = "";
+error="";
 article: any = {
  articleId: 0,
  title: '',
@@ -67,7 +68,6 @@ privateArticle:any={
 
     //Create and post the article.
   onSubmit() {
-
     this.IsLoadingSubmit = true;
     this.article.articleStatusID = 2;
     if(this.goalitems.length==0){
@@ -77,6 +77,10 @@ privateArticle:any={
         next: (data: any) => {
           this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
           this.route.navigateByUrl("/MyArticles");
+        },
+        error: (error) => {
+          this.error = error.error.message;
+          this.IsLoadingSubmit=false;
         }
       });
     }
@@ -94,6 +98,10 @@ privateArticle:any={
         next: (data: any) => {
           this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
           this.route.navigateByUrl("/MyArticles");
+        },
+        error: (error) => {
+          this.error = error.error.message;
+          this.IsLoadingSubmit=false;
         }
       });
     }
@@ -118,6 +126,11 @@ privateArticle:any={
         next: (data: any) => {
           this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
           this.route.navigateByUrl("/MyArticles");
+        },
+        error: (error) => {
+          this.error = error.error.message;
+          this.IsLoadingSaveDraft=false;
+
         }
       });
 
