@@ -17,56 +17,12 @@ body {
   border-radius: 12px
 }
 
-.name {
-  color: #007bff
-}
 
 .limitTextHeight {
   height: 75px;
   overflow: hidden
 }
 
-.example-viewport {
-  height: 300px;
-  width: 100%;
-  border: 1px solid #000
-}
-
-.example-dt {
-  height: 30px;
-  font-weight: 700
-}
-
-.example-dd {
-  height: 30px
-}
-
-.custom-btn {
-  width: auto;
-  height: 40px;
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-family: Lato, sans-serif;
-  font-weight: 500;
-  background: 0 0;
-  cursor: pointer;
-  transition: all .3s ease;
-  position: relative;
-  display: inline-block;
-  box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, .5), 7px 7px 20px 0 rgba(0, 0, 0, .1), 4px 4px 5px 0 rgba(0, 0, 0, .1);
-  outline: 0;
-  margin-left: 15px
-}
-
-.btn-1 {
-  background: #00acee;
-  border: none
-}
-
-.btn-1:hover {
-  background: #0495ce
-}
 
 .btn-3 {
   float: right;
@@ -74,15 +30,7 @@ body {
   background: #00acee
 }
 
-.custom-btn.btn-1 {
-  border: none;
-  width: 130px
-}
 
 .Content {
   min-height: 100vh;
-}
-
-.breadcrumb {
-  margin: 20px;
 }

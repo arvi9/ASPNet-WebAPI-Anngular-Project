@@ -2,18 +2,6 @@
     padding: 10%;
 }
 
-h1 {
-    text-align: center;
-}
-
-.tablecolor {
-    background: lightskyblue;
-}
-
-.breadcrumb {
-    margin: 50px;
-}
-
 .Content {
     min-height: 100vh;
 }
