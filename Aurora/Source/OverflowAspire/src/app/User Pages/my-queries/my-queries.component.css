@@ -1,3 +1,24 @@
+h1 {
+    text-align: center;
+}
+
+.our-skills {
+    padding: 70px 0px 20px;
+    width: 300px;
+    height: 200px;
+    margin-left: 30px;
+    margin-right: 30px;
+    align-items: center;
+}
+
+.icon {
+    padding: 10px 0px;
+    background-color: #fff;
+    margin: -45px auto 20px auto;
+    border-radius: 10px;
+    width: 90px;
+}
+
 .box-shadow {
     margin-bottom: 20px;
     background-color: #fff;
@@ -8,19 +29,46 @@
     width: 300px;
     height: 300px;
 }
+
+.box-shadow:hover {
+    box-shadow: 0px 0px 10px 0px #a5a5a5;
+}
+
+p {
+    font-size: 15px;
+    line-height: 23px;
+
+    text-align: center;
+}
+
 a {
-    color: white;
+    color: #6b6b6b;
     font-size: 16px;
     float: right;
     text-decoration: none;
     transition: 0.5s;
 }
 
+h4 {
+
+    text-align: center;
+
+    font-weight: 600;
+}
 
 .QueryImgIcon {
     height: 60px;
     width: 60px;
     margin-left: 12px;
+}
+
+.readmore {
+    position: sticky;
+    top: 100%
+}
+
+a:hover {
+    color: blue;
 }
 
 .truncate-line-clamp {
@@ -36,6 +84,60 @@ a {
     top: 110%;
 
 }
+
+.tag {
+    align-self: flex-start;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+
+}
+
+.btntag {
+    align-self: flex-end;
+    cursor: pointer;
+    margin-left: 125px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+
+
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+    width: fit-content;
+}
+
+.tag-blue {
+    background: #56CCF2;
+    background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+    color: #fafafa;
+}
+
+.tag+.tag {
+    margin-left: .5em;
+}
+
+
+
+.tag-brown {
+    background: #D1913C;
+    background: linear-gradient(to bottom, #ff9800, #ed6c02);
+    color: #fafafa;
+}
+
+.tag-red {
+
+    background: linear-gradient(to bottom, #ce100d, #cd0a0a);
+    color: #fafafa;
+
+}
+
+.tag-Material {
+
+    background: linear-gradient(to bottom, #58de54, #39d45b);
+    color: #fafafa;
+}
+
 .card {
     margin-top: 2%;
     max-width: 55%;
@@ -46,6 +148,50 @@ a {
     border-radius: 10px;
     background-color: skyblue;
 }
+
+.labeltext {
+    font-weight: bold;
+    padding: 10px;
+
+}
+
+.Searchbar {
+    margin-right: 1%;
+}
+
+.custom-btn {
+    width: auto;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+    margin-left: 15px;
+}
+
+.btn-1 {
+    background: rgb(0, 172, 238);
+    border: none;
+}
+
+.btn-1:hover {
+    background: rgb(4, 149, 206);
+}
+
+.breadcrumb {
+    margin: 20px;
+}
+
 .Content {
     min-height: 100vh;
 }

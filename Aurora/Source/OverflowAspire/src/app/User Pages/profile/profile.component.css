@@ -15,6 +15,10 @@
     margin-top: 2;
 }
 
+.breadcrumb {
+    margin: 20px;
+}
+
 .Content {
     min-height: 100vh;
 }

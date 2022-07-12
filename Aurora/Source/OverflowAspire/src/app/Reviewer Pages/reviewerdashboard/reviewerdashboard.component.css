@@ -1,3 +1,8 @@
+:root {
+    --primary: #009cff;
+    --light: #f3f6f9;
+    --dark: #191c24
+}
 
 body {
     position: relative;
@@ -14,6 +19,12 @@ body {
     margin-right: 13rem;
 }
 
+.cardRight {
+    border-style: solid;
+    width: 18rem;
+    margin: 10px;
+
+}
 .ToReview:hover{
     background-color: rgb(111, 172, 246);
 }
@@ -22,7 +33,37 @@ body {
     background-color: rgb(249, 134, 188);
 }
 
+.heading {
+    text-align: center
+}
+
+.wrapper {
+    width: 350px;
+    height: 350px;
+    margin-top: 3rem;
+    margin-right: 10rem;
+    margin-left: 2%;
+    float: right;
+
+}
+
 .Content {
     min-height: 100vh;
 }
 
+.cardtitle {
+    text-align: center;
+}
+
+.cardtext {
+    text-align: center;
+}
+
+#piechart {
+    width: 76;
+    height: 76;
+}
+
+.breadcrumb {
+    margin: 20px;
+}

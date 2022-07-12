@@ -17,7 +17,9 @@ export class AdmindashboardComponent implements OnInit {
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    if (!AuthService.GetData("Admin")) {
+    // console.warn(AuthService.GetData("Admin"))
+    // console.warn(AuthService.IsAdmin())
+    if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }
 

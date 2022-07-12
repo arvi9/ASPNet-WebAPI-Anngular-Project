@@ -1,3 +1,8 @@
+:root {
+    --primary: #009cff;
+    --light: #f3f6f9;
+    --dark: #191c24
+}
 
 .Content {
     min-height: 100vh;
@@ -11,6 +16,15 @@ body {
     justify-content: center;
 }
 
+.cardtitle {
+    text-align: center;
+}
+
+.cardtext {
+
+    text-align: center;
+}
+
 .card {
     margin-top: 3%;
     margin-left: 1%;
@@ -19,6 +33,11 @@ body {
     width: 20rem;
 }
 
+.cardRight {
+    border-style: solid;
+    width: 18rem;
+    margin: 10px;
+}
 
 .Container {
     margin-left: 15%;
@@ -26,4 +45,19 @@ body {
     border-style: solid;
 }
 
+.heading {
+    text-align: center
+}
 
+.wrapper {
+    width: 400px;
+    height: 400px;
+    margin-right: 10rem;
+    margin-top: 50px;
+    float: right;
+}
+
+#piechart {
+    width: 76;
+    height: 76;
+}
