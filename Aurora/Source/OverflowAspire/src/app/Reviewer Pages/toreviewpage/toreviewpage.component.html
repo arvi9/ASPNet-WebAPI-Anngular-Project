@@ -21,7 +21,6 @@
                     <th>Author Name</th>
                     <th>Article Name</th>
                     <th>Status</th>
-                    <th>Reviewer Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,9 +28,18 @@
                     <td>{{item.articleId}}</td>
                     <td>{{item.authorName}}</td>
                     <td>{{item.title}}</td>
-                    <td><a routerLinkActive="active"
-                            [routerLink]="['/ToReviewSpecific',item.articleId]">{{item.status}}</a></td>
-                    <td></td>
+                    <td>
+                        <div *ngIf="item.reviewerId>0;else enable">
+                            <a *ngIf="userid == item.reviewerId; else disabledLink"
+                                [routerLink]="['/ToReviewSpecific',item.articleId]">{{item.status}}</a>
+                            <ng-template #disabledLink>
+                                <a>{{item.status}}</a>
+                            </ng-template>
+                        </div>
+                        <ng-template #enable>
+                            <a [routerLink]="['/ToReviewSpecific',item.articleId]">{{item.status}}</a>
+                        </ng-template>
+                    </td>
                 </tr>
             </tbody>
         </table>

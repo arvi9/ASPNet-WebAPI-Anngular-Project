@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           AuthService.SetDataWithExpiry("Admin", data.isAdmin, data.expiryInMinutes)
           AuthService.SetDataWithExpiry("Reviewer", data.isReviewer, data.expiryInMinutes)
           this.connection.initializeTokenHeader(AuthService.GetData("token"))
-          if (this.IsAdmin) {
+          if (AuthService.IsAdmin()) {
             this.route.navigateByUrl("/AdminDashboard");
           }
           else {

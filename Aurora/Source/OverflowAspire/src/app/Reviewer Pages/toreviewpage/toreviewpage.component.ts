@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from 'Models/Article';
+import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
@@ -13,9 +14,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class ToreviewpageComponent implements OnInit {
   public data: Article[] = [];
   public data1: Article[] = [];
-  public users: any[] = [];
-  public ReviewerID: any
-  reviewername: any;
+  userid:any;
 
   constructor(private connection: ConnectionService, private route: Router) { }
 
@@ -34,26 +33,18 @@ export class ToreviewpageComponent implements OnInit {
             .subscribe({
               next: (data: Article[]) => {
                 this.data = this.data1.concat(data)
-                this.ReviewerID = this.data.map(x => x.reviewerId)
+                console.log(this.data)
               },
-              //complete: () => {
-              //   this.data.filter(item =>item.reviewer=this.GetReviewer(item.reviewerId))
-              // }
             });
            
         }
       });
-
-
+      this.connection.GetCurrentApplicationUser()
+      .subscribe({
+        next: (data: User) => {
+          this.userid = data.userId;
+          console.log(this.userid)
+        }
+      });
   }
-  // GetReviewer(ReviewerID:number):any {
-  //   if(ReviewerID <=0) return "";
-  //   this.connection.GetUserById(ReviewerID)
-  //     .subscribe({
-  //       next: (data:any) => {
-  //         console.warn(data)
-  //         return data.name
-  //       }
-  //     });
-  // }
 }

@@ -15,28 +15,33 @@
     </nav>
 </div>
 <div class="Content">
-    <div class="container">
-        <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)" class="checkin">
-            <button type="button"  class="custom-btn btn-1">Check In</button></a>
-        </div>
-        <div>
-            <h5 class="text-center text-danger">{{error}}</h5>
-        </div>
-        <div class="text-center">
-            <br>
-            <h1>{{data.title}}</h1>
-        </div>
-        <div class="text-center pb-4">
-            <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
-        </div>
-        <p> {{data.content|htmlToPlaintext}}</p>
-        <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
-            <a (click)="RejectArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
-                    type="button" class="custom-btn btn-1">Reject</button></a>
-            <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
-                    type="button" class="custom-btn btn-1">Publish</button></a>
+    <div *ngIf="userid == data.reviewerId; else disabledLink">
+        <div class="container">
+            <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
+                    class="checkin">
+                    <button type="button" class="custom-btn btn-1">Check In</button></a>
+            </div>
+            <div>
+                <h5 class="text-center text-danger">{{error}}</h5>
+            </div>
+            <div class="text-center">
+                <br>
+                <h1>{{data.title}}</h1>
+            </div>
+            <div class="text-center pb-4">
+                <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
+            </div>
+            <p> {{data.content|htmlToPlaintext}}</p>
+            <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
+                <a (click)="RejectArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
+                        type="button" class="custom-btn btn-1">Reject</button></a>
+                <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
+                        type="button" class="custom-btn btn-1">Publish</button></a>
+            </div>
         </div>
     </div>
+    <ng-template #disabledLink>
+        <h1>You cannot view the other article which is reviewed by other reviewer</h1>
+    </ng-template>
 </div>
-<br>
 <app-footer></app-footer>

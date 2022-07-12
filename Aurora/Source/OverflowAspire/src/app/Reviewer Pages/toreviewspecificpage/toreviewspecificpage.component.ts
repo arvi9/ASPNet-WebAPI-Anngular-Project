@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { Toaster } from 'ngx-toast-notifications';
+import { User } from 'Models/User';
 
 @Component({
   selector: 'app-toreviewspecificpage',
@@ -13,6 +14,7 @@ import { Toaster } from 'ngx-toast-notifications';
 export class ToreviewspecificpageComponent implements OnInit {
   articleId: number = 0;
   error = ""
+  userid:any;
   public data: Article = new Article();
 
   constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService, private toaster: Toaster) { }
@@ -29,8 +31,16 @@ export class ToreviewspecificpageComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
+            console.log(this.data)
           }
         });
+        this.connection.GetCurrentApplicationUser()
+      .subscribe({
+        next: (data: User) => {
+          this.userid = data.userId;
+          console.log(this.userid)
+        }
+      });
     });
   }
   

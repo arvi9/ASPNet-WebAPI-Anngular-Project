@@ -17,7 +17,7 @@ export class PrivatearticlesComponent implements OnInit {
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
   userId:any=3;
-  public data: Article[] = [];
+  public data: any[] = [];
   public filteredData: Article[] = [];
  
 constructor(private route: ActivatedRoute,private routes:Router,private connection:ConnectionService) { }

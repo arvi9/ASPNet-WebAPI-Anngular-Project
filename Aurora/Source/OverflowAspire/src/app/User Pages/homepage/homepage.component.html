@@ -21,7 +21,7 @@
             <div class="img-card iCard-style2 onhover">
                 <div class="card-content">
                     <div class="card-image">
-                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                        <img [src]="'data:image/jpg;base64,'+ item.image" alt="" />
                     </div>
                     <h4 class="card-title text-truncate">{{item.title }}</h4>
                     <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
@@ -38,7 +38,7 @@
             <div class="img-card iCard-style2 onhover">
                 <div class="card-content">
                     <div class="card-image">
-                        <img [src]="'data:image/jpg;base64,'+ item.image" />
+                        <img [src]="'data:image/jpg;base64,'+ item.image" alt="" />
                     </div>
                     <h4 class="card-title text-truncate">{{item.title}}</h4>
                     <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
@@ -59,7 +59,7 @@
                         <span *ngIf="item.isSolved==false" class="tag tag-red">UnSolved</span>
                     </div>
                     <div class="icon">
-                        <img class="QueryImgIcon" src="./assets/chat-icon.png">
+                        <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
                     </div>
                     <h4 class="card-text text-truncate">{{item.title}}</h4>
                     <p class="truncate-line-clamp">{{item.content}}</p>
@@ -82,7 +82,7 @@
                         <span *ngIf="item.isSolved==false" class="tag tag-red">UnSolved</span>
                     </div>
                     <div class="icon">
-                        <img class="QueryImgIcon" src="./assets/chat-icon.png">
+                        <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
                     </div>
                     <h4 class="card-text text-truncate">{{item.title}}</h4>
                     <p class="truncate-line-clamp">{{item.content}}</p>
