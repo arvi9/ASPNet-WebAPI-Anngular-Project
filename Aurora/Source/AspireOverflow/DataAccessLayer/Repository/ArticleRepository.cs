@@ -274,7 +274,7 @@ namespace AspireOverflow.DataAccessLayer
         {  if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                var ListofPrivateArticles = _context.PrivateArticles.Where(item => item.ArticleId == ArticleId).Include(e => e.article);
+                var ListofPrivateArticles = _context.PrivateArticles.Where(item => item.ArticleId == ArticleId).Include(e => e.user);
                 return ListofPrivateArticles;
             }
             catch (Exception exception)

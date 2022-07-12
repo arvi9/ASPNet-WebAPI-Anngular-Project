@@ -128,9 +128,9 @@ namespace AspireOverflow.Services
             {
                 var article = database.GetArticleByID(ArticleId);
                 var SharedUsers=article.IsPrivate?database.GetPrivateArticlesByArticleId(article.ArtileId).Select(Item=>new {
-                     UserId=Item.user!.UserId,
-                    FullName=Item.user!.FullName,
-                    Email=Item.user!.EmailAddress
+                     UserId=Item.user?.UserId,
+                    FullName=Item.user?.FullName,
+                    Email=Item.user?.EmailAddress
                 }):null;
                 return new
                 {
