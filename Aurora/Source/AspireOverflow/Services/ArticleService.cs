@@ -138,6 +138,7 @@ namespace AspireOverflow.Services
                     Likes = GetLikesCount(article.ArtileId),
                     comments = GetComments(article.ArtileId),
                     status = article.ArticleStatus?.Status,
+                    ReviewerId=article.ReviewerId
                 };
             }
             catch (Exception exception)

@@ -74,7 +74,6 @@ namespace AspireOverflow.Services
         {
             var mail=new MailRequest();
             mail.ToEmail=RecieverEmail;
-            mail.Subject=Subject;
             mail.Body=$"Hello Aspirian,\n\nGreetings,\n\n Your Query- \"{QueryTitle}\" have been Created.\n\n Thanks and Regards,\nAspireOverflow.\n";
             return mail;
         }

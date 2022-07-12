@@ -84,7 +84,7 @@ namespace AspireOverflow.DataAccessLayer
             Query? ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId);
+                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.Now.AddMonths(-GetRange()));
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
@@ -100,7 +100,7 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())).Include(e => e.User).ToList();
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.User).ToList();
                 return ListOfQueries;
             }
             catch (Exception exception)
@@ -241,7 +241,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        private int GetDuration()
+        private int GetRange()
         {
             try
             {

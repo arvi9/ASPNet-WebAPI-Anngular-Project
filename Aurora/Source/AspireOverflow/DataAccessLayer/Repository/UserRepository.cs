@@ -201,7 +201,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
            public object GetCountOfUsers()
-        {
+        { 
             try
             {
                 return new{
@@ -262,7 +262,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        private int GetDuration()
+        private int GetRange()
         {
             try
             {

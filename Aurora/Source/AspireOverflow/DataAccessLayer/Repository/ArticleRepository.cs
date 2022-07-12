@@ -4,19 +4,30 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+
+
 namespace AspireOverflow.DataAccessLayer
 {
+
+
     public class ArticleRepository : IArticleRepository
     {
         private readonly AspireOverflowContext _context;
         private readonly ILogger<ArticleRepository> _logger;
         private readonly IConfiguration _configuration;
+        private readonly Stopwatch _stopWatch;
+        private bool IsTracingEnabled;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleRepository> logger, IConfiguration configuration)
         {
             _context = context;
             _logger = logger;
             _configuration = configuration;
+            IsTracingEnabled = GetIsTraceEnabledFromConfiguration();
+            _stopWatch = new Stopwatch();
+
         }
+
 
         //to add an article using article object.
         public bool AddArticle(Article article)
@@ -130,7 +141,7 @@ namespace AspireOverflow.DataAccessLayer
             Article? ExistingArticle;
             try
             {
-                ExistingArticle = _context.Articles.Include(e=>e.ArticleStatus).Include(e=>e.User).FirstOrDefault(item => item.ArtileId == ArticleId);
+                ExistingArticle = _context.Articles.Include(e => e.ArticleStatus).Include(e => e.User).FirstOrDefault(item => item.ArtileId == ArticleId && item.CreatedOn > DateTime.Now.AddMonths(-GetRange()));
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)
@@ -143,9 +154,10 @@ namespace AspireOverflow.DataAccessLayer
         //to get the list of articles.
         public IEnumerable<Article> GetArticles()
         {
+            _stopWatch.Start();
             try
             {
-                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
             }
             catch (Exception exception)
@@ -153,25 +165,34 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticles()", exception));
                 throw;
             }
+            finally
+            {
+                _stopWatch.Stop();
+                if (IsTracingEnabled) _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+            }
         }
 
-        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID,bool IsReviewer)
+        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)
 
         {
+            _stopWatch.Start();
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
-            {   
-           //Articles with status (to be reviewed) and (Under Review) can only be accessible only to reviewer with PrivateArticles.
-           var ListOfArticle = (ArticleStatusID ==2 || ArticleStatusID==3) && IsReviewer?_context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())&& item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList():
-           _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetDuration()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
-            
-            
-            return ListOfArticle;
+            {
+                //Articles with status (to be reviewed) and (Under Review) can only be accessible only to reviewer with PrivateArticles.
+                var ListOfArticle = (ArticleStatusID > 1) && IsReviewer ? _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList() :
+                _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                return ListOfArticle;
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticles()", exception));
                 throw;
+            }
+            finally
+            {
+                _stopWatch.Stop();
+                if (IsTracingEnabled) _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
             }
         }
         public IEnumerable<Article> GetArticlesByTitle(string Title)
@@ -179,7 +200,7 @@ namespace AspireOverflow.DataAccessLayer
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
-                return _context.Articles.Where(article => article.Title!.Contains(Title) && article.ArticleStatusID == 1).Include(e => e.ArticleStatus).Include(e => e.User);
+                return _context.Articles.Where(article => article.Title!.Contains(Title) && article.ArticleStatusID == 4).Include(e => e.ArticleStatus).Include(e => e.User);
             }
             catch (Exception exception)
             {
@@ -225,7 +246,6 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 return _context.Articles.Where(item => item.CreatedBy == UserId).Include(e => e.ArticleStatus).Include(e => e.User);
-
             }
             catch (Exception exception)
             {
@@ -252,20 +272,28 @@ namespace AspireOverflow.DataAccessLayer
 
         public object GetCountOfArticles()
         {
+            _stopWatch.Start();
             try
             {
-                return new{
+                var ListOfCounts = new
+                {
                     TotalNumberOfArticles = _context.Articles.Count(),
                     DraftArticles = _context.Articles.Count(item => item.ArticleStatusID == 1),
                     ToBeReviewedArticles = _context.Articles.Count(item => item.ArticleStatusID == 2),
                     UnderReviewArticles = _context.Articles.Count(item => item.ArticleStatusID == 3),
                     ArticlesPublished = _context.Articles.Count(item => item.ArticleStatusID == 4)
                 };
+                return ListOfCounts;
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetCountOfArticles()", exception));
                 throw;
+            }
+            finally
+            {
+                _stopWatch.Stop();
+                if (IsTracingEnabled) _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
             }
         }
 
@@ -274,9 +302,9 @@ namespace AspireOverflow.DataAccessLayer
         {
             Validation.ValidateArticleComment(comment);
             try
-            { 
-                comment.Datetime=DateTime.Now;
-                comment.CreatedOn=DateTime.Now;
+            {
+                comment.Datetime = DateTime.Now;
+                comment.CreatedOn = DateTime.Now;
                 _context.ArticleComments.Add(comment);
                 _context.SaveChanges();
                 return true;
@@ -294,7 +322,7 @@ namespace AspireOverflow.DataAccessLayer
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
             try
             {
-                var ListOfComments = _context.ArticleComments.Where(item => item.ArticleId == ArticleId && item.CreatedOn > DateTime.Now.AddMonths(-GetDuration())).Include(e => e.User).ToList();
+                var ListOfComments = _context.ArticleComments.Where(item => item.ArticleId == ArticleId && item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.User).ToList();
                 return ListOfComments;
             }
             catch (Exception exception)
@@ -303,7 +331,6 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
-
         //to add like for the article.
         public bool AddLike(ArticleLike like)
         {
@@ -344,6 +371,7 @@ namespace AspireOverflow.DataAccessLayer
         public int GetCountOfLikes(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
+            _stopWatch.Start();
             try
             {
                 var CountOfArticleLikes = _context.ArticleLikes.Count(item => item.ArticleId == ArticleId);
@@ -354,20 +382,41 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetCountOfLikes(int ArticleId)", exception));
                 throw;
             }
+            finally
+            {
+                _stopWatch.Stop();
+                _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+            }
         }
-        private int GetDuration()
+        private int GetRange()
         {
             try
             {
-                var Duration = _configuration["Data_Fetching_Duration:In_months"];
-                return Duration != null ? Convert.ToInt32(Duration) : throw new Exception("Data_Fetching_Duration:In_months-> value is Invalif  in AppSettings.json ");
+                var Range = _configuration["Data_Fetching_Duration:In_months"];
+                return Range != null ? Convert.ToInt32(Range) : throw new Exception("Data_Fetching_Duration:In_months-> value is Invalif  in AppSettings.json ");
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDuration()", exception));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetRange()", exception));
                 throw;
 
             }
         }
+
+        private bool GetIsTraceEnabledFromConfiguration()
+        {
+            try
+            {
+                var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
+                return IsTracingEnabled != null ? Convert.ToBoolean(IsTracingEnabled) : false;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetIsTraceEnabledFromConfiguration()", exception));
+                return false;
+            }
+        }
+
     }
 }
+

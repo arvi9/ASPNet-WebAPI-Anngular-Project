@@ -247,8 +247,8 @@ namespace AspireOverflow.Services
         }
         public object GetCountOfQueries()
         {
-            try
-            {
+            try{
+            
                 return database.GetCountOfQueries();
             }
             catch (Exception exception)
