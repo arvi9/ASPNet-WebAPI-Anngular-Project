@@ -33,7 +33,6 @@ export class ToreviewpageComponent implements OnInit {
             .subscribe({
               next: (data: Article[]) => {
                 this.data = this.data1.concat(data)
-                console.log(this.data)
               },
             });
            
@@ -43,7 +42,6 @@ export class ToreviewpageComponent implements OnInit {
       .subscribe({
         next: (data: User) => {
           this.userid = data.userId;
-          console.log(this.userid)
         }
       });
   }

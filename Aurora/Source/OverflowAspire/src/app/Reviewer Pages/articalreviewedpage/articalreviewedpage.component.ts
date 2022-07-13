@@ -32,7 +32,6 @@ export class ArticalreviewedpageComponent implements OnInit {
       .subscribe({
         next: (data: Article[]) => {
           this.data = data;
-          console.log(data)
         }
       });
   }

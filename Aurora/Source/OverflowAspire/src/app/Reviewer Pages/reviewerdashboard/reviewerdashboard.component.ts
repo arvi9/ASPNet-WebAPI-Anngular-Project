@@ -12,7 +12,9 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 
 export class ReviewerdashboardComponent implements OnInit {
-  public piedata: any = new Dashboard();
+  piedata: any = {
+    articleCounts: 0,
+  }
   constructor(private route: Router, private connection: ConnectionService) { }
   articles:any;
 

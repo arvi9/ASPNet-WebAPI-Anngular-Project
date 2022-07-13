@@ -38,7 +38,6 @@ export class ToreviewspecificpageComponent implements OnInit {
       .subscribe({
         next: (data: User) => {
           this.userid = data.userId;
-          console.log(this.userid)
         }
       });
     });
