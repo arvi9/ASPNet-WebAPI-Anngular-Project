@@ -10,6 +10,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
   styleUrls: ['./privatearticles.component.css']
 })
 export class PrivatearticlesComponent implements OnInit {
+  url: string = "PrivateArticles";
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -25,15 +26,6 @@ constructor(private route: ActivatedRoute,private routes:Router,private connecti
 //Get private articles.
 ngOnInit(): void {
   if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
-    this.connection.GetPrivateArticles()
-      .subscribe({
-        next: (data: any[]) => {
-          this.data = data
-          console.log(data)
-          this.filteredData = data;
-          this.totalLength = data.length;       
-        }
-      });
   }
   
  

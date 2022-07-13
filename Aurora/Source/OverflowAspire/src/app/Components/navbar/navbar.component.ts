@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 
 export class NavbarComponent implements OnInit {
-  role=AuthService.GetData("Reviewer")
+  role=AuthService.IsReviewer()
 
   constructor(private route:Router) { }
 

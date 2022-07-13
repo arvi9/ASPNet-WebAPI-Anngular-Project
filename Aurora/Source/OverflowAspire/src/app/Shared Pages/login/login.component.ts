@@ -35,10 +35,9 @@ export class LoginComponent implements OnInit {
           this.IsAdmin = data.isAdmin,
           this.IsReviewer = data.isReviewer,
           this.IsVerified = data.isVerified
-          console.log(data)
           AuthService.SetDataWithExpiry("token", data.token, data.expiryInMinutes)
-          AuthService.SetDataWithExpiry("Admin", data.isAdmin, data.expiryInMinutes)
-          AuthService.SetDataWithExpiry("Reviewer", data.isReviewer, data.expiryInMinutes)
+          AuthService.SetDataWithExpiry("Admin", data.isAdmin.toString(), data.expiryInMinutes)
+          AuthService.SetDataWithExpiry("Reviewer", data.isReviewer.toString(), data.expiryInMinutes)
           this.connection.initializeTokenHeader(AuthService.GetData("token"))
           if (AuthService.IsAdmin()) {
             this.route.navigateByUrl("/AdminDashboard");

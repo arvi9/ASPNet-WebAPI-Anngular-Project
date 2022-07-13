@@ -12,13 +12,15 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 
 export class AdmindashboardComponent implements OnInit {
-
+  piedata: any = {
+    users: 0,
+    articles:0,
+    queries:0
+  }
   constructor(private connection: ConnectionService, private route: Router) { }
 
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
-    // console.warn(AuthService.GetData("Admin"))
-    // console.warn(AuthService.IsAdmin())
     if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }
@@ -27,7 +29,6 @@ export class AdmindashboardComponent implements OnInit {
       {
         next: (data: any) => {
           this.piedata = data;
-          console.log(data)
           var names = ['Number of Articles', 'Number of Queries'];
           var details = [];
           details.push(data.articles.totalNumberOfArticles);
@@ -52,6 +53,4 @@ export class AdmindashboardComponent implements OnInit {
       }
     );
   }
-
-  public piedata: any = new Dashboard();
 }

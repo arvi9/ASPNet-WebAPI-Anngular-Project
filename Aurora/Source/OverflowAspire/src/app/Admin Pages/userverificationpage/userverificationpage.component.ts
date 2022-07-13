@@ -14,8 +14,6 @@ import { Subject } from 'rxjs';
 
 export class UserverificationpageComponent implements OnInit {
   public data: User[] = [];
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
   constructor(private routing: Router, private toaster: Toaster, private connection: ConnectionService) { }
 
   //Get all the Users.
@@ -24,15 +22,13 @@ export class UserverificationpageComponent implements OnInit {
     if (!AuthService.IsAdmin()) {
       this.routing.navigateByUrl("")
     }
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      processing: true
-    };
     this.connection.GetUsers()
       .subscribe({
         next: (data: User[]) => {
           this.data = data;
+          $(function(){
+            $("#emptable").DataTable();
+           });
         }
       });
   }

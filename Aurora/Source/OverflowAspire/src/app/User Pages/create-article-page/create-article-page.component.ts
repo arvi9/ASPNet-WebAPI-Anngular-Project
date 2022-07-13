@@ -39,7 +39,8 @@ export class CreateArticlePageComponent implements OnInit {
     updatedBy: 0,
     isPrivate: false,
     ImageString: this.cardImageBase64,
-    reviewerId: 0
+    reviewerId: 0,
+    Reason:null,
   }
 
   public items = [

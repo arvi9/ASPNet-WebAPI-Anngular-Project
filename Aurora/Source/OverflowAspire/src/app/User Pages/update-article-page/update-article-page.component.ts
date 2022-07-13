@@ -21,7 +21,7 @@ export class UpdateArticlePageComponent implements OnInit {
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
   article: any = {
-    artileId: 0,
+    articleId: 0,
     title: '',
     content: '',
     image: "",
@@ -31,6 +31,7 @@ export class UpdateArticlePageComponent implements OnInit {
     sharedUsers:null,
     ImageString: this.cardImageBase64,
     updatedOn: new Date(),
+    Reason:null,
   }
   public data: Article = new Article();
 
@@ -45,7 +46,7 @@ export class UpdateArticlePageComponent implements OnInit {
         .subscribe({
           next: (data: { articleId: any; title: any; content: any; image: any;sharedUsers:any }) => {
             console.log(data)
-            this.article.artileId = data.articleId;
+            this.article.articleId = data.articleId;
             this.article.title = data.title;
             this.article.content = data.content;
             this.article.ImageString = data.image

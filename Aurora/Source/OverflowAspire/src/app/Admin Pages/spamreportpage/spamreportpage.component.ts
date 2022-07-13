@@ -12,9 +12,6 @@ import { Subject } from 'rxjs';
 
 export class SpamreportpageComponent implements OnInit {
   public data: any[] = []
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
-
   constructor(private connection: ConnectionService, private route: Router) { }
 
   //Get reported spams.
@@ -23,15 +20,13 @@ export class SpamreportpageComponent implements OnInit {
     if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      processing: true
-    };
     this.connection.GetSpams()
       .subscribe({
         next: (data: any[]) => {
           this.data = data;
+          $(function(){
+            $("#emptable").DataTable();
+           });
         }
       });
   }

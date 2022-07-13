@@ -11,7 +11,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class ArticleCardComponent implements OnInit {
   @Input() artsrc: string = '';
-  @Input() ShowStatus:boolean =true;
+  @Input() ShowStatus: boolean = true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -21,42 +21,58 @@ export class ArticleCardComponent implements OnInit {
   public data: Article[] = [];
   public filteredData: Article[] = [];
 
-  constructor(private connection: ConnectionService,private route:Router) { }
-  
+  constructor(private connection: ConnectionService, private route: Router) { }
+
   //Get articles
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     //Get all the articles
-    if(this.artsrc=="allArticles"){
-     this.connection.GetAllArticles()
-      .subscribe({next:(data) => {
-        this.data = data;
-        this.filteredData = data;
-        this.totalLength = data.length;
-      }});
+    if (this.artsrc == "allArticles") {
+      this.connection.GetAllArticles()
+        .subscribe({
+          next: (data) => {
+            this.data = data;
+            this.filteredData = data;
+            this.totalLength = data.length;
+          }
+        });
     }
 
     //Get latest articles.
-    else if(this.artsrc=="latestArticles")
-    {
+    else if (this.artsrc == "latestArticles") {
       this.connection.GetLatestArticles()
-      .subscribe({next:(data) => {
-        this.data = data;
-        this.filteredData = data;
-        this.totalLength = data.length;
-      }});
+        .subscribe({
+          next: (data) => {
+            this.data = data;
+            this.filteredData = data;
+            this.totalLength = data.length;
+          }
+        });
+    }
+    //Get private articles
+    else if (this.artsrc == "PrivateArticles") {
+      this.connection.GetPrivateArticles()
+        .subscribe({
+          next: (data: any[]) => {
+            this.data = data
+            this.filteredData = data;
+            this.totalLength = data.length;
+          }
+        });
     }
 
     // Get Trending articles.
-    else(this.artsrc=="trendingArticles")
+    else if (this.artsrc == "trendingArticles")
     {
       this.connection.GetTrendingArticles()
-      .subscribe({next:(data) => {
-        this.data = data;
-        this.filteredData = data;
-        this.totalLength = data.length;
-      }});
-    }  
+        .subscribe({
+          next: (data) => {
+            this.data = data;
+            this.filteredData = data;
+            this.totalLength = data.length;
+          }
+        });
+    }
   }
 
   //Filter articles by Title,Author,Fromdate and Todate.
@@ -111,21 +127,21 @@ export class ArticleCardComponent implements OnInit {
     else if (searchTitle.length != 0 && searchAuthor.length != 0 && FromDate == new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) <= new Date(ToDate) });
     }
-     //13.search by author,Fromdate and Todate
-     else if (searchTitle == '' && searchAuthor.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
-      this.data = this.filteredData.filter(item => { return item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
+    //13.search by author,Fromdate and Todate
+    else if (searchTitle == '' && searchAuthor.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
+      this.data = this.filteredData.filter(item => { return item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
-     //14.search by Title,Fromdate and Todate
-     else if (searchTitle.length != 0 && searchAuthor== ''&& FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
-      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
+    //14.search by Title,Fromdate and Todate
+    else if (searchTitle.length != 0 && searchAuthor == '' && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
+      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
     //15.search by Title,Author,Fromdate and Todate
     else if (searchTitle.length != 0 && searchAuthor.length != 0 && FromDate != new Date("0001-01-01").toString() && ToDate != new Date("0001-01-01").toString()) {
-      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase())&&item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) >= new Date(FromDate)&&new Date(item.date) <= new Date(ToDate) });
+      this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && item.authorName.toLowerCase().includes(searchAuthor.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
     this.searchTitle = '';
     this.searchAuthor = '';
-    this.FromDate=new Date("0001-01-01");
-    this.ToDate=new Date("0001-01-01");
+    this.FromDate = new Date("0001-01-01");
+    this.ToDate = new Date("0001-01-01");
   }
 }
