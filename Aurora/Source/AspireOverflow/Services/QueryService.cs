@@ -245,6 +245,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
+        //Gets the total cout of queries from the database.
         public object GetCountOfQueries()
         {
             try{

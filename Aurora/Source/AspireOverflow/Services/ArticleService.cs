@@ -424,6 +424,7 @@ namespace AspireOverflow.Services
             }
         }
 
+        //Gets the count of the article from the database.
         public object GetCountOfArticles()
         {
             try

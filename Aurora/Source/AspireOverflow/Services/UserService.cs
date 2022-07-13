@@ -235,6 +235,8 @@ namespace AspireOverflow.Services
                 throw;
             }
         }
+
+        //Gets the total count of the Users.
         public object GetCountOfUsers()
         {
             try
