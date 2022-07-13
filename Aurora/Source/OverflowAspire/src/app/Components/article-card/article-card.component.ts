@@ -125,5 +125,7 @@ export class ArticleCardComponent implements OnInit {
     }
     this.searchTitle = '';
     this.searchAuthor = '';
+    this.FromDate=new Date("0001-01-01");
+    this.ToDate=new Date("0001-01-01");
   }
 }

@@ -28,58 +28,22 @@ h4 {
   max-width: 60%;
   height: auto;
   padding: 10px;
+  padding-left: 1%;
   margin-bottom: 40px;
   text-align: center;
   border-radius: 10px;
   background-color: skyblue;
 }
 
-
-.labeltext {
-  font-weight: bold;
-  float: center;
-  padding-left: 20px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.labeltextFrom {
-  font-weight: bold;
-  padding-left: 20px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.labeltextauthor {
-  font-weight: bold;
-  float: center;
-  margin-left: 5%;
-  padding-left: 25px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.labeltextto {
-  font-weight: bold;
-  padding-left: 20px;
-  margin-left: 3%;
-  float: center;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .labeltextclick {
   float: center;
+  margin-right: 40px;
 }
-
-
-
 .tag-blue {
   background: #56CCF2;
   background: linear-gradient(to bottom, #2F80ED, #56CCF2);
   color: #fafafa;
+}
+.lab{
+  margin-left: -55%;
 }

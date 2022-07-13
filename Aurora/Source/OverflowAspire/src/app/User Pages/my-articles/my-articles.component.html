@@ -14,13 +14,25 @@
     </div>
     <div class="container card">
         <form>
-            <label class="labeltext">Title <input type="text" name="searchTitle" [(ngModel)]="searchTitle"
-                    autocomplete="off" /></label>
-            <label class="labeltext">From <input type="date" name="FromDate" [(ngModel)]="FromDate"
-                    autocomplete="off" /></label>
-            <label class="labeltext">To <input type="date" name="ToDate" [(ngModel)]="ToDate"
-                    autocomplete="off" /></label>
+            <div class="row">
+                <div class="col-md-4">
+            <label class="form-label"><b>Title</b> </label><input type="text" class="form-control" name="searchTitle" [(ngModel)]="searchTitle"
+                    autocomplete="off" />
+                </div>
+                    <div class="col-md-4">
+            <label class="form-label"><b>From</b> </label><input type="date" class="form-control" name="FromDate" [(ngModel)]="FromDate"
+                    autocomplete="off" />
+                </div>
+                    <div class="col-md-4">
+            <label class="form-label"><b>To</b> </label><input type="date"  class="form-control" name="ToDate" [(ngModel)]="ToDate"
+                    autocomplete="off" />
+                </div>
+        <div class="row p-2">
+                    <div class="" >
             <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
+        </div>
+        </div>
+        </div>
         </form>
     </div>
     <div *ngIf="data.length>0; else ArrayEmpty">

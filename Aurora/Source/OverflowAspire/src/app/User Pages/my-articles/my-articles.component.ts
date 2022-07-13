@@ -71,5 +71,7 @@ export class MyArticlesComponent implements OnInit {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
     this.searchTitle = '';
+    this.FromDate=new Date("0001-01-01");
+    this.ToDate=new Date("0001-01-01");
   }
 }
