@@ -104,18 +104,7 @@ namespace AspireOverflow.Services
             try
             {
                 var User = database.GetUserByID(UserID);
-                return new
-                {
-                    UserId = User.UserId,
-                    fullName = User.FullName,
-                    EmployeeId = User.AceNumber,
-                    email = User.EmailAddress,
-                    DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation?.DesignationName,
-                    Department = GetDepartmentByID(User.Designation!.DepartmentId),
-                    Gender = User.Gender?.Name,
-                    IsReviewer = User.IsReviewer
-                };
+                return GetAnonymousUserObject(User);
             }
             catch (Exception exception)
             {
@@ -146,18 +135,7 @@ namespace AspireOverflow.Services
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
-                return database.GetUsersByVerifyStatusId(VerifyStatusID).Select(User => new
-                {
-                    UserId = User.UserId,
-                    fullName = User.FullName,
-                    EmployeeId = User.AceNumber,
-                    Email = User.EmailAddress,
-                    DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation?.DesignationName,
-                    Department = User.Designation!.Department.DepartmentName,
-                    Gender = User.Gender?.Name,
-                    IsReviewer = User.IsReviewer
-                });
+                return database.GetUsersByVerifyStatusId(VerifyStatusID).Select(User => GetAnonymousUserObject(User));
             }
             catch (Exception exception)
             {
@@ -173,18 +151,7 @@ namespace AspireOverflow.Services
             if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
-                return database.GetUsersByUserRoleID(UserRoleID).Select(User => new
-                {
-                    UserId = User.UserId,
-                    fullName = User.FullName,
-                    EmployeeId = User.AceNumber,
-                    Email = User.EmailAddress,
-                    DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation?.DesignationName,
-                    Department = User.Designation!.Department.DepartmentName,
-                    Gender = User.Gender?.Name,
-                    IsReviewer = User.IsReviewer
-                });
+                return database.GetUsersByUserRoleID(UserRoleID).Select(User => GetAnonymousUserObject(User));
             }
             catch (Exception exception)
             {
@@ -216,18 +183,7 @@ namespace AspireOverflow.Services
         {
             try
             {
-                return database.GetUsersByIsReviewer(IsReviewer).Select(User => new
-                {
-                    UserId = User.UserId,
-                    Name = User.FullName,
-                    EmployeeId = User.AceNumber,
-                    Email = User.EmailAddress,
-                    DateOfBirth = User.DateOfBirth,
-                    Designation = User.Designation?.DesignationName,
-                    Department = User.Designation!.Department.DepartmentName,
-                    Gender = User.Gender?.Name,
-                    IsReviewer = User.IsReviewer
-                });
+                return database.GetUsersByIsReviewer(IsReviewer).Select(User => GetAnonymousUserObject(User));
             }
             catch (Exception exception)
             {
@@ -250,81 +206,97 @@ namespace AspireOverflow.Services
             }
 
         }
-            //to get the department using DepartmentId.
-            private string GetDepartmentByID(int DepartmentId)
+        //to get the department using DepartmentId.
+        private string GetDepartmentByID(int DepartmentId)
+        {
+            if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
+            try
             {
-                if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
-                try
-                {
-                    var department = database.GetDepartments().FirstOrDefault(item => item.DepartmentId == DepartmentId);
-                    return department?.DepartmentName!;
-                }
-                catch (Exception exception)
-                {
-                    _logger.LogError(HelperService.LoggerMessage("UserService", "GetDepartmentByID(int DepartmentId)", exception, DepartmentId));
-                    throw;
-                }
+                var department = database.GetDepartments().FirstOrDefault(item => item.DepartmentId == DepartmentId);
+                return department?.DepartmentName!;
             }
-
-
-            //to get the gender from the database.
-            public IEnumerable<Object> GetGenders()
+            catch (Exception exception)
             {
-                try
-                {
-                    var Genders = database.GetGenders().Select(item => new
-                    {
-                        GenderId = item.GenderId,
-                        Name = item.Name
-                    });
-                    return Genders;
-                }
-                catch (Exception exception)
-                {
-                    _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
-                    throw;
-                }
-            }
-
-
-            //to get the designation from the database.
-            public IEnumerable<Object> GetDesignations()
-            {
-                try
-                {
-                    var designations = database.GetDesignations().Select(item => new
-                    {
-                        DesignationId = item.DesignationId,
-                        Name = item.DesignationName,
-                        DepartmentId = item.DepartmentId
-                    });
-                    return designations;
-                }
-                catch (Exception exception)
-                {
-                    _logger.LogError(HelperService.LoggerMessage("UserService", " GetDesignations()", exception));
-                    throw;
-                }
-            }
-
-
-            //to get the departments from the database.
-            public IEnumerable<object> GetDepartments()
-            {
-                try
-                {
-                    var Departments = database.GetDepartments().Select(item => new
-                    {
-                        DepartmentId = item.DepartmentId,
-                        Name = item.DepartmentName
-                    });
-                    return Departments;
-                }
-                catch (Exception exception)
-                {
-                    _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
-                    throw;
-                }
+                _logger.LogError(HelperService.LoggerMessage("UserService", "GetDepartmentByID(int DepartmentId)", exception, DepartmentId));
+                throw;
             }
         }
+
+
+        //to get the gender from the database.
+        public IEnumerable<Object> GetGenders()
+        {
+            try
+            {
+                var Genders = database.GetGenders().Select(item => new
+                {
+                    GenderId = item.GenderId,
+                    Name = item.Name
+                });
+                return Genders;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
+                throw;
+            }
+        }
+
+
+        //to get the designation from the database.
+        public IEnumerable<Object> GetDesignations()
+        {
+            try
+            {
+                var designations = database.GetDesignations().Select(item => new
+                {
+                    DesignationId = item.DesignationId,
+                    Name = item.DesignationName,
+                    DepartmentId = item.DepartmentId
+                });
+                return designations;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserService", " GetDesignations()", exception));
+                throw;
+            }
+        }
+
+
+        //to get the departments from the database.
+        public IEnumerable<object> GetDepartments()
+        {
+            try
+            {
+                var Departments = database.GetDepartments().Select(item => new
+                {
+                    DepartmentId = item.DepartmentId,
+                    Name = item.DepartmentName
+                });
+                return Departments;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDepartments()", exception));
+                throw;
+            }
+        }
+     //Returns anonymous object for the User object 
+    private object GetAnonymousUserObject(User user)
+    {
+        return new
+        {
+            UserId = user.UserId,
+            fullName = user.FullName,
+            EmployeeId = user.AceNumber,
+            Email = user.EmailAddress,
+            DateOfBirth = user.DateOfBirth,
+            Designation = user.Designation?.DesignationName,
+            Department = user.Designation!.Department.DepartmentName,
+            Gender = user.Gender?.Name,
+            IsReviewer = user.IsReviewer
+        };
     }
+}
+}

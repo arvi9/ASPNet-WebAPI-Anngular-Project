@@ -8,7 +8,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool CreateArticle(Article article);
         bool DeleteArticleByArticleId(int ArticleId);
         bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId);
-        bool UpdateArticle(Article article, int _currentUserId);
+        bool UpdateArticle(Article article, int _currentUserId,bool IsReviewer=false);
         Object GetArticleById(int ArticleId);
         IEnumerable<Object> GetTrendingArticles(int Range=0);
         IEnumerable<Object> GetLatestArticles(int Range=0);

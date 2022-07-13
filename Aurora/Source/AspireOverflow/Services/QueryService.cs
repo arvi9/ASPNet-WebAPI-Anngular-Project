@@ -106,13 +106,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfQueries = database.GetQueries();
-                return ListOfQueries.Select(item => new
-                {
-                    QueryId = item.QueryId,
-                    Title = item.Title,
-                    content = item.Content,
-                    IsSolved = item.IsSolved
-                });
+                return ListOfQueries.Select(query => GetAnonymousQueryObject(query));
             }
             catch (Exception exception)
             {
@@ -129,14 +123,8 @@ namespace AspireOverflow.Services
             {
                 //get queries from the database using Creation date by descending order.
                 var ListOfQueries = database.GetQueries().OrderByDescending(query => query.CreatedOn).ToList();
-                   if (ListOfQueries.Count > Range && Range != 0) ListOfQueries = ListOfQueries.GetRange(0, Range);
-                return ListOfQueries.Select(item => new
-                {
-                    QueryId = item.QueryId,
-                    Title = item.Title,
-                    content = item.Content,
-                    IsSolved = item.IsSolved
-                });
+                if (ListOfQueries.Count > Range && Range != 0) ListOfQueries = ListOfQueries.GetRange(0, Range);
+                return ListOfQueries.Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
             {
@@ -163,13 +151,7 @@ namespace AspireOverflow.Services
                     var Query = ListOfQueries.Find(item => item.QueryId == Id);
                     if (Query != null) TrendingQueries.Add(Query);
                 }
-                return (from Query in TrendingQueries select Query).Select(item => new
-                {
-                    QueryId = item.QueryId,
-                    Title = item.Title,
-                    content = item.Content,
-                    IsSolved = item.IsSolved
-                });
+                return (from Query in TrendingQueries select Query).Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
             {
@@ -186,13 +168,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfQueries = database.GetQueriesByUserId(UserId);
-                return ListOfQueries.Select(item => new
-                {
-                    QueryId = item.QueryId,
-                    Title = item.Title,
-                    content = item.Content,
-                    IsSolved = item.IsSolved
-                });
+                return ListOfQueries.Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
             {
@@ -209,13 +185,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfQueries = database.GetQueriesByTitle(Title);
-                return ListOfQueries.Select(item => new
-                {
-                    QueryId = item.QueryId,
-                    Title = item.Title,
-                    content = item.Content,
-                    IsSolved = item.IsSolved
-                });
+                return ListOfQueries.Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
             {
@@ -231,13 +201,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfQueries = database.GetQueriesByIsSolved(IsSolved);
-                return ListOfQueries.Select(item => new
-                {
-                    QueryId = item.QueryId,
-                    Title = item.Title,
-                    content = item.Content,
-                    IsSolved = item.IsSolved
-                });
+                return ListOfQueries.Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
             {
@@ -249,8 +213,9 @@ namespace AspireOverflow.Services
         //Gets the total cout of queries from the database.
         public object GetCountOfQueries()
         {
-            try{
-            
+            try
+            {
+
                 return database.GetCountOfQueries();
             }
             catch (Exception exception)
@@ -365,6 +330,17 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetSpams()", exception));
                 throw;
             }
+        }
+          //Returns anonymous object for the Query object 
+        private object GetAnonymousQueryObject(Query query)
+        {
+            return new
+            {
+                QueryId = query.QueryId,
+                Title = query.Title,
+                content = query.Content,
+                IsSolved = query.IsSolved
+            };
         }
     }
 }

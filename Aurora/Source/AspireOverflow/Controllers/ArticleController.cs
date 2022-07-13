@@ -241,8 +241,8 @@ namespace AspireOverflow.Controllers
         {
             if (article == null) return BadRequest(Message("Article can't be null"));
             try
-            {
-                return _articleService.UpdateArticle(article, GetCurrentUser().UserId) ? await Task.FromResult(Ok(Message("Successfully updated the article"))) : BadRequest(Message("Error Occured while Updating the article"));
+            {   var _currentUser=GetCurrentUser();
+                return _articleService.UpdateArticle(article, _currentUser.UserId,_currentUser.IsReviewer) ? await Task.FromResult(Ok(Message("Successfully updated the article"))) : BadRequest(Message("Error Occured while Updating the article"));
             }
             catch (ValidationException exception)
             {

@@ -56,15 +56,15 @@ namespace AspireOverflow.Services
 
 
         //Article is Updating using article object and UpdatedByUserId.
-        public bool UpdateArticle(Article article, int UpdatedByUserId)
+        public bool UpdateArticle(Article article, int UpdatedByUserId,bool IsReviewer)
         {
             //throws Validation Exception if any validation fails.
             Validation.ValidateArticle(article);
             try
             {
-                var ExistingArticle = database.GetArticleByID(article.ArtileId);
+                var ExistingArticle = database.GetArticleByID(article.ArticleId);
                 //throws Exception when ExistingArticle is null.
-                if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArtileId}");
+                if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArticleId}");
                 if (ExistingArticle.ArticleStatusID != 1) throw new ValidationException("you can update only the Draft Articles");
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
@@ -72,6 +72,13 @@ namespace AspireOverflow.Services
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
+                
+                //Reviewer once rejected,Reason and Reviewer ID is updated.
+                if (UpdatedByUserId != ExistingArticle.CreatedBy && IsReviewer)
+                {
+                    ExistingArticle.Reason = article.Reason;
+                    ExistingArticle.ReviewerId = UpdatedByUserId;
+                }
                 //Returns true once successfully updated.
                 return database.UpdateArticle(ExistingArticle);
             }
@@ -127,24 +134,25 @@ namespace AspireOverflow.Services
             try
             {
                 var article = database.GetArticleByID(ArticleId);
-                var SharedUsers=article.IsPrivate?database.GetPrivateArticlesByArticleId(article.ArtileId).Select(Item=>new {
-                     UserId=Item.user?.UserId,
-                    FullName=Item.user?.FullName,
-                    Email=Item.user?.EmailAddress
-                }):null;
+                var SharedUsers = article.IsPrivate ? database.GetPrivateArticlesByArticleId(article.ArticleId).Select(Item => new
+                {
+                    UserId = Item.user?.UserId,
+                    FullName = Item.user?.FullName,
+                    Email = Item.user?.EmailAddress
+                }) : null;
                 return new
                 {
-                    articleId = article.ArtileId,
+                    articleId = article.ArticleId,
                     PublishedDate = article.UpdatedOn,
                     title = article.Title,
                     AuthorName = article.User?.FullName,
                     content = article.Content,
                     image = article.Image,
-                    Likes = GetLikesCount(article.ArtileId),
-                    comments = GetComments(article.ArtileId),
+                    Likes = GetLikesCount(article.ArticleId),
+                    comments = GetComments(article.ArticleId),
                     status = article.ArticleStatus?.Status,
                     ReviewerId = article.ReviewerId,
-                    SharedUsers=SharedUsers
+                    SharedUsers = SharedUsers
 
                 };
             }
@@ -163,16 +171,7 @@ namespace AspireOverflow.Services
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.UpdatedOn).ToList();
                 if (ListOfArticles.Count > Range && Range != 0) ListOfArticles = ListOfArticles.GetRange(0, Range);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -190,24 +189,15 @@ namespace AspireOverflow.Services
                 //Get number of likes and grouped based on ArticleId and sorted by Descending oreder.
                 var data = (database.GetLikes().GroupBy(item => item.ArticleId)).OrderByDescending(item => item.Count());
                 List<int> ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
-                var ListOfArticles =database.GetArticlesByArticleStatusId(4).ToList();
+                var ListOfArticles = database.GetArticlesByArticleStatusId(4).ToList();
                 if (ListOfArticleId.Count > Range && Range != 0) ListOfArticleId = ListOfArticleId.GetRange(0, Range);
                 var TrendingArticles = new List<Article>();
                 foreach (var Id in ListOfArticleId)
                 {
-                    var Article =ListOfArticles.Find(item =>item.ArtileId==Id) ;
+                    var Article = ListOfArticles.Find(item => item.ArticleId == Id);
                     if (Article != null) TrendingArticles.Add(Article);
                 }
-                return TrendingArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return TrendingArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -224,16 +214,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = database.GetArticlesByUserId(UserId);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -283,16 +264,7 @@ namespace AspireOverflow.Services
             {
                 //to get the articles where private is false.
                 var ListOfArticles = GetArticles().Where(Item => !Item.IsPrivate);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -325,16 +297,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = database.GetArticlesByTitle(Title);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -351,16 +314,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = database.GetArticlesByAuthor(AuthorName);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -377,16 +331,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = database.GetArticlesByReviewerId(ReviewerId);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -405,17 +350,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = database.GetArticlesByArticleStatusId(ArticleStatusID, IsReviewer);
-                return ListOfArticles.Select(Article => new
-                {
-                    ArticleId = Article.ArtileId,
-                    title = Article.Title,
-                    AuthorName = Article.User?.FullName,
-                    content = Article.Content,
-                    image = Article.Image,
-                    date = Article.UpdatedOn,
-                    status = Article.ArticleStatus?.Status,
-                    ReviewerId = Article.ReviewerId
-                });
+                return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
             {
@@ -515,6 +450,22 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetLikesCount()", exception));
                 throw;
             }
+        }
+        //Returns anonymous object for the Articles object 
+        private object GetAnonymousArticleObject(Article article)
+        {
+            return new
+            {
+                ArticleId = article.ArticleId,
+                title = article.Title,
+                AuthorName = article.User?.FullName,
+                content = article.Content,
+                image = article.Image,
+                date = article.UpdatedOn,
+                status = article.ArticleStatus?.Status,
+                ReviewerId = article.ReviewerId,
+                Reason = article.Reason
+            };
         }
     }
 }

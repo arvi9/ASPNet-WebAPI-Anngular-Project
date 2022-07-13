@@ -4,19 +4,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 namespace AspireOverflow.Models
 {
-    
+
     public partial class Article : IAuditField
     {
 
 
         [Key]
-        public int ArtileId { get; set; }
+        public int ArticleId { get; set; }
 
         public string? Title { get; set; }
 
         public string? Content { get; set; }
 
-        public byte[] Image { get; set; }=null!;
+        public byte[] Image { get; set; } = null!;
         public int ArticleStatusID { get; set; }
         public int? ReviewerId { get; set; }
 
@@ -34,6 +34,7 @@ namespace AspireOverflow.Models
         public DateTime? UpdatedOn { get; set; }
         [NotMapped]
         public string? ImageString { get; set; }
+        public string? Reason { get; set; }
 
         [ForeignKey("ArticleStatusID")]
         [InverseProperty("Articles")]
@@ -81,7 +82,8 @@ namespace AspireOverflow.Models
 
     }
 
-    public partial class PrivateArticleDto {
+    public partial class PrivateArticleDto
+    {
 
         public Article? article { get; set; }
         public List<int>? SharedUsersId { get; set; }

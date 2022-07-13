@@ -245,7 +245,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-       //Gets the old data using the range.
+       //Getting Range from Configuration for Data fetching .
         private int GetRange()
         {
             try

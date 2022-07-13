@@ -56,7 +56,7 @@ namespace AspireOverflow.DataAccessLayer
                 _context.SaveChanges();
                 if (article.IsPrivate && SharedUsersId.Count > 0)
                 {
-                    SharedUsersId.ForEach(item => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArtileId, item)));
+                    SharedUsersId.ForEach(item => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArticleId, item)));
                     _context.SaveChanges();
                 }
                 return true;
@@ -121,7 +121,7 @@ namespace AspireOverflow.DataAccessLayer
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                var ExistingDraftArticle = _context.Articles.FirstOrDefault(item => item.ArtileId == ArticleId && item.ArticleStatusID == 1);
+                var ExistingDraftArticle = _context.Articles.FirstOrDefault(item => item.ArticleId == ArticleId && item.ArticleStatusID == 1);
                 if (ExistingDraftArticle == null) throw new ItemNotFoundException($"No Matching data found with ArticleId:{ArticleId}");
                 _context.Articles.Remove(ExistingDraftArticle);
                 _context.SaveChanges();
@@ -141,7 +141,7 @@ namespace AspireOverflow.DataAccessLayer
             Article? ExistingArticle;
             try
             {
-                ExistingArticle = _context.Articles.Include(e => e.ArticleStatus).Include(e => e.User).FirstOrDefault(item => item.ArtileId == ArticleId);
+                ExistingArticle = _context.Articles.Include(e => e.ArticleStatus).Include(e => e.User).FirstOrDefault(item => item.ArticleId == ArticleId);
                 return ExistingArticle != null ? ExistingArticle : throw new ItemNotFoundException($"There is no matching Article data with ArticleID :{ArticleId}");
             }
             catch (Exception exception)
@@ -431,7 +431,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
         
-        //Tracing  of the articles.
+        //Get Tracing Enabled or not from Configuration
         private bool GetIsTraceEnabledFromConfiguration()
         {
             try
