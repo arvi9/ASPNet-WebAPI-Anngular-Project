@@ -11,10 +11,7 @@ h1 {
     min-height: 100vh;
 }
 
-.tablecolor {
-    background: lightskyblue;
-}
 
 .breadcrumb {
-    margin: 50px;
+    margin: 30px;
 }

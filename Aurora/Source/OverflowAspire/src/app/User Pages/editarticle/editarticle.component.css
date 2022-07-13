@@ -41,42 +41,12 @@ body {
   height: 30px
 }
 
-.custom-btn {
-  width: auto;
-  height: 40px;
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-family: Lato, sans-serif;
-  font-weight: 500;
-  background: 0 0;
-  cursor: pointer;
-  transition: all .3s ease;
-  position: relative;
-  display: inline-block;
-  box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, .5), 7px 7px 20px 0 rgba(0, 0, 0, .1), 4px 4px 5px 0 rgba(0, 0, 0, .1);
-  outline: 0;
-  margin-left: 15px
-}
 
-.btn-1 {
-  background: #00acee;
-  border: none
-}
-
-.btn-1:hover {
-  background: #0495ce
-}
 
 .btn-3 {
   float: right;
   margin-right: -.5%;
   background: #00acee
-}
-
-.custom-btn.btn-1 {
-  border: none;
-  width: 130px
 }
 
 .Content {
