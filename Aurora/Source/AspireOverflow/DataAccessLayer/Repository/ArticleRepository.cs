@@ -172,6 +172,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //get the article with the Article StatusID.
         public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)
 
         {
@@ -195,11 +196,14 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled) _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
             }
         }
+
+        //Get the article by it's title.
         public IEnumerable<Article> GetArticlesByTitle(string Title)
         {
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
+                //rutrns the article which has the same title with article StatusId as 4 (4->Published article).
                 return _context.Articles.Where(article => article.Title!.Contains(Title) && article.ArticleStatusID == 4).Include(e => e.ArticleStatus).Include(e => e.User);
             }
             catch (Exception exception)
@@ -208,11 +212,14 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+
+        //Gets the article by it's Author Name.
         public IEnumerable<Article> GetArticlesByAuthor(string AuthorName)
         {
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentException("AuthorName value can't be null");
             try
             {
+                //returns the article which has the same author and StatusID as 4 (4->Published article).
                 return _context.Articles.Where(article => article.User!.FullName.Contains(AuthorName) && article.ArticleStatusID == 4).Include(e => e.ArticleStatus).Include(e => e.User);
 
             }
@@ -240,6 +247,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Get the article with it's UserId (User denotes the author who created the article).
         public IEnumerable<Article> GetArticlesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -270,6 +278,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Gets the private article by the articleId (Private article = article which is shared only with certain people).
          public IEnumerable<PrivateArticle> GetPrivateArticlesByArticleId(int ArticleId)
         {  if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
@@ -284,6 +293,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //get the total count of the articles.
         public object GetCountOfArticles()
         {
              _stopWatch.Start();
@@ -382,6 +392,8 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+
+        //get the total count of likes using ArticleId.
         public int GetCountOfLikes(int ArticleId)
         {
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
@@ -402,6 +414,7 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
             }
         }
+
         //Getting Range from Configuration for Data fetching duration
         private int GetRange()
         {
@@ -417,7 +430,8 @@ namespace AspireOverflow.DataAccessLayer
 
             }
         }
-
+        
+        //Tracing  of the articles.
         private bool GetIsTraceEnabledFromConfiguration()
         {
             try

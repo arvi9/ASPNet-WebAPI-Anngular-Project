@@ -109,6 +109,8 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+
+        //gets the queries by it's UserId (User who created the query).
         public IEnumerable<Query> GetQueriesByUserId(int UserId)
         {
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -138,6 +140,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Fetches the queries which has been solved by IsSolved.
         public IEnumerable<Query> GetQueriesByIsSolved(bool IsSolved)
         {
             try
@@ -223,6 +226,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //gets the total count of the queries.
         public object GetCountOfQueries()
         {
             try
@@ -241,6 +245,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+       //Gets the old data using the range.
         private int GetRange()
         {
             try

@@ -84,6 +84,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Gets the user by their Email.
         public User GetUserByEmail(string Email)
         {
             Validation.ValidateEmail(Email);
@@ -145,6 +146,7 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+
        //to get the list of users.
         public IEnumerable<User> GetUsers()
         {
@@ -159,8 +161,10 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Get the user list using VerifyStatusID.
          public IEnumerable<User> GetUsersByVerifyStatusId(int VerifyStatusID)
         {
+            //throws exception when the VerifyStatusID is not inbetweeen 0 and 3
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
@@ -173,11 +177,14 @@ namespace AspireOverflow.DataAccessLayer
             }
 
         }
+
+        //gets the Users by their role using UserRoleID.
            public IEnumerable<User> GetUsersByUserRoleID(int UserRoleID)
         {
             if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
+                //Gets the users with same UserRoleId with VerifyStatusID as 1 (1->Approved User).
                 return _context.Users.Where(user => user.UserRoleId == UserRoleID && user.VerifyStatusID == 1).Include(e => e.Designation).Include(e => e.Gender).Include(e=>e.Designation!.Department);
                
             }
@@ -188,6 +195,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Gets the User who is a reviewer using IsReviewer.
            public IEnumerable<User> GetUsersByIsReviewer(bool IsReviewer)
         {
             try
@@ -200,6 +208,8 @@ namespace AspireOverflow.DataAccessLayer
                 throw;
             }
         }
+
+        //Gets the total count of the user who uses the application.
            public object GetCountOfUsers()
         { 
             try
@@ -262,6 +272,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
+        //Gets the ols information using the range value.
         private int GetRange()
         {
             try
