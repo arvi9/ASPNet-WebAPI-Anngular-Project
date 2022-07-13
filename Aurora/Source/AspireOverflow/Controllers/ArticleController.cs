@@ -255,6 +255,54 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occured while Adding article :{HelperService.PropertyList(article)}");
             }
         }
+        
+        /// <summary>
+        /// Update a article
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/Article/UpdatePrivateArticle
+        /// 
+        ///     * fields are required
+        /// 
+        ///     body
+        ///     {
+        ///         artileId*: int,
+        ///         title*: string,
+        ///         content*: string,
+        ///         image*: string
+        ///         articleStatusID*: int,
+        ///         reviewerId*: int,
+        ///         datetime*: "2022-06-22T04:00:01.462Z",
+        ///         isPrivate*: bool,
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">If the article was updated. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="article"></param>
+        [HttpPut]
+        public async Task<ActionResult> UpdatePrivateArticle(PrivateArticleDto privateArticleDto)
+        {
+            if (privateArticleDto ==null || privateArticleDto.article == null) return BadRequest(Message("Article can't be null"));
+            try
+            {   var _currentUser=GetCurrentUser();
+                return _articleService.UpdateArticle(privateArticleDto.article, _currentUser.UserId,_currentUser.IsReviewer,privateArticleDto.SharedUsersId!) ? await Task.FromResult(Ok(Message("Successfully updated the article"))) : BadRequest(Message("Error Occured while Updating the article"));
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdatePrivateArticle(PrivateArticleDto privateArticleDto)", exception, privateArticleDto.article));
+                return BadRequest(Message($"{exception.Message}", privateArticleDto.article));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleController", "UpdatePrivateArticle(PrivateArticleDto privateArticleDto)", exception, privateArticleDto.article));
+                return Problem($"Error Occured while Adding article :{HelperService.PropertyList(privateArticleDto.article)}");
+            }
+        }
+
 
 
         /// <summary>

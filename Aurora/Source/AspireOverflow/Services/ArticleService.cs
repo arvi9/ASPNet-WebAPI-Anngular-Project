@@ -23,6 +23,7 @@ namespace AspireOverflow.Services
         {
             //throws Validation Exception if any validation fails.
             Validation.ValidateArticle(article);
+            if (article.IsPrivate) throw new ValidationException("IsPrivate should not be true");
             try
             {
                 article.Image = Convert.FromBase64String(article.ImageString!);
@@ -56,7 +57,7 @@ namespace AspireOverflow.Services
 
 
         //Article is Updating using article object and UpdatedByUserId.
-        public bool UpdateArticle(Article article, int UpdatedByUserId,bool IsReviewer)
+        public bool UpdateArticle(Article article, int UpdatedByUserId, bool IsReviewer, List<int>? SharedUsersId = default!)
         {
             //throws Validation Exception if any validation fails.
             Validation.ValidateArticle(article);
@@ -72,7 +73,7 @@ namespace AspireOverflow.Services
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
-                
+
                 //Reviewer once rejected,Reason and Reviewer ID is updated.
                 if (UpdatedByUserId != ExistingArticle.CreatedBy && IsReviewer)
                 {
@@ -80,7 +81,7 @@ namespace AspireOverflow.Services
                     ExistingArticle.ReviewerId = UpdatedByUserId;
                 }
                 //Returns true once successfully updated.
-                return database.UpdateArticle(ExistingArticle);
+                return SharedUsersId == null ? database.UpdateArticle(ExistingArticle) : database.UpdatePrivateArticle(ExistingArticle, SharedUsersId);
             }
             catch (Exception exception)
             {
@@ -88,6 +89,8 @@ namespace AspireOverflow.Services
                 return false;
             }
         }
+
+
 
 
         //Changes the Status of the article 1->In draft 2->To be Reviewed 3->Under Review 4->Published.
@@ -152,6 +155,8 @@ namespace AspireOverflow.Services
                     comments = GetComments(article.ArticleId),
                     status = article.ArticleStatus?.Status,
                     ReviewerId = article.ReviewerId,
+                    Reason = article.Reason,
+                    IsPrivate = article.IsPrivate,
                     SharedUsers = SharedUsers
 
                 };
@@ -170,7 +175,7 @@ namespace AspireOverflow.Services
             try
             {
                 var ListOfArticles = GetArticles().OrderByDescending(article => article.UpdatedOn).ToList();
-                if (ListOfArticles.Count > Range && Range != 0) ListOfArticles = ListOfArticles.GetRange(0, Range);
+                if (ListOfArticles.Count >= Range && Range != 0) ListOfArticles = ListOfArticles.GetRange(0, Range);
                 return ListOfArticles.Select(Article => GetAnonymousArticleObject(Article));
             }
             catch (Exception exception)
@@ -190,7 +195,7 @@ namespace AspireOverflow.Services
                 var data = (database.GetLikes().GroupBy(item => item.ArticleId)).OrderByDescending(item => item.Count());
                 List<int> ListOfArticleId = (from item in data select item.First().ArticleId).ToList();
                 var ListOfArticles = database.GetArticlesByArticleStatusId(4).ToList();
-                if (ListOfArticleId.Count > Range && Range != 0) ListOfArticleId = ListOfArticleId.GetRange(0, Range);
+                if (ListOfArticleId.Count >= Range && Range != 0) ListOfArticleId = ListOfArticleId.GetRange(0, Range);
                 var TrendingArticles = new List<Article>();
                 foreach (var Id in ListOfArticleId)
                 {
@@ -464,7 +469,8 @@ namespace AspireOverflow.Services
                 date = article.UpdatedOn,
                 status = article.ArticleStatus?.Status,
                 ReviewerId = article.ReviewerId,
-                Reason = article.Reason
+                Reason = article.Reason,
+                IsPrivate = article.IsPrivate
             };
         }
     }

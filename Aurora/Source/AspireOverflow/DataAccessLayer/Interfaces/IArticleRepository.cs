@@ -7,6 +7,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool AddArticle(Article article);
         bool UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId);
         bool UpdateArticle(Article article);
+          public bool UpdatePrivateArticle(Article article, List<int> SharedUsersId);
         Article GetArticleByID(int ArticleId);
         bool DeleteArticleByArticleId(int ArticleId);
         IEnumerable<Article> GetArticles();

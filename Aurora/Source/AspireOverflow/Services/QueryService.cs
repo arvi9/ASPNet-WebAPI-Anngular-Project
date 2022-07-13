@@ -123,7 +123,7 @@ namespace AspireOverflow.Services
             {
                 //get queries from the database using Creation date by descending order.
                 var ListOfQueries = database.GetQueries().OrderByDescending(query => query.CreatedOn).ToList();
-                if (ListOfQueries.Count > Range && Range != 0) ListOfQueries = ListOfQueries.GetRange(0, Range);
+                if (ListOfQueries.Count >= Range && Range != 0) ListOfQueries = ListOfQueries.GetRange(0, Range);
                 return ListOfQueries.Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
@@ -144,7 +144,7 @@ namespace AspireOverflow.Services
                 var ListOfQueryId = (from queryComment in ListOfComments select queryComment.First().QueryId).ToList();
                 var ListOfQueries = database.GetQueriesByIsSolved(false).ToList();
 
-                if (ListOfQueryId.Count > Range && Range != 0) ListOfQueryId = ListOfQueryId.GetRange(0, Range);
+                if (ListOfQueryId.Count >= Range && Range != 0) ListOfQueryId = ListOfQueryId.GetRange(0, Range);
                 List<Query> TrendingQueries = new List<Query>();
                 foreach (var Id in ListOfQueryId)
                 {

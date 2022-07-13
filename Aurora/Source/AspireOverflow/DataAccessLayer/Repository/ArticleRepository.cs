@@ -16,7 +16,7 @@ namespace AspireOverflow.DataAccessLayer
         private readonly AspireOverflowContext _context;
         private readonly ILogger<ArticleRepository> _logger;
         private readonly IConfiguration _configuration;
-        private readonly Stopwatch _stopWatch;
+        private readonly Stopwatch _stopWatch = new Stopwatch();
         private bool IsTracingEnabled;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleRepository> logger, IConfiguration configuration)
         {
@@ -24,14 +24,13 @@ namespace AspireOverflow.DataAccessLayer
             _logger = logger;
             _configuration = configuration;
             IsTracingEnabled = GetIsTraceEnabledFromConfiguration();
-            _stopWatch = new Stopwatch();
-
         }
 
 
         //to add an article using article object.
         public bool AddArticle(Article article)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -44,11 +43,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddArticle(Article article)", exception, article));
                 return false;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for AddArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to create a private article using article object and list of shared user Id.
         public bool AddPrivateArticle(Article article, List<int> SharedUsersId)
-        {
+        { 
+            if(IsTracingEnabled)_stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -56,7 +64,7 @@ namespace AspireOverflow.DataAccessLayer
                 _context.SaveChanges();
                 if (article.IsPrivate && SharedUsersId.Count > 0)
                 {
-                    SharedUsersId.ForEach(item => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArticleId, item)));
+                    SharedUsersId.ForEach(UserId => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArticleId, UserId)));
                     _context.SaveChanges();
                 }
                 return true;
@@ -66,11 +74,21 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddPrivateArticle(Article article, List<int> SharedUsersId)", exception, article));
                 return false;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for AddPrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
+
 
         //to update an article using article object.
         public bool UpdateArticle(Article article)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -83,11 +101,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(Article article)", exception, article));
                 return false;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for UpdateArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to update an article using ArticleId , ArticleStatusID and UpdatedByUserId.
         public bool UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
@@ -113,11 +140,56 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception));
                 return false;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
+        }
+
+        public bool UpdatePrivateArticle(Article article, List<int> SharedUsersId)
+        {
+            if(IsTracingEnabled)_stopWatch.Start();
+            Validation.ValidateArticle(article);
+            try
+            {
+                _context.Articles.Update(article);
+                _context.SaveChanges();
+                if (SharedUsersId.Count > 0)
+                {
+                    foreach (int UserId in SharedUsersId)
+                    {
+                        if (!_context.PrivateArticles.Any(Item => Item.ArticleId == article.ArticleId && Item.UserId == UserId))
+                        {
+                            _context.PrivateArticles.Update(new PrivateArticle(article.ArticleId, UserId));
+                        }
+                    }
+                    _context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "UpdatePrivateArticle(Article article, List<int> SharedUsersId)", exception, article));
+                return false;
+            }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for UpdatePrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to delete an article using ArticleId.
         public bool DeleteArticleByArticleId(int ArticleId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
@@ -129,14 +201,23 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticle(int ArticleId)", exception, ArticleId));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
                 return false;
+            }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for DeleteArticleByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 
         //to fetch the article using ArticleId.
         public Article GetArticleByID(int ArticleId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             Article? ExistingArticle;
             try
@@ -149,12 +230,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticleByID(int ArticleId)", exception, ArticleId));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticleByID(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to get the list of articles.
         public IEnumerable<Article> GetArticles()
         {
-            _stopWatch.Start();
+            if(IsTracingEnabled)_stopWatch.Start();
             try
             {
                 var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
@@ -167,8 +256,11 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
+                if(IsTracingEnabled)
+                {
                 _stopWatch.Stop();
-                if (IsTracingEnabled) _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 
@@ -176,7 +268,7 @@ namespace AspireOverflow.DataAccessLayer
         public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)
 
         {
-            _stopWatch.Start();
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
@@ -187,19 +279,23 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticles()", exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)", exception));
                 throw;
             }
             finally
             {
+                if(IsTracingEnabled)
+                {
                 _stopWatch.Stop();
-                if (IsTracingEnabled) _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 
         //Get the article by it's title.
         public IEnumerable<Article> GetArticlesByTitle(string Title)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
@@ -211,11 +307,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticlesByTitle(string Title)", exception, Title));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByTitle(string Title) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //Gets the article by it's Author Name.
         public IEnumerable<Article> GetArticlesByAuthor(string AuthorName)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentException("AuthorName value can't be null");
             try
             {
@@ -228,12 +333,21 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByAuthor(string AuthorName)", exception, AuthorName));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByAuthor(string AuthorName) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
 
         //Get the articles by the Reviewer's Id. Reviewer who reviews the article before publishing.
         public IEnumerable<Article> GetArticlesByReviewerId(int ReviewerId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ReviewerId <= 0) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
             try
             {
@@ -245,11 +359,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticeRepository", " GetArticlesByReviewerId(int ReviewerId)", exception, ReviewerId));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByReviewerId(int ReviewerId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //Get the article with it's UserId (User denotes the author who created the article).
         public IEnumerable<Article> GetArticlesByUserId(int UserId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -260,11 +383,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetArticlesByUserId(int UserId)", exception, UserId));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to get the list of privately shared articles by UserId
         public IEnumerable<PrivateArticle> GetPrivateArticlesByUserId(int UserId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -273,14 +405,24 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticlesByUserId", exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticlesByUserId(int UserId)", exception));
                 throw;
+            }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetPrivateArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 
         //Gets the private article by the articleId (Private article = article which is shared only with certain people).
-         public IEnumerable<PrivateArticle> GetPrivateArticlesByArticleId(int ArticleId)
-        {  if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
+        public IEnumerable<PrivateArticle> GetPrivateArticlesByArticleId(int ArticleId)
+        {
+            if(IsTracingEnabled)_stopWatch.Start();
+            if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 var ListofPrivateArticles = _context.PrivateArticles.Where(item => item.ArticleId == ArticleId).Include(e => e.user);
@@ -291,12 +433,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetPrivateArticlesByArticleId", exception));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetPrivateArticlesByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //get the total count of the articles.
         public object GetCountOfArticles()
         {
-             _stopWatch.Start();
+            if(IsTracingEnabled)_stopWatch.Start();
             try
             {
                 var ListOfCounts = new
@@ -316,14 +466,18 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
+                if(IsTracingEnabled)
+                {
                 _stopWatch.Stop();
-                if (IsTracingEnabled) _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 
         //to to add comments for the article.
         public bool AddComment(ArticleComment comment)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             Validation.ValidateArticleComment(comment);
             try
             {
@@ -338,11 +492,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddComment(ArticleComment comment)", exception, comment));
                 return false;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for AddComment(ArticleComment comment) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to get the added comments for the article.
         public IEnumerable<ArticleComment> GetCommentsByArticleId(int ArticleId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
             try
             {
@@ -351,13 +514,23 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetComments()", exception));
+                _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetCommentsByArticleId(int ArticleId)", exception));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetCommentsByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
+
         //to add like for the article.
         public bool AddLike(ArticleLike like)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             Validation.ValidateArticleLike(like);
             try
             {
@@ -376,11 +549,20 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "AddLike(ArticleLike like)", exception, like));
                 return false;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for AddLike(ArticleLike like) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //to get the likes for the article.
         public IEnumerable<ArticleLike> GetLikes()
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             try
             {
                 var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange())).ToList();
@@ -391,13 +573,21 @@ namespace AspireOverflow.DataAccessLayer
                 _logger.LogError(HelperService.LoggerMessage("ArticleRepository", "GetLikes()", exception));
                 throw;
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetLikes() - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
 
         //get the total count of likes using ArticleId.
         public int GetCountOfLikes(int ArticleId)
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
-            _stopWatch.Start();
             try
             {
                 var CountOfArticleLikes = _context.ArticleLikes.Count(item => item.ArticleId == ArticleId);
@@ -410,14 +600,18 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
+                if(IsTracingEnabled)
+                {
                 _stopWatch.Stop();
                 _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 
         //Getting Range from Configuration for Data fetching duration
         private int GetRange()
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             try
             {
                 var Range = _configuration["Data_Fetching_Duration:In_months"];
@@ -425,15 +619,24 @@ namespace AspireOverflow.DataAccessLayer
             }
             catch (Exception exception)
             {
-                _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetRange()", exception));
+                _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetRange()", exception));
                 throw;
 
             }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetRange() - {_stopWatch.ElapsedMilliseconds}ms");
+                }
+            }
         }
-        
+
         //Get Tracing Enabled or not from Configuration
         private bool GetIsTraceEnabledFromConfiguration()
         {
+            if(IsTracingEnabled)_stopWatch.Start();
             try
             {
                 var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
@@ -443,6 +646,14 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetIsTraceEnabledFromConfiguration()", exception));
                 return false;
+            }
+            finally
+            {
+                if(IsTracingEnabled)
+                {
+                _stopWatch.Stop();
+                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                }
             }
         }
 

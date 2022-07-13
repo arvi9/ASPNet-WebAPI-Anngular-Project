@@ -27,7 +27,7 @@ namespace AspireOverflow.Services
         public static bool ValidateArticle(Article article)
         {
             if (article == null) throw new ValidationException("Article should not be null");
-            if (article.CreatedBy <= 0) throw new ValidationException("CreatedBy Id  must be greater than 0");
+          
             if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
             if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
             if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
