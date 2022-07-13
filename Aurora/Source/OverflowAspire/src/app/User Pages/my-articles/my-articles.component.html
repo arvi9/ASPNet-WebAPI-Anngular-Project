@@ -16,23 +16,24 @@
         <form>
             <div class="row">
                 <div class="col-md-4">
-            <label class="form-label"><b>Title</b> </label><input type="text" class="form-control" name="searchTitle" [(ngModel)]="searchTitle"
-                    autocomplete="off" />
+                    <label class="form-label"><b>Title</b> </label><input type="text" class="form-control"
+                        name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
                 </div>
-                    <div class="col-md-4">
-            <label class="form-label"><b>From</b> </label><input type="date" class="form-control" name="FromDate" [(ngModel)]="FromDate"
-                    autocomplete="off" />
+                <div class="col-md-4">
+                    <label class="form-label"><b>From</b> </label><input type="date" class="form-control"
+                        name="FromDate" [(ngModel)]="FromDate" autocomplete="off" />
                 </div>
-                    <div class="col-md-4">
-            <label class="form-label"><b>To</b> </label><input type="date"  class="form-control" name="ToDate" [(ngModel)]="ToDate"
-                    autocomplete="off" />
+                <div class="col-md-4">
+                    <label class="form-label"><b>To</b> </label><input type="date" class="form-control" name="ToDate"
+                        [(ngModel)]="ToDate" autocomplete="off" />
                 </div>
-        <div class="row p-2">
-                    <div class="" >
-            <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)"> Apply</button>
-        </div>
-        </div>
-        </div>
+                <div class="row p-2">
+                    <div class="">
+                        <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)">
+                            Apply</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <div *ngIf="data.length>0; else ArrayEmpty">
@@ -44,11 +45,20 @@
                             <img [src]="'data:image/jpg;base64,'+ item.image" />
                         </div>
                         <div class="card__body d-flex flex-column">
-                            <div *ngIf="ShowStatus">
-                                <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
-                                <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
-                                    class="tag tag-brown">Under Review</span>
-                                <span *ngIf="item.status=='InDraft'" class="tag tag-red">In Draft</span>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div *ngIf="ShowStatus">
+                                        <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
+                                        <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
+                                            class="tag tag-brown">UnderReview</span>
+                                        <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div *ngIf="item.isPrivate">
+                                        <img alt="LogoImg" class="privateImg" src="./assets/private.png">
+                                    </div>
+                                </div>
                             </div>
                             <h4 class="card-title text-truncate">{{item.title}}</h4>
                             <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>

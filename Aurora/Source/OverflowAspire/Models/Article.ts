@@ -1,4 +1,3 @@
-import { Byte } from "@angular/compiler/src/util";
 import { User } from "./User";
 
 export class Article {
@@ -16,6 +15,7 @@ export class Article {
     getlike:articleLikes[]=[];
     likes:number=0;
     reviewer:string=""
+    Reason:string=""
 }
 
 export class ArticleComments{

@@ -200,6 +200,10 @@ export class ConnectionService {
     return this.http.put<any>(this.URL + 'Article/UpdateArticle', article, { headers: this.headers })
   }
 
+  //User can update draft article. 
+  UpdatePrivateArticle(article:any){
+    return this.http.put<any>(this.URL + 'Article/UpdatePrivateArticle', article, { headers: this.headers })
+  }
     //User can Get all articles.
   GetAllArticles(){
     return this.http.get<any>(this.URL + 'Article/GetArticlesByArticleStatusId?ArticleStatusID=4', { headers: this.headers });

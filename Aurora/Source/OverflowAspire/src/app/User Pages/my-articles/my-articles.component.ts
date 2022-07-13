@@ -11,14 +11,15 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 export class MyArticlesComponent implements OnInit {
   @Input() ShowStatus: boolean = true;
+  @Input() Showprivate: boolean = false;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
   userId: any = 0;
-  public data: Article[] = [];
-  public filteredData: Article[] = [];
+  public data: any[] = [];
+  public filteredData: any[] = [];
 
   constructor(private routes: Router, private connection: ConnectionService) { }
   

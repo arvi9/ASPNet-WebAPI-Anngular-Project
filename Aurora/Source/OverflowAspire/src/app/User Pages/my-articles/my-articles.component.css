@@ -69,6 +69,12 @@ img {
   color: #fafafa
 }
 
+.tag-orange {
+  background: #d1913c;
+  background: linear-gradient(to bottom, #3910ee, #3910ee);
+  color: #fafafa
+}
+
 img {
   max-width: 100%;
   height: 100%;

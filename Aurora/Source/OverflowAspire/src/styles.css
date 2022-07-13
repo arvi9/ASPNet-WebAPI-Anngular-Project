@@ -72,6 +72,10 @@ h6 {
     height: 60px;
     width: 60px
 }
+.privateImg {
+  height: 25px;
+  width: 30px
+}
 
 .img-card {
     width: 300px;

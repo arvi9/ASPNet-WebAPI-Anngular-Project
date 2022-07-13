@@ -1,11 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'Models/Article';
+import { SharedUsers } from 'Models/SharedUsers';
 import { Toaster } from 'ngx-toast-notifications';
 import { catchError } from 'rxjs';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
+export class sharedItem {
+  display: string = ""
+  value: number = 0
+  constructor(value: number, display: string) {
+    this.display = display,
+      this.value = value
+  }
+}
 
 @Component({
   selector: 'app-update-article-page',
@@ -20,6 +29,9 @@ export class UpdateArticlePageComponent implements OnInit {
   IsLoadingSaveDraft: boolean = false;
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
+  error = ""
+  itemsAsObjects: sharedItem[] = [];
+  sharedUsersId: any = []
   article: any = {
     articleId: 0,
     title: '',
@@ -28,12 +40,22 @@ export class UpdateArticlePageComponent implements OnInit {
     articleStatusID: 1,
     reviewerId: 0,
     createdBy: 1,
-    sharedUsers:null,
+    sharedUsers: null,
     ImageString: this.cardImageBase64,
     updatedOn: new Date(),
-    Reason:null,
+    Reason: null,
   }
-  public data: Article = new Article();
+
+  public data: any = new Article();
+
+  public items = [
+    { display: '', value: 0 },
+  ];
+
+  privateArticle: any = {
+    article: this.article,
+    itemsAsObjects: []
+  }
 
   constructor(private route: ActivatedRoute, private connection: ConnectionService, private router: Router, private toaster: Toaster) { }
 
@@ -44,30 +66,61 @@ export class UpdateArticlePageComponent implements OnInit {
       this.articleId = params['articleId'];
       this.connection.GetArticle(this.articleId)
         .subscribe({
-          next: (data: { articleId: any; title: any; content: any; image: any;sharedUsers:any }) => {
+          next: (data: { articleId: any; title: any; content: any; image: any; sharedUsers: SharedUsers[] }) => {
             console.log(data)
             this.article.articleId = data.articleId;
             this.article.title = data.title;
             this.article.content = data.content;
-            this.article.ImageString = data.image
-            this.article.sharedUsers=data.sharedUsers
-            console.log(this.article.sharedUsers)
+            this.article.ImageString = data.image;
+            data.sharedUsers.forEach(item => this.itemsAsObjects.push(new sharedItem(item.userId, item.email)))
           }
         });
+      this.connection.GetEmployeePage().subscribe((data: any[]) => {
+        data.forEach(item => this.items.push({ display: item.email, value: item.userId }))
+      })
     });
   }
 
   // Update article and submit.
   onSubmit() {
+    this.IsLoadingSubmit = true;
     this.article.articleStatusID = 2;
-    this.connection.UpdateArticle(this.article)
-      .pipe(catchError(this.handleError)).subscribe({
-        next: (data: any) => {
-          this.toaster.open({ text: 'Article Submitted Succesfully', position: 'top-center', type: 'success' })
-          this.router.navigateByUrl("/MyArticles");
-        }
-      });
+    if (this.itemsAsObjects.length == 0) {
+      this.connection.UpdateArticle(this.article)
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.router.navigateByUrl("/MyArticles");
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          }
+        });
+    }
+    //update private article.
+    else {
+      this.article.isPrivate = true;
+      this.itemsAsObjects.forEach(item => this.sharedUsersId.push(item.value))
+      this.privateArticle = {
+        article: this.article,
+        sharedUsersId: this.sharedUsersId
+      }
+      this.connection.UpdatePrivateArticle(this.privateArticle)
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.router.navigateByUrl("/MyArticles");
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          }
+        });
+    }
+
   }
+  
 
   saveToDraft() {
     this.connection.UpdateArticle(this.article)

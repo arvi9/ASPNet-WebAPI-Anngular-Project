@@ -1,7 +1,6 @@
-
 .navbar-light .navbar-nav .nav-link {
     font-family: Roboto, sans-serif;
-    padding: 35px 15px;
+    padding: 15px;
     font-size: 18px;
     font-weight: 550;
     color: var(--dark);

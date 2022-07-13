@@ -6,7 +6,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
 
 export interface sharedItem {
-  display: string,
+  display: string, 
   value: number
 }
 
