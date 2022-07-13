@@ -28,6 +28,7 @@ export class UpdateArticlePageComponent implements OnInit {
     articleStatusID: 1,
     reviewerId: 0,
     createdBy: 1,
+    sharedUsers:null,
     ImageString: this.cardImageBase64,
     updatedOn: new Date(),
   }
@@ -42,11 +43,14 @@ export class UpdateArticlePageComponent implements OnInit {
       this.articleId = params['articleId'];
       this.connection.GetArticle(this.articleId)
         .subscribe({
-          next: (data: { articleId: any; title: any; content: any; image: any; }) => {
+          next: (data: { articleId: any; title: any; content: any; image: any;sharedUsers:any }) => {
+            console.log(data)
             this.article.artileId = data.articleId;
             this.article.title = data.title;
             this.article.content = data.content;
             this.article.ImageString = data.image
+            this.article.sharedUsers=data.sharedUsers
+            console.log(this.article.sharedUsers)
           }
         });
     });

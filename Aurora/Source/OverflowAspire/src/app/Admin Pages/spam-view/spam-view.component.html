@@ -15,11 +15,13 @@
       </ol>
     </nav>
   </div>
-  <div class="container">
-    <pre><h1 class="Title">{{data[0].query.title}}</h1></pre>
-    <div>
-      <p>{{data[0].query.content}}</p>
+  <div class="container p-5 my-1 border">
+    <div class="text-center">
+      <h1>{{data[0].query.title}}</h1>
     </div>
+    <pre>
+      {{data[0].query.content}}
+    </pre>
     <button class="btn btn-danger" (click)="onReject()">Cancel Spam</button>
     <button class="btn btn-success float-end " (click)="onAccept() ">Remove Query</button>
     <br><br>

@@ -5,9 +5,9 @@ import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
 
-export interface sharedItem{
-  display:string,
-  value:number
+export interface sharedItem {
+  display: string,
+  value: number
 }
 
 declare var CKEDITOR: any;
@@ -20,37 +20,38 @@ declare var CKEDITOR: any;
 
 export class CreateArticlePageComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
-sharedUsersId:any=[]
-IsLoadingSubmit: boolean = false;
-IsLoadingSaveDraft: boolean = false;
-imageError: string = "";
-isImageSaved: boolean = false;
-cardImageBase64: string = "";
-error="";
-article: any = {
- articleId: 0,
- title: '',
- content: '',
- image: "",
- articleStatusID: 1,
- datetime: new Date(),
- createdBy: 0,
- createdOn: new Date(),
- updatedBy: 0,
- ImageString: this.cardImageBase64,
- reviewerId:0
-}
- 
- public items = [
- { display: '', value: 0 },
-];
+  sharedUsersId: any = []
+  IsLoadingSubmit: boolean = false;
+  IsLoadingSaveDraft: boolean = false;
+  imageError: string = "";
+  isImageSaved: boolean = false;
+  cardImageBase64: string = "";
+  error = "";
+  article: any = {
+    articleId: 0,
+    title: '',
+    content: '',
+    image: "",
+    articleStatusID: 1,
+    datetime: new Date(),
+    createdBy: 0,
+    createdOn: new Date(),
+    updatedBy: 0,
+    isPrivate: false,
+    ImageString: this.cardImageBase64,
+    reviewerId: 0
+  }
 
-public goalitems:sharedItem[] = []
+  public items = [
+    { display: '', value: 0 },
+  ];
 
-privateArticle:any={
- article:this.article,
- SharedusersId:[]
-}
+  public goalitems: sharedItem[] = []
+
+  privateArticle: any = {
+    article: this.article,
+    SharedusersId: []
+  }
 
 
 
@@ -66,46 +67,44 @@ privateArticle:any={
     });
   }
 
-    //Create and post the article.
+  //Create and post the article.
   onSubmit() {
     this.IsLoadingSubmit = true;
     this.article.articleStatusID = 2;
-    if(this.goalitems.length==0){
-    
-    this.connection.CreateArticle(this.article)
-      .pipe(catchError(this.handleError)).subscribe({
-        next: (data: any) => {
-          this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
-          this.route.navigateByUrl("/MyArticles");
-        },
-        error: (error) => {
-          this.error = error.error.message;
-          this.IsLoadingSubmit=false;
-        }
-      });
+    if (this.goalitems.length == 0) {
+      this.connection.CreateArticle(this.article)
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.route.navigateByUrl("/MyArticles");
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          }
+        });
     }
     //Create private article.
-    else{
-      this.article.IsPrivate=true;
-      this.goalitems.forEach(item =>this.sharedUsersId.push(item.value))
-      this.privateArticle={
-        article:this.article,
-        sharedUsersId:this.sharedUsersId
+    else {
+      this.article.isPrivate = true;
+      this.goalitems.forEach(item => this.sharedUsersId.push(item.value))
+      this.privateArticle = {
+        article: this.article,
+        sharedUsersId: this.sharedUsersId
       }
-    
       this.connection.CreatePrivateArticle(this.privateArticle)
-      .pipe(catchError(this.handleError)).subscribe({
-        next: (data: any) => {
-          this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
-          this.route.navigateByUrl("/MyArticles");
-        },
-        error: (error) => {
-          this.error = error.error.message;
-          this.IsLoadingSubmit=false;
-        }
-      });
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.route.navigateByUrl("/MyArticles");
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          }
+        });
     }
-    
+
   }
 
   handleError(error: any) {
@@ -121,18 +120,39 @@ privateArticle:any={
   //Create article and save it to draft.
   saveToDraft() {
     this.IsLoadingSaveDraft = true;
-    this.connection.CreateArticle(this.article)
-      .subscribe({
-        next: (data: any) => {
-          this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
-          this.route.navigateByUrl("/MyArticles");
-        },
-        error: (error) => {
-          this.error = error.error.message;
-          this.IsLoadingSaveDraft=false;
+    if (this.goalitems.length == 0) {
+      this.connection.CreateArticle(this.article)
+        .subscribe({
+          next: (data: any) => {
+            this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
+            this.route.navigateByUrl("/MyArticles");
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSaveDraft = false;
 
-        }
-      });
+          }
+        });
+    }
+    else {
+      this.article.isPrivate = true;
+      this.goalitems.forEach(item => this.sharedUsersId.push(item.value))
+      this.privateArticle = {
+        article: this.article,
+        sharedUsersId: this.sharedUsersId
+      }
+      this.connection.CreatePrivateArticle(this.privateArticle)
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.route.navigateByUrl("/MyArticles");
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          }
+        });
+    }
 
   }
   //Add image in article.
@@ -168,5 +188,5 @@ privateArticle:any={
       reader.readAsDataURL(fileInput.target.files[0]);
     } return false
   }
-  
+
 }
