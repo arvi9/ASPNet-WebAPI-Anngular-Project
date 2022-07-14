@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Article } from 'Models/Article';
 import { Toaster } from 'ngx-toast-notifications';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -19,7 +18,7 @@ export class RejectreasonComponent implements OnInit {
     articlestatusid: 1,
     Reason: "",
   }
-  
+
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
 
   ngOnInit(): void {
@@ -35,8 +34,7 @@ export class RejectreasonComponent implements OnInit {
   }
 
   UpdateReason() {
-    console.log(this.article)
-  this.article.articlestatusid=1
+    this.article.articlestatusid = 1
     this.connection.UpdateArticle(this.article)
       .subscribe({
         next: (data) => {
