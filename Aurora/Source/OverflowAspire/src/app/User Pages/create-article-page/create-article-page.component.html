@@ -41,6 +41,11 @@
                         Image is required.
                     </small>
                 </div>
+                <div>
+                    <br>
+                    <b><h5>Preview:</h5></b>
+                    <img class="articleimg" [src]="'data:image/jpg;base64,'+ article.ImageString" alt="image" />
+                </div>
             </div>
             <br> 
             <label class="form-label" for="email">Invite People(optional):</label><br>

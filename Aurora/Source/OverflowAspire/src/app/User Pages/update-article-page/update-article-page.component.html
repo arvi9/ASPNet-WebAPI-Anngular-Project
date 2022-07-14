@@ -16,6 +16,7 @@
         </nav>
     </div>
     <div class="container editor">
+        <h1>{{error}}</h1>
         <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">
                 <label class="form-label">Title:</label>
@@ -32,13 +33,18 @@
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
                 <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image"
-                    #image="ngModel" [(ngModel)]="article.ImageString" required>
+                    #image="ngModel" [(ngModel)]="article.ImageString">
                 <label class="text-danger"> {{imageError}}</label>
                 <div *ngIf="image.errors && (image.invalid || image.touched)">
                     <small class="text-danger" [class.d-none]="image.valid || image.untouched"
                         *ngIf="image.errors?.['required']">
                         Image is required.
                     </small>
+                </div>
+                <div>
+                    <br>
+                    <b><h5>Preview:</h5></b>
+                    <img class="articleimg" [src]="'data:image/jpg;base64,'+ article.ImageString" alt="image" />
                 </div>
             </div>
             <br>
@@ -58,10 +64,13 @@
                 </small>
             </div>
             <div class="editor-btn">
-                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button" (click)="saveToDraft()">Save
-                    To Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"></span></button>
-                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit">Submit <span
-                        *ngIf="IsLoadingSubmit" class="spinner-border spinner-border-sm" role="status"></span></button>
+                <button class="custom-btn btn-1 btn-2 text-white font-weight-normal" type="button"
+                    [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
+                    Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span></button>
+                <button class="custom-btn btn-1 btn-2 text-white font-weight-normal" type="submit"
+                    [disabled]="!form.valid">Submit <span *ngIf="IsLoadingSubmit"
+                        class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
             </div>
         </form>
     </div>

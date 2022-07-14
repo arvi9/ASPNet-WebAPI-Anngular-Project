@@ -39,9 +39,6 @@ export class UpdateArticlePageComponent implements OnInit {
     image: "",
     articleStatusID: 1,
     reviewerId: 0,
-    createdBy: 1,
-    sharedUsers: null,
-    ImageString: this.cardImageBase64,
     updatedOn: new Date(),
     Reason: null,
   }
@@ -70,7 +67,9 @@ export class UpdateArticlePageComponent implements OnInit {
             this.article.title = data.title;
             this.article.content = data.content;
             this.article.ImageString = data.image;
-            data.sharedUsers.forEach(item => this.itemsAsObjects.push(new sharedItem(item.userId, item.email)))
+            if(data.sharedUsers!=null){
+              data.sharedUsers.forEach(item => this.itemsAsObjects.push(new sharedItem(item.userId, item.email)))
+            }
           }
         });
       this.connection.GetEmployeePage().subscribe((data: any[]) => {
