@@ -64,11 +64,11 @@
                 </small>
             </div>
             <div class="editor-btn">
-                <button class="custom-btn btn-1 btn-2 text-white font-weight-normal" type="button"
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button"
                     [disabled]="form.form.invalid" (click)="saveToDraft()">Save To
                     Draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
                         aria-hidden="true"></span></button>
-                <button class="custom-btn btn-1 btn-2 text-white font-weight-normal" type="submit"
+                <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit"
                     [disabled]="!form.valid">Submit <span *ngIf="IsLoadingSubmit"
                         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
             </div>

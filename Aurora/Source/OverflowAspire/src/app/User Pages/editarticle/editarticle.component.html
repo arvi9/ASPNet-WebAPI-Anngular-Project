@@ -17,14 +17,17 @@
   </div>
 
   <div class="container p-2" *ngIf="data.status=='InDraft' && data.reason!==null">
-      <p class="reason">
-        <label class="r1">Reason For Rejection</label>
-        <br>
-        <br> 
-        {{data.reason}}</p>
+    <p class="reason">
+      <label class="r1">Reason For Rejection</label>
+      <br>
+      <br>
+      {{data.reason}}
+    </p>
   </div>
 
-  <div class="container p-1">
+  <div class="container p-1 d-flex justify-content-between">
+    <a *ngIf="data.status=='InDraft'" (click)="DeleteArticle(data.articleId)"><button type="button" class="custom-btn btn btn-danger" id="button-code">Delete
+      Article</button></a>
     <a *ngIf="data.status=='InDraft'" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button"
         class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>
   </div>

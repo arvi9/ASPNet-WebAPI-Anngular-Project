@@ -145,6 +145,11 @@ export class ConnectionService {
     return this.http.patch(this.URL + `Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=4`,Object,{ headers: this.headers })  
   
   }
+
+  DeleteArticle(articleId:number): any {
+    return this.http.delete(this.URL + `Article/DeleteArticleByArticleId?ArticleId=${articleId}`,{ headers: this.headers })  
+  
+  }
   //Change article status to under review.
   ChangeToUnderReview(articleId:number): any {
     return this.http.patch(this.URL + `Article/ChangeArticleStatus?ArticleId=${articleId}&ArticleStatusID=3`,Object,{ headers: this.headers })  

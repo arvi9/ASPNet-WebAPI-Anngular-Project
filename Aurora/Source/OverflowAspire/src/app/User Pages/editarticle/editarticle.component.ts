@@ -3,6 +3,7 @@ import { Article } from 'Models/Article';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-editarticle',
@@ -18,7 +19,7 @@ export class EditarticleComponent implements OnInit {
   isReadMore = false
   iReadMore = true
   createdOn: string = this.data.date.toDateString()
-  
+  error=""
   article: any = {
     articleCommentId: 0,
     comment: '',
@@ -35,7 +36,7 @@ export class EditarticleComponent implements OnInit {
     userId: 2,
   }
 
-  constructor(private route: ActivatedRoute,  private routes: Router, private connection: ConnectionService) { }
+  constructor(private route: ActivatedRoute,  private routes: Router, private connection: ConnectionService,private toaster: Toaster) { }
 
   //Get article by article id.
   ngOnInit(): void {
@@ -51,6 +52,20 @@ export class EditarticleComponent implements OnInit {
     });
   }
 
+  DeleteArticle(articleId: number){
+    this.connection.DeleteArticle(articleId)
+    .subscribe({
+      next: () => {
+      },
+      error: (error:any)=> {
+        this.error = error.error.message;
+      },
+      complete:()=>{
+        this.toaster.open({ text: 'Article Deleted successfully', position: 'top-center', type: 'danger' })
+        this.routes.navigateByUrl("/MyArticles");
+      }
+    });
+  }
   
 
   showText() {

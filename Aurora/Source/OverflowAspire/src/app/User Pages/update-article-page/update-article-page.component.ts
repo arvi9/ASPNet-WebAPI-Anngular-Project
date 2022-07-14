@@ -135,7 +135,7 @@ export class UpdateArticlePageComponent implements OnInit {
             this.IsLoadingSubmit = false;
           },
           complete:()=>{
-            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.toaster.open({ text: 'Article added to draft successfully', position: 'top-center', type: 'success' })
             this.router.navigateByUrl("/MyArticles");
           }  
         });
@@ -157,7 +157,7 @@ export class UpdateArticlePageComponent implements OnInit {
             this.IsLoadingSubmit = false;
           },
           complete:()=>{
-            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.toaster.open({ text: 'Article added to draft successfully', position: 'top-center', type: 'success' })
             this.router.navigateByUrl("/MyArticles");
           }
         });
