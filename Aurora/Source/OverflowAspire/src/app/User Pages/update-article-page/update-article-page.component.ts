@@ -125,7 +125,7 @@ export class UpdateArticlePageComponent implements OnInit {
   //Update article to savetodraft
   saveToDraft() {
     this.IsLoadingSubmit = true;
-    if (this.itemsAsObjects.length == 0) {
+    if (this.itemsAsObjects.length==0) {
       this.connection.UpdateArticle(this.article)
         .pipe(catchError(this.handleError)).subscribe({
           next: (data: any) => {
