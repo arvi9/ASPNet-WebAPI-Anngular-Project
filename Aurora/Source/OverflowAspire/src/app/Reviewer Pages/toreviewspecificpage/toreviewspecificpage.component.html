@@ -34,7 +34,7 @@
                 </div>
                 <p> {{data.content|htmlToPlaintext}}</p>
                 <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
-                    <a (click)="RejectArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
+                    <a [routerLink]="['/ReasonReject',data.articleId]" routerLinkActive="active"><button
                             type="button" class="custom-btn btn-1">Reject</button></a>
                     <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
                             type="button" class="custom-btn btn-1">Publish</button></a>
@@ -63,7 +63,7 @@
             </div>
             <p> {{data.content|htmlToPlaintext}}</p>
             <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
-                <a (click)="RejectArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
+                <a  routerLinkActive="active" [routerLink]="['/ReasonReject',data.articleId]"><button
                         type="button" class="custom-btn btn-1">Reject</button></a>
                 <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
                         type="button" class="custom-btn btn-1">Publish</button></a>

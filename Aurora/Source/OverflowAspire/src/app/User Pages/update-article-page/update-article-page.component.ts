@@ -12,7 +12,7 @@ export class sharedItem {
   value: number = 0
   constructor(value: number, display: string) {
     this.display = display,
-      this.value = value
+    this.value = value
   }
 }
 
@@ -47,11 +47,9 @@ export class UpdateArticlePageComponent implements OnInit {
   }
 
   public data: any = new Article();
-
   public items = [
     { display: '', value: 0 },
   ];
-
   privateArticle: any = {
     article: this.article,
     itemsAsObjects: []
@@ -89,16 +87,18 @@ export class UpdateArticlePageComponent implements OnInit {
       this.connection.UpdateArticle(this.article)
         .pipe(catchError(this.handleError)).subscribe({
           next: (data: any) => {
-            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
-            this.router.navigateByUrl("/MyArticles");
           },
           error: (error) => {
             this.error = error.error.message;
             this.IsLoadingSubmit = false;
+          },
+          complete:()=>{
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.router.navigateByUrl("/MyArticles");
           }
         });
     }
-    //update private article.
+    //update private article and submit
     else {
       this.article.isPrivate = true;
       this.itemsAsObjects.forEach(item => this.sharedUsersId.push(item.value))
@@ -109,27 +109,60 @@ export class UpdateArticlePageComponent implements OnInit {
       this.connection.UpdatePrivateArticle(this.privateArticle)
         .pipe(catchError(this.handleError)).subscribe({
           next: (data: any) => {
-            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
-            this.router.navigateByUrl("/MyArticles");
           },
           error: (error) => {
             this.error = error.error.message;
             this.IsLoadingSubmit = false;
+          },
+          complete:()=>{
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.router.navigateByUrl("/MyArticles");
           }
         });
     }
 
   }
-  
 
+  //Update article to savetodraft
   saveToDraft() {
-    this.connection.UpdateArticle(this.article)
-      .subscribe({
-        next: (data: any) => {
-          this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'warning' })
-          this.router.navigateByUrl("/MyArticles");
-        }
-      });
+    this.IsLoadingSubmit = true;
+    if (this.itemsAsObjects.length == 0) {
+      this.connection.UpdateArticle(this.article)
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          },
+          complete:()=>{
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.router.navigateByUrl("/MyArticles");
+          }  
+        });
+    }
+    //update private article to savetodraft
+    else {
+      this.article.isPrivate = true;
+      this.itemsAsObjects.forEach(item => this.sharedUsersId.push(item.value))
+      this.privateArticle = {
+        article: this.article,
+        sharedUsersId: this.sharedUsersId
+      }
+      this.connection.UpdatePrivateArticle(this.privateArticle)
+        .pipe(catchError(this.handleError)).subscribe({
+          next: (data: any) => {
+          },
+          error: (error) => {
+            this.error = error.error.message;
+            this.IsLoadingSubmit = false;
+          },
+          complete:()=>{
+            this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
+            this.router.navigateByUrl("/MyArticles");
+          }
+        });
+    }
 
   }
 

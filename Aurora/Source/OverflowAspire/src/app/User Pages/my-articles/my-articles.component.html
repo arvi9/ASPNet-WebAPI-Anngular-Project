@@ -44,31 +44,26 @@
                         <div class="card-image">
                             <img [src]="'data:image/jpg;base64,'+ item.image" />
                         </div>
-                        <div class="card__body d-flex flex-column">
-                            <div class="row">
-                                <div class="col-md-3">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content">
                                     <div *ngIf="ShowStatus">
                                         <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
                                         <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
-                                            class="tag tag-brown">UnderReview</span>
-                                        <span *ngIf="item.status=='InDraft'" class="tag tag-red">InDraft</span>
+                                            class="tag tag-brown">Under Review</span>
+                                        <span *ngIf="item.status=='InDraft'" class="tag tag-red">In Draft</span>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
                                     <div *ngIf="item.isPrivate">
                                         <img alt="LogoImg" class="privateImg" src="./assets/private.png">
                                     </div>
-                                </div>
                             </div>
                             <h4 class="card-title text-truncate">{{item.title}}</h4>
                             <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                         </div>
                         <div class="mt-auto">
-                            <div class="btntag tag-blue " routerLinkActive="active"
+                            <div class="btntag tag-blue" routerLinkActive="active"
                                 [routerLink]="['/EditArticle',item.articleId]">Read More</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

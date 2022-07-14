@@ -14,7 +14,7 @@ import { User } from 'Models/User';
 export class ToreviewspecificpageComponent implements OnInit {
   articleId: number = 0;
   error = ""
-  userid:any;
+  userid: any;
   public data: Article = new Article();
 
   constructor(private route: ActivatedRoute, private routing: Router, private connection: ConnectionService, private toaster: Toaster) { }
@@ -31,17 +31,18 @@ export class ToreviewspecificpageComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
+            console.log(data.articleId)
           }
         });
-        this.connection.GetCurrentApplicationUser()
-      .subscribe({
-        next: (data: User) => {
-          this.userid = data.userId;
-        }
-      });
+      this.connection.GetCurrentApplicationUser()
+        .subscribe({
+          next: (data: User) => {
+            this.userid = data.userId;
+          }
+        });
     });
   }
-  
+
 
   PublishArticle(articleId: number) {
     this.connection.ApproveArticle(articleId)
@@ -53,18 +54,6 @@ export class ToreviewspecificpageComponent implements OnInit {
         },
         complete: () => {
           this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
-          this.routing.navigateByUrl("/ToReview");
-        }
-      });
-  }
-
-  RejectArticle(articleId: number) {
-    this.connection.RejectArticle(articleId)
-      .subscribe({
-        next: (data: any) => {
-        },
-        complete: () => {
-          this.toaster.open({ text: 'Article Rejected successfully', position: 'top-center', type: 'warning' })
           this.routing.navigateByUrl("/ToReview");
         }
       });
@@ -82,12 +71,12 @@ export class ToreviewspecificpageComponent implements OnInit {
           this.ngOnInit()
           this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' })
         }
-      });  
-      setTimeout(
-        () => {
-          location.reload(); // the code to execute after the timeout
-        },
-        1000// the time to sleep to delay for
+      });
+    setTimeout(
+      () => {
+        location.reload(); // the code to execute after the timeout
+      },
+      1000// the time to sleep to delay for
     );
   }
 }

@@ -56,7 +56,12 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           this.IsLoading = false;
           this.showErrorMessage = true;
+        },
+        complete:()=>{
+          this.user.Email=''
+          this.user.Password=''
         }
       });
+      
   }
 }

@@ -1,4 +1,3 @@
-
 body {
   margin: 0
 }
@@ -8,16 +7,13 @@ body {
   padding: 10px
 }
 
-
-
-
 .stickypagination {
   position: sticky;
   top: 90%
 }
 
 .para {
-  margin-left: 20px
+  margin-left: 20px;
 }
 
 .card {
@@ -56,11 +52,6 @@ img {
   box-shadow: 0 .1rem 1rem rgba(0, 0, 0, .1);
   border-radius: 1em;
   background: #fff
-}
-
-
-.card__body {
-  padding-left: 1rem
 }
 
 .tag-brown {

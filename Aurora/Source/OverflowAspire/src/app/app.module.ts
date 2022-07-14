@@ -58,6 +58,7 @@ import { TrendingQueriespageComponent } from './User Pages/trending-queriespage/
 import { UpdateArticlePageComponent } from './User Pages/update-article-page/update-article-page.component';
 import { ErrorPageComponent } from './Shared Pages/error-page/error-page.component';
 import { PrivatearticlesComponent } from './User Pages/privatearticles/privatearticles.component';
+import { RejectreasonComponent } from './Reviewer Pages/rejectreason/rejectreason.component';
 
 
 
@@ -101,7 +102,8 @@ import { PrivatearticlesComponent } from './User Pages/privatearticles/privatear
     TrendingQueriespageComponent,
     UpdateArticlePageComponent,
     ErrorPageComponent,
-    PrivatearticlesComponent
+    PrivatearticlesComponent,
+    RejectreasonComponent
   ],
 
   imports: [
