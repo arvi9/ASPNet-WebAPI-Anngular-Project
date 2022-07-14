@@ -73,6 +73,7 @@ namespace AspireOverflow.Services
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
+                ExistingArticle.IsPrivate=article.IsPrivate;
                 ExistingArticle.Image = String.IsNullOrEmpty(article.ImageString) ? ExistingArticle.Image : System.Convert.FromBase64String(article.ImageString!);
 
                 //Reviewer once rejected the article,Reason and Reviewer ID is updated .

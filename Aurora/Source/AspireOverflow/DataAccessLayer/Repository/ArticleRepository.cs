@@ -91,7 +91,7 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticle(article);
             try
             {
-                if (article.ArticleStatusID != 1) throw new ValidationException("you can update only the Draft Articles");
+                if (article.ArticleStatusID > 2) throw new ValidationException("you can update only the Draft Articles");
                 _context.Articles.Update(article);
                 _context.SaveChanges();
                 return true;
@@ -166,7 +166,7 @@ namespace AspireOverflow.DataAccessLayer
                 //Removing existing shared users in the PrivateArticleUsers table.
                 var ExistingSharedUsers = _context.PrivateArticleUsers.Where(item => item.ArticleId == article.ArticleId);
                 _context.PrivateArticleUsers.RemoveRange(ExistingSharedUsers);
-                //
+                //Addings Sharedusers Id to the PrivateArticleUsers table
                 if (SharedUsersId.Count > 0) SharedUsersId.ForEach(UserId => _context.PrivateArticleUsers.Update(new PrivateArticleUsers(article.ArticleId, UserId)));
                 _context.SaveChanges();
                 return true;
