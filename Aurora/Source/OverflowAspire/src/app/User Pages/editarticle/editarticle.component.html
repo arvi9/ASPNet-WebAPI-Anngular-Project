@@ -15,6 +15,20 @@
       </ol>
     </nav>
   </div>
+
+  <div class="container p-2" *ngIf="data.status=='InDraft' && data.reason!==null">
+    <!-- <h1 class="text-center">Reason For Rejection</h1> -->
+    <br>
+    <div>
+      <p class="reason">
+        <label class="r1">Reason For Rejection</label>
+        <br>
+        <br>
+        
+        {{data.reason}}</p>
+  </div>
+  </div>
+
   <div class="container p-1">
     <a *ngIf="data.status=='InDraft'" [routerLink]="['/UpdateArticle',data.articleId]"><button type="button"
         class="custom-btn btn-1 btn-3 " id="button-code">Edit Article</button></a>

@@ -56,3 +56,17 @@ body {
 .breadcrumb {
   margin: 20px;
 }
+.reason{
+  text-align: center;
+  border:1px solid #000;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.r1{
+  text-align: center;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: bold;
+  font-size: large;
+  
+}

@@ -27,6 +27,7 @@ export class EditarticleComponent implements OnInit {
     articleId: 2,
     updatedBy: 0,
     updatedOn: '',
+    reviewerId:0
   }
   like: any = {
     likeId: 0,
@@ -45,6 +46,10 @@ export class EditarticleComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
+            console.log(data)
+            console.log(data.reviewerId)
+           
+
           }
         });
     });
