@@ -27,6 +27,7 @@ namespace AspireOverflow.Services
             try
             {
                 article.Image = Convert.FromBase64String(article.ImageString!);
+                article.Reason = null;
                 article.CreatedOn = DateTime.Now;
                 return database.AddArticle(article);
             }
@@ -57,6 +58,7 @@ namespace AspireOverflow.Services
 
 
         //Article is Updating using article object and UpdatedByUserId.
+        //sharedUsersId is Required only for updating Private Articles.
         public bool UpdateArticle(Article article, int UpdatedByUserId, bool IsReviewer, List<int>? SharedUsersId = default!)
         {
             //throws Validation Exception if any validation fails.
@@ -66,15 +68,14 @@ namespace AspireOverflow.Services
                 var ExistingArticle = database.GetArticleByID(article.ArticleId);
                 //throws Exception when ExistingArticle is null.
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArticleId}");
-                if (ExistingArticle.ArticleStatusID != 1) throw new ValidationException("you can update only the Draft Articles");
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
-                ExistingArticle.Image = System.Convert.FromBase64String(article.ImageString!);
+                ExistingArticle.Image = String.IsNullOrEmpty(article.ImageString) ? ExistingArticle.Image : System.Convert.FromBase64String(article.ImageString!);
 
-                //Reviewer once rejected,Reason and Reviewer ID is updated.
+                //Reviewer once rejected the article,Reason and Reviewer ID is updated .
                 if (UpdatedByUserId != ExistingArticle.CreatedBy && IsReviewer)
                 {
                     ExistingArticle.Reason = article.Reason;
@@ -82,6 +83,11 @@ namespace AspireOverflow.Services
                 }
                 //Returns true once successfully updated.
                 return SharedUsersId == null ? database.UpdateArticle(ExistingArticle) : database.UpdatePrivateArticle(ExistingArticle, SharedUsersId);
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", " UpdateArticle(Article article, int CurrentUser)", exception, article));
+                throw;
             }
             catch (Exception exception)
             {
@@ -158,7 +164,6 @@ namespace AspireOverflow.Services
                     Reason = article.Reason,
                     IsPrivate = article.IsPrivate,
                     SharedUsers = SharedUsers
-
                 };
             }
             catch (Exception exception)
