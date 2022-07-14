@@ -54,7 +54,7 @@ namespace AspireOverflow.DataAccessLayer
         }
 
         //to create a private article using article object and list of shared user Id.
-        public bool AddPrivateArticle(Article article, List<int> SharedUsersId)
+        public bool AddPrivateArticleWithSharedUsers(Article article, List<int> SharedUsersId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticle(article);
@@ -64,7 +64,7 @@ namespace AspireOverflow.DataAccessLayer
                 _context.SaveChanges();
                 if (article.IsPrivate && SharedUsersId.Count > 0)
                 {
-                    SharedUsersId.ForEach(UserId => _context.PrivateArticles.AddAsync(new PrivateArticle(entry.Entity.ArticleId, UserId)));
+                    SharedUsersId.ForEach(UserId => _context.PrivateArticleUsers.AddAsync(new PrivateArticleUsers(entry.Entity.ArticleId, UserId)));
                     _context.SaveChanges();
                 }
                 return true;
@@ -83,7 +83,6 @@ namespace AspireOverflow.DataAccessLayer
                 }
             }
         }
-
 
         //to update an article using article object.
         public bool UpdateArticle(Article article)
@@ -157,24 +156,19 @@ namespace AspireOverflow.DataAccessLayer
         }
 
         //To Update the existing private article  with shared users
-        public bool UpdatePrivateArticle(Article article, List<int> SharedUsersId)
+        public bool UpdatePrivateArticleWithSharedUsers(Article article, List<int> SharedUsersId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
                 UpdateArticle(article);
-                if (SharedUsersId.Count > 0)
-                {
-                    foreach (int UserId in SharedUsersId)
-                    {
-                        if (!_context.PrivateArticles.Any(Item => Item.ArticleId == article.ArticleId && Item.UserId == UserId))
-                        {
-                            _context.PrivateArticles.Update(new PrivateArticle(article.ArticleId, UserId));
-                        }
-                    }
-                    _context.SaveChanges();
-                }
+                //Removing existing shared users in the PrivateArticleUsers table.
+                var ExistingSharedUsers = _context.PrivateArticleUsers.Where(item => item.ArticleId == article.ArticleId);
+                _context.PrivateArticleUsers.RemoveRange(ExistingSharedUsers);
+                //
+                if (SharedUsersId.Count > 0) SharedUsersId.ForEach(UserId => _context.PrivateArticleUsers.Update(new PrivateArticleUsers(article.ArticleId, UserId)));
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception exception)
@@ -400,13 +394,13 @@ namespace AspireOverflow.DataAccessLayer
         }
 
         //to get the list of privately shared articles by UserId
-        public IEnumerable<PrivateArticle> GetPrivateArticlesByUserId(int UserId)
+        public IEnumerable<PrivateArticleUsers> GetPrivateArticleUsersByUserId(int UserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var ListofPrivateArticles = _context.PrivateArticles.Where(item => item.UserId == UserId).Include(e => e.article);
+                var ListofPrivateArticles = _context.PrivateArticleUsers.Where(item => item.UserId == UserId).Include(e => e.article);
                 return ListofPrivateArticles;
             }
             catch (Exception exception)
@@ -425,13 +419,13 @@ namespace AspireOverflow.DataAccessLayer
         }
 
         //Gets the private article by the articleId (Private article = article which is shared only with certain people).
-        public IEnumerable<PrivateArticle> GetPrivateArticlesByArticleId(int ArticleId)
+        public IEnumerable<PrivateArticleUsers> GetPrivateArticleUsersByArticleId(int ArticleId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
-                var ListofPrivateArticles = _context.PrivateArticles.Where(item => item.ArticleId == ArticleId).Include(e => e.user);
+                var ListofPrivateArticles = _context.PrivateArticleUsers.Where(item => item.ArticleId == ArticleId).Include(e => e.user);
                 return ListofPrivateArticles;
             }
             catch (Exception exception)

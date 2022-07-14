@@ -9,7 +9,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         IEnumerable<Query> GetQueries();
         public object GetCountOfQueries();
         public IEnumerable<Query> GetQueriesByUserId(int UserId);
-           public IEnumerable<Query> GetQueriesByTitle(String Title);
+        public IEnumerable<Query> GetQueriesByTitle(String Title);
         public IEnumerable<Query> GetQueriesByIsSolved(bool IsSolved);
 
     }

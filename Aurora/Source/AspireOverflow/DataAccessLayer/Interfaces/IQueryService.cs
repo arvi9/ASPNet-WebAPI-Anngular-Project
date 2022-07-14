@@ -9,12 +9,12 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool MarkQueryAsSolved(int QueryId);
         Object GetQuery(int QueryID);
         IEnumerable<Object> GetListOfQueries();
-        IEnumerable<Object> GetTrendingQueries(int Range=0);
-        IEnumerable<Object> GetLatestQueries(int Range=0);
+        IEnumerable<Object> GetTrendingQueries(int Range = 0);
+        IEnumerable<Object> GetLatestQueries(int Range = 0);
         IEnumerable<Object> GetQueriesByUserId(int UserId);
         IEnumerable<Object> GetQueriesByTitle(String Title);
         IEnumerable<Object> GetQueriesByIsSolved(bool IsSolved);
-         public object GetCountOfQueries();
+        public object GetCountOfQueries();
     }
 
     public interface IQueryCommentService
@@ -22,7 +22,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         bool CreateComment(QueryComment comment);
         IEnumerable<Object> GetComments(int QueryId);
     }
-    
+
     public interface IQuerySpamService
     {
         bool AddSpam(Spam spam);

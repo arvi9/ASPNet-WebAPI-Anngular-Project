@@ -47,7 +47,7 @@ namespace AspireOverflow.Services
                 article.Image = Convert.FromBase64String(article.ImageString!);
                 article.CreatedOn = DateTime.Now;
                 //for adding articles visible only for shared users.
-                return database.AddPrivateArticle(article, SharedUsersId);
+                return database.AddPrivateArticleWithSharedUsers(article, SharedUsersId);
             }
             catch (Exception exception)
             {
@@ -82,7 +82,7 @@ namespace AspireOverflow.Services
                     ExistingArticle.ReviewerId = UpdatedByUserId;
                 }
                 //Returns true once successfully updated.
-                return SharedUsersId == null ? database.UpdateArticle(ExistingArticle) : database.UpdatePrivateArticle(ExistingArticle, SharedUsersId);
+                return SharedUsersId == null ? database.UpdateArticle(ExistingArticle) : database.UpdatePrivateArticleWithSharedUsers(ExistingArticle, SharedUsersId);
             }
             catch (ValidationException exception)
             {
@@ -143,7 +143,7 @@ namespace AspireOverflow.Services
             try
             {
                 var article = database.GetArticleByID(ArticleId);
-                var SharedUsers = article.IsPrivate ? database.GetPrivateArticlesByArticleId(article.ArticleId).Select(Item => new
+                var SharedUsers = article.IsPrivate ? database.GetPrivateArticleUsersByArticleId(article.ArticleId).Select(Item => new
                 {
                     UserId = Item.user?.UserId,
                     FullName = Item.user?.FullName,
@@ -289,7 +289,7 @@ namespace AspireOverflow.Services
         {
             try
             {
-                var ListOfPrivateArticles = database.GetPrivateArticlesByUserId(UserId);
+                var ListOfPrivateArticles = database.GetPrivateArticleUsersByUserId(UserId);
                 return ListOfPrivateArticles.Select(PrivateArticle => PrivateArticle.article!);
             }
             catch (Exception exception)

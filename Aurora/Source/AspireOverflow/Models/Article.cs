@@ -54,12 +54,12 @@ namespace AspireOverflow.Models
         public virtual ICollection<ArticleLike>? ArticleLikes { get; set; }
 
         [InverseProperty("article")]
-        public virtual ICollection<PrivateArticle>? PrivateArticles { get; set; }
+        public virtual ICollection<PrivateArticleUsers>? PrivateArticles { get; set; }
 
     }
-    public partial class PrivateArticle
+    public partial class PrivateArticleUsers
     {
-        public PrivateArticle(int articleId, int userId)
+        public PrivateArticleUsers(int articleId, int userId)
         {
             ArticleId = articleId;
             UserId = userId;
