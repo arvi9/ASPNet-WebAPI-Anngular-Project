@@ -15,7 +15,7 @@ export class Article {
     getlike:articleLikes[]=[];
     likes:number=0;
     reviewer:string=""
-    Reason:string=""
+    reason:string=""
 }
 
 export class ArticleComments{

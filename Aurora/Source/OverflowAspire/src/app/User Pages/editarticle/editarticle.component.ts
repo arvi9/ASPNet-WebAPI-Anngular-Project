@@ -46,10 +46,6 @@ export class EditarticleComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
-            console.log(data)
-            console.log(data.reviewerId)
-           
-
           }
         });
     });

@@ -16,17 +16,12 @@
     </nav>
   </div>
 
-  <div class="container p-2" *ngIf="data.status=='InDraft' && data.Reason!==null">
-    <!-- <h1 class="text-center">Reason For Rejection</h1> -->
-    <br>
-    <div>
+  <div class="container p-2" *ngIf="data.status=='InDraft' && data.reason!==null">
       <p class="reason">
         <label class="r1">Reason For Rejection</label>
         <br>
-        <br>
-        
-        {{data.Reason}}</p>
-  </div>
+        <br> 
+        {{data.reason}}</p>
   </div>
 
   <div class="container p-1">
