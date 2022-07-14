@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
 import { TagInputModule } from 'ngx-chips';
+import { HashLocationStrategy,LocationStrategy } from '@angular/common';
 
 import { AdmindashboardComponent } from './Admin Pages/admindashboard/admindashboard.component';
 import { EmployeePageComponent } from './Admin Pages/employee-page/employee-page.component';
@@ -128,7 +129,7 @@ import { RejectreasonComponent } from './Reviewer Pages/rejectreason/rejectreaso
     TagInputModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{provide:LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
