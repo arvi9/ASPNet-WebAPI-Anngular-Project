@@ -18,6 +18,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
 
         public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer = false);
         public object GetCountOfArticles();
+         public bool GetIsTraceEnabledFromConfiguration();
     }
 
     public interface IArticleComment

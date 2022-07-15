@@ -48,7 +48,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddPrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddPrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for UpdateArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for UpdateArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (ExistingArticle.CreatedBy == UpdatedByUserId && ArticleStatusID > 2) throw new ValidationException("Reviewer cannot update status of thier own articles");
                 if (ArticleStatusID > 2) ExistingArticle.ReviewerId = UpdatedByUserId; // Reviewer Id has been assigned once article status Id greater than 2
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
-                ExistingArticle.UpdatedOn = DateTime.Now;
+                ExistingArticle.UpdatedOn = ;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
 
                 _context.Articles.Update(ExistingArticle);
@@ -150,7 +150,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for UpdatePrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for UpdatePrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -209,7 +209,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for DeleteArticleByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for DeleteArticleByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -235,7 +235,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticleByID(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticleByID(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -246,7 +246,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
             }
             catch (Exception exception)
@@ -259,7 +259,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -273,8 +273,8 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 //Articles with status (to be reviewed) and (Under Review) can only be accessible only to reviewer with PrivateArticles.
-                var ListOfArticle = (ArticleStatusID > 1) && IsReviewer ? _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList() :
-                _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                var ListOfArticle = (ArticleStatusID > 1) && IsReviewer ? _context.Articles.Where(item => item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()) && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList() :
+                _context.Articles.Where(item => item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
             }
             catch (Exception exception)
@@ -287,7 +287,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -312,7 +312,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByTitle(string Title) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByTitle(string Title) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -338,7 +338,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByAuthor(string AuthorName) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByAuthor(string AuthorName) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -364,7 +364,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByReviewerId(int ReviewerId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByReviewerId(int ReviewerId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -388,7 +388,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -413,7 +413,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetPrivateArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetPrivateArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -438,7 +438,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetPrivateArticlesByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetPrivateArticlesByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -469,7 +469,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"TraceLog:ArticleRepository Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -481,8 +481,8 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticleComment(comment);
             try
             {
-                comment.Datetime = DateTime.Now;
-                comment.CreatedOn = DateTime.Now;
+                comment.Datetime = DateTime.UtcNow;
+                comment.CreatedOn = DateTime.UtcNow;
                 _context.ArticleComments.Add(comment);
                 _context.SaveChanges();
                 return true;
@@ -497,7 +497,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddComment(ArticleComment comment) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddComment(ArticleComment comment) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -509,7 +509,7 @@ namespace AspireOverflow.DataAccessLayer
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
             try
             {
-                var ListOfComments = _context.ArticleComments.Where(item => item.ArticleId == ArticleId && item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.User).ToList();
+                var ListOfComments = _context.ArticleComments.Where(item => item.ArticleId == ArticleId && item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).Include(e => e.User).ToList();
                 return ListOfComments;
             }
             catch (Exception exception)
@@ -522,7 +522,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetCommentsByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetCommentsByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -554,7 +554,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddLike(ArticleLike like) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddLike(ArticleLike like) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -565,7 +565,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange())).ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).ToList();
                 return ListOfArticleLikes;
             }
             catch (Exception exception)
@@ -578,7 +578,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetLikes() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetLikes() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -603,7 +603,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"TraceLog:Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"TraceLog:ArticleRepository Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -628,13 +628,13 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetRange() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetRange() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
 
         //Get Tracing Enabled or not from Configuration
-        private bool GetIsTraceEnabledFromConfiguration()
+        public bool GetIsTraceEnabledFromConfiguration()
         {
             if (IsTracingEnabled) _stopWatch.Start();
             try
@@ -652,7 +652,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }

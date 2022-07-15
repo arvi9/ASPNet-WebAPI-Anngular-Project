@@ -519,7 +519,7 @@ namespace AspireOverflow.Controllers
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) return BadRequest(Message($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}"));
             try
             {
-                return _queryService.ChangeSpamStatus(QueryId, VerifyStatusID) ? Ok(Message("successfully Updated")) : BadRequest(Message($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}"));
+                return _queryService.ChangeSpamStatus(QueryId, VerifyStatusID,GetCurrentUser().UserId) ? Ok(Message("successfully Updated")) : BadRequest(Message($"Error occured while processing your request with QueryId:{QueryId} and VerifyStatusId:{VerifyStatusID}"));
             }
             catch (Exception exception)
             {

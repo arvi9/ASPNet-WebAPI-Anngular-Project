@@ -14,6 +14,14 @@ namespace AspireOverflow.Models
 
         public int VerifyStatusID { get; set; }
 
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public int CreatedBy { get; set; }
+      
+        public DateTime? UpdatedOn { get; set; }
+        public int? UpdatedBy { get; set; }
+
+
+
         [ForeignKey("VerifyStatusID")]
         public virtual VerifyStatus? VerifyStatus { get; set; }
         [ForeignKey("QueryId")]

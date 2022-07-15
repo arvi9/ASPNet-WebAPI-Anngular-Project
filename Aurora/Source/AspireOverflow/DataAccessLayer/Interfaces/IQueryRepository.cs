@@ -11,6 +11,7 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
         public IEnumerable<Query> GetQueriesByUserId(int UserId);
         public IEnumerable<Query> GetQueriesByTitle(String Title);
         public IEnumerable<Query> GetQueriesByIsSolved(bool IsSolved);
+         public bool GetIsTraceEnabledFromConfiguration();
 
     }
 
@@ -24,6 +25,6 @@ namespace AspireOverflow.DataAccessLayer.Interfaces
     {
         IEnumerable<Spam> GetSpams();
         bool AddSpam(Spam spam);
-        bool UpdateSpam(int QueryId, int VerifyStatusID);
+        bool UpdateSpam(int QueryId, int VerifyStatusID,int UpdatedByUserId);
     }
 }

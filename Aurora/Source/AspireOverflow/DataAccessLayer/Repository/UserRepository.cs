@@ -53,7 +53,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for CreateUser(User user) - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for CreateUser(User user) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for RemoveUser(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for RemoveUser(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetUserByID(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetUserByID(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetUserByID(int Email) - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetUserByID(int Email) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -149,7 +149,7 @@ namespace AspireOverflow.DataAccessLayer
 
        
         //to Update the user using UserId and VerifyStatusId.
-        public bool UpdateUserByVerifyStatus(int UserId, int VerifyStatusID)
+        public bool UpdateUserByVerifyStatus(int UserId, int VerifyStatusID,int UpdatedByUserId)
         {
             if(IsTracingEnabled) _stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -158,6 +158,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 var ExistingUser = GetUserByID(UserId);
                 ExistingUser.VerifyStatusID = VerifyStatusID;
+                ExistingUser.UpdatedOn=DateTime.UtcNow;
+                ExistingUser.UpdatedBy=UpdatedByUserId;
                 _context.Users.Update(ExistingUser);
                 _context.SaveChanges();
                 return true;
@@ -172,14 +174,14 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
 
 
         //to update the user using userId and IsReviewer.
-        public bool UpdateUserByReviewer(int UserId, bool IsReviewer)
+        public bool UpdateUserByReviewer(int UserId, bool IsReviewer,int UpdatedByUserId)
         {
             if(IsTracingEnabled) _stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
@@ -187,6 +189,8 @@ namespace AspireOverflow.DataAccessLayer
             {
                 var ExistingUser = GetUserByID(UserId);
                 ExistingUser.IsReviewer = IsReviewer;
+                ExistingUser.UpdatedBy=UpdatedByUserId;
+                ExistingUser.UpdatedOn=DateTime.UtcNow;
                 _context.Users.Update(ExistingUser);
                 _context.SaveChanges();
                 return true;
@@ -201,7 +205,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -224,7 +228,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -249,7 +253,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -275,7 +279,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -298,7 +302,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -326,7 +330,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -349,7 +353,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetGenders() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetGenders() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -373,7 +377,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -397,7 +401,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -421,13 +425,13 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
 
         //Get Tracing Enabled or not from Configuration
-        private bool GetIsTraceEnabledFromConfiguration()
+        public bool GetIsTraceEnabledFromConfiguration()
         {
             if(IsTracingEnabled) _stopWatch.Start();
             try
@@ -445,7 +449,7 @@ namespace AspireOverflow.DataAccessLayer
                 if(IsTracingEnabled)
                 {
                 _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }

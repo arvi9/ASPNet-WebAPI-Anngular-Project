@@ -45,7 +45,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddQuery(Query query) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for AddQuery(Query query) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddComment(QueryComment comment) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for AddComment(QueryComment comment) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for UpdateQuery(int QueryId, bool IsSolved, bool IsDelete) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for UpdateQuery(int QueryId, bool IsSolved, bool IsDelete) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace AspireOverflow.DataAccessLayer
             Query? ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.Now.AddMonths(-GetRange()));
+                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()));
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
@@ -131,7 +131,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetQueryByID(int QueryId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetQueryByID(int QueryId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -143,7 +143,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.User).ToList();
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).Include(e => e.User).ToList();
                 return ListOfQueries;
             }
             catch (Exception exception)
@@ -156,7 +156,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetQueries() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetQueries() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetQueriesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetQueriesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -203,7 +203,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetQueriesByTitle(String Title) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetQueriesByTitle(String Title) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -226,7 +226,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetQueries(bool IsSolved) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetQueries(bool IsSolved) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -250,7 +250,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetComments() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetComments() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -278,7 +278,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for AddSpam(Spam spam) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for AddSpam(Spam spam) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -303,24 +303,29 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetSpams() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetSpams() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
 
 
         //to update the query as spam using QueryId and VerifyStatusId.
-        public bool UpdateSpam(int QueryId, int VerifyStatusID)
+        public bool UpdateSpam(int QueryId, int VerifyStatusID, int UpdatedByUserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0 where QueryId:{QueryId}");
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be greater than 0 where VerifyStatusId:{VerifyStatusID}");
             try
             {
-                var ExistingSpam = _context.Spams.Where(item => item.QueryId == QueryId).ToList();
-                if (ExistingSpam == null) throw new ItemNotFoundException($"There is no matching Spam data with QueryId :{QueryId}");
-                ExistingSpam.ForEach(Item => Item.VerifyStatusID = VerifyStatusID);
-                _context.Spams.UpdateRange(ExistingSpam);
+                var ExistingSpams = _context.Spams.Where(item => item.QueryId == QueryId).ToList();
+                if (ExistingSpams == null) throw new ItemNotFoundException($"There is no matching Spam data with QueryId :{QueryId}");
+                foreach (var spam in ExistingSpams)
+                {
+                    spam.VerifyStatusID = VerifyStatusID;
+                    spam.UpdatedBy = UpdatedByUserId;
+                    spam.UpdatedOn = DateTime.UtcNow;
+                };
+                _context.Spams.UpdateRange(ExistingSpams);
                 _context.SaveChanges();
                 return true;
             }
@@ -334,7 +339,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for UpdateSpam(int QueryId, int VerifyStatusID) - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for UpdateSpam(int QueryId, int VerifyStatusID) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -362,7 +367,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetCountOfQueries() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetCountOfQueries() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
@@ -387,13 +392,13 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetDuration() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetDuration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }
 
         //Get Tracing Enabled or not from Configuration
-        private bool GetIsTraceEnabledFromConfiguration()
+        public bool GetIsTraceEnabledFromConfiguration()
         {
             if (IsTracingEnabled) _stopWatch.Start();
             try
@@ -411,7 +416,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (IsTracingEnabled)
                 {
                     _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
+                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
         }

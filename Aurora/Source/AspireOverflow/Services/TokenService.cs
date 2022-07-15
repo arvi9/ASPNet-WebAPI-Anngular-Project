@@ -45,9 +45,9 @@ namespace AspireOverflow.Services
                   _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
                     new ClaimsIdentity(claims),
-                    DateTime.Now,
-                    DateTime.Now.AddMinutes(30),
-                    DateTime.Now,
+                    DateTime.UtcNow,
+                    DateTime.UtcNow.AddMinutes(30),
+                    DateTime.UtcNow,
                     signIn,
                     encryptingCredentials);
                 var Result = new
