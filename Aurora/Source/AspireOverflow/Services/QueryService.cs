@@ -351,7 +351,6 @@ namespace AspireOverflow.Services
             try
             {
                 comment.CreatedOn = DateTime.UtcNow;
-                comment.Datetime = DateTime.UtcNow;
                 comment.UpdatedBy=null;
             
                 return database.AddComment(comment);
@@ -385,7 +384,8 @@ namespace AspireOverflow.Services
                     CommentId = item.QueryCommentId,
                     Message = item.Comment,
                     Name = item.User?.FullName,
-                    QueryId = item.QueryId
+                    QueryId = item.QueryId,
+                    DateTime=item.CreatedOn
                 });
             }
             catch (Exception exception)

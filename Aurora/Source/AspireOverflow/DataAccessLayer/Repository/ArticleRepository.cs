@@ -128,7 +128,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (ExistingArticle.CreatedBy == UpdatedByUserId && ArticleStatusID > 2) throw new ValidationException("Reviewer cannot update status of thier own articles");
                 if (ArticleStatusID > 2) ExistingArticle.ReviewerId = UpdatedByUserId; // Reviewer Id has been assigned once article status Id greater than 2
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
-                ExistingArticle.UpdatedOn = ;
+                ExistingArticle.UpdatedOn = DateTime.UtcNow;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
 
                 _context.Articles.Update(ExistingArticle);
@@ -481,7 +481,6 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticleComment(comment);
             try
             {
-                comment.Datetime = DateTime.UtcNow;
                 comment.CreatedOn = DateTime.UtcNow;
                 _context.ArticleComments.Add(comment);
                 _context.SaveChanges();

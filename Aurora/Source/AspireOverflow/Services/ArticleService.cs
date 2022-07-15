@@ -574,6 +574,7 @@ namespace AspireOverflow.Services
             try
             {
                 comment.CreatedBy = comment.UserId;
+                comment.CreatedOn=DateTime.UtcNow;
                 var IsCommentSuccessfully = database.AddComment(comment);
                 if (IsCommentSuccessfully) _mailService?.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully"));
                 return IsCommentSuccessfully;
@@ -608,7 +609,9 @@ namespace AspireOverflow.Services
                     CommentId = Item.ArticleCommentId,
                     Message = Item.Comment,
                     Name = Item.User?.FullName,
-                    ArticleId = Item.ArticleId
+                    ArticleId = Item.ArticleId,
+                    DateTime=Item.CreatedOn
+
                 });
             }
             catch (Exception exception)

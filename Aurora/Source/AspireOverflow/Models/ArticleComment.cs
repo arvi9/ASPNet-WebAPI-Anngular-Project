@@ -19,7 +19,7 @@ namespace AspireOverflow.Models
 
         public string? Comment { get; set; }
 
-        public DateTime Datetime { get; set; }
+      
 
 
         public int UserId { get;  set;}
