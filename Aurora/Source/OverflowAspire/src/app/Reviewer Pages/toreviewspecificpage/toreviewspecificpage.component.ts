@@ -74,9 +74,9 @@ export class ToreviewspecificpageComponent implements OnInit {
       });
     setTimeout(
       () => {
-        location.reload(); // the code to execute after the timeout
+        location.reload(); 
       },
-      1000// the time to sleep to delay for
+      1000
     );
   }
 }

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RejectreasonComponent } from './rejectreason.component';
 
 describe('RejectreasonComponent', () => {

@@ -17,7 +17,6 @@
                 <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)">Apply</button>
             </div>
         </div>
-
     </form>
 </div>
 <div *ngIf="data.length>0; else ArrayEmpty">
@@ -33,7 +32,7 @@
                     <div class="icon">
                         <img class="QueryImgIcon" src="./assets/chat-icon.png">
                     </div>
-                    <h4 class="card-text text-truncate">{{item.title}}</h4>
+                    <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
                     <p class="truncate-line-clamp">{{item.content}}</p>
                     <div class="mt-auto">
                         <a class="btntag tag-blue" routerLinkActive="active"

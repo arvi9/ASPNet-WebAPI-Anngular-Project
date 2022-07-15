@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Dashboard } from 'Models/Dashboard';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
@@ -14,8 +14,8 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class AdmindashboardComponent implements OnInit {
   piedata: any = {
     users: 0,
-    articles:0,
-    queries:0
+    articles: 0,
+    queries: 0
   }
   constructor(private connection: ConnectionService, private route: Router) { }
 

@@ -2,11 +2,9 @@ h3 {
     margin-left: 15%
 }
 
-
 .para {
     margin-left: 20px
 }
-
 
 .icon {
     padding: 10px 0;
@@ -39,6 +37,7 @@ h4 {
     width: 60px;
     margin-left: 12px
 }
+
 .btntag {
     align-self: flex-end;
     cursor: pointer;

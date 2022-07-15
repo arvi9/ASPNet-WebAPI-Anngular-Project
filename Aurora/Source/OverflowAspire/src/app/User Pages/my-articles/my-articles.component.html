@@ -53,10 +53,10 @@
                                         <span *ngIf="item.status=='InDraft'" class="tag tag-red">In Draft</span>
                                     </div>
                                     <div *ngIf="item.isPrivate">
-                                        <img alt="LogoImg" class="privateImg" src="./assets/private.png">
+                                        <img alt="LogoImg" class="privateImg" src="./assets/private.png" data-toggle="tooltip" title="Private">
                                     </div>
                             </div>
-                            <h4 class="card-title text-truncate">{{item.title}}</h4>
+                            <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
                             <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                         </div>
                         <div class="mt-auto">

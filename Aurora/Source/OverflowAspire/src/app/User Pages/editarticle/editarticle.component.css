@@ -41,8 +41,6 @@ body {
   height: 30px
 }
 
-
-
 .btn-3 {
   float: right;
   margin-right: -.5%;
@@ -56,17 +54,18 @@ body {
 .breadcrumb {
   margin: 20px;
 }
-.reason{
+
+.reason {
   text-align: center;
-  border:1px solid #000;
+  border: 1px solid #000;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.r1{
+
+.r1 {
   text-align: center;
   text-transform: uppercase;
   color: #000;
   font-weight: bold;
   font-size: large;
-  
 }

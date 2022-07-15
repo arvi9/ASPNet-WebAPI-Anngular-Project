@@ -1,4 +1,3 @@
-
 body {
   margin: 0
 }
@@ -7,6 +6,7 @@ h4 {
   font-size: 1.5rem;
   font-weight: 600;
 }
+
 .readmore {
   position: sticky;
   top: 90%;
@@ -39,11 +39,13 @@ h4 {
   float: center;
   margin-right: 40px;
 }
+
 .tag-blue {
   background: #56CCF2;
   background: linear-gradient(to bottom, #2F80ED, #56CCF2);
   color: #fafafa;
 }
-.lab{
+
+.lab {
   margin-left: -55%;
 }

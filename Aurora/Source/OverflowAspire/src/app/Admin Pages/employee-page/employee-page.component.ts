@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
-import { Subject } from 'rxjs';
 
 
 @Component({
@@ -42,9 +41,9 @@ export class EmployeePageComponent implements OnInit {
       });
     setTimeout(
       () => {
-        location.reload(); // the code to execute after the timeout
+        location.reload(); 
       },
-      1000// the time to sleep to delay for
+      1000
     );
   }
 
@@ -62,7 +61,6 @@ export class EmployeePageComponent implements OnInit {
           }
         });
     }
-
     //Here the admin can unmark a user as reviewer.
     else {
       this.connection.UnmarkAsReviewer(userId)

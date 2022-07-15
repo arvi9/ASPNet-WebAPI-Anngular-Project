@@ -33,7 +33,7 @@
                         <img [src]="'data:image/jpg;base64,'+ item.image" />
                     </div>
                     <div class="card-body d-flex flex-column">
-                        <h4 class="card-title text-truncate">{{item.title}}</h4>
+                        <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
                         <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                     </div>
                     <div class="mt-auto">

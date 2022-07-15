@@ -16,20 +16,22 @@ body {
     margin-top: 3rem;
     float: right;
 }
-.Container{
-    margin-right:0%;
-    }
+
+.Container {
+    margin-right: 0%;
+}
+
 .cardRight {
     border-style: solid;
     width: 18rem;
     margin: 10px;
-
 }
-.ToReview:hover{
+
+.ToReview:hover {
     background-color: rgb(111, 172, 246);
 }
 
-.ArticleReviewed:hover{
+.ArticleReviewed:hover {
     background-color: rgb(249, 134, 188);
 }
 
@@ -42,8 +44,8 @@ body {
     height: 350px;
     margin-top: 3rem;
     float: right;
-   margin-right:12%;
-   margin-left:20%;
+    margin-right: 12%;
+    margin-left: 20%;
 }
 
 .Content {

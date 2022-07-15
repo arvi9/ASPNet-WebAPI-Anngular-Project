@@ -4,7 +4,6 @@ import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-userverificationpage',
@@ -26,9 +25,9 @@ export class UserverificationpageComponent implements OnInit {
       .subscribe({
         next: (data: User[]) => {
           this.data = data;
-          $(function(){
+          $(function () {
             $("#emptable").DataTable();
-           });
+          });
         }
       });
   }
@@ -38,10 +37,12 @@ export class UserverificationpageComponent implements OnInit {
     this.connection.ApproveUser(userId)
       .subscribe({
         next: (data: any) => {
+        },
+        complete: () => {
+          this.toaster.open({ text: 'User Verified successfully', position: 'top-center', type: 'success' })
+          this.routing.navigateByUrl("/Employee");
         }
       });
-    this.toaster.open({ text: 'User Verified successfully', position: 'top-center', type: 'success' })
-    this.routing.navigateByUrl("/Employee");
   }
 
 
@@ -50,10 +51,12 @@ export class UserverificationpageComponent implements OnInit {
     this.connection.RemoveUser(userId)
       .subscribe({
         next: (data: any) => {
+        },
+        complete: () => {
+          this.toaster.open({ text: 'User removed successfully', position: 'top-center', type: 'danger' })
+          this.routing.navigateByUrl("/Employee");
         }
       });
-    this.toaster.open({ text: 'User removed successfully', position: 'top-center', type: 'danger' })
-    this.routing.navigateByUrl("/Employee");
   }
 }
 
