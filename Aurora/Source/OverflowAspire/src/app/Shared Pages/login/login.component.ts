@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
               this.IsLoading = false;
               this.route.navigateByUrl("");
             }
-            else {
+            if (this.IsVerified == "Approved"){
               this.route.navigateByUrl("/Home");
             }
           }
