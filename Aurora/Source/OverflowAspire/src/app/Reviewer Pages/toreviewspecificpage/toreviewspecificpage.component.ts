@@ -48,15 +48,14 @@ export class ToreviewspecificpageComponent implements OnInit {
     this.connection.ApproveArticle(articleId)
       .subscribe({
         next: (data: any) => {
-        },
-        error: (error: { error: { message: string; }; }) => {
-          this.error = error.error.message;
-        },
-        complete: () => {
-          this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
-          this.routing.navigateByUrl("/ToReview");
         }
+        
+      
+          
+        
       });
+      this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
+      this.routing.navigateByUrl("/ToReview");
   }
 
   ChangeToUnderReview(articleId: number) {

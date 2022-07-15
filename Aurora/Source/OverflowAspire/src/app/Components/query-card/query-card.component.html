@@ -2,16 +2,16 @@
     <form>
         <div class="row">
             <div class="col-md mb-2">
-                <label class="label">Search Query</label>
+                <label class="label">Search Query&nbsp;</label>
                 <input class="Searchbar" type="text" name="search" [(ngModel)]="searchTitle" autocomplete="off">
             </div>
             <div class="col-md-3 ">
                 <input type="radio" value="Solved Queries" name="Queries" [(ngModel)]="searchSolvedQueries" autocomplete="off">
-                <label class="label">Solved Queries</label>
+                <label class="label">&nbsp;Solved Queries</label>
             </div>
             <div class="col-md-3 ">
                 <input type="radio" value="Unsolved Queries" name="Queries" [(ngModel)]="searchUnSolvedQueries" autocomplete="off">
-                <label class="label">Unsolved Queries</label>
+                <label class="label">&nbsp;Unsolved Queries</label>
             </div>
             <div class="rowr">
                 <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)">Apply</button>
