@@ -7,12 +7,15 @@
                     <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
+                    <a routerLinkActive="active" routerLink="/ToReview">ToReview</a>
+                </li>
+                <li class="breadcrumb-item">
                     <a>Reason For Rejection</a>
                 </li>
             </ol>
         </nav>
     </div>
-</div> 
+</div>
 <div class="Content">
     <div class="container  p-5 my-5 border">
         <div class="text-center my-4">
@@ -23,11 +26,16 @@
             <div>
                 <form #form="ngForm" (ngSubmit)="UpdateReason()" autocomplete="off">
                     <div class="bg-light p-2">
-                        <textarea type="text" name="reportspam" class="form-control" rows="5" cols="4"
+                        <textarea type="text" #title="ngModel" name="reportspam" class="form-control" rows="5" cols="4"
                             placeholder="maximum 200words" id="reportspam-name" placeholder="Reason for Report"
-                            [(ngModel)]="article.reason"></textarea>
+                            [(ngModel)]="article.reason" required></textarea>
+                        <div *ngIf="title.errors && (title.invalid || title.touched)">
+                            <small class="text-danger" [class.d-none]="title.valid||title.untouched"
+                                *ngIf="title.errors['required']">Reason is required</small>
+                        </div>
                     </div>
-                    <div class="mt-2 text-right"><button type="submit" class="custom-btn btn-1 btn-2">
+                    <div class="mt-2 text-right"><button type="submit" class="custom-btn btn-1 btn-2"
+                            [disabled]="!form.valid">
                             Reject</button>
                     </div>
                 </form>

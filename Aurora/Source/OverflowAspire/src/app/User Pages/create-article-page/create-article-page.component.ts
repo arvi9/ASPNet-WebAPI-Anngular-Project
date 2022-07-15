@@ -36,10 +36,10 @@ export class CreateArticlePageComponent implements OnInit {
     datetime: new Date(),
     createdBy: 0,
     createdOn: new Date(),
-    updatedBy: 0,
+    updatedBy: null,
     isPrivate: false,
     ImageString: this.cardImageBase64,
-    reviewerId: 0,
+    reviewerId: null,
     Reason:null,
   }
 

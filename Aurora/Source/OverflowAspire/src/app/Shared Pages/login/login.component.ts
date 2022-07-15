@@ -48,6 +48,11 @@ export class LoginComponent implements OnInit {
               this.IsLoading = false;
               this.route.navigateByUrl("");
             }
+            if (this.IsVerified == "Rejected") {
+              this.toaster.open({ text: 'You have disabled by the admin!! Contact admin!', position: 'top-center', type: 'warning' })
+              this.IsLoading = false;
+              this.route.navigateByUrl("");
+            }
             else {
               this.route.navigateByUrl("/Home");
             }
