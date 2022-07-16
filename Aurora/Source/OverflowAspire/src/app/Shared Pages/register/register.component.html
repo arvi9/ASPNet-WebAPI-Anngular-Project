@@ -54,14 +54,14 @@
                                 class="text-danger" *ngIf="user.controls['aceNumber'].errors?.['required']">ACE Number
                                 is required</span>
                             <span class="text-danger" *ngIf="user.controls['aceNumber'].errors?.['pattern']">ACE Number
-                                is invalid (Example-ACE1234)</span>
+                                is invalid (Example-ACE123456)</span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6 col-md-6 mb-4">
                         <label class="form-label">Department </label>
                         <select id="departmentValidate" class="form-select" name="departmentValidate"
                             (change)="FilterDesignation()" required formControlName="departmentValidate">
-                            <option value="" hidden>Select the Department</option>
+                            <option value="" hidden>Select the department</option>
                             <option *ngFor="let item of departmentDetails" value={{item.departmentId}}>{{item.name}}
                             </option>
                         </select>

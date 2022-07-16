@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   user = this.fb.group({
     fullName: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(26), Validators.pattern("^[A-Za-z ]+$")]],
     gender: ['', [Validators.required]],
-    aceNumber: ['', [Validators.required, Validators.pattern("ACE+[0-9]{6}")]],
+    aceNumber: ['', [Validators.required, Validators.pattern("ACE+[0-9]{4,6}")]],
     departmentValidate: ['', [Validators.required]],
     emailAddress: ['', [Validators.required, Validators.pattern("([a-zA-Z0-9-_\.]+)@(aspiresys.com)")]],
     DesignationValidate: ['', [Validators.required]],

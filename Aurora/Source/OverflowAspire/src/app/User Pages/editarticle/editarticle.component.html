@@ -7,17 +7,17 @@
           <a routerLinkActive="active" routerLink="/Home">Home</a>
         </li>
         <li class="breadcrumb-item">
-          <a routerLinkActive="active" routerLink="/MyArticles">MyArticles</a>
+          <a routerLinkActive="active" routerLink="/MyArticles">My articles</a>
         </li>
         <li class="breadcrumb-item active">
-          <a>Edit Article</a>
+          <a>Edit article</a>
         </li>
       </ol>
     </nav>
   </div>
   <div class="container p-2" *ngIf="data.status=='InDraft' && data.reason!==null">
     <p class="reason">
-      <label class="r1">Reason For Rejection</label>
+      <label class="r1">Reason for rejection</label>
       <br>
       <br>
       {{data.reason}}

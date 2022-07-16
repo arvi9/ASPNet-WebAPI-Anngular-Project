@@ -7,7 +7,7 @@
         <a routerLinkActive="active" routerLink="/Home">Home</a>
       </li>
       <li class="breadcrumb-item">
-        <a>Specificquery</a>
+        <a>Specific query</a>
       </li>
     </ol>
   </nav>
@@ -15,7 +15,7 @@
 <div class="container mb-4">
   <a routerLinkActive="active" [routerLink]="['/ReportSpam',data.queryId]"><button type="button"
       class="custom-btn btn-1 btn-3 " id="button-code">Report
-      Spam</button></a>
+      spam</button></a>
 </div>
 <div class="container p-5 my-1 border">
   <div class="text-center">
@@ -42,7 +42,7 @@
   <br>
   <br>
   <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off" *ngIf="data.isSolved==false">
-    <h5>Comment Your Answer</h5>
+    <h5>Comment your answer</h5>
     <div class="container">
       <div class="bg-light p-2">
         <textarea type="text" name="comment" class="form-control form-control5" id="queryComment-message"
