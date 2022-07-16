@@ -6,10 +6,10 @@
                 <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a routerLinkActive="active" routerLink="/ToReview">ToReview</a>
+                <a routerLinkActive="active" routerLink="/ToReview">Toreview</a>
             </li>
             <li class="breadcrumb-item active">
-                ToReviewSpecific
+                Toreviewspecific
             </li>
         </ol>
     </nav>
@@ -21,7 +21,7 @@
                 <div class="container">
                     <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
                             class="checkin">
-                            <button type="button" class="custom-btn btn-1">Check Out</button></a>
+                            <button type="button" class="custom-btn btn-1">Check out</button></a>
                     </div>
                     <div>
                         <h5 class="text-center text-danger">{{error}}</h5>
