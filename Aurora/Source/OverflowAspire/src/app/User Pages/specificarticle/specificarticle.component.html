@@ -35,7 +35,7 @@
             <table>
                 <tr *cdkVirtualFor="let comment of data.comments">
                     <td class="example-dt"><br><i
-                            class="fa fa-solid fa-user mx-3">  {{comment.name}}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.message}}</i>
+                            class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
                     </td>
                     <br>
             </table>

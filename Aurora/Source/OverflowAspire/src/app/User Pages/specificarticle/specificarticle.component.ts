@@ -54,7 +54,6 @@ export class SpecificarticleComponent implements OnInit {
           next: (data: any) => {
             this.data = data;
             console.log(data)
-            console.log(this.data.publishedDate)
           }
         });
     });

@@ -46,11 +46,9 @@ export class SpamViewComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
-        complete: () => {
-          this.toaster.open({ text: 'Query removed successfully', position: 'top-center', type: 'danger' })
-          this.routing.navigateByUrl("/SpamReport");
-        }
       });
+    this.toaster.open({ text: 'Query removed successfully', position: 'top-center', type: 'danger' })
+    this.routing.navigateByUrl("/SpamReport");
 
   }
 
@@ -60,10 +58,8 @@ export class SpamViewComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
-        complete: () => {
-          this.toaster.open({ text: 'spam removed successfully', position: 'top-center', type: 'danger' })
-          this.routing.navigateByUrl("/SpamReport");
-        }
       });
+    this.toaster.open({ text: 'spam removed successfully', position: 'top-center', type: 'danger' })
+    this.routing.navigateByUrl("/SpamReport");
   }
 }
