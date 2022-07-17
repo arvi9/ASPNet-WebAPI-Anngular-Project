@@ -29,7 +29,7 @@ catch (SystemException Exception)
 //logs all the http requests
 builder.Services.AddHttpLogging(httpLogging =>
 {
-    httpLogging.LoggingFields = HttpLoggingFields.All;
+    httpLogging.LoggingFields = HttpLoggingFields.None;
 });
 builder.Services.AddTransient<IQueryService,QueryService>();
 builder.Services.AddTransient<IQueryRepository,QueryRepository>();
@@ -100,7 +100,6 @@ try
 catch (Exception exception)
 {
     Console.WriteLine(exception.Message);
-
 }
 var app = builder.Build();
 

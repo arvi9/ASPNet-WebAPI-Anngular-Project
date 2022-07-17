@@ -118,7 +118,7 @@ namespace AspireOverflow.DataAccessLayer
             Query? ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()));
+                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()) && query.IsActive);
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
@@ -168,7 +168,7 @@ namespace AspireOverflow.DataAccessLayer
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                return _context.Queries.Where(query => query.CreatedBy == UserId).Include(e => e.User);
+                return _context.Queries.Where(query => query.CreatedBy == UserId && query.IsActive).Include(e => e.User);
             }
             catch (Exception exception)
             {
@@ -191,7 +191,7 @@ namespace AspireOverflow.DataAccessLayer
             if (String.IsNullOrEmpty(Title)) throw new ArgumentException(" Title value can't be null");
             try
             {
-                return _context.Queries.Where(query => query.Title!.Contains(Title)).Include(e => e.User);
+                return _context.Queries.Where(query => query.Title!.Contains(Title) &&query.IsActive).Include(e => e.User);
             }
             catch (Exception exception)
             {
@@ -214,7 +214,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                return _context.Queries.Where(item => item.IsSolved == IsSolved).Include(e => e.User);
+                return _context.Queries.Where(item => item.IsSolved == IsSolved && item.IsActive).Include(e => e.User);
             }
             catch (Exception exception)
             {
@@ -400,7 +400,6 @@ namespace AspireOverflow.DataAccessLayer
         //Get Tracing Enabled or not from Configuration
         public bool GetIsTraceEnabledFromConfiguration()
         {
-            if (IsTracingEnabled) _stopWatch.Start();
             try
             {
                 var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
@@ -410,14 +409,6 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetIsTraceEnabledFromConfiguration()", exception));
                 return false;
-            }
-            finally
-            {
-                if (IsTracingEnabled)
-                {
-                    _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:QueryRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
-                }
             }
         }
     }

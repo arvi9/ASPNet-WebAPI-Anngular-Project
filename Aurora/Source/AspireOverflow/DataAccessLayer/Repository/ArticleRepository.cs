@@ -400,7 +400,7 @@ namespace AspireOverflow.DataAccessLayer
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                var ListofPrivateArticles = _context.PrivateArticleUsers.Where(item => item.UserId == UserId).Include(e => e.article);
+                var ListofPrivateArticles = _context.PrivateArticleUsers.Include(e => e.article).Where(item => item.UserId == UserId  && item.article!.ArticleStatusID==4);
                 return ListofPrivateArticles;
             }
             catch (Exception exception)
@@ -481,6 +481,7 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticleComment(comment);
             try
             {
+
                 comment.CreatedOn = DateTime.UtcNow;
                 _context.ArticleComments.Add(comment);
                 _context.SaveChanges();
@@ -635,7 +636,7 @@ namespace AspireOverflow.DataAccessLayer
         //Get Tracing Enabled or not from Configuration
         public bool GetIsTraceEnabledFromConfiguration()
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+           
             try
             {
                 var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
@@ -645,14 +646,6 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetIsTraceEnabledFromConfiguration()", exception));
                 return false;
-            }
-            finally
-            {
-                if (IsTracingEnabled)
-                {
-                    _stopWatch.Stop();
-                    _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
-                }
             }
         }
 

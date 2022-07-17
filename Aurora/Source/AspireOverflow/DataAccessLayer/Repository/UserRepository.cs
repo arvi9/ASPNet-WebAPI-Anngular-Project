@@ -433,7 +433,6 @@ namespace AspireOverflow.DataAccessLayer
         //Get Tracing Enabled or not from Configuration
         public bool GetIsTraceEnabledFromConfiguration()
         {
-            if(IsTracingEnabled) _stopWatch.Start();
             try
             {
                 var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
@@ -443,14 +442,6 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetIsTraceEnabledFromConfiguration()", exception));
                 return false;
-            }
-            finally
-            {
-                if(IsTracingEnabled)
-                {
-                _stopWatch.Stop();
-                _logger.LogInformation($"Tracelog:UserRepository Elapsed Time for GetIsTraceEnabledFromConfiguration() - {_stopWatch.ElapsedMilliseconds}ms");
-                }
             }
         }
     }
