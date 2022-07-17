@@ -89,7 +89,7 @@ public class UserController : BaseController
         /// <response code="500">If there is problem in server. </response>
         /// <param name="UserId"></param>
         /// <param name="IsVerified"></param>
-    [HttpPatch]
+    [HttpPatch][Authorize(Roles ="Admin")]
     public async Task<ActionResult> ChangeUserVerifyStatus(int UserId, bool IsVerified)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -133,7 +133,7 @@ public class UserController : BaseController
         /// <response code="500">If there is problem in server. </response>
         /// <param name="UserId"></param>
         /// <param name="IsReviewer"></param>
-      [HttpPatch]
+      [HttpPatch][Authorize(Roles ="Admin")]
     public async Task<ActionResult> UpdateUserByIsReviewer(int UserId, bool IsReviewer)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));
@@ -175,7 +175,7 @@ public class UserController : BaseController
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="UserId"></param>
-    [HttpDelete]   //Admin rejected users only be deleted
+    [HttpDelete] [Authorize(Roles ="Admin")]//Admin rejected users only be deleted
     public async Task<ActionResult> RemoveUser(int UserId)
     {
         if (UserId <= 0) return BadRequest(Message("User ID must be greater than 0"));

@@ -42,7 +42,7 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a reviewer dashboard by reviewer id. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <param name="ReviewerId"></param>
-        [HttpGet]
+        [HttpGet][Authorize(Roles ="Reviewer")]
         public async Task<ActionResult> GetReviewerDashboard() //reviewerID temporarily getting as input ,later it is retrived from claims.
         {
             try
@@ -70,7 +70,7 @@ namespace AspireOverflow.Controllers
         /// <response code="200">Returns a admin dashboard. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
-        [HttpGet]
+        [HttpGet][Authorize(Roles ="Admin")]
         public async Task<ActionResult> GetAdminDashboard()
         {
             try

@@ -36,7 +36,8 @@ namespace AspireOverflow.Services
                         new Claim("UserId",user.UserId.ToString()),
                         new Claim("RoleId",user.UserRoleId.ToString()),
                           new Claim(ClaimTypes.Role,user.UserRole?.RoleName!),
-                        new Claim("IsReviewer",user.IsReviewer.ToString())
+                        new Claim(ClaimTypes.Role, user.IsReviewer?"Reviewer":""),
+                        new Claim("IsReviewer", user.IsReviewer.ToString())
                     };
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                 var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -54,8 +55,8 @@ namespace AspireOverflow.Services
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     ExpiryInMinutes = 30,
-                    IsAdmin = user.UserRoleId == 1? "true":"false",
-                    IsReviewer = user.IsReviewer? "true":"false",
+                    IsAdmin = user.UserRoleId == 1 ? "true" : "false",
+                    IsReviewer = user.IsReviewer ? "true" : "false",
                     IsVerified = user.VerifyStatus?.Name
                 };
                 return Result;
@@ -72,7 +73,7 @@ namespace AspireOverflow.Services
             }
         }
 
-        
+
         private void ValidateUser(Login Credentials)
         {
             if (Credentials == null) throw new ArgumentException("Credentials cannot be null");

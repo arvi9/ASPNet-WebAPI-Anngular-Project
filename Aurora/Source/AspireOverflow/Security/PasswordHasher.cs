@@ -5,7 +5,7 @@ public  class BCryptPasswordHasher<TUser> : IPasswordHasher<TUser> where TUser :
 {
     public  string HashPassword(TUser user, string password)
     {
-        return BCrypt.Net.BCrypt.HashPassword(password, 12);
+        return BCrypt.Net.BCrypt.HashPassword(password, 12); 
     }
 	
     public  PasswordVerificationResult VerifyHashedPassword(

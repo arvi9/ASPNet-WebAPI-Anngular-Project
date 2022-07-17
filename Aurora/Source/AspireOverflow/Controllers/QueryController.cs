@@ -90,7 +90,7 @@ namespace AspireOverflow.Controllers
         /// <response code="404">If query was not found. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="QueryId"></param>
-        [HttpDelete]
+        [HttpDelete][Authorize(Roles ="Admin")]
         public async Task<ActionResult> RemoveQueryByQueryId(int QueryId)
         {
             if (QueryId <= 0) return BadRequest(Message("Query ID must be greater than 0"));
@@ -512,7 +512,7 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="SpamId"></param>
         /// <param name="VerifyStatusID"></param>
-        [HttpPatch]
+        [HttpPatch][Authorize(Roles="Admin")]
         public ActionResult UpdateSpamStatus(int QueryId, int VerifyStatusID)
         {
             if (QueryId <= 0) return BadRequest(Message($"QueryId Id must be greater than 0  where QueryId:{QueryId}"));
