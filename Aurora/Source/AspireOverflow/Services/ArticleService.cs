@@ -78,9 +78,9 @@ namespace AspireOverflow.Services
         }
 
 
-        //Article is Updating using article object and UpdatedByUserId.
+        //Article is Updating using article object and _currentUserId.
         //sharedUsersId is Required only for updating Private Articles.
-        public bool UpdateArticle(Article article, int UpdatedByUserId, bool IsReviewer, List<int>? SharedUsersId = default!)
+        public bool UpdateArticle(Article article, int _currentUserId, bool IsReviewer = false, List<int>? SharedUsersId = default!)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             //throws Validation Exception if any validation fails.
@@ -93,16 +93,16 @@ namespace AspireOverflow.Services
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
-                ExistingArticle.UpdatedBy = UpdatedByUserId;
+                ExistingArticle.UpdatedBy = _currentUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.IsPrivate = article.IsPrivate;
                 ExistingArticle.Image = String.IsNullOrEmpty(article.ImageString) ? ExistingArticle.Image : System.Convert.FromBase64String(article.ImageString!);
 
                 //Reviewer once rejected the article,Reason and Reviewer ID is updated .
-                if (UpdatedByUserId != ExistingArticle.CreatedBy && IsReviewer)
+                if (_currentUserId != ExistingArticle.CreatedBy && IsReviewer)
                 {
                     ExistingArticle.Reason = article.Reason;
-                    ExistingArticle.ReviewerId = UpdatedByUserId;
+                    ExistingArticle.ReviewerId = _currentUserId;
                 }
                 //Returns true once successfully updated.
                 return SharedUsersId == null ? database.UpdateArticle(ExistingArticle) : database.UpdatePrivateArticleWithSharedUsers(ExistingArticle, SharedUsersId);
@@ -232,7 +232,7 @@ namespace AspireOverflow.Services
 
 
         //To get the Latest Articles by using published date.
-        public IEnumerable<object> GetLatestArticles(int Range)
+        public IEnumerable<object> GetLatestArticles(int Range = 0)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             try
@@ -258,7 +258,7 @@ namespace AspireOverflow.Services
 
 
         //To Get the trending article based on the number of likes.
-        public IEnumerable<Object> GetTrendingArticles(int Range)
+        public IEnumerable<Object> GetTrendingArticles(int Range = 0)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             try
@@ -592,7 +592,7 @@ namespace AspireOverflow.Services
                     Name = Item.User?.FullName,
                     ArticleId = Item.ArticleId,
                     DateTime = Item.CreatedOn
-                });
+                }).OrderByDescending(item =>item.DateTime);
             }
             catch (Exception exception)
             {

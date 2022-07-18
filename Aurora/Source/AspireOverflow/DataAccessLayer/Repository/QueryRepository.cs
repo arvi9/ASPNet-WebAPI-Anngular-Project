@@ -320,7 +320,7 @@ namespace AspireOverflow.DataAccessLayer
                     spam.VerifyStatusID = VerifyStatusID;
                     spam.UpdatedBy = UpdatedByUserId;
                     spam.UpdatedOn = DateTime.Now;
-                };
+                }
                 _context.Spams.UpdateRange(ExistingSpams);
                 _context.SaveChanges();
                 return true;
@@ -397,8 +397,8 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
-                return IsTracingEnabled != null ? Convert.ToBoolean(IsTracingEnabled) : false;
+                var IsTracingEnabledFromConfiguration = _configuration["Tracing:IsEnabled"];
+                return IsTracingEnabledFromConfiguration != null ? Convert.ToBoolean(IsTracingEnabledFromConfiguration) : false;
             }
             catch (Exception exception)
             {

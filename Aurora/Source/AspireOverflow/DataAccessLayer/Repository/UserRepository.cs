@@ -402,7 +402,7 @@ namespace AspireOverflow.DataAccessLayer
             }
         }
 
-        //Gets the ols information using the range value.
+        //Gets the old information using the range value.
         private int GetRange()
         {
             if(IsTracingEnabled) _stopWatch.Start();
@@ -431,8 +431,8 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
-                return IsTracingEnabled != null ? Convert.ToBoolean(IsTracingEnabled) : false;
+                var IsTracingEnabledFromConfiguration = _configuration["Tracing:IsEnabled"];
+                return IsTracingEnabledFromConfiguration != null ? Convert.ToBoolean(IsTracingEnabledFromConfiguration) : false;
             }
             catch (Exception exception)
             {

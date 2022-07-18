@@ -167,7 +167,7 @@ namespace AspireOverflow.Services
 
 
         //to fetch the list of latest queries using it's creation date.
-        public IEnumerable<Object> GetLatestQueries(int Range)
+        public IEnumerable<Object> GetLatestQueries(int Range = 0)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             try
@@ -194,7 +194,7 @@ namespace AspireOverflow.Services
 
 
         //To Fetch the trending articles using number of comments and usolved query.
-        public IEnumerable<Object> GetTrendingQueries(int Range)
+        public IEnumerable<Object> GetTrendingQueries(int Range = 0)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             try
@@ -370,7 +370,7 @@ namespace AspireOverflow.Services
                     Name = item.User?.FullName,
                     QueryId = item.QueryId,
                     DateTime = item.CreatedOn
-                });
+                }).OrderByDescending(item =>item.DateTime);
             }
             catch (Exception exception)
             {

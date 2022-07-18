@@ -20,10 +20,7 @@ namespace AspireOverflow.DataAccessLayer
         public virtual DbSet<ArticleLike> ArticleLikes { get; set; } = null!;
         public DbSet<Article> Articles { get; set; } = null!;
         public DbSet<ArticleComment> ArticleComments { get; set; } = null!;
-        // public virtual ObjectResult GetCountOfArticles(){
-        //     return ((IObjectContextAdapter)this).ObjectContext.
-
-        // }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Gender>(entity =>
