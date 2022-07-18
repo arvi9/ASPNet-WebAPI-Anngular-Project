@@ -60,8 +60,8 @@
             <div class="our-skills">
                 <div class="box-shadow card-body d-flex flex-column">
                     <div *ngIf="ShowStatus">
-                        <span *ngIf="item.isSolved==true" class="tag tag-Material">Solved</span>
-                        <span *ngIf="item.isSolved==false" class="tag tag-red">UnSolved</span>
+                        <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
+                        <span *ngIf="item.isSolved===false" class="tag tag-red">UnSolved</span>
                     </div>
                     <div class="icon">
                         <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
@@ -83,8 +83,8 @@
             <div class="our-skills">
                 <div class="box-shadow card-body d-flex flex-column">
                     <div *ngIf="ShowStatus">
-                        <span *ngIf="item.isSolved==true" class="tag tag-Material">Solved</span>
-                        <span *ngIf="item.isSolved==false" class="tag tag-red">UnSolved</span>
+                        <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
+                        <span *ngIf="item.isSolved===false" class="tag tag-red">UnSolved</span>
                     </div>
                     <div class="icon">
                         <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">

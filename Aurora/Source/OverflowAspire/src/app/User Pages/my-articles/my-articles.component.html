@@ -47,10 +47,10 @@
                         <div class="card-body d-flex flex-column">
                             <div class="d-flex justify-content">
                                     <div *ngIf="ShowStatus">
-                                        <span *ngIf="item.status=='Published'" class="tag tag-Material">Published</span>
-                                        <span *ngIf="item.status=='Under Review' || item.status=='To Be Reviewed'"
+                                        <span *ngIf="item.status==='Published'" class="tag tag-Material">Published</span>
+                                        <span *ngIf="item.status==='Under Review' || item.status==='To Be Reviewed'"
                                             class="tag tag-brown">Under Review</span>
-                                        <span *ngIf="item.status=='InDraft'" class="tag tag-red">In Draft</span>
+                                        <span *ngIf="item.status==='InDraft'" class="tag tag-red">In Draft</span>
                                     </div>
                                     <div *ngIf="item.isPrivate">
                                         <img alt="LogoImg" class="privateImg" src="./assets/private.png" data-toggle="tooltip" title="Private">

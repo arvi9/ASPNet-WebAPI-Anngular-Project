@@ -15,11 +15,11 @@
     </nav>
 </div>
 <div class="Content">
-    <div *ngIf="data.status!='To Be Reviewed' ;else enablink">
+    <div *ngIf="data.status!=='To Be Reviewed' ;else enablink">
         <div *ngIf="data.reviewerId>0;else enable">
-            <div *ngIf="userid == data.reviewerId; else disabledLink">
+            <div *ngIf="userid === data.reviewerId; else disabledLink">
                 <div class="container">
-                    <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
+                    <div *ngIf=" data.status ==='To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
                             class="checkin">
                             <button type="button" class="custom-btn btn-1">Check out</button></a>
                     </div>
@@ -34,7 +34,7 @@
                         <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
                     </div>
                     <p> {{data.content|htmlToPlaintext}}</p>
-                    <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
+                    <div class="container d-flex justify-content-between" *ngIf=" data.status ==='Under Review'">
                         <a [routerLink]="['/ReasonReject',data.articleId]" routerLinkActive="active"><button
                                 type="button" class="custom-btn btn-1">Reject</button></a>
                         <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview"
@@ -49,7 +49,7 @@
         </div>
         <ng-template #enable>
             <div class="container">
-                <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
+                <div *ngIf=" data.status ==='To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
                         class="checkin">
                         <button type="button" class="custom-btn btn-1">Check Out</button></a>
                 </div>
@@ -64,7 +64,7 @@
                     <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
                 </div>
                 <p> {{data.content|htmlToPlaintext}}</p>
-                <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
+                <div class="container d-flex justify-content-between" *ngIf=" data.status ==='Under Review'">
                     <a routerLinkActive="active" [routerLink]="['/ReasonReject',data.articleId]"><button type="button"
                             class="custom-btn btn-1">Reject</button></a>
                     <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
@@ -75,7 +75,7 @@
     </div>
     <ng-template #enablink>
         <div class="container">
-            <div *ngIf=" data.status == 'To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
+            <div *ngIf=" data.status ==='To Be Reviewed'"><a (click)="ChangeToUnderReview(data.articleId)"
                     class="checkin">
                     <button type="button" class="custom-btn btn-1">Check Out</button></a>
             </div>
@@ -90,7 +90,7 @@
                 <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
             </div>
             <p> {{data.content|htmlToPlaintext}}</p>
-            <div class="container d-flex justify-content-between" *ngIf=" data.status == 'Under Review'">
+            <div class="container d-flex justify-content-between" *ngIf=" data.status ==='Under Review'">
                 <a [routerLink]="['/ReasonReject',data.articleId]" routerLinkActive="active"><button type="button"
                         class="custom-btn btn-1">Reject</button></a>
                 <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button

@@ -39,7 +39,7 @@
                             required></textarea>
                         <div *ngIf="querycontent.errors && (querycontent.invalid || querycontent.touched)">
                             <small class="text-danger" *ngIf="querycontent.errors['pattern']">Query should have
-                                Maximum 200 characters</small>
+                                Maximum 200 words</small>
                             <small class="text-danger" [class.d-none]="querycontent.valid||querycontent.untouched"
                                 *ngIf="querycontent.errors['required']">query is required</small>
                         </div>

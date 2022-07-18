@@ -6,13 +6,13 @@
                 <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-                Article reviewed
+                Published article
             </li>
         </ol>
     </nav>
 </div>
 <div class="Content" *ngIf="data.length>0; else ArrayEmpty">
-    <h1>Article reviewed</h1>
+    <h1>Published article</h1>
     <div class="Container">
         <div>
             <table class="table table-striped row-border hover">
