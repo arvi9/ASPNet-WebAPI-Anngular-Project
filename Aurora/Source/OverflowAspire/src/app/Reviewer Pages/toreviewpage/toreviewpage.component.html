@@ -11,7 +11,7 @@
         </ol>
     </nav>
 </div>
-<div class="Content">
+<div class="Content" *ngIf="data.length>0; else ArrayEmpty">
     <h1>Articles waiting for review</h1>
     <div class="Container">
         <table class="table table-striped row-border hover">
@@ -50,4 +50,9 @@
         </table>
     </div>
 </div>
+<ng-template #ArrayEmpty>
+    <div class="text-center">
+        <h1>No articles to review.</h1>
+    </div>
+</ng-template>
 <app-footer></app-footer>

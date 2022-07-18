@@ -11,7 +11,7 @@
         </ol>
     </nav>
 </div>
-<div class="Content">
+<div class="Content" *ngIf="data.length>0; else ArrayEmpty">
     <h1>Article reviewed</h1>
     <div class="Container">
         <div>
@@ -36,4 +36,9 @@
         </div>
     </div>
 </div>
+<ng-template #ArrayEmpty>
+    <div class="text-center">
+        <h1>No Articles found.</h1>
+    </div>
+</ng-template>
 <app-footer></app-footer>
