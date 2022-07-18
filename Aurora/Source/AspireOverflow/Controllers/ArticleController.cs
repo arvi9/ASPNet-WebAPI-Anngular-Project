@@ -20,28 +20,11 @@ namespace AspireOverflow.Controllers
             _articleService = articleService;
         }
 
-
-        ///<summary>
-        /// Create Article
+        /// <summary>
+        /// hello
         /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        /// url : https://localhost:7197/Article/CreateArticle
-        ///
-        /// * fields are required
-        ///
-        /// body{
-        /// articleId*: int,
-        /// title*: string,
-        /// content*: string,
-        /// image*: string,
-        ///
-        /// </remarks>
-        /// <response code="200">If the article was created. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="500">If there is problem in server. </response>
         /// <param name="article"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> CreateArticle(Article article)
         {

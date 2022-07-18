@@ -263,7 +263,7 @@ namespace AspireOverflow.DataAccessLayer
         }
 
         //get the article with the Article StatusID.
-        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)
+        public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer = false)
 
         {
             if (IsTracingEnabled) _stopWatch.Start();
@@ -631,8 +631,8 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
-                return IsTracingEnabled != null ? Convert.ToBoolean(IsTracingEnabled) : false;
+                var IsTracingEnabledFromConfiguration = _configuration["Tracing:IsEnabled"];
+                return IsTracingEnabledFromConfiguration != null ? Convert.ToBoolean(IsTracingEnabledFromConfiguration) : false;
             }
             catch (Exception exception)
             {

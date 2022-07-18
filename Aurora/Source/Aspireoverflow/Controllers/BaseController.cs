@@ -20,13 +20,13 @@ namespace AspireOverflow.Controllers
         {
             var CurrentUser = new CurrentUser();
             if (User != null)
-            try{
-                CurrentUser.UserId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
-                CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
-                CurrentUser.RoleId = Convert.ToInt32(User.FindFirst("RoleId")?.Value);
-                CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
-                return CurrentUser;
-            }catch (Exception){
+                try{
+                    CurrentUser.UserId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
+                    CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
+                    CurrentUser.RoleId = Convert.ToInt32(User.FindFirst("RoleId")?.Value);
+                    CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
+                    return CurrentUser;
+                }catch (Exception){
                 throw;
             }
             return CurrentUser;
