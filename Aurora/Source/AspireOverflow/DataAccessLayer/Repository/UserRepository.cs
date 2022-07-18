@@ -5,7 +5,6 @@ using AspireOverflow.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
-
 namespace AspireOverflow.DataAccessLayer
 {
     public class UserRepository : IUserRepository
@@ -15,7 +14,6 @@ namespace AspireOverflow.DataAccessLayer
         private readonly IConfiguration _configuration;
         private readonly Stopwatch _stopWatch =new Stopwatch();
         private bool IsTracingEnabled;
-
         public UserRepository(AspireOverflowContext context, ILogger<UserRepository> logger, IConfiguration configuration)
         {
             _context = context;
@@ -242,11 +240,9 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                return  _context.Users.Where(user =>user.VerifyStatusID==VerifyStatusID).Include(e => e.Designation).Include(e => e.Gender).Include(e=>e.Designation!.Department).ToList();
-          
             }catch(Exception exception){
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetUsersByVerifyStatus(int VerifyStatusID)", exception,VerifyStatusID));
                 throw;
-
             }
             finally
             {

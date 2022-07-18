@@ -31,7 +31,6 @@ namespace AspireOverflow.Services
         public bool CreateQuery(Query query)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-            
             Validation.ValidateQuery(query);
             try
             {
@@ -45,7 +44,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "CreateQuery(Query query)", exception, query));
                 return false;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -60,7 +59,6 @@ namespace AspireOverflow.Services
         public bool RemoveQueryByQueryId(int QueryId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
@@ -71,7 +69,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "RemoveQueryByQueryId(int QueryId)", exception, QueryId));
                 return false;
             }
-                finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -86,7 +84,6 @@ namespace AspireOverflow.Services
         public bool MarkQueryAsSolved(int QueryId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (QueryId <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryId:{QueryId}");
             try
             {
@@ -97,7 +94,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", " MarkQueryAsSolved(int QueryId)", exception, QueryId));
                 return false;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -112,7 +109,6 @@ namespace AspireOverflow.Services
         public Object GetQuery(int QueryID)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (QueryID <= 0) throw new ArgumentException($"Query Id must be greater than 0 where QueryID:{QueryID}");
             try
             {
@@ -134,7 +130,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQuery(int QueryId)", exception, QueryID));
                 throw;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -148,9 +144,7 @@ namespace AspireOverflow.Services
         ////to fetch the list of queries inthe database.
         public IEnumerable<Object> GetListOfQueries()
         {
-
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 var ListOfQueries = database.GetQueries();
@@ -161,7 +155,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueries()", exception));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -175,8 +169,7 @@ namespace AspireOverflow.Services
         //to fetch the list of latest queries using it's creation date.
         public IEnumerable<Object> GetLatestQueries(int Range)
         {
-             if (IsTracingEnabled) _stopWatch.Start();
-
+            if (IsTracingEnabled) _stopWatch.Start();
             try
             {
                 //get queries from the database using Creation date by descending order.
@@ -189,7 +182,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetLatestQueries()", exception));
                 throw;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -204,7 +197,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetTrendingQueries(int Range)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 //get the comments and group by QueryId using decending order in count.
@@ -226,7 +218,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetTrendingQueries()", exception));
                 throw;
             }
-                 finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -241,7 +233,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetQueriesByUserId(int UserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -253,7 +244,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByUserId(int UserId)", exception, UserId));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -268,7 +259,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetQueriesByTitle(String Title)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (String.IsNullOrEmpty(Title)) throw new ArgumentException(" Title value can't be null");
             try
             {
@@ -280,7 +270,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByTitle(String Title)", exception, Title));
                 throw;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -295,7 +285,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetQueriesByIsSolved(bool IsSolved)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 var ListOfQueries = database.GetQueriesByIsSolved(IsSolved);
@@ -306,7 +295,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetQueriesByIsSolved(bool IsSolved)", exception, IsSolved));
                 throw;
             }
-                      finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -320,10 +309,8 @@ namespace AspireOverflow.Services
         public object GetCountOfQueries()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
-
                 return database.GetCountOfQueries();
             }
             catch (Exception exception)
@@ -331,7 +318,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("Queryservice", "GetCountOfQueries()", exception));
                 throw;
             }
-                        finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -339,20 +326,17 @@ namespace AspireOverflow.Services
                     _logger.LogInformation($"Tracelog:QueryService Elapsed Time for GetCountOfQueries() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
-
         }
 
         //Add an comment for the particular query.
         public bool CreateComment(QueryComment comment)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             Validation.ValidateComment(comment);
             try
             {
                 comment.CreatedOn = DateTime.Now;
-                comment.UpdatedBy=null;
-            
+                comment.UpdatedBy = null;
                 return database.AddComment(comment);
             }
             catch (Exception exception)
@@ -360,7 +344,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "CreateComment(QueryComment comment)", exception, comment));
                 return false;
             }
-                       finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -385,7 +369,7 @@ namespace AspireOverflow.Services
                     Message = item.Comment,
                     Name = item.User?.FullName,
                     QueryId = item.QueryId,
-                    DateTime=item.CreatedOn
+                    DateTime = item.CreatedOn
                 });
             }
             catch (Exception exception)
@@ -393,7 +377,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetComments(int QueryId)", exception, QueryId));
                 throw;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -405,16 +389,15 @@ namespace AspireOverflow.Services
 
 
         //to change the status of the query if it is reported as spam using the QueryId and VerifyStatusID.
-        public bool ChangeSpamStatus(int QueryId, int VerifyStatusID,int UpdatedByUserId)
+        public bool ChangeSpamStatus(int QueryId, int VerifyStatusID, int UpdatedByUserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (QueryId <= 0) throw new ArgumentException($"QueryId  must be greater than 0  where QueryId:{QueryId}");
             //VerifyStatusID should be inbetween 0 and 3, where 1->Approved, 2->Rejected, 3->To be Reviewed.
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"VerifyStatusId must be greater than 0  and less than 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
-                var IsChangeSuccessfully = database.UpdateSpam(QueryId, VerifyStatusID,UpdatedByUserId);
+                var IsChangeSuccessfully = database.UpdateSpam(QueryId, VerifyStatusID, UpdatedByUserId);
                 if (IsChangeSuccessfully) _mailService?.SendEmailAsync(HelperService.SpamMail("Manimaran.0610@gmail.com", "Title", "Hello", 2));
                 return IsChangeSuccessfully;
             }
@@ -423,7 +406,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage($"QueryService", "ChangeSpamStatus(int QueryId, int VerifyStatusID)", exception, QueryId, VerifyStatusID));
                 throw;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -438,13 +421,12 @@ namespace AspireOverflow.Services
         public bool AddSpam(Spam spam)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             Validation.ValidateSpam(spam);
             try
             {
-                spam.CreatedBy=spam.UserId;
-                spam.CreatedOn=DateTime.Now;
-                spam.UpdatedBy=null;
+                spam.CreatedBy = spam.UserId;
+                spam.CreatedOn = DateTime.Now;
+                spam.UpdatedBy = null;
                 return database.AddSpam(spam);
             }
             catch (Exception exception)
@@ -452,7 +434,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "AddSpam(Spam spam)", exception, spam));
                 return false;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -467,7 +449,6 @@ namespace AspireOverflow.Services
         public IEnumerable<object> GetSpams(int VerifyStatusID)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("Verfiystatus Id must be greater than 0 and less than or eeeeeeequal to 4");
             try
             {
@@ -492,7 +473,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("QueryService", "GetSpams(int VerifyStatusID)", exception));
                 throw;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -501,7 +482,7 @@ namespace AspireOverflow.Services
                 }
             }
         }
-          //Returns anonymous object for the Query object 
+        //Returns anonymous object for the Query object 
         private object GetAnonymousQueryObject(Query query)
         {
             return new

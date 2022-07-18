@@ -20,7 +20,6 @@ namespace AspireOverflow.Services
             _mailService = mailService;
             database = _articleRepository;
             IsTracingEnabled = database.GetIsTraceEnabledFromConfiguration();
-            
         }
 
         public bool CreateArticle(Article article)
@@ -68,7 +67,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "CreateArticle(Article article, List<int> SharedUsersId)", exception, article));
                 return false;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -96,7 +95,7 @@ namespace AspireOverflow.Services
                 ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
-                ExistingArticle.IsPrivate=article.IsPrivate;
+                ExistingArticle.IsPrivate = article.IsPrivate;
                 ExistingArticle.Image = String.IsNullOrEmpty(article.ImageString) ? ExistingArticle.Image : System.Convert.FromBase64String(article.ImageString!);
 
                 //Reviewer once rejected the article,Reason and Reviewer ID is updated .
@@ -118,7 +117,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", " UpdateArticle(Article article, int CurrentUser)", exception, article));
                 return false;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -130,12 +129,10 @@ namespace AspireOverflow.Services
 
 
 
-
         //Changes the Status of the article 1->In draft 2->To be Reviewed 3->Under Review 4->Published.
         public bool ChangeArticleStatus(int ArticleID, int ArticleStatusID, int UserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (ArticleID <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleID}");
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
@@ -150,7 +147,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", " ChangeArticleStatus(int ArticleId, int ArticleStatusID, int UpdatedByUserId)", exception), ArticleID, ArticleStatusID);
                 throw;
             }
-                 finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -165,7 +162,6 @@ namespace AspireOverflow.Services
         public bool DeleteArticleByArticleId(int ArticleId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
@@ -176,7 +172,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "DeleteArticleByArticleId(int ArticleId)", exception, ArticleId));
                 return false;
             }
-                 finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -192,7 +188,6 @@ namespace AspireOverflow.Services
         public object GetArticleById(int ArticleId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
@@ -225,7 +220,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById(int ArticleId)", exception, ArticleId));
                 throw;
             }
-                finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -251,7 +246,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetLatestArticles()", exception));
                 throw;
             }
-                 finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -259,7 +254,6 @@ namespace AspireOverflow.Services
                     _logger.LogInformation($"Tracelog:ArticleService Elapsed Time for GetLatestArticles(int Range) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
-
         }
 
 
@@ -267,7 +261,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetTrendingArticles(int Range)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 //Get number of likes and grouped based on ArticleId and sorted by Descending oreder.
@@ -288,7 +281,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetTrendingArticles()", exception));
                 throw;
             }
-                 finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -303,7 +296,6 @@ namespace AspireOverflow.Services
         public IEnumerable<object> GetArticlesByUserId(int UserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -315,7 +307,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByUserId(int UserId)", exception, UserId));
                 throw;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -329,7 +321,7 @@ namespace AspireOverflow.Services
         //The articles will be fetched only when the status is 4->published.
         private IEnumerable<Article> GetArticles()
         {
-             if (IsTracingEnabled) _stopWatch.Start();
+            if (IsTracingEnabled) _stopWatch.Start();
             try
             {
                 //get the aricles only when the ArticleStatusID is 4 -> published.
@@ -341,7 +333,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticles()", exception));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -356,7 +348,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Article> GetAll()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 var ListOfArticles = database.GetArticles();
@@ -382,7 +373,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetListOfArticles()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 //to get the articles where private is false.
@@ -409,7 +399,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetPrivateArticles(int UserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 var ListOfPrivateArticles = database.GetPrivateArticleUsersByUserId(UserId);
@@ -420,7 +409,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetPrivateArticles(int UserId)", exception));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -434,8 +423,7 @@ namespace AspireOverflow.Services
         //to get article by its title.
         public IEnumerable<object> GetArticlesByTitle(string Title)
         {
-             if (IsTracingEnabled) _stopWatch.Start();
-
+            if (IsTracingEnabled) _stopWatch.Start();
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
@@ -447,7 +435,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByTitle(string Title)", exception, Title));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -462,7 +450,6 @@ namespace AspireOverflow.Services
         public IEnumerable<object> GetArticlesByAuthor(string AuthorName)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentException("AuthorName value can't be null");
             try
             {
@@ -488,9 +475,7 @@ namespace AspireOverflow.Services
         //Get the articles by the Reviewer's Id. Reviewer who reviews the article before publishing.
         public IEnumerable<object> GetArticlesByReviewerId(int ReviewerId)
         {
-
-            if (IsTracingEnabled) _stopWatch.Start();   
-            
+            if (IsTracingEnabled) _stopWatch.Start();
             if (ReviewerId <= 0) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
             try
             {
@@ -502,7 +487,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", " GetArticlesByReviewerId(int ReviewerId)", exception, ReviewerId));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -530,7 +515,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer)", exception), ArticleStatusID);
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -544,7 +529,6 @@ namespace AspireOverflow.Services
         public object GetCountOfArticles()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 return database.GetCountOfArticles();
@@ -562,19 +546,17 @@ namespace AspireOverflow.Services
                     _logger.LogInformation($"Tracelog:ArticleService Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
-            
         }
 
         //to add an comment under an article.
         public bool CreateComment(ArticleComment comment)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             Validation.ValidateArticleComment(comment);
             try
             {
                 comment.CreatedBy = comment.UserId;
-                comment.CreatedOn=DateTime.Now;
+                comment.CreatedOn = DateTime.Now;
                 var IsCommentSuccessfully = database.AddComment(comment);
                 if (IsCommentSuccessfully) _mailService?.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully"));
                 return IsCommentSuccessfully;
@@ -599,7 +581,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetComments(int ArticleID)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (ArticleID <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleID}");
             try
             {
@@ -610,8 +591,7 @@ namespace AspireOverflow.Services
                     Message = Item.Comment,
                     Name = Item.User?.FullName,
                     ArticleId = Item.ArticleId,
-                    DateTime=Item.CreatedOn
-
+                    DateTime = Item.CreatedOn
                 });
             }
             catch (Exception exception)
@@ -634,7 +614,6 @@ namespace AspireOverflow.Services
         public bool AddLikeToArticle(ArticleLike Like)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-            
             Validation.ValidateArticleLike(Like);
             try
             {
@@ -650,7 +629,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle(ArticleLike Like)", exception, Like));
                 return false;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -658,7 +637,6 @@ namespace AspireOverflow.Services
                     _logger.LogInformation($"Tracelog:ArticleService Elapsed Time for AddLikeToArticle(ArticleLike Like) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
-
         }
 
 
@@ -666,7 +644,6 @@ namespace AspireOverflow.Services
         public int GetLikesCount(int ArticleID)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (ArticleID <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleID}");
             try
             {
@@ -678,7 +655,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetLikesCount(int ArticleID)", exception));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -687,6 +664,7 @@ namespace AspireOverflow.Services
                 }
             }
         }
+
         //Returns anonymous object for the Articles object 
         private object GetAnonymousArticleObject(Article article)
         {

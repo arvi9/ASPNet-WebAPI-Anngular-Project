@@ -20,21 +20,20 @@ namespace AspireOverflow.Services
         {
             _logger = logger;
             database = _userRepository;
-             IsTracingEnabled = database.GetIsTraceEnabledFromConfiguration();
+            IsTracingEnabled = database.GetIsTraceEnabledFromConfiguration();
         }
 
 
         //to create an user using user object.
         public bool CreateUser(User user)
         {
-             if (IsTracingEnabled) _stopWatch.Start();
-
+            if (IsTracingEnabled) _stopWatch.Start();
             Validation.ValidateUser(user);
             try
             {
                 user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
-                user.CreatedOn=DateTime.Now;
-                user.UpdatedBy=null;
+                user.CreatedOn = DateTime.Now;
+                user.UpdatedBy = null;
                 return database.CreateUser(user);
             }
             catch (ValidationException exception)
@@ -47,7 +46,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "CreateUser(User user)", exception, user));
                 return false;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -62,7 +61,6 @@ namespace AspireOverflow.Services
         public bool RemoveUser(int UserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -73,7 +71,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "RemoveUser(int UserId)", exception, UserId));
                 return false;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -85,21 +83,20 @@ namespace AspireOverflow.Services
 
 
         //to update the user as reviewer using UserId and IsReviewer.
-        public bool UpdateUserByIsReviewer(int UserId, bool IsReviewer,int UpdatedByUserId)
+        public bool UpdateUserByIsReviewer(int UserId, bool IsReviewer, int UpdatedByUserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
-                return database.UpdateUserByReviewer(UserId, IsReviewer,UpdatedByUserId);
+                return database.UpdateUserByReviewer(UserId, IsReviewer, UpdatedByUserId);
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "UpdateUserByIsReviewer(int UserId,bool IsReviewer,int UpdatedByUserId)", exception, UserId));
                 return false;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -114,7 +111,6 @@ namespace AspireOverflow.Services
         public User GetUser(string Email, string Password)  //Method used in Token Controller
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (Email == null || Password == null) throw new ArgumentException("Email or Password cannot be null");
             try
             {
@@ -132,7 +128,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("ArticleService()", "GetUser(string Email, string Password)", exception, Email));
                 throw;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -146,8 +142,7 @@ namespace AspireOverflow.Services
         //to get the user by UserID from database.
         public object GetUserByID(int UserID)
         {
-             if (IsTracingEnabled) _stopWatch.Start();
-
+            if (IsTracingEnabled) _stopWatch.Start();
             if (UserID <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserID:{UserID}");
             try
             {
@@ -159,7 +154,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByID(int UserId)", exception, UserID));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -174,7 +169,6 @@ namespace AspireOverflow.Services
         public IEnumerable<User> GetUsers()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 return database.GetUsers();
@@ -184,7 +178,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsers()", exception));
                 throw;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -199,7 +193,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetUsersByVerifyStatus(int VerifyStatusID)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException("VerifyStatusId must be greater than 0 and less than 3");
             try
             {
@@ -210,7 +203,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByVerifyStatus(int VerifyStatusID)", exception, VerifyStatusID));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -225,7 +218,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetUsersByUserRoleID(int UserRoleID)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (UserRoleID <= 0 || UserRoleID > 2) throw new ArgumentException($"User Role Id must be greater than 0 where UserRoleId:{UserRoleID}");
             try
             {
@@ -236,7 +228,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByUserRoleID(int UserRoleID)", exception, UserRoleID));
                 throw;
             }
-               finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -248,22 +240,21 @@ namespace AspireOverflow.Services
 
 
         //to change the status of the user uding UserID and VerifyStatusID.
-        public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID,int UpdatedByUserId)
+        public bool ChangeUserVerificationStatus(int UserID, int VerifyStatusID, int UpdatedByUserId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (UserID <= 0) throw new ArgumentException($"User Id must be greater than 0  where UserID:{UserID}");
             if (VerifyStatusID <= 0 || VerifyStatusID > 3) throw new ArgumentException($"Verify Status Id must be between 0 and 3 where VerifyStatusID:{VerifyStatusID}");
             try
             {
-                return database.UpdateUserByVerifyStatus(UserID, VerifyStatusID,UpdatedByUserId);
+                return database.UpdateUserByVerifyStatus(UserID, VerifyStatusID, UpdatedByUserId);
             }
             catch (Exception exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("UserService", "ChangeUserVerificationStatus(int UserID, int VerifyStatusID,int UpdatedByUserId)", exception, $"UserID:{UserID},VerifyStatusID:{VerifyStatusID}"));
                 throw;
             }
-              finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -278,7 +269,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetUsersByIsReviewer(bool IsReviewer)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 return database.GetUsersByIsReviewer(IsReviewer).Select(User => GetAnonymousUserObject(User));
@@ -288,7 +278,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetUsersByIsReviewer(bool IsReviewer)", exception, IsReviewer));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -302,7 +292,6 @@ namespace AspireOverflow.Services
         public object GetCountOfUsers()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 return database.GetCountOfUsers();
@@ -320,13 +309,11 @@ namespace AspireOverflow.Services
                     _logger.LogInformation($"Tracelog:UserService Elapsed Time for GetCountOfUsers() - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
-
         }
         //to get the department using DepartmentId.
         private string GetDepartmentByID(int DepartmentId)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             if (DepartmentId <= 0) throw new ArgumentException($"User Id must be greater than 0 where DepartmentId:{DepartmentId}");
             try
             {
@@ -338,7 +325,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", "GetDepartmentByID(int DepartmentId)", exception, DepartmentId));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -346,7 +333,6 @@ namespace AspireOverflow.Services
                     _logger.LogInformation($"Tracelog:UserService Elapsed Time for GetDepartmentByID(int DepartmentId) - {_stopWatch.ElapsedMilliseconds}ms");
                 }
             }
-            
         }
 
 
@@ -354,7 +340,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetGenders()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 var Genders = database.GetGenders().Select(item => new
@@ -369,7 +354,7 @@ namespace AspireOverflow.Services
                 _logger.LogError(HelperService.LoggerMessage("UserService", " GetGenders()", exception));
                 throw;
             }
-             finally
+            finally
             {
                 if (IsTracingEnabled)
                 {
@@ -384,7 +369,6 @@ namespace AspireOverflow.Services
         public IEnumerable<Object> GetDesignations()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-
             try
             {
                 var designations = database.GetDesignations().Select(item => new
@@ -415,7 +399,6 @@ namespace AspireOverflow.Services
         public IEnumerable<object> GetDepartments()
         {
             if (IsTracingEnabled) _stopWatch.Start();
-            
             try
             {
                 var Departments = database.GetDepartments().Select(item => new
@@ -439,21 +422,22 @@ namespace AspireOverflow.Services
                 }
             }
         }
-     //Returns anonymous object for the User object 
-    private object GetAnonymousUserObject(User user)
-    {
-        return new
+
+        //Returns anonymous object for the User object 
+        private object GetAnonymousUserObject(User user)
         {
-            UserId = user.UserId,
-            fullName = user.FullName,
-            EmployeeId = user.AceNumber,
-            Email = user.EmailAddress,
-            DateOfBirth = user.DateOfBirth,
-            Designation = user.Designation?.DesignationName,
-            Department = user.Designation!.Department.DepartmentName,
-            Gender = user.Gender?.Name,
-            IsReviewer = user.IsReviewer
-        };
+            return new
+            {
+                UserId = user.UserId,
+                fullName = user.FullName,
+                EmployeeId = user.AceNumber,
+                Email = user.EmailAddress,
+                DateOfBirth = user.DateOfBirth,
+                Designation = user.Designation?.DesignationName,
+                Department = user.Designation!.Department.DepartmentName,
+                Gender = user.Gender?.Name,
+                IsReviewer = user.IsReviewer
+            };
+        }
     }
-}
 }

@@ -4,7 +4,6 @@ using AspireOverflow.DataAccessLayer.Interfaces;
 using AspireOverflow.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-
 namespace AspireOverflow.DataAccessLayer
 {
     public class QueryRepository : IQueryRepository
@@ -20,10 +19,7 @@ namespace AspireOverflow.DataAccessLayer
             _logger = logger;
             _configuration = configuration;
             IsTracingEnabled = GetIsTraceEnabledFromConfiguration();
-
         }
-
-
         //to add query using query object.
         public bool AddQuery(Query query)
         {
@@ -385,7 +381,6 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", " GetDuration()", exception));
                 throw;
-
             }
             finally
             {

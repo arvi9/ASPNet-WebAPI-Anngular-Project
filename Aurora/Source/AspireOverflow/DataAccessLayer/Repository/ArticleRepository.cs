@@ -9,8 +9,6 @@ using System.Diagnostics;
 
 namespace AspireOverflow.DataAccessLayer
 {
-
-
     public class ArticleRepository : IArticleRepository
     {
         private readonly AspireOverflowContext _context;
@@ -326,7 +324,6 @@ namespace AspireOverflow.DataAccessLayer
             {
                 //returns the article which has the same author and StatusID as 4 (4->Published article).
                 return _context.Articles.Where(article => article.User!.FullName.Contains(AuthorName) && article.ArticleStatusID == 4).Include(e => e.ArticleStatus).Include(e => e.User);
-
             }
             catch (Exception exception)
             {
@@ -352,7 +349,6 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 return _context.Articles.Where(article => article.ReviewerId == ReviewerId).Include(e => e.ArticleStatus).Include(e => e.User);
-
             }
             catch (Exception exception)
             {
@@ -619,7 +615,6 @@ namespace AspireOverflow.DataAccessLayer
             {
                 _logger.LogError(HelperService.LoggerMessage("UserRepository", "GetRange()", exception));
                 throw;
-
             }
             finally
             {
@@ -634,7 +629,6 @@ namespace AspireOverflow.DataAccessLayer
         //Get Tracing Enabled or not from Configuration
         public bool GetIsTraceEnabledFromConfiguration()
         {
-           
             try
             {
                 var IsTracingEnabled = _configuration["Tracing:IsEnabled"];
@@ -646,7 +640,6 @@ namespace AspireOverflow.DataAccessLayer
                 return false;
             }
         }
-
     }
 }
 
