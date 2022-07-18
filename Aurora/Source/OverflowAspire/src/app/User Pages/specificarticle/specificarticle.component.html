@@ -51,10 +51,16 @@
     </div>
     <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
         <div class="container">
-            <div class="d-flex flex-row align-items-start"><textarea class="form-control form-control5"
-                    name="QueryComment" [(ngModel)]="article.comment" placeholder="Enter comments"></textarea></div>
+            <div class="bg-light p-2">
+                <textarea class="form-control form-control5" #comment="ngModel" name="QueryComment"
+                    [(ngModel)]="article.comment" placeholder="Enter comments" required></textarea>
+                <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
+                    <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
+                        *ngIf="comment.errors['required']">comment is required</small>
+                </div>
+            </div>
             <div class="mt-2">
-                <input class="custom-btn btn-1" type="submit" value="Post"/>
+                <input class="custom-btn btn-1" type="submit" [disabled]="!commentform.valid" value="Post" />
             </div>
         </div>
     </form>

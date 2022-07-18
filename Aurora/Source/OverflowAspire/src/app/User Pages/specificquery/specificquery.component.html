@@ -32,7 +32,8 @@
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
       <table>
         <tr *cdkVirtualFor="let comment of data.comments">
-          <td class="example-dt"><br><i class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
+          <td class="example-dt"><br><i
+              class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
             <hr>
           </td>
           <br>
@@ -41,17 +42,21 @@
   </div>
   <br>
   <br>
-  <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off" *ngIf="data.isSolved===false">
+  <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off" *ngIf="data.isSolved===false" >
     <h5>Comment your answer</h5>
     <div class="container">
       <div class="bg-light p-2">
         <textarea type="text" name="comment" class="form-control form-control5" id="queryComment-message"
-          placeholder="Enter comments" [(ngModel)]="Query.comment">
+          placeholder="Enter comments" [(ngModel)]="Query.comment" #comment="ngModel" required>
                     </textarea>
+        <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
+          <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
+            *ngIf="comment.errors['required']">comment is required</small>
+        </div>
       </div>
     </div>
     <div class="mt-2 text-right">
-      <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">Post</button>
+      <button class="custom-btn btn-1 btn-2" id="button-code" [disabled]="!form.valid" type="submit">Post</button>
     </div>
   </form>
 </div>

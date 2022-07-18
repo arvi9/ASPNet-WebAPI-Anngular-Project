@@ -28,7 +28,7 @@ export class ReviewerdashboardComponent implements OnInit {
         next: (data: any) => {
           this.piedata = data;
           this.articles=data.articleCounts.toBeReviewedArticles+data.articleCounts.underReviewArticles
-          var names = ['Articles to be Reviewed', 'Articles Reviewed'];
+          var names = ['Articles to be reviewed', 'Article published'];
           var details = [];
           details.push( this.articles);
           details.push(data.articleCounts.articlesPublished);
