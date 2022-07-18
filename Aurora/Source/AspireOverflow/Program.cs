@@ -9,11 +9,48 @@ using System.Text;
 using Serilog;
 using AspireOverflow.DataAccessLayer.Interfaces;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//To Enable Swagger Documentation and Authentication
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Aspire-Overflow API",
+        Version = "v1"
+    });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+ {
+     {
+           new OpenApiSecurityScheme
+             {
+                 Reference = new OpenApiReference
+                 {
+                     Type = ReferenceType.SecurityScheme,
+                     Id = "Bearer"
+                 }
+             },
+             new string[] {}
+     }
+ });
+});
 try
 {
     //Creates the instance for Db Context by fetching the Connection string from configuration file
@@ -31,20 +68,20 @@ builder.Services.AddHttpLogging(httpLogging =>
 {
     httpLogging.LoggingFields = HttpLoggingFields.None;
 });
-builder.Services.AddTransient<IQueryService,QueryService>();
-builder.Services.AddTransient<IQueryRepository,QueryRepository>();
-builder.Services.AddTransient<IArticleRepository,ArticleRepository>();
-builder.Services.AddTransient<IUserRepository,UserRepository>();
-builder.Services.AddTransient<IUserService,UserService>();
-builder.Services.AddTransient<ITokenService,TokenService>();
-builder.Services.AddTransient<IArticleService,ArticleService>();
+builder.Services.AddTransient<IQueryService, QueryService>();
+builder.Services.AddTransient<IQueryRepository, QueryRepository>();
+builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IArticleService, ArticleService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<MailService>();
 //Jwt Token Authentication 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
-    options.SaveToken = true;  
+    options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuer = true,
@@ -55,31 +92,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         TokenDecryptionKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-//To Enable Authentication and Documentation in Swaggger
-builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new OpenApiInfo {
-        Title = "JWTToken_Auth_API", Version = "v1"
-    });
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
-        Name = "Authorization",
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer",
-            BearerFormat = "JWT",
-            In = ParameterLocation.Header,
-            Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
-    });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
-});
+
 
 //To Avoid Json Serialization Exception while sending list of data as Response,,Used following code.
 builder.Services.AddControllersWithViews()
@@ -104,12 +117,12 @@ catch (Exception exception)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
+ app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aspire-Overflow API");
+        });
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 app.UseHttpsRedirection();
 app.UseHttpLogging(); //logs all the Http Request
 app.UseAuthentication(); //To enable Authentication
