@@ -55,9 +55,11 @@
             </tag-input>
             <br>
             <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}"
-                debounce="500" required>
+                debounce="500" pattern="^\W*(\w+(\W+|$)){50,100000}$" required>
             </ckeditor>
             <div *ngIf="content.errors && (content.invalid || content.touched)">
+                <small class="text-danger" *ngIf="content.errors['pattern']">Article content should have
+                    Minimum 50 words</small>
                 <small class="text-danger" [class.d-none]="content.valid || content.untouched"
                     *ngIf="content.errors?.['required']">
                     Article content is required.

@@ -31,7 +31,6 @@ export class ToreviewspecificpageComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
-            console.log(data.articleId)
           }
         });
       this.connection.GetCurrentApplicationUser()

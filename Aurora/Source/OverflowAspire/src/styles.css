@@ -7,6 +7,11 @@
     --dark: #091E3E
 }
 
+.Content {
+  min-height: 100vh;
+}
+
+
 h1,
 h2 {
     font-weight: 700 !important
@@ -341,7 +346,7 @@ a:hover {
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
-  text-align: justify
+  text-align: justify;
 }
 
 .example-viewport {

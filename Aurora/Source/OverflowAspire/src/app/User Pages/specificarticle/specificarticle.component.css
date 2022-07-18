@@ -115,7 +115,7 @@ body {
 }
 
 .limitTextHeight {
-  height: 75px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -164,4 +164,8 @@ body {
 
 .breadcrumb {
   margin: 20px;
+}
+
+.readmore{
+  margin:5px;
 }

@@ -19,8 +19,8 @@ export class SpecificarticleComponent implements OnInit {
   public data: any = new Article();
   likeCount = 0;
   isLiked = false;
-  isReadMore = false
-  iReadMore = true
+  isReadMore = true
+  isReadLess = false
   createdOn="";
 
   article: any = {
@@ -92,8 +92,5 @@ export class SpecificarticleComponent implements OnInit {
 
   showText() {
     this.isReadMore = !this.isReadMore
-  }
-  Text() {
-    this.iReadMore = !this.iReadMore
   }
 }

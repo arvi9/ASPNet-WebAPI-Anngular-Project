@@ -20,6 +20,7 @@ declare var CKEDITOR: any;
 
 export class CreateArticlePageComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
+  
   sharedUsersId: any = []
   IsLoadingSubmit: boolean = false;
   IsLoadingSaveDraft: boolean = false;

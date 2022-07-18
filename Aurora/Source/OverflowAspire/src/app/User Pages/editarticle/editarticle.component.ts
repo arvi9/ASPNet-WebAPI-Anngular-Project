@@ -16,9 +16,8 @@ export class EditarticleComponent implements OnInit {
   public data: Article = new Article();
   likeCount = 0;
   isLiked = false;
-  isReadMore = false
+  isReadMore = true;
   iReadMore = true
-  createdOn: string = this.data.date.toDateString()
   error=""
   article: any = {
     articleCommentId: 0,
@@ -28,7 +27,8 @@ export class EditarticleComponent implements OnInit {
     articleId: 2,
     updatedBy: 0,
     updatedOn: '',
-    reviewerId:0
+    reviewerId:0,
+    publishedDate:new Date()
   }
   like: any = {
     likeId: 0,
@@ -47,6 +47,7 @@ export class EditarticleComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
+            console.log(data)
           }
         });
     });

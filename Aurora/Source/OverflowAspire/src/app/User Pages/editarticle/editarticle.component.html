@@ -36,13 +36,13 @@
     </div>
     <div class="panel panel-default p-3">
       <div class="panel-heading bold">Author Name:&nbsp;{{data.authorName}}</div>
-      <div class="panel-body bold">Date:&nbsp;{{createdOn}}</div>
+      <div class="panel-body bold">Date:&nbsp;{{data.publishedDate|date}}</div>
       <div class="text-center pb-4">
         <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
       </div>
       <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
       </div>
-      <button type="button" (click)="showText()">
+      <button type="button" class="readmore" (click)="showText()">
         {{ isReadMore ? 'Read More': 'Read Less' }}
       </button>
     </div>

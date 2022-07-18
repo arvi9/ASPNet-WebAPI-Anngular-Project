@@ -14,8 +14,10 @@ export class Article {
     date:Date=new Date();
     getlike:articleLikes[]=[];
     likes:number=0;
-    reviewer:string=""
-    reason:string=""
+    reviewer:string="";
+    reason:string="";
+    publishedDate:Date=new Date()
+
 }
 
 export class ArticleComments{

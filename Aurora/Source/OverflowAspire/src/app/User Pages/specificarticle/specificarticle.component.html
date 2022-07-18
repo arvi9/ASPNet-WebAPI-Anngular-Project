@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div>
+<div class="Content">
     <div class="breadcrumb">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -12,57 +12,58 @@
             </ol>
         </nav>
     </div>
-</div>
-<div class="container p-5 my-5 border">
-    <div class="text-center">
-        <h1>{{data.title}}</h1>
-    </div>
-    <div class="panel panel-default p-3">
-        <div class="panel-heading bold" [ngStyle]="{'font-weight':'600'}">Author Name:&nbsp;{{data.authorName}}</div>
-        <div class="panel-body bold">Date:&nbsp;{{data.publishedDate| date}}</div>
-        <div class="text-center pb-4 ">
-            <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
+    <div class="container p-5 my-5 border">
+        <div class="text-center">
+            <h1>{{data.title}}</h1>
         </div>
-        <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
+        <div class="panel panel-default p-3">
+            <div class="panel-heading bold" [ngStyle]="{'font-weight':'600'}">Author Name:&nbsp;{{data.authorName}}
+            </div>
+            <div class="panel-body bold">Date:&nbsp;{{data.publishedDate| date}}</div>
+            <div class="text-center pb-4 ">
+                <img class="article-img " [src]="'data:image/jpg;base64,'+ data.image" />
+            </div>
+            <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
+            </div>
+            <button class="readmore" (click)="showText()">
+                {{ isReadMore ? 'Read More': 'Read Less' }}
+            </button>
         </div>
-        <button type="custom-btn btn-1" (click)="showText()">
-            {{ isReadMore ? 'Read More': 'Read Less' }}
-        </button>
-    </div>
-    <div *ngIf="data.comments.length!==0">
-        <h4>{{data.comments.length}} Comments</h4>
-        <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
-            <table>
-                <tr *cdkVirtualFor="let comment of data.comments">
-                    <td class="example-dt"><br><i
-                            class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
-                    </td>
-                    <br>
-            </table>
-        </cdk-virtual-scroll-viewport>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <div class=" iconstyle d-flex flex-row fs-12">
-        <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
-            <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{data.likes}}</span>
+        <div *ngIf="data.comments.length!==0">
+            <h4>{{data.comments.length}} Comments</h4>
+            <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+                <table>
+                    <tr *cdkVirtualFor="let comment of data.comments">
+                        <td class="example-dt"><br><i
+                                class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
+                        </td>
+                        <br>
+                </table>
+            </cdk-virtual-scroll-viewport>
         </div>
-    </div>
-    <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
-        <div class="container">
-            <div class="bg-light p-2">
-                <textarea class="form-control form-control5" #comment="ngModel" name="QueryComment"
-                    [(ngModel)]="article.comment" placeholder="Enter comments" required></textarea>
-                <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
-                    <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
-                        *ngIf="comment.errors['required']">comment is required</small>
+        <br>
+        <hr>
+        <br>
+        <div class=" iconstyle d-flex flex-row fs-12">
+            <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
+                <i class=" fa fa-regular fa-heart mx-2"></i> <span class="like-counter">{{data.likes}}</span>
+            </div>
+        </div>
+        <form #commentform="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
+            <div class="container">
+                <div class="bg-light p-2">
+                    <textarea class="form-control form-control5" #comment="ngModel" name="QueryComment"
+                        [(ngModel)]="article.comment" placeholder="Enter comments" required></textarea>
+                    <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
+                        <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
+                            *ngIf="comment.errors['required']">comment is required</small>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <input class="custom-btn btn-1" type="submit" [disabled]="!commentform.valid" value="Post" />
                 </div>
             </div>
-            <div class="mt-2">
-                <input class="custom-btn btn-1" type="submit" [disabled]="!commentform.valid" value="Post" />
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 <app-footer></app-footer>
