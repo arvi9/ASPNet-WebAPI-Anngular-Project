@@ -128,7 +128,7 @@ namespace AspireOverflow.DataAccessLayer
                 if (ExistingArticle.CreatedBy == UpdatedByUserId && ArticleStatusID > 2) throw new ValidationException("Reviewer cannot update status of thier own articles");
                 if (ArticleStatusID > 2) ExistingArticle.ReviewerId = UpdatedByUserId; // Reviewer Id has been assigned once article status Id greater than 2
                 ExistingArticle.ArticleStatusID = ArticleStatusID;
-                ExistingArticle.UpdatedOn = DateTime.UtcNow;
+                ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
 
                 _context.Articles.Update(ExistingArticle);
@@ -246,7 +246,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
             }
             catch (Exception exception)
@@ -273,8 +273,8 @@ namespace AspireOverflow.DataAccessLayer
             try
             {
                 //Articles with status (to be reviewed) and (Under Review) can only be accessible only to reviewer with PrivateArticles.
-                var ListOfArticle = (ArticleStatusID > 1) && IsReviewer ? _context.Articles.Where(item => item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()) && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList() :
-                _context.Articles.Where(item => item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
+                var ListOfArticle = (ArticleStatusID > 1) && IsReviewer ? _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList() :
+                _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && !item.IsPrivate && item.ArticleStatusID == ArticleStatusID).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
                 return ListOfArticle;
             }
             catch (Exception exception)
@@ -481,8 +481,6 @@ namespace AspireOverflow.DataAccessLayer
             Validation.ValidateArticleComment(comment);
             try
             {
-
-                comment.CreatedOn = DateTime.UtcNow;
                 _context.ArticleComments.Add(comment);
                 _context.SaveChanges();
                 return true;
@@ -509,7 +507,7 @@ namespace AspireOverflow.DataAccessLayer
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
             try
             {
-                var ListOfComments = _context.ArticleComments.Where(item => item.ArticleId == ArticleId && item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).Include(e => e.User).ToList();
+                var ListOfComments = _context.ArticleComments.Where(item => item.ArticleId == ArticleId && item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.User).ToList();
                 return ListOfComments;
             }
             catch (Exception exception)
@@ -565,7 +563,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange())).ToList();
                 return ListOfArticleLikes;
             }
             catch (Exception exception)

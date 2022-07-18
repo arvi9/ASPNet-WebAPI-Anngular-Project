@@ -1,10 +1,7 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
-
 using System.ComponentModel.DataAnnotations;
-
 using AspireOverflow.Models.Interfaces;
-
 namespace AspireOverflow.Models
 {
     public partial class ArticleComment : IAuditField
@@ -19,14 +16,9 @@ namespace AspireOverflow.Models
 
         public string? Comment { get; set; }
 
-      
-
-
         public int UserId { get;  set;}
         public int CreatedBy{get;set;}
         
-      
-
         public int ArticleId { get; set; }
 
         public DateTime CreatedOn { get; set; }

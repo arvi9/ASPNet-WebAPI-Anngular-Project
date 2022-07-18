@@ -33,7 +33,7 @@ namespace AspireOverflow.Services
             try
             {
                 user.Password = PasswordHasherFactory.GetPasswordHasherFactory().HashPassword(user, user.Password);
-                user.CreatedOn=DateTime.UtcNow;
+                user.CreatedOn=DateTime.Now;
                 user.UpdatedBy=null;
                 return database.CreateUser(user);
             }

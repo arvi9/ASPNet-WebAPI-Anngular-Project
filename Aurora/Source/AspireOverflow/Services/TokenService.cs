@@ -31,7 +31,7 @@ namespace AspireOverflow.Services
                 var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()),
                         new Claim(ClaimTypes.Email,user.EmailAddress),
                         new Claim("UserId",user.UserId.ToString()),
                         new Claim("RoleId",user.UserRoleId.ToString()),
@@ -46,9 +46,9 @@ namespace AspireOverflow.Services
                   _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
                     new ClaimsIdentity(claims),
-                    DateTime.UtcNow,
-                    DateTime.UtcNow.AddMinutes(30),
-                    DateTime.UtcNow,
+                    DateTime.Now,
+                    DateTime.Now.AddMinutes(30),
+                    DateTime.Now,
                     signIn,
                     encryptingCredentials);
                 var Result = new

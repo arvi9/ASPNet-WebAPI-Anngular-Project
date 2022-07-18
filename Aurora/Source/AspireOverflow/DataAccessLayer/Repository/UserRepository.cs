@@ -158,7 +158,7 @@ namespace AspireOverflow.DataAccessLayer
             {
                 var ExistingUser = GetUserByID(UserId);
                 ExistingUser.VerifyStatusID = VerifyStatusID;
-                ExistingUser.UpdatedOn=DateTime.UtcNow;
+                ExistingUser.UpdatedOn=DateTime.Now;
                 ExistingUser.UpdatedBy=UpdatedByUserId;
                 _context.Users.Update(ExistingUser);
                 _context.SaveChanges();
@@ -190,7 +190,7 @@ namespace AspireOverflow.DataAccessLayer
                 var ExistingUser = GetUserByID(UserId);
                 ExistingUser.IsReviewer = IsReviewer;
                 ExistingUser.UpdatedBy=UpdatedByUserId;
-                ExistingUser.UpdatedOn=DateTime.UtcNow;
+                ExistingUser.UpdatedOn=DateTime.Now;
                 _context.Users.Update(ExistingUser);
                 _context.SaveChanges();
                 return true;

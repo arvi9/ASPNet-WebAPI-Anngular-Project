@@ -35,7 +35,7 @@ namespace AspireOverflow.Services
             Validation.ValidateQuery(query);
             try
             {
-                query.CreatedOn = DateTime.UtcNow;
+                query.CreatedOn = DateTime.Now;
                 var IsAddedSuccessfully = database.AddQuery(query);
                 if (IsAddedSuccessfully) _mailService?.SendEmailAsync(HelperService.QueryMail("Manimaran.0610@gmail.com", query.Title!, "Query Created Successfully"));
                 return IsAddedSuccessfully;
@@ -350,7 +350,7 @@ namespace AspireOverflow.Services
             Validation.ValidateComment(comment);
             try
             {
-                comment.CreatedOn = DateTime.UtcNow;
+                comment.CreatedOn = DateTime.Now;
                 comment.UpdatedBy=null;
             
                 return database.AddComment(comment);
@@ -443,7 +443,7 @@ namespace AspireOverflow.Services
             try
             {
                 spam.CreatedBy=spam.UserId;
-                spam.CreatedOn=DateTime.UtcNow;
+                spam.CreatedOn=DateTime.Now;
                 spam.UpdatedBy=null;
                 return database.AddSpam(spam);
             }

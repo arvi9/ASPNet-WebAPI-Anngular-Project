@@ -118,7 +118,7 @@ namespace AspireOverflow.DataAccessLayer
             Query? ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange()) && query.IsActive);
+                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && query.IsActive);
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
@@ -143,7 +143,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.UtcNow.AddMonths(-GetRange())).Include(e => e.User).ToList();
+                var ListOfQueries = _context.Queries.Where(item => item.IsActive && item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.User).ToList();
                 return ListOfQueries;
             }
             catch (Exception exception)
@@ -323,7 +323,7 @@ namespace AspireOverflow.DataAccessLayer
                 {
                     spam.VerifyStatusID = VerifyStatusID;
                     spam.UpdatedBy = UpdatedByUserId;
-                    spam.UpdatedOn = DateTime.UtcNow;
+                    spam.UpdatedOn = DateTime.Now;
                 };
                 _context.Spams.UpdateRange(ExistingSpams);
                 _context.SaveChanges();

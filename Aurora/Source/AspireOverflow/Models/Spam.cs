@@ -14,7 +14,7 @@ namespace AspireOverflow.Models
 
         public int VerifyStatusID { get; set; }
 
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
         public int CreatedBy { get; set; }
       
         public DateTime? UpdatedOn { get; set; }

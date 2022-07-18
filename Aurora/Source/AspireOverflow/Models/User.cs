@@ -44,7 +44,7 @@ namespace AspireOverflow.Models
 
         public int DesignationId { get; set; }
 
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
 
         public DateTime? UpdatedOn { get; set; }

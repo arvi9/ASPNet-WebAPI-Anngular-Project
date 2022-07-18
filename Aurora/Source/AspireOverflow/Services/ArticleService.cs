@@ -33,7 +33,7 @@ namespace AspireOverflow.Services
             {
                 article.Image = Convert.FromBase64String(article.ImageString!);
                 article.Reason = null;
-                article.CreatedOn = DateTime.UtcNow;
+                article.CreatedOn = DateTime.Now;
                 return database.AddArticle(article);
             }
             catch (Exception exception)
@@ -59,7 +59,7 @@ namespace AspireOverflow.Services
             try
             {
                 article.Image = Convert.FromBase64String(article.ImageString!);
-                article.CreatedOn = DateTime.UtcNow;
+                article.CreatedOn = DateTime.Now;
                 //for adding articles visible only for shared users.
                 return database.AddPrivateArticleWithSharedUsers(article, SharedUsersId);
             }
@@ -93,7 +93,7 @@ namespace AspireOverflow.Services
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArticleId}");
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
-                ExistingArticle.UpdatedOn = DateTime.UtcNow;
+                ExistingArticle.UpdatedOn = DateTime.Now;
                 ExistingArticle.UpdatedBy = UpdatedByUserId;
                 ExistingArticle.ArticleStatusID = article.ArticleStatusID;
                 ExistingArticle.IsPrivate=article.IsPrivate;
@@ -574,7 +574,7 @@ namespace AspireOverflow.Services
             try
             {
                 comment.CreatedBy = comment.UserId;
-                comment.CreatedOn=DateTime.UtcNow;
+                comment.CreatedOn=DateTime.Now;
                 var IsCommentSuccessfully = database.AddComment(comment);
                 if (IsCommentSuccessfully) _mailService?.SendEmailAsync(HelperService.CommentMail("Venkateshwaranmalai2000@gmail.com", "Title", "Article Created Successfully"));
                 return IsCommentSuccessfully;
