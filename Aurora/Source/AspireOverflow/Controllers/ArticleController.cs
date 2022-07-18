@@ -19,12 +19,32 @@ namespace AspireOverflow.Controllers
             _logger = logger;
             _articleService = articleService;
         }
-
+        
         /// <summary>
-        /// hello
+        ///  Create Article
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///    url : https://localhost:7197/Article/CreateArticle
+        /// 
+        ///     * fields are required
+        /// 
+        ///     body
+        ///     {
+        ///         articleId*: int,
+        ///         title*: string,
+        ///         content*: string,
+        ///         image*: string,
+        ///         articleStatusID*: int,
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">If the article was created. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
         /// <param name="article"></param>
-        /// <returns></returns>
+       
         [HttpPost]
         public async Task<ActionResult> CreateArticle(Article article)
         {
@@ -73,6 +93,7 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="privateArticleDto"></param>
+        
         [HttpPost]
         public async Task<ActionResult> CreatePrivateArticle(PrivateArticleDto privateArticleDto)
         {
@@ -240,7 +261,7 @@ namespace AspireOverflow.Controllers
         }
         
         /// <summary>
-        /// Update a article
+        /// Update a article as private.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -262,10 +283,12 @@ namespace AspireOverflow.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="200">If the article was updated. </response>
+        /// <response code="200">If the private article was updated. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
-        /// <param name="article"></param>
+        /// <param name="privateArticleDto"></param>
+        /// 
+        /// 
         [HttpPut]
         public async Task<ActionResult> UpdatePrivateArticle(PrivateArticleDto privateArticleDto)
         {
@@ -285,7 +308,6 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occured while Adding article :{HelperService.PropertyList(privateArticleDto.article)}");
             }
         }
-
 
 
         /// <summary>
@@ -310,6 +332,8 @@ namespace AspireOverflow.Controllers
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleId"></param>
         /// <param name="ArticleStatusID"></param>
+
+
         [HttpPatch]
         public async Task<ActionResult> ChangeArticleStatus(int ArticleId, int ArticleStatusID)
         {
@@ -336,6 +360,27 @@ namespace AspireOverflow.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete articles by its id.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/Article/DeleteArticleByArticleId
+        /// 
+        ///     * fields are required
+        /// 
+        ///     body
+        ///     {
+        ///         artileId*: int,
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">If the article was deleted successfully. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="ArticleId"></param>
+        /// <returns></returns>
 
         [HttpDelete]
         public async Task<ActionResult> DeleteArticleByArticleId(int ArticleId)
@@ -374,9 +419,10 @@ namespace AspireOverflow.Controllers
         ///     }
         /// </remarks>
         /// <response code="200">Returns a latest articles in a articles. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Range"></param>
+         
+        
         [HttpGet]
         public async Task<ActionResult> GetLatestArticles(int Range = 0)
         {
@@ -412,6 +458,8 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Range"></param>
+        
+         
         [HttpGet]
         public async Task<ActionResult> GetTrendingArticles(int Range = 0)
         {
@@ -447,6 +495,7 @@ namespace AspireOverflow.Controllers
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleId"></param>
+        
         [HttpGet]
         public async Task<ActionResult> GetArticleById(int ArticleId)
         {
@@ -469,7 +518,7 @@ namespace AspireOverflow.Controllers
 
 
         /// <summary>
-        /// Gets list of articles.
+        /// Gets all articles.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -477,7 +526,7 @@ namespace AspireOverflow.Controllers
         ///     url : https://localhost:7197/Article/GetAll
         ///
         /// </remarks>
-        /// <response code="200">Returns a list of articles. </response>
+        /// <response code="200">Returns all articles. </response>
         /// <response code="500">If there is problem in server. </response>
         [HttpGet]
         public async Task<ActionResult> GetAll()
@@ -523,25 +572,19 @@ namespace AspireOverflow.Controllers
 
 
         /// <summary>
-        /// Gets a list of private articles in articles by user id.
+        /// Gets a list of private articles.
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
         ///     url : https://localhost:7197/Article/GetPrivateArticles
         /// 
-        ///     * fields are required
-        /// 
-        ///     body
-        ///     {
-        ///         UserId*: int,
-        ///     }
         ///
         /// </remarks>
         /// <response code="200">Returns a list of private articles in that user id</response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
-        /// <param name="UserId"></param>
+        /// 
         [HttpGet]
         public async Task<ActionResult> GetPrivateArticles()
         {
@@ -559,25 +602,25 @@ namespace AspireOverflow.Controllers
 
 
         /// <summary>
-        /// Gets a list of articles by title.
+        /// Get a Article by title
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
         ///     url : https://localhost:7197/Article/GetArticlesByTitle
-        /// 
-        ///  * fields are required
+        ///
+        ///     * fields are required
         /// 
         ///     body
         ///     {
         ///         Title*: string,
         ///     }
-        ///
         /// </remarks>
-        /// <response code="200">Returns a list of article by title.. </response>
+        /// <response code="200">Returns a article by its title. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="Title"></param>
+        
         [HttpGet]
         public async Task<ActionResult> GetArticlesByTitle(string Title)
         {
@@ -595,26 +638,27 @@ namespace AspireOverflow.Controllers
         }
 
 
+       
         /// <summary>
-        /// Gets a list of articles by author name.
+        /// Get a Article by author.
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
-        ///    url:  https://localhost:7197/Article/GetArticlesByAuthor
-        /// 
-        ///  * fields are required
+        ///     url : https://localhost:7197/Article/GetArticlesByAuthor
+        ///
+        ///     * fields are required
         /// 
         ///     body
         ///     {
         ///         AuthorName*: string,
         ///     }
-        ///
         /// </remarks>
-        /// <response code="200">Returns a list of articles by author name.. </response>
+        /// <response code="200">Returns a article by author name. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="AuthorName"></param>
+        /// 
         [HttpGet]
         public async Task<ActionResult> GetArticlesByAuthor(string AuthorName)
         {
@@ -632,26 +676,27 @@ namespace AspireOverflow.Controllers
         }
 
 
-        /// <summary>
-        /// Gets a list of article by article status id.
+       /// <summary>
+        /// Get a Article by article status id.
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
-        ///    url: https://localhost:7197/Article/GetArticlesByArticleStatusId 
-        /// 
-        ///  * fields are required
+        ///     url : https://localhost:7197/Article/GetArticlesByArticleStatusId
+        ///
+        ///     * fields are required
         /// 
         ///     body
         ///     {
-        ///         ArticleStatusID*: int,
+        ///         ArticleStatusID*: string,
         ///     }
-        ///
         /// </remarks>
-        /// <response code="200">Returns a list of article by article status id.. </response>
+        /// <response code="200">Returns a article by author name. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="ArticleStatusID"></param>
+        
+
         [HttpGet]
         public async Task<IActionResult> GetArticlesByArticleStatusId(int ArticleStatusID)
         {
@@ -675,9 +720,9 @@ namespace AspireOverflow.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///    url: https://localhost:7197/Article/GetComments
+        ///     url: https://localhost:7197/Article/GetComments
         /// 
-        ///  * fields are required
+        ///     * fields are required
         /// 
         ///     body
         ///     {

@@ -38,6 +38,10 @@ public class UserController : BaseController
         ///        emailAddress*: string,
         ///        password*: string,
         ///        dateOfBirth*: 2022-06-19T16:02:44.207Z,
+        ///        verifyStatusID*: int,
+        ///        isReviewer*: bool,
+        ///        userRoleId*: int,
+        ///        designationId*: int
         ///     }
         ///
         /// </remarks>
@@ -144,7 +148,7 @@ public class UserController : BaseController
         catch (ItemNotFoundException exception)
         {
             _logger.LogError(HelperService.LoggerMessage("UserController", "  UpdateUserByIsReviewer(int UserId, bool IsReviewer)", exception, UserId));
-            return NotFound($"{exception.Message}");
+            return BadRequest($"{exception.Message}");
         }
         catch (Exception exception)
         {
@@ -155,7 +159,7 @@ public class UserController : BaseController
 
 
         /// <summary>
-        /// To remove user by User id.
+        /// To remove user by its id.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -197,17 +201,26 @@ public class UserController : BaseController
 
 
         /// <summary>
-        /// Gets all users
+        /// Gets user by its id.
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
         ///     url : https://localhost:7197/User/GetUser
+        /// 
+        ///     * fields are required
+        ///     body
+        ///             {
+        ///                 UserId* : int,
+        ///                
+        ///             }
         ///
         /// </remarks>
         /// <response code="200">Returns a list of user. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
+        /// <param name="UserId"></param>
+      
+      
     [HttpGet]
     public async Task<ActionResult> GetUserById(int UserId)
     {
@@ -224,7 +237,7 @@ public class UserController : BaseController
     }
 
         /// <summary>
-        /// Gets all users
+        /// Gets current users.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -232,9 +245,10 @@ public class UserController : BaseController
         ///     url : https://localhost:7197/User/GetCurrentApplicationUser
         ///
         /// </remarks>
-        /// <response code="200">Returns a list of user. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="200">Returns a current user. </response>
         /// <response code="500">If there is problem in server. </response>
+        
+        
     [HttpGet]
     public async Task<ActionResult> GetCurrentApplicationUser()
     {
@@ -310,6 +324,7 @@ public class UserController : BaseController
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="RoleId"></param>
+        
     [HttpGet]
     public async Task<ActionResult> GetUsersByUserRoleId(int RoleId)
     {
@@ -345,9 +360,9 @@ public class UserController : BaseController
         ///             }
         /// </remarks>
         /// <response code="200">Returns a list of user  assigned as reviewer. </response>
-        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="IsReviewer"></param>
+    
     [HttpGet]
     public async Task<ActionResult> GetUsersByIsReviewer(bool IsReviewer)
     {
@@ -363,6 +378,20 @@ public class UserController : BaseController
         }
     }
 
+        /// <summary>
+        /// Gets a list of genders.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetUsersByIsReviewer
+        ///
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns a list of genders. </response>
+        /// <response code="500">If there is problem in server. </response>
+        
+    [HttpGet]
 
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetGenders()
@@ -378,6 +407,19 @@ public class UserController : BaseController
         }
     }
 
+        /// <summary>
+        /// Gets a list of designations.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/User/GetUsersByIsReviewer
+        ///
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns a list of designations. </response>
+        /// <response code="500">If there is problem in server. </response>
+   
 
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDesignations()
@@ -393,9 +435,8 @@ public class UserController : BaseController
         }
     }
 
-
-         /// <summary>
-        /// Gets all departments.
+        /// <summary>
+        /// Gets a list of departments.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -406,6 +447,7 @@ public class UserController : BaseController
         /// <response code="200">Returns a list of departments.
         /// </response>
         /// <response code="500">If there is problem in server. </response>
+        
     [HttpGet][AllowAnonymous]
     public async Task<IActionResult> GetDepartments()
     {

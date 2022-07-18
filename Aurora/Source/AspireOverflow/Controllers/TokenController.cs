@@ -33,9 +33,9 @@ namespace AspireOverflow.Controllers
         /// 
         /// </remarks>
         /// <response code="200">Returns a jwt token. </response>
-        /// <response code="401">Invalid credentials. </response>
+        /// <response code="400">Invalid credentials. </response>
         /// <response code="500">If there is problem in server. </response>
-        /// <param name="Crendentials"></
+        /// <param name="Crendentials"></param>
         [HttpPost]
         public IActionResult AuthToken(Login Crendentials)
         {  if ( Crendentials == null || !Validation.ValidateUserCredentials(Crendentials.Email!, Crendentials.Password!)) return BadRequest(Message("Login Credentials cannot be null"));

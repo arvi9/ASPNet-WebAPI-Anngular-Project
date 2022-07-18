@@ -37,7 +37,7 @@ namespace AspireOverflow.Controllers
         ///         content*: string,
         ///         code*: string,
         ///         isSolved*: boolean,
-        ///         isActive*: boolean,
+        ///        
         ///     }
         /// 
         /// </remarks>
@@ -87,9 +87,10 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a removed query successfully. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
-        /// <response code="404">If query was not found. </response>
         /// <response code="500">If there is problem in server. </response>
         /// <param name="QueryId"></param>
+        
+
         [HttpDelete][Authorize(Roles ="Admin")]
         public async Task<ActionResult> RemoveQueryByQueryId(int QueryId)
         {
@@ -101,7 +102,7 @@ namespace AspireOverflow.Controllers
             catch (ItemNotFoundException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "RemoveQueryByQueryId(int QueryId)", exception, QueryId));
-                return NotFound($"{exception.Message}");
+                return BadRequest($"{exception.Message}");
             }
             catch (Exception exception)
             {
@@ -109,6 +110,28 @@ namespace AspireOverflow.Controllers
                 return Problem($"Error Occurred while removing query with QueryId :{QueryId}");
             }
         }
+
+        /// <summary>
+        /// To mark that query as solved.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/Query/MarkQueryAsSolved
+        ///     
+        ///     * fields are required
+        /// 
+        ///     body
+        ///             {
+        ///                 QueryId* : int,
+        ///                
+        ///             }
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns that query masrk as solved. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+        /// <param name="QueryId"></param>
 
 
         [HttpPatch]
@@ -122,7 +145,7 @@ namespace AspireOverflow.Controllers
             catch (ItemNotFoundException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("QueryController", "MarkQueryAsSolved(int QueryId)", exception, QueryId));
-                return NotFound($"{exception.Message}");
+                return BadRequest($"{exception.Message}");
             }
             catch (Exception exception)
             {
@@ -139,6 +162,11 @@ namespace AspireOverflow.Controllers
         /// Sample request:
         ///
         ///     url : https://localhost:7197/Query/GetQuery
+        /// 
+        ///     body
+        ///     {
+        ///         queryId*: int
+        ///     }
         ///
         /// </remarks>
         /// <response code="200">Returns a query that specify to its id.. </response>
@@ -206,7 +234,7 @@ namespace AspireOverflow.Controllers
         /// 
         ///     body
         ///     {
-        ///         Range*: int,
+        ///         Range*: int
         ///     }
         /// </remarks>
         /// <response code="200">Returns a latest queries in a queries. </response>
@@ -236,18 +264,19 @@ namespace AspireOverflow.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     url : https://localhost:7197/Query/GetTrendingQueries?Range=0
+        ///     url : https://localhost:7197/Query/GetTrendingQueries
         ///
         ///     * fields are required
         /// 
         ///     body
         ///     {
-        ///         "Range": 0,
+        ///         Range*: int
         ///     }
         /// </remarks>
         /// <response code="200">Returns a trending queries in a queries. </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
+        
         [HttpGet]
         public async Task<ActionResult> GetTrendingQueries(int Range = 0)
         {
@@ -265,6 +294,19 @@ namespace AspireOverflow.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Queries by user id.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/Query/GetQueriesByUserId
+        ///
+        /// 
+        /// </remarks>
+        /// <response code="200">Returns a queries by user id. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
 
         [HttpGet]
         public async Task<ActionResult> GetQueriesByUserId()
@@ -282,7 +324,26 @@ namespace AspireOverflow.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Get Queries by title.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     url : https://localhost:7197/Query/GetQueriesByUserId
+        ///
+        ///     * fields are required
+        /// 
+        ///     body
+        ///     {
+        ///         "Title": string
+        ///     } 
+        /// </remarks>
+        /// <response code="200">Returns a queries by title. </response>
+        /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
+        /// <response code="500">If there is problem in server. </response>
+         /// <param name="Title"></param>
+       
         [HttpGet]
         public async Task<ActionResult> GetQueriesByTitle(string Title)
         {
@@ -308,11 +369,11 @@ namespace AspireOverflow.Controllers
         ///
         ///     url : https://localhost:7197/Query/GetQueriesByIsSolved
         ///
-        ///  * fields are required
+        ///     * fields are required
         /// 
         ///     body
         ///     {
-        ///         IsSolved*: bool,
+        ///         IsSolved*: bool
         ///     }
         /// 
         /// </remarks>
@@ -387,9 +448,9 @@ namespace AspireOverflow.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///    url: https://localhost:7197/Query/GetComments
+        ///     url: https://localhost:7197/Query/GetComments
         /// 
-        ///  * fields are required
+        ///     * fields are required
         /// 
         ///     body
         ///     {
@@ -474,6 +535,8 @@ namespace AspireOverflow.Controllers
         /// </remarks>
         /// <response code="200">Returns a list of spams. </response>
         /// <response code="500">If there is problem in server. </response>
+        
+        
         [HttpGet]
         public async Task<ActionResult> GetListOfSpams()
         {
@@ -510,8 +573,10 @@ namespace AspireOverflow.Controllers
         /// <response code="200">If the spam status was updated </response>
         /// <response code="400">The server will not process the request due to something that is perceived to be a client error. </response>
         /// <response code="500">If there is problem in server. </response>
-        /// <param name="SpamId"></param>
+        /// <param name="QueryId"></param>
         /// <param name="VerifyStatusID"></param>
+        
+      
         [HttpPatch][Authorize(Roles="Admin")]
         public ActionResult UpdateSpamStatus(int QueryId, int VerifyStatusID)
         {

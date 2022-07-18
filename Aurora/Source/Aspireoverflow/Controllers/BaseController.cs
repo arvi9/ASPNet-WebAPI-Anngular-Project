@@ -13,21 +13,21 @@ namespace AspireOverflow.Controllers
             else if (Message != null && obj != null) return new { Message = message, DataPassed = obj };
             else return new { };
         }
-
         
         //Returns the Current Application User's Data By using the Claims.
         protected CurrentUser GetCurrentUser()
         {
             var CurrentUser = new CurrentUser();
             if (User != null)
-                try{
-                    CurrentUser.UserId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
-                    CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
-                    CurrentUser.RoleId = Convert.ToInt32(User.FindFirst("RoleId")?.Value);
-                    CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
-                    return CurrentUser;
-                }catch (Exception){
-                throw;
+            try{
+                CurrentUser.UserId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
+                CurrentUser.Email = User.FindFirst(ClaimTypes.Email)?.Value;
+                CurrentUser.RoleId = Convert.ToInt32(User.FindFirst("RoleId")?.Value);
+                CurrentUser.IsReviewer = Convert.ToBoolean(User.FindFirst("IsReviewer")?.Value);
+                return CurrentUser;
+            }catch (Exception)
+            {
+                throw new Exception("Error occured while executing GetCurrentUser()");
             }
             return CurrentUser;
         }
