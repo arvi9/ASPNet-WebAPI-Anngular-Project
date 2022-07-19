@@ -1,29 +1,41 @@
+<form #Filter="ngForm">
 <div class="card">
     <div class="row">
         <div class="col-md-3">
+        
             <label class="form-label"><b>Title</b> </label>
-            <input type="text" class="form-control" name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
+            <input type="text" class="form-control" name="searchTitle" #filter="ngModel" [(ngModel)]="searchTitle" pattern='^\S.*[^.\s]$' autocomplete="off" />
+            <div *ngIf="filter.errors && (filter.invalid || filter.touched)">
+                    <small class="text-danger" *ngIf="filter.errors['pattern']">Title should not start with space</small>
+            </div>
         </div>
         <div class="col-md-3">
             <label class="form-label"><b>Author</b></label>
-            <input type="text" class="form-control" name="searchAuthor" [(ngModel)]="searchAuthor" autocomplete="off" />
+            <input type="text" class="form-control" name="searchAuthor" [(ngModel)]="searchAuthor" #author="ngModel" pattern='^\S.*[^.\s]$' autocomplete="off" />
+            <div *ngIf="author.errors && (author.invalid || author.touched)">
+                <small class="text-danger" *ngIf="author.errors['pattern']">Author should not start with space</small>
+        </div>
         </div>
         <div class="col-md-3">
             <label class="form-label"><b>From</b></label>
-            <input type="date" class="form-control" name="FromDate" [(ngModel)]="FromDate" autocomplete="off" />
+            <input type="date" max="{{maxDate}}" onkeydown="return false"
+            class="form-control" name="FromDate" [(ngModel)]="FromDate" autocomplete="off" 
+           />
         </div>
         <div class="col-md-3">
-            <label class="form-label"><b>To</b></label> <input type="date" class="form-control" name="ToDate"
+            <label class="form-label"><b>To</b></label> <input type="date" max="{{maxDate}}" onkeydown="return false"
+            class="form-control" name="ToDate"
                 [(ngModel)]="ToDate" autocomplete="off" />
         </div>
         <div class="row p-2">
             <div class="">
-                <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchAuthor,FromDate,ToDate)">
+                <button class="custom-btn btn-1" [disabled]="!Filter.valid" (click)="samplefun(searchTitle,searchAuthor,FromDate,ToDate)">
                     Apply</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 <div *ngIf="data.length>0; else ArrayEmpty">
     <div class="container justify-content-center d-flex flex-wrap">
         <div class="" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">

@@ -35,7 +35,7 @@
                 <table>
                     <tr *cdkVirtualFor="let comment of data.comments">
                         <td class="example-dt"><br><i
-                                class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
+                                class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br><p class="text-style">{{comment.message}}</p></i>
                         </td>
                         <br>
                 </table>
@@ -53,10 +53,11 @@
             <div class="container">
                 <div class="bg-light p-2">
                     <textarea class="form-control form-control5" #comment="ngModel" name="QueryComment"
-                        [(ngModel)]="article.comment" placeholder="Enter comments" required></textarea>
+                        [(ngModel)]="article.comment" placeholder="Enter comments" pattern="^\W*(\w+(\W+|$)){1,200}$" required></textarea>
                     <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
                         <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
                             *ngIf="comment.errors['required']">comment is required</small>
+                            <small class="text-danger" *ngIf="comment.errors['pattern']">Comment should not empty must contain minimum 200 words</small>
                     </div>
                 </div>
                 <div class="mt-2">

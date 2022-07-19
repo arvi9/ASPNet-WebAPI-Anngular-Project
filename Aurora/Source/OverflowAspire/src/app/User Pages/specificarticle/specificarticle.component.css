@@ -169,3 +169,6 @@ body {
 .readmore{
   margin:5px;
 }
+.text-style {
+  white-space: pre-wrap;
+}
