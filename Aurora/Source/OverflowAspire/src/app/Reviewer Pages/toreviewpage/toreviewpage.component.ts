@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from 'Models/Article';
 import { User } from 'Models/User';
+import { Toaster } from 'ngx-toast-notifications';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
@@ -16,10 +17,14 @@ export class ToreviewpageComponent implements OnInit {
   public data1: Article[] = [];
   userid:any;
 
-  constructor(private connection: ConnectionService, private route: Router) { }
+  constructor(private connection: ConnectionService, private route: Router,private toaster: Toaster) { }
 
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     if (!AuthService.IsReviewer()) {
       this.route.navigateByUrl("")
     }

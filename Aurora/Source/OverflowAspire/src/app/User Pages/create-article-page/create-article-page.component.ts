@@ -59,7 +59,11 @@ export class CreateArticlePageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
       var editor = event.editor;
       editor.name = "content";

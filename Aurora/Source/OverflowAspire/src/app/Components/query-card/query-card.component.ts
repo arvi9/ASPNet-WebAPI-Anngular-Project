@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Query } from 'Models/Query';
-import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
 
@@ -22,11 +21,12 @@ export class QueryCardComponent implements OnInit {
   public data: Query[] = [];
   public filteredData: Query[] = [];
 
-  constructor(private connection: ConnectionService,private route:Router) { }
+  constructor(private connection: ConnectionService, private route: Router,) { }
 
   // Get queries.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+
+    
     if (this.Querysrc == "allQueries") {
       //Get all the queries
       this.connection.GetAllQueries()

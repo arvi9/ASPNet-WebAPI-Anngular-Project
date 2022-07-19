@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { Subject } from 'rxjs';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-spamreportpage',
@@ -12,11 +13,15 @@ import { Subject } from 'rxjs';
 
 export class SpamreportpageComponent implements OnInit {
   public data: any[] = []
-  constructor(private connection: ConnectionService, private route: Router) { }
+  constructor(private connection: ConnectionService, private route: Router,private toaster: Toaster) { }
 
   //Get reported spams.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }

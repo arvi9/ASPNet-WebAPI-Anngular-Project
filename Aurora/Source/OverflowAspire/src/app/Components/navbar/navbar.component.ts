@@ -1,5 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/Services/auth.service';
 
 
@@ -10,18 +11,19 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 
 export class NavbarComponent implements OnInit {
-  role=AuthService.IsReviewer()
+  role = AuthService.IsReviewer()
 
-  constructor(private route:Router) { }
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+
+   
   }
 
   //Here the user can logout the application.
-  LogOut(){
+  LogOut() {
     AuthService.Logout();
     this.route.navigateByUrl("")
   }
- 
+
 }

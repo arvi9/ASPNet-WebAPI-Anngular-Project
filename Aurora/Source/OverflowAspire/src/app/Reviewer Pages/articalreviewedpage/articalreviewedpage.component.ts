@@ -3,6 +3,7 @@ import { Article } from 'Models/Article';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-articalreviewedpage',
@@ -11,12 +12,16 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 })
 
 export class ArticalreviewedpageComponent implements OnInit {
-  constructor(private route: Router, private connection: ConnectionService) { }
+  constructor(private route: Router, private connection: ConnectionService,private toaster: Toaster) { }
   public data: Article[] = [];
 
   // Reviewer can get reviewed articles.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     if (!AuthService.IsReviewer()) {
       this.route.navigateByUrl("")
     }

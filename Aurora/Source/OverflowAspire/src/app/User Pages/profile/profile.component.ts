@@ -3,6 +3,7 @@ import { User } from 'Models/User';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-profile',
@@ -27,11 +28,15 @@ export class ProfileComponent implements OnInit {
     userRoleId: 0,
     designationId: 0
   }
-  constructor(private connection: ConnectionService, private route: Router) { }
+  constructor(private connection: ConnectionService, private route: Router,private toaster: Toaster) { }
 
   //Get user profile.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     this.connection.GetCurrentApplicationUser()
       .subscribe({
         next: (data: User) => {

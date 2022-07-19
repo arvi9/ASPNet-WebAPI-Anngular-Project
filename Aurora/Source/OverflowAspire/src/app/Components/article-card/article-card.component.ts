@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
+
 @Component({
   selector: 'app-article-card',
   templateUrl: './article-card.component.html',
@@ -25,7 +26,6 @@ export class ArticleCardComponent implements OnInit {
 
   //Get articles
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     //Get all the articles
     if (this.artsrc == "allArticles") {
       this.connection.GetAllArticles()

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Chart } from 'chart.js';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-reviewerdashboard',
@@ -15,11 +16,15 @@ export class ReviewerdashboardComponent implements OnInit {
   piedata: any = {
     articleCounts: 0,
   }
-  constructor(private route: Router, private connection: ConnectionService) { }
+  constructor(private route: Router, private connection: ConnectionService,private toaster: Toaster) { }
   articles:any;
 
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     if (!AuthService.IsReviewer()) {
       this.route.navigateByUrl("")
     }

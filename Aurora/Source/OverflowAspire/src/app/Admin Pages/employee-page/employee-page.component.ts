@@ -18,7 +18,11 @@ export class EmployeePageComponent implements OnInit {
 
   //Get the Employee page and shows the employee data
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-admindashboard',
@@ -17,10 +18,14 @@ export class AdmindashboardComponent implements OnInit {
     articles: 0,
     queries: 0
   }
-  constructor(private connection: ConnectionService, private route: Router) { }
+  constructor(private connection: ConnectionService, private route: Router,private toaster: Toaster) { }
 
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.route.navigateByUrl("")
+    }
     if (!AuthService.IsAdmin()) {
       this.route.navigateByUrl("")
     }
