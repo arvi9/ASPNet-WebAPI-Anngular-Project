@@ -71,5 +71,15 @@ export class EmployeePageComponent implements OnInit {
           }
         });
     }
+    this.closePopup()
+  }
+
+  displayStyle = "none";
+  
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 }

@@ -29,7 +29,7 @@ export class AdmindashboardComponent implements OnInit {
       {
         next: (data: any) => {
           this.piedata = data;
-          var names = ['Number of Articles', 'Number of Queries'];
+          var names = ['Number of articles', 'Number of queries'];
           var details = [];
           details.push(data.articles.totalNumberOfArticles);
           details.push(data.queries.totalNumberOfQueries);

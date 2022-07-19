@@ -1,44 +1,47 @@
 <app-navbar></app-navbar>
-<div class="breadcrumb">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a routerLinkActive="active" routerLink="/Home">Home</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a routerLinkActive="active" routerLink="/MyQueries">My queries</a>
-      </li>
-      <li class="breadcrumb-item active">
-        My query specific
-    </li>
-    </ol>
-  </nav>
-</div>
-<div class="container mb-4">
-  <a><button type="button" class="custom-btn btn-1 btn-3 " *ngIf=" issolved === false" id="button-code"
-      (click)="MarkQueryAsSolved(queryId)">Mark Query As Solved</button></a>
-</div>
-<div class="Content container p-5 my-1 border">
-  <div class="text-center">
-    <h1>{{data.title}}</h1>
+<div class="Content">
+  <div class="breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLinkActive="active" routerLink="/Home">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLinkActive="active" routerLink="/MyQueries">My queries</a>
+        </li>
+        <li class="breadcrumb-item active">
+          My query specific
+        </li>
+      </ol>
+    </nav>
   </div>
-  <pre>
+  <div class="container mb-4">
+    <a><button type="button" class="custom-btn btn-1 btn-3 " *ngIf=" issolved === false" id="button-code"
+        (click)="MarkQueryAsSolved(queryId)">Mark Query As Solved</button></a>
+  </div>
+  <div class="container p-5 my-1 border">
+    <div class="text-center">
+      <h1>{{data.title}}</h1>
+    </div>
+    <pre>
     {{data.content}}
     </pre>
-  <pre class="">
+    <pre class="">
      {{data.code}}
  </pre>
-  <div *ngIf="data.comments.length!==0">
-    <h4>{{data.comments.length}} Answers</h4>
-    <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
-      <table>
-        <tr *cdkVirtualFor="let comment of data.comments">
-          <td class="example-dt"><br><i class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>{{comment.message}}</i>
-            <hr>
-          </td>
-          <br>
-      </table>
-    </cdk-virtual-scroll-viewport>
+    <div *ngIf="data.comments.length!==0">
+      <h4>{{data.comments.length}} Answers</h4>
+      <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+        <table>
+          <tr *cdkVirtualFor="let comment of data.comments">
+            <td class="example-dt"><br><i
+                class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>{{comment.message}}</i>
+              <hr>
+            </td>
+            <br>
+        </table>
+      </cdk-virtual-scroll-viewport>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

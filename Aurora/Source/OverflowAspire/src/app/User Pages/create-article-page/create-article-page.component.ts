@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
 
+
 export interface sharedItem {
-  display: string, 
+  display: string,
   value: number
 }
 
@@ -20,7 +21,7 @@ declare var CKEDITOR: any;
 
 export class CreateArticlePageComponent implements OnInit {
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
-  
+
   sharedUsersId: any = []
   IsLoadingSubmit: boolean = false;
   IsLoadingSaveDraft: boolean = false;
@@ -41,7 +42,7 @@ export class CreateArticlePageComponent implements OnInit {
     isPrivate: false,
     ImageString: this.cardImageBase64,
     reviewerId: null,
-    Reason:null,
+    Reason: null,
   }
 
   public items = [
@@ -60,8 +61,7 @@ export class CreateArticlePageComponent implements OnInit {
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.route.navigateByUrl("")
     CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
-      var editor = event.editor,
-        element = editor.element;
+      var editor = event.editor;
       editor.name = "content";
       this.connection.GetEmployeePage().subscribe((data: any[]) => {
         data.forEach(item => this.items.push({ display: item.email, value: item.userId }))

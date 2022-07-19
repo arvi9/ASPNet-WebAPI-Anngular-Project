@@ -28,11 +28,11 @@ body {
 }
 
 .ToReview:hover {
-    background-color: rgb(111, 172, 246);
+    background-color: rgb(255, 99, 132);
 }
 
 .ArticleReviewed:hover {
-    background-color: rgb(249, 134, 188);
+    background-color: rgb(54, 162, 235);
 }
 
 .heading {

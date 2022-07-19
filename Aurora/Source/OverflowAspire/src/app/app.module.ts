@@ -64,7 +64,6 @@ import { RejectreasonComponent } from './Reviewer Pages/rejectreason/rejectreaso
 import { AgoPipe } from './Services/ago.pipe';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +107,9 @@ import { AgoPipe } from './Services/ago.pipe';
     PrivatearticlesComponent,
     RejectreasonComponent,
     AgoPipe,
+ 
+    
+    
     
   ],
 
@@ -131,6 +133,7 @@ import { AgoPipe } from './Services/ago.pipe';
     ReactiveFormsModule,
     ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'}),
     TagInputModule,
+
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

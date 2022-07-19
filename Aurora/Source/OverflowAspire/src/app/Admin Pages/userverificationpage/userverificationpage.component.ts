@@ -43,6 +43,7 @@ export class UserverificationpageComponent implements OnInit {
           this.routing.navigateByUrl("/Employee");
         }
       });
+      this.closePopup();
   }
 
 
@@ -57,6 +58,14 @@ export class UserverificationpageComponent implements OnInit {
           this.routing.navigateByUrl("/Employee");
         }
       });
+  }
+  displayStyle = "none";
+  
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 }
 
