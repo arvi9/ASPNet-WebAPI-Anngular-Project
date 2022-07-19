@@ -370,7 +370,7 @@ namespace AspireOverflow.Services
                     Name = item.User?.FullName,
                     QueryId = item.QueryId,
                     DateTime = item.CreatedOn
-                }).OrderByDescending(item =>item.DateTime);
+                }).OrderByDescending(item => item.DateTime);
             }
             catch (Exception exception)
             {
@@ -424,10 +424,16 @@ namespace AspireOverflow.Services
             Validation.ValidateSpam(spam);
             try
             {
+                if (database.GetQueryByID(spam.QueryId).QueryId == spam.UserId) throw new ValidationException("User cannot report spam to their own query");
                 spam.CreatedBy = spam.UserId;
                 spam.CreatedOn = DateTime.Now;
                 spam.UpdatedBy = null;
                 return database.AddSpam(spam);
+            }
+            catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("QueryService", "AddSpam(Spam spam)", exception, spam));
+                throw;
             }
             catch (Exception exception)
             {
