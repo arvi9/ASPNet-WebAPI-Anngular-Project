@@ -27,6 +27,7 @@ namespace AspireOverflow.Services
             if (IsTracingEnabled) _stopWatch.Start();
             //throws Validation Exception if any validation fails.
             Validation.ValidateArticle(article);
+            if(String.IsNullOrEmpty(article.ImageString)) throw new ValidationException("ImageString should not be null or Empty");
             if (article.IsPrivate) throw new ValidationException("IsPrivate should not be true");
             try
             {
