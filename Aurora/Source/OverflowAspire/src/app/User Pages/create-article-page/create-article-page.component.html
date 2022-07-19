@@ -54,7 +54,7 @@
                 </tag-input-dropdown>
             </tag-input>
             <br>
-            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}"
+            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content"  [config]="{ removeButtons: 'Subscript,Superscript,Anchor,Source,Table,Scayt,HorizontalRule,Image'}"
                 debounce="500" pattern="^\W*(\w+(\W+|$)){50,100000}$" required>
             </ckeditor>
             <div *ngIf="content.errors && (content.invalid || content.touched)">

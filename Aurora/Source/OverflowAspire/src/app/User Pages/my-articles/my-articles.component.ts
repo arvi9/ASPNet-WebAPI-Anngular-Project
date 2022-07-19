@@ -18,7 +18,6 @@ export class MyArticlesComponent implements OnInit {
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
   userId: any = 0;
-  maxDate:any;
   public data: any[] = [];
   public filteredData: any[] = [];
 
@@ -26,7 +25,6 @@ export class MyArticlesComponent implements OnInit {
   
   //Get my articles.
   ngOnInit(): void {
-    this.dateValidation();
     if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
     this.connection.GetMyArticles()
       .subscribe({
@@ -37,20 +35,8 @@ export class MyArticlesComponent implements OnInit {
         }
       });
   }
-  dateValidation() {
-    var date: any = new Date();
-    var toDate: any = date.getDate();
-    if (toDate < 10) {
-      toDate = "0" + toDate;
-    }
-    var month = date.getMonth() + 1;
-    if (month < 10) {
-      month = '0' + month;
-    }
-    var year = date.getFullYear(); 
-    this.maxDate = year + "-" + month + "-" + toDate;
-    return true;
-  }
+
+ 
   samplefun(searchTitle: string, FromDate: any, ToDate: any) {
     if (searchTitle.length == 0 && FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) this.data = this.filteredData
     //1.Search by title

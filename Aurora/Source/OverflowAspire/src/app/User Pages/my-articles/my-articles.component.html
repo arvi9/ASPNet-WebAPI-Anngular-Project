@@ -16,19 +16,15 @@
         <form>
             <div class="row">
                 <div class="col-md-4">
-                    <label class="form-label"><b>Title</b> </label><input type="text" #filter="ngModel" class="form-control" pattern='^\S.*[^.\s]$'
+                    <label class="form-label"><b>Title</b> </label><input type="text" class="form-control"
                         name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
-                        <div *ngIf="filter.errors && (filter.invalid || filter.touched)">
-                            <small class="text-danger" *ngIf="filter.errors['pattern']">Title should not start with space</small>
-                    </div>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label"><b>From</b> </label><input type="date" class="form-control"  max="{{maxDate}}" onkeydown="return false"
-                        name="FromDate" [(ngModel)]="FromDate" autocomplete="off"
-                         />
+                    <label class="form-label"><b>From</b> </label><input type="date" class="form-control"
+                        name="FromDate" [(ngModel)]="FromDate" autocomplete="off" />
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label"><b>To</b> </label><input type="date" class="form-control" name="ToDate"  max="{{maxDate}}" onkeydown="return false"
+                    <label class="form-label"><b>To</b> </label><input type="date" class="form-control" name="ToDate"
                         [(ngModel)]="ToDate" autocomplete="off" />
                 </div>
                 <div class="row p-2">
