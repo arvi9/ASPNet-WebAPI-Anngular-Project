@@ -202,7 +202,7 @@ namespace AspireOverflow.Services
                 return new
                 {
                     articleId = article.ArticleId,
-                    PublishedDate = article.UpdatedOn,
+                    PublishedDate = article.UpdatedOn != null ?article.UpdatedOn:article.CreatedOn,
                     title = article.Title,
                     AuthorName = article.User?.FullName,
                     content = article.Content,
