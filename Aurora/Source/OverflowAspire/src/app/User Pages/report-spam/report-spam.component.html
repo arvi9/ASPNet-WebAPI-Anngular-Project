@@ -36,11 +36,17 @@
             <div>
                 <form #form="ngForm" (ngSubmit)="spamreport()" autocomplete="off">
                     <div class="bg-light p-2">
-                        <textarea type="text" name="reportspam" class="form-control" rows="5" cols="4"
-                            placeholder="maximum 200words" id="reportspam-name" placeholder="Reason for report"
-                            [(ngModel)]="reportspam.reason"></textarea>
+                        <textarea type="text" name="reportspam" class="form-control" rows="5" cols="4" #report="ngModel"
+                            placeholder="maximum 200words" id="reportspam-name" placeholder="Reason for report" pattern="^\W*(\w+(\W+|$)){2,50}$"
+                            [(ngModel)]="reportspam.reason" required></textarea>
+                            <div *ngIf="report.errors && (report.invalid || report.touched)">
+                                <small class="text-danger" *ngIf="report.errors['pattern']">Reason should have maximum 50
+                                    words</small>
+                                <small class="text-danger" [class.d-none]="report.valid||report.untouched"
+                                    *ngIf="report.errors['required']">Reason is required</small>
+                            </div> 
                     </div>
-                    <div class="mt-2 text-right"><button type="submit" class="custom-btn btn-1 btn-2">Report
+                    <div class="mt-2 text-right"><button type="submit" [disabled]="!form.valid" class="custom-btn btn-1 btn-2">Report
                             spam</button>
                     </div>
                 </form>
