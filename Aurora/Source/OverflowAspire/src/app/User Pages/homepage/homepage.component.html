@@ -1,99 +1,110 @@
 <app-navbar></app-navbar>
-<div>
-    <div class="breadcrumb">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a routerLinkActive="active" routerLink="/Home">Home</a>
-                </li>  
-            </ol>
-        </nav>
-    </div>
+<div *ngIf="isSpinner==true">
+    <ngx-spinner type="ball-scale-multiple" bdColor="rgba(51,51,51,0.8)">
+        <h1>Please wait loading.....</h1>
+    </ngx-spinner>
 </div>
 <div class="Content">
-    <h3>Trending Articles<a routerLink="/TrendingArticles" class="Homepage" routerLinkActive="active">(Show all)</a>
-    </h3>
-    <div class="container justify-content-center d-flex ">
-        <div class="" *ngFor="let item of data.trendingArticles">
-            <div class="img-card iCard-style2 onhover">
-                <div class="card-content">
-                    <div class="card-image">
-                        <img [src]="'data:image/jpg;base64,'+ item.image" />
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
-                        <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
-                    </div>
-                    <div class="mt-auto">
-                        <div class="btntag tag-blue " routerLinkActive="active"
-                            [routerLink]="['/specificarticle',item.articleId]">Read More</div>
+    <div *ngIf="isSpinner==false">
+        <div class="breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLinkActive="active" routerLink="/Home">Home</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <h3>Trending Articles<a routerLink="/TrendingArticles" class="Homepage" routerLinkActive="active">(Show all)</a>
+        </h3>
+        <div class="container justify-content-center d-flex ">
+            <div class="" *ngFor="let item of data.trendingArticles">
+                <div class="img-card iCard-style2 onhover">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img [src]="'data:image/jpg;base64,'+ item.image" />
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">
+                                {{item.title}}</h4>
+                            <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="btntag tag-blue " routerLinkActive="active"
+                                [routerLink]="['/specificarticle',item.articleId]">Read More</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <h3>Latest Articles<a routerLink="/LatestArticles" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
-    <div class="container justify-content-center d-flex flex-wrap">
-        <div class="" *ngFor="let item of data.latestArticles">
-            <div class="img-card iCard-style2 onhover">
-                <div class="card-content">
-                    <div class="card-image">
-                        <img [src]="'data:image/jpg;base64,'+ item.image" />
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
-                        <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
-                    </div>
-                    <div class="mt-auto">
-                        <div class="btntag tag-blue" routerLinkActive="active"
-                            [routerLink]="['/specificarticle',item.articleId]">Read More</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <h3>Trending Queries<a routerLink="/TrendingQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
-    <div class="container justify-content-center d-flex flex-wrap">
-        <div class="" *ngFor="let item of data.trendingQueries">
-            <div class="our-skills">
-                <div class="box-shadow card-body d-flex flex-column">
-                    <div *ngIf="ShowStatus">
-                        <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
-                        <span *ngIf="item.isSolved===false" class="tag tag-red">UnSolved</span>
-                    </div>
-                    <div class="icon">
-                        <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
-                    </div>
-                    <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
-                    <p class="truncate-line-clamp">{{item.content}}</p>
-                    <div class="mt-auto float-right">
-                        <a class="btntag tag-blue" routerLinkActive="active"
-                            [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
+        <br>
+        <h3>Latest Articles<a routerLink="/LatestArticles" class="Homepage" routerLinkActive="active">(Show all)</a>
+        </h3>
+        <div class="container justify-content-center d-flex flex-wrap">
+            <div class="" *ngFor="let item of data.latestArticles">
+                <div class="img-card iCard-style2 onhover">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img [src]="'data:image/jpg;base64,'+ item.image" />
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">
+                                {{item.title}}</h4>
+                            <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="btntag tag-blue" routerLinkActive="active"
+                                [routerLink]="['/specificarticle',item.articleId]">Read More</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <h3>Latest Queries<a routerLink="/LatestQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
-    <div class="container justify-content-center d-flex flex-wrap">
-        <div class="" *ngFor="let item of data.latestQueries">
-            <div class="our-skills">
-                <div class="box-shadow card-body d-flex flex-column">
-                    <div *ngIf="ShowStatus">
-                        <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
-                        <span *ngIf="item.isSolved===false" class="tag tag-red">UnSolved</span>
+        <br>
+        <h3>Trending Queries<a routerLink="/TrendingQueries" class="Homepage" routerLinkActive="active">(Show all)</a>
+        </h3>
+        <div class="container justify-content-center d-flex flex-wrap">
+            <div class="" *ngFor="let item of data.trendingQueries">
+                <div class="our-skills">
+                    <div class="box-shadow card-body d-flex flex-column">
+                        <div *ngIf="ShowStatus">
+                            <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
+                            <span *ngIf="item.isSolved===false" class="tag tag-red">UnSolved</span>
+                        </div>
+                        <div class="icon">
+                            <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
+                        </div>
+                        <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}
+                        </h4>
+                        <p class="truncate-line-clamp">{{item.content}}</p>
+                        <div class="mt-auto float-right">
+                            <a class="btntag tag-blue" routerLinkActive="active"
+                                [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
-                    </div>
-                    <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
-                    <p class="truncate-line-clamp">{{item.content}}</p>
-                    <div class="mt-auto">
-                        <a class="btntag tag-blue" routerLinkActive="active"
-                            [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3>Latest Queries<a routerLink="/LatestQueries" class="Homepage" routerLinkActive="active">(Show all)</a></h3>
+        <div class="container justify-content-center d-flex flex-wrap">
+            <div class="" *ngFor="let item of data.latestQueries">
+                <div class="our-skills">
+                    <div class="box-shadow card-body d-flex flex-column">
+                        <div *ngIf="ShowStatus">
+                            <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
+                            <span *ngIf="item.isSolved===false" class="tag tag-red">UnSolved</span>
+                        </div>
+                        <div class="icon">
+                            <img class="QueryImgIcon" src="./assets/chat-icon.png" alt="">
+                        </div>
+                        <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}
+                        </h4>
+                        <p class="truncate-line-clamp">{{item.content}}</p>
+                        <div class="mt-auto">
+                            <a class="btntag tag-blue" routerLinkActive="active"
+                                [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,4 +112,3 @@
     </div>
 </div>
 <app-footer></app-footer>
-<ng-http-loader></ng-http-loader>

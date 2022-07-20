@@ -13,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ArticleCardComponent implements OnInit {
   @Input() artsrc: string = '';
   @Input() ShowStatus: boolean = true;
+  isSpinner = true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -22,7 +23,7 @@ export class ArticleCardComponent implements OnInit {
   public data: Article[] = [];
   public filteredData: Article[] = [];
 
-  constructor(private connection: ConnectionService, private route: Router,private spinner: NgxSpinnerService) { }
+  constructor(private connection: ConnectionService, private route: Router, private spinner: NgxSpinnerService) { }
 
   //Get articles
   ngOnInit(): void {
@@ -36,7 +37,8 @@ export class ArticleCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
-          complete:()=>{
+          complete: () => {
+            this.isSpinner = false;
             this.spinner.hide();
           }
         });
@@ -44,36 +46,50 @@ export class ArticleCardComponent implements OnInit {
 
     //Get latest articles.
     else if (this.artsrc == "latestArticles") {
+      this.spinner.show();
       this.connection.GetLatestArticles()
         .subscribe({
           next: (data) => {
             this.data = data;
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete: () => {
+            this.isSpinner = false;
+            this.spinner.hide();
           }
         });
     }
     //Get private articles
     else if (this.artsrc == "PrivateArticles") {
+      this.spinner.show();
       this.connection.GetPrivateArticles()
         .subscribe({
           next: (data: any[]) => {
             this.data = data
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete: () => {
+            this.isSpinner = false;
+            this.spinner.hide();
           }
         });
     }
 
     // Get Trending articles.
-    else if (this.artsrc == "trendingArticles")
-    {
+    else if (this.artsrc == "trendingArticles") {
+      this.spinner.show();
       this.connection.GetTrendingArticles()
         .subscribe({
           next: (data) => {
             this.data = data;
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete: () => {
+            this.isSpinner = false;
+            this.spinner.hide();
           }
         });
     }

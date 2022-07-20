@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Article } from 'Models/Article';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-my-articles',
   templateUrl: './my-articles.component.html',
@@ -12,6 +12,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class MyArticlesComponent implements OnInit {
   @Input() ShowStatus: boolean = true;
   @Input() Showprivate: boolean = false;
+  isSpinner = true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -21,17 +22,22 @@ export class MyArticlesComponent implements OnInit {
   public data: any[] = [];
   public filteredData: any[] = [];
 
-  constructor(private routes: Router, private connection: ConnectionService) { }
+  constructor(private routes: Router, private connection: ConnectionService,private spinner: NgxSpinnerService) { }
   
   //Get my articles.
   ngOnInit(): void {
     if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
+    this.spinner.show();
     this.connection.GetMyArticles()
       .subscribe({
         next: (data: any[]) => {
           this.data = data;
           this.filteredData = data;
           this.totalLength = data.length;
+        },
+        complete: () => {
+          this.isSpinner = false;
+          this.spinner.hide();
         }
       });
   }

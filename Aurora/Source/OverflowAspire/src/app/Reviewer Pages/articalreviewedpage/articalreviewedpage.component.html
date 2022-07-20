@@ -1,46 +1,53 @@
 <app-navbar></app-navbar>
-<div class="breadcrumb">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">
-                Published article
-            </li>
-        </ol>
-    </nav>
+<div *ngIf="isSpinner==true">
+    <ngx-spinner type="ball-scale-multiple" bdColor="rgba(51,51,51,0.8)">
+        <h1>Please wait loading.....</h1>
+    </ngx-spinner>
 </div>
 <div class="Content">
-<div *ngIf="data.length>0; else ArrayEmpty">
-    <h2>Published article</h2>
-    <div class="Container">
-        <div>
-            <table class="table table-striped row-border hover">
-                <thead>
-                    <tr class="tablecolor">
-                        <th>Article no</th>
-                        <th>Author name</th>
-                        <th>Article name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-default" *ngFor="let item of data">
-                        <td>{{item.articleId}}</td>
-                        <td>{{item.authorName}}</td>
-                        <td><a routerLinkActive="active"
-                                [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div *ngIf="isSpinner==false">
+        <div class="breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLinkActive="active" routerLink="/ReviewerDashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Published article
+                    </li>
+                </ol>
+            </nav>
         </div>
+        <div *ngIf="data.length>0; else ArrayEmpty">
+            <h2>Published article</h2>
+            <div class="Container">
+                <div>
+                    <table class="table table-striped row-border hover">
+                        <thead>
+                            <tr class="tablecolor">
+                                <th>Article no</th>
+                                <th>Author name</th>
+                                <th>Article name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-default" *ngFor="let item of data">
+                                <td>{{item.articleId}}</td>
+                                <td>{{item.authorName}}</td>
+                                <td><a routerLinkActive="active"
+                                        [routerLink]="['/ArticleReviewedSpecific',item.articleId]">{{item.title}}</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <ng-template #ArrayEmpty>
+            <div class="text-center">
+                <h2>No Articles found.</h2>
+            </div>
+        </ng-template>
     </div>
-</div>
-<ng-template #ArrayEmpty>
-    <div class="text-center">
-        <h2>No Articles found.</h2>
-    </div>
-</ng-template>
 </div>
 <app-footer></app-footer>

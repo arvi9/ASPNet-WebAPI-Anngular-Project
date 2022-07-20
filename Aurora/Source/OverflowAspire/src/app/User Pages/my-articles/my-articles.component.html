@@ -1,82 +1,92 @@
 <app-navbar></app-navbar>
+<div *ngIf="isSpinner==true">
+    <ngx-spinner type="ball-scale-multiple" bdColor="rgba(51,51,51,0.8)">
+        <h1>Please wait loading.....</h1>
+    </ngx-spinner>
+</div>
 <div class="Content">
-    <div class="breadcrumb">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a routerLink="/Home" routerLinkActive="active">Home</a>
-                </li>
-                <li class="breadcrumb-item active">
-                    My articles
-                </li>
-            </ol>
-        </nav>
-    </div>
-    <div class="container card">
-        <form>
-            <div class="row">
-                <div class="col-md-4">
-                    <label class="form-label"><b>Title</b> </label><input type="text" class="form-control"
-                        name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>From</b> </label><input type="date" class="form-control"
-                        name="FromDate" [(ngModel)]="FromDate" autocomplete="off" />
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>To</b> </label><input type="date" class="form-control" name="ToDate"
-                        [(ngModel)]="ToDate" autocomplete="off" />
-                </div>
-                <div class="row p-2">
-                    <div class="">
-                        <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)">
-                            Apply</button>
+    <div *ngIf="isSpinner==false">
+        <div class="breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home" routerLinkActive="active">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        My articles
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="container card">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Title</b> </label><input type="text" class="form-control"
+                            name="searchTitle" [(ngModel)]="searchTitle" autocomplete="off" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>From</b> </label><input type="date" class="form-control"
+                            name="FromDate" [(ngModel)]="FromDate" autocomplete="off" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>To</b> </label><input type="date" class="form-control"
+                            name="ToDate" [(ngModel)]="ToDate" autocomplete="off" />
+                    </div>
+                    <div class="row p-2">
+                        <div class="">
+                            <button class="custom-btn btn-1" (click)="samplefun(searchTitle,FromDate,ToDate)">
+                                Apply</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <div *ngIf="data.length>0; else ArrayEmpty">
-        <div class="container justify-content-center d-flex flex-wrap">
-            <div *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
-                <div class="img-card iCard-style2 onhover d-flex flex-column">
-                    <div class="card-content ">
-                        <div class="card-image">
-                            <img [src]="'data:image/jpg;base64,'+ item.image" />
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex justify-content">
+            </form>
+        </div>
+        <div *ngIf="data.length>0; else ArrayEmpty">
+            <div class="container justify-content-center d-flex flex-wrap">
+                <div *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength}">
+                    <div class="img-card iCard-style2 onhover d-flex flex-column">
+                        <div class="card-content ">
+                            <div class="card-image">
+                                <img [src]="'data:image/jpg;base64,'+ item.image" />
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content">
                                     <div *ngIf="ShowStatus">
-                                        <span *ngIf="item.status==='Published'" class="tag tag-Material">Published</span>
+                                        <span *ngIf="item.status==='Published'"
+                                            class="tag tag-Material">Published</span>
                                         <span *ngIf="item.status==='Under Review' || item.status==='To Be Reviewed'"
                                             class="tag tag-brown">Under Review</span>
                                         <span *ngIf="item.status==='InDraft'" class="tag tag-red">In Draft</span>
                                     </div>
                                     <div *ngIf="item.isPrivate">
-                                        <img alt="LogoImg" class="privateImg" src="./assets/private.png" data-toggle="tooltip" title="Private">
+                                        <img alt="LogoImg" class="privateImg" src="./assets/private.png"
+                                            data-toggle="tooltip" title="Private">
                                     </div>
+                                </div>
+                                <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">
+                                    {{item.title}}</h4>
+                                <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
                             </div>
-                            <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
-                            <div class="truncate-line-clamp para">{{item.content|htmlToPlaintext}}</div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="btntag tag-blue" routerLinkActive="active"
-                                [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+                            <div class="mt-auto">
+                                <div class="btntag tag-blue" routerLinkActive="active"
+                                    [routerLink]="['/EditArticle',item.articleId]">Read More</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="Container justify-content-center d-flex">
-            <div class="stickypagination">
-                <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+            <div class="Container justify-content-center d-flex">
+                <div class="stickypagination">
+                    <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+                </div>
             </div>
         </div>
+        <ng-template #ArrayEmpty>
+            <div class="text-center">
+                <h2>No articles was created by you! Please create a article!!</h2>
+            </div>
+        </ng-template>
     </div>
-    <ng-template #ArrayEmpty>
-        <div class="text-center">
-            <h2>No articles was created by you! Please create a article!!</h2>
-        </div>
-    </ng-template>
 </div>
 <app-footer></app-footer>

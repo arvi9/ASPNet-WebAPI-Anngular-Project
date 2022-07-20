@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Query } from 'Models/Query';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Toaster } from 'ngx-toast-notifications';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -16,25 +17,30 @@ export class MyQueriesComponent implements OnInit {
   totalLength: any;
   page: number = 1;
   searchTitle = "";
+  isSpinner = true;
   searchUnSolvedQueries = false;
   searchSolvedQueries = false;
   public data: Query[] = [];
   public filteredData: Query[] = [];
 
   //Get My queries.
-  constructor(private connection: ConnectionService,private route:Router,private toaster: Toaster) { }
+  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster, private spinner: NgxSpinnerService) { }
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
+    this.spinner.show();
     this.connection.GetMyQueries()
       .subscribe({
         next: (data: any[]) => {
           this.data = data;
           this.filteredData = data;
           this.totalLength = data.length;
+        },
+        complete: () => {
+          this.isSpinner = false;
+          this.spinner.hide();
         }
       });
   }

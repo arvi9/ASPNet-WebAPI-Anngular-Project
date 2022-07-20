@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TagInputModule } from 'ngx-chips';
 import { HashLocationStrategy,LocationStrategy } from '@angular/common';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AdmindashboardComponent } from './Admin Pages/admindashboard/admindashboard.component';
 import { EmployeePageComponent } from './Admin Pages/employee-page/employee-page.component';
@@ -136,6 +135,7 @@ import { AgoPipe } from './Services/ago.pipe';
     ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'}),
     TagInputModule,
     LoadingBarHttpClientModule,
+    BrowserAnimationsModule
 
     
   ],

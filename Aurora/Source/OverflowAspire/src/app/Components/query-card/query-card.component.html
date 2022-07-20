@@ -1,55 +1,66 @@
-<div class="container card">
-    <form>
-        <div class="row">
-            <div class="col-md mb-2">
-                <label class="label">Search Query&nbsp;</label>
-                <input class="Searchbar" type="text" name="search" [(ngModel)]="searchTitle" autocomplete="off">
-            </div>
-            <div class="col-md-3 ">
-                <input type="radio" value="Solved Queries" name="Queries" [(ngModel)]="searchSolvedQueries" autocomplete="off">
-                <label class="label">&nbsp;Solved Queries</label>
-            </div>
-            <div class="col-md-3 ">
-                <input type="radio" value="Unsolved Queries" name="Queries" [(ngModel)]="searchUnSolvedQueries" autocomplete="off">
-                <label class="label">&nbsp;Unsolved Queries</label>
-            </div>
-            <div class="rowr">
-                <button class="custom-btn btn-1" (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)">Apply</button>
-            </div>
-        </div>
-    </form>
+<div *ngIf="isSpinner==true">
+    <ngx-spinner type="ball-scale-multiple" bdColor="rgba(51,51,51,0.8)">
+        <h1>Please wait loading.....</h1>
+    </ngx-spinner>
 </div>
-<div *ngIf="data.length>0; else ArrayEmpty">
-    <div class="container justify-content-center d-flex flex-wrap">
-        <div class=""
-            *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength }">
-            <div class="our-skills">
-                <div class="box-shadow card-body d-flex flex-column">
-                    <div *ngIf="ShowStatus">
-                        <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
-                        <span *ngIf="item.isSolved===false" class="tag tag-red">Unsolved</span>
-                    </div>
-                    <div class="icon">
-                        <img class="QueryImgIcon" src="./assets/chat-icon.png">
-                    </div>
-                    <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}</h4>
-                    <p class="truncate-line-clamp">{{item.content}}</p>
-                    <div class="mt-auto">
-                        <a class="btntag tag-blue" routerLinkActive="active"
-                            [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
+<div *ngIf="isSpinner==false">
+    <div class="container card">
+        <form>
+            <div class="row">
+                <div class="col-md mb-2">
+                    <label class="label">Search Query&nbsp;</label>
+                    <input class="Searchbar" type="text" name="search" [(ngModel)]="searchTitle" autocomplete="off">
+                </div>
+                <div class="col-md-3 ">
+                    <input type="radio" value="Solved Queries" name="Queries" [(ngModel)]="searchSolvedQueries"
+                        autocomplete="off">
+                    <label class="label">&nbsp;Solved Queries</label>
+                </div>
+                <div class="col-md-3 ">
+                    <input type="radio" value="Unsolved Queries" name="Queries" [(ngModel)]="searchUnSolvedQueries"
+                        autocomplete="off">
+                    <label class="label">&nbsp;Unsolved Queries</label>
+                </div>
+                <div class="rowr">
+                    <button class="custom-btn btn-1"
+                        (click)="samplefun(searchTitle,searchSolvedQueries,searchUnSolvedQueries)">Apply</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="data.length>0; else ArrayEmpty">
+        <div class="container justify-content-center d-flex flex-wrap">
+            <div class=""
+                *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: page,totalItems:totalLength }">
+                <div class="our-skills">
+                    <div class="box-shadow card-body d-flex flex-column">
+                        <div *ngIf="ShowStatus">
+                            <span *ngIf="item.isSolved===true" class="tag tag-Material">Solved</span>
+                            <span *ngIf="item.isSolved===false" class="tag tag-red">Unsolved</span>
+                        </div>
+                        <div class="icon">
+                            <img class="QueryImgIcon" src="./assets/chat-icon.png">
+                        </div>
+                        <h4 class="card-text text-truncate" data-toggle="tooltip" title="{{item.title}}">{{item.title}}
+                        </h4>
+                        <p class="truncate-line-clamp">{{item.content}}</p>
+                        <div class="mt-auto">
+                            <a class="btntag tag-blue" routerLinkActive="active"
+                                [routerLink]="['/SpecificQuery',item.queryId]">Read More </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="Container justify-content-center d-flex flex-wrap">
-        <div class="stickypagination">
-            <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+        <div class="Container justify-content-center d-flex flex-wrap">
+            <div class="stickypagination">
+                <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+            </div>
         </div>
     </div>
+    <ng-template #ArrayEmpty>
+        <div class="text-center">
+            <h2>No Queries found.</h2>
+        </div>
+    </ng-template>
 </div>
-<ng-template #ArrayEmpty>
-    <div class="text-center">
-        <h2>No Queries found.</h2>
-    </div>
-</ng-template>

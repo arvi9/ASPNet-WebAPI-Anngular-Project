@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Query } from 'Models/Query';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
 
@@ -13,6 +14,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class QueryCardComponent implements OnInit {
   @Input() ShowStatus: boolean = true;
   @Input() Querysrc: string = "";
+  isSpinner=true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -21,12 +23,11 @@ export class QueryCardComponent implements OnInit {
   public data: Query[] = [];
   public filteredData: Query[] = [];
 
-  constructor(private connection: ConnectionService, private route: Router,) { }
+  constructor(private connection: ConnectionService, private route: Router,private spinner: NgxSpinnerService) { }
 
   // Get queries.
   ngOnInit(): void {
-
-    
+    this.spinner.show();
     if (this.Querysrc == "allQueries") {
       //Get all the queries
       this.connection.GetAllQueries()
@@ -35,6 +36,10 @@ export class QueryCardComponent implements OnInit {
             this.data = data;
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete: () => {
+            this.isSpinner = false;
+            this.spinner.hide();
           }
         });
     }
@@ -47,6 +52,10 @@ export class QueryCardComponent implements OnInit {
             this.data = data;
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete: () => {
+            this.isSpinner = false;
+            this.spinner.hide();
           }
         });
     }
@@ -59,6 +68,10 @@ export class QueryCardComponent implements OnInit {
             this.data = data;
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete: () => {
+            this.isSpinner = false;
+            this.spinner.hide();
           }
         });
     }

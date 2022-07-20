@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from 'Models/Article';
 import { User } from 'Models/User';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Toaster } from 'ngx-toast-notifications';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
@@ -15,19 +16,21 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class ToreviewpageComponent implements OnInit {
   public data: Article[] = [];
   public data1: Article[] = [];
-  userid:any;
-
-  constructor(private connection: ConnectionService, private route: Router,private toaster: Toaster) { }
+  userid: any;
+  isSpinner = true;
+  
+  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
     if (!AuthService.IsReviewer()) {
       this.route.navigateByUrl("")
     }
+    this.spinner.show();
     // Get to review articles.
     this.connection.GetToReviewArticles()
       .subscribe({
@@ -38,10 +41,12 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
             .subscribe({
               next: (data: Article[]) => {
                 this.data = this.data1.concat(data)
-                console.log(this.data)
               },
+              complete: () => {
+                this.isSpinner = false;
+                this.spinner.hide();
+              }
             });
-           
         }
       });
       this.connection.GetCurrentApplicationUser()
