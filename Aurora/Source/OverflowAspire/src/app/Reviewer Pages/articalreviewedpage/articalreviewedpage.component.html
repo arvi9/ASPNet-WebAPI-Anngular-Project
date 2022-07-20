@@ -11,8 +11,9 @@
         </ol>
     </nav>
 </div>
-<div class="Content" *ngIf="data.length>0; else ArrayEmpty">
-    <h1>Published article</h1>
+<div class="Content">
+<div *ngIf="data.length>0; else ArrayEmpty">
+    <h2>Published article</h2>
     <div class="Container">
         <div>
             <table class="table table-striped row-border hover">
@@ -38,7 +39,8 @@
 </div>
 <ng-template #ArrayEmpty>
     <div class="text-center">
-        <h1>No Articles found.</h1>
+        <h2>No Articles found.</h2>
     </div>
 </ng-template>
+</div>
 <app-footer></app-footer>

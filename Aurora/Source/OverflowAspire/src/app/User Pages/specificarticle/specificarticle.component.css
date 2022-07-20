@@ -69,7 +69,7 @@ body {
 }
 
 .comment-text {
-  font-size: 12px
+  font-size: 2px
 }
 
 .fs-12 {
@@ -78,6 +78,16 @@ body {
 
 .shadow-none {
   box-shadow: none
+}
+.lineh
+{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+  line-height:1.5;
+}
+.Textname
+{
+  font-size: 10px;
 }
 
 .article-img {

@@ -17,9 +17,10 @@
   </div>
   <div class="container p-5 my-1 border">
     <div class="text-center">
-      <h1>{{data[0].query.title}}</h1>
+      <h2>{{data[0].query.title}}</h2>
     </div>
-    <pre>
+    <br>
+    <pre class="textsize">
       {{data[0].query.content}}
     </pre>
     <button class="btn btn-danger" (click)="onReject()">Cancel spam</button>
@@ -28,8 +29,8 @@
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
       <dl class="example-dl p-2">
         <ng-container *cdkVirtualFor="let comment of data[0].listOfSpams">
-          <dt class="example-dt"><i class="fa fa-solid fa-user mx-3 ">&nbsp;&nbsp;{{comment.name}}</i></dt>
-          <dd class="example-dd mx-5">{{comment.reason}}</dd>
+          <dt class="example-dt"><i class="fa fa-solid fa-user mx-3 ">&nbsp;&nbsp;<p class="lineh">{{comment.name}}</p></i></dt>
+          <dd class="example-dd mx-5 lineh"> {{comment.reason}}></dd>
           <hr>
         </ng-container>
       </dl>

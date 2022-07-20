@@ -12,7 +12,7 @@
     </ol>
   </nav>
 </div>
-<div class=" container mb-4">
+<div class="container mb-4">
   <a routerLinkActive="active" [routerLink]="['/ReportSpam',data.queryId]"><button type="button"
       class="custom-btn btn-1 btn-3 " id="button-code">Report
       spam</button></a>
@@ -21,10 +21,11 @@
   <div class="text-center">
     <h1>{{data.title}}</h1>
   </div>
-  <pre>
+  <br>
+  <pre class="textsize">
     {{data.content}}
   </pre>
-  <pre class="">
+  <pre class="querycode">
 {{data.code}}
 </pre>
   <div *ngIf="data.comments.length!==0">
@@ -32,8 +33,8 @@
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
       <table>
         <tr *cdkVirtualFor="let comment of data.comments">
-          <td class="example-dt"><br><i
-              class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br>{{comment.message}}</i>
+          <td class="example-dt"><br><i  
+              class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br><p class="lineh">{{comment.message}}</p></i>
             <hr>
           </td>
           <br>
@@ -60,4 +61,5 @@
     </div>
   </form>
 </div>
+
 <app-footer></app-footer>

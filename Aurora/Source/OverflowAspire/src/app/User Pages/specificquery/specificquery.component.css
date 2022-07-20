@@ -5,6 +5,7 @@
 }
 
 .container {
+    margin: auto;
     padding: 30px;
     margin-top: -30px
 }
@@ -42,8 +43,21 @@
 .user-container {
     float: right
 }
-
-
+.textsize
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+.lineh
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    line-height:1.5;
+}
+.querycode
+{
+    background-color: whitesmoke;
+}
 
 .breadcrumb {
     margin: 20px;

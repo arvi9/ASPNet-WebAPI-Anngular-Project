@@ -22,11 +22,12 @@
   <div class="container p-5 my-1 border">
     <div class="text-center">
       <h1>{{data.title}}</h1>
+      <br>
     </div>
-    <pre>
+    <pre class="textsize">
     {{data.content}}
     </pre>
-    <pre class="">
+    <pre class="querycode">
      {{data.code}}
  </pre>
     <div *ngIf="data.comments.length!==0">
@@ -35,7 +36,7 @@
         <table>
           <tr *cdkVirtualFor="let comment of data.comments">
             <td class="example-dt"><br><i
-                class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br>{{comment.message}}</i>
+                class="fa fa-solid fa-user mx-3">{{comment.name}}<br><br><p class="lineh">{{comment.message}}</p></i>
               <hr>
             </td>
             <br>

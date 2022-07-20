@@ -33,7 +33,8 @@ export class SpecificarticleComponent implements OnInit {
     createdOn: new Date(),
     updatedBy: 0,
     updatedOn: '',
-    publishedDate:''
+    publishedDate:'',
+    status:''
   }
 
   like: any = {

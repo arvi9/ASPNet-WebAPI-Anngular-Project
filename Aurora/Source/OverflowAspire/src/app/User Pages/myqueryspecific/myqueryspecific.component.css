@@ -16,8 +16,21 @@
 .fa.fa-comment {
     font-size: 36px
 }
-
-
+.textsize
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+.lineh
+{
+ font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+  line-height:1.5;
+}
+.querycode
+{
+    background-color: whitesmoke;
+}
 .btn-3 {
     float: right;
     margin-right: -2.3rem;

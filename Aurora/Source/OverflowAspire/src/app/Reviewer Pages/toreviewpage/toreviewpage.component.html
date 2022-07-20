@@ -13,7 +13,7 @@
         </nav>
     </div>
     <div *ngIf="data.length>0; else ArrayEmpty">
-        <h1>Articles waiting for review</h1>
+        <h2>Articles waiting for review</h2>
         <div class="Container">
             <table class="table table-striped row-border hover">
                 <thead>
@@ -53,7 +53,7 @@
     </div>
     <ng-template #ArrayEmpty>
         <div class="text-center">
-            <h1>No articles to review.</h1>
+            <h2>No articles to review.</h2>
         </div>
     </ng-template>
 </div>

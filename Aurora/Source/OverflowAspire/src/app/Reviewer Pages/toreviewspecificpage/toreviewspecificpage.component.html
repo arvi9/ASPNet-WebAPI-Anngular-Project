@@ -28,7 +28,7 @@
                     </div>
                     <div class="text-center">
                         <br>
-                        <h1>{{data.title}}</h1>
+                        <h2>{{data.title}}</h2>
                     </div>
                     <div class="text-center pb-4">
                         <img class="article-img" [src]="'data:image/jpg;base64,'+ data.image" />
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <ng-template #disabledLink>
-                <h1>You cannot view the article reviewed by others</h1>
+                <h2>You cannot view the article reviewed by others</h2>
             </ng-template>
         </div>
         <ng-template #enable>
@@ -97,11 +97,11 @@
                 <a [routerLink]="['/ReasonReject',data.articleId]" routerLinkActive="active"><button type="button"
                         class="custom-btn btn-1">Reject</button></a>
                 <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button
-                        type="button" class="custom-btn btn-1">Publish</button></a>
+                        type="button" class="custzzom-btn btn-1">Publish</button></a>
             </div>
         </div>
     </ng-template>
 </div>
 <br>
-<br>
+
 <app-footer></app-footer>

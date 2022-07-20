@@ -21,6 +21,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
 import { TagInputModule } from 'ngx-chips';
 import { HashLocationStrategy,LocationStrategy } from '@angular/common';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 
 import { AdmindashboardComponent } from './Admin Pages/admindashboard/admindashboard.component';
@@ -107,6 +108,7 @@ import { AgoPipe } from './Services/ago.pipe';
     PrivatearticlesComponent,
     RejectreasonComponent,
     AgoPipe,
+    
  
     
     
@@ -133,6 +135,7 @@ import { AgoPipe } from './Services/ago.pipe';
     ReactiveFormsModule,
     ToastNotificationsModule.forRoot({duration: 6000, type: 'primary'}),
     TagInputModule,
+    LoadingBarHttpClientModule,
 
     
   ],
