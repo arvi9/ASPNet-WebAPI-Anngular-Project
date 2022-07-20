@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   departmentDetails: any;
   GenderDetails: any;
   error: string = ""
+  maxDate:any;
   Designationlist: any[] = []
   Designationlist1: any[] = []
   todayAsString: any;
@@ -26,19 +27,20 @@ export class RegisterComponent implements OnInit {
   validateGendererror = true;
 
   user = this.fb.group({
-    fullName: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(26), Validators.pattern("^[A-Za-z ]+$")]],
+    fullName: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(26), Validators.pattern("^(?!.*([ ])\\1)(?!.*([A-Za-z])\\2{2})\\w[a-zA-Z\\s]*$")]],
     gender: ['', [Validators.required]],
-    aceNumber: ['', [Validators.required, Validators.pattern("ACE+[0-9]{4,6}")]],
+    aceNumber: ['', [Validators.required, Validators.pattern("^ACE[0-9]{4,6}$"),Validators.pattern("^(?!.*ACE000000|ACE0000|ACE00000).*$")]],
     departmentValidate: ['', [Validators.required]],
-    emailAddress: ['', [Validators.required, Validators.pattern("([a-zA-Z0-9-_\.]+)@(aspiresys.com)")]],
+    emailAddress: ['', [Validators.required, Validators.pattern("([a-zA-Z0-9-_\.]{5,22})@(aspiresys.com)")]],
     DesignationValidate: ['', [Validators.required]],
     dateOfBirth: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
   })
+
   
 
   constructor(private fb: FormBuilder, private connection: ConnectionService, private router: Router, private toaster: Toaster) { }
-
+ 
   validateGender(value: any) {
     if (value === 'default') {
       this.validateGendererror = true;
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dateValidation();
     this.connection.GetDesignations()
       .subscribe({
         next: (data) => {
@@ -68,7 +71,22 @@ export class RegisterComponent implements OnInit {
         }
       });
   }
+  dateValidation() {
+    var date: any = new Date();
 
+    var toDate: any = date.getDate();
+    if (toDate < 10) {
+      toDate = "0" + toDate;
+    }
+    var month = date.getMonth() + 1;
+    if (month < 10) {
+      month = '0' + month;
+    }
+    var year = date.getFullYear(); 
+    this.maxDate = year + "-" + month + "-" + toDate;
+    console.log(this.maxDate);
+    return true;
+  }
   FilterDesignation() {
     this.Designationlist = [];
     for (let item of this.designationDetails) {
@@ -79,8 +97,6 @@ export class RegisterComponent implements OnInit {
   }
 
   validateDateOfBirth() {
-    this.todayAsString = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-    if (this.user.value['dateOfBirth'] < this.todayAsString) {
       this.year = parseInt(this.user.value['dateOfBirth']);
       if (((new Date().getFullYear() - this.year) <= 18))
        {
@@ -91,10 +107,7 @@ export class RegisterComponent implements OnInit {
       }
       return false;
     }
-    else {
-      return true;
-    }
-  }
+  
 
 
   userdata() {

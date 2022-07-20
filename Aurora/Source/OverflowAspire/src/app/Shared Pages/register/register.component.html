@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="form-label">
-                            <label class="form-label" for="fullName">Full Name </label>
+                            <label class="form-label" for="fullName">Full Name<label class="text-danger">*</label></label>
                             <input type="text" class="form-control" name="fullName" id="fullName"
                                 formControlName="fullName">
                             <span
@@ -27,13 +27,13 @@
                             <span class="text-danger" *ngIf="user.controls['fullName'].errors?.['minlength']">Name
                                 should not have minimum 4 characters</span>
                             <span class="text-danger" *ngIf="user.controls['fullName'].errors?.['maxlength']">Name
-                                should have maximum 20 characters</span>
+                                should have maximum 20 characters.</span>
                             <span class="text-danger" *ngIf="user.controls['fullName'].errors?.['pattern']">Name must
-                                contain only characters</span>
+                                contain only characters and it should not repeat</span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6 col-md-6 mb-4">
-                        <label class="form-label">Gender</label>
+                        <label class="form-label">Gender<label class="text-danger">*</label></label>
                         <select class="form-select " name="gender" id="genderN" formControlName="gender" required>
                             <option value="" hidden>Choose Gender</option>
                             <option *ngFor="let item of GenderDetails" value={{item.genderId}}>{{item.name}}</option>
@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="label">
-                            <label class="form-label" for="name">ACE Number</label>
+                            <label class="form-label" for="name">ACE Number<label class="text-danger">*</label></label>
                             <input type="text" class="form-control" formControlName="aceNumber" required
                                 name="aceNumber">
                             <span
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6 col-md-6 mb-4">
-                        <label class="form-label">Department </label>
+                        <label class="form-label">Department<label class="text-danger">*</label></label>
                         <select id="departmentValidate" class="form-select" name="departmentValidate"
                             (change)="FilterDesignation()" required formControlName="departmentValidate">
                             <option value="" hidden>Select the department</option>
@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="form-label">
-                            <label class="form-label" for="name">Mail Address </label>
+                            <label class="form-label" for="name">Mail Address<label class="text-danger">*</label></label>
                             <input type="text" class="form-control" required formControlName="emailAddress"
                                 name="emailAddress">
                             <span
@@ -83,11 +83,11 @@
                                 class="text-danger" *ngIf="user.controls['emailAddress'].errors?.['required']">Email
                                 Address is required</span>
                             <span class="text-danger" *ngIf="user.controls['emailAddress'].errors?.['pattern']">Email
-                                Address is invalid (Example-xxx@aspiresys.com)</span>
+                                Address should have atleast 5 characters(Example-xxxxx@aspiresys.com)</span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6 col-md-6 mb-4">
-                        <label class="form-label">Designation </label>
+                        <label class="form-label">Designation<label class="text-danger">*</label></label>
                         <select name="DesignationValidate" class="form-select" (change)="FilterDesignation()"
                             formControlName="DesignationValidate" required>
                             <option hidden>Select the Designation </option>
@@ -104,9 +104,9 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="label">
-                            <label class="form-label">Date Of Birth</label>
+                            <label class="form-label">Date Of Birth<label class="text-danger">*</label></label>
                             <input type="date" class="form-control rounded" placeholder="Date" aria-label="date"
-                                aria-describedby="search-addon" name="dateOfBirth" formControlName="dateOfBirth"
+                                aria-describedby="search-addon" name="dateOfBirth" formControlName="dateOfBirth" (onchange)=validateDateOfBirth() max="{{maxDate}}" onkeydown="return false"
                                 required>
                             <span
                                 [class.d-none]="user.controls['dateOfBirth'].valid || user.controls['dateOfBirth'].untouched"
@@ -120,7 +120,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="label">
-                            <label class="form-label" for="name">Password</label>
+                            <label class="form-label" for="name">Password<label class="text-danger">*</label></label>
                             <input type="password" class="form-control" formControlName="password" required
                                 name="password">
                             <span
@@ -128,7 +128,7 @@
                                 class="text-danger" *ngIf="user.controls['password'].errors?.['required']">Password is
                                 required</span>
                             <span class="text-danger" *ngIf="user.controls['password'].errors?.['pattern']">Password
-                                should be minimum 8 digits with 1 uppercase,1 lowercase,1 symbol and 1 number</span>
+                                should be minimum 8 digits with atleast 1 uppercase,1 lowercase,1 symbol and 1 number</span>
                         </div>
                     </div>
                 </div>

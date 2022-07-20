@@ -23,15 +23,18 @@
                 <div class="row">
                     <div class="col-md mb-2">
                         <label class="labeltext">Search Query&nbsp;</label>
-                        <input class="Searchbar" type="text" name="search" [(ngModel)]="searchTitle" autocomplete="off">
+                        <input class="Searchbar" type="text" #query="ngModel" pattern='^\S.*[^.\s]$' name="search" [(ngModel)]="searchTitle" autocomplete="off">
+                        <div *ngIf="query.errors && (query.invalid || query.touched)">
+                            <small class="text-danger" *ngIf="query.errors['pattern']">Query should not start with space</small>
+                    </div>
                     </div>
                     <div class="col-md-3 ">
-                        <input type="radio" value="Solved Queries" name="Queries" [(ngModel)]="searchSolvedQueries"
+                        <input class="form-check-input" type="radio" value="Solved Queries" name="Queries" [(ngModel)]="searchSolvedQueries"
                             autocomplete="off">
                         <label class="labeltext">&nbsp;Solved Queries</label>
                     </div>
                     <div class="col-md-3 ">
-                        <input type="radio" value="Unsolved Queries" name="Queries" [(ngModel)]="searchUnSolvedQueries"
+                        <input class="form-check-input" type="radio" value="Unsolved Queries" name="Queries" [(ngModel)]="searchUnSolvedQueries"
                             autocomplete="off">
                         <label class="labeltext">&nbsp;Unsolved Queries</label>
                     </div>

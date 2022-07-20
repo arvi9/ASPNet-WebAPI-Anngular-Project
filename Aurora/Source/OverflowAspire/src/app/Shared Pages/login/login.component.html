@@ -10,10 +10,10 @@
 			<h5 class="card-title text-center ">Login</h5>
 			<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 				<div class="mt-3" *ngIf="showErrorMessage">
-					<p class="text-danger text-center"> Invalid username or password</p>
+					<p class="text-danger text-center"> Invalid Credentials</p>
 				</div>
 				<div class="form-group mb-3 p-2">
-					<label class="label" for="name">Email </label>
+					<label class="label" for="name">Email<label class="text-danger">*</label></label>
 					<input type="text" id="email" #email="ngModel" class="form-control" name="email"
 						[(ngModel)]="user.Email" pattern="([a-zA-Z0-9-_\.]+)@(aspiresys.com)" required>
 					<div *ngIf="email.errors && (email.invalid || email.touched)">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="form-group mb-3 p-2">
-					<label class="label" for="name">Password</label>
+					<label class="label" for="name">Password<label class="text-danger">*</label></label>
 					<input type="password" class="form-control" name="password" #password="ngModel"
 						[(ngModel)]="user.Password" required>
 					<div class="text-danger" [class.d-none]="password.valid || password.untouched"
@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="text-center mb-2 p-2">
-					<button class="custom-btn btn-1" type="Submit">
+					<button class="custom-btn btn-1" type="Submit" [disabled]="!form.valid">
 						<span *ngIf="IsLoading" class="spinner-border spinner-border-sm" role="status"
 							aria-hidden="true"></span>
 						Login</button>

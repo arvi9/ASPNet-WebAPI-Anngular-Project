@@ -48,14 +48,15 @@
     <div class="container">
       <div class="bg-light p-2">
         <textarea type="text" name="comment" class="form-control form-control5" id="queryComment-message"
-          placeholder="Enter comments" [(ngModel)]="Query.comment" #comment="ngModel" required>
-                    </textarea>
-        <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
-          <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
-            *ngIf="comment.errors['required']">comment is required</small>
-        </div>
+        placeholder="Enter comments (maximum 500 characters)" [(ngModel)]="Query.comment" #comment="ngModel" pattern="^.{1,500}$" required>
+    </textarea>
+      <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
+        <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
+          *ngIf="comment.errors['required']">comment is required</small>
+          <small class="text-danger" *ngIf="comment.errors['pattern']">Comment should not empty must contain maximum 200 characters</small>
       </div>
     </div>
+  </div>
     <div class="mt-2 text-right">
       <button class="custom-btn btn-1 btn-2" id="button-code" [disabled]="!form.valid" type="submit">Post</button>
     </div>

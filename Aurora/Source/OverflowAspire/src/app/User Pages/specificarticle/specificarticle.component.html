@@ -53,10 +53,11 @@
             <div class="container">
                 <div class="bg-light p-2">
                     <textarea class="form-control form-control5" #comment="ngModel" name="QueryComment"
-                        [(ngModel)]="article.comment" placeholder="Enter comments" required></textarea>
+                        [(ngModel)]="article.comment" placeholder="Enter comments (maximum 100 characters )" pattern="^.{1,100}$" required></textarea>
                     <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
                         <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
                             *ngIf="comment.errors['required']">comment is required</small>
+                            <small class="text-danger" *ngIf="comment.errors['pattern']">Comment should not empty must contain maximum 100 characters</small>
                     </div>
                 </div>
                 <div class="mt-2">

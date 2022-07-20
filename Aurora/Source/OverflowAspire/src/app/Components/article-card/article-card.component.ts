@@ -20,6 +20,7 @@ export class ArticleCardComponent implements OnInit {
   searchAuthor = "";
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
+  maxDate: any = ''
   public data: Article[] = [];
   public filteredData: Article[] = [];
 
@@ -27,6 +28,7 @@ export class ArticleCardComponent implements OnInit {
 
   //Get articles
   ngOnInit(): void {
+    this.dateValidation();
     //Get all the articles
     this.spinner.show();
     if (this.artsrc == "allArticles") {
@@ -94,7 +96,22 @@ export class ArticleCardComponent implements OnInit {
         });
     }
   }
+  dateValidation() {
+    var date: any = new Date();
 
+    var toDate: any = date.getDate();
+    if (toDate < 10) {
+      toDate = "0" + toDate;
+    }
+    var month = date.getMonth() + 1;
+    if (month < 10) {
+      month = '0' + month;
+    }
+    var year = date.getFullYear(); 
+    this.maxDate = year + "-" + month + "-" + toDate;
+    console.log(this.maxDate);
+    return true;
+  }
   //Filter articles by Title,Author,Fromdate and Todate.
   samplefun(searchTitle: string, searchAuthor: string, FromDate: any, ToDate: any) {
     if (searchTitle.length == 0 && searchAuthor.length == 0 && FromDate == new Date("0001-01-01").toString() && ToDate == new Date("0001-01-01").toString()) this.data = this.filteredData

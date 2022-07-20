@@ -16,49 +16,49 @@
         <h2>Raise Query</h2>
     </div>
     <div class="form-group">
-        <form #form="ngForm" (ngSubmit)="RaiseQuery()" autocomplete="off">
-            <label class="control-label col-sm-2 mb-2" for="fname"><b>Title</b></label>
+        <form [formGroup]="raisequery" (ngSubmit)="RaiseQuery()" novalidate>
             <div class="col-sm-10">
-                <input type="text" #title="ngModel" class="form-control mb-4" id="raisequery"
-                    placeholder="Enter query title" name="querytitle" [(ngModel)]="query.title"
-                    [class.is-invalid]="title.invalid && title.touched" pattern="^.{1,60}$" required>
-                <div *ngIf="title.errors && (title.invalid || title.touched)">
-                    <small class="text-danger" *ngIf="title.errors['pattern']">Title should have maximum 60
-                        characters</small>
-                    <small class="text-danger" [class.d-none]="title.valid||title.untouched"
-                        *ngIf="title.errors['required']">Title is required</small>
-                </div>
+                <label class="control-label col-sm-2 mb-2" for="fname"><b>Title</b></label>
+                <input type="text" class="form-control mb-4" id="raisequery-name" formControlName="title"
+                    placeholder="Enter query title" name="title">
+                <span [class.d-none]="raisequery.controls['title'].valid || raisequery.controls['title'].untouched"
+                    class="text-danger" *ngIf="raisequery.controls['title'].errors?.['required']">Title is required</span>
+                <span class="text-danger" *ngIf="raisequery.controls['title'].errors?.['pattern']">Title should maximum 100 characters</span>
             </div>
             <div>
                 <div class="form-group">
                     <label class="control-label col-sm-2 mb-2" for="fname"><b>Query</b></label>
                     <div class="col-sm-10">
-                        <textarea type="text" name="query" class="form-control mb-4" rows="5" cols="4"
+                        <textarea type="text" name="content" class="form-control mb-4" rows="5" cols="4"
                             id="raisequery-name" placeholder="Enter query here (Maximum 200 words)"
-                            #querycontent="ngModel" pattern="^\W*(\w+(\W+|$)){1,200}$" [(ngModel)]="query.content"
-                            required></textarea>
-                        <div *ngIf="querycontent.errors && (querycontent.invalid || querycontent.touched)">
-                            <small class="text-danger" *ngIf="querycontent.errors['pattern']">Query should have
-                                Maximum 200 words</small>
-                            <small class="text-danger" [class.d-none]="querycontent.valid||querycontent.untouched"
-                                *ngIf="querycontent.errors['required']">query is required</small>
-                        </div>
+                            formControlName="content">
+                        </textarea>
+                        <span
+                            [class.d-none]="raisequery.controls['content'].valid || raisequery.controls['content'].untouched"
+                            class="text-danger" *ngIf="raisequery.controls['content'].errors?.['required']"> Content is
+                            required</span>
+                        <span class="text-danger" *ngIf="raisequery.controls['content'].errors?.['pattern']">Query
+                            should have Minimum 20 words</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2 mb-2" for="fname"><b>Code</b></label>
                     <div class="col-sm-10">
-                        <textarea type="text" name="querycode" class="form-control mb-4" rows="5" cols="4"
-                            placeholder="maximum 200words" id="raisequery-name" placeholder="Enter code here(Optional)"
-                            [(ngModel)]="query.code"></textarea>
+                        <textarea type="text" name="code" class="form-control mb-4" rows="5" cols="4"
+                            id="raisequery-name" placeholder="Enter code here(Optional)"
+                            formControlName="code"></textarea>
+                        <span
+                            [class.d-none]="raisequery.controls['code'].valid || raisequery.controls['code'].untouched"
+                            class="text-danger" *ngIf="raisequery.controls['code'].errors?.['pattern']">Query code
+                            should have Maximum 1000 characters</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="mt-2 text-right">
-                            <button class="btn btn-1 btn-2 text-white font-weight-normal " [disabled]="!form.valid"
-                                type="submit"><span *ngIf="IsLoading" class="spinner-border spinner-border-sm"
-                                    role="status" aria-hidden="true"></span>
+                            <button class="btn btn-1 btn-2 text-white font-weight-normal "
+                                [disabled]="!raisequery.valid" type="submit"><span *ngIf="IsLoading"
+                                    class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Raise query </button>
                         </div>
                     </div>
