@@ -60,4 +60,5 @@ namespace AspireOverflow.Models
         public Article? article { get; set; }
         public List<int>? SharedUsersId { get; set; }
     }
+    
 }

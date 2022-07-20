@@ -91,6 +91,9 @@ namespace AspireOverflow.Services
                 var ExistingArticle = database.GetArticleByID(article.ArticleId);
                 //throws Exception when ExistingArticle is null.
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArticleId}");
+
+                //if any other user trying to update the article which is not created by them,throws exception
+                if(ExistingArticle.CreatedBy != _currentUserId && !IsReviewer ) throw new ValidationException("you do not have access to update this article");
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
@@ -186,13 +189,14 @@ namespace AspireOverflow.Services
 
 
         //To Fetch the articles using ArticleId.
-        public object GetArticleById(int ArticleId)
+        public object GetArticleById(int ArticleId,CurrentUser currentUser)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
                 var article = database.GetArticleByID(ArticleId);
+                if(article.CreatedBy != currentUser.UserId && article.ArticleStatusID==1 &&!currentUser.IsReviewer) throw new ValidationException("You dont have access to retrieve this article");
                 var SharedUsers = article.IsPrivate ? database.GetPrivateArticleUsersByArticleId(article.ArticleId).Select(Item => new
                 {
                     UserId = Item.user?.UserId,
@@ -215,6 +219,10 @@ namespace AspireOverflow.Services
                     IsPrivate = article.IsPrivate,
                     SharedUsers = SharedUsers
                 };
+            }catch (ValidationException exception)
+            {
+                _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById(int ArticleId)", exception, ArticleId));
+                throw;
             }
             catch (Exception exception)
             {

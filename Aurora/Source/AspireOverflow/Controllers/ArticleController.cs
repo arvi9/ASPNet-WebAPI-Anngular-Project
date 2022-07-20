@@ -502,9 +502,9 @@ namespace AspireOverflow.Controllers
             if (ArticleId <= 0) return BadRequest(Message("Article ID must be greater than 0"));
             try
             {
-                return await Task.FromResult(Ok(_articleService.GetArticleById(ArticleId)));
+                return await Task.FromResult(Ok(_articleService.GetArticleById(ArticleId,GetCurrentUser())));
             }
-            catch (ItemNotFoundException exception)
+            catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleController", "GetArticleById(int ArticleId)", exception, ArticleId));
                 return BadRequest(Message($"{exception.Message}"));

@@ -51,7 +51,7 @@ namespace AspireOverflow.DataAccessLayer
         public bool AddComment(QueryComment comment)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-            Validation.ValidateComment(comment);
+            Validation.ValidateQueryComment(comment);
             try
             {
                 _context.QueryComments.Add(comment);

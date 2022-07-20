@@ -332,7 +332,7 @@ namespace AspireOverflow.Services
         public bool CreateComment(QueryComment comment)
         {
             if (IsTracingEnabled) _stopWatch.Start();
-            Validation.ValidateComment(comment);
+            Validation.ValidateQueryComment(comment);
             try
             {
                 comment.CreatedOn = DateTime.Now;
@@ -463,13 +463,14 @@ namespace AspireOverflow.Services
                     ListOfSpams = item.Select(spam => new
                     {
                         Name = spam.User?.FullName,
-                        Reason = spam.Reason
-                    }),
+                        Reason = spam.Reason,
+                         DateTime=spam.CreatedOn
+                    }).OrderByDescending(item =>item.DateTime),
                     Query = new
                     {
                         QueryId = item.First().QueryId,
                         Content = item.First().Query?.Content,
-                        Title = item.First().Query?.Title
+                        Title = item.First().Query?.Title         
                     }
                 });
                 return Spams;

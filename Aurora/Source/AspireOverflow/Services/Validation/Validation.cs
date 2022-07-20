@@ -16,18 +16,20 @@ namespace AspireOverflow.Services
             else return true;
         }
 
-        public static bool ValidateComment(QueryComment Comment)
+        public static bool ValidateQueryComment(QueryComment Comment)
         {
             if (Comment == null) throw new ValidationException("Comment should not be null");
             if (Comment.QueryId <= 0) throw new ValidationException("Query Id  must be greater than 0");
             if (String.IsNullOrEmpty(Comment.Comment)) throw new ValidationException("Comment cannot be null or empty");
+            if (Comment.Comment.Length > 500) throw new ValidationException("Comment must be less than 500 characters");
+            if (Comment.Code != null && Comment.Code.Length > 1000) throw new ValidationException("Code must be less than 1000 characters");
             else return true;
         }
 
         public static bool ValidateArticle(Article article)
         {
             if (article == null) throw new ValidationException("Article should not be null");
-          
+
             if (String.IsNullOrEmpty(article.Title)) throw new ValidationException("Title cannot be null or empty");
             if (String.IsNullOrEmpty(article.Content)) throw new ValidationException("content cannot be null or empty");
             if (article.Title.Length > 100) throw new ValidationException("Title length must be less than 100 charcter");
@@ -40,6 +42,7 @@ namespace AspireOverflow.Services
             if (Comment == null) throw new ValidationException("Comment should not be null");
             if (Comment.ArticleId <= 0) throw new ValidationException("Article Id  must be greater than 0");
             if (String.IsNullOrEmpty(Comment.Comment)) throw new ValidationException("Comment cannot be null or empty");
+            if (Comment.Comment.Length > 100) throw new ValidationException("Comment must be less than 100 characters");
             else return true;
         }
 
