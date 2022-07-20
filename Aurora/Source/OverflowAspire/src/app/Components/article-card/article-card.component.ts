@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Article } from 'Models/Article';
-import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -22,11 +22,12 @@ export class ArticleCardComponent implements OnInit {
   public data: Article[] = [];
   public filteredData: Article[] = [];
 
-  constructor(private connection: ConnectionService, private route: Router) { }
+  constructor(private connection: ConnectionService, private route: Router,private spinner: NgxSpinnerService) { }
 
   //Get articles
   ngOnInit(): void {
     //Get all the articles
+    this.spinner.show();
     if (this.artsrc == "allArticles") {
       this.connection.GetAllArticles()
         .subscribe({
@@ -34,6 +35,9 @@ export class ArticleCardComponent implements OnInit {
             this.data = data;
             this.filteredData = data;
             this.totalLength = data.length;
+          },
+          complete:()=>{
+            this.spinner.hide();
           }
         });
     }
