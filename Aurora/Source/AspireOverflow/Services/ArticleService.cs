@@ -196,7 +196,10 @@ namespace AspireOverflow.Services
             try
             {
                 var article = database.GetArticleByID(ArticleId);
-                if(article.CreatedBy != currentUser.UserId && article.ArticleStatusID==1 &&!currentUser.IsReviewer) throw new ValidationException("You dont have access to retrieve this article");
+                //Validating the User access to get the article
+                if(article.CreatedBy != currentUser.UserId && article.ArticleStatusID==1) throw new ValidationException("You dont have access to retrieve this article");
+               if(article.CreatedBy != currentUser.UserId && (article.ArticleStatusID==2 || article.ArticleStatusID==3) && !currentUser.IsReviewer ) throw new ValidationException("You dont have access to retrieve this article");
+              //it retrives sharedusers only for the private articles
                 var SharedUsers = article.IsPrivate ? database.GetPrivateArticleUsersByArticleId(article.ArticleId).Select(Item => new
                 {
                     UserId = Item.user?.UserId,
