@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'Models/Article';
+import { Toaster } from 'ngx-toast-notifications';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ConnectionService } from 'src/app/Services/connection.service';
 
@@ -21,11 +22,14 @@ export class PrivatearticlesComponent implements OnInit {
   public data: any[] = [];
   public filteredData: Article[] = [];
  
-constructor(private route: ActivatedRoute,private routes:Router,private connection:ConnectionService) { }
+constructor(private route: ActivatedRoute,private routes:Router,private connection:ConnectionService,private toaster: Toaster) { }
 
 //Get private articles.
 ngOnInit(): void {
-  if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
+  if (AuthService.GetData("token") == null) {
+    this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+    this.routes.navigateByUrl("")
+  }
   }
   
  

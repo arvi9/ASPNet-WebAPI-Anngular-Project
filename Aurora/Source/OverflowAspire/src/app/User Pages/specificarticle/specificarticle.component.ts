@@ -47,7 +47,10 @@ export class SpecificarticleComponent implements OnInit {
 
   //Get Specific article by its id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
       this.connection.GetArticle(this.articleId)

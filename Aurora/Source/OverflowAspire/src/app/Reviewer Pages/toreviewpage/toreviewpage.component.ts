@@ -18,7 +18,7 @@ export class ToreviewpageComponent implements OnInit {
   public data1: Article[] = [];
   userid: any;
   isSpinner = true;
-  
+  error:any
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -42,6 +42,7 @@ export class ToreviewpageComponent implements OnInit {
               next: (data: Article[]) => {
                 this.data = this.data1.concat(data)
               },
+              error: (error:any) => this.error = error.error.message,
               complete: () => {
                 this.isSpinner = false;
                 this.spinner.hide();
@@ -53,7 +54,8 @@ export class ToreviewpageComponent implements OnInit {
       .subscribe({
         next: (data: User) => {
           this.userid = data.userId;
-        }
+        },
+        error: (error:any) => this.error = error.error.message,
       });
   }
 }

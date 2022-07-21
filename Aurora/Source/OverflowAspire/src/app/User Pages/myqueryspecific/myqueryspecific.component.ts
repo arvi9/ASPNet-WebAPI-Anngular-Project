@@ -18,7 +18,7 @@ export class MyqueryspecificComponent implements OnInit {
     this.queryId = params['queryId'];
   });
   queryId: number = this.queryDetails;
-
+  error: any
   Query: any = {
     CommentId: 0,
     comment: '',
@@ -33,7 +33,10 @@ export class MyqueryspecificComponent implements OnInit {
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
   //Get specific query by its id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
       this.connection.GetQuery(this.queryId)
@@ -41,7 +44,8 @@ export class MyqueryspecificComponent implements OnInit {
           next: (data: Query) => {
             this.data = data;
             this.issolved = data.isSolved;
-          }
+          },
+          error: (error: any) => this.error = error.error.message,
         });
     });
   }
@@ -50,7 +54,8 @@ export class MyqueryspecificComponent implements OnInit {
     this.connection.MarkQueryAsSolved(QueryId)
       .subscribe({
         next: (data: any) => {
-        }
+        },
+        error: (error: any) => this.error = error.error.message,
       });
     this.toaster.open({ text: 'Query Marked As Solved', position: 'top-center', type: 'success' })
     this.routing.navigateByUrl("/MyQueries");

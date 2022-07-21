@@ -16,6 +16,7 @@ export class ArticalreviewedpageComponent implements OnInit {
   constructor(private route: Router, private connection: ConnectionService, private toaster: Toaster,private spinner: NgxSpinnerService) { }
   public data: Article[] = [];
   isSpinner = true;
+  error:any
 
   // Reviewer can get reviewed articles.
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class ArticalreviewedpageComponent implements OnInit {
         next: (data: Article[]) => {
           this.data = data;
         },
+        error: (error:any) => this.error = error.error.message,
         complete: () => {
           this.isSpinner = false;
           this.spinner.hide();

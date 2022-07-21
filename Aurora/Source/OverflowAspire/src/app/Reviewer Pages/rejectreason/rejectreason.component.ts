@@ -22,13 +22,15 @@ export class RejectreasonComponent implements OnInit {
   constructor(private routing: Router, private route: ActivatedRoute, private connection: ConnectionService, private toaster: Toaster) { }
 
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.articleid = params['articleId'];
       this.connection.GetArticle(this.articleid)
         .subscribe((data: any) => {
           this.article = data;
-          console.log(this.article)
         });
     });
   }

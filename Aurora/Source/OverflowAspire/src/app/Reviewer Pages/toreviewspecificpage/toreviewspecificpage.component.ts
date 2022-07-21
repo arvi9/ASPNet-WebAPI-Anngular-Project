@@ -21,7 +21,10 @@ export class ToreviewspecificpageComponent implements OnInit {
 
   // Get article by article id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     if (!AuthService.IsReviewer()) {
       this.routing.navigateByUrl("")
     }
@@ -31,30 +34,28 @@ export class ToreviewspecificpageComponent implements OnInit {
         .subscribe({
           next: (data: Article) => {
             this.data = data;
-          }
+          },
+          error: (error: any) => this.error = error.error.message,
         });
       this.connection.GetCurrentApplicationUser()
         .subscribe({
           next: (data: User) => {
             this.userid = data.userId;
-          }
+          },
+          error: (error: any) => this.error = error.error.message,
         });
     });
   }
-
 
   PublishArticle(articleId: number) {
     this.connection.ApproveArticle(articleId)
       .subscribe({
         next: (data: any) => {
-        }
-        
-      
-          
-        
+        },
+        error: (error: any) => this.error = error.error.message,
       });
-      this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
-      this.routing.navigateByUrl("/ToReview");
+    this.toaster.open({ text: 'Article Published successfully', position: 'top-center', type: 'success' })
+    this.routing.navigateByUrl("/ToReview");
   }
 
   ChangeToUnderReview(articleId: number) {
@@ -62,9 +63,7 @@ export class ToreviewspecificpageComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
-        error: (error: { error: { message: string; }; }) => {
-          this.error = error.error.message;
-        },
+        error: (error: any) => this.error = error.error.message,
         complete: () => {
           this.ngOnInit()
           this.toaster.open({ text: 'Checked in successfully', position: 'top-center', type: 'warning' })
@@ -72,7 +71,7 @@ export class ToreviewspecificpageComponent implements OnInit {
       });
     setTimeout(
       () => {
-        location.reload(); 
+        location.reload();
       },
       1000
     );

@@ -22,7 +22,8 @@ export class MyQueriesComponent implements OnInit {
   searchSolvedQueries = false;
   public data: Query[] = [];
   public filteredData: Query[] = [];
-
+  error: any
+  
   //Get My queries.
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster, private spinner: NgxSpinnerService) { }
   ngOnInit(): void {
@@ -38,6 +39,7 @@ export class MyQueriesComponent implements OnInit {
           this.filteredData = data;
           this.totalLength = data.length;
         },
+        error: (error: any) => this.error = error.error.message,
         complete: () => {
           this.isSpinner = false;
           this.spinner.hide();

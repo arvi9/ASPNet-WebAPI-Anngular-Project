@@ -28,20 +28,22 @@ export class ProfileComponent implements OnInit {
     userRoleId: 0,
     designationId: 0
   }
-  constructor(private connection: ConnectionService, private route: Router,private toaster: Toaster) { }
+  error: any
+  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
 
   //Get user profile.
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
     this.connection.GetCurrentApplicationUser()
       .subscribe({
         next: (data: User) => {
           this.user = data;
-        }
+        },
+        error: (error: any) => this.error = error.error.message,
       });
   }
 }

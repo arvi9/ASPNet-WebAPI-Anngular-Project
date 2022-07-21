@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Toaster } from 'ngx-toast-notifications';
 @Component({
   selector: 'app-my-articles',
   templateUrl: './my-articles.component.html',
@@ -19,16 +20,19 @@ export class MyArticlesComponent implements OnInit {
   FromDate = new Date("0001-01-01");
   ToDate = new Date("0001-01-01");
   userId: any = 0;
-  maxDate:any;
+  maxDate: any;
   public data: any[] = [];
   public filteredData: any[] = [];
+  error: any
+  constructor(private routes: Router, private connection: ConnectionService, private toaster: Toaster, private spinner: NgxSpinnerService) { }
 
-  constructor(private routes: Router, private connection: ConnectionService,private spinner: NgxSpinnerService) { }
-  
   //Get my articles.
   ngOnInit(): void {
     this.dateValidation();
-    if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routes.navigateByUrl("")
+    }
     this.spinner.show();
     this.connection.GetMyArticles()
       .subscribe({
@@ -37,6 +41,7 @@ export class MyArticlesComponent implements OnInit {
           this.filteredData = data;
           this.totalLength = data.length;
         },
+        error: (error: any) => this.error = error.error.message,
         complete: () => {
           this.isSpinner = false;
           this.spinner.hide();
@@ -54,7 +59,7 @@ export class MyArticlesComponent implements OnInit {
     if (month < 10) {
       month = '0' + month;
     }
-    var year = date.getFullYear(); 
+    var year = date.getFullYear();
     this.maxDate = year + "-" + month + "-" + toDate;
     return true;
   }
@@ -93,7 +98,7 @@ export class MyArticlesComponent implements OnInit {
       this.data = this.filteredData.filter(item => { return item.title.toLowerCase().includes(searchTitle.toLowerCase()) && new Date(item.date) >= new Date(FromDate) && new Date(item.date) <= new Date(ToDate) });
     }
     this.searchTitle = '';
-    this.FromDate=new Date("0001-01-01");
-    this.ToDate=new Date("0001-01-01");
+    this.FromDate = new Date("0001-01-01");
+    this.ToDate = new Date("0001-01-01");
   }
 }

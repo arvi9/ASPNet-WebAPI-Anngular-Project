@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
@@ -59,9 +59,8 @@ export class CreateArticlePageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
     CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
@@ -169,7 +168,7 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
       const allowed_types = ['image/png', 'image/jpeg'];
       if (fileInput.target.files[0].size > max_size) {
         this.imageError =
-        'Maximum size allowed is ' + max_size / 20000 + 'Mb';
+          'Maximum size allowed is ' + max_size / 20000 + 'Mb';
         return false;
       }
 

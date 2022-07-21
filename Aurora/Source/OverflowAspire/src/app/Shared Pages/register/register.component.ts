@@ -56,7 +56,8 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.designationDetails = data;
-        }
+        },
+        error: (error:any) => this.error = error.error.message,
       });
     this.connection.GetDepartments()
       .subscribe({
@@ -66,9 +67,11 @@ export class RegisterComponent implements OnInit {
             .subscribe({
               next: (data) => {
                 this.GenderDetails = data;
-              }
+              },
+              error: (error:any) => this.error = error.error.message,
             });
-        }
+        },
+        error: (error:any) => this.error = error.error.message,
       });
   }
   dateValidation() {

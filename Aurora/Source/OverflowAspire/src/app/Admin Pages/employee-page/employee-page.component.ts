@@ -14,13 +14,14 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 
 export class EmployeePageComponent implements OnInit {
   public data: User[] = []
+  error:any;
   constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
 
   //Get the Employee page and shows the employee data
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
     if (!AuthService.IsAdmin()) {
@@ -28,9 +29,9 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
     }
     this.connection.GetEmployeePage().subscribe((data: User[]) => {
       this.data = data;
-      $(function(){
+      $(function () {
         $("#emptable").DataTable();
-       });
+      });
     })
   }
 
@@ -39,13 +40,14 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
     this.connection.DisableUser(userId)
       .subscribe({
         next: () => { },
+        error: (error: any) => this.error = error.error.message,
         complete: () => {
           this.toaster.open({ text: 'User has Disabled', position: 'top-center', type: 'danger' })
         }
       });
     setTimeout(
       () => {
-        location.reload(); 
+        location.reload();
       },
       1000
     );
@@ -60,6 +62,7 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
       this.connection.MarkAsReviewer(userId)
         .subscribe({
           next: () => { },
+          error: (error:any) => this.error = error.error.message,
           complete: () => {
             this.toaster.open({ text: 'User marked as Reviewer', position: 'top-center', type: 'success' })
           }
@@ -70,6 +73,7 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
       this.connection.UnmarkAsReviewer(userId)
         .subscribe({
           next: () => { },
+          error: (error:any) => this.error = error.error.message,
           complete: () => {
             this.toaster.open({ text: 'User unmarked as Reviewer', position: 'top-center', type: 'secondary' })
           }
@@ -79,7 +83,7 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
   }
 
   displayStyle = "none";
-  
+
   openPopup() {
     this.displayStyle = "block";
   }

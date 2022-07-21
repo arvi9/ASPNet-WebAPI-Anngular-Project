@@ -14,7 +14,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 export class QueryCardComponent implements OnInit {
   @Input() ShowStatus: boolean = true;
   @Input() Querysrc: string = "";
-  isSpinner=true;
+  isSpinner = true;
   totalLength: any;
   page: number = 1;
   searchTitle = "";
@@ -22,8 +22,8 @@ export class QueryCardComponent implements OnInit {
   searchSolvedQueries = false;
   public data: Query[] = [];
   public filteredData: Query[] = [];
-
-  constructor(private connection: ConnectionService, private route: Router,private spinner: NgxSpinnerService) { }
+  error: any;
+  constructor(private connection: ConnectionService, private route: Router, private spinner: NgxSpinnerService) { }
 
   // Get queries.
   ngOnInit(): void {
@@ -37,6 +37,7 @@ export class QueryCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();
@@ -53,6 +54,7 @@ export class QueryCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();
@@ -69,6 +71,7 @@ export class QueryCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();

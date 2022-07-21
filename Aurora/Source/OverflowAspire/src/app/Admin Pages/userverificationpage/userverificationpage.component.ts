@@ -13,11 +13,15 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 
 export class UserverificationpageComponent implements OnInit {
   public data: User[] = [];
+  error:any;
   constructor(private routing: Router, private toaster: Toaster, private connection: ConnectionService) { }
 
   //Get all the Users.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     if (!AuthService.IsAdmin()) {
       this.routing.navigateByUrl("")
     }
@@ -28,7 +32,8 @@ export class UserverificationpageComponent implements OnInit {
           $(function () {
             $("#emptable").DataTable();
           });
-        }
+        },
+        error: (error:any) => this.error = error.error.message,
       });
   }
 
@@ -38,6 +43,7 @@ export class UserverificationpageComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
+        error: (error:any) => this.error = error.error.message,
         complete: () => {
           this.toaster.open({ text: 'User Verified successfully', position: 'top-center', type: 'success' })
           this.routing.navigateByUrl("/Employee");

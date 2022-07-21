@@ -58,7 +58,6 @@ import { SpecificqueryComponent } from './User Pages/specificquery/specificquery
 import { TrendingArticlepageComponent } from './User Pages/trending-articlepage/trending-articlepage.component';
 import { TrendingQueriespageComponent } from './User Pages/trending-queriespage/trending-queriespage.component';
 import { UpdateArticlePageComponent } from './User Pages/update-article-page/update-article-page.component';
-import { ErrorPageComponent } from './Shared Pages/error-page/error-page.component';
 import { PrivatearticlesComponent } from './User Pages/privatearticles/privatearticles.component';
 import { RejectreasonComponent } from './Reviewer Pages/rejectreason/rejectreason.component';
 import { AgoPipe } from './Services/ago.pipe';
@@ -103,7 +102,6 @@ import { AgoPipe } from './Services/ago.pipe';
     TrendingArticlepageComponent,
     TrendingQueriespageComponent,
     UpdateArticlePageComponent,
-    ErrorPageComponent,
     PrivatearticlesComponent,
     RejectreasonComponent,
     AgoPipe,

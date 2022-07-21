@@ -23,7 +23,7 @@ export class ArticleCardComponent implements OnInit {
   maxDate: any = ''
   public data: Article[] = [];
   public filteredData: Article[] = [];
-
+  error: any;
   constructor(private connection: ConnectionService, private route: Router, private spinner: NgxSpinnerService) { }
 
   //Get articles
@@ -39,6 +39,7 @@ export class ArticleCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();
@@ -56,6 +57,7 @@ export class ArticleCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();
@@ -72,6 +74,7 @@ export class ArticleCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();
@@ -89,6 +92,7 @@ export class ArticleCardComponent implements OnInit {
             this.filteredData = data;
             this.totalLength = data.length;
           },
+          error: (error: any) => this.error = error.error.message,
           complete: () => {
             this.isSpinner = false;
             this.spinner.hide();
@@ -107,7 +111,7 @@ export class ArticleCardComponent implements OnInit {
     if (month < 10) {
       month = '0' + month;
     }
-    var year = date.getFullYear(); 
+    var year = date.getFullYear();
     this.maxDate = year + "-" + month + "-" + toDate;
     console.log(this.maxDate);
     return true;

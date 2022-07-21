@@ -28,7 +28,10 @@ export class ReportSpamComponent implements OnInit {
 
   //Get query by its id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
       this.connection.GetQuery(this.queryId)

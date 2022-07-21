@@ -22,6 +22,7 @@ export class HomePage {
 
 // Get homepage and show latest articles,trending articles,trending queries,latest queries.
 export class HomepageComponent implements OnInit {
+  error:any
   isSpinner = true;
   @Input() ShowStatus: boolean = true;
   public data: HomePage = new HomePage();
@@ -42,6 +43,7 @@ export class HomepageComponent implements OnInit {
           this.data.trendingQueries = data.trendingQueries
           this.data.latestQueries = data.latestQueries
         },
+        error: (error:any) => this.error = error.error.message,
         complete: () => {
           this.isSpinner = false;
           this.spinner.hide();

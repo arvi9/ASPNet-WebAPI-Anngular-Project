@@ -40,7 +40,10 @@ export class EditarticleComponent implements OnInit {
 
   //Get article by article id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routes.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routes.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
       this.connection.GetArticle(this.articleId)
@@ -48,7 +51,8 @@ export class EditarticleComponent implements OnInit {
           next: (data: Article) => {
             this.data = data;
             console.log(data)
-          }
+          },
+          error: (error:any) => this.error = error.error.message,
         });
     });
   }

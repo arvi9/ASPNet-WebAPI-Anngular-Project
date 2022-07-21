@@ -56,13 +56,15 @@ export class UpdateArticlePageComponent implements OnInit {
 
   //Get article by its id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.router.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.router.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
       this.connection.GetArticle(this.articleId)
         .subscribe({
           next: (data: { articleId: any; title: any; content: any; image: any; sharedUsers: SharedUsers[] }) => {
-            console.log(data)
             this.article.articleId = data.articleId;
             this.article.title = data.title;
             this.article.content = data.content;
@@ -70,7 +72,8 @@ export class UpdateArticlePageComponent implements OnInit {
             if(data.sharedUsers!=null){
               data.sharedUsers.forEach(item => this.itemsAsObjects.push(new sharedItem(item.userId, item.email)))
             }
-          }
+          },
+          error: (error:any) => this.error = error.error.message,
         });
       this.connection.GetEmployeePage().subscribe((data: any[]) => {
         data.forEach(item => this.items.push({ display: item.email, value: item.userId }))
@@ -182,11 +185,11 @@ export class UpdateArticlePageComponent implements OnInit {
   fileChangeEvent(fileInput: any) {
     this.imageError = "";
     if (fileInput.target.files && fileInput.target.files[0]) {
-      const max_size = 20971520;
+      const max_size = 100000;
       const allowed_types = ['image/png', 'image/jpeg'];
       if (fileInput.target.files[0].size > max_size) {
         this.imageError =
-          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+        'Maximum size allowed is ' + max_size / 20000 + 'Mb';
         return false;
       }
       if (!allowed_types.includes(fileInput.target.files[0].type)) {

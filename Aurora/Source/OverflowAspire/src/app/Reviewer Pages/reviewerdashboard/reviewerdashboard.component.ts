@@ -16,13 +16,13 @@ export class ReviewerdashboardComponent implements OnInit {
   piedata: any = {
     articleCounts: 0,
   }
-  constructor(private route: Router, private connection: ConnectionService,private toaster: Toaster) { }
-  articles:any;
+  error:any;
+  constructor(private route: Router, private connection: ConnectionService, private toaster: Toaster) { }
+  articles: any;
 
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
     if (!AuthService.IsReviewer()) {
@@ -32,10 +32,10 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
       .subscribe({
         next: (data: any) => {
           this.piedata = data;
-          this.articles=data.articleCounts.toBeReviewedArticles+data.articleCounts.underReviewArticles
+          this.articles = data.articleCounts.toBeReviewedArticles + data.articleCounts.underReviewArticles
           var names = ['Articles to be reviewed', 'Article published'];
           var details = [];
-          details.push( this.articles);
+          details.push(this.articles);
           details.push(data.articleCounts.articlesPublished);
           new Chart('piechart', {
             type: 'pie',
@@ -54,8 +54,9 @@ this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center
               },
             }
           });
-        }
+        },
+        error: (error:any) => this.error = error.error.message,
       });
   }
-  
+
 }

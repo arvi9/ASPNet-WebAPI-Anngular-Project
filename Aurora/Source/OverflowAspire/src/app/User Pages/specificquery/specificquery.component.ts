@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Query } from 'Models/Query';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -14,6 +14,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 
 export class SpecificqueryComponent implements OnInit {
   issolved = false;
+  error: any
   queryDetails: any = this.route.params.subscribe(params => {
     this.queryId = params['queryId'];
   });
@@ -34,7 +35,10 @@ export class SpecificqueryComponent implements OnInit {
 
   //Get specific query by its id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
       this.GetQuery()
@@ -47,7 +51,8 @@ export class SpecificqueryComponent implements OnInit {
         next: (data: Query) => {
           this.data = data;
           this.issolved = data.isSolved;
-        }
+        },
+        error: (error: any) => this.error = error.error.message,
       });
   }
 
@@ -57,7 +62,8 @@ export class SpecificqueryComponent implements OnInit {
     this.connection.PostQueryComment(this.Query)
       .subscribe({
         next: () => {
-        }
+        },
+        error: (error: any) => this.error = error.error.message,
       });
     this.toaster.open({ text: 'Comment Posted successfully', position: 'top-center', type: 'success' })
     this.ngOnInit();

@@ -12,13 +12,12 @@ import { AuthService } from 'src/app/Services/auth.service';
 
 export class TrendingArticlepageComponent implements OnInit {
   url: string = 'trendingArticles';
-  constructor(private http: HttpClient, private route: Router,private toaster: Toaster) { }
+  constructor(private http: HttpClient, private route: Router, private toaster: Toaster) { }
 
   //Show trending Articles.
   ngOnInit(): void {
-    
- if (AuthService.GetData("token") == null) {
-this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
   }

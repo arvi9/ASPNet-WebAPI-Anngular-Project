@@ -20,7 +20,10 @@ export class SpamViewComponent implements OnInit {
 
   //Get spams by query id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.routing.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.routing.navigateByUrl("")
+    }
     if (!AuthService.IsAdmin()) {
       this.routing.navigateByUrl("")
     }
@@ -46,6 +49,7 @@ export class SpamViewComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
+        error: (error:any) => this.error = error.error.message,
       });
     this.toaster.open({ text: 'Query removed successfully', position: 'top-center', type: 'danger' })
     this.routing.navigateByUrl("/SpamReport");
@@ -58,6 +62,7 @@ export class SpamViewComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
         },
+        error: (error:any) => this.error = error.error.message,
       });
     this.toaster.open({ text: 'spam removed successfully', position: 'top-center', type: 'danger' })
     this.routing.navigateByUrl("/SpamReport");
