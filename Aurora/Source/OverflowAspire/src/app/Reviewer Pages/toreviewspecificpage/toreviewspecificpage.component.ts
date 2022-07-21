@@ -46,6 +46,18 @@ export class ToreviewspecificpageComponent implements OnInit {
         });
     });
   }
+  isShown: boolean = false ; // hidden by default
+  toggleShow() {
+  
+  this.isShown = ! this.isShown;
+  
+  }
+  isShow: boolean = false ; // hidden by default
+  toggleShown() {
+  
+  this.isShow = ! this.isShow;
+  
+  }
 
   PublishArticle(articleId: number) {
     this.connection.ApproveArticle(articleId)

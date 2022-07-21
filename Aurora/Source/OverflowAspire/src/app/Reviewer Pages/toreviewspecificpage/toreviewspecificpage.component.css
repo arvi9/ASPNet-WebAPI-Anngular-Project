@@ -25,3 +25,37 @@ h2{
 .checkin {
   float:right;
 }
+.Font{
+  color:black;
+  font-weight:700;
+}
+.popup {
+  width: 30%;
+  padding: 25px;
+  left: 0;
+  margin-left: 33.333333%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  position: relative;
+  top: 40%;
+  box-shadow: 5px 5px 5px gray;
+  z-index: 10001;
+}
+.clc{
+  margin-top: 10%;
+
+}
+.align{
+  margin-left: 60%;
+  margin-right: 10%;
+}
+.overlay {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+}

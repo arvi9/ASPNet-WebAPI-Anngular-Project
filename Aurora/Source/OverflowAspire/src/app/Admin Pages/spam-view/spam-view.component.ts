@@ -36,6 +36,18 @@ export class SpamViewComponent implements OnInit {
         });
     });
   }
+  isShown: boolean = false ; // hidden by default
+  toggleShow() {
+  
+  this.isShown = ! this.isShown;
+  
+  }
+  isShow: boolean = false ; // hidden by default
+  toggleShown() {
+  
+  this.isShow = ! this.isShow;
+  
+  }
 
   //Here the admin can approve spam by query id.
   onAccept() {

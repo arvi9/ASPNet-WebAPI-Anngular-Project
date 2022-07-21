@@ -23,9 +23,32 @@
     <pre class="textsize">
       {{data[0].query.content}}
     </pre>
-    <button class="btn btn-danger" (click)="onReject()">Cancel spam</button>
-    <button class="btn btn-success float-end " (click)="onAccept() ">Remove query</button>
+  
+    <button class="btn btn-danger" (click)="toggleShow()">Cancel spam</button>
+    <button class="btn btn-success float-end " (click)="toggleShown() ">Remove query</button>
     <br><br>
+    <div *ngIf="isShown" class="row container-fluid"  id="divshow">
+      <div  class="overlay" *ngFor="let item of data">
+          <div class="popup">
+            <p class="Font">Are You Sure Do you want to cancel this spam?</p>
+            <div class="text-right clc">
+              <a (click)="onReject()"><button class="btn btn-primary align">Yes</button></a>   
+              <a (click)="toggleShow()"><button class="btn btn-danger">No</button></a>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div *ngIf="isShow" class="row container-fluid"  id="divshow">
+    <div  class="overlay" *ngFor="let item of data">
+        <div class="popup">
+          <p class="Font">Are You Sure Do you want to remove this query?</p>
+          <div class="text-right clc">
+            <a (click)="onAccept()"><button class="btn btn-primary align">Yes</button></a>   
+            <a (click)="toggleShown()"><button class="btn btn-danger">No</button></a>
+          </div>
+        </div>
+    </div>
+</div>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
       <dl class="example-dl p-2">
         <ng-container *cdkVirtualFor="let comment of data[0].listOfSpams">

@@ -36,11 +36,32 @@
                     <div [innerHTML]="data.content">  
                     </div>
                     <div class="container d-flex justify-content-between" *ngIf=" data.status ==='Under Review'">
-                        <a [routerLink]="['/ReasonReject',data.articleId]" routerLinkActive="active"><button
+                        <a (click)="toggleShown()" ><button
                                 type="button" class="custom-btn btn-1">Reject</button></a>
-                        <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview"
-                            routerLinkActive="active"><button type="button"
+                        <a (click)="toggleShow()"><button type="button"
                                 class="custom-btn btn-1">Publish</button></a>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isShow" class="row container-fluid"  id="divshow">
+                <div  class="overlay">
+                    <div class="popup">
+                      <p class="Font">Are You Sure Do you want to reject this article?</p>
+                      <div class="text-right clc">
+                        <a  [routerLink]="['/ReasonReject',data.articleId]" routerLinkActive="active"><button class="btn btn-primary align">Yes</button></a>   
+                        <a (click)="toggleShown()"><button class="btn btn-danger">No</button></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isShown" class="row container-fluid"  id="divshow">
+                <div  class="overlay">
+                    <div class="popup">
+                      <p class="Font">Are You Sure Do you want to publish this article?</p>
+                      <div class="text-right clc">
+                        <a (click)="PublishArticle(data.articleId)" routerLink="/ToReview" routerLinkActive="active"><button class="btn btn-primary align">Yes</button></a>   
+                        <a (click)="toggleShow()"><button class="btn btn-danger">No</button></a>
+                      </div>
                     </div>
                 </div>
             </div>
