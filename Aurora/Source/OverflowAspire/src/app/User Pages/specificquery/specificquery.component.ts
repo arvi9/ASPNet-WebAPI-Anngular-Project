@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
+import { User } from 'Models/User';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { ConnectionService } from 'src/app/Services/connection.service';
 
 export class SpecificqueryComponent implements OnInit {
   issolved = false;
+  userid: any;
   error: any
   queryDetails: any = this.route.params.subscribe(params => {
     this.queryId = params['queryId'];
@@ -42,6 +44,13 @@ export class SpecificqueryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.queryId = params['queryId'];
       this.GetQuery()
+    });
+    this.connection.GetCurrentApplicationUser()
+    .subscribe({
+      next: (data: User) => {
+        this.userid = data.userId;
+        console.log(this.userid)
+      }
     });
   }
 

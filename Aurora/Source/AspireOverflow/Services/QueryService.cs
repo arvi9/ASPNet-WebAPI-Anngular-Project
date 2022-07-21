@@ -122,7 +122,9 @@ namespace AspireOverflow.Services
                     Date = Query.CreatedOn,
                     RaiserName = Query.User?.FullName,
                     IsSolved = Query.IsSolved,
-                    Comments = GetComments(QueryID)
+                    Comments = GetComments(QueryID),
+                    DateTime=Query.CreatedOn,
+                    CreatedBy=Query.CreatedBy
                 };
             }
             catch (Exception exception)

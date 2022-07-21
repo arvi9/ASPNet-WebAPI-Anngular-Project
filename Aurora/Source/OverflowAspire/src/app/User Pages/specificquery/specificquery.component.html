@@ -13,9 +13,11 @@
   </nav>
 </div>
 <div class="container mb-4">
-  <a routerLinkActive="active" [routerLink]="['/ReportSpam',data.queryId]"><button type="button"
-      class="custom-btn btn-1 btn-3 " id="button-code">Report
-      spam</button></a>
+  <div *ngIf="data.createdBy!=userid">
+    <a routerLinkActive="active" [routerLink]="['/ReportSpam',data.queryId]"><button type="button"
+        class="custom-btn btn-1 btn-3 " id="button-code">Report
+        spam</button></a>
+  </div>
 </div>
 <div class="container p-5 my-5 border">
   <pre class="text-center">

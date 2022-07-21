@@ -5,6 +5,7 @@ export class Query {
     code: string="";
     isSolved: boolean=false;
     comments:QueryComment[]=[];
+    createdBy:number=0;
     constructor(){}
     
 }
