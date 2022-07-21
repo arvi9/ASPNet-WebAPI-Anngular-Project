@@ -22,10 +22,10 @@
                 <label class="form-label">Title:</label>
                 <input type="text" #title="ngModel" class="form-control mb-4" id="createarticle"
                     placeholder="Enter Article Title" name="title" [(ngModel)]="article.title"
-                    [class.is-invalid]="title.invalid && title.touched" pattern="^.{1,100}$" required>
+                    [class.is-invalid]="title.invalid && title.touched" minlength="4" maxlength="100" pattern="^\S.*[^.\s]$" required>
                 <div *ngIf="title.errors && (title.invalid || title.touched)">
-                    <small class="text-danger" *ngIf="title.errors['pattern']">Article Title should have maximum 100
-                        characters</small>
+                    <small class="text-danger" *ngIf="title.errors['pattern']">Article Title shouldn't start with space,have minimum 100
+                        characters and characters shouldn't repeat for many times</small>
                     <small class="text-danger" [class.d-none]="title.valid||title.untouched"
                         *ngIf="title.errors['required']">Article Title is required</small>
                 </div>
@@ -35,12 +35,7 @@
                 <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image"
                     #image="ngModel" [(ngModel)]="article.ImageString">
                 <label class="text-danger"> {{imageError}}</label>
-                <div *ngIf="image.errors && (image.invalid || image.touched)">
-                    <small class="text-danger" [class.d-none]="image.valid || image.untouched"
-                        *ngIf="image.errors?.['required']">
-                        Image is required.
-                    </small>
-                </div>
+             
                 <div>
                     <br>
                     <b><h5>Preview:</h5></b>
@@ -54,7 +49,7 @@
                 </tag-input-dropdown>
             </tag-input>
             <br>
-            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content" [config]="{ removeButtons: 'Subscript,Superscript,Anchor,Source,Table,Scayt,HorizontalRule,Image'}"
+            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content" [config]="{uiColor: '#a4a4a4'}"
                 debounce="500" pattern="^\W*(\w+(\W+|$)){50,100000}$" required>
             </ckeditor>
             <div *ngIf="content.errors && (content.invalid || content.touched)">

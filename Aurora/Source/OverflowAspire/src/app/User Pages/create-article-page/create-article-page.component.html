@@ -14,39 +14,35 @@
     </div>
     <div class="container editor">
         <h5 class="text-center text-danger">{{error}}</h5>
-        <form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <form [formGroup]="createarticle" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="w-25">
                 <label class="form-label">Title:</label>
-                <input type="text" #title="ngModel" class="form-control mb-4" id="createarticle"
-                    placeholder="Enter article title" name="title" [(ngModel)]="article.title"
-                    [class.is-invalid]="title.invalid && title.touched" pattern="^.{1,100}$" required>
-                <div *ngIf="title.errors && (title.invalid || title.touched)">
-                    <small class="text-danger" *ngIf="title.errors['pattern']">Article Title should have maximum 100
-                        characters</small>
-                    <small class="text-danger" [class.d-none]="title.valid||title.untouched"
-                        *ngIf="title.errors['required']">Article Title is required</small>
-                </div>
+                <input type="text" class="form-control mb-4" id="createarticle" placeholder="Enter article title"
+                    name="title" formControlName="title">
+                <span
+                    [class.d-none]="createarticle.controls['title'].valid || createarticle.controls['title'].untouched"
+                    class="text-danger" *ngIf="createarticle.controls['title'].errors?.['required']">Title is
+                    required</span>
+                    <span class="text-danger" *ngIf="createarticle.controls['title'].errors?.['minlength']">Title
+                        should not have minimum 4 characters</span>
+                    <span class="text-danger" *ngIf="createarticle.controls['title'].errors?.['maxlength']">Title should be
+                        less
+                        than 60 characters.</span>
+                <span class="text-danger" *ngIf="createarticle.controls['title'].errors?.['pattern']">Title should not have repeated characters</span>
             </div>
             <div class="w-25">
                 <label class="form-label">Image:</label><br>
-                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="image"
-                    #image="ngModel" [(ngModel)]="article.ImageString" required>
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" name="imageString"
+                    formControlName="imageString">
                 <label class="text-danger"> {{imageError}}</label>
-                <div *ngIf="image.errors && (image.invalid || image.touched)">
-                    <small class="text-danger" [class.d-none]="image.valid || image.untouched"
-                        *ngIf="image.errors?.['required']">
-                        Image is required.
-                    </small>
-                </div>
-                <div>
-                    <br>
-                    <b><h5>Preview:</h5></b>
-                    <img class="articleimg" [src]="'data:image/jpg;base64,'+ article.ImageString" alt="image" />
-                </div>
+                <span
+                    [class.d-none]="createarticle.controls['imageString'].valid || createarticle.controls['imageString'].untouched"
+                    class="text-danger" *ngIf="createarticle.controls['imageString'].errors?.['required']">Image is
+                    required</span>
             </div>
-            <br> 
+            <br>
             <label class="form-label" for="email">Invite People(Optional):</label><br>
-            <tag-input [(ngModel)]='goalitems' name="out" [onlyFromAutocomplete]="true" [editable]='true'
+            <tag-input formControlName='goalitems' name="out" [onlyFromAutocomplete]="true" [editable]='true'
                 [separatorKeyCodes]="[32,188,186,13,9]" [placeholder]="'Add email'"
                 secondaryPlaceholder="Add email address" [clearOnBlur]="true" [addOnPaste]="true" [addOnBlur]="true"
                 theme='bootstrap'>
@@ -54,24 +50,22 @@
                 </tag-input-dropdown>
             </tag-input>
             <br>
-            <ckeditor name="content" #content="ngModel" [(ngModel)]="article.content"  [config]="{ removeButtons: 'Subscript,Superscript,Anchor,Source,Table,Scayt,HorizontalRule,Image'}"
-                debounce="500" pattern="^\W*(\w+(\W+|$)){50,100000}$" required>
+            <ckeditor name="content" formControlName="content" 
+                [config]="{ removeButtons: 'Subscript,Superscript,Anchor,Source,Table,Scayt,HorizontalRule,Image'}"
+                debounce="500" required>
             </ckeditor>
-            <div *ngIf="content.errors && (content.invalid || content.touched)">
-                <small class="text-danger" *ngIf="content.errors['pattern']">Article content should have
-                    Minimum 50 words</small>
-                <small class="text-danger" [class.d-none]="content.valid || content.untouched"
-                    *ngIf="content.errors?.['required']">
-                    Article content is required.
-                </small>
-            </div>
+            <span
+                [class.d-none]="createarticle.controls['content'].valid || createarticle.controls['content'].untouched"
+                class="text-danger" *ngIf="createarticle.controls['content'].errors?.['required']">Content is
+                required</span>  
+                         
             <div class="editor-btn">
                 <button class="btn btn-1 btn-2 text-white font-weight-normal" type="button"
-                    [disabled]="form.form.invalid" (click)="saveToDraft()">Save to
+                    [disabled]="!createarticle.valid" (click)="saveToDraft()">Save to
                     draft <span *ngIf="IsLoadingSaveDraft" class="spinner-border spinner-border-sm" role="status"
                         aria-hidden="true"></span></button>
                 <button class="btn btn-1 btn-2 text-white font-weight-normal" type="submit"
-                    [disabled]="!form.valid">Submit <span *ngIf="IsLoadingSubmit"
+                    [disabled]="!createarticle.valid">Submit <span *ngIf="IsLoadingSubmit"
                         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
             </div>
         </form>
