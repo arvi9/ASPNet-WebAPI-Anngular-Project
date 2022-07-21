@@ -56,7 +56,10 @@ export class UpdateArticlePageComponent implements OnInit {
 
   //Get article by its id.
   ngOnInit(): void {
-    if (AuthService.GetData("token") == null) this.router.navigateByUrl("")
+    if (AuthService.GetData("token") == null) {
+      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+      this.router.navigateByUrl("")
+    }
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
       this.connection.GetArticle(this.articleId)
@@ -70,7 +73,8 @@ export class UpdateArticlePageComponent implements OnInit {
             if(data.sharedUsers!=null){
               data.sharedUsers.forEach(item => this.itemsAsObjects.push(new sharedItem(item.userId, item.email)))
             }
-          }
+          },
+          error: (error:any) => this.error = error.error.message,
         });
       this.connection.GetEmployeePage().subscribe((data: any[]) => {
         data.forEach(item => this.items.push({ display: item.email, value: item.userId }))
