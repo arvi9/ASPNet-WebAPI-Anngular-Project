@@ -12,6 +12,7 @@
             </ol>
         </nav>
     </div>
+<app-play-feature [article]="'Title '+data.title + 'Written by '+data.authorName+''+ data.content|htmlToPlaintext"></app-play-feature>
     <div class="container p-5 my-5 border" *ngIf="data.status=='Published'">
         <div class="text-center">
             <h1>{{data.title}}</h1>

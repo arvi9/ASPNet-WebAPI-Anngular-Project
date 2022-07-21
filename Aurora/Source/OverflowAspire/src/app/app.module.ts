@@ -61,6 +61,7 @@ import { UpdateArticlePageComponent } from './User Pages/update-article-page/upd
 import { PrivatearticlesComponent } from './User Pages/privatearticles/privatearticles.component';
 import { RejectreasonComponent } from './Reviewer Pages/rejectreason/rejectreason.component';
 import { AgoPipe } from './Services/ago.pipe';
+import { PlayFeatureComponent } from './Components/play-feature/play-feature.component';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ import { AgoPipe } from './Services/ago.pipe';
     PrivatearticlesComponent,
     RejectreasonComponent,
     AgoPipe,
+    PlayFeatureComponent,
     
  
     

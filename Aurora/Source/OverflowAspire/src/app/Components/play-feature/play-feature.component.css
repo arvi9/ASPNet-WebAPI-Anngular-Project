@@ -1,0 +1,45 @@
+.container {
+    padding:10px;
+  
+  }
+.btn-3 {
+    float: right;
+    background: #00acee
+  }
+  .img{
+    height:55px;
+    margin-right: 20px;
+    color: #00acee;
+  }
+  a .img:hover{
+    transform : scale(101%);
+    box-shadow: #00acee;
+    background-color:#00acee
+  }
+  a:hover{
+    background-image: skyblue;
+    border-radius: 10%;
+  }
+  .pauseimg
+  {
+    margin-right: 20px;
+    background-color: blue;
+  }
+  .stopimg{
+    height:55px;
+  
+  }
+  .alignment{
+    margin-left: 30%;
+  }
+  .playbutton:hover{
+    color: #00acee;
+  }
+  .image{
+    font-size: 50px;
+    color: black;
+  }
+ .dropdown
+ {
+    width: 100px;
+ }
