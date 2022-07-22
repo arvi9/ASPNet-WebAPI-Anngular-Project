@@ -27,7 +27,7 @@ namespace AspireOverflow.Services
             if (IsTracingEnabled) _stopWatch.Start();
             //throws Validation Exception if any validation fails.
             Validation.ValidateArticle(article);
-            if(String.IsNullOrEmpty(article.ImageString)) throw new ValidationException("ImageString should not be null or Empty");
+            if (String.IsNullOrEmpty(article.ImageString)) throw new ValidationException("ImageString should not be null or Empty");
             if (article.IsPrivate) throw new ValidationException("IsPrivate should not be true");
             try
             {
@@ -93,7 +93,7 @@ namespace AspireOverflow.Services
                 if (ExistingArticle == null) throw new ItemNotFoundException($"Unable to Find any Article with ArticleId:{article.ArticleId}");
 
                 //if any other user trying to update the article which is not created by them,throws exception
-                if(ExistingArticle.CreatedBy != _currentUserId && !IsReviewer ) throw new ValidationException("you do not have access to update this article");
+                if (ExistingArticle.CreatedBy != _currentUserId && !IsReviewer) throw new ValidationException("you do not have access to update this article");
                 ExistingArticle.Title = article.Title;
                 ExistingArticle.Content = article.Content;
                 ExistingArticle.UpdatedOn = DateTime.Now;
@@ -189,7 +189,7 @@ namespace AspireOverflow.Services
 
 
         //To Fetch the articles using ArticleId.
-        public object GetArticleById(int ArticleId,CurrentUser currentUser)
+        public object GetArticleById(int ArticleId, CurrentUser currentUser)
         {
             if (IsTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
@@ -197,9 +197,9 @@ namespace AspireOverflow.Services
             {
                 var article = database.GetArticleByID(ArticleId);
                 //Validating the User access to get the article
-                if(article.CreatedBy != currentUser.UserId && article.ArticleStatusID==1) throw new ValidationException("You dont have access to retrieve this article");
-               if(article.CreatedBy != currentUser.UserId && (article.ArticleStatusID==2 || article.ArticleStatusID==3) && !currentUser.IsReviewer ) throw new ValidationException("You dont have access to retrieve this article");
-              //it retrives sharedusers only for the private articles
+                if (article.CreatedBy != currentUser.UserId && article.ArticleStatusID == 1) throw new ValidationException("You dont have access to retrieve this article");
+                if (article.CreatedBy != currentUser.UserId && (article.ArticleStatusID == 2 || article.ArticleStatusID == 3) && !currentUser.IsReviewer) throw new ValidationException("You dont have access to retrieve this article");
+                //it retrives sharedusers only for the private articles
                 var SharedUsers = article.IsPrivate ? database.GetPrivateArticleUsersByArticleId(article.ArticleId).Select(Item => new
                 {
                     UserId = Item.user?.UserId,
@@ -209,7 +209,7 @@ namespace AspireOverflow.Services
                 return new
                 {
                     articleId = article.ArticleId,
-                    PublishedDate = article.UpdatedOn != null ?article.UpdatedOn:article.CreatedOn,
+                    PublishedDate = article.UpdatedOn != null ? article.UpdatedOn : article.CreatedOn,
                     title = article.Title,
                     AuthorName = article.User?.FullName,
                     content = article.Content,
@@ -222,7 +222,8 @@ namespace AspireOverflow.Services
                     IsPrivate = article.IsPrivate,
                     SharedUsers = SharedUsers
                 };
-            }catch (ValidationException exception)
+            }
+            catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "GetArticleById(int ArticleId)", exception, ArticleId));
                 throw;
@@ -604,7 +605,7 @@ namespace AspireOverflow.Services
                     Name = Item.User?.FullName,
                     ArticleId = Item.ArticleId,
                     DateTime = Item.CreatedOn
-                }).OrderByDescending(item =>item.DateTime);
+                }).OrderByDescending(item => item.DateTime);
             }
             catch (Exception exception)
             {
@@ -634,7 +635,7 @@ namespace AspireOverflow.Services
             catch (ValidationException exception)
             {
                 _logger.LogError(HelperService.LoggerMessage("ArticleService", "AddLikeToArticle()", exception, Like));
-                return false;
+                throw;
             }
             catch (Exception exception)
             {

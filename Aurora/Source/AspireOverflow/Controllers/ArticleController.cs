@@ -194,7 +194,7 @@ namespace AspireOverflow.Controllers
             Like.UserId = GetCurrentUser().UserId;
             try
             {
-                if (!_articleService.AddLikeToArticle(Like)) BadRequest(Message("Error Occured while adding Like to article "));
+                if (!_articleService.AddLikeToArticle(Like)) return BadRequest(Message("Error Occured while adding Like to article "));
                 var Result = new { message = "Successfully added Like to article", LikesCount = _articleService.GetLikesCount(Like.ArticleId) };
                 return await Task.FromResult(Ok(Result));
             }
