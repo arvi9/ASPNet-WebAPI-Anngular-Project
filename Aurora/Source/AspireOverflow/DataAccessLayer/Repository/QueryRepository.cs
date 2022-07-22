@@ -114,7 +114,7 @@ namespace AspireOverflow.DataAccessLayer
             Query? ExistingQuery;
             try
             {
-                ExistingQuery = _context.Queries.FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && query.IsActive);
+                ExistingQuery = _context.Queries.Include(e=>e.User).FirstOrDefault(query => query.QueryId == QueryId && query.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && query.IsActive);
                 return ExistingQuery != null ? ExistingQuery : throw new ItemNotFoundException($"There is no matching Query data with QueryID :{QueryId}");
             }
             catch (Exception exception)
