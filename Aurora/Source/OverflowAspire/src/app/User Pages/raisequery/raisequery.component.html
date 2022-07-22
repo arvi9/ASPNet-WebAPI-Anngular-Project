@@ -23,7 +23,8 @@
                     placeholder="Enter query title" name="title">
                 <span [class.d-none]="raisequery.controls['title'].valid || raisequery.controls['title'].untouched"
                     class="text-danger" *ngIf="raisequery.controls['title'].errors?.['required']">Title is required</span>
-                <span class="text-danger" *ngIf="raisequery.controls['title'].errors?.['pattern']">Title should contains minimum 5 and maximum 100 characters</span>
+                <span class="text-danger" *ngIf="raisequery.controls['title'].errors?.['minlength']">Title should contains minimum 5 characters</span>
+                <span class="text-danger" *ngIf="raisequery.controls['title'].errors?.['maxlength']">Title should contains maximum 100 characters</span>
             </div>
             <div>
                 <div class="form-group">
@@ -37,7 +38,8 @@
                             [class.d-none]="raisequery.controls['content'].valid || raisequery.controls['content'].untouched"
                             class="text-danger" *ngIf="raisequery.controls['content'].errors?.['required']"> Content is
                             required</span>
-                        <span class="text-danger" *ngIf="raisequery.controls['content'].errors?.['pattern']">Query contains minimum 20 characters</span>
+                        <span class="text-danger" *ngIf="raisequery.controls['content'].errors?.['minlength']">Query contains minimum 20 characters</span>
+                        <span class="text-danger" *ngIf="raisequery.controls['content'].errors?.['maxlength']">Query contains maximum 500 characters</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,8 +50,12 @@
                             formControlName="code"></textarea>
                         <span
                             [class.d-none]="raisequery.controls['code'].valid || raisequery.controls['code'].untouched"
-                            class="text-danger" *ngIf="raisequery.controls['code'].errors?.['pattern']">Query code
+                            class="text-danger" *ngIf="raisequery.controls['code'].errors?.['minlength']">Query code
                             should have Minimum 1 characters</span>
+                            <span
+                            [class.d-none]="raisequery.controls['code'].valid || raisequery.controls['code'].untouched"
+                            class="text-danger" *ngIf="raisequery.controls['code'].errors?.['maxlength']">Query code
+                            should have Maximum 1000 characters</span>
                     </div>
                 </div>
                 <div class="form-group">

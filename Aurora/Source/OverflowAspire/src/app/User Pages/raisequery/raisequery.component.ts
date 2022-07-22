@@ -14,9 +14,9 @@ export class RaisequeryComponent implements OnInit {
   IsLoading: boolean = false;
   error=""
   raisequery = this.fb.group({
-    title:['',[Validators.required,Validators.minLength(5),Validators.minLength(100)]],
-    content:['',[Validators.minLength(20),Validators.minLength(900000000)]],
-    code:['',[Validators.minLength(1),Validators.minLength(900000000)]]
+    title:['',[Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
+    content:['',[Validators.minLength(20),Validators.maxLength(900000000)]],
+    code:['',[Validators.minLength(1),Validators.maxLength(900000000)]]
   })
   constructor(private fb:FormBuilder, private connection: ConnectionService, private routing: Router,private toaster:Toaster) { }
  

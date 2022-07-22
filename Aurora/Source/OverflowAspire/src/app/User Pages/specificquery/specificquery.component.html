@@ -27,9 +27,11 @@
   <pre class="textsize">
     {{data.content}}
   </pre>
+  <div *ngIf="data.code.length!==0">
   <pre class="querycode">
 {{data.code}}
 </pre>
+</div>
   <div *ngIf="data.comments.length!==0">
     <h4>{{data.comments.length}} Answers</h4>
     <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
@@ -37,13 +39,15 @@
         <tr *cdkVirtualFor="let comment of data.comments">
           <td class="example-dt"><br><i  
               class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br><p class="lineh">{{comment.message}}</p></i>
-            <hr>
+          
           </td>
           <br>
       </table>
     </cdk-virtual-scroll-viewport>
+  
   </div>
   <br>
+  <hr>
   <br>
   <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off" *ngIf="data.isSolved===false" >
     <h5>Comment your answer</h5>

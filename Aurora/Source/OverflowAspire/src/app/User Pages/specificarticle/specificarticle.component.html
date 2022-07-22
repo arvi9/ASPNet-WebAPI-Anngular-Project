@@ -26,7 +26,7 @@
             </div>
             <div class="textsize" [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
             </div>
-            <button class="readmore custom-btn btn-1 btn-3" (click)="showText()">
+            <button class="readmore" (click)="showText()">
                 {{ isReadMore ? 'Read More': 'Read Less' }}
             </button>
         </div>
@@ -37,13 +37,16 @@
                     <tr *cdkVirtualFor="let comment of data.comments">
                         <td class="example-dt"><br><i
                                 class="fa fa-solid fa-user mx-3">&nbsp;&nbsp;<b>{{comment.name}}</b>:&nbsp;<i>{{comment.dateTime|ago}}</i><br><br><P class="lineh" >{{comment.message}}</P></i>
+                       
                         </td>
+                    </tr>
                         <br>
+                      
                 </table>
             </cdk-virtual-scroll-viewport>
         </div>
         <br>
-        <hr>
+       
         <br>
         <div class=" iconstyle d-flex flex-row fs-12">
             <div class="iconstyle like-button" [ngClass]="{'liked':isLiked}" (click)="likeTheButton()">
