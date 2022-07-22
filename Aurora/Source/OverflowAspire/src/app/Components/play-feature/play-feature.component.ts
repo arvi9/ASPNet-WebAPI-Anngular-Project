@@ -172,6 +172,11 @@ export class PlayFeatureComponent implements OnInit {
   toggleShown() {
 
     this.isShow = !this.isShow;
+     if(speechSynthesis.speaking)
+    {
+      speechSynthesis.cancel();
+
+    }
 
   }
 

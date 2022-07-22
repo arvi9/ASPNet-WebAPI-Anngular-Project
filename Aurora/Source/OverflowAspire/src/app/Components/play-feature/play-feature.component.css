@@ -4,7 +4,8 @@
   }
 .btn-3 {
     float: right;
-    background: #00acee
+    background: #00acee;
+    margin-right: -2.3rem;
   }
   .img{
     height:55px;
