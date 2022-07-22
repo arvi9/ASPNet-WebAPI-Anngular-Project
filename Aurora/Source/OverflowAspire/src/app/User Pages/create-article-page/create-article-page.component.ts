@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { ConnectionService } from 'src/app/Services/connection.service';
 import { catchError } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
-
 
 
 export interface sharedItem {
@@ -22,13 +20,7 @@ declare var CKEDITOR: any;
 })
 
 export class CreateArticlePageComponent implements OnInit {
-  createarticle = this.fb.group({
-    title: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(100), Validators.pattern("^(?!.*([ ])\\1)(?!.*([A-Za-z.,:!@#$%^&*()\".*\"'])\\2{4})\\w[a-zA-Z.,:!@#$%^&*()\".*\"'\\s]*$")]],
-    imageString: ['', [Validators.required]],
-    goalitems: [''],
-    content: ['', [Validators.required]]
-  })
-  constructor(private fb: FormBuilder, private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
+  constructor(private connection: ConnectionService, private route: Router, private toaster: Toaster) { }
 
   sharedUsersId: any = []
   IsLoadingSubmit: boolean = false;
@@ -37,8 +29,21 @@ export class CreateArticlePageComponent implements OnInit {
   isImageSaved: boolean = false;
   cardImageBase64: string = "";
   error = "";
-
-
+  article: any = {
+    articleId: 0,
+    title: '',
+    content: '',
+    image: "",
+    articleStatusID: 1,
+    datetime: new Date(),
+    createdBy: 0,
+    createdOn: new Date(),
+    updatedBy: null,
+    isPrivate: false,
+    ImageString: this.cardImageBase64,
+    reviewerId: null,
+    Reason: null,
+  }
 
   public items = [
     { display: '', value: 0 },
@@ -47,16 +52,16 @@ export class CreateArticlePageComponent implements OnInit {
   public goalitems: sharedItem[] = []
 
   privateArticle: any = {
-    article: this.createarticle,
+    article: this.article,
     SharedusersId: []
   }
 
 
 
   ngOnInit(): void {
-
-    if (AuthService.GetData("token") == null) {
-      this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
+    
+ if (AuthService.GetData("token") == null) {
+this.toaster.open({ text: 'Your Session has been Expired', position: 'top-center', type: 'warning' })
       this.route.navigateByUrl("")
     }
     CKEDITOR.on("instanceCreated", (event: { editor: any; }, data: any) => {
@@ -68,31 +73,12 @@ export class CreateArticlePageComponent implements OnInit {
     });
   }
 
-  change() {
-    console.warn(this.createarticle.value['content'])
-  }
-
-
   //Create and post the article.
   onSubmit() {
-    const createarticle = {
-      title: this.createarticle.value['title'],
-      content: this.createarticle.value['content'],
-      image:"",
-      imageString:this.cardImageBase64,
-      articleStatusID: 1,
-      datetime: new Date(),
-      createdBy: 0,
-      createdOn: new Date(),
-      updatedBy: null,
-      isPrivate: false,
-      reviewerId: null,
-      Reason: null,
-    }
     this.IsLoadingSubmit = true;
-    createarticle.articleStatusID = 2;
+    this.article.articleStatusID = 2;
     if (this.goalitems.length == 0) {
-      this.connection.CreateArticle(createarticle)
+      this.connection.CreateArticle(this.article)
         .pipe(catchError(this.handleError)).subscribe({
           next: (data: any) => {
             this.toaster.open({ text: 'Article submitted successfully', position: 'top-center', type: 'success' })
@@ -106,10 +92,10 @@ export class CreateArticlePageComponent implements OnInit {
     }
     //Create private article.
     else {
-      createarticle.isPrivate = true;
+      this.article.isPrivate = true;
       this.goalitems.forEach(item => this.sharedUsersId.push(item.value))
       this.privateArticle = {
-        article: createarticle,
+        article: this.article,
         sharedUsersId: this.sharedUsersId
       }
       this.connection.CreatePrivateArticle(this.privateArticle)
@@ -126,6 +112,7 @@ export class CreateArticlePageComponent implements OnInit {
     }
 
   }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -135,25 +122,12 @@ export class CreateArticlePageComponent implements OnInit {
     }
     return "";
   }
+
   //Create article and save it to draft.
   saveToDraft() {
-    const createarticle = {
-      title: this.createarticle.value['title'],
-      content: this.createarticle.value['content'],
-      image:"",
-      imageString:this.cardImageBase64,
-      articleStatusID: 1,
-      datetime: new Date(),
-      createdBy: 0,
-      createdOn: new Date(),
-      updatedBy: null,
-      isPrivate: false,
-      reviewerId: null,
-      reason: null,
-    }
     this.IsLoadingSaveDraft = true;
     if (this.goalitems.length == 0) {
-      this.connection.CreateArticle(createarticle)
+      this.connection.CreateArticle(this.article)
         .subscribe({
           next: (data: any) => {
             this.toaster.open({ text: 'Article saved to draft', position: 'top-center', type: 'success' })
@@ -165,13 +139,12 @@ export class CreateArticlePageComponent implements OnInit {
 
           }
         });
-        console.log(createarticle)
     }
     else {
-      createarticle.isPrivate = true;
+      this.article.isPrivate = true;
       this.goalitems.forEach(item => this.sharedUsersId.push(item.value))
       this.privateArticle = {
-        article: createarticle,
+        article: this.article,
         sharedUsersId: this.sharedUsersId
       }
       this.connection.CreatePrivateArticle(this.privateArticle)
@@ -214,7 +187,7 @@ export class CreateArticlePageComponent implements OnInit {
           this.cardImageBase64 = this.cardImageBase64.replace("data:image/png;base64,", "");
           this.cardImageBase64 = this.cardImageBase64.replace("data:image/jpg;base64,", "");
           this.cardImageBase64 = this.cardImageBase64.replace("data:image/jpeg;base64,", "");
-          this.createarticle.value['imageString'] = this.cardImageBase64;
+          this.article.ImageString = this.cardImageBase64;
           this.isImageSaved = true;
         }
       };
