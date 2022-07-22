@@ -186,11 +186,11 @@ export class UpdateArticlePageComponent implements OnInit {
   fileChangeEvent(fileInput: any) {
     this.imageError = "";
     if (fileInput.target.files && fileInput.target.files[0]) {
-      const max_size = 20971520;
+      const max_size = 500000;
       const allowed_types = ['image/png', 'image/jpeg'];
       if (fileInput.target.files[0].size > max_size) {
         this.imageError =
-          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+          'Maximum size allowed is ' + max_size / 100000 + 'Mb';
         return false;
       }
       if (!allowed_types.includes(fileInput.target.files[0].type)) {

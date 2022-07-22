@@ -28,7 +28,7 @@
                     <div class="bg-light p-2">
                         <textarea type="text" #title="ngModel" name="reportspam" class="form-control" rows="5" cols="4"
                             placeholder="Maximum 50 words" id="reportspam-name" maxlength="100" minlength="2" pattern="^\S.*[^.\s]$"
-                            [(ngModel)]="article.Reason" required></textarea>
+                            [(ngModel)]="article.reason" required></textarea>
                         <div *ngIf="title.errors && (title.invalid || title.touched)">
                             <small class="text-danger" *ngIf="title.errors['pattern']">Reason should have
                                 Maximum 100 words</small>

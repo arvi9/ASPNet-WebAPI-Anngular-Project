@@ -3,9 +3,9 @@
 </div>
 <div *ngIf='isShow' class="container alignment">
     <div class="row">
-        <div class="col-md-6">
-           <div class="justify-content-between align-items-center d-flex bg-light border p-2">
-            <div class="col-0 fs-5">
+        <div class="col-md-7">
+           <div class="justify-content-between align-items-center d-flex bg-light border p-4">
+            <div class="col-0 fs-5 px-5">
                 <label for="voice-control" class="form-field__label">Voice:</label>
                 <div class="dropdown ">
                     <select id="voice-control" name="voice" [(ngModel)]="selectedVoice" (change)=" updateSayCommand()"
@@ -26,9 +26,9 @@
                 </div>
             </div>
             <div class="col-4">
-                <a (click)="speak()"><input type="image" alt="PlayIcon" class="img " src="./assets/play.png" /> </a>
-                <a (click)="pause()"><input type="image" alt="PlayIcon" class="img" src="./assets/pause.png" /> </a>
-                <a (click)="stop()"><input type="image" alt="StopIcon" class="stopimg" src="./assets/stop.png" /> </a>
+                <a (click)="speak()" *ngIf="!IsPause"><input type="image" alt="PlayIcon" class="img onhover" title="play" src="./assets/play.png" /> </a>
+                <a (click)="speak()" *ngIf="IsPause"><input type="image" alt="PlayIcon" class="img onhover" title="pause" src="./assets/pause.png" /> </a>
+                <a (click)="stop()"><input type="image" alt="StopIcon" class="stopimg onhover" title="stop" src="./assets/stop.png" /> </a>
             </div>
            </div>
         </div>
