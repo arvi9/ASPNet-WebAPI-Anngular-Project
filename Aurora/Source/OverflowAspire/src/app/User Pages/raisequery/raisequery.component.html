@@ -23,7 +23,7 @@
                     placeholder="Enter query title" name="title">
                 <span [class.d-none]="raisequery.controls['title'].valid || raisequery.controls['title'].untouched"
                     class="text-danger" *ngIf="raisequery.controls['title'].errors?.['required']">Title is required</span>
-                <span class="text-danger" *ngIf="raisequery.controls['title'].errors?.['pattern']">Title should maximum 100 characters</span>
+                <span class="text-danger" *ngIf="raisequery.controls['title'].errors?.['pattern']">Title should not be repeated and contains minimum 5 and maximum 100 characters</span>
             </div>
             <div>
                 <div class="form-group">
@@ -38,7 +38,7 @@
                             class="text-danger" *ngIf="raisequery.controls['content'].errors?.['required']"> Content is
                             required</span>
                         <span class="text-danger" *ngIf="raisequery.controls['content'].errors?.['pattern']">Query
-                            should have Minimum 20 words</span>
+                            should not be repeated and contains minimum 20 characters</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,7 +50,7 @@
                         <span
                             [class.d-none]="raisequery.controls['code'].valid || raisequery.controls['code'].untouched"
                             class="text-danger" *ngIf="raisequery.controls['code'].errors?.['pattern']">Query code
-                            should have Maximum 1000 characters</span>
+                            should have Minimum 1 characters</span>
                     </div>
                 </div>
                 <div class="form-group">

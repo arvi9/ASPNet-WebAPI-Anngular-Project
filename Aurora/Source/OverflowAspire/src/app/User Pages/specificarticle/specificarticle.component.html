@@ -54,7 +54,7 @@
             <div class="container">
                 <div class="bg-light p-2">
                     <textarea class="form-control form-control5" #comment="ngModel" name="QueryComment"
-                        [(ngModel)]="article.comment" placeholder="Enter comments (maximum 100 characters )" pattern="^.{1,100}$" required></textarea>
+                        [(ngModel)]="article.comment" placeholder="Enter comments (maximum 100 characters )" maxlength="100" minlength="2" pattern="^\S.*[^.\s]$" required></textarea>
                     <div *ngIf="comment.errors && (comment.invalid || comment.touched)">
                         <small class="text-danger" [class.d-none]="comment.valid||comment.untouched"
                             *ngIf="comment.errors['required']">comment is required</small>
