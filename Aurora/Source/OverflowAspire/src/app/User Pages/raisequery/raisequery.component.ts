@@ -14,9 +14,9 @@ export class RaisequeryComponent implements OnInit {
   IsLoading: boolean = false;
   error=""
   raisequery = this.fb.group({
-    title:['',[Validators.required,Validators.pattern("^.{5,100}$"),Validators.pattern("^(?!.*([ ])\\1)(?!.*([A-Za-z])\\2{2})\\w[a-zA-Z\\s]*$")]],
-    content:['',[Validators.required,Validators.pattern("^.{20,100000}$"),Validators.pattern("^(?!.*([ ])\\1)(?!.*([A-Za-z])\\2{2})\\w[a-zA-Z\\s]*$")]],
-    code:['',[Validators.pattern("^.{1,90000000}$"),Validators.pattern("^(?!.*([ ])\\1)(?!.*([A-Za-z])\\2{2})\\w[a-zA-Z\\s]*$")]]
+    title:['',[Validators.required,Validators.pattern("^.{5,100}$")]],
+    content:['',[Validators.required,Validators.pattern("^.{20,1000000}$")]],
+    code:['',[Validators.pattern("^.{1,90000000}$")]]
   })
   constructor(private fb:FormBuilder, private connection: ConnectionService, private routing: Router,private toaster:Toaster) { }
  
