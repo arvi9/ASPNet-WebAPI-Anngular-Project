@@ -16,6 +16,7 @@ interface RecommendedVoices {
 export class PlayFeatureComponent implements OnInit {
   @Input() article: any
 
+
   public sayCommand: string;
   public recommendedVoices: RecommendedVoices;
   public rates: number[];

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ConnectionService {
-  URL: string='https://localhost:7197/'
+  URL: string='http://172.24.210.43/Aspire-API/'
   constructor(private http: HttpClient) { }
 
   public headers = new HttpHeaders({
