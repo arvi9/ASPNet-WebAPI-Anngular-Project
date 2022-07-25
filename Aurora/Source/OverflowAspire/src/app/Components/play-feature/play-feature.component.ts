@@ -63,8 +63,11 @@ export class PlayFeatureComponent implements OnInit {
     {
       return;
     }
+    if(speechSynthesis.speaking && !speechSynthesis.paused){
     this.stop();
     this.synthesizeSpeechFromText(this.selectedVoice,this.selectedRate,this.text);
+    this.IsPause=true
+    }
   }
   
   ngOnChanges() {
