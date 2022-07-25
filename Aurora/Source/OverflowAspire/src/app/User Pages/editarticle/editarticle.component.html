@@ -42,7 +42,7 @@
       </div>
       <div [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="data.content">
       </div>
-      <button type="button" class="readmore" (click)="showText()">
+      <button type="custom-btn btn-1 button" class="readmore" (click)="showText()">
         {{ isReadMore ? 'Read More': 'Read Less' }}
       </button>
     </div>
