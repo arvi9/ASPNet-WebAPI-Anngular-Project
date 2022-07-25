@@ -213,7 +213,7 @@ namespace AspireOverflow.Services
                     var Query = ListOfQueries.Find(item => item.QueryId == Id);
                     if (Query != null) TrendingQueries.Add(Query);
                 }
-                return (from Query in TrendingQueries select Query).Select(Query => GetAnonymousQueryObject(Query));
+                return TrendingQueries.Select(Query => GetAnonymousQueryObject(Query));
             }
             catch (Exception exception)
             {

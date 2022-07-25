@@ -559,7 +559,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange())).ToList();
+                var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && item.Article!.ArticleStatusID==4).ToList();
                 return ListOfArticleLikes;
             }
             catch (Exception exception)

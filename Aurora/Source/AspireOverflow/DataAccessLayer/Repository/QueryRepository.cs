@@ -233,7 +233,7 @@ namespace AspireOverflow.DataAccessLayer
             if (IsTracingEnabled) _stopWatch.Start();
             try
             {
-                var ListOfComments = _context.QueryComments.Include(e => e.Query).Include(e => e.User).ToList();
+                var ListOfComments = _context.QueryComments.Include(e => e.Query).Include(e => e.User).Where(item=>!item.Query!.IsSolved &&item.Query!.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && item.Query.IsActive).ToList();
                 return ListOfComments;
             }
             catch (Exception exception)
