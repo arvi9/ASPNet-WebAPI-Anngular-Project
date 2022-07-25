@@ -56,6 +56,17 @@ export class PlayFeatureComponent implements OnInit {
 
   public data: any = new Article();
   IsPause: boolean = false
+
+  public changeVoice():void
+  {
+    if(!this.selectedVoice)
+    {
+      return;
+    }
+    this.stop();
+    this.synthesizeSpeechFromText(this.selectedVoice,this.selectedRate,this.text);
+  }
+  
   ngOnChanges() {
     this.text = this.article
     this.IsPause
