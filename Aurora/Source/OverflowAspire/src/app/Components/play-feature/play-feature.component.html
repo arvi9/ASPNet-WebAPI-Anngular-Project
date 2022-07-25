@@ -3,12 +3,12 @@
 </div>
 <div *ngIf='isShow' class="container alignment">
     <div class="row">
-        <div class="col-md-7">
-           <div class="justify-content-between align-items-center d-flex bg-light border p-4">
-            <div class="col-0 fs-5 px-5">
+        <div class="col-md-6">
+           <div class="justify-content-between align-items-center d-flex bg-light border p-2">
+            <div class="col-0 fs-5">
                 <label for="voice-control" class="form-field__label">Voice:</label>
                 <div class="dropdown ">
-                    <select id="voice-control" name="voice" [(ngModel)]="selectedVoice" (change)=" updateSayCommand()"
+                    <select id="voice-control" name="voice" [(ngModel)]="selectedVoice" (change)=" changeVoice(); updateSayCommand()"
                         class="form-field__control dropdown">
                         <option value="">- Select a voice -</option>
                         <option *ngFor="let voice of voices" [ngValue]="voice">{{ voice.name }}</option>
@@ -21,14 +21,15 @@
                     <select id="rate-control" name="rate" [(ngModel)]="selectedRate" (change)=" updateSayCommand()" class="form-field__control">
                         <option *ngFor="let rate of rates" [ngValue]="rate">{{ rate }}
                             <ng-template [ngIf]="( rate === 1 )">( Normal )</ng-template>
+                            <ng-template [ngIf]="(rate===0.25)">(Slow)</ng-template>
                         </option>
                     </select>
                 </div>
             </div>
             <div class="col-4">
-                <a (click)="speak()" *ngIf="!IsPause"><input type="image" alt="PlayIcon" class="img onhover" title="play" src="./assets/play.png" /> </a>
-                <a (click)="speak()" *ngIf="IsPause"><input type="image" alt="PlayIcon" class="img onhover" title="pause" src="./assets/pause.png" /> </a>
-                <a (click)="stop()"><input type="image" alt="StopIcon" class="stopimg onhover" title="stop" src="./assets/stop.png" /> </a>
+                <a (click)="speak()"><input type="image" alt="PlayIcon" class="img " src="./assets/play.png" /> </a>
+                <a (click)="pause()"><input type="image" alt="PlayIcon" class="img" src="./assets/pause.png" /> </a>
+                <a (click)="stop()"><input type="image" alt="StopIcon" class="stopimg" src="./assets/stop.png" /> </a>
             </div>
            </div>
         </div>

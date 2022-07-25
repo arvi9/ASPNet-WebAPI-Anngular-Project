@@ -16,7 +16,6 @@ interface RecommendedVoices {
 export class PlayFeatureComponent implements OnInit {
   @Input() article: any
 
-
   public sayCommand: string;
   public recommendedVoices: RecommendedVoices;
   public rates: number[];
@@ -56,6 +55,21 @@ export class PlayFeatureComponent implements OnInit {
 
   public data: any = new Article();
   IsPause: boolean = false
+
+  public changeVoice():void
+  {
+    if(!this.selectedVoice)
+    {
+      
+      return;
+    
+    }
+    
+    this.stop();
+ 
+    this.synthesizeSpeechFromText(this.selectedVoice,this.selectedRate,this.text); 
+  }
+    
   ngOnChanges() {
     this.text = this.article
     this.IsPause
@@ -107,13 +121,15 @@ export class PlayFeatureComponent implements OnInit {
   public stop(): void {
     this.IsPause = false
 
-    if (speechSynthesis.speaking) {
-
+    if (speechSynthesis.speaking )  {
       speechSynthesis.cancel();
+  
 
     }
+    
 
   }
+  
   public pause(): void {
 
     if (speechSynthesis.speaking) {
@@ -150,8 +166,9 @@ export class PlayFeatureComponent implements OnInit {
       .replace(/[\r\n]/g, " ")
       .replace(/(["'\\\\/])/g, "\\$1")
       ;
+      speechSynthesis.onvoiceschanged;
 
-    this.sayCommand = `say --voice ${this.selectedVoice.name} --rate ${sanitizedRate} --output-file=demo.aiff "${sanitizedText}"`;
+    // this.sayCommand = `say --voice ${this.selectedVoice.name} --rate ${sanitizedRate} --output-file=demo.aiff "${sanitizedText}"`;
 
   }
 
@@ -163,19 +180,20 @@ export class PlayFeatureComponent implements OnInit {
 
     var utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = this.selectedVoice;
-    utterance.rate = rate;
+    utterance.rate = rate;''
 
     speechSynthesis.speak(utterance);
+    
 
   }
   isShow: boolean = false; // hidden by default
   toggleShown() {
 
     this.isShow = !this.isShow;
-     if(speechSynthesis.speaking)
+    if(speechSynthesis.speaking)
     {
       speechSynthesis.cancel();
-
+      speechSynthesis.onvoiceschanged
     }
 
   }
