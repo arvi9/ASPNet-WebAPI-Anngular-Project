@@ -12,11 +12,7 @@
     margin-right: 20px;
     color: #00acee;
   }
-  a .img:hover{
-    transform : scale(101%);
-    box-shadow: #00acee;
-    background-color:#00acee
-  }
+ 
   a:hover{
     background-image: skyblue;
     border-radius: 10%;
@@ -24,7 +20,8 @@
   .pauseimg
   {
     margin-right: 20px;
-    background-color: blue;
+    height:60px;
+    
   }
   .stopimg{
     height:55px;
@@ -42,5 +39,8 @@
   }
  .dropdown
  {
-    width: 100px;
+    width: 150px;
+ }
+ .column{
+  padding: 100px;
  }
