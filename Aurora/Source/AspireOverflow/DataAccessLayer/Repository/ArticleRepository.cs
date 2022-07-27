@@ -15,20 +15,20 @@ namespace AspireOverflow.DataAccessLayer
         private readonly ILogger<ArticleRepository> _logger;
         private readonly IConfiguration _configuration;
         private readonly Stopwatch _stopWatch = new Stopwatch();
-        private bool IsTracingEnabled;
+        private bool _isTracingEnabled;
         public ArticleRepository(AspireOverflowContext context, ILogger<ArticleRepository> logger, IConfiguration configuration)
         {
             _context = context;
             _logger = logger;
             _configuration = configuration;
-            IsTracingEnabled = GetIsTraceEnabledFromConfiguration();
+            _isTracingEnabled = GetIsTraceEnabledFromConfiguration();
         }
 
 
         //to add an article using article object.
         public bool AddArticle(Article article)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -43,7 +43,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -54,7 +54,7 @@ namespace AspireOverflow.DataAccessLayer
         //to create a private article using article object and list of shared user Id.
         public bool AddPrivateArticleWithSharedUsers(Article article, List<int> SharedUsersId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -74,7 +74,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddPrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -85,7 +85,7 @@ namespace AspireOverflow.DataAccessLayer
         //to update an article using article object.
         public bool UpdateArticle(Article article)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -106,7 +106,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for UpdateArticle(Article article) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -117,7 +117,7 @@ namespace AspireOverflow.DataAccessLayer
         //to update an article using ArticleId , ArticleStatusID and UpdatedByUserId.
         public bool UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
@@ -145,7 +145,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for UpdateArticle(int ArticleId, int ArticleStatusID, int UpdatedByUserId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -156,7 +156,7 @@ namespace AspireOverflow.DataAccessLayer
         //To Update the existing private article  with shared users
         public bool UpdatePrivateArticleWithSharedUsers(Article article, List<int> SharedUsersId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticle(article);
             try
             {
@@ -176,7 +176,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for UpdatePrivateArticle(Article article, List<int> SharedUsersId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -187,7 +187,7 @@ namespace AspireOverflow.DataAccessLayer
         //to delete an article using ArticleId.
         public bool DeleteArticleByArticleId(int ArticleId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
@@ -204,7 +204,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for DeleteArticleByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -215,7 +215,7 @@ namespace AspireOverflow.DataAccessLayer
         //to fetch the article using ArticleId.
         public Article GetArticleByID(int ArticleId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             Article? ExistingArticle;
             try
@@ -230,7 +230,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticleByID(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -241,7 +241,7 @@ namespace AspireOverflow.DataAccessLayer
         //to get the list of articles.
         public IEnumerable<Article> GetArticles()
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             try
             {
                 var ListOfArticle = _context.Articles.Where(item => item.CreatedOn > DateTime.Now.AddMonths(-GetRange())).Include(e => e.ArticleStatus).Include(e => e.User).ToList();
@@ -254,7 +254,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticles() - {_stopWatch.ElapsedMilliseconds}ms");
@@ -266,7 +266,7 @@ namespace AspireOverflow.DataAccessLayer
         public IEnumerable<Article> GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer = false)
 
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleStatusID <= 0 || ArticleStatusID > 4) throw new ArgumentException($"Article Status Id must be between 0 and 4 ArticleStatusID:{ArticleStatusID}");
             try
             {
@@ -282,7 +282,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByArticleStatusId(int ArticleStatusID, bool IsReviewer) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -293,7 +293,7 @@ namespace AspireOverflow.DataAccessLayer
         //Get the article by it's title.
         public IEnumerable<Article> GetArticlesByTitle(string Title)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (String.IsNullOrEmpty(Title)) throw new ValidationException("Article Title cannot be null or empty");
             try
             {
@@ -307,7 +307,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByTitle(string Title) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -318,7 +318,7 @@ namespace AspireOverflow.DataAccessLayer
         //Gets the article by it's Author Name.
         public IEnumerable<Article> GetArticlesByAuthor(string AuthorName)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (String.IsNullOrEmpty(AuthorName)) throw new ArgumentException("AuthorName value can't be null");
             try
             {
@@ -332,7 +332,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByAuthor(string AuthorName) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -344,7 +344,7 @@ namespace AspireOverflow.DataAccessLayer
         //Get the articles by the Reviewer's Id. Reviewer who reviews the article before publishing.
         public IEnumerable<Article> GetArticlesByReviewerId(int ReviewerId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ReviewerId <= 0) throw new ArgumentException($"ReviewerId must be greater than 0 While ReviewerId:{ReviewerId}");
             try
             {
@@ -357,7 +357,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByReviewerId(int ReviewerId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -368,7 +368,7 @@ namespace AspireOverflow.DataAccessLayer
         //Get the article with it's UserId (User denotes the author who created the article).
         public IEnumerable<Article> GetArticlesByUserId(int UserId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -381,7 +381,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -392,7 +392,7 @@ namespace AspireOverflow.DataAccessLayer
         //to get the list of privately shared articles by UserId
         public IEnumerable<PrivateArticleUsers> GetPrivateArticleUsersByUserId(int UserId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (UserId <= 0) throw new ArgumentException($"User Id must be greater than 0 where UserId:{UserId}");
             try
             {
@@ -406,7 +406,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetPrivateArticlesByUserId(int UserId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -417,7 +417,7 @@ namespace AspireOverflow.DataAccessLayer
         //Gets the private article by the articleId (Private article = article which is shared only with certain people).
         public IEnumerable<PrivateArticleUsers> GetPrivateArticleUsersByArticleId(int ArticleId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleId:{ArticleId}");
             try
             {
@@ -431,7 +431,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetPrivateArticlesByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -442,7 +442,7 @@ namespace AspireOverflow.DataAccessLayer
         //get the total count of the articles.
         public object GetCountOfArticles()
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             try
             {
                 var ListOfCounts = new
@@ -462,7 +462,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"TraceLog:ArticleRepository Elapsed Time for GetCountOfArticles() - {_stopWatch.ElapsedMilliseconds}ms");
@@ -473,7 +473,7 @@ namespace AspireOverflow.DataAccessLayer
         //to to add comments for the article.
         public bool AddComment(ArticleComment comment)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticleComment(comment);
             try
             {
@@ -488,7 +488,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddComment(ArticleComment comment) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -499,7 +499,7 @@ namespace AspireOverflow.DataAccessLayer
         //to get the added comments for the article.
         public IEnumerable<ArticleComment> GetCommentsByArticleId(int ArticleId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
             try
             {
@@ -513,7 +513,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetCommentsByArticleId(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -524,7 +524,7 @@ namespace AspireOverflow.DataAccessLayer
         //to add like for the article.
         public bool AddLike(ArticleLike like)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             Validation.ValidateArticleLike(like);
             try
             {
@@ -545,7 +545,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for AddLike(ArticleLike like) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -556,7 +556,7 @@ namespace AspireOverflow.DataAccessLayer
         //to get the likes for the article.
         public IEnumerable<ArticleLike> GetLikes()
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             try
             {
                 var ListOfArticleLikes = _context.ArticleLikes.Include(e => e.Article).Where(item => item.Article!.CreatedOn > DateTime.Now.AddMonths(-GetRange()) && item.Article!.ArticleStatusID==4).ToList();
@@ -569,7 +569,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetLikes() - {_stopWatch.ElapsedMilliseconds}ms");
@@ -580,7 +580,7 @@ namespace AspireOverflow.DataAccessLayer
         //get the total count of likes using ArticleId.
         public int GetCountOfLikes(int ArticleId)
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             if (ArticleId <= 0) throw new ArgumentException($"Article Id must be greater than 0 where ArticleID:{ArticleId}");
             try
             {
@@ -594,7 +594,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"TraceLog:ArticleRepository Elapsed Time for GetCountOfLikes(int ArticleId) - {_stopWatch.ElapsedMilliseconds}ms");
@@ -605,7 +605,7 @@ namespace AspireOverflow.DataAccessLayer
         //Getting Range from Configuration for Data fetching duration
         private int GetRange()
         {
-            if (IsTracingEnabled) _stopWatch.Start();
+            if (_isTracingEnabled) _stopWatch.Start();
             try
             {
                 var Range = _configuration["Data_Fetching_Duration:In_months"];
@@ -618,7 +618,7 @@ namespace AspireOverflow.DataAccessLayer
             }
             finally
             {
-                if (IsTracingEnabled)
+                if (_isTracingEnabled)
                 {
                     _stopWatch.Stop();
                     _logger.LogInformation($"Tracelog:ArticleRepository Elapsed Time for GetRange() - {_stopWatch.ElapsedMilliseconds}ms");
@@ -631,8 +631,8 @@ namespace AspireOverflow.DataAccessLayer
         {
             try
             {
-                var IsTracingEnabledFromConfiguration = _configuration["Tracing:IsEnabled"];
-                return IsTracingEnabledFromConfiguration != null ? Convert.ToBoolean(IsTracingEnabledFromConfiguration) : false;
+                var _isTracingEnabledFromConfiguration = _configuration["Tracing:IsEnabled"];
+                return _isTracingEnabledFromConfiguration != null ? Convert.ToBoolean(_isTracingEnabledFromConfiguration) : false;
             }
             catch (Exception exception)
             {
