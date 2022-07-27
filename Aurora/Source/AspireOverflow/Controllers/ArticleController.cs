@@ -51,6 +51,7 @@ namespace AspireOverflow.Controllers
             if (article == null) return BadRequest(Message("Null value is not supported"));
             try
             {
+              
                 article.CreatedBy = GetCurrentUser().UserId;
                 return _articleService.CreateArticle(article) ? await Task.FromResult(Ok(Message("Successfully Created"))) : BadRequest(Message($"Error Occured while Adding Article ", article));
             }
