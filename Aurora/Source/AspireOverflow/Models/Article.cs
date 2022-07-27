@@ -5,7 +5,18 @@ using Microsoft.EntityFrameworkCore;
 namespace AspireOverflow.Models
 {
     public partial class Article : IAuditField
+
     {
+        public Article(string Title){
+           this.Title=Title; 
+
+        }
+         public Article(){
+
+
+        }
+        
+
         [Key]
         public int ArticleId { get; set; }
         public string? Title { get; set; }
